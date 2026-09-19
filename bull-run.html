@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bull Run · Playtrade Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="practice.css">
+  <link rel="stylesheet" href="bull-run.css">
+</head>
+<body class="pr-page">
+
+  <!-- ============ Top navigation ============ -->
+  <header class="topnav">
+    <a href="index.html" aria-label="Profit.com home"><img class="topnav__logo" src="assets/logo.svg" alt="Profit.com"></a>
+    <img class="vdivider" src="assets/divider.svg" alt="">
+    <nav class="topnav__menu" aria-label="Primary">
+      <a class="topnav__item" href="#"><img class="icon" src="assets/cup.svg" width="16" height="16" alt="">Arena<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Tools<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Learn<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Plans</a>
+      <a class="topnav__item" href="#">More<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+    </nav>
+    <div class="topnav__right">
+      <button aria-label="Search"><img class="icon icon-20" src="assets/search.svg" alt=""></button>
+      <div class="topnav__icons">
+        <img class="vdivider" src="assets/divider.svg" alt="">
+        <button class="topnav__lang"><span class="topnav__globe"><img src="assets/globe.svg" alt=""></span>EN</button>
+        <img class="vdivider" src="assets/divider.svg" alt="">
+        <button class="icon-btn" aria-label="Notifications"><img class="icon icon-20" src="assets/bell.svg" alt=""><span class="badge">2</span></button>
+        <button class="icon-btn" aria-label="Messages"><img class="icon icon-20" src="assets/messenger.svg" alt=""><span class="badge">1</span></button>
+        <a class="btn-brand topnav__upgrade" href="#">Upgrade</a>
+        <span class="topnav__sale">37% OFF</span>
+      </div>
+      <img class="topnav__avatar" src="assets/nav-avatar.png" width="32" height="32" alt="Profile">
+    </div>
+  </header>
+
+  <div class="pr-shell">
+    <!-- ============ Side navigation (built by sidebar.js) ============ -->
+    <aside class="side-nav is-collapsed" id="sideNav" data-active="games" aria-label="Sections"></aside>
+    <script src="sidebar.js"></script>
+
+    <main class="pr-main br-main">
+
+      <!-- ============ Left column: rules + recent runs ============ -->
+      <div class="pr-left br-left">
+        <a class="pr-back" href="index.html" aria-label="Back to Arena"><img src="assets/pr-chevron-left.svg" alt=""></a>
+
+        <section class="pr-panel pr-panel--rules" aria-labelledby="rules-title">
+          <h2 class="pr-panel__title" id="rules-title">Rules</h2>
+          <div class="rules">
+            <div class="rule"><img src="assets/pr-ic-risk.svg" alt=""><div class="rule__body"><span class="rule__title">How to play</span>
+              <span class="rule__value">Read the headline. Pick <b class="gain">BUY</b> if the price rises, <b class="loss">SELL</b> if it falls, or <b class="pass">PASS</b> to skip.</span></div></div>
+            <div class="rule"><img src="assets/pr-ic-rewards.svg" alt=""><div class="rule__body"><span class="rule__title">Your capital</span>
+              <span class="rule__value">Start with $10,000 virtual capital. Each call is a $1,000 virtual trade.</span></div></div>
+            <div class="rule"><svg viewBox="0 0 18 18" fill="none" stroke="#22A180" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 15.5v-6h5v6M1.5 15.5v-4h5M11.5 15.5v-3h5v3M1.5 15.5h15M9 2.5l.7 1.4 1.5.2-1.1 1 .3 1.5L9 5.9l-1.4.7.3-1.5-1.1-1 1.5-.2Z"/></svg><div class="rule__body"><span class="rule__title">Climb the leaderboard</span>
+              <span class="rule__value">Grow your capital. The more you earn, the higher you climb.</span></div></div>
+            <div class="rule"><svg viewBox="0 0 18 18" fill="none" stroke="#22A180" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15.2s-6-3.6-6-8A3.3 3.3 0 0 1 9 5a3.3 3.3 0 0 1 6 2.2c0 4.4-6 8-6 8Z"/></svg><div class="rule__body"><span class="rule__title">Survival</span>
+              <span class="rule__value"><span class="nowrap">❤️ 3 lives · 2 passes</span> · <span class="nowrap">🔥 8 correct = +1 life</span></span></div></div>
+            <div class="rule"><img src="assets/pr-lock.svg" alt=""><div class="rule__body"><span class="rule__title">Access</span>
+              <span class="rule__value">Free — no PRO required</span></div></div>
+          </div>
+          <button class="rules-link" type="button" data-open-how>Read full rules <span aria-hidden="true">→</span></button>
+        </section>
+
+        <section class="pr-panel" aria-labelledby="runs-title">
+          <h2 class="pr-panel__title" id="runs-title">Recent runs</h2>
+          <div class="runs">
+            <div class="run"><span class="run__mode run__mode--s">S</span><span class="run__name">Survival</span><span class="run__date">13 Jun, 21:44</span><span class="run__best">Best</span><span class="run__score">$14,820</span></div>
+            <div class="run"><span class="run__mode run__mode--p">P</span><span class="run__name">Practice</span><span class="run__date">13 Jun, 21:30</span><span class="run__score">$11,340</span></div>
+            <div class="run"><span class="run__mode run__mode--s">S</span><span class="run__name">Survival</span><span class="run__date">12 Jun, 19:02</span><span class="run__score">$13,110</span></div>
+            <div class="run"><span class="run__mode run__mode--p">P</span><span class="run__name">Practice</span><span class="run__date">11 Jun, 08:15</span><span class="run__score">$11,185</span></div>
+            <div class="run"><span class="run__mode run__mode--s">S</span><span class="run__name">Survival</span><span class="run__date">10 Jun, 22:47</span><span class="run__score">$12,450</span></div>
+            <div class="run"><span class="run__mode run__mode--p">P</span><span class="run__name">Practice</span><span class="run__date">10 Jun, 22:40</span><span class="run__score">$11,420</span></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============ Join card ============ -->
+      <section class="pr-card br-card" aria-labelledby="br-title">
+        <div class="pr-card__head">
+          <div class="pr-card__copy">
+            <h1 class="br-title" id="br-title">Bull <span>Run</span></h1>
+            <p class="pr-card__sub">Read the news, pick <b class="gain">BUY</b> or <b class="loss">SELL</b>, then see how the market reacted.</p>
+          </div>
+        </div>
+        <div class="br-preview">
+          <!-- The real Bull Run scene in its non-interactive attract mode -->
+          <iframe class="br-preview__frame" id="runnerPreview" src="games/bull_run/index.html?preview" title="Bull Run gameplay preview" tabindex="-1" aria-hidden="true" loading="eager"></iframe>
+        </div>
+        <div class="br-actions">
+          <div class="mode-pick" role="radiogroup" aria-label="Game mode">
+            <button type="button" role="radio" class="mode-pick__opt mode-pick__opt--practice" data-mode="practice" aria-checked="true"><span class="mode-pick__k">Practice</span><span class="mode-pick__sub">Learn without pressure</span><i class="mode-pick__radio" aria-hidden="true"></i></button>
+            <button type="button" role="radio" class="mode-pick__opt mode-pick__opt--survival" data-mode="survival" aria-checked="false"><span class="mode-pick__k">Survival</span><span class="mode-pick__sub">Test your skills</span><i class="mode-pick__radio" aria-hidden="true"></i></button>
+          </div>
+          <button class="br-start" type="button" id="startBtn">Start Bull Run <span aria-hidden="true">›</span></button>
+        </div>
+      </section>
+
+      <!-- ============ Right column: stats + leaderboard ============ -->
+      <div class="pr-right">
+        <div class="pr-right__head">
+          <div class="pr-players" aria-label="Friends playing">
+            <span class="initials" style="background:#3b82f6">R</span><span class="initials" style="background:#e5487a">A</span><span class="initials" style="background:#22a180">C</span>
+          </div>
+          <button class="pr-share" type="button"><img src="assets/pr-share.svg" alt="">Share with friends</button>
+        </div>
+        <div class="pr-stats">
+          <div class="pr-stat"><span class="pr-stat__label">Best score</span><span class="pr-stat__value">$14,820</span></div>
+          <div class="pr-stat"><span class="pr-stat__label">Runs</span><span class="pr-stat__value">38</span></div>
+          <div class="pr-stat"><span class="pr-stat__label">Accuracy</span><span class="pr-stat__value pr-stat__value--mint">67%</span></div>
+          <div class="pr-stat"><span class="pr-stat__label">Best streak</span><span class="pr-stat__value">14 🔥</span></div>
+          <div class="pr-stat pr-stat--wide pr-stat--lives">
+            <div><span class="pr-stat__label">Lives</span><p class="pr-stat__label">Fully equipped</p></div>
+            <div class="pr-lives"><img src="assets/pr-life.svg" alt="Life"><img src="assets/pr-life.svg" alt="Life"><img src="assets/pr-life.svg" alt="Life"></div>
+          </div>
+        </div>
+        <section class="leaderboard" aria-labelledby="lb-title">
+          <div class="leaderboard__head"><h2 id="lb-title">Leaderboard</h2><span class="leaderboard__count">96 players</span></div>
+          <div class="lb-list">
+            <div class="lb-row has-line"><span class="lb-rank">1</span><span class="lb-av" style="background:#a78bfa29;color:#a78bfa">RN</span><span class="lb-name">Raghavendra Naik</span><span class="lb-score">$19,140</span></div>
+            <div class="lb-row has-line"><span class="lb-rank">2</span><span class="lb-av" style="background:#3be39a29;color:#3be39a">NS</span><span class="lb-name">Nivedita Shetty</span><span class="lb-score">$18,720</span></div>
+            <div class="lb-row has-line"><span class="lb-rank">3</span><span class="lb-av" style="background:#60a5fa29;color:#60a5fa">CW</span><span class="lb-name">Chen Wei</span><span class="lb-score">$17,905</span></div>
+            <div class="lb-row has-line"><span class="lb-rank">4</span><span class="lb-av" style="background:#ff6b9329;color:#ff6b93">AG</span><span class="lb-name">Abdulrasheed G.</span><span class="lb-score">$17,410</span></div>
+            <div class="lb-row has-line is-you"><span class="lb-rank">5</span><span class="lb-av"><img src="assets/user-avatar.png" alt=""></span><span class="lb-name">John (you)</span><span class="lb-score">$14,820</span></div>
+            <div class="lb-row has-line"><span class="lb-rank">6</span><span class="lb-av" style="background:#fbb51729;color:#fbb517">TN</span><span class="lb-name">tony nik56</span><span class="lb-score">$14,300</span></div>
+            <div class="lb-row has-line"><span class="lb-rank">7</span><span class="lb-av" style="background:#22d3ee29;color:#22d3ee">ML</span><span class="lb-name">Maria Lopez</span><span class="lb-score">$13,980</span></div>
+            <div class="lb-row has-line"><span class="lb-rank">8</span><span class="lb-av" style="background:#f9731629;color:#f97316">KS</span><span class="lb-name">Kenji Sato</span><span class="lb-score">$13,655</span></div>
+            <div class="lb-row has-line"><span class="lb-rank">9</span><span class="lb-av" style="background:#a78bfa29;color:#a78bfa">EK</span><span class="lb-name">Elif Kaya</span><span class="lb-score">$13,210</span></div>
+            <div class="lb-row"><span class="lb-rank">10</span><span class="lb-av" style="background:#3be39a29;color:#3be39a">OH</span><span class="lb-name">Omar Haddad</span><span class="lb-score">$12,940</span></div>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ============ How to play ============ -->
+  <dialog class="br-dialog" id="howDialog" aria-labelledby="how-title">
+    <h2 id="how-title">How Bull Run works</h2>
+    <p>Each headline is a $1,000 virtual trade in the asset shown on the card. <b class="gain">▲ BUY</b> profits if its price rose that day, <b class="loss">▼ SELL</b> profits if it fell, by the real percentage move. Not sure? <b>● PASS</b> skips the round: no gain, no loss, no points.</p>
+    <p>Run into the lane you pick before you reach the news wall. You start with $10,000 of virtual capital: a right call grows it by the real price move, a wrong call shrinks it. Your capital is your score on the leaderboard.</p>
+    <p><b>Practice:</b> 8 headlines, and you see the correct answer after each one.</p>
+    <p><b>Survival:</b> you have 3 lives and 2 passes, and you get less time with every headline. A wrong call costs a life. Staying in the PASS lane uses a pass; once your passes are used up, reaching the wall without picking BUY or SELL costs a life. Every 8 right calls in a row win a life back.</p>
+    <p><b>Controls:</b> ← → or A / D to switch lanes, 1 2 3 to jump to a lane, P or Esc to pause. On touch screens, swipe or tap the lane buttons.</p>
+    <button class="btn-light pr-outline-btn br-dialog__close" type="button" data-close-how>Got it</button>
+  </dialog>
+
+  <!-- ============ Game player (full screen) ============ -->
+  <div class="game-modal" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="gameModalTitle" hidden>
+    <div class="game-modal__bar">
+      <button class="game-modal__back" type="button" data-game-close><img src="assets/pr-chevron-left.svg" alt="">Exit game</button>
+      <span class="game-modal__title" id="gameModalTitle">Bull Run</span>
+    </div>
+    <iframe class="game-modal__frame" title="Bull Run" allow="autoplay; fullscreen"></iframe>
+  </div>
+
+  <script src="bull-run.js"></script>
+</body>
+</html>

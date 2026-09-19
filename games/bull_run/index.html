@@ -1,0 +1,1853 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Bull Run · Playtrade by profit.com</title>
+<meta name="description" content="Read real market headlines, buy or sell, and run through the news wall to see how the market really reacted.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #15181d;
+    --card-2: #1e2227;
+    --line: #2d2f34;
+    --text: #f7f8fa;
+    --muted: #9ba1a8;
+    --green: #22a180;
+    --green-2: #07d8a2;
+    --green-deep: #0a9772;
+    --gain: #17b26a;
+    --loss: #e31b54;
+    --orange: #ff9100;
+    --gold: #ffc700;
+    --pink: #fd6f8e;
+    --blue: #87bfff;
+    --glass: rgba(20, 21, 24, .74);
+    --font: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+  /* iOS Safari ignores user-scalable=no; manipulation keeps taps and scrolling but disables double-tap zoom */
+  * { touch-action: manipulation; }
+  canvas#game { position: fixed; inset: 0; display: block; touch-action: none; }
+  a { color: inherit; }
+  .gain { color: var(--gain); }
+  .loss { color: var(--loss); }
+
+  /* ---------- Brand bar ---------- */
+  .brandbar { position: fixed; top: max(14px, env(safe-area-inset-top)); left: 16px; display: flex; align-items: center; gap: 10px; z-index: 20; pointer-events: none; }
+  .brandbar .logo { color: #fff; display: flex; }
+  .brandbar .logo svg { height: 24px; width: auto; }
+  .brandbar .sep { width: 1px; height: 18px; background: rgba(255,255,255,.25); }
+  .brandbar .pt { font-weight: 700; font-size: 13px; letter-spacing: .4px; color: var(--green-2); }
+
+  /* ---------- HUD ---------- */
+  #hud { position: fixed; inset: 0; pointer-events: none; padding: max(12px, env(safe-area-inset-top)) 16px 0; z-index: 5; }
+  .topbar { margin: 0 auto; width: min(900px, 100%); height: 56px; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-areas: 'mid money ctrl'; align-items: center; gap: 12px; padding: 0 8px 0 18px; background: var(--glass); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .label { font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); }
+  .tb-mid { grid-area: mid; display: flex; align-items: center; justify-content: flex-start; gap: 12px; min-width: 0; }
+  .tb-money { grid-area: money; text-align: center; line-height: 1.1; } /* capital + P&L centred, as on mobile */
+  .tb-ctrl { grid-area: ctrl; display: flex; gap: 6px; justify-self: end; }
+  .tb-streak { display: none; } /* streak counter stays mobile-only */
+  .tb-pnl { font-size: 11px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .tb-streak { font-size: 11px; font-weight: 800; color: var(--orange); white-space: nowrap; }
+  .tb-streak.zero { color: var(--muted); opacity: .6; }
+  .round { font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--green-2); white-space: nowrap; }
+  .equity { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; text-align: center; transition: color .5s; }
+  .equity.up { color: #3be39a; transition: none; }
+  .equity.down { color: #ff6b93; transition: none; }
+  .streak-chip { position: fixed; left: 50%; top: calc(max(12px, env(safe-area-inset-top)) + 66px); transform: translateX(-50%); background: var(--orange); color: #111; font-weight: 800; font-size: 13px; padding: 5px 12px; border-radius: 999px; pointer-events: none; z-index: 6; animation: streakIn 1.8s ease-out forwards; }
+  @keyframes streakIn { 0% { opacity: 0; transform: translate(-50%, -6px) scale(.9); } 12% { opacity: 1; transform: translate(-50%, 0) scale(1); } 80% { opacity: 1; } 100% { opacity: 0; } }
+  .dots { display: flex; gap: 6px; justify-content: center; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.16); transition: background .2s; }
+  .dots i.right { background: var(--gain); }
+  .dots i.wrong { background: var(--loss); }
+  .dots i.skip { background: #6d737b; }
+  .dots i.cash, .dots i.pass { background: #c3c8ce; }
+  .dots i.now { background: transparent; box-shadow: inset 0 0 0 2px var(--green-2); }
+  .icon-btn { width: 34px; height: 34px; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); background: var(--glass); color: var(--text); display: grid; place-items: center; cursor: pointer; }
+  .icon-btn svg { width: 16px; height: 16px; }
+  .icon-btn:focus-visible { outline: 2px solid var(--green-2); outline-offset: 2px; }
+  .topbar .icon-btn { pointer-events: auto; width: 40px; height: 40px; border-radius: 12px; }
+
+  /* ---------- Headline card ---------- */
+  .news { position: fixed; left: 50%; top: 86px; transform: translateX(-50%); width: min(660px, calc(100% - 32px)); background: rgba(15,17,21,.93); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 14px 18px 12px; z-index: 6; box-shadow: 0 16px 40px rgba(0,0,0,.45); animation: newsIn .35s cubic-bezier(.2,.9,.3,1.2); }
+  @keyframes newsIn { from { opacity: 0; transform: translate(-50%, -14px) scale(.97); } }
+  .news-top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+  .tag { font-size: 11px; font-weight: 800; letter-spacing: .8px; padding: 3px 8px; border-radius: 6px; color: #111; }
+  .asset { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .asset b { color: var(--text); font-weight: 800; }
+  .headline { font-size: clamp(18px, 2.5vw, 24px); font-weight: 800; line-height: 1.3; letter-spacing: -.2px; }
+  .news-q { font-size: 12px; font-weight: 700; color: var(--muted); margin-top: 8px; }
+  .newsbar { height: 5px; background: rgba(255,255,255,.1); border-radius: 4px; margin-top: 8px; overflow: hidden; }
+  .newsbar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--green-deep), var(--green-2)); }
+  .newsbar.urgent i { background: var(--loss); }
+
+  #verdict { position: fixed; left: 50%; top: 52%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; z-index: 8; white-space: nowrap; opacity: 0; }
+  #verdict .v { font-size: clamp(34px, 7vw, 62px); font-weight: 900; letter-spacing: -1px; text-shadow: 0 6px 30px rgba(0,0,0,.7); }
+  #verdict .amt { font-size: clamp(20px, 4vw, 30px); font-weight: 800; text-shadow: 0 4px 20px rgba(0,0,0,.8); }
+  #verdict.show { animation: verdict 1.7s ease-out forwards; }
+  @keyframes verdict { 0% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); } 12% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 75% { opacity: 1; transform: translate(-50%, -50%); } 100% { opacity: 0; transform: translate(-50%, -64%); } }
+
+  .reveal-card { position: fixed; left: 50%; bottom: calc(max(16px, env(safe-area-inset-bottom)) + 86px); transform: translateX(-50%); width: min(640px, calc(100% - 32px)); background: rgba(15,17,21,.95); border: 1px solid var(--line); border-left-width: 5px; border-radius: 16px; padding: 14px 16px; z-index: 6; box-shadow: 0 16px 40px rgba(0,0,0,.45); animation: toastIn .3s ease-out; }
+  .reveal-card.right { border-left-color: var(--gain); }
+  .reveal-card.wrong { border-left-color: var(--loss); }
+  .reveal-card.skip { border-left-color: #6d737b; }
+  .reveal-card.cash, .reveal-card.pass { border-left-color: #c3c8ce; }
+  @keyframes toastIn { from { opacity: 0; transform: translate(-50%, 10px); } }
+  .rv-top { display: flex; justify-content: space-between; gap: 6px 10px; align-items: baseline; flex-wrap: wrap; }
+  .rv-verdict { font-weight: 900; font-size: 16px; }
+  .rv-meta { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .rv-meta b { font-weight: 800; }
+  .rv-why { margin: 8px 0 0; font-size: 14px; line-height: 1.5; color: #d9dde1; }
+  .rv-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 10px; flex-wrap: wrap; }
+  .rv-you { font-size: 12px; color: var(--muted); }
+  .rv-you b { color: var(--text); }
+  .chip { font-size: 10px; font-weight: 800; letter-spacing: .6px; padding: 3px 7px; border-radius: 6px; background: rgba(255,199,0,.15); color: var(--gold); text-transform: uppercase; }
+
+  .lanes { position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; gap: 10px; z-index: 6; }
+  .lane { font: 900 16px var(--font); letter-spacing: .8px; color: var(--text); background: var(--glass); border: 2px solid rgba(255,255,255,.14); border-radius: 14px; padding: 12px 18px; min-width: 170px; cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: transform .1s, border-color .15s, background .15s, opacity .2s; }
+  .lane:active { transform: scale(.96); }
+  .lane small { display: block; font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: .2px; margin-top: 2px; }
+  .lane.short { color: #ff6b93; }
+  .lane.long { color: #3be39a; }
+  .lane.short.on { border-color: var(--loss); background: rgba(227,27,84,.3); color: #fff; }
+  .lane.long.on { border-color: var(--gain); background: rgba(23,178,106,.32); color: #fff; }
+  .lanes.await .lane { animation: lanePulse 1s ease-in-out infinite; }
+  .lanes.locked .lane:not(.on) { opacity: .35; }
+  .lane.cash { color: #d7dbe0; min-width: 150px; }
+  .lane.cash.on { border-color: rgba(255,255,255,.75); background: rgba(255,255,255,.16); color: #fff; }
+  .lane:disabled { opacity: .3; cursor: not-allowed; animation: none !important; }
+  @keyframes lanePulse { 50% { transform: scale(1.05); box-shadow: 0 0 0 5px rgba(7,216,162,.25); } }
+
+  #pops { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 7; }
+  .pop { position: absolute; transform: translate(-50%, -50%); font: 800 18px var(--font); white-space: nowrap; animation: rise 1.1s ease-out forwards; text-shadow: 0 2px 8px rgba(0,0,0,.7); }
+  .pop.good { color: #3be39a; }
+  .pop.bad { color: #ff6b93; }
+  .pop.info { color: #fff; }
+  @keyframes rise { 0% { opacity: 0; margin-top: 12px; } 15% { opacity: 1; } 100% { opacity: 0; margin-top: -60px; } }
+
+  #vignette { position: fixed; inset: 0; pointer-events: none; opacity: 0; transition: opacity .5s; z-index: 4; }
+  #vignette.on { opacity: 1; transition: none; }
+
+  #countdown { position: fixed; inset: 0; display: grid; place-items: center; pointer-events: none; z-index: 8; text-align: center; }
+  /* Countdown controls hint: a light glass strip just above the lane buttons, clear of the runner */
+  #countdown .cd-keys { position: fixed; left: 50%; bottom: calc(max(16px, env(safe-area-inset-bottom)) + 76px); transform: translateX(-50%); width: max-content; max-width: calc(100% - 24px); display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(10,12,15,.32); border: 1px solid rgba(255,255,255,.06); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font: 600 13px var(--font); color: rgba(255,255,255,.62); animation: none; }
+  #countdown .cd-keys kbd { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); }
+  #countdown .cd-keys span { display: inline-flex; align-items: center; gap: 6px; }
+  #countdown .cd-keys b { color: var(--text); font-weight: 800; }
+  #countdown .n { display: block; font: 900 min(24vw, 140px)/1 var(--font); color: #fff; text-shadow: 0 0 40px rgba(7,216,162,.5); animation: cd .9s ease-out forwards; }
+  @keyframes cd { 0% { transform: scale(1.7); opacity: 0; } 25% { transform: scale(1); opacity: 1; } 100% { opacity: 0; } }
+
+  .coach { position: fixed; left: 50%; bottom: calc(max(16px, env(safe-area-inset-bottom)) + 86px); transform: translateX(-50%); width: min(560px, calc(100% - 32px)); background: rgba(15,17,21,.95); border: 1px solid var(--green-2); border-radius: 16px; padding: 14px 16px; z-index: 9; box-shadow: 0 0 0 4px rgba(7,216,162,.15), 0 16px 40px rgba(0,0,0,.5); animation: toastIn .25s ease-out; }
+  .coach-step { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--green-2); text-transform: uppercase; margin-bottom: 4px; }
+  .coach-text { font-size: 15px; line-height: 1.5; font-weight: 500; }
+  .coach-text b { font-weight: 800; }
+  .coach-keys { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: 8px; }
+  #coachDim { position: fixed; inset: 0; background: rgba(5,6,8,.35); pointer-events: none; z-index: 3; }
+
+  /* ---------- Overlays ---------- */
+  .overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: flex-start; padding-block: 64px 24px; padding-inline: max(16px, 5vw); background: linear-gradient(90deg, rgba(10,12,15,.9), rgba(10,12,15,.5) 50%, rgba(10,12,15,0) 80%); z-index: 10; }
+  .overlay.center { justify-content: center; background: rgba(10,12,15,.6); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 30px 80px rgba(0,0,0,.5); width: min(540px, 100%); max-height: 100%; overflow: auto; padding: 26px; animation: cardIn .4s cubic-bezier(.2,.9,.3,1.15); scrollbar-width: thin; scrollbar-color: #3a3d44 transparent; }
+  .card.wide { width: min(660px, 100%); }
+  @keyframes cardIn { from { transform: translateY(16px); opacity: 0; } }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-2); }
+  h1, h2, h3 { margin: 0; }
+  h1 { font-size: clamp(40px, 8vw, 56px); font-weight: 900; letter-spacing: -1.5px; line-height: 1; margin: 6px 0 10px; }
+  h1 span { background: linear-gradient(90deg, var(--green-deep), var(--green-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h2 { font-size: clamp(26px, 5vw, 34px); font-weight: 800; letter-spacing: -.5px; line-height: 1.1; margin: 6px 0 6px; }
+  .lead { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 0 0 16px; }
+  .lead b { color: var(--text); }
+  .lead b.gain { color: var(--gain); }
+  .lead b.loss { color: var(--loss); }
+
+  .lanecards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0 0; padding: 18px 0; border-block: 1px solid var(--line); text-align: center; }
+  .lc { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .lc svg { width: 46px; height: 22px; margin-bottom: 4px; }
+  .lc b { font-size: 14px; font-weight: 800; letter-spacing: .3px; }
+  .lc span { font-size: 12.5px; color: var(--muted); }
+  .lc.short b { color: #ff6b93; }
+  .lc.cash b { color: #c3c8ce; }
+  .lc.long b { color: #3be39a; }
+  .menu-controls { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 16px; font-size: 13px; color: var(--muted); margin-top: 18px; }
+  .menu-controls span { display: inline-flex; align-items: center; gap: 6px; }
+  .menu-controls b { color: #c3c8ce; font-weight: 800; }
+  .select-label { margin: 28px 0 12px; }
+  .start-row { margin: 18px 0 22px; }
+  .start-row .btn { width: 100%; }
+  .best-inline { text-align: center; font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .best-inline b { color: var(--text); font-weight: 800; font-variant-numeric: tabular-nums; margin-left: 4px; }
+  /* Preview: no top HUD bar, a small floating capital readout, and a compact headline card */
+  body.preview #hud .topbar { display: none; }
+  .pv-cap { position: fixed; left: 14px; bottom: 12px; z-index: 6; display: flex; flex-direction: column; pointer-events: none; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
+  .pv-cap span { font-size: 10px; font-weight: 800; letter-spacing: 1px; color: rgba(255,255,255,.6); }
+  .pv-cap b { font-size: 18px; font-weight: 800; line-height: 1.15; color: #fff; }
+  body.preview .news { top: 10px; width: min(560px, calc(100% - 24px)); padding: 7px 12px; border-radius: 12px; }
+  body.preview .news-top { margin-bottom: 4px; gap: 6px; }
+  body.preview .tag { font-size: 10px; padding: 2px 7px; }
+  body.preview .asset { font-size: 11px; }
+  body.preview .headline { font-size: 16px; line-height: 1.25; }
+  body.preview .news-q { font-size: 10.5px; line-height: 13px; margin-top: 3px; }
+  body.preview .newsbar { height: 3px; margin-top: 6px; }
+  body.preview #brandbar, body.preview #lanes, body.preview .tb-ctrl, body.preview #menu, body.preview #paused,
+  body.preview #over, body.preview #coach, body.preview #coachDim, body.preview #reveal, body.preview #countdown { display: none !important; }
+  kbd { font: 700 12px var(--font); background: var(--card-2); border: 1px solid #3a3d44; border-bottom-width: 2px; border-radius: 6px; padding: 2px 6px; color: var(--text); }
+  details.rules { border: 1px solid var(--line); border-radius: 14px; background: var(--card-2); overflow: hidden; }
+  details.rules summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; list-style: none; padding: 14px 16px; font-size: 14px; font-weight: 700; }
+  details.rules summary::-webkit-details-marker { display: none; }
+  details.rules summary::after { content: ''; width: 9px; height: 9px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg) translate(-2px, -2px); transition: transform .2s; }
+  details.rules[open] summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
+  details.rules summary:hover { background: rgba(255,255,255,.03); }
+  details.rules summary:focus-visible { outline: 2px solid var(--green-2); outline-offset: -2px; border-radius: 14px; }
+  details.rules p { font-size: 13px; line-height: 1.55; color: var(--muted); margin: 0; padding: 0 16px 14px; }
+  details.rules[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+  .best { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .best b { color: var(--text); }
+  .disclaimer { font-size: 10.5px; line-height: 1.5; color: #6d737b; margin-top: 14px; }
+
+  .btn { font: 800 15px var(--font); border: 0; border-radius: 12px; padding: 13px 20px; cursor: pointer; color: #06140f; background: linear-gradient(90deg, var(--green-deep), var(--green-2)); transition: transform .1s, filter .15s; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn:hover { filter: brightness(1.08); }
+  .btn:active { transform: scale(.97); }
+  .btn.ghost { background: var(--card-2); color: var(--text); border: 1px solid #3a3d44; }
+  .btn.small { padding: 9px 14px; font-size: 13px; }
+  .btn.big { width: 100%; padding: 16px 20px; font-size: 17px; }
+  .btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mode { position: relative; text-align: left; font: inherit; color: inherit; background: var(--card-2); border: 2px solid var(--line); border-radius: 16px; padding: 16px; cursor: pointer; transition: border-color .15s, background .15s, box-shadow .15s, transform .1s; }
+  .mode:hover { border-color: #4a4e56; }
+  .mode:active { transform: scale(.98); }
+  .mode:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .mode .radio { position: absolute; top: 16px; right: 16px; width: 22px; height: 22px; border-radius: 50%; border: 2px solid #5a5f66; transition: border-color .15s, box-shadow .15s; }
+  .mode .k { font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); padding-right: 30px; }
+  .mode b { display: block; font-size: 19px; font-weight: 800; margin: 4px 0 6px; }
+  .mode span { display: block; font-size: 13px; color: var(--muted); line-height: 1.45; }
+  .mode.practice[aria-checked="true"] { border-color: var(--green-2); background: rgba(7,216,162,.06); box-shadow: 0 0 22px rgba(7,216,162,.22); }
+  .mode.practice[aria-checked="true"] .k { color: var(--green-2); }
+  .mode.practice[aria-checked="true"] .radio { border-color: var(--green-2); box-shadow: inset 0 0 0 4px var(--card-2), inset 0 0 0 11px var(--green-2); }
+  .mode.survival[aria-checked="true"] { border-color: var(--orange); background: rgba(255,145,0,.06); box-shadow: 0 0 22px rgba(255,145,0,.22); }
+  .mode.survival[aria-checked="true"] .k { color: var(--orange); }
+  .mode.survival[aria-checked="true"] .radio { border-color: var(--orange); box-shadow: inset 0 0 0 4px var(--card-2), inset 0 0 0 11px var(--orange); }
+  .lives { display: flex; gap: 6px; justify-content: center; align-items: center; }
+  .lives svg { width: 22px; height: 22px; transition: opacity .3s; }
+  .lives svg.lost { opacity: .22; filter: grayscale(1); }
+  .lives.hit { animation: lifeHit .5s; }
+  .pass-chip { align-self: center; margin-left: 6px; font-size: 11px; font-weight: 800; letter-spacing: .3px; color: #111; background: #d7dbe0; border-radius: 999px; padding: 2px 8px; }
+  .pass-chip.none { opacity: .3; }
+  @keyframes lifeHit { 30% { transform: scale(1.3); } }
+
+  .score { font-size: 44px; font-weight: 900; letter-spacing: -1px; font-variant-numeric: tabular-nums; line-height: 1; }
+  .score small { font-size: 14px; color: var(--muted); font-weight: 700; letter-spacing: 0; }
+  .pill { font-size: 12px; font-weight: 800; padding: 5px 10px; border-radius: 999px; background: rgba(7,216,162,.15); color: var(--green-2); }
+  .pill.newbest { background: var(--gold); color: #111; }
+  .go-scoreline { display: flex; align-items: center; gap: 10px; margin: 12px 0 6px; flex-wrap: nowrap; min-width: 0; }
+  .save-link { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--green-2); text-decoration: none; border: 1px solid rgba(7,216,162,.4); border-radius: 999px; padding: 6px 12px; white-space: nowrap; }
+  .save-link:hover { background: rgba(7,216,162,.1); }
+  .go-sub { font-size: 14px; color: var(--muted); margin: 0 0 16px; }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+  .metric { background: var(--card-2); border-radius: 12px; padding: 10px 12px; }
+  .metric b { display: block; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .metric span { font-size: 11px; color: var(--muted); }
+  .go-primary { width: 100%; padding: 16px; font-size: 17px; }
+  .go-secondary { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 2px; margin-top: 10px; }
+  .go-secondary .sep { color: #4a4e56; }
+  .link-btn { background: none; border: 0; color: #c3c8ce; font: 700 14px var(--font); padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+  .link-btn:hover { color: #fff; background: rgba(255,255,255,.06); }
+  .link-btn:focus-visible { outline: 2px solid var(--green-2); outline-offset: 1px; }
+  details.more { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 12px; }
+  details.more summary { cursor: pointer; list-style: none; text-align: center; font-size: 13px; font-weight: 700; color: var(--muted); }
+  details.more summary::-webkit-details-marker { display: none; }
+  details.more summary::after { content: '  ▾'; }
+  details.more[open] summary::after { content: '  ▴'; }
+  details.more > :not(summary) { margin-top: 14px; }
+  .cats { display: grid; gap: 7px; margin: 0 0 16px; }
+  .cat { display: grid; grid-template-columns: 118px 1fr 44px; gap: 10px; align-items: center; font-size: 12px; color: var(--muted); font-weight: 600; }
+  .cat .bar { height: 7px; background: rgba(255,255,255,.08); border-radius: 4px; overflow: hidden; }
+  .cat .bar i { display: block; height: 100%; border-radius: 4px; }
+  .cat b { color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+  .profile { border: 1px solid rgba(7,216,162,.35); background: linear-gradient(160deg, rgba(34,161,128,.14), rgba(34,161,128,.02)); border-radius: 16px; padding: 14px 16px; margin-bottom: 14px; }
+  .profile h3 { font-size: 20px; font-weight: 800; margin: 4px 0; }
+  .profile p { margin: 0 0 10px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .feature { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: rgba(0,0,0,.25); border-radius: 12px; padding: 10px 12px; text-decoration: none; }
+  .feature b { display: block; font-size: 14px; }
+  .feature span { font-size: 12px; color: var(--muted); }
+  .feature em { font-style: normal; color: var(--green-2); font-weight: 800; font-size: 13px; white-space: nowrap; }
+  .cta { display: grid; gap: 8px; margin-bottom: 18px; }
+  .cta .btn { width: 100%; padding: 15px 18px; }
+  .review { list-style: none; padding: 0; margin: 8px 0 14px; display: grid; gap: 8px; }
+  .review li { background: var(--card-2); border-radius: 12px; padding: 10px 12px; border-left: 4px solid #6d737b; }
+  .review li.right { border-left-color: var(--gain); }
+  .review li.wrong { border-left-color: var(--loss); }
+  .review .rh { font-weight: 700; font-size: 14px; line-height: 1.35; }
+  .review .rm { font-size: 12px; color: var(--muted); margin: 3px 0 5px; font-variant-numeric: tabular-nums; }
+  .review .rm b { font-weight: 800; }
+  .review .rw { font-size: 12.5px; color: #c3c8ce; line-height: 1.45; }
+
+  @media (max-width: 760px) {
+    .overlay { align-items: flex-end; justify-content: center; padding-block: 56px 12px; background: linear-gradient(0deg, rgba(10,12,15,.94) 30%, rgba(10,12,15,.3)); }
+    .card { padding: 18px 16px; }
+    .modes { gap: 8px; }
+    .mode { padding: 14px 12px; }
+    .mode .radio { top: 14px; right: 12px; width: 20px; height: 20px; }
+    .mode b { font-size: 16px; white-space: nowrap; }
+    .mode span { font-size: 12px; }
+    .lanecards { gap: 6px; margin: 14px 0 0; padding: 16px 0; }
+    .select-label { margin: 22px 0 10px; }
+    .lc span { font-size: 11.5px; }
+    .menu-controls { font-size: 12px; }
+    .metric { padding: 9px 10px; }
+    .go-scoreline { gap: 8px; }
+    .go-scoreline .pill { font-size: 10px; padding: 4px 8px; }
+    .save-link { font-size: 12px; padding: 5px 10px; }
+    .metric b { font-size: 16px; }
+    .score { font-size: 40px; }
+    .cat { grid-template-columns: 96px 1fr 40px; }
+    #hud { padding-inline: 10px; }
+    .topbar { height: auto; min-height: 58px; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-areas: 'mid money ctrl'; gap: 6px; padding: 6px; }
+    .tb-mid { flex-wrap: wrap; justify-content: flex-start; align-content: center; gap: 4px 5px; padding-left: 4px; }
+    .equity { font-size: 18px; text-align: center; }
+    .tb-streak { display: block; }
+    .tb-ctrl .icon-btn { width: 36px; height: 36px; border-radius: 10px; }
+    .rl-mode { display: none; }
+    .round { font-size: 12px; letter-spacing: .3px; }
+    .dots { gap: 3px; }
+    .dots i { width: 7px; height: 7px; }
+    .lives { display: contents; }
+    .lives svg { width: 16px; height: 16px; }
+    .pass-chip { font-size: 10px; padding: 1px 6px; margin-left: 0; }
+    .streak-chip { display: none !important; }
+    .news { top: 82px; padding: 12px 14px 10px; }
+
+    .headline { font-size: 17px; }
+    .lane, .lane.cash { min-width: 0; flex: 1; padding: 11px 6px; font-size: 14px; }
+    .lane small { font-size: 9.5px; }
+    .lanes { left: 12px; right: 12px; transform: none; }
+    .reveal-card, .coach { bottom: calc(max(16px, env(safe-area-inset-bottom)) + 84px); }
+    .rv-why { font-size: 13px; }
+    .brandbar { display: none; }
+  }
+</style>
+<script>
+  // Launched straight into a run (?autostart) or as the lobby preview (?preview): never flash the start menu while loading
+  if (/[?&](autostart|preview)\b/.test(location.search)) document.documentElement.classList.add('direct-start');
+</script>
+<style>html.direct-start #menu, html.direct-start #brandbar { display: none !important; }</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<div class="brandbar" id="brandbar"><span class="logo" id="logo"></span><span class="sep"></span><span class="pt">Playtrade</span></div>
+
+<div id="hud" hidden>
+  <div class="topbar">
+    <div class="tb-money">
+      <div class="equity" id="equity" title="Virtual balance">$10,000</div>
+      <div class="tb-pnl gain" id="pnl">P&amp;L +$0</div>
+    </div>
+    <div class="tb-mid">
+      <span class="round" id="roundLbl"></span>
+      <div class="dots" id="dots"></div>
+      <div class="lives" id="lives" hidden></div>
+      <span class="tb-streak" id="streakHud">🔥 0</span>
+    </div>
+    <div class="tb-ctrl">
+      <button class="icon-btn" id="btnPause" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+      <button class="icon-btn tb-sound" id="btnSound" aria-label="Mute sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path id="soundWaves" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+  <div class="streak-chip" id="streakChip" hidden></div>
+</div>
+
+<div class="news" id="news" hidden>
+  <div class="news-top"><span class="tag" id="newsTag">EARNINGS</span><span class="asset" id="newsAsset"></span></div>
+  <div class="headline" id="newsText"></div>
+  <div class="news-q" id="newsQ">Will the price rise or fall? Pick a lane before the news wall.</div>
+  <div class="newsbar" id="newsBarWrap"><i id="newsBar"></i></div>
+</div>
+
+<div id="verdict"></div>
+<div class="reveal-card" id="reveal" hidden></div>
+
+<div class="lanes" id="lanes" hidden>
+  <button class="lane short" data-lane="0">▼ SELL<small>Price will fall</small></button>
+  <button class="lane cash" data-lane="1">● PASS<small id="cashSub">Skip this round</small></button>
+  <button class="lane long" data-lane="2">▲ BUY<small>Price will rise</small></button>
+</div>
+
+<div id="pops"></div>
+<div id="vignette"></div>
+<div id="countdown"></div>
+<div id="coachDim" hidden></div>
+<div id="coach" class="coach" hidden>
+  <div class="coach-step" id="coachStep"></div>
+  <div class="coach-text" id="coachText"></div>
+  <div class="coach-keys" id="coachKeys"></div>
+</div>
+
+<section class="overlay" id="menu">
+  <div class="card">
+    <div class="eyebrow">A Playtrade mini-game</div>
+    <h1>Bull <span>Run</span></h1>
+    <p class="lead">Read the news, pick <b class="gain">BUY</b> or <b class="loss">SELL</b>, then see how the market reacted.</p>
+    <div class="lanecards">
+      <div class="lc short"><svg viewBox="0 0 46 22"><polyline points="3,5 16,11 26,8 43,17" fill="none" stroke="#ff6b93" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><b>▼ SELL</b><span>price falls</span></div>
+      <div class="lc cash"><svg viewBox="0 0 46 22"><line x1="5" y1="11" x2="41" y2="11" stroke="#9ba1a8" stroke-width="3" stroke-linecap="round"/></svg><b>● PASS</b><span>skip a round</span></div>
+      <div class="lc long"><svg viewBox="0 0 46 22"><polyline points="3,17 16,11 26,14 43,5" fill="none" stroke="#3be39a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><b>▲ BUY</b><span>price rises</span></div>
+    </div>
+    <div class="label select-label">Select mode</div>
+    <div class="modes" role="radiogroup" aria-label="Select mode">
+      <button class="mode practice" id="btnPractice" role="radio" aria-checked="true"><span class="radio" aria-hidden="true"></span><div class="k">Practice</div><b>8 headlines</b><span>See the correct answer after each headline.</span></button>
+      <button class="mode survival" id="btnSurvival" role="radio" aria-checked="false"><span class="radio" aria-hidden="true"></span><div class="k">Survival</div><b>3 lives</b><span>Faster each round. No explanations.</span></button>
+    </div>
+    <div class="menu-controls" id="controls"></div>
+    <div class="start-row">
+      <button class="btn big" id="btnStart">Start Bull Run</button>
+      <div class="best-inline" id="bestInline" hidden>Best score<b id="bestInlineN">0</b></div>
+    </div>
+    <details class="rules">
+      <summary>How the game works</summary>
+      <p>Each headline is a $1,000 virtual trade in the asset shown on the card. BUY profits if its price rose that day, SELL profits if it fell, by the real percentage move. Traders call these going long and going short. Not sure? PASS to skip the round: no gain, no loss, no points. Right calls score 100 points, plus a bonus for deciding fast and for streaks.</p>
+      <p><b style="color:var(--text)">Survival:</b> a wrong call costs a life, and so does reaching the wall without picking a lane once your passes are used up, and you get less time with every headline. You have 2 passes: each PASS skips a round without losing a life, but resets your streak. With no passes left, PASS is locked. Every 8 right calls in a row win a life back. The explanations for your misses are waiting at the end.</p>
+    </details>
+  </div>
+</section>
+
+<section class="overlay center" id="paused" hidden>
+  <div class="card" style="width:min(340px,100%);text-align:center">
+    <div id="pauseMain">
+      <div class="eyebrow">Paused</div>
+      <h2>Market on hold</h2>
+      <p class="lead">Markets don’t really wait, but this one will.</p>
+      <div class="row" style="justify-content:center">
+        <button class="btn" id="btnResume">Resume</button>
+        <button class="btn ghost" id="btnQuit">Exit to menu</button>
+      </div>
+    </div>
+    <div id="pauseConfirm" hidden>
+      <h2>Leave this run?</h2>
+      <p class="lead">Your progress in this run will be lost.</p>
+      <div class="row" style="justify-content:center">
+        <button class="btn" id="btnKeep">Keep playing</button>
+        <button class="btn ghost" id="btnExitRun">Exit run</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="overlay" id="over" hidden>
+  <div class="card" id="overCard"></div>
+</section>
+
+<script src="brand/logo.js"></script>
+<script src="data/headlines.js"></script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+/* =========================================================
+   Config
+   ========================================================= */
+const CONFIG = {
+  utm: 'utm_source=bull_run&utm_medium=game&utm_campaign=playtrade_run',
+  // TODO: confirm destination URLs with the profit.com team
+  playtradeUrl: 'https://profit.com/terminal/tournaments/arena',
+  signupUrl: 'https://profit.com/terminal/tournaments/arena',
+};
+
+const FEATURES = {
+  playtrade: { name: 'Playtrade tournaments', text: 'Compete with virtual funds on real-time market data.', url: 'https://profit.com/terminal/tournaments/arena' },
+  alerts: { name: 'Price Alerts', text: 'Get notified when a price reaches your level.', url: 'https://profit.com/pricing' },
+  brief: { name: 'AI Daily Briefs', text: 'A daily summary of what is moving markets.', url: 'https://profit.com/daily-brief' },
+  weekly: { name: 'Weekly Market Briefs', text: 'A weekly recap of the biggest market stories.', url: 'https://profit.com/learning/weekly-briefs' },
+};
+
+const CATEGORIES = {
+  EARNINGS: { label: 'Earnings', color: '#ff9100' },
+  ECONOMY: { label: 'Economy', color: '#87bfff' },
+  COMPANY: { label: 'Company news', color: '#ffc700' },
+  WORLD: { label: 'World events', color: '#fd6f8e' },
+};
+
+const ARCHETYPES = {
+  pro: { name: 'Headline Pro', desc: 'You read the news like a seasoned trader.', tip: 'Put that instinct to work on live markets with virtual funds.', feature: 'playtrade' },
+  hesitant: { name: 'Hesitant Trader', desc: 'You let several headlines pass without making a call.', tip: 'Deciding your levels before news breaks makes it easier to act quickly.', feature: 'alerts' },
+  rookie: { name: 'News Rookie', desc: "Markets don't always react the way a headline suggests.", tip: 'Following the biggest market stories each week builds intuition fast.', feature: 'weekly' },
+  EARNINGS: { name: 'Earnings Learner', desc: 'Earnings news was your weak spot. Investors compare results with what they expected, not just with last year.', tip: 'Recaps of each week\'s big reports show what the market cared about.', feature: 'weekly' },
+  ECONOMY: { name: 'Macro Learner', desc: 'Economy headlines tripped you up. Inflation and interest rates move entire markets, sometimes in surprising directions.', tip: 'A short daily summary of the economy makes these headlines much easier to read.', feature: 'brief' },
+  COMPANY: { name: 'Company News Learner', desc: 'Company news caught you out. Splits, index changes and product news can move prices in unexpected ways.', tip: 'Alerts on the stocks you follow help you see how they react to news in real time.', feature: 'alerts' },
+  WORLD: { name: 'World Events Learner', desc: 'Global events were your weak spot. Ask which companies win and which lose from the news.', tip: 'A daily summary of market-moving events helps connect the dots.', feature: 'brief' },
+};
+
+const HEADLINES = window.BULL_RUN_HEADLINES || [];
+const BRAND = window.PROFIT_BRAND || { logo: '', mark: '' };
+
+/* =========================================================
+   Helpers & constants
+   ========================================================= */
+const $ = (id) => document.getElementById(id);
+const clamp = THREE.MathUtils.clamp;
+const lerp = THREE.MathUtils.lerp;
+const damp = (a, b, rate, dt) => lerp(a, b, 1 - Math.exp(-rate * dt));
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const fmtMoney = (v) => (v < 0 ? '−$' : '$') + Math.abs(Math.round(v)).toLocaleString('en-US');
+const fmtSigned = (v) => (v >= 0 ? '+$' : '−$') + Math.abs(Math.round(v)).toLocaleString('en-US');
+const fmtPct = (f, d = 1) => (f >= 0 ? '+' : '−') + Math.abs(f * 100).toFixed(d) + '%';
+const fmtDate = (d) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const fmtMonth = (d) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const withUtm = (url, content) => `${url}${url.includes('?') ? '&' : '?'}${CONFIG.utm}&utm_content=${encodeURIComponent(content)}`;
+function track(name, props = {}) { (window.dataLayer = window.dataLayer || []).push({ event: `bull_run_${name}`, ...props }); }
+
+const SPEED = 15;
+const ROUNDS = 8;
+const STAKE = 1000;
+const START_EQUITY = 10000;
+const TRACK_W = 7.2;
+const LANE_X = [-2.4, 0, 2.4];
+const LANE_DIR = [-1, 0, 1];
+const LANE_NAME = ['SELL', 'PASS', 'BUY'];
+const LEAD_IN = 24;
+const RAMP_LEN = 24;
+const SURVIVAL_LIVES = 3;
+const SURVIVAL_PASSES = 2;
+const SURVIVAL_MAX = 64;
+const LIFE_EVERY = 8;
+const TILE = 14;
+const IS_TOUCH = matchMedia('(pointer: coarse)').matches;
+// Shown under the 3-2-1 countdown so the controls are fresh right before the first headline
+const CONTROLS_HINT = IS_TOUCH
+  ? '<span><b>Tap</b> SELL · PASS · BUY</span><span>·</span><span><b>Swipe</b> to change lanes</span>'
+  : '<span><kbd>← / A</kbd><kbd>→ / D</kbd> change lanes</span><span>·</span><span><kbd>P</kbd> pause</span>';
+// ?preview: non-interactive attract mode for the Playtrade Arena lobby (autopilot, silent, saves nothing)
+const PREVIEW = new URLSearchParams(location.search).has('preview');
+const BEST_KEY = (kind) => `bull_run_news_best_${kind}_v1`;
+const SEEN_KEY = 'bull_run_news_seen_v1';
+const GAIN = '#17b26a', LOSS = '#e31b54';
+// decide: seconds to read the headline and pick a lane; cool: seconds between the price reaction and the next headline
+const MODES = {
+  practice: { label: 'Practice', cool: 4.4, decide: (r) => (r < 2 ? 6.5 : Math.max(3.8, 6.5 - (r - 1) * 0.45)) },
+  survival: { label: 'Survival', cool: 1.3, decide: (r) => Math.max(2.4, 5.2 - r * 0.2) },
+  preview: { label: 'Preview', cool: 1.8, decide: () => 4.6 }, // steady pace, no speed-up
+};
+
+$('logo').innerHTML = BRAND.logo;
+
+/* =========================================================
+   Renderer, scene, camera, lights
+   ========================================================= */
+const canvas = $('game');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, IS_TOUCH ? 1.75 : 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+
+const scene = new THREE.Scene();
+const HORIZON = new THREE.Color('#0c1917');
+scene.fog = new THREE.Fog(HORIZON, 30, 100);
+
+const camera = new THREE.PerspectiveCamera(62, 1, 0.1, 700);
+const camLook = new THREE.Vector3(0, 1, -5);
+camera.position.set(0, 3, 6);
+
+scene.add(new THREE.HemisphereLight('#c9fff0', '#0b0d10', 1.0));
+const keyLight = new THREE.DirectionalLight('#ffffff', 1.9);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(1024, 1024);
+Object.assign(keyLight.shadow.camera, { left: -9, right: 9, top: 9, bottom: -9, near: 1, far: 60 });
+keyLight.shadow.bias = -0.0005;
+keyLight.shadow.normalBias = 0.03;
+scene.add(keyLight, keyLight.target);
+const rimLight = new THREE.DirectionalLight('#07d8a2', 1.4);
+scene.add(rimLight, rimLight.target);
+
+/* =========================================================
+   Textures
+   ========================================================= */
+function canvasTex(w, h, draw) {
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  return t;
+}
+const shared = (o) => { o.userData.shared = true; return o; };
+const FONT = (w, px) => `${w} ${px}px Montserrat, Arial, sans-serif`;
+
+let TEX = null;
+function buildTextures() {
+  const track = canvasTex(512, 512, (x, W, H) => {
+    const lw = W / 3;
+    x.fillStyle = '#161a20'; x.fillRect(0, 0, W, H);
+    x.fillStyle = 'rgba(227,27,84,.22)'; x.fillRect(0, 0, lw, H);
+    x.fillStyle = 'rgba(255,255,255,.045)'; x.fillRect(lw, 0, lw, H);
+    x.fillStyle = 'rgba(23,178,106,.24)'; x.fillRect(lw * 2, 0, lw, H);
+    x.strokeStyle = 'rgba(255,255,255,.05)'; x.lineWidth = 2;
+    for (let v = 0; v < H; v += H / 8) { x.beginPath(); x.moveTo(0, v); x.lineTo(W, v); x.stroke(); }
+    x.strokeStyle = 'rgba(7,216,162,.45)'; x.lineWidth = 4;
+    x.beginPath(); x.moveTo(0, 2); x.lineTo(W, 2); x.stroke();
+    x.setLineDash([26, 22]); x.strokeStyle = 'rgba(255,255,255,.3)';
+    for (const u of [lw, lw * 2]) { x.beginPath(); x.moveTo(u, 0); x.lineTo(u, H); x.stroke(); }
+    x.setLineDash([]);
+    x.font = FONT(900, 42); x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.fillStyle = 'rgba(255,110,145,.7)'; x.fillText('▼ SELL', lw / 2, H * 0.3);
+    x.fillStyle = 'rgba(70,230,165,.75)'; x.fillText('BUY ▲', lw * 2.5, H * 0.3);
+    x.fillStyle = 'rgba(255,255,255,.4)'; x.fillText('PASS', lw * 1.5, H * 0.3);
+  });
+  track.wrapT = THREE.RepeatWrapping;
+
+  const glow = canvasTex(64, 64, (x, S) => {
+    const g = x.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
+    g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.35, 'rgba(255,255,255,.35)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, S, S);
+  });
+
+  const markImg = new Image();
+  const markTex = new THREE.Texture(markImg);
+  markTex.colorSpace = THREE.SRGBColorSpace;
+  markImg.onload = () => { markTex.needsUpdate = true; };
+  markImg.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(BRAND.mark.replace(/#22A180/gi, '#ffffff').replace('<svg ', '<svg width="240" height="256" '));
+
+  TEX = { track, glow, markTex };
+  Object.values(TEX).forEach(shared);
+}
+
+function wallTexture(item) {
+  const cat = CATEGORIES[item.category];
+  return canvasTex(512, 1066, (x, W, H) => {
+    x.fillStyle = 'rgba(12,14,18,.98)'; x.fillRect(0, 0, W, H);
+    x.strokeStyle = 'rgba(255,255,255,.05)'; x.lineWidth = 2;
+    for (let i = 0; i < W; i += 32) { x.beginPath(); x.moveTo(i, 0); x.lineTo(i, H); x.stroke(); }
+    for (let i = 0; i < H; i += 32) { x.beginPath(); x.moveTo(0, i); x.lineTo(W, i); x.stroke(); }
+    x.strokeStyle = cat.color; x.lineWidth = 10; x.strokeRect(5, 5, W - 10, H - 10);
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    const cy = H * 0.34;
+    x.fillStyle = cat.color; x.font = FONT(900, 28); x.fillText(`NEWS BREAKS · ${cat.label.toUpperCase()}`, W / 2, cy - 74);
+    x.fillStyle = '#ffffff';
+    let size = 60; x.font = FONT(900, size);
+    while (x.measureText(item.name).width > W - 60 && size > 28) { size -= 4; x.font = FONT(900, size); }
+    x.fillText(item.name, W / 2, cy - 16);
+    x.font = FONT(900, 40);
+    x.fillStyle = '#ff6b93'; x.fillText('SELL', W / 2 - 110, cy + 52);
+    x.fillStyle = 'rgba(255,255,255,.5)'; x.fillText('or', W / 2, cy + 52);
+    x.fillStyle = '#3be39a'; x.fillText('BUY', W / 2 + 110, cy + 52);
+  });
+}
+
+/* =========================================================
+   Environment: sky, stars, grid, motes
+   ========================================================= */
+const skyGroup = new THREE.Group();
+scene.add(skyGroup);
+{
+  const sky = new THREE.Mesh(
+    new THREE.SphereGeometry(500, 32, 16),
+    new THREE.ShaderMaterial({
+      side: THREE.BackSide, depthWrite: false, toneMapped: false,
+      uniforms: { top: { value: new THREE.Color('#040506') }, horizon: { value: HORIZON.clone() }, glow: { value: new THREE.Color('#07d8a2') } },
+      vertexShader: 'varying vec3 vDir; void main(){ vDir = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: `
+        uniform vec3 top; uniform vec3 horizon; uniform vec3 glow; varying vec3 vDir;
+        void main(){
+          vec3 d = normalize(vDir);
+          vec3 col = mix(horizon, top, smoothstep(0.0, 0.5, d.y));
+          col += glow * (d.y > 0.0 ? exp(-d.y * 9.0) * 0.15 : exp(d.y * 90.0) * 0.1);
+          col = mix(col, top * 1.6, smoothstep(0.0, 0.06, -d.y));
+          gl_FragColor = vec4(col, 1.0);
+          #include <colorspace_fragment>
+        }`,
+    })
+  );
+  skyGroup.add(sky);
+  const starPos = [];
+  for (let i = 0; i < 700; i++) {
+    const th = Math.random() * Math.PI * 2, y = Math.random() * 0.9 + 0.08;
+    const r = Math.sqrt(1 - y * y);
+    starPos.push(Math.cos(th) * r * 450, y * 450, Math.sin(th) * r * 450);
+  }
+  const sg = new THREE.BufferGeometry();
+  sg.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3));
+  skyGroup.add(new THREE.Points(sg, new THREE.PointsMaterial({ color: '#bfeee0', size: 1.3, sizeAttenuation: false, fog: false, transparent: true, opacity: 0.6 })));
+}
+
+// Distant mountains: one mass on each side of the track that slopes down to the horizon straight ahead,
+// leaving a clear gap where the news gate stands. Triangle waves add a jagged ridgeline. Each range is
+// dark at the crest and lifts into the teal horizon haze toward its base; a soft glow marks the horizon.
+// They follow the camera (never reached) with a slight vertical lag for parallax.
+const tri = (x) => 1 - 2 * Math.abs(x - Math.floor(x) - 0.5);
+const mountainLayers = [
+  // gap/peak: degrees from straight ahead where the slope starts and where it tops out
+  { radius: 470, ground: -2, amp: 40, gap: 6, peak: 30, octaves: [[17, 1], [37, 0.5], [83, 0.2]], seed: 11, crest: '#123536', haze: '#1a4a47', lag: 2.4 },
+  { radius: 380, ground: -2, amp: 58, gap: 9, peak: 40, octaves: [[23, 1], [53, 0.45], [109, 0.2]], seed: 29, crest: '#091c1f', haze: '#113534', lag: 1.3 },
+].map((L, li) => {
+  const rng = mulberry32(L.seed);
+  const oct = L.octaves.map(([k, a]) => ({ k, a, ph: rng() }));
+  const norm = oct.reduce((sum, o) => sum + o.a, 0);
+  const SEG = 1024, pos = [], idx = [];
+  const bottom = L.ground - 6;
+  for (let i = 0; i <= SEG; i++) {
+    let n = 0;
+    for (const o of oct) n += o.a * tri((i / SEG) * o.k + o.ph);
+    const th = (i / SEG) * Math.PI * 2;
+    const deg = Math.abs(((i / SEG) * 360 + 180) % 360 - 180);
+    const rise = Math.pow(clamp((deg - L.gap) / (L.peak - L.gap), 0, 1), 1.5);
+    const env = deg <= L.peak ? rise : 1 - 0.6 * THREE.MathUtils.smoothstep(deg, L.peak, L.peak + 45);
+    const top = L.ground + env * L.amp * (0.62 + 0.38 * (n / norm));
+    const x = Math.sin(th) * L.radius, z = -Math.cos(th) * L.radius;
+    pos.push(x, bottom, z, x, top, z);
+    if (i < SEG) { const a = i * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  geo.setIndex(idx);
+  const mesh = new THREE.Mesh(geo, new THREE.ShaderMaterial({
+    side: THREE.DoubleSide, transparent: true, depthWrite: false, toneMapped: false, fog: false,
+    uniforms: {
+      crest: { value: new THREE.Color(L.crest) }, haze: { value: new THREE.Color(L.haze) },
+      ground: { value: L.ground }, peak: { value: L.ground + L.amp }, vis: { value: 1 },
+    },
+    vertexShader: 'varying float vY; void main(){ vY = position.y; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: `
+      uniform vec3 crest; uniform vec3 haze; uniform float ground; uniform float peak; uniform float vis;
+      varying float vY;
+      void main(){
+        float h = clamp((vY - ground) / (peak - ground), 0.0, 1.0);
+        vec3 col = mix(haze, crest, smoothstep(0.0, 0.55, h));
+        float a = smoothstep(ground - 4.0, ground, vY);
+        gl_FragColor = vec4(col, a * vis);
+        #include <colorspace_fragment>
+      }`,
+  }));
+  mesh.renderOrder = -3 + li;
+  mesh.frustumCulled = false;
+  scene.add(mesh);
+  return { mesh, lag: L.lag, y: 0, mats: [mesh.material] };
+});
+{
+  // soft glow along the horizon, in front of the nearest range
+  const near = mountainLayers[mountainLayers.length - 1];
+  const R = 375, SEG = 256, pos = [], v = [], idx = [];
+  for (let i = 0; i <= SEG; i++) {
+    const th = (i / SEG) * Math.PI * 2, x = Math.sin(th) * R, z = -Math.cos(th) * R;
+    pos.push(x, -2 - 6, z, x, -2 + 6, z);
+    v.push(-1, 1);
+    if (i < SEG) { const a = i * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  geo.setAttribute('band', new THREE.Float32BufferAttribute(v, 1));
+  geo.setIndex(idx);
+  const line = new THREE.Mesh(geo, new THREE.ShaderMaterial({
+    side: THREE.DoubleSide, transparent: true, depthWrite: false, toneMapped: false, fog: false, blending: THREE.AdditiveBlending,
+    uniforms: { color: { value: new THREE.Color('#07d8a2') }, vis: { value: 1 } },
+    vertexShader: 'attribute float band; varying float vB; void main(){ vB = band; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: `
+      uniform vec3 color; uniform float vis; varying float vB;
+      void main(){
+        float g = exp(-vB * vB * 120.0) * 0.1 + exp(-max(vB, 0.0) * 5.0) * step(0.0, vB) * 0.06;
+        gl_FragColor = vec4(color * g * vis, 1.0);
+        #include <colorspace_fragment>
+      }`,
+  }));
+  line.frustumCulled = false;
+  near.mesh.add(line);
+  near.mats.push(line.material);
+}
+let sceneryVis = 1;
+
+const grid = new THREE.GridHelper(700, 140, '#22a180', '#173b33');
+grid.material.transparent = true;
+grid.material.opacity = 0.32;
+scene.add(grid);
+
+const MOTES = 220;
+const moteGeo = new THREE.BufferGeometry();
+const moteArr = new Float32Array(MOTES * 3);
+for (let i = 0; i < MOTES; i++) { moteArr[i * 3] = (Math.random() - 0.5) * 30; moteArr[i * 3 + 1] = Math.random() * 14 - 3; moteArr[i * 3 + 2] = -Math.random() * 80 + 10; }
+moteGeo.setAttribute('position', new THREE.BufferAttribute(moteArr, 3));
+const motes = new THREE.Points(moteGeo, new THREE.PointsMaterial({ color: '#07d8a2', size: 0.09, transparent: true, opacity: 0.55, depthWrite: false, blending: THREE.AdditiveBlending }));
+motes.frustumCulled = false;
+scene.add(motes);
+
+/* =========================================================
+   Particles
+   ========================================================= */
+const P_MAX = 260;
+const pMesh = new THREE.InstancedMesh(new THREE.OctahedronGeometry(0.08, 0), new THREE.MeshBasicMaterial({ toneMapped: false }), P_MAX);
+pMesh.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(P_MAX * 3), 3);
+pMesh.frustumCulled = false;
+scene.add(pMesh);
+const particles = Array.from({ length: P_MAX }, () => ({ life: 0, p: new THREE.Vector3(), v: new THREE.Vector3() }));
+let pCursor = 0;
+const _dummy = new THREE.Object3D();
+const _col = new THREE.Color();
+function burst(pos, color, n = 16, power = 4) {
+  _col.set(color);
+  for (let i = 0; i < n; i++) {
+    const pt = particles[pCursor];
+    pt.life = 0.5 + Math.random() * 0.5;
+    pt.p.copy(pos);
+    pt.v.set(Math.random() - 0.5, Math.random() * 0.9 + 0.1, Math.random() - 0.5).normalize().multiplyScalar(power * (0.4 + Math.random() * 0.6));
+    pMesh.setColorAt(pCursor, _col);
+    pCursor = (pCursor + 1) % P_MAX;
+  }
+  pMesh.instanceColor.needsUpdate = true;
+}
+function updateParticles(dt) {
+  for (let i = 0; i < P_MAX; i++) {
+    const pt = particles[i];
+    if (pt.life > 0) { pt.life -= dt; pt.v.y -= 8 * dt; pt.p.addScaledVector(pt.v, dt); }
+    _dummy.position.copy(pt.p);
+    _dummy.scale.setScalar(pt.life > 0 ? Math.min(1, pt.life * 2.5) : 0);
+    _dummy.rotation.set(pt.life * 6, pt.life * 4, 0);
+    _dummy.updateMatrix();
+    pMesh.setMatrixAt(i, _dummy.matrix);
+  }
+  pMesh.instanceMatrix.needsUpdate = true;
+}
+
+/* =========================================================
+   The runner: an original bull mascot in a profit.com hoodie
+   ========================================================= */
+function makeBull() {
+  const root = new THREE.Group();
+  const rig = new THREE.Group();
+  root.add(rig);
+  const mat = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.7, ...o });
+  const M = {
+    hood: mat('#22a180'), fur: mat('#8a5a3c'), muzzle: mat('#e9c9a6'), horn: mat('#f3eadb', { roughness: 0.4 }),
+    dark: mat('#101214', { roughness: 0.3 }), pants: mat('#2d2f34'), shoe: mat('#f7f8fa'), sole: mat('#07d8a2', { emissive: '#07d8a2', emissiveIntensity: 0.6 }),
+    ring: mat('#ffc700', { metalness: 0.8, roughness: 0.25 }),
+  };
+  const add = (parent, geo, m, x = 0, y = 0, z = 0) => {
+    const mesh = new THREE.Mesh(geo, m);
+    mesh.position.set(x, y, z);
+    mesh.castShadow = true;
+    parent.add(mesh);
+    return mesh;
+  };
+  add(rig, new THREE.CapsuleGeometry(0.3, 0.3, 4, 16), M.hood, 0, 0.88, 0).scale.set(1.05, 1, 0.9);
+  const patch = new THREE.Mesh(new THREE.PlaneGeometry(0.26, 0.28), new THREE.MeshBasicMaterial({ map: TEX.markTex, transparent: true, toneMapped: false }));
+  patch.position.set(0, 0.95, 0.275);
+  rig.add(patch);
+  add(rig, new THREE.TorusGeometry(0.2, 0.06, 8, 20), M.hood, 0, 1.18, 0.02).rotation.x = Math.PI / 2;
+  add(rig, new THREE.SphereGeometry(0.3, 22, 16), M.fur, 0, 1.42, 0).scale.set(1, 0.92, 1);
+  add(rig, new THREE.SphereGeometry(0.19, 18, 12), M.muzzle, 0, 1.33, -0.24).scale.set(1.3, 0.82, 0.85);
+  for (const s of [-1, 1]) {
+    add(rig, new THREE.SphereGeometry(0.03, 8, 6), M.dark, s * 0.08, 1.35, -0.39);
+    add(rig, new THREE.SphereGeometry(0.042, 10, 8), M.dark, s * 0.13, 1.5, -0.25);
+    add(rig, new THREE.SphereGeometry(0.013, 6, 4), M.shoe, s * 0.12 + 0.01, 1.515, -0.29);
+    add(rig, new THREE.ConeGeometry(0.075, 0.36, 12), M.horn, s * 0.34, 1.64, -0.02).rotation.z = -s * 1.05;
+    add(rig, new THREE.ConeGeometry(0.04, 0.16, 10), M.horn, s * 0.5, 1.78, -0.02).rotation.z = -s * 0.25;
+    const ear = add(rig, new THREE.SphereGeometry(0.09, 10, 8), M.fur, s * 0.3, 1.47, 0.06);
+    ear.scale.set(1.5, 0.55, 0.9); ear.rotation.z = s * 0.45;
+  }
+  add(rig, new THREE.TorusGeometry(0.06, 0.014, 8, 20), M.ring, 0, 1.25, -0.38);
+  const arms = [-1, 1].map((s) => {
+    const pivot = new THREE.Group();
+    pivot.position.set(s * 0.37, 1.07, 0);
+    pivot.rotation.z = s * 0.12;
+    rig.add(pivot);
+    add(pivot, new THREE.CapsuleGeometry(0.075, 0.26, 4, 8), M.hood, 0, -0.18, 0);
+    add(pivot, new THREE.SphereGeometry(0.075, 10, 8), M.dark, 0, -0.38, 0);
+    return pivot;
+  });
+  const legs = [-1, 1].map((s) => {
+    const pivot = new THREE.Group();
+    pivot.position.set(s * 0.13, 0.6, 0);
+    rig.add(pivot);
+    add(pivot, new THREE.CapsuleGeometry(0.085, 0.28, 4, 8), M.pants, 0, -0.22, 0);
+    add(pivot, new THREE.SphereGeometry(0.1, 12, 8), M.shoe, 0, -0.47, -0.05).scale.set(1, 0.65, 1.5);
+    add(pivot, new THREE.BoxGeometry(0.18, 0.03, 0.3), M.sole, 0, -0.53, -0.05);
+    return pivot;
+  });
+  const tail = new THREE.Group();
+  tail.position.set(0, 0.72, 0.26);
+  rig.add(tail);
+  add(tail, new THREE.CylinderGeometry(0.018, 0.022, 0.38, 6), M.fur, 0, -0.16, 0.08).rotation.x = 0.5;
+  add(tail, new THREE.SphereGeometry(0.06, 8, 6), M.dark, 0, -0.33, 0.17);
+  const aura = new THREE.Mesh(new THREE.RingGeometry(0.5, 0.78, 40), new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false, side: THREE.DoubleSide }));
+  aura.rotation.x = -Math.PI / 2;
+  aura.position.y = 0.04;
+  root.add(aura);
+  return { root, rig, arms, legs, tail, aura };
+}
+
+/* =========================================================
+   Run layout: approach → news wall → real price reaction → explanation
+   ========================================================= */
+let RUN = null;
+let world = null;
+let bull = null;
+const MAT = {};
+
+function disposeTree(obj) {
+  obj.traverse((o) => {
+    if (o.geometry && !o.geometry.userData.shared) o.geometry.dispose();
+    const mats = o.material ? (Array.isArray(o.material) ? o.material : [o.material]) : [];
+    for (const m of mats) {
+      if (m.userData.shared) continue;
+      if (m.map && !m.map.userData.shared) m.map.dispose();
+      m.dispose();
+    }
+  });
+}
+
+function trackH(d) {
+  const p = RUN.pts;
+  if (d <= p[0][0]) return p[0][1];
+  if (d >= p[p.length - 1][0]) return p[p.length - 1][1];
+  let lo = 0, hi = p.length - 1;
+  while (hi - lo > 1) { const m = (lo + hi) >> 1; if (p[m][0] <= d) lo = m; else hi = m; }
+  return lerp(p[lo][1], p[hi][1], (d - p[lo][0]) / (p[hi][0] - p[lo][0]));
+}
+
+function pickHeadlines(rng) {
+  const pool = HEADLINES.slice();
+  for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+  const out = [];
+  const count = (fn) => out.filter(fn).length;
+  for (const h of pool) {
+    if (out.length >= ROUNDS) break;
+    const up = h.move > 0;
+    if (count((o) => (o.move > 0) === up) >= 5) continue;
+    if (count((o) => o.ticker === h.ticker) >= 2) continue;
+    if (count((o) => o.category === h.category) >= 3) continue;
+    out.push(h);
+  }
+  for (const h of pool) { if (out.length >= ROUNDS) break; if (!out.includes(h)) out.push(h); }
+  return out;
+}
+
+// Survival draws from reshuffled decks of every headline, never repeating one back to back.
+function survivalSequence(rng) {
+  const out = [];
+  while (out.length < SURVIVAL_MAX) {
+    const deck = HEADLINES.slice();
+    for (let i = deck.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+    if (deck[0] === out[out.length - 1]) deck.push(deck.shift());
+    out.push(...deck);
+  }
+  return out.slice(0, SURVIVAL_MAX);
+}
+
+function buildRun(mode) {
+  if (world) { scene.remove(world); disposeTree(world); }
+  world = new THREE.Group();
+  scene.add(world);
+
+  const rng = mulberry32(mode.seed);
+  const items = mode.kind === 'survival' || mode.kind === 'preview' ? survivalSequence(rng) : pickHeadlines(rng);
+  const M = MODES[mode.kind];
+  const pts = [[-60, 0], [LEAD_IN, 0]];
+  const rounds = [];
+  let d = LEAD_IN, h = 0;
+  items.forEach((item, r) => {
+    const decide = M.decide(r);
+    const aStart = d, wall = d + decide * SPEED;
+    for (let x = aStart + 7; x < wall - 1; x += 7) pts.push([x, h + Math.sin(x * 0.37) * 0.18]);
+    pts.push([wall, h]);
+    const sign = item.move >= 0 ? 1 : -1;
+    const dh = sign * clamp(Math.abs(Math.log(1 + item.move)) * 30, 1.6, 8);
+    const rampStart = wall + 2, rampEnd = rampStart + RAMP_LEN, coolEnd = rampEnd + M.cool * SPEED;
+    pts.push([rampStart, h], [rampEnd, h + dh], [coolEnd, h + dh]);
+    rounds.push({ item, r, decide, aStart, wall, rampStart, rampEnd, coolEnd, h0: h, h1: h + dh });
+    h += dh;
+    d = coolEnd;
+  });
+  pts.push([d + 120, h]);
+  RUN = { mode, items, pts, rounds, end: d };
+
+  // track surface, glowing edges and area-chart curtains
+  const surf = { pos: [], uv: [], idx: [] };
+  const edges = [{ pos: [], idx: [] }, { pos: [], idx: [] }];
+  const curtains = [{ pos: [], col: [], idx: [] }, { pos: [], col: [], idx: [] }];
+  const c = new THREE.Color('#22a180');
+  pts.forEach(([pd, ph], k) => {
+    const z = -pd;
+    surf.pos.push(-TRACK_W / 2, ph, z, TRACK_W / 2, ph, z);
+    surf.uv.push(0, pd / TILE, 1, pd / TILE);
+    [-1, 1].forEach((s, e) => {
+      const x0 = s < 0 ? -TRACK_W / 2 - 0.16 : TRACK_W / 2, x1 = s < 0 ? -TRACK_W / 2 : TRACK_W / 2 + 0.16;
+      edges[e].pos.push(x0, ph + 0.03, z, x1, ph + 0.03, z);
+      curtains[e].pos.push(s * TRACK_W / 2, ph, z, s * TRACK_W / 2, ph - 14, z);
+      curtains[e].col.push(c.r, c.g, c.b, 0.3, c.r, c.g, c.b, 0);
+    });
+    if (k < pts.length - 1) {
+      const a = k * 2, quad = [a, a + 1, a + 2, a + 1, a + 3, a + 2];
+      surf.idx.push(...quad);
+      edges.forEach((g) => g.idx.push(...quad));
+      curtains.forEach((g) => g.idx.push(...quad));
+    }
+  });
+  const geo = (o, withUv, colors) => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(o.pos, 3));
+    if (withUv) g.setAttribute('uv', new THREE.Float32BufferAttribute(o.uv, 2));
+    if (colors) g.setAttribute('color', new THREE.Float32BufferAttribute(o.col, 4));
+    g.setIndex(o.idx);
+    g.computeVertexNormals();
+    return g;
+  };
+  const trackMesh = new THREE.Mesh(geo(surf, true), MAT.track);
+  trackMesh.receiveShadow = true;
+  world.add(trackMesh);
+  edges.forEach((e) => world.add(new THREE.Mesh(geo(e), MAT.edge)));
+  curtains.forEach((cu) => world.add(new THREE.Mesh(geo(cu, false, true), MAT.curtain)));
+
+
+}
+
+// News wall for one round. Built only for the current and next
+// round (a survival run can be very long).
+function buildRoundObjects(R) {
+  if (!R || R.wallMesh) return;
+  {
+    const wallMat = new THREE.MeshBasicMaterial({ map: wallTexture(R.item), transparent: true, opacity: 0.98, side: THREE.DoubleSide, toneMapped: false });
+    R.wallMesh = new THREE.Mesh(new THREE.PlaneGeometry(24, 50), wallMat);
+    R.wallMesh.position.set(0, R.h0 - 5, -R.wall);
+    world.add(R.wallMesh);
+  }
+}
+
+function disposeRoundObjects(R) {
+  if (!R || !R.wallMesh) return;
+  world.remove(R.wallMesh);
+  disposeTree(R.wallMesh);
+  R.wallMesh = null;
+  R.openT = null;
+}
+
+function buildSharedMaterials() {
+  MAT.track = shared(new THREE.MeshStandardMaterial({ map: TEX.track, emissiveMap: TEX.track, emissive: '#ffffff', emissiveIntensity: 0.55, roughness: 0.55, metalness: 0.05 }));
+  MAT.edge = shared(new THREE.MeshBasicMaterial({ color: '#07d8a2', toneMapped: false }));
+  MAT.curtain = shared(new THREE.MeshBasicMaterial({ vertexColors: true, transparent: true, depthWrite: false, side: THREE.DoubleSide }));
+}
+
+/* =========================================================
+   Audio (synthesised)
+   ========================================================= */
+const audio = {
+  ctx: null, master: null, muted: false,
+  init() {
+    if (this.ctx) { if (this.ctx.state === 'suspended') this.ctx.resume(); return; }
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    this.ctx = new AC();
+    this.master = this.ctx.createGain();
+    this.master.gain.value = this.muted ? 0 : 0.4;
+    this.master.connect(this.ctx.destination);
+  },
+  setMuted(m) { this.muted = m; if (this.master) this.master.gain.value = m ? 0 : 0.4; },
+  tone(freq, dur, { type = 'sine', vol = 0.3, when = 0, slide = null } = {}) {
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime + when;
+    const o = this.ctx.createOscillator(), g = this.ctx.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (slide) o.frequency.exponentialRampToValueAtTime(slide, t + dur);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g).connect(this.master);
+    o.start(t); o.stop(t + dur + 0.05);
+  },
+  noise(dur, { vol = 0.3, freq = 1200, when = 0 } = {}) {
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime + when;
+    const len = Math.floor(this.ctx.sampleRate * dur);
+    const buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+    const ch = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) ch[i] = (Math.random() * 2 - 1) * (1 - i / len);
+    const src = this.ctx.createBufferSource(); src.buffer = buf;
+    const f = this.ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = freq;
+    const g = this.ctx.createGain(); g.gain.value = vol;
+    src.connect(f).connect(g).connect(this.master);
+    src.start(t);
+  },
+};
+const sfx = {
+  news: () => { audio.tone(988, 0.08, { type: 'square', vol: 0.08 }); audio.tone(1319, 0.12, { type: 'square', vol: 0.08, when: 0.09 }); },
+  lane: (dir) => audio.tone(dir > 0 ? 660 : dir < 0 ? 330 : 480, 0.12, { type: 'triangle', vol: 0.22, slide: dir > 0 ? 990 : dir < 0 ? 220 : 480 }),
+  wall: () => { audio.noise(0.45, { vol: 0.45, freq: 700 }); audio.tone(110, 0.4, { vol: 0.25, slide: 60 }); },
+  right: () => [0, 4, 7, 12].forEach((s, i) => audio.tone(660 * Math.pow(2, s / 12), 0.18, { type: 'triangle', vol: 0.22, when: 0.1 + i * 0.06 })),
+  wrong: () => { audio.tone(220, 0.35, { type: 'sawtooth', vol: 0.12, slide: 90, when: 0.1 }); },
+  skip: () => audio.tone(400, 0.2, { type: 'triangle', vol: 0.15, when: 0.1 }),
+  urgent: () => audio.tone(740, 0.08, { type: 'square', vol: 0.08 }),
+  beep: (hi) => audio.tone(hi ? 880 : 520, hi ? 0.35 : 0.14, { type: 'triangle', vol: 0.25 }),
+  finish: () => [0, 4, 7, 12, 16].forEach((s, i) => audio.tone(523 * Math.pow(2, s / 12), 0.3, { type: 'triangle', vol: 0.18, when: i * 0.09 })),
+};
+
+/* =========================================================
+   Game state & flow
+   ========================================================= */
+const G = {
+  state: 'loading', t: 0, d: 0, lane: 1, x: 0, hopY: 0, hopV: 0, r: 0, phase: 'lead',
+  equity: START_EQUITY, eqFrom: START_EQUITY, eqTo: START_EQUITY, score: 0, streak: 0, bestStreak: 0,
+  results: [], approachT: 0, choiceT: null, urgentPlayed: false, fast: false, coachBlock: false, timeScale: 0, lives: SURVIVAL_LIVES, passes: SURVIVAL_PASSES, cashPick: false,
+  countdown: 0, lastCount: 0, overTimer: 0, runPhase: 0, camY: 0, shake: 0, menuAngle: Math.PI * 0.8, viewShift: 1, mode: null,
+};
+
+let SEEN = {};
+try { SEEN = JSON.parse(localStorage.getItem(SEEN_KEY)) || {}; } catch { SEEN = {}; }
+function markSeen(k) { SEEN[k] = true; try { localStorage.setItem(SEEN_KEY, JSON.stringify(SEEN)); } catch { /* storage unavailable */ } }
+
+const practiceMode = () => ({ kind: 'practice', seed: Math.floor(Math.random() * 1e9), label: 'Practice' });
+const survivalMode = () => ({ kind: 'survival', seed: Math.floor(Math.random() * 1e9), label: 'Survival' });
+
+function resetRun() {
+  Object.assign(G, {
+    d: 0, lane: 1, x: 0, hopY: 0, hopV: 0, r: 0, phase: 'lead', equity: START_EQUITY, eqFrom: START_EQUITY, eqTo: START_EQUITY,
+    score: 0, streak: 0, bestStreak: 0, results: [], approachT: 0, choiceT: null, urgentPlayed: false, fast: false,
+    coachBlock: false, shake: 0, lives: SURVIVAL_LIVES, passes: SURVIVAL_PASSES, cashPick: false,
+  });
+  RUN.rounds.forEach(disposeRoundObjects);
+  buildRoundObjects(RUN.rounds[0]);
+  buildRoundObjects(RUN.rounds[1]);
+  ['news', 'reveal', 'coach', 'coachDim'].forEach((id) => ($(id).hidden = true));
+  $('verdict').className = '';
+  $('countdown').innerHTML = '';
+  lastHud = {};
+  updateHud(); // HUD is correct from the countdown on, not only once play starts
+  renderDots();
+  renderLives();
+}
+
+function startRun(mode) {
+  audio.init();
+  G.mode = mode;
+  selectMode(mode.kind);
+  if (!RUN || RUN.mode.seed !== mode.seed) buildRun(mode);
+  resetRun();
+  G.state = 'countdown';
+  G.countdown = 3;
+  G.lastCount = 4;
+  ['menu', 'over', 'paused'].forEach((id) => ($(id).hidden = true));
+  $('hud').hidden = false;
+  $('lanes').hidden = false;
+  $('brandbar').hidden = true;
+  $('dots').hidden = mode.kind === 'survival';
+  $('lives').hidden = mode.kind !== 'survival';
+  $('roundLbl').innerHTML = `<span class="rl-mode">${mode.label}</span>`;
+  updateLaneButtons();
+  track('run_start', { mode: mode.kind });
+}
+
+function beginApproach(R) {
+  buildRoundObjects(R);
+  buildRoundObjects(RUN.rounds[R.r + 1]);
+  disposeRoundObjects(RUN.rounds[R.r - 2]);
+  G.phase = 'approach';
+  G.lane = 1;
+  G.approachT = 0;
+  G.choiceT = null;
+  G.cashPick = false;
+  G.urgentPlayed = false;
+  G.fast = false;
+  $('reveal').hidden = true;
+  const cat = CATEGORIES[R.item.category];
+  $('newsTag').textContent = cat.label.toUpperCase();
+  $('newsTag').style.background = cat.color;
+  $('newsAsset').innerHTML = `Trading <b>${escapeHtml(R.item.name)}</b> (${escapeHtml(R.item.ticker)}) · ${fmtMonth(R.item.date)}`;
+  $('newsText').textContent = R.item.headline;
+  // The "Will the price rise or fall?" prompt is a learning aid: Practice only
+  $('newsQ').hidden = RUN.mode.kind !== 'practice';
+  const n = $('news');
+  n.hidden = false;
+  n.style.animation = 'none'; void n.offsetWidth; n.style.animation = '';
+  $('newsBarWrap').classList.remove('urgent');
+  $('roundLbl').innerHTML = PREVIEW ? '' : RUN.mode.kind === 'survival' ? `<span class="rl-mode">Survival · </span>#${R.r + 1}` : `<span class="rl-mode">Practice · </span>${R.r + 1}/${RUN.rounds.length}`;
+  renderDots();
+  updateLaneButtons();
+  sfx.news();
+  if (PREVIEW) planAutopilot(R);
+  if (!PREVIEW && !SEEN.firstCall && R.r === 0) {
+    G.coachBlock = true;
+    $('coachStep').textContent = 'How to play';
+    $('coachText').innerHTML = `Read the headline about <b>${escapeHtml(R.item.name)}</b>. Price will rise? Pick <b class="gain">▲ BUY</b>. Price will fall? Pick <b class="loss">▼ SELL</b>. Not sure? <b>● PASS</b> ${RUN.mode.kind === 'survival' ? `skips it, using one of your ${SURVIVAL_PASSES} passes` : 'skips the round: no gain, no loss'}.`;
+    $('coachKeys').textContent = IS_TOUCH ? 'Tap SELL, PASS or BUY below' : 'Press ← SELL, → BUY or ↓ PASS (or click the buttons)';
+    $('coach').hidden = false;
+    $('coachDim').hidden = false;
+  }
+}
+
+function hitWall(R) {
+  G.phase = 'ramp';
+  const item = R.item;
+  const survival = RUN.mode.kind === 'survival';
+  // Survival: reaching the wall in the PASS lane with passes left counts as using a pass
+  if (survival && G.lane === 1 && !G.cashPick && !cashLocked()) G.cashPick = true;
+  const dir = LANE_DIR[G.lane];
+  const pnl = STAKE * dir * item.move;
+  let outcome;
+  if (dir !== 0) outcome = dir * item.move > 0 ? 'right' : 'wrong';
+  else if (G.cashPick) outcome = survival ? (G.passes > 0 ? 'pass' : 'skip') : 'cash';
+  else outcome = 'skip';
+  let pts = 0;
+  if (outcome === 'right') {
+    G.streak++;
+    G.bestStreak = Math.max(G.bestStreak, G.streak);
+    const speedFrac = clamp(1 - (G.choiceT ?? R.decide) / R.decide, 0, 1);
+    pts = 100 + Math.round(60 * speedFrac) + 25 * Math.min(G.streak - 1, 4);
+    G.score += pts;
+  } else if (outcome !== 'cash') {
+    G.streak = 0;
+  }
+  let lifeNote = '';
+  if (survival) {
+    if (outcome === 'pass') { G.passes--; lifeNote = ` · pass used, ${G.passes} left`; }
+    else if (outcome !== 'right') { G.lives--; lifeNote = ' · −1 life'; }
+    else if (G.streak % LIFE_EVERY === 0 && G.lives < SURVIVAL_LIVES) { G.lives++; lifeNote = ' · +1 life'; }
+    renderLives(outcome === 'wrong' || outcome === 'skip');
+    updateLaneButtons();
+  }
+  G.results.push({ item, dir, pnl, outcome, pts, decision: G.choiceT });
+  flashEquity(pnl);
+  if (outcome === 'right' && G.streak >= 2) showStreak(G.streak);
+  G.eqFrom = G.equity;
+  G.eqTo = G.equity + pnl;
+  R.openT = G.t;
+  $('news').hidden = true;
+  $('lanes').classList.remove('await');
+  $('lanes').classList.add('locked');
+
+  const v = $('verdict');
+  const neutral = { cash: 'PASSED', pass: 'PASS USED', skip: 'NO CALL' };
+  const title = outcome === 'right' ? '<span class="gain">✓ RIGHT CALL</span>' : outcome === 'wrong' ? '<span class="loss">✗ WRONG CALL</span>' : `<span style="color:#fff">${neutral[outcome]}</span>`;
+  const amt = dir === 0 ? `<div class="amt" style="color:#9ba1a8">$0${lifeNote}</div>` : `<div class="amt ${pnl >= 0 ? 'gain' : 'loss'}">${fmtSigned(pnl)}${pts ? ` · +${pts} pts` : ''}${lifeNote}</div>`;
+  v.innerHTML = `<div class="v">${title}</div>${amt}`;
+  v.className = '';
+  void v.offsetWidth;
+  v.className = 'show';
+
+  const hit = new THREE.Vector3(G.x, R.h0 + 2, -R.wall);
+  burst(hit, CATEGORIES[item.category].color, 40, 8);
+  burst(hit, item.move >= 0 ? GAIN : LOSS, 30, 6);
+  sfx.wall();
+  if (outcome === 'right') { sfx.right(); flash('gain'); }
+  else if (outcome === 'wrong') { sfx.wrong(); flash('loss'); G.shake = 0.4; }
+  else sfx.skip();
+  G.hopV = 6;
+  renderDots();
+}
+
+function showReveal(R) {
+  const res = G.results[G.results.length - 1];
+  const item = R.item;
+  const card = $('reveal');
+  card.className = `reveal-card ${res.outcome}`;
+  const verdict = res.outcome === 'right' ? '<span class="gain">✓ Right call</span>' : res.outcome === 'wrong' ? '<span class="loss">✗ Wrong call</span>' : res.outcome === 'cash' ? '● Passed' : 'No call made';
+  const you = res.dir === 0 ? (res.outcome === 'cash' ? 'You passed: no gain, no loss' : "You didn't pick a lane") : `You chose <b>${LANE_NAME[G.lane]}</b> → <b class="${res.pnl >= 0 ? 'gain' : 'loss'}">${fmtSigned(res.pnl)}</b>`;
+  card.innerHTML = `
+    <div class="rv-top"><div class="rv-verdict">${verdict} ${item.tricky ? '<span class="chip">Surprise reaction</span>' : ''}</div>
+    <div class="rv-meta">${escapeHtml(item.name)} · ${fmtDate(item.date)} · <b class="${item.move >= 0 ? 'gain' : 'loss'}">${fmtPct(item.move)}</b> that day</div></div>
+    <p class="rv-why">${escapeHtml(item.why)}</p>
+    <div class="rv-foot"><span class="rv-you">${you}</span><button class="btn ghost small" id="btnNext">${R.r === RUN.rounds.length - 1 ? 'See results' : 'Next headline'} ▸</button></div>`;
+  card.hidden = false;
+  $('btnNext').onclick = () => { G.fast = true; };
+}
+
+function roundUpdate() {
+  const R = RUN.rounds[G.r];
+  if (!R) return;
+  if (G.phase === 'lead' && G.d >= R.aStart) beginApproach(R);
+  if (G.phase === 'approach') {
+    const frac = clamp((R.wall - G.d) / (R.wall - R.aStart), 0, 1);
+    $('newsBar').style.width = `${frac * 100}%`;
+    const urgent = frac < 0.3;
+    $('newsBarWrap').classList.toggle('urgent', urgent);
+    // In Survival the PASS lane is a safe choice while passes remain, so only warn when it isn't
+    const undecided = G.lane === 1 && !G.cashPick && (RUN.mode.kind !== 'survival' || cashLocked());
+    $('lanes').classList.toggle('await', undecided);
+    if (urgent && undecided && !G.urgentPlayed) { G.urgentPlayed = true; sfx.urgent(); }
+    if (PREVIEW) runAutopilot(R);
+    if (G.d >= R.wall) hitWall(R);
+  } else if (G.phase === 'ramp') {
+    const k = clamp((G.d - R.rampStart) / (R.rampEnd - R.rampStart), 0, 1);
+    G.equity = lerp(G.eqFrom, G.eqTo, k);
+    if (G.d >= R.rampEnd) {
+      G.equity = G.eqTo;
+      G.phase = 'cool';
+      if (RUN.mode.kind === 'practice') showReveal(R);
+      else if (G.lives <= 0) endRun();
+    }
+  } else if (G.phase === 'cool') {
+    if (G.d >= R.coolEnd) {
+      G.r++;
+      G.phase = 'lead';
+      $('lanes').classList.remove('locked');
+      if (G.r >= RUN.rounds.length) { if (PREVIEW) startPreview(); else endRun(); }
+    }
+  }
+}
+
+// Attract-mode autopilot: usually runs into the correct lane, sometimes holds PASS, occasionally
+// drifts toward the wrong lane first and corrects, like a player reading the headline.
+function planAutopilot(R) {
+  const right = R.item.move >= 0 ? 2 : 0;
+  const roll = Math.random();
+  const t = (f) => R.decide * f;
+  if (roll < 0.18) R.auto = [{ at: t(0.4 + Math.random() * 0.2), lane: 1 }];
+  else if (roll < 0.32) R.auto = [{ at: t(0.3), lane: 2 - right }, { at: t(0.62), lane: right }];
+  else R.auto = [{ at: t(0.28 + Math.random() * 0.3), lane: right }];
+}
+function runAutopilot(R) {
+  for (const step of R.auto || []) {
+    if (step.done || G.approachT < step.at) continue;
+    step.done = true;
+    G.lane = step.lane;
+    G.cashPick = step.lane === 1;
+    G.choiceT = G.approachT;
+    updateLaneButtons();
+  }
+}
+function startPreview() {
+  G.mode = { kind: 'preview', seed: Math.floor(Math.random() * 1e9), label: 'Preview' };
+  buildRun(G.mode);
+  resetRun();
+  G.state = 'play';
+  ['menu', 'over', 'paused', 'brandbar', 'lanes', 'dots', 'lives'].forEach((id) => ($(id).hidden = true));
+  $('hud').hidden = false;
+  $('roundLbl').innerHTML = '';
+  if (!$('pvCap')) document.body.insertAdjacentHTML('beforeend', '<div class="pv-cap"><span>CAPITAL</span><b id="pvCap"></b></div>');
+  setText('pvCap', fmtMoney(G.equity));
+}
+
+function endRun() {
+  G.state = 'over';
+  G.overTimer = 0.4;
+  $('reveal').hidden = true;
+  sfx.finish();
+}
+
+function setPaused(p) {
+  if (p && G.state === 'play') {
+    G.state = 'paused';
+    $('pauseMain').hidden = false;
+    $('pauseConfirm').hidden = true;
+    $('paused').hidden = false;
+    $('btnResume').focus({ preventScroll: true });
+  }
+  else if (!p && G.state === 'paused') { G.state = 'play'; $('paused').hidden = true; clock.getDelta(); }
+}
+
+// Launched inside the Playtrade Arena player (?autostart in an iframe): leaving a run hands control
+// back to the arena's join screen instead of showing this game's own menu.
+const EMBEDDED = new URLSearchParams(location.search).has('autostart') && window.parent !== window;
+function exitRun() {
+  if (!EMBEDDED) return toMenu();
+  G.state = 'menu';
+  ['paused', 'over', 'hud', 'lanes'].forEach((id) => ($(id).hidden = true));
+  window.parent.postMessage({ source: 'bull_run', type: 'exit' }, '*');
+}
+
+function toMenu() {
+  document.documentElement.classList.remove('direct-start'); // the menu may show from here on
+  G.state = 'menu';
+  ['paused', 'over', 'hud', 'lanes'].forEach((id) => ($(id).hidden = true));
+  $('brandbar').hidden = false;
+  if (!RUN) buildRun({ kind: 'practice', seed: 1, label: 'Practice' });
+  G.mode = RUN.mode;
+  resetRun();
+  renderMenu();
+  $('menu').hidden = false;
+}
+
+/* =========================================================
+   Input
+   ========================================================= */
+// In Survival, PASS is only available while you still have passes.
+const cashLocked = () => !!RUN && RUN.mode.kind === 'survival' && G.passes <= 0;
+
+function setLane(lane) {
+  if (G.state !== 'play' || G.phase !== 'approach') return;
+  if (lane === 1 && cashLocked()) return;
+  // the middle is also where every headline starts, so picking PASS there still counts as a choice
+  if (lane === G.lane && (lane !== 1 || G.cashPick)) return;
+  G.lane = lane;
+  G.cashPick = lane === 1;
+  G.choiceT = G.approachT;
+  sfx.lane(LANE_DIR[lane]);
+  updateLaneButtons();
+  if (G.coachBlock) {
+    G.coachBlock = false;
+    markSeen('firstCall');
+    $('coachStep').textContent = '';
+    const where = lane === 1 ? `<b>PASS</b>${RUN.mode.kind === 'survival' ? ', which will use one of your passes' : ': no gain, no loss'}` : `<b class="${lane === 2 ? 'gain' : 'loss'}">${LANE_NAME[lane]}</b>`;
+    $('coachText').innerHTML = `Nice. You picked ${where}. You can still switch before the wall. Run through it to see what really happened.`;
+    $('coachKeys').textContent = '';
+    $('coachDim').hidden = true;
+    setTimeout(() => { $('coach').hidden = true; }, 3000);
+  }
+}
+function moveLane(d) {
+  if (G.state !== 'play' || G.phase !== 'approach') return;
+  let target = G.lane + d;
+  if (target === 1 && cashLocked()) target += d;
+  setLane(clamp(target, 0, 2));
+}
+function updateLaneButtons() {
+  const survival = !!RUN && RUN.mode.kind === 'survival';
+  document.querySelectorAll('.lane').forEach((b) => {
+    const lane = Number(b.dataset.lane);
+    b.classList.toggle('on', lane === G.lane && (lane !== 1 || G.cashPick));
+    if (lane === 1) b.disabled = cashLocked();
+  });
+  $('cashSub').textContent = !survival ? 'Skip this round' : G.passes > 0 ? `Skip this round · ${G.passes} left` : 'No passes left';
+}
+
+window.addEventListener('keydown', (e) => {
+  if (PREVIEW) return;
+  const k = e.code;
+  if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Space'].includes(k)) e.preventDefault();
+  if (G.state === 'menu') {
+    if (k === 'Enter' || k === 'Space') startSelectedMode();
+    else if (k === 'ArrowLeft' || k === 'ArrowUp') selectMode('practice');
+    else if (k === 'ArrowRight' || k === 'ArrowDown') selectMode('survival');
+    return;
+  }
+  if (k === 'ArrowLeft' || k === 'KeyA') moveLane(-1);
+  else if (k === 'ArrowRight' || k === 'KeyD') moveLane(1);
+  else if (k === 'Digit1' || k === 'Numpad1') setLane(0);
+  else if (k === 'Digit2' || k === 'Numpad2' || k === 'ArrowDown' || k === 'KeyS') setLane(1);
+  else if (k === 'Digit3' || k === 'Numpad3') setLane(2);
+  else if ((k === 'Enter' || k === 'Space') && G.state === 'play' && G.phase === 'cool') G.fast = true;
+  else if (k === 'KeyP' || k === 'Escape') { if (G.state === 'play') setPaused(true); else if (G.state === 'paused') setPaused(false); }
+});
+let touchStart = null;
+canvas.addEventListener('pointerdown', (e) => { touchStart = { x: e.clientX, y: e.clientY }; });
+canvas.addEventListener('pointerup', (e) => {
+  if (PREVIEW || !touchStart) return;
+  const dx = e.clientX - touchStart.x, dy = e.clientY - touchStart.y;
+  if (Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy)) moveLane(dx > 0 ? 1 : -1);
+  else if (dy > 28 && dy > Math.abs(dx)) setLane(1);
+  touchStart = null;
+});
+canvas.addEventListener('pointercancel', () => (touchStart = null));
+// Block pinch-zoom on iOS Safari, which ignores the viewport meta
+document.addEventListener('gesturestart', (e) => e.preventDefault());
+document.querySelectorAll('.lane').forEach((b) => b.addEventListener('click', () => setLane(Number(b.dataset.lane))));
+const MODE_KEY = 'bull_run_mode_v1';
+let menuMode = 'practice';
+try { if (localStorage.getItem(MODE_KEY) === 'survival') menuMode = 'survival'; } catch { /* storage unavailable */ }
+function selectMode(kind) {
+  menuMode = kind;
+  try { localStorage.setItem(MODE_KEY, kind); } catch { /* storage unavailable */ }
+  $('btnPractice').setAttribute('aria-checked', String(kind === 'practice'));
+  $('btnSurvival').setAttribute('aria-checked', String(kind === 'survival'));
+  $('btnStart').textContent = kind === 'survival' ? 'Start Survival' : 'Start Practice';
+  const best = kind === 'survival' ? loadBest('survival') : 0;
+  $('bestInline').hidden = !best;
+  $('bestInlineN').textContent = best.toLocaleString('en-US');
+}
+const startSelectedMode = () => startRun(menuMode === 'survival' ? survivalMode() : practiceMode());
+$('btnPractice').onclick = () => selectMode('practice');
+$('btnSurvival').onclick = () => selectMode('survival');
+$('btnStart').onclick = startSelectedMode;
+$('btnResume').onclick = () => setPaused(false);
+$('btnQuit').onclick = () => {
+  $('pauseMain').hidden = true;
+  $('pauseConfirm').hidden = false;
+  $('btnKeep').focus({ preventScroll: true });
+};
+$('btnKeep').onclick = () => setPaused(false);
+$('btnExitRun').onclick = exitRun;
+if (EMBEDDED) $('btnQuit').textContent = 'Exit game';
+$('btnPause').onclick = () => (G.state === 'paused' ? setPaused(false) : setPaused(true));
+function toggleSound() {
+  audio.setMuted(!audio.muted);
+  $('soundWaves').setAttribute('d', audio.muted ? 'M16 9l6 6M22 9l-6 6' : 'M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12');
+  $('btnSound').setAttribute('aria-label', audio.muted ? 'Unmute sound' : 'Mute sound');
+}
+$('btnSound').onclick = toggleSound;
+document.addEventListener('visibilitychange', () => { if (document.hidden && !PREVIEW) setPaused(true); });
+
+/* =========================================================
+   HUD & feedback
+   ========================================================= */
+let lastHud = {};
+function setText(id, val) { if (lastHud[id] !== val) { lastHud[id] = val; $(id).textContent = val; } }
+function updateHud() {
+  const pnl = G.equity - START_EQUITY;
+  setText('equity', fmtMoney(G.equity));
+  if (PREVIEW && $('pvCap')) setText('pvCap', fmtMoney(G.equity)); // readout is created by startPreview()
+  setText('pnl', `P&L ${fmtSigned(pnl)}`);
+  const cls = `tb-pnl ${pnl >= 0 ? 'gain' : 'loss'}`;
+  if (lastHud.pnlCls !== cls) { lastHud.pnlCls = cls; $('pnl').className = cls; }
+  setText('streakHud', `🔥 ${G.streak}`);
+  const streakCls = G.streak ? 'tb-streak' : 'tb-streak zero';
+  if (lastHud.streakCls !== streakCls) { lastHud.streakCls = streakCls; $('streakHud').className = streakCls; }
+}
+let streakTimer = 0;
+function showStreak(n) {
+  const c = $('streakChip');
+  c.textContent = `🔥 ${n} in a row`;
+  c.hidden = false;
+  c.style.animation = 'none'; void c.offsetWidth; c.style.animation = '';
+  clearTimeout(streakTimer);
+  streakTimer = setTimeout(() => (c.hidden = true), 1900);
+}
+let equityTimer = 0;
+function flashEquity(pnl) {
+  const el = $('equity');
+  el.classList.remove('up', 'down');
+  if (!pnl) return;
+  el.classList.add(pnl > 0 ? 'up' : 'down');
+  clearTimeout(equityTimer);
+  equityTimer = setTimeout(() => el.classList.remove('up', 'down'), 2200);
+}
+function renderDots() {
+  if (!RUN) return;
+  $('dots').innerHTML = RUN.rounds.map((R, i) => {
+    const res = G.results[i];
+    const cls = res ? res.outcome : i === G.r && G.state !== 'menu' ? 'now' : '';
+    return `<i class="${cls}"></i>`;
+  }).join('');
+}
+const HEART = '<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.4.7-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" fill="#e31b54"/></svg>';
+function renderLives(hit = false) {
+  const el = $('lives');
+  el.innerHTML = Array.from({ length: SURVIVAL_LIVES }, (_, i) => HEART.replace('<svg', `<svg class="${i < G.lives ? '' : 'lost'}"`)).join('')
+    + `<span class="pass-chip ${G.passes > 0 ? '' : 'none'}">${G.passes} pass${G.passes === 1 ? '' : 'es'}</span>`;
+  if (hit) { el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit'); }
+}
+let flashTimer = 0;
+function flash(kind) {
+  const v = $('vignette');
+  const c = kind === 'loss' ? 'rgba(227,27,84,.45)' : 'rgba(7,216,162,.35)';
+  v.style.background = `radial-gradient(ellipse at center, transparent 45%, ${c} 100%)`;
+  v.classList.add('on');
+  clearTimeout(flashTimer);
+  flashTimer = setTimeout(() => v.classList.remove('on'), 90);
+}
+
+/* =========================================================
+   Menu & results
+   ========================================================= */
+function loadBest(kind) { try { return Number(localStorage.getItem(BEST_KEY(kind))) || 0; } catch { return 0; } }
+function saveBest(kind, v) { try { localStorage.setItem(BEST_KEY(kind), String(v)); } catch { /* storage unavailable */ } }
+
+function renderMenu() {
+  selectMode(menuMode);
+  $('controls').innerHTML = IS_TOUCH
+    ? '<span><b>Tap</b> SELL · PASS · BUY</span><span>·</span><span><b>Swipe</b> to change lanes</span>'
+    : '<span><kbd>← / A</kbd><kbd>→ / D</kbd> change lanes</span><span>·</span><span><kbd>P</kbd> pause</span>';
+}
+
+function showResults() {
+  const res = G.results;
+  const right = res.filter((r) => r.outcome === 'right').length;
+  const wrong = res.filter((r) => r.outcome === 'wrong').length;
+  const skipped = res.filter((r) => r.dir === 0).length;
+  const pnl = G.equity - START_EQUITY;
+  const acc = right + wrong ? right / (right + wrong) : 0;
+  const decided = res.filter((r) => r.decision != null);
+  const avgDecision = decided.length ? decided.reduce((a, r) => a + r.decision, 0) / decided.length : 0;
+
+  const cats = {};
+  for (const r of res) {
+    if (r.dir === 0) continue;
+    const c = (cats[r.item.category] = cats[r.item.category] || { right: 0, total: 0 });
+    c.total++;
+    if (r.outcome === 'right') c.right++;
+  }
+  const survival = G.mode.kind === 'survival';
+  let arch;
+  if (skipped >= 3) arch = 'hesitant';
+  else if (survival ? res.length >= 12 && acc >= 0.85 : right >= 7) arch = 'pro';
+  else if (survival ? acc < 0.5 : right <= 3) arch = 'rookie';
+  else {
+    const entries = Object.entries(cats);
+    arch = !entries.length ? 'hesitant' : entries.sort((a, b) => a[1].right / a[1].total - b[1].right / b[1].total || b[1].total - a[1].total)[0][0];
+  }
+  const A = ARCHETYPES[arch];
+  const F = FEATURES[A.feature];
+  const best = loadBest(G.mode.kind);
+  const isNew = survival && G.score > best && G.score > 0;
+  if (isNew) saveBest(G.mode.kind, G.score);
+  G.lastSummary = { kind: G.mode.kind, right, total: res.length, pnl, score: G.score, arch: A.name };
+  track('run_end', { mode: G.mode.kind, right, total: res.length, pnl: Math.round(pnl), score: G.score, archetype: arch });
+
+  const catRows = Object.entries(cats).map(([k, c]) => {
+    const pct = c.right / c.total;
+    return `<div class="cat"><span>${CATEGORIES[k].label}</span><div class="bar"><i style="width:${Math.max(4, pct * 100)}%;background:${CATEGORIES[k].color}"></i></div><b>${c.right}/${c.total}</b></div>`;
+  }).join('');
+
+  const reviewed = survival ? res.filter((r) => r.outcome !== 'right') : res;
+  const review = reviewed.map((r) => {
+    const you = r.dir === 0 ? { cash: 'You passed', pass: 'You used a pass', skip: "You didn't pick a lane" }[r.outcome] : `You chose ${r.dir > 0 ? 'BUY' : 'SELL'} → <b class="${r.pnl >= 0 ? 'gain' : 'loss'}">${fmtSigned(r.pnl)}</b>`;
+    return `<li class="${r.outcome}"><div class="rh">${r.outcome === 'right' ? '✓' : r.outcome === 'wrong' ? '✗' : '–'} ${escapeHtml(r.item.headline)}</div>
+      <div class="rm">${escapeHtml(r.item.name)} · ${fmtDate(r.item.date)} · price <b class="${r.item.move >= 0 ? 'gain' : 'loss'}">${fmtPct(r.item.move)}</b> · ${you}</div>
+      <div class="rw">${escapeHtml(r.item.why)}</div></li>`;
+  }).join('');
+
+  const decidedCount = right + wrong;
+  const sub = [`${right} correct`, `${wrong} wrong`, `${skipped} passed`];
+  if (G.bestStreak >= 2) sub.push(`best streak ${G.bestStreak}`);
+  const title = survival
+    ? (G.lives > 0 ? 'Every headline cleared' : `You survived ${res.length} headline${res.length === 1 ? '' : 's'}`)
+    : `You got ${right} of ${res.length} right`;
+
+  $('overCard').innerHTML = `
+    <div class="eyebrow" ${survival ? 'style="color:var(--orange)"' : ''}>${survival ? (G.lives > 0 ? 'Survival complete' : 'Game over') : 'Practice complete'}</div>
+    <h2>${title}</h2>
+    <div class="go-scoreline">
+      <div class="score">${G.score}<small> pts</small></div>
+      ${isNew && survival ? '<span class="pill newbest">NEW BEST</span>' : ''}
+      ${survival ? `<a class="save-link" id="ctaSignup" href="${withUtm(CONFIG.signupUrl, 'cta_leaderboard')}" target="_blank" rel="noopener">Save score ↗</a>` : ''}
+    </div>
+    <p class="go-sub">${sub.join(' · ')}</p>
+    <div class="metrics">
+      <div class="metric"><b class="${pnl >= 0 ? 'gain' : 'loss'}">${fmtSigned(pnl)}</b><span>Virtual P&amp;L</span></div>
+      <div class="metric"><b>${right}/${decidedCount}</b><span>Correct calls</span></div>
+      <div class="metric"><b>${decided.length ? `${avgDecision.toFixed(1)}s` : '—'}</b><span>Avg decision</span></div>
+    </div>
+    <button class="btn go-primary" id="btnAgain">${survival ? 'Play Survival again' : 'Play Survival'}</button>
+    <div class="go-secondary">
+      <button class="link-btn" id="btnOther">${survival ? 'Try Practice' : 'Practice again'}</button><span class="sep">·</span>
+      <button class="link-btn" id="btnShare">Share result</button><span class="sep">·</span>
+      <button class="link-btn" id="btnMenu">${EMBEDDED ? 'Exit game' : 'Menu'}</button>
+    </div>
+    <details class="more">
+      <summary>See your breakdown</summary>
+      <div class="profile">
+        <div class="eyebrow">Your trader profile</div>
+        <h3>${A.name}</h3>
+        <p>${A.desc} ${A.tip}</p>
+        <a class="feature" id="featureLink" href="${withUtm(F.url, 'feature_' + A.feature)}" target="_blank" rel="noopener"><div><b>${F.name}</b><span>${F.text}</span></div><em>Explore →</em></a>
+      </div>
+      <a class="btn ghost" id="ctaPlaytrade" style="width:100%" href="${withUtm(CONFIG.playtradeUrl, 'cta_playtrade')}" target="_blank" rel="noopener">Trade today's live markets in Playtrade</a>
+      ${catRows && decidedCount >= 4 ? `<div><div class="label" style="margin-bottom:8px">By news type</div><div class="cats">${catRows}</div></div>` : ''}
+      ${review ? `<div><div class="label">${survival ? 'Learn from your misses' : 'Headline review'}</div><ul class="review">${review}</ul></div>` : ''}
+      <div class="disclaimer">Real headlines with each asset's actual close-to-close move on the day the market reacted. Simplified, simulated with virtual money, and not investment advice. Past performance does not guarantee future results. Profit.com is not a broker.</div>
+    </details>`;
+
+  $('hud').hidden = true;
+  $('lanes').hidden = true;
+  $('brandbar').hidden = false;
+  $('over').hidden = false;
+  $('overCard').scrollTop = 0;
+  $('btnAgain').onclick = () => startRun(survivalMode());
+  $('btnOther').onclick = () => startRun(practiceMode());
+  $('btnMenu').onclick = exitRun;
+  $('btnShare').onclick = shareResult;
+  $('ctaPlaytrade').onclick = () => track('cta_click', { cta: 'playtrade', archetype: arch });
+  if ($('ctaSignup')) $('ctaSignup').onclick = () => track('cta_click', { cta: 'leaderboard', archetype: arch });
+  $('featureLink').onclick = () => track('cta_click', { cta: 'feature_' + A.feature, archetype: arch });
+}
+
+async function shareResult() {
+  const s = G.lastSummary;
+  const text = s.kind === 'survival'
+    ? `Bull Run Survival: I lasted ${s.total} real market headlines (${s.right} right calls, ${s.score} pts). Can you last longer?`
+    : `Bull Run: I called ${s.right} of ${s.total} real market headlines right (${fmtSigned(s.pnl)} virtual, ${s.score} pts) as a "${s.arch}". Can you beat me?`;
+  const url = location.href.startsWith('http') ? location.href.split('#')[0] : withUtm(CONFIG.playtradeUrl, 'share');
+  track('share', { score: s.score });
+  try {
+    if (navigator.share) { await navigator.share({ title: 'Bull Run', text, url }); return; }
+    await navigator.clipboard.writeText(`${text} ${url}`);
+    $('btnShare').textContent = 'Copied!';
+  } catch {
+    $('btnShare').textContent = 'Share unavailable';
+  }
+  setTimeout(() => { if ($('btnShare')) $('btnShare').textContent = 'Share result'; }, 2000);
+}
+
+/* =========================================================
+   Resize & main loop
+   ========================================================= */
+let portrait = false;
+function resize() {
+  renderer.setSize(innerWidth, innerHeight);
+  camera.aspect = innerWidth / innerHeight;
+  portrait = camera.aspect < 0.8;
+  camera.fov = portrait ? 76 : 62;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+
+const clock = new THREE.Clock();
+const _camT = new THREE.Vector3();
+const _lookT = new THREE.Vector3();
+
+function update(dt) {
+  G.t += dt;
+  const t = G.t;
+  const st = G.state;
+
+  if (st === 'countdown') {
+    G.countdown -= dt;
+    const n = Math.ceil(G.countdown);
+    if (n !== G.lastCount && n > 0) {
+      G.lastCount = n;
+      $('countdown').innerHTML = `<div><span class="n">${n}</span><div class="cd-keys">${CONTROLS_HINT}</div></div>`;
+      sfx.beep(false);
+    }
+    if (G.countdown <= 0) {
+      G.state = 'play';
+      $('countdown').innerHTML = '<div><span class="n">GO</span></div>';
+      sfx.beep(true);
+      setTimeout(() => { if (G.state !== 'countdown') $('countdown').innerHTML = ''; }, 900);
+    }
+  } else if (st === 'over') {
+    G.overTimer -= dt;
+    if (G.overTimer <= 0 && $('over').hidden) showResults();
+  }
+
+  G.timeScale = st !== 'play' ? 0 : G.coachBlock ? 0 : G.phase === 'cool' && G.fast ? 3.5 : 1;
+  if (st === 'play') {
+    G.d += SPEED * dt * G.timeScale;
+    if (G.phase === 'approach') G.approachT += dt * G.timeScale;
+    roundUpdate();
+    updateHud();
+  }
+  G.shake = Math.max(0, G.shake - dt * 1.4);
+
+  // runner
+  const running = st === 'play' && G.timeScale > 0;
+  const baseY = trackH(G.d);
+  G.x = damp(G.x, LANE_X[G.lane], 10, dt);
+  if (G.hopV || G.hopY > 0) {
+    G.hopV -= 22 * dt;
+    G.hopY += G.hopV * dt;
+    if (G.hopY <= 0) { G.hopY = 0; G.hopV = 0; }
+  }
+  const pz = -G.d;
+  bull.root.position.set(G.x, baseY + G.hopY, pz);
+  const slope = (trackH(G.d + 1.5) - trackH(G.d - 1.5)) / 3;
+  bull.rig.rotation.x = damp(bull.rig.rotation.x, -clamp(slope, -1, 1) * 0.35 - (running ? 0.1 : 0), 8, dt);
+  bull.rig.rotation.z = (G.x - LANE_X[G.lane]) * 0.2;
+  if (running) {
+    G.runPhase += dt * 13 * Math.min(G.timeScale, 1.6);
+    const sw = Math.sin(G.runPhase);
+    bull.legs[0].rotation.x = sw * 0.95; bull.legs[1].rotation.x = -sw * 0.95;
+    bull.arms[0].rotation.x = -sw * 0.8; bull.arms[1].rotation.x = sw * 0.8;
+    bull.rig.position.y = G.hopY > 0 ? 0 : Math.abs(Math.cos(G.runPhase)) * 0.08;
+  } else {
+    for (const l of [...bull.legs, ...bull.arms]) l.rotation.x = damp(l.rotation.x, 0, 8, dt);
+    bull.arms[0].rotation.x += Math.sin(t * 2) * 0.004;
+    bull.rig.position.y = Math.sin(t * 2.4) * 0.02;
+  }
+  bull.tail.rotation.z = Math.sin(t * 6) * 0.35;
+  bull.aura.material.color.set(G.lane === 2 ? GAIN : G.lane === 0 ? LOSS : '#9ba1a8');
+  bull.aura.material.opacity = 0.55 + Math.sin(t * 6) * 0.2;
+
+  // walls open
+  if (RUN) {
+    for (const R of RUN.rounds) {
+      if (!R.wallMesh) continue;
+      if (R.openT != null && R.wallMesh.visible) {
+        const k = Math.min(1, (t - R.openT) / 0.35);
+        R.wallMesh.material.opacity = 0.98 * (1 - k);
+        R.wallMesh.scale.set(1 + k * 0.6, 1 + k * 0.15, 1);
+        if (k >= 1) R.wallMesh.visible = false;
+      }
+    }
+  }
+  updateParticles(dt);
+
+  // motes & grid follow the runner
+  const mp = moteGeo.attributes.position.array;
+  for (let i = 0; i < MOTES; i++) {
+    mp[i * 3 + 1] += Math.sin(t * 0.6 + i) * dt * 0.2;
+    if (mp[i * 3 + 2] > pz + 12) { mp[i * 3 + 2] -= 90; mp[i * 3 + 1] = baseY + Math.random() * 14 - 3; }
+    if (mp[i * 3 + 2] < pz - 80) mp[i * 3 + 2] += 90;
+  }
+  moteGeo.attributes.position.needsUpdate = true;
+
+  // camera
+  const inMenu = st === 'menu' || st === 'loading';
+  G.camY = damp(G.camY, trackH(G.d + 6), 3, dt);
+  grid.position.set(0, G.camY - 9, Math.round(pz / 5) * 5);
+  if (inMenu) {
+    G.menuAngle += dt * 0.25;
+    const R = portrait ? 6.5 : 5.4;
+    _camT.set(Math.sin(G.menuAngle) * R, baseY + (portrait ? 2.9 : 2.2), pz + Math.cos(G.menuAngle) * R);
+    _lookT.set(0, baseY + (portrait ? 1.6 : 1.1), pz);
+  } else {
+    _camT.set(G.x * 0.45, G.camY + (portrait ? 4.4 : 3.7), pz + (portrait ? 9 : 7.8));
+    _lookT.set(G.x * 0.5, G.camY + 1.3, pz - 12);
+  }
+  const rate = inMenu ? 3 : 6;
+  camera.position.set(damp(camera.position.x, _camT.x, rate, dt), damp(camera.position.y, _camT.y, rate, dt), damp(camera.position.z, _camT.z, rate * 1.5, dt));
+  camLook.set(damp(camLook.x, _lookT.x, rate * 1.3, dt), damp(camLook.y, _lookT.y, rate * 1.3, dt), damp(camLook.z, _lookT.z, rate * 1.5, dt));
+  if (G.shake > 0) {
+    camera.position.x += (Math.random() - 0.5) * G.shake * 0.5;
+    camera.position.y += (Math.random() - 0.5) * G.shake * 0.5;
+  }
+  camera.lookAt(camLook);
+  G.viewShift = damp(G.viewShift, (inMenu || st === 'over') && !portrait && innerWidth > 760 ? 1 : 0, 3, dt);
+  if (G.viewShift > 0.002) camera.setViewOffset(innerWidth, innerHeight, -innerWidth * 0.2 * G.viewShift, 0, innerWidth, innerHeight);
+  else if (camera.view && camera.view.enabled) camera.clearViewOffset();
+
+  skyGroup.position.copy(camera.position);
+  // mountains recede while a headline decision is open
+  sceneryVis = damp(sceneryVis, st === 'play' && G.phase === 'approach' ? 0.65 : 1, 2.5, dt);
+  // squeeze the ranges horizontally on narrow screens so both peaks stay in view (1.07 = 16:9 width)
+  const hillSqueeze = clamp((Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect) / 1.07, 0.25, 1);
+  for (const M of mountainLayers) {
+    M.y = damp(M.y, camera.position.y, M.lag, dt);
+    M.mesh.position.set(camera.position.x, M.y, camera.position.z);
+    M.mesh.scale.x = hillSqueeze;
+    for (const m of M.mats) m.uniforms.vis.value = sceneryVis;
+  }
+  keyLight.position.set(G.x + 5, baseY + 14, pz + 6);
+  keyLight.target.position.set(G.x, baseY, pz - 2);
+  rimLight.position.set(G.x, baseY + 4, pz - 9);
+  rimLight.target.position.set(G.x, baseY + 1, pz);
+}
+
+async function init() {
+  if (!HEADLINES.length) {
+    document.body.insertAdjacentHTML('beforeend', '<p style="position:fixed;inset:auto 0 40%;text-align:center">Headline data failed to load (data/headlines.js).</p>');
+    return;
+  }
+  try { await Promise.race([document.fonts.load(FONT(900, 40)), new Promise((r) => setTimeout(r, 1500))]); } catch { /* use fallback font */ }
+  buildTextures();
+  buildSharedMaterials();
+  bull = makeBull();
+  scene.add(bull.root);
+  toMenu();
+  renderer.setAnimationLoop(() => {
+    const dt = Math.min(0.05, clock.getDelta());
+    if (G.state !== 'paused') update(dt);
+    renderer.render(scene, camera);
+  });
+  // Launched from the Playtrade Arena join screen: ?mode=practice|survival&autostart skips the menu
+  if (PREVIEW) {
+    document.body.classList.add('preview');
+    startPreview();
+    // Respect reduced motion: show one still frame of the scene instead of the loop
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) setTimeout(() => renderer.setAnimationLoop(null), 1500);
+    return;
+  }
+  const qs = new URLSearchParams(location.search);
+  const qsMode = qs.get('mode');
+  if (qsMode === 'practice' || qsMode === 'survival') selectMode(qsMode);
+  if (qs.has('autostart')) startSelectedMode();
+}
+init();
+
+// debug handle for automated checks
+window.__bull = { G, get RUN() { return RUN; }, startRun, practiceMode, survivalMode, setLane };
+</script>
+</body>
+</html>

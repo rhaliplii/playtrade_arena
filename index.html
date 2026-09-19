@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Playtrade Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ Top navigation ============ -->
+  <header class="topnav">
+    <a href="#" aria-label="Profit.com home"><img class="topnav__logo" src="assets/logo.svg" alt="Profit.com"></a>
+    <img class="vdivider" src="assets/divider.svg" alt="">
+    <nav class="topnav__menu" aria-label="Primary">
+      <a class="topnav__item" href="#"><img class="icon" src="assets/cup.svg" width="16" height="16" alt="">Arena<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Tools<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Learn<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Plans</a>
+      <a class="topnav__item" href="#">More<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+    </nav>
+    <div class="topnav__right">
+      <button aria-label="Search"><img class="icon icon-20" src="assets/search.svg" alt=""></button>
+      <div class="topnav__icons">
+        <img class="vdivider" src="assets/divider.svg" alt="">
+        <button class="topnav__lang"><span class="topnav__globe"><img src="assets/globe.svg" alt=""></span>EN</button>
+        <img class="vdivider" src="assets/divider.svg" alt="">
+        <button class="icon-btn" aria-label="Notifications"><img class="icon icon-20" src="assets/bell.svg" alt=""><span class="badge">2</span></button>
+        <button class="icon-btn" aria-label="Messages"><img class="icon icon-20" src="assets/messenger.svg" alt=""><span class="badge">1</span></button>
+        <a class="btn-brand topnav__upgrade" href="#">Upgrade</a>
+        <span class="topnav__sale">37% OFF</span>
+      </div>
+      <img class="topnav__avatar" src="assets/nav-avatar.png" width="32" height="32" alt="Profile">
+    </div>
+  </header>
+
+  <div class="shell">
+
+    <!-- ============ Side navigation (built by sidebar.js) ============ -->
+    <aside class="side-nav is-collapsed" id="sideNav" data-active="tournaments" aria-label="Sections"></aside>
+    <script src="sidebar.js"></script>
+
+    <main class="main">
+
+      <!-- ============ Hero ============ -->
+      <section class="hero" aria-label="Featured">
+        <div class="hero__banner">
+          <div class="hero__inner">
+          <div class="hero__content">
+            <div class="hero__copy">
+              <h1 class="hero__title">Practice. Compete.<br>Play the markets.</h1>
+              <p class="hero__sub">Join simulated trading tournaments or sharpen your market instincts in interactive games—with virtual funds.</p>
+            </div>
+            <div class="hero__bottom">
+              <div class="hero__cta-row">
+                <a class="hero__cta t-m-semibold" href="#">Try Now — It’s Free</a>
+                <div class="hero__stats">
+                  <div class="hero__stat"><b>$188k</b><span class="t-m-medium">cash paid</span></div>
+                  <div class="hero__stat"><b>220k</b><span class="t-m-medium">traders</span></div>
+                  <div class="hero__stat"><b>0</b><span class="t-m-medium">risk money</span></div>
+                </div>
+              </div>
+              <div class="hero__arrows">
+                <button aria-label="Previous slide"><img src="assets/hero-prev.svg" alt=""></button>
+                <button class="is-next" aria-label="Next slide"><img src="assets/hero-next.svg" alt=""></button>
+              </div>
+            </div>
+          </div>
+          <div class="hero__art" aria-hidden="true">
+            <div class="hero__coin-a"><img src="assets/hero-coin-1.png" alt=""></div>
+            <div class="hero__coin-b"><img src="assets/hero-coin-2.png" alt=""></div>
+            <img class="hero__sign" src="assets/hero-wallst.png" alt="">
+          </div>
+          </div>
+        </div>
+        <div class="hero__dots" role="tablist" aria-label="Slides">
+          <button class="hero__dot is-active" aria-label="Slide 1"></button>
+          <button class="hero__dot" aria-label="Slide 2"></button>
+          <button class="hero__dot" aria-label="Slide 3"></button>
+          <button class="hero__dot" aria-label="Slide 4"></button>
+          <button class="hero__dot" aria-label="Slide 5"></button>
+          <button class="hero__dot" aria-label="Slide 6"></button>
+        </div>
+      </section>
+
+      <!-- ============ User summary ============ -->
+      <section class="summary" aria-label="Your account">
+        <div class="summary__profile">
+          <div class="summary__who">
+            <div class="summary__avatar"><img src="assets/user-avatar.png" alt=""></div>
+            <div class="summary__info">
+              <p class="t-h1 nowrap">Hi John 👋</p>
+              <div class="summary__meta">
+                <div class="summary__row">
+                  <span class="t-s-medium t-secondary">Rank</span>
+                  <span class="summary__badge">
+                    <span class="summary__badge-icon"><img class="crown" src="assets/rank-crown.svg" alt=""></span>
+                    <span class="t-m-semibold">Tycoon V</span>
+                  </span>
+                </div>
+                <div class="summary__row">
+                  <span class="t-s-medium t-secondary">Level</span>
+                  <span class="summary__badge">
+                    <span class="summary__badge-icon"><img class="rocket" src="assets/rocket.svg" alt=""></span>
+                    <span class="t-m-semibold">12</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="btn-light summary__upgrade t-m-semibold" href="#">Upgrade to PRO</a>
+        </div>
+        <div class="summary__stats">
+          <div class="stat-card">
+            <img class="icon icon-40" src="assets/stat-cash.svg" alt="">
+            <div class="stat-card__body"><p class="t-h1">$2,309</p><p class="t-caption t-secondary">Cash Balance</p></div>
+          </div>
+          <div class="stat-card">
+            <img class="icon icon-40" src="assets/stat-coins.svg" alt="">
+            <div class="stat-card__body"><p class="t-h1">3,545</p><p class="t-caption t-secondary">Profit Coins</p></div>
+          </div>
+          <div class="stat-card">
+            <img class="icon icon-40" src="assets/stat-lives.svg" alt="">
+            <div class="stat-card__body"><p class="t-h1">1</p><p class="t-caption t-secondary">Lives</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Joined competitions ============ -->
+      <section class="section" aria-labelledby="joined-title">
+        <div class="section__head section__head--tight">
+          <h2 class="t-h1" id="joined-title">Joined Competitions</h2>
+          <span class="live-dot" aria-label="Live"></span>
+        </div>
+        <div class="joined-grid">
+
+          <a class="jc-card jc-card--red" href="practice.html" aria-label="Open 1-to-1 Practice">
+            <!-- Bull / VS / bear crops of one image, positioned from Figma metadata -->
+            <div class="masked" style="left:201.817px;top:43.036px;width:259.021px;height:259.021px;-webkit-mask-image:var(--jc-mask-1);mask-image:var(--jc-mask-1);-webkit-mask-position:5.183px 2.023px;mask-position:5.183px 2.023px;-webkit-mask-size:131.408px 149.367px;mask-size:131.408px 149.367px"><img class="cover" src="assets/jc-bullbear.png" alt=""></div>
+            <div class="masked" style="left:181.661px;top:34.656px;width:323.293px;height:323.293px;-webkit-mask-image:var(--jc-mask-2);mask-image:var(--jc-mask-2);-webkit-mask-position:118.407px 5.189px;mask-position:118.407px 5.189px;-webkit-mask-size:79.956px 149.251px;mask-size:79.956px 149.251px"><img class="cover" src="assets/jc-bullbear.png" alt=""></div>
+            <div class="masked" style="left:181.661px;top:34.656px;width:323.293px;height:323.293px;-webkit-mask-image:var(--jc-mask-2);mask-image:var(--jc-mask-2);-webkit-mask-position:118.407px 5.189px;mask-position:118.407px 5.189px;-webkit-mask-size:79.956px 149.251px;mask-size:79.956px 149.251px"><img class="cover" src="assets/jc-bullbear.png" alt=""></div>
+            <div class="masked" style="left:207.598px;top:-16.214px;width:212.71px;height:212.71px;-webkit-mask-image:var(--jc-mask-3);mask-image:var(--jc-mask-3);-webkit-mask-position:122.449px 23.757px;mask-position:122.449px 23.757px;-webkit-mask-size:99.953px 93.991px;mask-size:99.953px 93.991px"><img class="cover" src="assets/jc-bullbear.png" alt=""></div>
+            <div class="jc-card__top jc-card__top--split">
+              <h3 class="t-h2" style="width:165px">1-to-1 Practice</h3>
+              <span class="glass-tag">Live · 2d : 16h</span>
+            </div>
+            <div class="jc-card__stats">
+              <div class="jc-profit" style="align-items:flex-start"><b>+$1 100</b><span class="t-caption t-secondary">Profit</span></div>
+              <span class="jc-vline"></span>
+              <div class="jc-metrics">
+                <div class="jc-metric"><span class="jc-metric__value"><img class="icon icon-18" src="assets/ic-ranking.svg" alt="">18</span><span class="t-caption t-secondary">Position</span></div>
+                <div class="jc-metric"><span class="jc-metric__value is-neg"><img class="icon icon-18" src="assets/ic-chart.svg" alt="">-12%</span><span class="t-caption t-secondary">Drawdown</span></div>
+                <div class="jc-metric"><span class="jc-metric__value"><img class="icon icon-18" src="assets/ic-judge.svg" alt="">54</span><span class="t-caption t-secondary">Trades</span></div>
+              </div>
+            </div>
+          </a>
+
+          <article class="jc-card jc-card--grey">
+            <img style="position:absolute;right:9.41px;bottom:-0.59px;width:217.586px;height:217.586px;object-fit:cover" src="assets/jc-bitcoin.png" alt="">
+            <div class="jc-card__top jc-card__top--split">
+              <div class="jc-card__title-row">
+                <h3 class="t-h2 nowrap">Bitcoin Bulls</h3>
+                <span class="jc-card__eliminated t-s-semibold">Eliminated</span>
+              </div>
+              <span class="glass-tag">&nbsp;Opens in 2d : 34h</span>
+            </div>
+            <div class="jc-card__footer">
+              <a class="btn-light jc-card__try t-m-semibold" href="#">Try Again</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ============ Open trades ============ -->
+      <section class="section" aria-labelledby="trades-title">
+        <div class="trades-head">
+          <div class="section__head section__head--tight">
+            <h2 class="nowrap" id="trades-title" style="font-size:28px;line-height:36px;font-weight:700;letter-spacing:-0.56px">Open Trades</h2>
+            <span class="count-pill">3</span>
+          </div>
+          <div class="tabs" role="tablist" data-tabs>
+            <button class="tab" role="tab">All</button>
+            <button class="tab is-active" role="tab">Profitable</button>
+            <button class="tab" role="tab">Loosing</button>
+            <button class="tab" role="tab">Buys</button>
+            <button class="tab" role="tab">Sells</button>
+          </div>
+        </div>
+        <div class="trades-row">
+          <!-- repeated trade card -->
+          <article class="trade-card">
+            <div class="trade-card__body">
+              <div class="trade-asset">
+                <img class="icon icon-40" src="assets/coin-ltc.svg" alt="">
+                <div class="trade-asset__text">
+                  <div class="trade-asset__line"><span class="t-m-semibold">LTC</span><span class="sell-pill">Sell</span></div>
+                  <span class="t-caption t-secondary">10 min ago</span>
+                </div>
+              </div>
+              <div class="trade-pnl"><span class="t-xl-semibold">-$100 000</span><span class="t-s-semibold">-4.50%</span></div>
+            </div>
+            <div class="trade-card__comp">Wall Street Warriors</div>
+          </article>
+          <article class="trade-card">
+            <div class="trade-card__body">
+              <div class="trade-asset">
+                <img class="icon icon-40" src="assets/coin-ltc.svg" alt="">
+                <div class="trade-asset__text">
+                  <div class="trade-asset__line"><span class="t-m-semibold">LTC</span><span class="sell-pill">Sell</span></div>
+                  <span class="t-caption t-secondary">10 min ago</span>
+                </div>
+              </div>
+              <div class="trade-pnl"><span class="t-xl-semibold">-$100 000</span><span class="t-s-semibold">-4.50%</span></div>
+            </div>
+            <div class="trade-card__comp">Wall Street Warriors</div>
+          </article>
+          <article class="trade-card">
+            <div class="trade-card__body">
+              <div class="trade-asset">
+                <img class="icon icon-40" src="assets/coin-ltc.svg" alt="">
+                <div class="trade-asset__text">
+                  <div class="trade-asset__line"><span class="t-m-semibold">LTC</span><span class="sell-pill">Sell</span></div>
+                  <span class="t-caption t-secondary">10 min ago</span>
+                </div>
+              </div>
+              <div class="trade-pnl"><span class="t-xl-semibold">-$100 000</span><span class="t-s-semibold">-4.50%</span></div>
+            </div>
+            <div class="trade-card__comp">Wall Street Warriors</div>
+          </article>
+          <article class="trade-card">
+            <div class="trade-card__body">
+              <div class="trade-asset">
+                <img class="icon icon-40" src="assets/coin-ltc.svg" alt="">
+                <div class="trade-asset__text">
+                  <div class="trade-asset__line"><span class="t-m-semibold">LTC</span><span class="sell-pill">Sell</span></div>
+                  <span class="t-caption t-secondary">10 min ago</span>
+                </div>
+              </div>
+              <div class="trade-pnl"><span class="t-xl-semibold">-$100 000</span><span class="t-s-semibold">-4.50%</span></div>
+            </div>
+            <div class="trade-card__comp">Wall Street Warriors</div>
+          </article>
+          <article class="trade-card">
+            <div class="trade-card__body">
+              <div class="trade-asset">
+                <img class="icon icon-40" src="assets/coin-ltc.svg" alt="">
+                <div class="trade-asset__text">
+                  <div class="trade-asset__line"><span class="t-m-semibold">LTC</span><span class="sell-pill">Sell</span></div>
+                  <span class="t-caption t-secondary">10 min ago</span>
+                </div>
+              </div>
+              <div class="trade-pnl"><span class="t-xl-semibold">-$100 000</span><span class="t-s-semibold">-4.50%</span></div>
+            </div>
+            <div class="trade-card__comp">Wall Street Warriors</div>
+          </article>
+          <article class="trade-card trade-card--wide">
+            <div class="trade-asset">
+              <img class="icon icon-40" src="assets/coin-ltc.svg" alt="">
+              <div class="trade-asset__main">
+                <div class="trade-asset__text">
+                  <div class="trade-asset__line"><span class="t-m-semibold">LTC</span><span class="sell-pill">Sell</span></div>
+                  <span class="t-caption t-secondary">10 min ago</span>
+                </div>
+                <span class="trade-comp-link">Wall Street Warriors</span>
+              </div>
+            </div>
+            <div class="trade-pnl"><span class="t-xl-semibold">-$270</span><span class="t-s-semibold">-1.5%</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ Tournaments ============ -->
+      <section class="section" aria-labelledby="explore-title">
+        <div class="trades-head">
+          <h2 class="t-h1" id="explore-title">Tournaments</h2>
+          <div class="tabs" role="tablist" data-tabs>
+            <button class="tab is-active" role="tab">All</button>
+            <button class="tab" role="tab">Practice</button>
+            <button class="tab" role="tab">Cash Prizes</button>
+            <button class="tab tab--bare" role="tab">Unlimited Cash</button>
+            <button class="tab tab--live" role="tab">Live Now<span class="live-dot live-dot--sm"></span></button>
+          </div>
+        </div>
+        <div class="explore-grid">
+
+          <a class="ex-card ex-card--practice" href="practice.html" aria-label="Open 1-to-1 Practice">
+            <!-- Bull / VS / bear crops, positioned from Figma metadata -->
+            <div class="masked" style="right:-48.097px;top:160.64px;width:318.47px;height:318.47px;-webkit-mask-image:var(--ex-mask-1);mask-image:var(--ex-mask-1);-webkit-mask-position:6.373px 2.488px;mask-position:6.373px 2.488px;-webkit-mask-size:161.568px 183.649px;mask-size:161.568px 183.649px"><img class="cover" src="assets/ex-bullbear.png" alt=""></div>
+            <div class="masked" style="right:-102.339px;top:150.336px;width:397.493px;height:397.493px;-webkit-mask-image:var(--ex-mask-2);mask-image:var(--ex-mask-2);-webkit-mask-position:145.583px 6.38px;mask-position:145.583px 6.38px;-webkit-mask-size:98.307px 183.507px;mask-size:98.307px 183.507px"><img class="cover" src="assets/ex-bullbear.png" alt=""></div>
+            <div class="masked" style="right:-102.339px;top:150.336px;width:397.493px;height:397.493px;-webkit-mask-image:var(--ex-mask-2);mask-image:var(--ex-mask-2);-webkit-mask-position:145.583px 6.38px;mask-position:145.583px 6.38px;-webkit-mask-size:98.307px 183.507px;mask-size:98.307px 183.507px"><img class="cover" src="assets/ex-bullbear.png" alt=""></div>
+            <div class="masked" style="right:1.735px;top:87.791px;width:261.53px;height:261.53px;-webkit-mask-image:var(--ex-mask-3);mask-image:var(--ex-mask-3);-webkit-mask-position:150.553px 29.209px;mask-position:150.553px 29.209px;-webkit-mask-size:122.894px 115.563px;mask-size:122.894px 115.563px"><img class="cover" src="assets/ex-bullbear.png" alt=""></div>
+            <div class="ex-card__top">
+              <h3 class="t-h2">1-to-1 Practice</h3>
+              <div class="ex-card__prize"><img class="icon icon-20" src="assets/star-gold.svg" alt=""><span class="t-h3b nowrap">100 Xp</span></div>
+            </div>
+            <span class="glass-tag">10min</span>
+          </a>
+
+          <article class="ex-card ex-card--battle">
+            <div class="ex-card__top">
+              <h3 class="t-h2">1-to-1 Cash Battle</h3>
+              <div class="ex-card__prize"><img class="icon icon-20" src="assets/ex-coin-icon.svg" alt=""><span class="t-h3b nowrap">100</span></div>
+            </div>
+            <span class="glass-tag">10min</span>
+            <div class="ex-art" style="right:-55px;bottom:-61.93px;width:197.891px;height:289.255px">
+              <img src="assets/ex-ko.png" alt="" style="width:269.903px;height:104.136px;object-position:bottom;rotate:-67.94deg;scale:1 -1">
+            </div>
+            <div class="ex-art" style="right:97.95px;bottom:-9.2px;width:163.441px;height:180.606px">
+              <img src="assets/ex-dollar-coin.png" alt="" style="width:128.319px;height:152.594px;object-position:bottom;rotate:-15deg">
+            </div>
+            <div class="ex-art" style="right:-0.5px;bottom:84.45px;width:175.826px;height:135.312px">
+              <img src="assets/ex-ring.png" alt="" style="width:155.669px;height:98.374px;object-position:bottom;rotate:-15deg">
+            </div>
+          </article>
+
+          <article class="ex-card ex-card--warriors">
+            <div class="ex-card__top">
+              <h3 class="t-h2">Wall Street Warriors</h3>
+              <div class="ex-card__prize"><span class="t-h3b nowrap">$2000</span></div>
+            </div>
+            <span class="glass-tag">Live · 2d : 16h</span>
+            <img src="assets/ex-warriors.png" alt="" style="position:absolute;right:-19.34px;bottom:-31px;width:247.337px;height:239px;object-fit:cover">
+          </article>
+
+          <article class="ex-card ex-card--bitcoin">
+            <div class="masked" style="right:-30.736px;top:91.64px;width:282.416px;height:282.416px;-webkit-mask-image:var(--ex-mask-skate-a);mask-image:var(--ex-mask-skate-a);-webkit-mask-position:-6.756px 71.569px;mask-position:-6.756px 71.569px;-webkit-mask-size:282.967px 221.74px;mask-size:282.967px 221.74px"><img class="cover" src="assets/ex-btc-skate-a.png" alt=""></div>
+            <div class="masked" style="right:-34.322px;top:84.469px;width:289.586px;height:289.586px;-webkit-mask-image:var(--ex-mask-skate-b);mask-image:var(--ex-mask-skate-b);-webkit-mask-position:-3.172px 78.741px;mask-position:-3.172px 78.741px;-webkit-mask-size:282.967px 221.74px;mask-size:282.967px 221.74px"><img class="cover" src="assets/ex-btc-skate-b.png" alt=""></div>
+            <div class="ex-art" style="right:75.69px;bottom:31.23px;width:187.31px;height:209.772px">
+              <img src="assets/ex-btc-coin.png" alt="" style="width:149.854px;height:180.095px;object-position:bottom;rotate:-13.32deg">
+            </div>
+            <div class="ex-card__top">
+              <h3 class="t-h2">Bitcoin Bulls</h3>
+              <div class="ex-card__prize"><span class="t-h3b nowrap">$500</span></div>
+            </div>
+            <span class="glass-tag">&nbsp;Opens in 2d : 34h</span>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ============ Mini games ============ -->
+      <section class="section section--games" aria-labelledby="games-title">
+        <h2 class="t-h1" id="games-title">Mini Games</h2>
+        <div class="games">
+          <a class="game game--bull" href="bull-run.html">
+            <div class="game__art">
+              <div class="rot" style="left:-18px;top:-22px;width:210.687px;height:206.179px">
+                <div class="crop" style="width:160.515px;height:137px;rotate:-37.21deg"><img src="assets/mg-bullrun.png" alt="" style="left:-117.83%;top:-16.79%;width:326.11%;height:382.09%"></div>
+              </div>
+            </div>
+            <span class="game__fade"></span>
+            <p class="game__title">Bull Run</p>
+          </a>
+          <a class="game game--scan" href="#">
+            <div class="game__art" aria-hidden="true">
+              <span class="scan-digit" style="left:75.59px;top:16.48px">54</span>
+              <span class="scan-digit" style="left:41.87px;top:42.9px">18</span>
+              <span class="scan-digit" style="left:81.15px;top:73.48px">54</span>
+              <span class="scan-digit" style="left:115.4px;top:51.24px">36</span>
+              <span class="scan-digit scan-digit--main" style="left:79.09px;top:40.58px">24</span>
+              <div class="rot" style="left:-25px;top:-28px;width:223.28px;height:223.28px">
+                <img src="assets/tt-magnifier.png" alt="" style="width:188.325px;height:188.325px;object-fit:cover;rotate:168.03deg;scale:1 -1">
+              </div>
+            </div>
+            <span class="game__fade"></span>
+            <p class="game__title">Fast Scan</p>
+          </a>
+          <div class="game game--soon" aria-disabled="true">
+            <div class="game__art">
+              <img src="assets/mg-bomb.png" alt="" style="position:absolute;left:-15px;top:-18px;width:205px;height:205px;object-fit:cover">
+            </div>
+            <p class="game__title">TicTok Trade</p>
+            <span class="game__soon">Soon</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Daily missions ============ -->
+      <section class="section" aria-labelledby="missions-title">
+        <a class="section__head" href="#">
+          <h2 class="t-h1" id="missions-title">Daily Missions</h2>
+          <span class="section-title-arrow"><img src="assets/chevron-right.svg" alt=""></span>
+        </a>
+        <div class="missions">
+          <div class="mission">
+            <img class="mission__img" src="assets/mission-safe.png" alt="">
+            <div class="mission__text">
+              <p class="mission__title">Make 50 Trades per day</p>
+              <div class="mission__earn"><span>Earn</span><span class="mission__xp"><img src="assets/star.svg" width="17" height="17" alt=""><span class="t-m-semibold">25 XP</span></span></div>
+            </div>
+            <button class="btn-brand mission__claim">Claim</button>
+          </div>
+          <div class="mission">
+            <img class="mission__img" src="assets/mission-safe.png" alt="">
+            <div class="mission__text">
+              <p class="mission__title">Make 50 Trades per day</p>
+              <div class="mission__earn"><span>Earn</span><span class="mission__xp"><img src="assets/star.svg" width="17" height="17" alt=""><span class="t-m-semibold">25 XP</span></span></div>
+            </div>
+            <button class="btn-brand mission__claim">Claim</button>
+          </div>
+          <div class="mission">
+            <img class="mission__img" src="assets/mission-safe.png" alt="">
+            <div class="mission__text">
+              <p class="mission__title">Make 50 Trades per day</p>
+              <div class="mission__earn"><span>Earn</span><span class="mission__xp"><img src="assets/star.svg" width="17" height="17" alt=""><span class="t-m-semibold">25 XP</span></span></div>
+            </div>
+            <button class="btn-brand mission__claim">Claim</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Referral banner ============ -->
+      <section class="referral" aria-label="Refer a friend">
+        <div class="referral__banner">
+          <div class="referral__art" aria-hidden="true">
+            <div class="blend" style="left:-60.68px;top:-116.98px;width:553.311px;height:553.311px">
+              <div class="masked" style="width:492.185px;height:492.185px;-webkit-mask-image:var(--rf-mask-1);mask-image:var(--rf-mask-1);-webkit-mask-position:0.636px 101.122px;mask-position:0.636px 101.122px;-webkit-mask-size:530.415px 419.753px;mask-size:530.415px 419.753px">
+                <img class="cover" src="assets/rf-mega-a.png" alt=""><img class="cover" src="assets/rf-mega-b.png" alt="">
+              </div>
+            </div>
+            <div class="blend" style="left:154.08px;top:58.91px;width:492.828px;height:492.828px">
+              <div class="masked" style="width:438.384px;height:438.384px;-webkit-mask-image:var(--rf-mask-2);mask-image:var(--rf-mask-2);-webkit-mask-position:216.391px 5.665px;mask-position:216.391px 5.665px;-webkit-mask-size:291.731px 146.149px;mask-size:291.731px 146.149px">
+                <img class="cover" src="assets/rf-mega-a.png" alt="">
+              </div>
+            </div>
+          </div>
+          <!-- Top-right light leak: rendered from Figma group 12913:18446 (additive layer) -->
+          <img class="referral__glow-top" src="assets/rf-glow-top.png" alt="" aria-hidden="true">
+          <div class="referral__content">
+            <div class="referral__glows" aria-hidden="true">
+              <div class="poly" style="left:-197.41px;top:215.31px;width:699.762px;height:342.267px">
+                <div style="width:247.013px;height:590.061px;rotate:-120.1deg;scale:1 0.95;transform:skewX(-17.51deg)"><img src="assets/rf-poly-13.svg" alt="" style="inset:-12.39% -29.59%;width:159.18%;height:124.78%"></div>
+              </div>
+              <div class="poly" style="left:-267.44px;top:209.07px;width:679.978px;height:272.994px">
+                <div style="width:247.013px;height:590.061px;rotate:-111.75deg;scale:1 0.95;transform:skewX(-17.51deg)"><img src="assets/rf-poly-17.svg" alt="" style="inset:-12.39% -29.59%;width:159.18%;height:124.78%"></div>
+              </div>
+              <div class="poly" style="left:-140.86px;top:105.25px;width:383.671px;height:334.224px">
+                <div style="width:347.969px;height:281.017px;rotate:-107.16deg;scale:1 0.95;transform:skewX(-17.51deg)"><img src="assets/rf-poly-16.svg" alt="" style="inset:-16.01% -12.93%;width:125.86%;height:132.02%"></div>
+              </div>
+              <div class="poly" style="left:-198px;top:-77px;width:700.486px;height:702.067px;mix-blend-mode:normal">
+                <div style="width:504.277px;height:491.022px;rotate:130.16deg;scale:1 -1"><img src="assets/rf-pattern.png" alt="" style="inset:0;width:100%;height:100%;object-fit:cover;opacity:0.25"></div>
+              </div>
+            </div>
+            <div class="referral__copy">
+              <h2 class="referral__title">Earn <span class="referral__amount"><img src="assets/rf-10.png" alt="$10"></span>CASH for every PRO+ Friend you Refer!</h2>
+              <p class="referral__sub">Unlock up to $125 Cash Bonus as you refer more friends!</p>
+            </div>
+            <a class="btn-light referral__cta t-m-semibold" href="#">Refer Now — Start Earning</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="section faq" aria-labelledby="faq-title">
+        <a class="section__head" href="#">
+          <h2 class="t-h1" id="faq-title">FAQs</h2>
+          <span class="section-title-arrow"><img src="assets/faq-arrow.svg" alt=""></span>
+        </a>
+        <div class="faq__cols">
+          <div class="faq__col" data-accordion>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What is Playtrade?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Playtrade is Profit.com’s trading arena: compete with virtual money in live competitions and win real cash prizes.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>How do I access the Billionaire Portfolios?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Open Tools in the top menu and select Billionaire Portfolios. Full holdings are available on PRO and PRO+ plans.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What’s the difference between Pro and Pro+ plans?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">PRO+ adds unlimited competition entries, AI-powered insights and referral cash bonuses on top of everything in PRO.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>How often do you provide AI-Powered Insights?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Insights refresh throughout the trading day whenever the market moves meaningfully.</p>
+            </div>
+            <div class="faq-item is-open">
+              <button class="faq-item__q" aria-expanded="true"><span>Can I cancel my subscription anytime?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes, you can cancel your subscription at any time without any additional fees.</p>
+            </div>
+          </div>
+          <div class="faq__col" data-accordion>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What is Playtrade?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Playtrade is Profit.com’s trading arena: compete with virtual money in live competitions and win real cash prizes.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>How do I access the Billionaire Portfolios?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Open Tools in the top menu and select Billionaire Portfolios. Full holdings are available on PRO and PRO+ plans.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What’s the difference between Pro and Pro+ plans?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">PRO+ adds unlimited competition entries, AI-powered insights and referral cash bonuses on top of everything in PRO.</p>
+            </div>
+            <div class="faq-contact">
+              <div class="faq-contact__text">
+                <p>Have additional questions?</p>
+                <p>Just message us at <a href="mailto:support@profit.com">support@profit.com</a>, and we will respond to all of your queries.</p>
+              </div>
+              <div class="faq-agent">
+                <div class="faq-agent__photo">
+                  <div><img src="assets/faq-avatar.png" alt=""></div>
+                  <span class="faq-agent__online"><img src="assets/faq-online.svg" alt=""></span>
+                </div>
+                <div class="faq-agent__who">
+                  <p class="t-m-semibold">Jessica</p>
+                  <p class="t-s-medium t-secondary nowrap">Customer Relations Manager</p>
+                </div>
+                <a class="btn-light faq-agent__cta t-m-semibold" href="mailto:support@profit.com">Contact Team</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Footer ============ -->
+      <footer class="footer">
+        <div class="footer__cta-row">
+          <div class="footer__pitch">
+            <p>Ready to Turn Practice in Real Money?</p>
+            <p>Join Profit.com — No risk. Real rewards.</p>
+          </div>
+          <a class="btn-brand footer__play" href="#">Play Now</a>
+        </div>
+        <div class="footer__body">
+          <div class="footer__cols">
+            <div class="footer__links">
+              <div class="footer__col"><h4>Tools</h4><ul><li><a href="#">Terminal</a></li><li><a href="#">Playtrade</a></li><li><a href="#">Research</a></li><li><a href="#">Messenger</a></li><li><a href="#">Mobile App</a></li></ul></div>
+              <div class="footer__col"><h4>Solutions</h4><ul><li><a href="#">Widgets</a></li><li><a href="#">Data API</a></li><li><a href="#">Charts Library</a></li><li><a href="#">Trading Signals</a></li><li><a href="#">Advertising</a></li></ul></div>
+              <div class="footer__col"><h4>More</h4><ul><li><a href="#">Company</a></li><li><a href="#">Rebranding</a></li><li><a href="#">Investors</a></li><li><a href="#">Partners</a></li><li><a href="#">Refer a Friend</a></li><li><a href="#">Become an Affiliate</a></li><li><a href="#">Contact us</a></li></ul></div>
+              <div class="footer__col footer__col--fixed"><h4>Resources</h4><ul><li><a href="#">Help Center</a></li><li><a href="#">Terms &amp; Conditions</a></li><li><a href="#">Cookie Policy</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Risks Disclosure</a></li><li><a href="#">Release Notes</a></li></ul></div>
+              <div class="footer__col footer__col--fixed"><h4>Compare</h4><ul><li><a href="#">Yahoo Finance</a></li><li><a href="#">Morningstar</a></li><li><a href="#">Bloomberg</a></li><li><a href="#">Google Finance</a></li><li><button class="footer__more">Show more<img src="assets/ft-chevron.svg" alt="" style="rotate:-90deg;width:4.5px;height:9px;margin:0 2.25px"></button></li></ul></div>
+            </div>
+            <div class="footer__col footer__col--app">
+              <h4>Profit.com App</h4>
+              <ul>
+                <li><p style="opacity:0.5">Discover the world of finance in your pocket</p></li>
+                <li style="display:flex;flex-direction:column;gap:9.333px">
+                  <a class="store-btn store-btn--apple" href="#"><img src="assets/ft-apple.svg" alt=""><span>App Store</span></a>
+                  <a class="store-btn store-btn--google" href="#" aria-label="Get it on Google Play"><img class="gp-icon" src="assets/ft-playstore.svg" alt=""><img class="gp-text" src="assets/ft-googleplay-text.svg" alt=""></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__bottom">
+            <a class="footer__logo" href="#" aria-label="Profit.com"><img class="mark" src="assets/ft-logo-mark.svg" alt=""><img class="word" src="assets/ft-logo-word.svg" alt=""></a>
+            <div class="footer__legal">
+              <p class="footer__copy">© 2025 All rights reserved</p>
+              <div class="socials">
+                <a class="social" href="#" aria-label="Telegram"><span class="ico"><img src="assets/ft-telegram.svg" alt=""></span></a>
+                <a class="social" href="#" aria-label="Instagram"><span class="ico"><img src="assets/ft-instagram.svg" alt=""></span></a>
+                <a class="social" href="#" aria-label="Facebook"><span class="ico"><img src="assets/ft-facebook.svg" alt=""></span></a>
+                <a class="social" href="#" aria-label="YouTube"><span class="ico"><img src="assets/ft-youtube.svg" alt=""></span></a>
+                <a class="social" href="#" aria-label="X"><span class="ico"><img src="assets/ft-x.svg" alt=""></span></a>
+                <a class="social" href="#" aria-label="LinkedIn"><span class="ico"><span class="li"><img src="assets/ft-linkedin.svg" alt=""></span></span></a>
+                <a class="social" href="#" aria-label="TikTok"><span class="ico"><img src="assets/ft-tiktok.svg" alt=""></span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

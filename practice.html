@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>1-to-1 Practice · Playtrade Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="practice.css">
+</head>
+<body class="pr-page">
+
+  <!-- ============ Top navigation ============ -->
+  <header class="topnav">
+    <a href="index.html" aria-label="Profit.com home"><img class="topnav__logo" src="assets/logo.svg" alt="Profit.com"></a>
+    <img class="vdivider" src="assets/divider.svg" alt="">
+    <nav class="topnav__menu" aria-label="Primary">
+      <a class="topnav__item" href="#"><img class="icon" src="assets/cup.svg" width="16" height="16" alt="">Arena<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Tools<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Learn<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Plans</a>
+      <a class="topnav__item" href="#">More<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+    </nav>
+    <div class="topnav__right">
+      <button aria-label="Search"><img class="icon icon-20" src="assets/search.svg" alt=""></button>
+      <div class="topnav__icons">
+        <img class="vdivider" src="assets/divider.svg" alt="">
+        <button class="topnav__lang"><span class="topnav__globe"><img src="assets/globe.svg" alt=""></span>EN</button>
+        <img class="vdivider" src="assets/divider.svg" alt="">
+        <button class="icon-btn" aria-label="Notifications"><img class="icon icon-20" src="assets/bell.svg" alt=""><span class="badge">2</span></button>
+        <button class="icon-btn" aria-label="Messages"><img class="icon icon-20" src="assets/messenger.svg" alt=""><span class="badge">1</span></button>
+        <a class="btn-brand topnav__upgrade" href="#">Upgrade</a>
+        <span class="topnav__sale">37% OFF</span>
+      </div>
+      <img class="topnav__avatar" src="assets/nav-avatar.png" width="32" height="32" alt="Profile">
+    </div>
+  </header>
+
+  <div class="pr-shell">
+
+    <!-- ============ Side navigation (built by sidebar.js) ============ -->
+    <aside class="side-nav is-collapsed" id="sideNav" data-active="tournaments" aria-label="Sections"></aside>
+    <script src="sidebar.js"></script>
+
+    <main class="pr-main">
+
+      <!-- ============ Left column: rules + history ============ -->
+      <div class="pr-left">
+        <a class="pr-back" href="index.html" aria-label="Back to Arena"><img src="assets/pr-chevron-left.svg" alt=""></a>
+
+        <section class="pr-panel pr-panel--rules" aria-labelledby="rules-title">
+          <a class="pr-panel__title" href="#" id="rules-title">Rules<img src="assets/pr-chevron-right.svg" alt=""></a>
+          <div class="rules">
+            <div class="rule"><img src="assets/pr-ic-duration.svg" alt=""><div class="rule__body"><span class="rule__title">Duration</span><span class="rule__value">7 Days</span></div></div>
+            <div class="rule"><img src="assets/pr-ic-risk.svg" alt=""><div class="rule__body"><span class="rule__title">Risk Rules</span>
+              <div class="rule__lines">
+                <div class="rule__metric"><span>Max Drawdown<img src="assets/pr-info-circle.svg" alt="" title="Largest allowed drop from your peak balance"></span>20%</div>
+                <div class="rule__metric"><span>Daily Drawdown<img src="assets/pr-info-circle.svg" alt="" title="Largest allowed drop within one day"></span>5%</div>
+              </div></div></div>
+            <div class="rule"><img src="assets/pr-ic-trade.svg" alt=""><div class="rule__body"><span class="rule__title">What Can You Trade?</span><span class="rule__value nowrap">Crypto, Stocks, Forex, Indices, ETFs</span></div></div>
+            <div class="rule"><img src="assets/pr-ic-rewards.svg" alt=""><div class="rule__body"><span class="rule__title">Rewards</span><span class="rule__value">Top 20 players win real cash • 21st–50th earn Profit Coins</span></div></div>
+            <div class="rule"><img src="assets/pr-ic-win.svg" alt=""><div class="rule__body"><span class="rule__title">How to Win</span><span class="rule__value">Finish in top 50 with best trading performance</span></div></div>
+            <div class="rule"><img src="assets/pr-lock.svg" alt=""><div class="rule__body"><span class="rule__title">User Access</span>
+              <div class="rule__lines">
+                <div class="rule__access">Free:<span><img src="assets/pr-access-no.svg" alt="">No access ($25 entry fee)</span></div>
+                <div class="rule__access">PRO:<span><img src="assets/pr-access-no.svg" alt="">No access ($5 entry fee)</span></div>
+                <div class="rule__access">PRO+:<span><img src="assets/pr-access-yes.svg" alt="">Unlimited access</span></div>
+              </div></div></div>
+          </div>
+          <span class="pr-fade" aria-hidden="true"></span>
+          <button class="pr-outline-btn">Read Rules</button>
+        </section>
+
+        <section class="pr-panel pr-panel--history" aria-labelledby="history-title">
+          <h2 class="pr-panel__title" id="history-title">Battles History</h2>
+          <div class="battles">
+            <button class="battle"><span class="pair"><span class="av24"><img src="assets/pr-av-a.png" alt=""><img src="assets/pr-av-b.png" alt=""></span><span class="vs">vs</span><span class="av24"><img src="assets/pr-av-a.png" alt=""></span><span class="battle__name">Travis Dann</span></span><span class="battle__date">8 Nov, 12:30</span><span class="battle__result is-win">Win</span><img src="assets/pr-chevron-right.svg" alt=""></button>
+            <div class="battle-open is-open">
+              <button class="battle" aria-expanded="true"><span class="pair"><span class="av24"><img src="assets/pr-av-a.png" alt=""><img src="assets/pr-av-b.png" alt=""></span><span class="vs">vs</span><span class="av24"><img src="assets/pr-av-a.png" alt=""></span><span class="battle__name">Travis Dann</span></span><span class="battle__date">8 Nov, 12:30</span><span class="battle__result is-lose">Lose</span><img src="assets/pr-chevron-down.svg" alt=""></button>
+              <div class="battle-open__details">
+                <div class="score-pill"><span class="neg">-24.5%</span><span class="av24"><img src="assets/pr-av-a.png" alt=""><img src="assets/pr-av-b.png" alt=""></span><span class="vs">vs</span><span class="av24 winner"><img src="assets/pr-av-a.png" alt=""></span><span class="pos">+34.5%</span><span class="score-pill__crown"><img src="assets/pr-crown.svg" alt=""></span></div>
+                <div class="trades">
+                <div class="trade"><img src="assets/pr-avatar-1.png" alt=""><img src="assets/pr-coin-ltc.svg" alt=""><span class="trade__sym">GOOGL</span><span class="trade__meta"><span class="trade__side"><span class="buy">buy</span><span class="lev">x10</span></span><span class="trade__pnl">+10.31%</span></span></div>
+                <div class="trade"><img src="assets/pr-avatar-2.png" alt=""><img src="assets/pr-coin-ltc.svg" alt=""><span class="trade__sym">GOOGL</span><span class="trade__meta"><span class="trade__side"><span class="buy">buy</span><span class="lev">x10</span></span><span class="trade__pnl">+10.31%</span></span></div>
+                <div class="trade"><img src="assets/pr-avatar-2.png" alt=""><img src="assets/pr-coin-ltc.svg" alt=""><span class="trade__sym">GOOGL</span><span class="trade__meta"><span class="trade__side"><span class="sell">sell</span><span class="lev">x10</span></span><span class="trade__pnl">+10.31%</span></span></div>
+                </div>
+              </div>
+            </div>
+            <button class="battle"><span class="pair"><span class="av24"><img src="assets/pr-av-a.png" alt=""><img src="assets/pr-av-b.png" alt=""></span><span class="vs">vs</span><span class="av24"><img src="assets/pr-av-a.png" alt=""></span><span class="battle__name">Travis Dann</span></span><span class="battle__date">8 Nov, 12:30</span><span class="battle__result is-win">Win</span><img src="assets/pr-chevron-right.svg" alt=""></button>
+            <button class="battle"><span class="pair"><span class="av24"><img src="assets/pr-av-a.png" alt=""><img src="assets/pr-av-b.png" alt=""></span><span class="vs">vs</span><span class="av24"><img src="assets/pr-av-a.png" alt=""></span><span class="battle__name">Travis Dann</span></span><span class="battle__date">8 Nov, 12:30</span><span class="battle__result is-win">Win</span><img src="assets/pr-chevron-right.svg" alt=""></button>
+            <button class="battle"><span class="pair"><span class="av24"><img src="assets/pr-av-a.png" alt=""><img src="assets/pr-av-b.png" alt=""></span><span class="vs">vs</span><span class="av24"><img src="assets/pr-av-a.png" alt=""></span><span class="battle__name">Travis Dann</span></span><span class="battle__date">8 Nov, 12:30</span><span class="battle__result is-win">Win</span><img src="assets/pr-chevron-right.svg" alt=""></button>
+            <button class="battle"><span class="pair"><span class="av24"><img src="assets/pr-av-a.png" alt=""><img src="assets/pr-av-b.png" alt=""></span><span class="vs">vs</span><span class="av24"><img src="assets/pr-av-a.png" alt=""></span><span class="battle__name">Travis Dann</span></span><span class="battle__date">8 Nov, 12:30</span><span class="battle__result is-win">Win</span><img src="assets/pr-chevron-right.svg" alt=""></button>
+            <button class="battle"><span class="pair"><span class="av24"><img src="assets/pr-av-a.png" alt=""><img src="assets/pr-av-b.png" alt=""></span><span class="vs">vs</span><span class="av24"><img src="assets/pr-av-a.png" alt=""></span><span class="battle__name">Travis Dann</span></span><span class="battle__date">8 Nov, 12:30</span><span class="battle__result is-win">Win</span><img src="assets/pr-chevron-right.svg" alt=""></button>
+          </div>
+          <span class="pr-fade" aria-hidden="true"></span>
+        </section>
+      </div>
+
+      <!-- ============ Tournament card ============ -->
+      <section class="pr-card" aria-labelledby="pr-title">
+        <div class="pr-card__head">
+          <div class="pr-card__copy">
+            <h1 class="t-h1" id="pr-title">1-to-1 Practice</h1>
+            <p class="pr-card__sub">Train your skills in risk-free 1-on-1 trading duel.</p>
+          </div>
+          <button class="pr-tour"><img src="assets/pr-play.svg" alt="">Battle Tour</button>
+        </div>
+        <div class="pr-interior" aria-hidden="true">
+          <div class="masked" style="right:40px;bottom:-176px;width:477.558px;height:477.558px;-webkit-mask-image:var(--pr-mask-1);mask-image:var(--pr-mask-1);-webkit-mask-position:9.557px 3.73px;mask-position:9.557px 3.73px;-webkit-mask-size:242.277px 275.389px;mask-size:242.277px 275.389px"><img src="assets/pr-bullbear.png" alt=""></div>
+          <div class="masked" style="right:-41.34px;bottom:-279.04px;width:596.056px;height:596.056px;-webkit-mask-image:var(--pr-mask-2);mask-image:var(--pr-mask-2);-webkit-mask-position:218.307px 9.566px;mask-position:218.307px 9.566px;-webkit-mask-size:147.415px 275.176px;mask-size:147.415px 275.176px"><img src="assets/pr-bullbear.png" alt=""></div>
+          <div class="masked" style="right:-41.34px;bottom:-279.04px;width:596.056px;height:596.056px;-webkit-mask-image:var(--pr-mask-2);mask-image:var(--pr-mask-2);-webkit-mask-position:218.307px 9.566px;mask-position:218.307px 9.566px;-webkit-mask-size:147.415px 275.176px;mask-size:147.415px 275.176px"><img src="assets/pr-bullbear.png" alt=""></div>
+          <div class="masked" style="right:114.72px;bottom:18.63px;width:392.175px;height:392.175px;-webkit-mask-image:var(--pr-mask-3);mask-image:var(--pr-mask-3);-webkit-mask-position:225.76px 43.801px;mask-position:225.76px 43.801px;-webkit-mask-size:184.284px 173.291px;mask-size:184.284px 173.291px"><img src="assets/pr-bullbear.png" alt=""></div>
+        </div>
+        <a class="btn-brand pr-start" href="#">Start Battle</a>
+      </section>
+
+      <!-- ============ Right column: stats + leaderboard ============ -->
+      <div class="pr-right">
+        <div class="pr-right__head">
+          <div class="pr-players"><span class="av32"><img src="assets/pr-rb-av-a.png" alt=""><img src="assets/pr-rb-av-b.png" alt=""></span><span class="av32"><img src="assets/pr-rb-av-a.png" alt=""></span></div>
+          <button class="pr-share"><img src="assets/pr-share.svg" alt="">Share with friends!</button>
+        </div>
+        <div class="pr-stats">
+          <div class="pr-stat"><span class="pr-stat__label">Wins</span><span class="pr-stat__value">20</span></div>
+          <div class="pr-stat"><span class="pr-stat__label">Losses</span><span class="pr-stat__value">6</span></div>
+          <div class="pr-stat pr-stat--wide">
+            <div class="pr-stat__row"><span class="pr-stat__label">Lives</span><span class="pr-stat__timer"><span>New in</span><b>13:11</b></span></div>
+            <div class="pr-lives"><img src="assets/pr-life.svg" alt="Life"><img src="assets/pr-life.svg" alt="Life"><img src="assets/pr-life.svg" alt="Life"><img src="assets/pr-heart-off.svg" alt="Empty life"><img src="assets/pr-heart-off.svg" alt="Empty life"></div>
+          </div>
+        </div>
+        <section class="leaderboard" aria-labelledby="lb-title">
+          <div class="leaderboard__head"><h2 id="lb-title">Leaderboard</h2><span class="leaderboard__count">346 players</span></div>
+          <div class="lb-list">
+            <div class="lb-row"><span class="lb-rank">678</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">You</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-gap" aria-hidden="true"></div>
+            <div class="lb-row has-line"><span class="lb-rank"><img src="assets/pr-cup.svg" alt="">1</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row has-line"><span class="lb-rank"><img src="assets/pr-cup.svg" alt="">2</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row has-line"><span class="lb-rank"><img src="assets/pr-cup.svg" alt="">3</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row has-line"><span class="lb-rank"><img src="assets/pr-cup.svg" alt="">4</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row has-line"><span class="lb-rank"><img src="assets/pr-cup.svg" alt="">5</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row"><span class="lb-rank"><img src="assets/pr-cup.svg" alt="">6</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row"><span class="lb-rank">7</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row"><span class="lb-rank">8</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row"><span class="lb-rank">9</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row"><span class="lb-rank">10</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">10 Wins</span></div>
+            <div class="lb-row"><span class="lb-rank">11</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">+90,87</span></div>
+            <div class="lb-row"><span class="lb-rank">12</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">+90,87</span></div>
+            <div class="lb-row"><span class="lb-rank">13</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">+90,87</span></div>
+            <div class="lb-row"><span class="lb-rank">14</span><span class="av24"><img src="assets/pr-rb-av-a.png" alt=""></span><span class="lb-name">Name Surname</span><span class="lb-score">+90,87</span></div>
+          </div>
+          <div class="leaderboard__end" aria-hidden="true"><img src="assets/pr-lb-bottom.svg" alt=""></div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // Expand / collapse the detailed battle row
+    document.querySelectorAll(".battle-open > .battle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const open = btn.parentElement.classList.toggle("is-open");
+        btn.setAttribute("aria-expanded", String(open));
+      });
+    });
+  </script>
+</body>
+</html>

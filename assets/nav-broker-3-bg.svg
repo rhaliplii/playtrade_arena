@@ -1,0 +1,21 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Rectangle 4203">
+<path d="M0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12Z" fill="url(#paint0_linear_0_531)"/>
+<path d="M12 0.135742C18.5524 0.135742 23.8643 5.4476 23.8643 12C23.8643 18.5524 18.5524 23.8643 12 23.8643C5.4476 23.8643 0.135742 18.5524 0.135742 12C0.135742 5.4476 5.4476 0.135742 12 0.135742Z" stroke="url(#paint1_radial_0_531)" stroke-opacity="0.5" stroke-width="0.271654"/>
+<path d="M12 0.135742C18.5524 0.135742 23.8643 5.4476 23.8643 12C23.8643 18.5524 18.5524 23.8643 12 23.8643C5.4476 23.8643 0.135742 18.5524 0.135742 12C0.135742 5.4476 5.4476 0.135742 12 0.135742Z" stroke="url(#paint2_radial_0_531)" stroke-opacity="0.5" stroke-width="0.271654"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_531" x1="3.25" y1="-3.94881e-07" x2="20.25" y2="24" gradientUnits="userSpaceOnUse">
+<stop/>
+<stop offset="1" stop-color="#2C2C2C"/>
+</linearGradient>
+<radialGradient id="paint1_radial_0_531" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(2 1) rotate(50.3145) scale(15.2684)">
+<stop stop-color="white"/>
+<stop offset="1" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint2_radial_0_531" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(21.5 23.25) rotate(-131.634) scale(15.052)">
+<stop stop-color="white"/>
+<stop offset="1" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
