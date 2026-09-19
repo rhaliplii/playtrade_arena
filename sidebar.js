@@ -16,13 +16,6 @@
     { id: "toolshop", label: "Toolshop", icon: "nav-shop.svg", href: "#" },
     { id: "wallet", label: "Wallet", icon: "nav-wallet.svg", href: "#", base: true, coins: "54,930" },
   ];
-  // Top-menu destinations; only shown in the mobile drawer, where the top menu is hidden
-  const SITE = [
-    { label: "Home", href: "landing.html" },
-    { label: "Tools", href: "landing.html#features" },
-    { label: "Learn", href: "#" },
-    { label: "Plans", href: "landing.html#plans" },
-  ];
   const BOTTOM = [
     { id: "brokers", label: "Brokers", icon: "nav-user-tick.svg", href: "#", base: true, brokers: true },
     { id: "refer", label: "Refer a Friend", icon: "nav-gift.svg", href: "#" },
@@ -63,10 +56,6 @@
           <a class="btn-brand side-nav__pro-btn" href="#">Become Pro</a>
         </div>
         <div class="side-nav__group">${BOTTOM.map(link).join("")}</div>
-        <nav class="side-nav__site" aria-label="Profit.com">
-          <p class="side-nav__site-title">Profit.com</p>
-          ${SITE.map((l) => `<a class="side-nav__site-link" href="${l.href}">${l.label}</a>`).join("")}
-        </nav>
       </div>
     </div>
     <button class="side-nav__toggle" type="button"><img src="assets/nav-toggle-arrow.svg" alt=""></button>`;
@@ -95,44 +84,4 @@
     try { localStorage.setItem(STORE_KEY, collapsed ? "1" : "0"); } catch { /* storage unavailable */ }
   });
 
-  // ---- Phones and small tablets: the side navigation becomes a drawer opened from the top bar
-  const bar = document.querySelector(".topnav");
-  if (!bar) return;
-  const burger = document.createElement("button");
-  burger.type = "button";
-  burger.className = "topnav__burger";
-  burger.setAttribute("aria-controls", "sideNav");
-  burger.setAttribute("aria-expanded", "false");
-  burger.setAttribute("aria-label", "Open menu");
-  burger.innerHTML = '<span></span><span></span><span></span>';
-  bar.prepend(burger);
-
-  const scrim = document.createElement("div");
-  scrim.className = "side-nav-scrim";
-  scrim.hidden = true;
-  nav.after(scrim);
-
-  const setDrawer = (open, fromKeyboard = false) => {
-    nav.classList.toggle("is-open", open);
-    burger.setAttribute("aria-expanded", String(open));
-    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    document.documentElement.classList.toggle("has-drawer", open);
-    if (open) {
-      scrim.hidden = false;
-      requestAnimationFrame(() => scrim.classList.add("is-on"));
-      if (fromKeyboard) nav.querySelector("a")?.focus({ preventScroll: true });
-    } else {
-      scrim.classList.remove("is-on");
-      setTimeout(() => { if (!nav.classList.contains("is-open")) scrim.hidden = true; }, 250);
-    }
-  };
-  // e.detail is 0 for keyboard-triggered clicks: move focus into the drawer only then
-  burger.addEventListener("click", (e) => setDrawer(!nav.classList.contains("is-open"), e.detail === 0));
-  scrim.addEventListener("click", () => setDrawer(false));
-  nav.addEventListener("click", (e) => { if (e.target.closest("a")) setDrawer(false); });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && nav.classList.contains("is-open")) { setDrawer(false); burger.focus(); }
-  });
-  // Leaving the phone layout closes the drawer
-  matchMedia("(min-width: 861px)").addEventListener("change", (e) => { if (e.matches) setDrawer(false); });
 })();

@@ -1,0 +1,29 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="logo+not">
+<g id="Rectangle 4203">
+<path d="M0 13.0394C0 5.83793 5.83792 0 13.0394 0H58.9606C66.1621 0 72 5.83792 72 13.0394V58.9606C72 66.1621 66.1621 72 58.9606 72H13.0394C5.83793 72 0 66.1621 0 58.9606V13.0394Z" fill="url(#paint0_linear_0_498)"/>
+<path d="M13.0391 0.407227H58.9609C65.9371 0.407395 71.5926 6.06291 71.5928 13.0391V58.9609C71.5926 65.9371 65.9371 71.5926 58.9609 71.5928H13.0391C6.06291 71.5926 0.407394 65.9371 0.407227 58.9609V13.0391C0.407394 6.06291 6.06291 0.407393 13.0391 0.407227Z" stroke="url(#paint1_radial_0_498)" stroke-opacity="0.5" stroke-width="0.814961"/>
+<path d="M13.0391 0.407227H58.9609C65.9371 0.407395 71.5926 6.06291 71.5928 13.0391V58.9609C71.5926 65.9371 65.9371 71.5926 58.9609 71.5928H13.0391C6.06291 71.5926 0.407394 65.9371 0.407227 58.9609V13.0391C0.407394 6.06291 6.06291 0.407393 13.0391 0.407227Z" stroke="url(#paint2_radial_0_498)" stroke-opacity="0.5" stroke-width="0.814961"/>
+</g>
+<g id="logo">
+<path id="Vector" d="M29.3764 30.5654L27.38 26.3696H20.544L24.7454 34.7611L29.3764 30.5654Z" fill="white"/>
+<path id="Vector_2" d="M45.5975 26.3572H33.382L16.6705 45.3569H23.3182L27.6955 40.3062L30.101 45.3569H41.5761L43.1143 36.902L44.5093 41.557L48.6821 36.712L45.5975 26.3572ZM36.2333 43.833L32.1629 35.4612L39.1952 27.5803L36.2333 43.833Z" fill="white"/>
+<path id="Vector 362" d="M10.6364 45.1754L14.6991 26.3572L20.4545 35.4628L10.6364 45.1754Z" fill="#FF0000"/>
+<path id="Vector_3" d="M56.0291 26.3696L44.865 42.7608H50.4655L54.716 36.3484L53.0755 45.3456H58.721L62.1819 26.3696H56.0291Z" fill="white"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_498" x1="9.75" y1="-1.18464e-06" x2="60.75" y2="72" gradientUnits="userSpaceOnUse">
+<stop/>
+<stop offset="1" stop-color="#2C2C2C"/>
+</linearGradient>
+<radialGradient id="paint1_radial_0_498" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(6 3) rotate(50.3145) scale(45.8053)">
+<stop stop-color="white"/>
+<stop offset="1" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint2_radial_0_498" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64.5 69.75) rotate(-131.634) scale(45.156)">
+<stop stop-color="white"/>
+<stop offset="1" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

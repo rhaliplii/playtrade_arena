@@ -1,0 +1,244 @@
+/* Market Game join screen — shared by every Arena game (Bull Run, Fast Scan, …).
+   Builds on practice.css (three-column layout, panels, stats, leaderboard rows).
+   Game-specific colours and details live in each game's own stylesheet. */
+
+:root {
+  --mint: #07d8a2;
+  --mint-ink: #06261c;
+  --pink: #ff6b93;
+  --buy: #3be39a;
+  --gain: #17b26a;
+  --loss: #e31b54;
+  --orange: #ff9100;
+}
+
+.gj-main { padding: 0 24px 16px; }
+
+/* Left column scrolls as a whole; its panels keep their natural height */
+.gj-left {
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+.gj-left::-webkit-scrollbar { display: none; }
+.gj-left .pr-panel { flex: none; }
+.gj-left .pr-panel--rules { overflow: visible; }
+.gj-left .rules { overflow: visible; flex: none; }
+.rule svg { width: 18px; height: 18px; flex-shrink: 0; }
+.rule__value b { font-weight: 700; }
+
+/* Mode picker: compact cards; the selected one gets a thin coloured border, glow and radio — no fill.
+   Each option sets its colour with --opt (and --opt-glow). */
+.mode-pick {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+  max-width: 440px;
+}
+.mode-pick--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; max-width: 520px; }
+.mode-pick__opt {
+  --opt: var(--mint);
+  --opt-glow: rgba(7, 216, 162, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 12px 40px 12px 14px;
+  border: 1px solid var(--border-primary);
+  border-radius: 14px;
+  background: #1a1d22;
+  text-align: left;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.mode-pick__opt:hover { border-color: #4a4e56; }
+.mode-pick__opt:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.mode-pick__k { font-size: 13px; line-height: 18px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; color: var(--fg-primary); }
+.mode-pick__sub { font-size: 12px; line-height: 16px; font-weight: 500; color: var(--fg-secondary); white-space: nowrap; }
+.mode-pick__radio {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #5a5f66;
+  border-radius: 50%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.mode-pick__opt[aria-checked="true"] { border-color: var(--opt); box-shadow: 0 0 16px var(--opt-glow); }
+.mode-pick__opt[aria-checked="true"] .mode-pick__k { color: var(--opt); }
+.mode-pick__opt[aria-checked="true"] .mode-pick__radio { border-color: var(--opt); box-shadow: inset 0 0 0 3px #1a1d22, inset 0 0 0 8px var(--opt); }
+.mode-pick__opt--survival { --opt: var(--orange); --opt-glow: rgba(255, 145, 0, 0.2); }
+
+/* Rules card: short summary, full rules live in the dialog */
+.rules-link {
+  align-self: flex-start;
+  display: inline-flex;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: -0.14px;
+  color: var(--mint);
+}
+.rules-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Recent runs */
+.runs { display: flex; flex-direction: column; }
+.run {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 0 13px;
+  border-bottom: 1px solid var(--border-primary);
+  font-size: 12px;
+  line-height: 16px;
+}
+.run:last-child { border-bottom: 0; }
+.run__mode {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+}
+.run__mode--s { background: rgba(255, 107, 147, 0.16); color: var(--pink); }
+.run__mode--p { background: rgba(7, 216, 162, 0.16); color: var(--mint); }
+.run__name { font-weight: 700; }
+.run__date { flex: 1; min-width: 0; font-weight: 500; color: var(--fg-secondary); white-space: nowrap; }
+.run__score { font-weight: 600; color: var(--mint); white-space: nowrap; }
+.run__best {
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  background: rgba(251, 181, 23, 0.16);
+  color: #fbb517;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 700;
+}
+
+/* Center card */
+.gj-card { gap: 20px; padding: 36px 32px 32px; }
+.gj-card .pr-card__head { width: 100%; max-width: 560px; }
+.gj-title { font-size: 44px; line-height: 52px; font-weight: 800; letter-spacing: -1.5px; }
+.gj-preview {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 604px;
+  min-height: 220px;
+  max-height: 460px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  background: #07090c;
+}
+.gj-preview__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none; /* watch-only: the preview is never playable */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.gj-preview__frame.is-ready { opacity: 1; }
+.gj-actions { display: flex; flex-direction: column; align-items: center; gap: 16px; flex-shrink: 0; width: 100%; }
+.gj-start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 360px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--mint);
+  color: var(--mint-ink);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.18px;
+  box-shadow: 0 8px 24px rgba(7, 216, 162, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.gj-start:hover { background: #2ee6b5; transform: translateY(-1px); }
+.gj-start:active { transform: translateY(1px); }
+.gj-start:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* Right column */
+.initials {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--bg-base);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+.initials + .initials { margin-left: -6px; }
+.pr-stat__value--mint { color: var(--mint); }
+.pr-stat--lives { flex-direction: row; align-items: center; justify-content: space-between; height: auto; }
+.pr-stat--lives .pr-lives img { width: 18px; height: 18px; }
+.lb-av {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+}
+.lb-av img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.lb-row .lb-score { color: var(--fg-primary); font-weight: 700; }
+.lb-row.is-you { margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: 10px; background: rgba(7, 216, 162, 0.08); }
+.lb-row.is-you .lb-name { font-weight: 700; }
+
+/* How to play dialog */
+.gj-dialog {
+  width: min(520px, calc(100% - 32px));
+  padding: 24px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--bg-subtle);
+  color: var(--fg-primary);
+  box-shadow: inset 0 0 0 1px var(--border-primary), 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+.gj-dialog::backdrop { background: rgba(5, 6, 8, 0.6); }
+.gj-dialog h2 { margin: 0 0 12px; font-size: 20px; line-height: 26px; font-weight: 700; }
+.gj-dialog p { margin: 0 0 12px; font-size: 14px; line-height: 21px; color: var(--fg-secondary); }
+.gj-dialog p b { color: var(--fg-primary); }
+.gj-dialog__close { margin-top: 8px; width: 100%; }
+
+@media (max-width: 1200px) {
+  .gj-main { padding: 0 16px 16px; }
+  .gj-left { overflow: visible; }
+  .gj-card { min-height: 0; }
+  .gj-preview { flex: none; height: 320px; }
+}
+@media (max-width: 860px) {
+  .gj-title { font-size: 36px; line-height: 44px; }
+  .gj-preview { height: 240px; }
+  .mode-pick { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; max-width: none; }
+  .mode-pick--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .mode-pick__opt { padding: 12px 30px 12px 12px; }
+  .mode-pick__sub { white-space: normal; }
+  .mode-pick__radio { top: 13px; right: 10px; }
+  .gj-start { width: 100%; }
+}
+/* Phones: three modes become a compact segmented row (label only; the border and colour mark the choice) */
+@media (max-width: 600px) {
+  .mode-pick--3 .mode-pick__opt { align-items: center; padding: 12px 6px; text-align: center; }
+  .mode-pick--3 .mode-pick__k { font-size: 12px; letter-spacing: 0.6px; }
+  .mode-pick--3 .mode-pick__sub,
+  .mode-pick--3 .mode-pick__radio { display: none; }
+}

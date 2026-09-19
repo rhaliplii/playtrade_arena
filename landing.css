@@ -838,7 +838,6 @@
   .lp-footer__bottom,
   .lp-footer__legal { flex-direction: column; align-items: flex-start; }
   .lp-footer__social { flex-wrap: wrap; }
-  .topnav__menu { display: none; }
   .lp-compare__line2 { flex-wrap: wrap; justify-content: center; white-space: normal; }
   .lp-pill { padding: 0 14px; }
   /* Table scrolls sideways; the feature column stays pinned */

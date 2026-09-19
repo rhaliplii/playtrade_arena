@@ -1,0 +1,88 @@
+/* Fast Scan join screen — Fast Scan specifics only.
+   Layout and shared parts come from practice.css and game-join.css. */
+
+:root {
+  --scan: #ff3b3b; /* Fast Scan's own accent: the scanner red of its Arena card */
+  --gold: #fbb517;
+}
+.gold, .fs-gold { color: var(--gold); }
+
+/* Mode colours: Practice mint, Classic orange (ranked), Hardcore scanner red */
+.fs-mode--classic { --opt: var(--orange); --opt-glow: rgba(255, 145, 0, 0.2); }
+.fs-mode--hardcore { --opt: var(--scan); --opt-glow: rgba(255, 59, 59, 0.22); }
+
+/* Preview: the attract board sits on a faint red glow, like the Arena card */
+.fs-preview {
+  background:
+    radial-gradient(420px 220px at 50% 0, rgba(255, 59, 59, 0.14), transparent 70%),
+    #07090c;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(255, 59, 59, 0.08);
+}
+
+/* Grid size: one compact segmented row */
+.fs-sizes {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 4px;
+  width: 100%;
+  max-width: 520px;
+  padding: 4px;
+  border-radius: 14px;
+  background: #1a1d22;
+  box-shadow: inset 0 0 0 1px var(--border-primary);
+}
+.fs-size {
+  height: 32px;
+  border-radius: 10px;
+  color: var(--fg-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.fs-size:hover { color: var(--fg-primary); }
+.fs-size[aria-checked="true"] { background: var(--bg-1); color: var(--fg-primary); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.fs-size:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+
+.fs-meta { margin: -6px 0 0; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--fg-secondary); text-align: center; }
+.fs-meta__cost { color: var(--fg-primary); }
+.fs-meta__free { color: var(--mint); }
+
+/* Recent runs: mode badges and failed runs */
+.fs-run--practice { background: rgba(7, 216, 162, 0.16); color: var(--mint); }
+.fs-run--classic { background: rgba(255, 145, 0, 0.16); color: var(--orange); }
+.fs-run--hardcore { background: rgba(255, 59, 59, 0.16); color: var(--scan); }
+.fs-run__fail { color: var(--fg-secondary); font-weight: 500; }
+.fs-empty { margin: 8px 0 4px; font-size: 13px; line-height: 19px; color: var(--fg-secondary); }
+
+/* Stats: coins row */
+.fs-coins { flex-direction: row; align-items: center; justify-content: space-between; height: auto; }
+
+/* Leaderboard */
+.fs-lb-sub { margin: -8px 0 4px; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--fg-secondary); }
+.fs-lb-gap { padding: 2px 0; color: var(--fg-secondary); text-align: center; letter-spacing: 4px; }
+
+/* Guests: sign-in prompts replace personal data */
+.pr-stats.is-guest { display: block; }
+.fs-signin {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(7, 216, 162, 0.08), rgba(7, 216, 162, 0.02));
+  box-shadow: inset 0 0 0 1px rgba(7, 216, 162, 0.2);
+}
+.fs-signin__title { font-size: 15px; line-height: 20px; font-weight: 700; }
+.fs-signin__text { font-size: 13px; line-height: 19px; font-weight: 500; color: var(--fg-secondary); }
+.fs-signin__row { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+.fs-signin__btn { padding: 8px 14px; font-size: 14px; line-height: 18px; font-weight: 600; }
+.fs-signin__link { font-size: 14px; font-weight: 600; color: var(--mint); }
+.fs-signin__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.fs-signin__actions { display: flex; flex-direction: column; gap: 10px; }
+.fs-signin__cta { max-width: none; height: 48px; font-size: 16px; }
+
+@media (max-width: 860px) {
+  .fs-sizes { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none; }
+  .fs-size { height: 34px; }
+}

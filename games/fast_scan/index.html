@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fast Scan · Profit.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  // Launched straight into a run (from the Arena) or as the attract preview: never flash the menu
+  if (/[?&](autostart|preview)\b/.test(location.search)) document.documentElement.classList.add("direct-start");
+  if (/[?&]preview\b/.test(location.search)) document.documentElement.classList.add("is-preview");
+  if (/[?&]autostart\b/.test(location.search) && window.parent !== window) document.documentElement.classList.add("is-embedded");
+</script>
+<style>
+/* ============================================================================
+   FAST SCAN — find the numbers in ascending order, as fast as you can.
+   Arena tokens: dark surfaces, Montserrat, Profit mint for right answers and actions.
+   Fast Scan's own identity: the scanner red of its Arena card and the lens.
+   ========================================================================= */
+:root {
+  --bg: #0a0c0f;
+  --surface: #14171c;
+  --surface-2: #1a1d22;
+  --line: #2d2f34;
+  --line-2: #3d3f47;
+  --text: #fff;
+  --text-2: #888b96;
+  --mint: #07d8a2;
+  --mint-soft: rgba(7, 216, 162, 0.14);
+  --mint-ink: #06261c;
+  --loss: #f63d68;
+  --loss-soft: rgba(246, 61, 104, 0.16);
+  --scan: #ff3b3b;
+  --scan-soft: rgba(255, 59, 59, 0.14);
+  --orange: #ff9100;
+  --gold: #fbb517;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(700px 360px at 50% -120px, rgba(255, 59, 59, 0.10), transparent 70%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Montserrat", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+[hidden] { display: none !important; }
+
+/* ---------- Game screen ---------- */
+.game {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 720px;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 16px 16px max(16px, env(safe-area-inset-bottom));
+}
+.hud { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.chip svg { width: 16px; height: 16px; flex: none; }
+.chip__lbl { font-size: 12px; font-weight: 600; color: var(--text-2); }
+.chip--mode { font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; }
+.chip--mode i { width: 8px; height: 8px; border-radius: 50%; background: var(--mode-color, var(--mint)); }
+.chip--time { position: relative; overflow: hidden; min-width: 72px; justify-content: center; }
+.chip--time .bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--mint); transform-origin: left; }
+.chip--time.is-low { color: var(--loss); }
+.chip--time.is-low .bar { background: var(--loss); }
+.chip--mistakes.is-low { color: var(--loss); box-shadow: inset 0 0 0 1px rgba(246, 61, 104, 0.5); }
+.chip--wallet { gap: 12px; }
+.wallet__part { display: flex; align-items: center; gap: 5px; }
+.wallet__part:not([hidden]) + .wallet__part { padding-left: 12px; border-left: 1px solid var(--line); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Streak badge sits at the right end of the "Find" strip */
+.target-row { position: relative; flex: none; }
+.target-row .target { padding-inline: 84px; }
+.streak {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: rgba(251, 181, 23, 0.12);
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transform: translateY(-50%) scale(0.9);
+  transition: opacity 0.2s, transform 0.2s var(--ease);
+  pointer-events: none;
+}
+.streak.is-on { opacity: 1; transform: translateY(-50%); }
+.hud__spacer { flex: 1; }
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.icon-btn:hover { background: var(--surface-2); }
+.icon-btn svg { width: 18px; height: 18px; }
+.shake { animation: shake 0.35s; }
+@keyframes shake { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+
+/* Target strip: what to find next */
+.target {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 8px 14px;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.target__next {
+  display: grid;
+  place-items: center;
+  min-width: 40px;
+  height: 36px;
+  padding: 0 8px;
+  border-radius: 10px;
+  background: var(--mint-soft);
+  box-shadow: inset 0 0 0 1px rgba(7, 216, 162, 0.45);
+  color: var(--mint);
+  font-size: 20px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.target__q {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--surface-2);
+  color: #5a5f66;
+  font-weight: 700;
+}
+.target__arrow { color: #5a5f66; }
+.target--hardcore { color: var(--text); }
+.target--hardcore b { color: var(--scan); }
+.progress { height: 4px; border-radius: 4px; background: var(--surface-2); overflow: hidden; flex: none; }
+.progress i { display: block; height: 100%; width: 0; background: var(--mint); transition: width 0.2s var(--ease); }
+
+/* The board: always square, as large as the space allows */
+.board-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 1;
+  min-height: 0;
+  container-type: size;
+}
+.board {
+  --n: 5;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: var(--gap, 8px);
+  width: min(100cqw, 100cqh);
+  aspect-ratio: 1;
+  transition: filter 0.2s;
+}
+.board.is-hidden { filter: blur(14px); pointer-events: none; }
+.cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  border-radius: clamp(6px, calc(min(100cqw, 100cqh) / var(--n) * 0.18), 16px);
+  background: linear-gradient(180deg, #1c1f25, #15181d);
+  box-shadow: inset 0 0 0 1px var(--line), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  font-size: calc(min(100cqw, 100cqh) / var(--n) * 0.36);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  transition: background 0.15s, box-shadow 0.15s, color 0.2s, transform 0.08s;
+}
+.cell:hover { box-shadow: inset 0 0 0 1px var(--line-2), inset 0 1px 0 rgba(255, 255, 255, 0.05); }
+.cell:active { transform: scale(0.96); }
+.cell.is-found {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(7, 216, 162, 0.16);
+  color: rgba(7, 216, 162, 0.38);
+  pointer-events: none;
+}
+.cell.is-hit { animation: hit 0.35s var(--ease); }
+@keyframes hit { 0% { background: var(--mint); color: var(--mint-ink); transform: scale(1.04); } 100% { background: transparent; } }
+.cell.is-wrong { animation: wrong 0.45s; }
+@keyframes wrong {
+  0% { background: var(--loss-soft); box-shadow: inset 0 0 0 2px var(--loss); color: var(--loss); }
+  20%, 60% { transform: translateX(-3px); }
+  40%, 80% { transform: translateX(3px); }
+}
+.cell.is-hint::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px var(--gold), 0 0 18px rgba(251, 181, 23, 0.5);
+  animation: pulse 0.9s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: 0.35; } }
+
+/* Hints */
+.hints { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: none; }
+.hints.is-single { grid-template-columns: 1fr; }
+.hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 14px;
+  font-weight: 700;
+}
+.hint:hover:not(:disabled) { background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line-2); }
+.hint:disabled { opacity: 0.4; cursor: default; }
+.hint__cost { display: flex; align-items: center; gap: 3px; color: var(--gold); font-size: 13px; }
+.hints-off { padding: 12px; border-radius: 14px; background: var(--scan-soft); color: #ff8080; font-size: 13px; font-weight: 600; text-align: center; flex: none; }
+
+/* Floating +coins / streak toast */
+.toast {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  z-index: 3;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: rgba(10, 12, 15, 0.9);
+  box-shadow: inset 0 0 0 1px rgba(251, 181, 23, 0.5);
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 800;
+  transform: translate(-50%, -6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.3s var(--ease);
+}
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Overlays ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(6, 7, 9, 0.72);
+  backdrop-filter: blur(6px);
+}
+.countdown { background: rgba(6, 7, 9, 0.35); backdrop-filter: none; pointer-events: none; }
+.countdown b {
+  font-size: 96px;
+  font-weight: 800;
+  letter-spacing: -3px;
+  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  animation: count 0.9s var(--ease) both;
+}
+.countdown b.go { color: var(--mint); }
+@keyframes count { 0% { opacity: 0; transform: scale(1.4); } 25% { opacity: 1; transform: none; } 85% { opacity: 1; } 100% { opacity: 0; transform: scale(0.85); } }
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: min(440px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 28px 24px 24px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #1a1d22, #121418);
+  box-shadow: inset 0 0 0 1px var(--line), 0 30px 80px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  animation: rise 0.3s var(--ease);
+}
+@keyframes rise { from { opacity: 0; transform: translateY(12px) scale(0.98); } }
+.panel__eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: var(--text-2); }
+.panel__eyebrow.is-win { color: var(--mint); }
+.panel__eyebrow.is-fail { color: var(--loss); }
+.panel__title { margin: -6px 0 0; font-size: 26px; line-height: 32px; font-weight: 800; letter-spacing: -0.6px; }
+.panel__big { font-size: 56px; line-height: 1; font-weight: 800; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
+.panel__sub { margin: -4px 0 0; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text-2); }
+.badge-best {
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(251, 181, 23, 0.16);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; width: 100%; }
+.tile { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 12px; border-radius: 14px; background: rgba(255, 255, 255, 0.04); text-align: left; }
+.tile span { font-size: 12px; font-weight: 600; color: var(--text-2); }
+.tile b { font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.tile b.gold { color: var(--gold); }
+.tile b.mint { color: var(--mint); }
+.actions { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.btn--primary { background: var(--mint); color: var(--mint-ink); box-shadow: 0 8px 24px rgba(7, 216, 162, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.35); }
+.btn--primary:hover { background: #2ee6b5; }
+.btn--ghost { background: rgba(255, 255, 255, 0.06); }
+.btn--ghost:hover { background: rgba(255, 255, 255, 0.1); }
+.btn small { font-size: 13px; font-weight: 700; opacity: 0.75; }
+
+/* Stand-alone menu (only when the page is opened directly) */
+.menu__opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.menu__opt, .menu__size {
+  padding: 10px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 13px;
+  font-weight: 700;
+}
+.menu__opt[aria-checked="true"], .menu__size[aria-checked="true"] { box-shadow: inset 0 0 0 1px var(--mint); color: var(--mint); }
+.menu__sizes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; }
+html.direct-start #menu { display: none !important; }
+
+/* ---------- Attract preview (join screen) ---------- */
+html.is-preview body { background: radial-gradient(520px 300px at 50% 0, rgba(255, 59, 59, 0.16), transparent 70%), #07090c; }
+html.is-preview .game { max-width: none; padding: 16px 20px 20px; gap: 10px; }
+html.is-preview .hud, html.is-preview .hints, html.is-preview .hints-off, html.is-preview .progress { display: none !important; }
+/* The preview is watch-only: none of the game's panels (pause, results, countdown, menu) may show in it */
+html.is-preview .overlay { display: none !important; }
+html.is-preview .board.is-hidden { filter: none; }
+html.is-preview .target { min-height: 44px; }
+.lens {
+  position: absolute;
+  z-index: 2;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--scan), 0 0 0 10px rgba(255, 59, 59, 0.12), 0 0 36px rgba(255, 59, 59, 0.45);
+  pointer-events: none;
+  opacity: 0;
+  transition: left 0.3s var(--ease), top 0.3s var(--ease), opacity 0.2s;
+}
+.lens::after { /* the handle of the magnifying glass */
+  content: "";
+  position: absolute;
+  right: -30%;
+  bottom: -30%;
+  width: 34%;
+  height: 12%;
+  border-radius: 6px;
+  background: var(--scan);
+  transform: rotate(45deg);
+  transform-origin: left center;
+}
+.lens.is-on { opacity: 1; }
+.pv-cleared {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  background: rgba(7, 9, 12, 0.55);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.pv-cleared.is-on { opacity: 1; }
+.pv-cleared span { color: var(--mint); }
+
+@media (max-width: 520px) {
+  .game { padding: 12px 12px max(12px, env(safe-area-inset-bottom)); gap: 10px; }
+  .chip { height: 34px; padding: 0 10px; font-size: 13px; }
+  .chip__lbl { display: none; }
+  .chip--time { min-width: 60px; }
+  .chip--wallet { gap: 8px; }
+  .wallet__part:not([hidden]) + .wallet__part { padding-left: 8px; }
+  .chip--wallet { padding-left: 10px; }
+  .streak { right: 8px; height: 28px; padding: 0 8px; font-size: 13px; }
+  .target-row .target { padding-inline: 66px; font-size: 13px; }
+  .target__togo { display: none; }
+  .hud { gap: 6px; }
+  html.is-embedded .chip--mode { display: none; } /* the Arena player's title bar already names the mode */
+  .hint { height: 42px; font-size: 13px; }
+  .panel__big { font-size: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<main class="game" id="game">
+  <div class="hud" id="hud">
+    <span class="chip chip--mode" id="modeChip"><i></i><span id="modeLbl">Practice · 5×5</span></span>
+    <span class="chip" title="Time elapsed">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="9" r="5.5"/><path d="M8 6.5V9l1.6 1.2M6.5 1.5h3"/></svg>
+      <span id="elapsed">0.0s</span>
+    </span>
+    <span class="chip chip--time" id="timeChip" title="Time left" hidden><span id="timeLeft">0:18</span><span class="bar" id="timeBar"></span></span>
+    <span class="chip chip--mistakes" id="mistakesChip" title="Mistakes left" hidden>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      <span id="mistakesLeft">4</span><span class="chip__lbl">mistakes</span>
+    </span>
+    <span class="hud__spacer"></span>
+    <span class="chip chip--wallet" id="walletChip">
+      <span class="wallet__part" id="livesPart" title="Lives left"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.2S2 10.6 2 6.3A3.2 3.2 0 0 1 8 4.4a3.2 3.2 0 0 1 6 1.9c0 4.3-6 7.9-6 7.9Z" fill="#f63d68"/></svg><span id="lives">5</span><span class="sr-only"> lives</span></span>
+      <span class="wallet__part" title="Coins"><span aria-hidden="true">🪙</span><span id="coins">0</span><span class="sr-only"> coins</span></span>
+    </span>
+    <button class="icon-btn" id="pauseBtn" type="button" aria-label="Pause (P)"><svg viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><rect x="4" y="3.5" width="3.4" height="11" rx="1"/><rect x="10.6" y="3.5" width="3.4" height="11" rx="1"/></svg></button>
+  </div>
+
+  <div class="target-row">
+    <div class="target" id="target" aria-live="polite"></div>
+    <span class="streak" id="streakChip" aria-live="polite">🔥 <span id="streakN">x3</span></span>
+  </div>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+  <div class="board-wrap" id="boardWrap">
+    <div class="board" id="board" role="grid" aria-label="Number grid"></div>
+    <span class="lens" id="lens" aria-hidden="true"></span>
+    <span class="toast" id="toast"></span>
+    <div class="pv-cleared" id="pvCleared" hidden><div>Cleared in <span id="pvTime">0.0s</span></div></div>
+  </div>
+
+  <div class="hints" id="hints">
+    <button class="hint" id="hintReveal" type="button">Reveal next <span class="hint__cost">🪙 25</span></button>
+    <button class="hint" id="hintTime" type="button">+3 seconds <span class="hint__cost">🪙 25</span></button>
+  </div>
+  <p class="hints-off" id="hintsOff" hidden>Hints are off in Hardcore — find the smallest number left.</p>
+</main>
+
+<div class="overlay countdown" id="countdown" hidden><b id="countN">3</b></div>
+
+<div class="overlay" id="pause" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
+    <p class="panel__eyebrow">Paused</p>
+    <h2 class="panel__title" id="pauseTitle">Take a breath</h2>
+    <p class="panel__sub">The clock is stopped and the board is hidden.</p>
+    <div class="actions">
+      <button class="btn btn--primary" id="resumeBtn" type="button">Resume</button>
+      <button class="btn btn--ghost" id="restartBtn" type="button">Restart</button>
+      <button class="btn btn--ghost" id="quitBtn" type="button">Exit game</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="end" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="endTitle" id="endPanel"></div>
+</div>
+
+<div class="overlay" id="menu">
+  <div class="panel" role="dialog" aria-labelledby="menuTitle">
+    <p class="panel__eyebrow is-win">Profit.com Market Games</p>
+    <h1 class="panel__title" id="menuTitle">Fast Scan</h1>
+    <p class="panel__sub">Tap the numbers in ascending order, as fast as you can.</p>
+    <div class="menu__opts" role="radiogroup" aria-label="Mode" id="menuModes"></div>
+    <div class="menu__sizes" role="radiogroup" aria-label="Grid size" id="menuSizes"></div>
+    <div class="actions"><button class="btn btn--primary" id="menuStart" type="button">Start</button></div>
+  </div>
+</div>
+
+<script src="fast-scan-core.js"></script>
+<script>
+(() => {
+  const FS = window.FastScan;
+  const { CONFIG, MODES } = FS;
+  const $ = (id) => document.getElementById(id);
+  const params = new URLSearchParams(location.search);
+  const PREVIEW = params.has("preview");
+  const EMBEDDED = params.has("autostart") && window.parent !== window;
+  const GUEST = FS.isGuest();
+
+  // ---------- Run state ----------
+  const S = {
+    mode: MODES[params.get("mode")] ? params.get("mode") : "practice",
+    size: CONFIG.SIZES.includes(Number(params.get("size"))) ? Number(params.get("size")) : FS.prefs().size,
+    numbers: [], order: [], idx: 0, mistakes: 0,
+    startAt: 0, pausedAt: 0, pausedTotal: 0, running: false, paused: false, over: false,
+    timeLimit: 0, maxMistakes: 0,
+    streak: 0, bestStreak: 0, streaks: 0, lastHit: 0,
+  };
+  if (GUEST && MODES[S.mode].ranked) S.mode = "practice"; // ranked runs need an account
+
+  const post = (msg) => { if (window.parent !== window) window.parent.postMessage({ source: "fast_scan", ...msg }, "*"); };
+  const elapsedMs = () => !S.startAt ? 0 : (S.paused ? S.pausedAt : performance.now()) - S.startAt - S.pausedTotal;
+  const ranked = () => MODES[S.mode].ranked;
+
+  // ---------- Board ----------
+  const board = $("board");
+  const buildBoard = () => {
+    S.numbers = FS.generateNumbers(S.size, S.mode);
+    S.order = [...S.numbers].sort((a, b) => a - b);
+    board.style.setProperty("--n", S.size);
+    board.style.setProperty("--gap", S.size <= 4 ? "10px" : S.size <= 6 ? "8px" : S.size <= 8 ? "6px" : "5px");
+    board.innerHTML = S.numbers.map((n) => `<button class="cell" type="button" role="gridcell" data-n="${n}">${n}</button>`).join("");
+  };
+  const cellFor = (n) => board.querySelector(`.cell[data-n="${n}"]`);
+  // One-shot flashes clear themselves so they can replay on the next tap
+  board.addEventListener("animationend", (e) => e.target.classList.remove("is-hit", "is-wrong"));
+
+  // ---------- HUD ----------
+  const renderTarget = () => {
+    const t = $("target");
+    if (S.idx >= S.order.length) { t.innerHTML = "Board cleared"; return; }
+    if (S.mode === "hardcore") {
+      t.className = "target target--hardcore";
+      t.innerHTML = `<span>Find the <b>smallest</b> number left<span class="target__togo"> · ${S.order.length - S.idx} to go</span></span>`;
+    } else {
+      t.className = "target";
+      t.innerHTML = `Find <span class="target__next">${S.order[S.idx]}</span><span class="target__arrow" aria-hidden="true">→</span><span class="target__q" aria-hidden="true">?</span><span class="target__q" aria-hidden="true">?</span>`;
+    }
+    $("progress").style.width = `${(S.idx / S.order.length) * 100}%`;
+  };
+  const renderHud = () => {
+    const m = MODES[S.mode];
+    $("modeLbl").textContent = `${m.label} · ${S.size}×${S.size}`;
+    $("modeChip").style.setProperty("--mode-color", S.mode === "practice" ? "var(--mint)" : S.mode === "classic" ? "var(--orange)" : "var(--scan)");
+    $("timeChip").hidden = !S.timeLimit;
+    $("mistakesChip").hidden = !S.maxMistakes;
+    $("walletChip").hidden = GUEST;
+    // Lives only matter for ranked runs (Practice is free)
+    $("livesPart").hidden = !ranked();
+    $("lives").textContent = FS.wallet().lives;
+    $("coins").textContent = FS.wallet().coins;
+    renderMistakes();
+    renderHints();
+  };
+  const renderMistakes = () => {
+    if (!S.maxMistakes) return;
+    const left = S.maxMistakes - S.mistakes;
+    $("mistakesLeft").textContent = left;
+    $("mistakesChip").classList.toggle("is-low", left <= 1);
+  };
+  const renderHints = () => {
+    const hardcore = S.mode === "hardcore";
+    $("hintsOff").hidden = !hardcore || PREVIEW;
+    $("hints").hidden = hardcore || GUEST || PREVIEW;
+    $("hintTime").hidden = !S.timeLimit;
+    $("hints").classList.toggle("is-single", !S.timeLimit);
+    const coins = FS.wallet().coins;
+    $("hintReveal").disabled = coins < CONFIG.HINT_COST || !S.running;
+    $("hintTime").disabled = coins < CONFIG.HINT_COST || !S.running;
+  };
+  const renderStreak = () => {
+    $("streakChip").classList.toggle("is-on", S.streak >= CONFIG.STREAK_MIN);
+    $("streakN").textContent = `x${S.streak}`;
+  };
+  let toastTimer = 0;
+  const toast = (text) => {
+    const t = $("toast");
+    t.textContent = text;
+    t.classList.add("is-on");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("is-on"), 900);
+  };
+  const shake = (el) => { el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake"); };
+
+  // Clock: elapsed time, time left, time-out (a steady 100 ms beat; the display shows tenths)
+  let clock = 0;
+  const startClock = () => { clearInterval(clock); clock = setInterval(tick, 100); };
+  const tick = () => {
+    if (!S.running || S.paused) return;
+    const ms = elapsedMs();
+    $("elapsed").textContent = FS.fmtTime(ms);
+    if (S.timeLimit) {
+      const left = S.timeLimit * 1000 - ms;
+      $("timeLeft").textContent = FS.fmtClock(left);
+      $("timeBar").style.transform = `scaleX(${Math.max(0, left / (S.timeLimit * 1000))})`;
+      $("timeChip").classList.toggle("is-low", left < 5000);
+      if (left <= 0) fail("Time's up!");
+    }
+  };
+
+  // ---------- Taps ----------
+  board.addEventListener("click", (e) => {
+    const cell = e.target.closest(".cell");
+    if (!cell || !S.running || S.paused || PREVIEW) return;
+    select(Number(cell.dataset.n), cell);
+  });
+  const select = (n, cell) => {
+    if (n === S.order[S.idx]) {
+      cell.classList.remove("is-hint");
+      cell.classList.add("is-found", "is-hit");
+      S.idx++;
+      // A streak: right taps no more than STREAK_WINDOW seconds apart
+      const now = performance.now();
+      S.streak = S.lastHit && now - S.lastHit <= CONFIG.STREAK_WINDOW * 1000 ? S.streak + 1 : 1;
+      S.lastHit = now;
+      S.bestStreak = Math.max(S.bestStreak, S.streak);
+      if (S.streak === CONFIG.STREAK_MIN) { S.streaks++; if (ranked() && !GUEST && !PREVIEW) toast(`🔥 Streak · +${CONFIG.REWARDS.STREAK_BONUS} coins`); }
+      renderStreak();
+      renderTarget();
+      // The attract preview loops on its own and never records a run or opens the results panel
+      if (S.idx >= S.order.length && !PREVIEW) complete();
+    } else {
+      S.mistakes++;
+      S.streak = 0;
+      S.lastHit = 0;
+      renderStreak();
+      cell.classList.remove("is-wrong"); void cell.offsetWidth; cell.classList.add("is-wrong");
+      if (S.maxMistakes) {
+        renderMistakes();
+        shake($("mistakesChip"));
+        if (S.mistakes >= S.maxMistakes && !PREVIEW) fail("Too many mistakes!");
+      }
+    }
+  };
+
+  // Hints (cost coins; never in Hardcore)
+  $("hintReveal").addEventListener("click", () => {
+    if (!S.running || !FS.spendCoins(CONFIG.HINT_COST)) return;
+    const cell = cellFor(S.order[S.idx]);
+    cell?.classList.add("is-hint");
+    setTimeout(() => cell?.classList.remove("is-hint"), 3000);
+    $("coins").textContent = FS.wallet().coins;
+    renderHints();
+  });
+  $("hintTime").addEventListener("click", () => {
+    if (!S.running || !S.timeLimit || !FS.spendCoins(CONFIG.HINT_COST)) return;
+    S.timeLimit += CONFIG.EXTRA_TIME;
+    toast(`+${CONFIG.EXTRA_TIME} seconds`);
+    $("coins").textContent = FS.wallet().coins;
+    renderHints();
+  });
+
+  // ---------- Run lifecycle ----------
+  let countTimer = 0;
+  const start = () => {
+    clearTimeout(countTimer);
+    $("end").hidden = true;
+    $("pause").hidden = true;
+    $("menu").hidden = true;
+    const lim = FS.limitsFor(S.mode, S.size);
+    Object.assign(S, lim, { idx: 0, mistakes: 0, startAt: 0, pausedTotal: 0, running: false, paused: false, over: false, streak: 0, bestStreak: 0, streaks: 0, lastHit: 0 });
+    // Ranked runs cost one life
+    if (ranked() && !GUEST && !FS.spendLife()) return showNoLives();
+    buildBoard();
+    board.classList.add("is-hidden");
+    renderHud();
+    renderTarget();
+    renderStreak();
+    $("elapsed").textContent = "0.0s";
+    if (S.timeLimit) { $("timeLeft").textContent = FS.fmtClock(S.timeLimit * 1000); $("timeBar").style.transform = "scaleX(1)"; $("timeChip").classList.remove("is-low"); }
+    post({ type: "wallet" });
+    // 3 · 2 · 1 · GO, then the clock starts
+    const steps = ["3", "2", "1", "GO"];
+    const cd = $("countdown");
+    cd.hidden = false;
+    const step = (i) => {
+      const b = $("countN");
+      b.textContent = steps[i];
+      b.className = steps[i] === "GO" ? "go" : "";
+      b.style.animation = "none"; void b.offsetWidth; b.style.animation = "";
+      if (i === steps.length - 1) {
+        board.classList.remove("is-hidden");
+        S.running = true;
+        S.startAt = performance.now();
+        renderHints();
+        startClock();
+        countTimer = setTimeout(() => (cd.hidden = true), 600);
+      } else countTimer = setTimeout(() => step(i + 1), 650);
+    };
+    step(0);
+  };
+
+  const finish = () => { S.running = false; S.over = true; clearInterval(clock); renderHints(); };
+  const record = (completed, reason) => {
+    const ms = Math.round(elapsedMs());
+    const attempts = S.idx + S.mistakes;
+    const run = {
+      id: Date.now(), at: Date.now(), mode: S.mode, size: S.size, completed, reason: reason || null,
+      timeMs: ms, found: S.idx, total: S.order.length, mistakes: S.mistakes,
+      accuracy: attempts ? Math.round((S.idx / attempts) * 100) : 100,
+      bestStreak: S.bestStreak, streaks: S.streaks, coins: 0,
+    };
+    if (completed && ranked() && !GUEST) { run.coins = FS.coinsFor(run); FS.addCoins(run.coins); }
+    const prevBest = GUEST ? null : FS.best(S.mode, S.size);
+    if (!GUEST) FS.addRun(run);
+    post({ type: "run", run });
+    return { run, newBest: completed && !GUEST && (!prevBest || ms < prevBest.timeMs) };
+  };
+
+  const complete = () => {
+    finish();
+    const { run, newBest } = record(true);
+    const ev = FS.evaluate(run.timeMs / 1000, run.accuracy, S.size);
+    const rank = ranked() && !GUEST ? FS.leaderboard(S.mode, S.size, { name: FS.PLAYER.name, timeMs: FS.best(S.mode, S.size).timeMs, accuracy: run.accuracy }) : null;
+    const you = rank?.rows.find((r) => r.you);
+    showEnd(`
+      <p class="panel__eyebrow is-win">${MODES[S.mode].label} · ${S.size}×${S.size} cleared</p>
+      <div class="panel__big">${FS.fmtTime(run.timeMs)}</div>
+      ${newBest ? '<span class="badge-best">New personal best</span>' : ""}
+      <h2 class="panel__title" id="endTitle">${ev.title}</h2>
+      <p class="panel__sub">${ev.sub}</p>
+      <div class="tiles">
+        <div class="tile"><span>Accuracy</span><b class="${run.accuracy === 100 ? "mint" : ""}">${run.accuracy}%</b></div>
+        <div class="tile"><span>Mistakes</span><b>${run.mistakes}</b></div>
+        <div class="tile"><span>Best streak</span><b>${run.bestStreak} 🔥</b></div>
+        ${ranked() && !GUEST
+          ? `<div class="tile"><span>Coins earned</span><b class="gold">+${run.coins}</b></div>`
+          : `<div class="tile"><span>Board</span><b>${run.total} numbers</b></div>`}
+        ${you ? `<div class="tile" style="grid-column:span 2"><span>Leaderboard · ${MODES[S.mode].label} ${S.size}×${S.size}</span><b>#${you.rank} of ${rank.players} players</b></div>` : ""}
+      </div>
+      ${endActions()}`);
+  };
+
+  const fail = (reason) => {
+    if (S.over) return;
+    finish();
+    const { run } = record(false, reason);
+    cellFor(S.order[S.idx])?.classList.add("is-hint"); // show where the next number was
+    showEnd(`
+      <p class="panel__eyebrow is-fail">${MODES[S.mode].label} · ${S.size}×${S.size}</p>
+      <h2 class="panel__title" id="endTitle">${reason}</h2>
+      <p class="panel__sub">${reason === "Time's up!" ? "The clock ran out before the board was cleared." : `You reached the limit of ${S.maxMistakes} mistakes.`}</p>
+      <div class="tiles">
+        <div class="tile"><span>Found</span><b>${run.found} / ${run.total}</b></div>
+        <div class="tile"><span>Accuracy</span><b>${run.found + run.mistakes ? `${run.accuracy}%` : "—"}</b></div>
+        <div class="tile"><span>Time</span><b>${FS.fmtTime(run.timeMs)}</b></div>
+        <div class="tile"><span>Best streak</span><b>${run.bestStreak} 🔥</b></div>
+      </div>
+      ${endActions("Try again")}`);
+  };
+
+  const endActions = (again = "Play again") => {
+    const cost = ranked() && !GUEST ? ` <small>· 1 ❤️</small>` : "";
+    return `<div class="actions">
+      <button class="btn btn--primary" type="button" data-act="again">${again}${cost}</button>
+      <button class="btn btn--ghost" type="button" data-act="exit">${EMBEDDED ? "Exit game" : "Change settings"}</button>
+    </div>`;
+  };
+  const showEnd = (html) => {
+    // Let the last tap / time-out register on the board before the panel covers it
+    setTimeout(() => {
+      $("endPanel").innerHTML = html;
+      $("end").hidden = false;
+      $("endPanel").querySelector("[data-act=again]")?.focus();
+    }, 450);
+  };
+  const showNoLives = () => {
+    const w = FS.wallet();
+    $("endPanel").innerHTML = `
+      <p class="panel__eyebrow is-fail">No lives left</p>
+      <h2 class="panel__title" id="endTitle">Out of lives</h2>
+      <p class="panel__sub">Classic and Hardcore runs cost a life. Your next life arrives in <b id="lifeIn">${FS.fmtClock(w.nextLifeIn)}</b> — Practice is always free.</p>
+      <div class="actions">
+        <button class="btn btn--primary" type="button" data-act="practice">Play Practice</button>
+        <button class="btn btn--ghost" type="button" data-act="exit">${EMBEDDED ? "Exit game" : "Change settings"}</button>
+      </div>`;
+    $("end").hidden = false;
+    const iv = setInterval(() => { const el = $("lifeIn"); if (!el) return clearInterval(iv); el.textContent = FS.fmtClock(FS.wallet().nextLifeIn); }, 1000);
+  };
+  $("end").addEventListener("click", (e) => {
+    const act = e.target.closest("[data-act]")?.dataset.act;
+    if (act === "again") start();
+    else if (act === "practice") { S.mode = "practice"; start(); }
+    else if (act === "exit") exitGame();
+  });
+
+  // ---------- Pause ----------
+  const setPaused = (p) => {
+    if (PREVIEW || !S.running || S.paused === p) return; // the attract preview never pauses
+    S.paused = p;
+    if (p) S.pausedAt = performance.now();
+    else S.pausedTotal += performance.now() - S.pausedAt;
+    board.classList.toggle("is-hidden", p);
+    $("pause").hidden = !p;
+    if (p) $("resumeBtn").focus();
+  };
+  $("pauseBtn").addEventListener("click", () => setPaused(true));
+  $("resumeBtn").addEventListener("click", () => setPaused(false));
+  $("restartBtn").addEventListener("click", () => { S.running = false; start(); });
+  $("quitBtn").addEventListener("click", exitGame);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.key === "p" || e.key === "P") { e.preventDefault(); if (S.running) setPaused(!S.paused); }
+  });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) setPaused(true); });
+
+  function exitGame() {
+    S.running = false;
+    if (EMBEDDED) post({ type: "exit" });
+    else { $("end").hidden = true; $("pause").hidden = true; openMenu(); }
+  }
+
+  // ---------- Stand-alone menu ----------
+  const openMenu = () => {
+    const modes = Object.entries(MODES).filter(([k, m]) => !(GUEST && m.ranked));
+    $("menuModes").innerHTML = modes.map(([k, m]) => `<button class="menu__opt" role="radio" type="button" data-mode="${k}" aria-checked="${k === S.mode}">${m.label}</button>`).join("");
+    $("menuSizes").innerHTML = CONFIG.SIZES.map((n) => `<button class="menu__size" role="radio" type="button" data-size="${n}" aria-checked="${n === S.size}">${n}×${n}</button>`).join("");
+    $("menu").hidden = false;
+  };
+  $("menu").addEventListener("click", (e) => {
+    const m = e.target.closest("[data-mode]"), z = e.target.closest("[data-size]");
+    if (m) { S.mode = m.dataset.mode; $("menuModes").querySelectorAll("[data-mode]").forEach((b) => b.setAttribute("aria-checked", String(b === m))); }
+    if (z) { S.size = Number(z.dataset.size); FS.savePrefs({ size: S.size }); $("menuSizes").querySelectorAll("[data-size]").forEach((b) => b.setAttribute("aria-checked", String(b === z))); }
+  });
+  $("menuStart").addEventListener("click", start);
+
+  // ---------- Attract preview: the board solving itself under the lens ----------
+  const runPreview = () => {
+    S.mode = "practice"; S.size = 5;
+    Object.assign(S, { timeLimit: 0, maxMistakes: 0, idx: 0, mistakes: 0, pausedTotal: 0, paused: false, over: false, streak: 0, lastHit: 0 });
+    buildBoard();
+    renderTarget();
+    $("pvCleared").hidden = true;
+    $("pvCleared").classList.remove("is-on");
+    S.running = true;
+    S.startAt = performance.now();
+    const lens = $("lens");
+    const place = (cell) => {
+      const wrap = $("boardWrap").getBoundingClientRect(); // measured each move: the preview can resize
+      const r = cell.getBoundingClientRect();
+      const d = r.width * 1.12;
+      Object.assign(lens.style, { width: `${d}px`, height: `${d}px`, left: `${r.left - wrap.left + r.width / 2 - d / 2}px`, top: `${r.top - wrap.top + r.height / 2 - d / 2}px` });
+      lens.classList.add("is-on");
+    };
+    const wrongAt = 6 + Math.floor(Math.random() * 10); // one slip per board, like a real player
+    const step = () => {
+      if (S.idx >= S.order.length) {
+        lens.classList.remove("is-on");
+        $("pvTime").textContent = FS.fmtTime(elapsedMs());
+        $("pvCleared").hidden = false;
+        requestAnimationFrame(() => $("pvCleared").classList.add("is-on"));
+        return setTimeout(runPreview, 1800);
+      }
+      const target = cellFor(S.order[S.idx]);
+      place(target);
+      setTimeout(() => {
+        if (S.idx === wrongAt && S.mistakes === 0) {
+          const other = [...board.querySelectorAll(".cell:not(.is-found)")].find((c) => c !== target);
+          if (other) select(Number(other.dataset.n), other);
+          return setTimeout(step, 420);
+        }
+        select(S.order[S.idx], target);
+        setTimeout(step, 180 + Math.random() * 160);
+      }, 260 + Math.random() * 120);
+    };
+    setTimeout(step, 500);
+  };
+
+  // ---------- Boot ----------
+  if (EMBEDDED) $("quitBtn").textContent = "Exit game";
+  if (PREVIEW) { runPreview(); }
+  else if (params.has("autostart")) start();
+  else { renderHud(); openMenu(); }
+})();
+</script>
+</body>
+</html>
