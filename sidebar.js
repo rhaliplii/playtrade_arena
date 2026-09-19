@@ -8,9 +8,9 @@
 
   const MAIN = [
     { id: "tournaments", label: "Tournaments", icon: "nav-cup.svg", href: "index.html", whiteIcon: true },
-    { id: "games", label: "Mini Games", icon: "nav-game.svg", href: "index.html#games-title", badge: 1 },
+    { id: "games", label: "Market Games", icon: "nav-game.svg", href: "index.html#games-title", badge: 1 },
     { id: "stats", label: "My Stats", icon: "nav-crown.svg", href: "#" },
-    { id: "leaderboard", label: "Leaderboard", icon: "nav-ranking.svg", href: "#" },
+    { id: "leaderboard", label: "Leaderboard", icon: "nav-ranking.svg", href: "index.html#top-title" },
     { id: "missions", label: "Missions", icon: "nav-target.svg", href: "index.html#missions-title" },
     { id: "toolbox", label: "Toolbox", tools: true, href: "#" },
     { id: "toolshop", label: "Toolshop", icon: "nav-shop.svg", href: "#" },

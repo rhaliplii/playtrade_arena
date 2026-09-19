@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profit.com — Discover Markets, Practice Trading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body class="lp" data-nav-active="none">
+
+  <!-- ============ Top navigation (shared with the arena) ============ -->
+  <header class="topnav">
+    <a href="landing.html" aria-label="Profit.com home"><img class="topnav__logo" src="assets/logo.svg" alt="Profit.com"></a>
+    <img class="vdivider" src="assets/divider.svg" alt="">
+    <nav class="topnav__menu" aria-label="Primary">
+      <a class="topnav__item" href="index.html"><img class="icon" src="assets/cup.svg" width="16" height="16" alt="">Playtrade<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#features">Tools<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Learn<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#plans">Plans</a>
+      <a class="topnav__item" href="#">More<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+    </nav>
+    <div class="topnav__right">
+      <button aria-label="Search"><img class="icon icon-20" src="assets/search.svg" alt=""></button>
+      <div class="topnav__icons">
+        <img class="vdivider" src="assets/divider.svg" alt="">
+        <button class="topnav__lang"><span class="topnav__globe"><img src="assets/globe.svg" alt=""></span>EN</button>
+        <img class="vdivider" src="assets/divider.svg" alt="">
+        <button class="icon-btn" aria-label="Notifications"><img class="icon icon-20" src="assets/bell.svg" alt=""><span class="badge">2</span></button>
+        <button class="icon-btn" aria-label="Messages"><img class="icon icon-20" src="assets/messenger.svg" alt=""><span class="badge">1</span></button>
+        <a class="btn-brand topnav__upgrade" href="index.html">Get Started</a>
+      </div>
+      <img class="topnav__avatar" src="assets/nav-avatar.png" width="32" height="32" alt="Profile">
+    </div>
+  </header>
+  <script src="topnav.js"></script>
+
+  <main>
+
+    <!-- ============ Hero ============ -->
+    <section class="lp-hero" aria-labelledby="lp-hero-title">
+      <div class="lp-hero__copy">
+        <div class="lp-hero__intro">
+          <ul class="lp-tags" aria-label="Highlights">
+            <li class="lp-tag"><img src="assets/lp-mountains.svg" alt=""><span><b>160K+</b> Instruments</span></li>
+            <li class="lp-tag"><img src="assets/lp-handshake.svg" alt=""><span>Advanced Analytics</span></li>
+            <li class="lp-tag"><img src="assets/lp-coins.svg" alt=""><span>No deposits</span></li>
+          </ul>
+          <h1 class="lp-hero__title" id="lp-hero-title">
+            <span>Discover Markets</span>
+            <span class="lp-hero__accent">Practice Trading</span>
+          </h1>
+          <p class="lp-hero__sub">Powerful analytics and simulated trading with virtual funds —<br>all in one platform.</p>
+        </div>
+        <div class="lp-hero__cta">
+          <a class="lp-btn-hero" href="index.html"><img src="assets/lp-sparkle.svg" alt="">Explore Now - It’s Free</a>
+          <div class="lp-trust">
+            <span>Trusted by 200k+ users</span>
+            <span class="lp-trust__avatars" aria-hidden="true">
+              <img src="assets/lp-av-2.png" alt="" style="object-position:50% 20%">
+              <img src="assets/lp-av-5.png" alt="" style="object-position:50% 25%">
+              <img src="assets/lp-av-3.png" alt="" style="object-position:50% 10%">
+              <img src="assets/lp-av-4.png" alt="" style="object-position:40% 30%">
+              <img src="assets/lp-av-1.png" alt="" style="object-position:35% 25%">
+            </span>
+          </div>
+        </div>
+      </div>
+      <a class="lp-hero__visual" href="#" aria-label="Watch the product video">
+        <img src="assets/lp-hero-visual.png" width="487" height="445" alt="The Profit.com trading terminal — one app for all traders">
+      </a>
+    </section>
+
+    <!-- ============ About ============ -->
+    <section class="lp-section lp-about" aria-labelledby="lp-about-title">
+      <header class="lp-head">
+        <p class="lp-eyebrow">ABOUT US</p>
+        <h2 class="lp-h2" id="lp-about-title"><span class="lp-about__lead">What is </span><span class="lp-about__hl">Profit.com?</span></h2>
+      </header>
+      <div class="lp-about__cards">
+        <p class="lp-about__card">All Your Trading <span>Tools in One App</span></p>
+        <p class="lp-about__card lp-about__card--dark">Practice Trading, <span>Build Your Skills</span></p>
+        <p class="lp-about__card">For Every Level, <span>Novice or Advanced</span></p>
+      </div>
+    </section>
+
+    <!-- ============ Key features ============ -->
+    <section class="lp-section lp-features" id="features" aria-labelledby="lp-features-title">
+      <header class="lp-head">
+        <p class="lp-eyebrow">KEY FEATURES</p>
+        <h2 class="lp-h2" id="lp-features-title">What You Get with Profit.com</h2>
+      </header>
+      <div class="lp-feat-grid">
+        <a class="lp-feat lp-feat--playtrade" href="index.html">
+          <div class="lp-feat__text">
+            <h3>Playtrade 🔥</h3>
+            <p>Practice your trading skills for free in simulated tournaments.</p>
+          </div>
+          <img class="lp-feat__art" src="assets/lp-f-playtrade.png" alt="">
+        </a>
+        <article class="lp-feat lp-feat--billionaires">
+          <div class="lp-feat__text">
+            <h3>Billionaire Portfolios</h3>
+            <p>Follow the market moves of Buffett, Gates, Soros and more.</p>
+          </div>
+          <img class="lp-feat__art" src="assets/lp-f-billionaires.png" alt="">
+        </article>
+        <article class="lp-feat lp-feat--alerts">
+          <div class="lp-feat__text">
+            <h3>Price Alerts</h3>
+            <p>Get instant notifications on important market changes.</p>
+          </div>
+          <img class="lp-feat__art" src="assets/lp-f-alerts.png" alt="">
+        </article>
+        <article class="lp-feat lp-feat--screeners">
+          <div class="lp-feat__text">
+            <h3>Screeners <span class="lp-new">NEW</span></h3>
+            <p>Find opportunities faster with our advanced market screener.</p>
+          </div>
+          <img class="lp-feat__art" src="assets/lp-f-screeners.png" alt="">
+        </article>
+        <article class="lp-feat lp-feat--research">
+          <div class="lp-feat__text">
+            <h3>Market Research</h3>
+            <p>Get our exclusive weekly analysis of financial markets.</p>
+          </div>
+          <img class="lp-feat__art" src="assets/lp-f-research.png" alt="">
+        </article>
+        <article class="lp-feat lp-feat--ai">
+          <div class="lp-feat__text">
+            <h3>AI-Powered Insights</h3>
+            <p>Stay ahead with personalized daily market briefs.</p>
+          </div>
+          <img class="lp-feat__art" src="assets/lp-f-ai.png" alt="">
+        </article>
+      </div>
+
+      <div class="lp-telegram">
+        <img src="assets/lp-tg-icon.png" width="80" height="80" alt="">
+        <div>
+          <p class="lp-telegram__title">Pro Plan Bonus: Exclusive Telegram Alerts</p>
+          <p class="lp-telegram__sub">Get premium real-time market insights at an unbeatable value!</p>
+        </div>
+      </div>
+
+      <a class="lp-btn" href="#">See all Tools<span class="lp-btn__div"></span><img src="assets/lp-chev-btn.svg" alt=""></a>
+    </section>
+
+    <!-- ============ Playtrade ============ -->
+    <section class="lp-section lp-playtrade" aria-labelledby="lp-playtrade-title">
+      <header class="lp-head">
+        <p class="lp-eyebrow">PLAYTRADE</p>
+        <h2 class="lp-h2" id="lp-playtrade-title">Practice. Compete.<br>Without the Real-Money Risk</h2>
+      </header>
+      <div class="lp-pt-cards">
+        <article class="lp-pt lp-pt--cash">
+          <div class="lp-pt__text">
+            <h3>Compete with virtual funds</h3>
+            <p>Join simulated trading competitions without putting real capital at risk.</p>
+          </div>
+          <img class="lp-pt__art" src="assets/lp-p-cash.png" alt="">
+        </article>
+        <article class="lp-pt lp-pt--assets">
+          <div class="lp-pt__text">
+            <h3>Build your trading skills</h3>
+            <p>Practice with real market data across multiple asset classes.</p>
+          </div>
+          <img class="lp-pt__art" src="assets/lp-p-assets.png" alt="Gold, Crypto, Forex, Indices and Stocks">
+        </article>
+        <article class="lp-pt lp-pt--podium">
+          <div class="lp-pt__text">
+            <h3>Climb the leaderboard</h3>
+            <p>Track your performance, compete with other traders.</p>
+          </div>
+          <img class="lp-pt__art" src="assets/lp-p-podium.png" alt="Leaderboard podium: alextrades, chartnomad and tokyotrader">
+        </article>
+      </div>
+      <a class="lp-btn lp-btn--wide" href="index.html">Try Playtrade<span class="lp-btn__div"></span><img src="assets/lp-chev-btn.svg" alt=""></a>
+    </section>
+
+    <!-- ============ How we compare ============ -->
+    <section class="lp-section lp-compare" aria-labelledby="lp-compare-title">
+      <header class="lp-head">
+        <p class="lp-eyebrow">HOW WE COMPARE</p>
+        <h2 class="lp-h2 lp-compare__title" id="lp-compare-title"><span>Why Investors</span><span class="lp-compare__line2">Choose <span class="lp-nowrap"><span class="lp-pill">Profit.com</span> ?</span></span></h2>
+        <p class="lp-sub lp-compare__sub">The Best Features at the Best Value! Profit.com is the better alternative to Bloomberg, Yahoo Finance, TradingView, Investing.com, Finviz &amp; Koyfin 👇</p>
+      </header>
+      <div class="lp-table-wrap">
+        <table class="lp-table" id="compareTable">
+          <thead>
+            <tr>
+              <td></td>
+              <th scope="col"><img src="assets/lp-cmp-profit.png" alt="">Profit.com</th>
+              <th scope="col"><img src="assets/lp-cmp-bloomberg.png" alt="">Bloomberg</th>
+              <th scope="col"><img src="assets/lp-cmp-yahoo.png" alt="">Yahoo Finance</th>
+              <th scope="col"><img src="assets/lp-cmp-tradingview.png" alt="">TradingView</th>
+              <th scope="col"><img src="assets/lp-cmp-investing.png" alt="">Investing.com</th>
+              <th scope="col"><img src="assets/lp-cmp-finviz.png" alt="">Finviz</th>
+              <th scope="col"><img src="assets/lp-cmp-koyfin.png" alt="">Koyfin</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <a class="lp-btn" href="#">Compare Now<span class="lp-btn__div"></span><img src="assets/lp-chev-btn.svg" alt=""></a>
+    </section>
+
+    <!-- ============ Testimonials ============ -->
+    <section class="lp-section lp-stories" aria-labelledby="lp-stories-title">
+      <header class="lp-head">
+        <p class="lp-eyebrow">COMMUNITY</p>
+        <h2 class="lp-h2 lp-stories__title" id="lp-stories-title">Stories from Our Users</h2>
+        <p class="lp-sub">See How Traders use Profit.com to Learn, Analyse the Markets, and Sharpen their Skills.</p>
+      </header>
+      <div class="lp-videos">
+        <a class="lp-video" href="#"><img class="lp-video__img" src="assets/lp-t-1.jpg" alt=""><span class="lp-video__play" aria-hidden="true"><img src="assets/lp-t-play.svg" alt=""></span><span class="lp-video__who"><b>Sam Martin</b>CEO at Culture Shock</span></a>
+        <a class="lp-video" href="#"><img class="lp-video__img" src="assets/lp-t-2.jpg" alt=""><span class="lp-video__play" aria-hidden="true"><img src="assets/lp-t-play.svg" alt=""></span><span class="lp-video__who"><b>Sam Martin</b>CEO at Culture Shock</span></a>
+        <a class="lp-video" href="#"><img class="lp-video__img" src="assets/lp-t-3.jpg" alt=""><span class="lp-video__play" aria-hidden="true"><img src="assets/lp-t-play.svg" alt=""></span><span class="lp-video__who"><b>Sam Martin</b>CEO at Culture Shock</span></a>
+        <a class="lp-video" href="#"><img class="lp-video__img" src="assets/lp-t-4.jpg" alt=""><span class="lp-video__play" aria-hidden="true"><img src="assets/lp-t-play.svg" alt=""></span><span class="lp-video__who"><b>Sam Martin</b>CEO at Culture Shock</span></a>
+      </div>
+      <div class="lp-quotes">
+        <figure class="lp-quote">
+          <span class="lp-stars" role="img" aria-label="5 out of 5 stars"></span>
+          <blockquote>“Upgrading to Pro helped me increase my <b><i>portfolio’s performance by 20% in just a few months</i></b>. The insights are invaluable”</blockquote>
+          <figcaption><img src="assets/lp-t-avatar.png" alt=""><span><b>Marcus Castro</b>Investor</span></figcaption>
+        </figure>
+        <figure class="lp-quote">
+          <span class="lp-stars" role="img" aria-label="5 out of 5 stars"></span>
+          <blockquote>“Upgrading to Pro helped me increase my <b><i>portfolio’s performance by 20% in just a few months</i></b>. The insights are invaluable”</blockquote>
+          <figcaption><img src="assets/lp-t-avatar.png" alt=""><span><b>Marcus Castro</b>Investor</span></figcaption>
+        </figure>
+        <figure class="lp-quote">
+          <span class="lp-stars" role="img" aria-label="5 out of 5 stars"></span>
+          <blockquote>“Upgrading to Pro helped me increase my <b><i>portfolio’s performance by 20% in just a few months</i></b>. The insights are invaluable”</blockquote>
+          <figcaption><img src="assets/lp-t-avatar.png" alt=""><span><b>Marcus Castro</b>Investor</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ Plans ============ -->
+    <section class="lp-section lp-plans" id="plans" aria-labelledby="lp-plans-title">
+      <header class="lp-head lp-plans__head">
+        <p class="lp-eyebrow">OUR PLANS</p>
+        <h2 class="lp-h2" id="lp-plans-title">Choose your plan</h2>
+        <p class="lp-sub">Start Free. Upgrade when Ready.</p>
+        <div class="lp-billing">
+          <span class="lp-billing__opt" data-opt="monthly">Monthly</span>
+          <button class="lp-switch" type="button" role="switch" aria-checked="true" aria-label="Bill yearly"><span></span></button>
+          <span class="lp-billing__opt" data-opt="yearly">Yearly</span>
+        </div>
+        <p class="lp-save">Save <em>33%</em> with the Annual Plan - <em>4 Months Free 🎉</em></p>
+      </header>
+
+      <div class="lp-plan-cards">
+        <article class="lp-plan">
+          <img class="lp-plan__badge" src="assets/lp-plan-free.png" alt="Free">
+          <p class="lp-plan__price"><b>$0</b><span>/ mo</span></p>
+          <p class="lp-plan__note">Free forever</p>
+          <p class="lp-plan__pitch">Explore essential tools and practice trading with virtual funds</p>
+          <ul class="lp-plan__points">
+            <li>Practice Tournaments</li><li>Basic Screeners &amp; Watchlists</li><li>News &amp; Price Alerts</li><li>Interactive Charts</li>
+          </ul>
+          <a class="lp-btn lp-btn--ghost" href="index.html">Start Now<span class="lp-btn__div"></span><img src="assets/lp-chev-dark.svg" alt=""></a>
+        </article>
+        <article class="lp-plan lp-plan--popular">
+          <span class="lp-plan__tag">MOST POPULAR</span>
+          <img class="lp-plan__badge" src="assets/lp-plan-pro.png" alt="Pro">
+          <p class="lp-plan__price"><b data-monthly="$9.99" data-yearly="$9.99">$9.99</b><span>/ mo</span></p>
+          <p class="lp-plan__note" data-yearly-only>$199/ year - <em>save 60$</em><img src="assets/lp-info.svg" alt="" title="Billed yearly"></p>
+          <p class="lp-plan__pitch">Unlock advanced research, screeners and investor insights</p>
+          <ul class="lp-plan__points">
+            <li>Everything in FREE</li><li>Billionaire Portfolios</li><li>Weekly Market Briefs</li><li>Advanced Screeners</li>
+          </ul>
+          <a class="lp-btn lp-btn--sm" href="#">Get Now<span class="lp-btn__div"></span><img src="assets/lp-chev-btn.svg" alt=""></a>
+        </article>
+        <article class="lp-plan">
+          <img class="lp-plan__badge" src="assets/lp-plan-proplus.png" alt="Pro+">
+          <p class="lp-plan__price"><b>$29.99</b><span>/ mo</span></p>
+          <p class="lp-plan__note" data-yearly-only>$369/ year - <em>save 180$</em><img src="assets/lp-info.svg" alt="" title="Billed yearly"></p>
+          <p class="lp-plan__pitch">Get full access to AI insights, customization and priority support</p>
+          <ul class="lp-plan__points">
+            <li>Everything in PRO</li><li>AI-Powered Daily Briefs</li><li>Unlimited Customization</li><li>Priority Customer Support</li>
+          </ul>
+          <a class="lp-btn lp-btn--sm" href="#">Get Now<span class="lp-btn__div"></span><img src="assets/lp-chev-btn.svg" alt=""></a>
+        </article>
+      </div>
+      <img class="lp-payments" src="assets/lp-payments.png" width="320" height="32" alt="Visa, Stripe, Mastercard, Apple Pay, Google Pay, PayPal">
+
+      <p class="lp-guarantee"><img src="assets/lp-guarantee.svg" alt="">Try Profit Pro for 30 Days. Love it or get your money back - no questions asked</p>
+      <a class="lp-btn lp-btn--ghost lp-btn--plain" href="#">See full comparison</a>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="lp-cta-wrap">
+      <div class="lp-cta">
+        <p class="lp-cta__title">Your journey to<br>success starts here</p>
+        <a class="lp-cta__btn" href="index.html">Get Started</a>
+      </div>
+    </section>
+
+    <!-- ============ Trusted by ============ -->
+    <section class="lp-trusted" aria-label="Trusted by">
+      <p>Trusted by</p>
+      <img src="assets/lp-trusted.png" width="961" height="34" alt="SEEDRS, XM, trading.com, vantage, AXIA.TRADE">
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="lp-footer">
+    <div class="lp-footer__cta">
+      <div>
+        <p class="lp-footer__kicker">WHAT ARE YOU WAITING FOR?</p>
+        <p class="lp-footer__title">Get started today</p>
+      </div>
+      <a class="lp-footer__btn" href="index.html">Explore Now</a>
+    </div>
+    <div class="lp-footer__cols">
+      <div><h4>Tools</h4><ul><li><a href="#">Terminal</a></li><li><a href="index.html">Playtrade</a></li><li><a href="#">Research</a></li><li><a href="#">Messenger</a></li><li><a href="#">Mobile App</a></li></ul></div>
+      <div><h4>Solutions</h4><ul><li><a href="#">Widgets</a></li><li><a href="#">Data API</a></li><li><a href="#">Charts Library</a></li><li><a href="#">Trading Signals</a></li><li><a href="#">Advertising</a></li></ul></div>
+      <div><h4>About</h4><ul><li><a href="#">Company</a></li><li><a href="#">Rebranding</a></li><li><a href="#">Investors</a></li><li><a href="#">Partners</a></li><li><a href="#">Refer a Friend</a></li><li><a href="#">Become an Affiliate</a></li><li><a href="#">Contact us</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="#">Help Center</a></li><li><a href="#">Terms &amp; Conditions</a></li><li><a href="#">Cookie Policy</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Risks Disclosure</a></li><li><a href="#">Release Notes</a></li></ul></div>
+      <div><h4>Compare</h4><ul><li><a href="#">Yahoo Finance</a></li><li><a href="#">Morningstar</a></li><li><a href="#">Bloomberg</a></li><li><a href="#">Google Finance</a></li><li><button class="lp-footer__more" type="button">Show more<img src="assets/ft-chevron.svg" alt=""></button></li></ul></div>
+      <div class="lp-footer__app"><h4>Profit mobile app</h4><p>Discover the world of finance in your pocket</p><img src="assets/lp-qr.png" width="96" height="96" alt="QR code to download the Profit.com app"></div>
+    </div>
+    <div class="lp-footer__bottom">
+      <a class="footer__logo" href="landing.html" aria-label="Profit.com"><img class="mark" src="assets/ft-logo-mark.svg" alt=""><img class="word" src="assets/ft-logo-word.svg" alt=""></a>
+      <div class="lp-footer__legal">
+        <p>© 2025 All rights reserved</p>
+        <div class="lp-footer__social">
+          <a href="#" aria-label="Facebook"><img src="assets/ft-facebook.svg" alt=""></a>
+          <a href="#" aria-label="X"><img src="assets/ft-x.svg" alt=""></a>
+          <a href="#" aria-label="YouTube"><img src="assets/ft-youtube.svg" alt=""></a>
+          <a href="#" aria-label="Instagram"><img src="assets/ft-instagram.svg" alt=""></a>
+          <a href="#" aria-label="LinkedIn"><img src="assets/ft-linkedin.svg" alt=""></a>
+          <a href="#" aria-label="Telegram"><img src="assets/ft-telegram.svg" alt=""></a>
+          <a href="#" aria-label="TikTok"><img src="assets/ft-tiktok.svg" alt=""></a>
+        </div>
+      </div>
+      <button class="lp-footer__lang" type="button"><img src="assets/globe.svg" alt="">EN</button>
+    </div>
+  </footer>
+
+  <!-- ============ Legal disclaimer ============ -->
+  <div class="legal-disclaimer lp-disclaimer" role="note" aria-label="Disclaimer">
+    <p>Profit.com is an educational, subscription-based software platform providing financial market analytics and simulated trading using real-time market data and virtual funds. All trading activity on the platform is simulated. No real capital is used, no customer deposits are collected, and no real-money trades are executed or facilitated.</p>
+    <p>Profit.com is not a broker and does not provide brokerage, investment, or other financial services or investment advice. All content, tools and features are provided for educational and informational purposes only. Simulated trading results are hypothetical and are not indicative of actual or future results. The terms “trading” and “trader” refer exclusively to simulated activity on Profit.com and should not be interpreted as real-money trading or investing.</p>
+  </div>
+
+  <script src="landing.js"></script>
+</body>
+</html>

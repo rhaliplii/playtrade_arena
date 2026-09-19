@@ -13,10 +13,10 @@
 
   <!-- ============ Top navigation ============ -->
   <header class="topnav">
-    <a href="#" aria-label="Profit.com home"><img class="topnav__logo" src="assets/logo.svg" alt="Profit.com"></a>
+    <a href="landing.html" aria-label="Profit.com home"><img class="topnav__logo" src="assets/logo.svg" alt="Profit.com"></a>
     <img class="vdivider" src="assets/divider.svg" alt="">
     <nav class="topnav__menu" aria-label="Primary">
-      <a class="topnav__item" href="#"><img class="icon" src="assets/cup.svg" width="16" height="16" alt="">Arena<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#"><img class="icon" src="assets/cup.svg" width="16" height="16" alt="">Playtrade<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
       <a class="topnav__item" href="#">Tools<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
       <a class="topnav__item" href="#">Learn<span class="topnav__caret"><img src="assets/dropdown-arrow.svg" alt=""></span></a>
       <a class="topnav__item" href="#">Plans</a>
@@ -36,6 +36,7 @@
       <img class="topnav__avatar" src="assets/nav-avatar.png" width="32" height="32" alt="Profile">
     </div>
   </header>
+  <script src="topnav.js"></script>
 
   <div class="shell">
 
@@ -45,44 +46,88 @@
 
     <main class="main">
 
-      <!-- ============ Hero ============ -->
-      <section class="hero" aria-label="Featured">
+      <!-- ============ Hero carousel ============ -->
+      <section class="hero" aria-roledescription="carousel" aria-label="Featured">
         <div class="hero__banner">
-          <div class="hero__inner">
-          <div class="hero__content">
-            <div class="hero__copy">
-              <h1 class="hero__title">Practice. Compete.<br>Play the markets.</h1>
-              <p class="hero__sub">Join simulated trading tournaments or sharpen your market instincts in interactive games—with virtual funds.</p>
-            </div>
-            <div class="hero__bottom">
-              <div class="hero__cta-row">
-                <a class="hero__cta t-m-semibold" href="#">Try Now — It’s Free</a>
-                <div class="hero__stats">
-                  <div class="hero__stat"><b>$188k</b><span class="t-m-medium">cash paid</span></div>
-                  <div class="hero__stat"><b>220k</b><span class="t-m-medium">traders</span></div>
-                  <div class="hero__stat"><b>0</b><span class="t-m-medium">risk money</span></div>
+          <div class="hero__track" id="heroTrack" aria-live="polite">
+            <!-- Slide 1: Playtrade -->
+            <div class="hero__slide hero__slide--main" role="group" aria-roledescription="slide" aria-label="1 of 2">
+              <div class="hero__inner">
+                <div class="hero__content">
+                  <div class="hero__copy">
+                    <h1 class="hero__title">Practice. Compete.<br>Play the markets.</h1>
+                    <p class="hero__sub">Join simulated trading tournaments or sharpen your market instincts in interactive games—with virtual funds.</p>
+                  </div>
+                  <div class="hero__bottom">
+                    <div class="hero__cta-row">
+                      <a class="hero__cta t-m-semibold" href="#">Try Now — It’s Free</a>
+                      <div class="hero__stats">
+                        <div class="hero__stat"><b>$188k</b><span class="t-m-medium">cash paid</span></div>
+                        <div class="hero__stat"><b>220k</b><span class="t-m-medium">traders</span></div>
+                        <div class="hero__stat"><b>0</b><span class="t-m-medium">risk money</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hero__art" aria-hidden="true">
+                  <div class="hero__coin-a"><img src="assets/hero-coin-1.png" alt=""></div>
+                  <div class="hero__coin-b"><img src="assets/hero-coin-2.png" alt=""></div>
+                  <img class="hero__sign" src="assets/hero-wallst.png" alt="">
                 </div>
               </div>
-              <div class="hero__arrows">
-                <button aria-label="Previous slide"><img src="assets/hero-prev.svg" alt=""></button>
-                <button class="is-next" aria-label="Next slide"><img src="assets/hero-next.svg" alt=""></button>
+            </div>
+
+            <!-- Slide 2: Refer a Friend -->
+            <div class="hero__slide hero__slide--refer" role="group" aria-roledescription="slide" aria-label="2 of 2">
+              <div class="hero__inner referral__inner">
+                <div class="referral__art" aria-hidden="true">
+                  <div class="blend" style="left:-60.68px;top:-116.98px;width:553.311px;height:553.311px">
+                    <div class="masked" style="width:492.185px;height:492.185px;-webkit-mask-image:var(--rf-mask-1);mask-image:var(--rf-mask-1);-webkit-mask-position:0.636px 101.122px;mask-position:0.636px 101.122px;-webkit-mask-size:530.415px 419.753px;mask-size:530.415px 419.753px">
+                      <img class="cover" src="assets/rf-mega-a.png" alt=""><img class="cover" src="assets/rf-mega-b.png" alt="">
+                    </div>
+                  </div>
+                  <div class="blend" style="left:154.08px;top:58.91px;width:492.828px;height:492.828px">
+                    <div class="masked" style="width:438.384px;height:438.384px;-webkit-mask-image:var(--rf-mask-2);mask-image:var(--rf-mask-2);-webkit-mask-position:216.391px 5.665px;mask-position:216.391px 5.665px;-webkit-mask-size:291.731px 146.149px;mask-size:291.731px 146.149px">
+                      <img class="cover" src="assets/rf-mega-a.png" alt="">
+                    </div>
+                  </div>
+                </div>
+                <div class="referral__content">
+                  <div class="referral__glows" aria-hidden="true">
+                    <div class="poly" style="left:-197.41px;top:215.31px;width:699.762px;height:342.267px">
+                      <div style="width:247.013px;height:590.061px;rotate:-120.1deg;scale:1 0.95;transform:skewX(-17.51deg)"><img src="assets/rf-poly-13.svg" alt="" style="inset:-12.39% -29.59%;width:159.18%;height:124.78%"></div>
+                    </div>
+                    <div class="poly" style="left:-267.44px;top:209.07px;width:679.978px;height:272.994px">
+                      <div style="width:247.013px;height:590.061px;rotate:-111.75deg;scale:1 0.95;transform:skewX(-17.51deg)"><img src="assets/rf-poly-17.svg" alt="" style="inset:-12.39% -29.59%;width:159.18%;height:124.78%"></div>
+                    </div>
+                    <div class="poly" style="left:-140.86px;top:105.25px;width:383.671px;height:334.224px">
+                      <div style="width:347.969px;height:281.017px;rotate:-107.16deg;scale:1 0.95;transform:skewX(-17.51deg)"><img src="assets/rf-poly-16.svg" alt="" style="inset:-16.01% -12.93%;width:125.86%;height:132.02%"></div>
+                    </div>
+                    <div class="poly" style="left:-198px;top:-77px;width:700.486px;height:702.067px;mix-blend-mode:normal">
+                      <div style="width:504.277px;height:491.022px;rotate:130.16deg;scale:1 -1"><img src="assets/rf-pattern.png" alt="" style="inset:0;width:100%;height:100%;object-fit:cover;opacity:0.25"></div>
+                    </div>
+                  </div>
+                  <div class="referral__copy">
+                    <h2 class="referral__title">Earn <span class="referral__amount"><img src="assets/rf-10.png" alt="$10"></span>CASH for every PRO+ Friend you Refer!</h2>
+                    <p class="referral__sub">Unlock up to $125 Cash Bonus as you refer more friends!</p>
+                  </div>
+                  <a class="btn-light referral__cta t-m-semibold" href="#">Refer Now — Start Earning</a>
+                </div>
               </div>
+              <!-- Top-right light leak: rendered from Figma group 12913:18446 (additive layer) -->
+              <img class="referral__glow-top" src="assets/rf-glow-top.png" alt="" aria-hidden="true">
             </div>
           </div>
-          <div class="hero__art" aria-hidden="true">
-            <div class="hero__coin-a"><img src="assets/hero-coin-1.png" alt=""></div>
-            <div class="hero__coin-b"><img src="assets/hero-coin-2.png" alt=""></div>
-            <img class="hero__sign" src="assets/hero-wallst.png" alt="">
-          </div>
+          <div class="hero__controls">
+            <div class="hero__arrows">
+              <button type="button" aria-label="Previous slide" aria-controls="heroTrack"><img src="assets/hero-prev.svg" alt=""></button>
+              <button type="button" class="is-next" aria-label="Next slide" aria-controls="heroTrack"><img src="assets/hero-next.svg" alt=""></button>
+            </div>
           </div>
         </div>
         <div class="hero__dots" role="tablist" aria-label="Slides">
-          <button class="hero__dot is-active" aria-label="Slide 1"></button>
-          <button class="hero__dot" aria-label="Slide 2"></button>
-          <button class="hero__dot" aria-label="Slide 3"></button>
-          <button class="hero__dot" aria-label="Slide 4"></button>
-          <button class="hero__dot" aria-label="Slide 5"></button>
-          <button class="hero__dot" aria-label="Slide 6"></button>
+          <button class="hero__dot is-active" role="tab" aria-selected="true" aria-label="Slide 1: Playtrade"></button>
+          <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 2: Refer a Friend"></button>
         </div>
       </section>
 
@@ -342,40 +387,85 @@
         </div>
       </section>
 
-      <!-- ============ Mini games ============ -->
+      <!-- ============ Market games ============ -->
       <section class="section section--games" aria-labelledby="games-title">
-        <h2 class="t-h1" id="games-title">Mini Games</h2>
-        <div class="games">
-          <a class="game game--bull" href="bull-run.html">
-            <div class="game__art">
-              <div class="rot" style="left:-18px;top:-22px;width:210.687px;height:206.179px">
-                <div class="crop" style="width:160.515px;height:137px;rotate:-37.21deg"><img src="assets/mg-bullrun.png" alt="" style="left:-117.83%;top:-16.79%;width:326.11%;height:382.09%"></div>
+        <h2 class="t-h1" id="games-title">Market Games</h2>
+        <div class="mg-row">
+          <a class="mg-card mg-card--bull" href="bull-run.html">
+            <div class="mg-card__art">
+              <!-- Cover art rendered from the real Bull Run 3D scene (games/bull_run), text removed -->
+              <img class="mg-card__scene" src="assets/mg-bullrun-cover.jpg" alt="The Bull Run mascot running down a three-lane neon road toward a glowing wall">
+            </div>
+            <div class="mg-card__body">
+              <div class="mg-card__copy">
+                <h3 class="mg-card__title">Bull <span>Run</span></h3>
+                <p class="mg-card__pitch">React to news. Predict the move.</p>
               </div>
             </div>
-            <span class="game__fade"></span>
-            <p class="game__title">Bull Run</p>
           </a>
-          <a class="game game--scan" href="#">
-            <div class="game__art" aria-hidden="true">
-              <span class="scan-digit" style="left:75.59px;top:16.48px">54</span>
-              <span class="scan-digit" style="left:41.87px;top:42.9px">18</span>
-              <span class="scan-digit" style="left:81.15px;top:73.48px">54</span>
-              <span class="scan-digit" style="left:115.4px;top:51.24px">36</span>
-              <span class="scan-digit scan-digit--main" style="left:79.09px;top:40.58px">24</span>
-              <div class="rot" style="left:-25px;top:-28px;width:223.28px;height:223.28px">
-                <img src="assets/tt-magnifier.png" alt="" style="width:188.325px;height:188.325px;object-fit:cover;rotate:168.03deg;scale:1 -1">
+          <div class="mg-card mg-card--scan is-soon" aria-disabled="true">
+            <div class="mg-card__art" aria-hidden="true">
+              <span class="mg-card__soon">Soon</span>
+              <div class="mg-scan">
+                <span class="scan-digit" style="left:75.59px;top:16.48px">54</span>
+                <span class="scan-digit" style="left:41.87px;top:42.9px">18</span>
+                <span class="scan-digit" style="left:81.15px;top:73.48px">54</span>
+                <span class="scan-digit" style="left:115.4px;top:51.24px">36</span>
+                <span class="scan-digit scan-digit--main" style="left:79.09px;top:40.58px">24</span>
+                <div class="rot" style="left:-25px;top:-28px;width:223.28px;height:223.28px">
+                  <img src="assets/tt-magnifier.png" alt="" style="width:188.325px;height:188.325px;object-fit:cover;rotate:168.03deg;scale:1 -1">
+                </div>
               </div>
             </div>
-            <span class="game__fade"></span>
-            <p class="game__title">Fast Scan</p>
-          </a>
-          <div class="game game--soon" aria-disabled="true">
-            <div class="game__art">
-              <img src="assets/mg-bomb.png" alt="" style="position:absolute;left:-15px;top:-18px;width:205px;height:205px;object-fit:cover">
+            <div class="mg-card__body">
+              <div class="mg-card__copy">
+                <h3 class="mg-card__title">Fast Scan</h3>
+                <p class="mg-card__pitch">Spot market signals fast.</p>
+              </div>
             </div>
-            <p class="game__title">TicTok Trade</p>
-            <span class="game__soon">Soon</span>
           </div>
+          <div class="mg-card mg-card--tictok is-soon" aria-disabled="true">
+            <div class="mg-card__art" aria-hidden="true">
+              <span class="mg-card__soon">Soon</span>
+              <img class="mg-bomb" src="assets/mg-bomb.png" alt="">
+            </div>
+            <div class="mg-card__body">
+              <div class="mg-card__copy">
+                <h3 class="mg-card__title">TicTok Trade</h3>
+                <p class="mg-card__pitch">Beat the clock on every trade.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Top Playtraders (matches production arena) ============ -->
+      <section class="section" aria-labelledby="top-title">
+        <a class="section__head" href="#">
+          <h2 class="t-h1" id="top-title">Top Playtraders</h2>
+          <span class="section-title-arrow"><img src="assets/faq-arrow.svg" alt=""></span>
+        </a>
+        <div class="tpc-row">
+          <article class="tpc">
+            <div class="tpc-head"><span class="tpc-av"><img src="assets/pr-avatar-2.png" alt=""></span><div class="tpc-who"><p class="tpc-name">Jak Pak</p><p class="tpc-handle">@goodthings081994</p></div><img class="tpc-crown" src="assets/rank-crown.svg" alt="Top rank"></div>
+            <div class="tpc-stats"><div class="tpc-stat"><span class="tpc-val"><i class="tpc-cash" aria-hidden="true">$</i>2k</span><span class="tpc-label">Cash Earned</span></div><div class="tpc-stat"><span class="tpc-val"><img src="assets/rocket.svg" alt="">23</span><span class="tpc-label">Level</span></div></div>
+          </article>
+          <article class="tpc">
+            <div class="tpc-head"><span class="tpc-av tpc-av--letter" style="background:#7b4fd6">R</span><div class="tpc-who"><p class="tpc-name">Raghavendra Naik</p><p class="tpc-handle">@Raghu</p></div><img class="tpc-crown" src="assets/rank-crown.svg" alt="Top rank"></div>
+            <div class="tpc-stats"><div class="tpc-stat"><span class="tpc-val"><i class="tpc-cash" aria-hidden="true">$</i>6k</span><span class="tpc-label">Cash Earned</span></div><div class="tpc-stat"><span class="tpc-val"><img src="assets/nav-coin.svg" alt="">1.6k</span><span class="tpc-label">Coins Earned</span></div><div class="tpc-stat"><span class="tpc-val"><img src="assets/rocket.svg" alt="">55</span><span class="tpc-label">Level</span></div></div>
+          </article>
+          <article class="tpc">
+            <div class="tpc-head"><span class="tpc-av"><img src="assets/pr-av-a.png" alt=""></span><div class="tpc-who"><p class="tpc-name">Abdulrasheed Guruji</p><p class="tpc-handle">@abdulrasheed.guruji</p></div><img class="tpc-crown" src="assets/rank-crown.svg" alt="Top rank"></div>
+            <div class="tpc-stats"><div class="tpc-stat"><span class="tpc-val"><i class="tpc-cash" aria-hidden="true">$</i>3.2k</span><span class="tpc-label">Cash Earned</span></div><div class="tpc-stat"><span class="tpc-val"><img src="assets/nav-coin.svg" alt="">2.5k</span><span class="tpc-label">Coins Earned</span></div><div class="tpc-stat"><span class="tpc-val"><img src="assets/rocket.svg" alt="">54</span><span class="tpc-label">Level</span></div></div>
+          </article>
+          <article class="tpc">
+            <div class="tpc-head"><span class="tpc-av" style="background:#2f7d62">TN</span><div class="tpc-who"><p class="tpc-name">tony nik56</p><p class="tpc-handle">@tonynik56</p></div></div>
+            <div class="tpc-stats"><div class="tpc-stat"><span class="tpc-val"><i class="tpc-cash" aria-hidden="true">$</i>450</span><span class="tpc-label">Cash Earned</span></div><div class="tpc-stat"><span class="tpc-val"><img src="assets/nav-coin.svg" alt="">1.8k</span><span class="tpc-label">Coins Earned</span></div><div class="tpc-stat"><span class="tpc-val"><img src="assets/rocket.svg" alt="">41</span><span class="tpc-label">Level</span></div></div>
+          </article>
+          <article class="tpc">
+            <div class="tpc-head"><span class="tpc-av" style="background:#2d6a8a">NS</span><div class="tpc-who"><p class="tpc-name">Nivedita Shetty</p><p class="tpc-handle">@nivedita.s</p></div></div>
+            <div class="tpc-stats"><div class="tpc-stat"><span class="tpc-val"><i class="tpc-cash" aria-hidden="true">$</i>380</span><span class="tpc-label">Cash Earned</span></div><div class="tpc-stat"><span class="tpc-val"><img src="assets/nav-coin.svg" alt="">1.5k</span><span class="tpc-label">Coins Earned</span></div><div class="tpc-stat"><span class="tpc-val"><img src="assets/rocket.svg" alt="">38</span><span class="tpc-label">Level</span></div></div>
+          </article>
         </div>
       </section>
 
@@ -413,47 +503,6 @@
         </div>
       </section>
 
-      <!-- ============ Referral banner ============ -->
-      <section class="referral" aria-label="Refer a friend">
-        <div class="referral__banner">
-          <div class="referral__art" aria-hidden="true">
-            <div class="blend" style="left:-60.68px;top:-116.98px;width:553.311px;height:553.311px">
-              <div class="masked" style="width:492.185px;height:492.185px;-webkit-mask-image:var(--rf-mask-1);mask-image:var(--rf-mask-1);-webkit-mask-position:0.636px 101.122px;mask-position:0.636px 101.122px;-webkit-mask-size:530.415px 419.753px;mask-size:530.415px 419.753px">
-                <img class="cover" src="assets/rf-mega-a.png" alt=""><img class="cover" src="assets/rf-mega-b.png" alt="">
-              </div>
-            </div>
-            <div class="blend" style="left:154.08px;top:58.91px;width:492.828px;height:492.828px">
-              <div class="masked" style="width:438.384px;height:438.384px;-webkit-mask-image:var(--rf-mask-2);mask-image:var(--rf-mask-2);-webkit-mask-position:216.391px 5.665px;mask-position:216.391px 5.665px;-webkit-mask-size:291.731px 146.149px;mask-size:291.731px 146.149px">
-                <img class="cover" src="assets/rf-mega-a.png" alt="">
-              </div>
-            </div>
-          </div>
-          <!-- Top-right light leak: rendered from Figma group 12913:18446 (additive layer) -->
-          <img class="referral__glow-top" src="assets/rf-glow-top.png" alt="" aria-hidden="true">
-          <div class="referral__content">
-            <div class="referral__glows" aria-hidden="true">
-              <div class="poly" style="left:-197.41px;top:215.31px;width:699.762px;height:342.267px">
-                <div style="width:247.013px;height:590.061px;rotate:-120.1deg;scale:1 0.95;transform:skewX(-17.51deg)"><img src="assets/rf-poly-13.svg" alt="" style="inset:-12.39% -29.59%;width:159.18%;height:124.78%"></div>
-              </div>
-              <div class="poly" style="left:-267.44px;top:209.07px;width:679.978px;height:272.994px">
-                <div style="width:247.013px;height:590.061px;rotate:-111.75deg;scale:1 0.95;transform:skewX(-17.51deg)"><img src="assets/rf-poly-17.svg" alt="" style="inset:-12.39% -29.59%;width:159.18%;height:124.78%"></div>
-              </div>
-              <div class="poly" style="left:-140.86px;top:105.25px;width:383.671px;height:334.224px">
-                <div style="width:347.969px;height:281.017px;rotate:-107.16deg;scale:1 0.95;transform:skewX(-17.51deg)"><img src="assets/rf-poly-16.svg" alt="" style="inset:-16.01% -12.93%;width:125.86%;height:132.02%"></div>
-              </div>
-              <div class="poly" style="left:-198px;top:-77px;width:700.486px;height:702.067px;mix-blend-mode:normal">
-                <div style="width:504.277px;height:491.022px;rotate:130.16deg;scale:1 -1"><img src="assets/rf-pattern.png" alt="" style="inset:0;width:100%;height:100%;object-fit:cover;opacity:0.25"></div>
-              </div>
-            </div>
-            <div class="referral__copy">
-              <h2 class="referral__title">Earn <span class="referral__amount"><img src="assets/rf-10.png" alt="$10"></span>CASH for every PRO+ Friend you Refer!</h2>
-              <p class="referral__sub">Unlock up to $125 Cash Bonus as you refer more friends!</p>
-            </div>
-            <a class="btn-light referral__cta t-m-semibold" href="#">Refer Now — Start Earning</a>
-          </div>
-        </div>
-      </section>
-
       <!-- ============ FAQ ============ -->
       <section class="section faq" aria-labelledby="faq-title">
         <a class="section__head" href="#">
@@ -461,40 +510,37 @@
           <span class="section-title-arrow"><img src="assets/faq-arrow.svg" alt=""></span>
         </a>
         <div class="faq__cols">
+          <!-- Answers are drafts: confirm fees, plan benefits and life refill timing with the team -->
           <div class="faq__col" data-accordion>
-            <div class="faq-item">
-              <button class="faq-item__q" aria-expanded="false"><span>What is Playtrade?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
-              <p class="faq-item__a">Playtrade is Profit.com’s trading arena: compete with virtual money in live competitions and win real cash prizes.</p>
-            </div>
-            <div class="faq-item">
-              <button class="faq-item__q" aria-expanded="false"><span>How do I access the Billionaire Portfolios?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
-              <p class="faq-item__a">Open Tools in the top menu and select Billionaire Portfolios. Full holdings are available on PRO and PRO+ plans.</p>
-            </div>
-            <div class="faq-item">
-              <button class="faq-item__q" aria-expanded="false"><span>What’s the difference between Pro and Pro+ plans?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
-              <p class="faq-item__a">PRO+ adds unlimited competition entries, AI-powered insights and referral cash bonuses on top of everything in PRO.</p>
-            </div>
-            <div class="faq-item">
-              <button class="faq-item__q" aria-expanded="false"><span>How often do you provide AI-Powered Insights?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
-              <p class="faq-item__a">Insights refresh throughout the trading day whenever the market moves meaningfully.</p>
-            </div>
             <div class="faq-item is-open">
-              <button class="faq-item__q" aria-expanded="true"><span>Can I cancel my subscription anytime?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
-              <p class="faq-item__a">Yes, you can cancel your subscription at any time without any additional fees.</p>
+              <button class="faq-item__q" aria-expanded="true"><span>What is Playtrade?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Playtrade is Profit.com’s trading arena. You trade real market moves with virtual money in tournaments and market games, climb the leaderboard, and can win real cash prizes.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Is it really free?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes. You can play practice tournaments and market games like Bull Run for free, with no deposit. Some cash-prize tournaments have an entry fee on the Free plan, or are included with PRO and PRO+.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What do PRO and PRO+ get?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">PRO gets cheaper entry to cash-prize tournaments. PRO+ gets unlimited access to every tournament with no entry fees.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Is the market data real?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes. Profit.com uses real market data, while all trading is simulated with virtual funds.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Is my money at risk?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">No. You trade with virtual funds. No deposits or real capital are used.</p>
             </div>
           </div>
           <div class="faq__col" data-accordion>
             <div class="faq-item">
-              <button class="faq-item__q" aria-expanded="false"><span>What is Playtrade?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
-              <p class="faq-item__a">Playtrade is Profit.com’s trading arena: compete with virtual money in live competitions and win real cash prizes.</p>
+              <button class="faq-item__q" aria-expanded="false"><span>What happens if I lose all my lives?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">You can’t start a new battle until a life refills. Lives come back automatically over time, one every 60 minutes, so check back later and pick up where you left off.</p>
             </div>
             <div class="faq-item">
-              <button class="faq-item__q" aria-expanded="false"><span>How do I access the Billionaire Portfolios?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
-              <p class="faq-item__a">Open Tools in the top menu and select Billionaire Portfolios. Full holdings are available on PRO and PRO+ plans.</p>
-            </div>
-            <div class="faq-item">
-              <button class="faq-item__q" aria-expanded="false"><span>What’s the difference between Pro and Pro+ plans?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
-              <p class="faq-item__a">PRO+ adds unlimited competition entries, AI-powered insights and referral cash bonuses on top of everything in PRO.</p>
+              <button class="faq-item__q" aria-expanded="false"><span>Can I cancel my subscription anytime?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes, you can cancel your subscription at any time without any additional fees.</p>
             </div>
             <div class="faq-contact">
               <div class="faq-contact__text">
@@ -521,8 +567,8 @@
       <footer class="footer">
         <div class="footer__cta-row">
           <div class="footer__pitch">
-            <p>Ready to Turn Practice in Real Money?</p>
-            <p>Join Profit.com — No risk. Real rewards.</p>
+            <p>Ready to test your trading skills?</p>
+            <p>Join Profit.com — no deposits, real cash prizes.</p>
           </div>
           <a class="btn-brand footer__play" href="#">Play Now</a>
         </div>
@@ -563,6 +609,12 @@
           </div>
         </div>
       </footer>
+
+      <!-- ============ Legal disclaimer ============ -->
+      <div class="legal-disclaimer" role="note" aria-label="Disclaimer">
+        <p>Profit.com is an educational, subscription-based software platform providing financial market analytics and simulated trading using real-time market data and virtual funds. All trading activity on the platform is simulated. No real capital is used, no customer deposits are collected, and no real-money trades are executed or facilitated.</p>
+        <p>Profit.com is not a broker and does not provide brokerage, investment, or other financial services or investment advice. All content, tools and features are provided for educational and informational purposes only. Simulated trading results are hypothetical and are not indicative of actual or future results. The terms “trading” and “trader” refer exclusively to simulated activity on Profit.com and should not be interpreted as real-money trading or investing.</p>
+      </div>
 
     </main>
   </div>

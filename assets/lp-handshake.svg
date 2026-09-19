@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Handshake" clip-path="url(#clip0_0_74)">
+<g id="Vector">
+</g>
+<path id="Vector_2" d="M14.375 5.625H11.25L7.68281 9.08516C7.6165 9.15144 7.56595 9.23179 7.5349 9.32026C7.50386 9.40872 7.49311 9.50305 7.50347 9.59623C7.51382 9.68941 7.54501 9.77908 7.59471 9.85857C7.64442 9.93807 7.71138 10.0054 7.79063 10.0555C9.15859 10.9297 11.0156 10.8695 12.5 9.375L15.625 11.875L16.875 10.625" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M15.625 11.875L12.5 15L7.5 13.75L3.125 10.625" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M4.375 15L6.25 16.25L8.75 16.875" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M5.625 5.625L10 4.375L14.375 5.625" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_6" d="M2.84531 4.93437L0.904688 8.81562C0.867905 8.88907 0.845961 8.96905 0.840112 9.05099C0.834263 9.13292 0.844622 9.21521 0.870598 9.29313C0.896574 9.37106 0.937657 9.44311 0.991498 9.50514C1.04534 9.56718 1.11088 9.618 1.18438 9.65469L3.125 10.625L5.625 5.625L3.68437 4.65469C3.61093 4.6179 3.53095 4.59596 3.44901 4.59011C3.36708 4.58426 3.28479 4.59462 3.20687 4.6206C3.12894 4.64657 3.05689 4.68766 2.99486 4.7415C2.93282 4.79534 2.882 4.86088 2.84531 4.93437Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_7" d="M16.3156 4.65469L14.375 5.625L16.875 10.625L18.8156 9.65469C18.8891 9.618 18.9547 9.56718 19.0085 9.50514C19.0623 9.44311 19.1034 9.37106 19.1294 9.29313C19.1554 9.21521 19.1657 9.13292 19.1599 9.05099C19.154 8.96905 19.1321 8.88907 19.0953 8.81562L17.1547 4.93437C17.118 4.86088 17.0672 4.79534 17.0051 4.7415C16.9431 4.68766 16.8711 4.64657 16.7931 4.6206C16.7152 4.59462 16.6329 4.58426 16.551 4.59011C16.4691 4.59596 16.3891 4.6179 16.3156 4.65469Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_0_74">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>
