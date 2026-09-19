@@ -1340,6 +1340,7 @@ a {
   .topnav__menu { gap: 16px; }
   .explore-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .missions { flex-direction: column; }
+  .mission { flex: none; } /* overflow:hidden would otherwise let the stacked rows collapse */
   .faq__cols { flex-direction: column; }
   .faq__col { width: 100%; }
   .footer__cols { flex-direction: column; }
@@ -1672,3 +1673,238 @@ body.is-playing { overflow: hidden; }
 }
 .nav-dd__social a:hover { border-color: var(--bg-2); }
 .nav-dd__social img { width: 20px; height: 20px; }
+
+/* =====================================================================
+   Mobile & small tablet (≤ 860px)
+   The side navigation turns into a drawer opened from the top bar, and
+   long rows of cards become swipeable strips that bleed to the screen edge.
+   ===================================================================== */
+.topnav__burger { display: none; }
+.side-nav__site,
+.side-nav-scrim { display: none; }
+.side-nav--drawer-only { display: none; }
+
+@media (max-width: 860px) {
+  /* ---- Top bar + drawer ---- */
+  .topnav { gap: 8px; padding: 0 12px 0 8px; }
+  .topnav > a:first-of-type { margin-right: auto; }
+  .topnav__logo { width: 124px; height: 22px; }
+  .topnav > .vdivider { display: none; }
+  .topnav__right { gap: 8px; }
+  .topnav__icons { gap: 4px; }
+  .topnav__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 12px;
+  }
+  .topnav__burger span {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--fg-primary);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .topnav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .topnav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .topnav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .topnav__burger:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+  .side-nav,
+  .side-nav--drawer-only,
+  .pr-shell .side-nav {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    z-index: 60;
+    display: flex;
+    width: min(300px, 86vw) !important;
+    height: auto;
+    border-right: 1px solid var(--border-primary);
+    background: var(--bg-base);
+    transform: translateX(-102%);
+    visibility: hidden;
+    transition: transform 0.25s ease, visibility 0s linear 0.25s;
+  }
+  .side-nav.is-open {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.25s ease;
+    box-shadow: 24px 0 48px rgba(0, 0, 0, 0.5);
+  }
+  .side-nav:hover,
+  .side-nav:focus-within { border-right-color: var(--border-primary); }
+  .side-nav__scroll { padding: 16px; }
+  .side-nav__item { height: 44px; padding: 0 12px; font-size: 16px; }
+  .side-nav__badge { left: 22px; top: 6px; }
+  /* Always show labels in the drawer, whatever the desktop collapse state */
+  .side-nav.is-collapsed .side-nav__label { display: block; }
+  .side-nav.is-collapsed .side-nav__coins,
+  .side-nav.is-collapsed .side-nav__logos,
+  .side-nav.is-collapsed .side-nav__pro { display: flex; }
+  .side-nav__toggle { display: none; }
+  .side-nav__site {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-primary);
+  }
+  .side-nav__site-title { padding: 0 12px 6px; font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--fg-secondary); }
+  .side-nav__site-link { display: flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 8px; font-size: 16px; font-weight: 500; color: var(--fg-secondary); }
+  .side-nav__site-link:hover { background: var(--bg-subtle); color: var(--fg-primary); }
+  .side-nav-scrim {
+    position: fixed;
+    inset: 56px 0 0;
+    z-index: 55;
+    display: block;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .side-nav-scrim[hidden] { display: none; }
+  .side-nav-scrim.is-on { opacity: 1; }
+  html.has-drawer,
+  html.has-drawer body { overflow: hidden; }
+  .topnav { z-index: 70; }
+  .nav-dd__panel { display: none !important; }
+
+  /* ---- Page rhythm ---- */
+  .main { gap: 40px; }
+  .section,
+  .summary { padding: 0 16px; }
+  .section .t-h1,
+  .section .t-h2 { font-size: 24px; line-height: 32px; letter-spacing: -0.5px; }
+
+  /* Swipeable strips: bleed to the screen edge, snap card by card */
+  .tabs,
+  .trades-row,
+  .explore-grid,
+  .mg-row,
+  .tpc-row {
+    margin-inline: -16px;
+    padding-inline: 16px;
+    scroll-padding-inline: 16px;
+  }
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { height: 36px; padding: 8px 16px; font-size: 15px; }
+  .tab--bare:not(.is-active) { padding: 8px 16px; }
+  .tab--live { padding: 8px 14px 8px 12px; }
+
+  /* ---- Hero ---- */
+  .hero { gap: 12px; }
+  .hero__inner { padding: 28px 16px 24px; }
+  .hero__content { gap: 24px; }
+  .hero__title { font-size: 34px; line-height: 40px; letter-spacing: -1.2px; }
+  .hero__sub { max-width: 30ch; }
+  .hero__stats { flex-wrap: nowrap; gap: 20px; }
+  .hero__stat { flex-direction: column; align-items: flex-start; gap: 0; }
+  .hero__stat b { font-size: 24px; line-height: 30px; }
+  .hero__art { opacity: 0.22; right: -160px; }
+  .referral__inner { padding-bottom: 28px; }
+  .referral__content { gap: 24px; }
+  .referral__title { font-size: 30px; line-height: 38px; letter-spacing: -1px; }
+  .referral__amount { width: 70px; height: 38px; }
+  .referral__amount img { top: -5px; width: 70px; height: 44px; }
+  .referral__sub { font-size: 16px; line-height: 22px; }
+  .referral__art { right: -220px; opacity: 0.3; }
+
+  /* ---- Account summary: three compact stat tiles in a row ---- */
+  .summary { gap: 20px; }
+  .summary__who { margin-bottom: 0; align-items: center; }
+  .summary__avatar { width: 64px; height: 64px; }
+  .summary__avatar img { width: 68px; height: 68px; }
+  .summary__profile { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 16px; }
+  .summary__upgrade { width: auto; }
+  .summary__stats { flex-direction: row; gap: 8px; }
+  .summary__stats > * { flex: 1 1 0; padding: 16px 8px; }
+  .stat-card { gap: 8px; min-width: 0; border-radius: 20px; }
+  .stat-card .icon-40 { width: 28px; height: 28px; }
+  .stat-card__body { min-width: 0; }
+  .stat-card__body .t-h1 { font-size: 20px; line-height: 26px; letter-spacing: -0.4px; }
+
+  /* ---- Joined competitions ---- */
+  .joined-grid { gap: 16px; }
+  .jc-card { width: 100%; }
+  .jc-card__stats { flex-wrap: wrap; row-gap: 12px; }
+
+  /* ---- Tournaments: one swipeable row of full-size cards ---- */
+  .explore-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(300px, 82%);
+    grid-template-columns: none;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+  }
+  .explore-grid::-webkit-scrollbar { display: none; }
+  .ex-card { height: 312px; scroll-snap-align: start; }
+  .ex-card:hover { transform: none; }
+
+  /* ---- Market games / top traders ---- */
+  .section--games { margin-top: 0; }
+  .mg-row { grid-auto-columns: min(300px, 82%); gap: 12px; }
+  .tpc-row { gap: 12px; scroll-snap-type: x mandatory; }
+  .tpc { scroll-snap-align: start; }
+
+  /* ---- Daily missions ---- */
+  .missions { gap: 12px; }
+  .mission { gap: 12px; padding: 14px; border-radius: 20px; }
+  .mission__img { width: 48px; height: 48px; }
+  .mission__text { padding-right: 0; }
+  .mission__title { font-size: 16px; line-height: 22px; }
+  .mission__earn > span:first-child { font-size: 14px; }
+  .mission__claim { flex-shrink: 0; width: 72px; }
+
+  /* ---- FAQ + contact ---- */
+  .faq-item__q { font-size: 16px; }
+  .faq-item__a { font-size: 15px; line-height: 24px; }
+  .faq-contact { padding: 20px; }
+  .faq-contact__text { font-size: 16px; line-height: 22px; }
+  .faq-agent { flex-wrap: wrap; }
+  .faq-agent__cta { flex-basis: 100%; }
+
+  /* ---- Footer ---- */
+  .footer { padding: 0 16px 32px; gap: 32px; }
+  .footer__pitch p:first-child { font-size: 16px; }
+  .footer__pitch p:last-child { font-size: 26px; line-height: 1.25; }
+  .footer__cols { gap: 32px; }
+  .footer__links { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 28px 16px; }
+  .footer__col--fixed,
+  .footer__col--app { width: auto; }
+  .footer__col { gap: 16px; }
+  .footer__col ul { gap: 12px; }
+  .socials { flex-wrap: wrap; }
+  .legal-disclaimer { padding: 20px 16px 32px; font-size: 11px; line-height: 16px; }
+
+  /* Game player: follow the visible viewport as mobile browser bars show and hide */
+  .game-modal { bottom: auto; height: 100dvh; }
+  .game-modal__bar { height: 48px; }
+}
+
+/* Small tablets: use the extra width for two-up joined cards */
+@media (min-width: 601px) and (max-width: 860px) {
+  .joined-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .footer__play { align-self: stretch; }
+}
+@media (max-width: 400px) {
+  .hero__title { font-size: 30px; line-height: 36px; }
+  .hero__stats { gap: 14px; }
+  .hero__stat b { font-size: 21px; line-height: 26px; }
+  .stat-card__body .t-h1 { font-size: 18px; line-height: 24px; }
+  .jc-metrics { flex-wrap: wrap; }
+}

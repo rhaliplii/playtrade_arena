@@ -233,4 +233,9 @@
 @media (max-width: 860px) {
   .br-title { font-size: 36px; line-height: 44px; }
   .br-preview { height: 240px; }
-  }
+  .mode-pick { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; max-width: none; }
+  .mode-pick__opt { padding: 12px 30px 12px 12px; }
+  .mode-pick__sub { white-space: normal; }
+  .mode-pick__radio { top: 13px; right: 10px; }
+  .br-start { width: 100%; }
+}

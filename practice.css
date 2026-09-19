@@ -379,6 +379,24 @@
   .pr-fade { display: none; }
 }
 @media (max-width: 860px) {
-  .pr-card { padding: 32px 16px 24px; min-height: 560px; }
-  .pr-interior { height: 320px; }
+  /* The side navigation is a fixed drawer here (styles.css); undo the in-flow column */
+  .pr-shell .side-nav { position: fixed; top: 56px; height: auto; align-self: auto; }
+  .pr-main { position: relative; gap: 12px; padding: 0 12px 24px; }
+  .pr-card { margin-top: 12px; padding: 64px 16px 24px; min-height: 0; gap: 16px; border-radius: 28px; }
+  .pr-card__sub { font-size: 15px; line-height: 22px; }
+  /* The artwork is one fixed 604 × 390 composition; scale it as a whole instead of cropping */
+  .pr-interior { width: 604px; max-width: none; height: 390px; flex-shrink: 0; zoom: 0.8; }
+  /* Back button floats over the top-left corner of the hero card */
+  .pr-back {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .pr-left, .pr-right { flex: 1 1 100%; margin-top: 0; }
+  .pr-panel { min-height: 0; }
+}
+@media (max-width: 600px) {
+  .pr-interior { zoom: 0.54; }
 }

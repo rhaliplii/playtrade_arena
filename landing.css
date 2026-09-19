@@ -814,6 +814,7 @@
   .lp-h2 { font-size: 36px; line-height: 44px; letter-spacing: -1px; }
   .lp-hero__title { font-size: 44px; line-height: 52px; letter-spacing: -1px; }
   .lp-hero__sub br { display: none; }
+  .lp-hero { padding-top: 40px; padding-bottom: 56px; gap: 40px; }
   .lp-btn-hero { width: 100%; }
   .lp-hero__cta { align-self: stretch; }
   .lp-about__hl { line-height: 44px; }
