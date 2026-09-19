@@ -838,8 +838,18 @@ a {
   width: 430px;
   height: 271px;
   overflow: hidden;
-  box-shadow: inset 0 0 0 1px var(--border-primary);
   border-radius: 32px;
+}
+/* The border is an overlay: the stats strip has its own background and would hide an inset border */
+.jc-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px var(--border-primary);
+  pointer-events: none;
+  transition: box-shadow 0.25s ease;
 }
 .jc-card--red { background-image: linear-gradient(212.698deg, #ff2441 3.7149%, #f40051 51.906%, #64000f 96.793%); }
 .jc-card--grey {
@@ -1388,8 +1398,7 @@ a {
 .ex-card--bitcoin, .jc-card--grey { --card-glow: rgba(160, 165, 180, 0.22); }
 a.ex-card,
 a.jc-card { transition: transform 0.2s ease, box-shadow 0.25s ease; }
-a.ex-card::after,
-a.jc-card::after {
+a.ex-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -1406,7 +1415,7 @@ a.jc-card > .masked { transition: transform 0.4s ease; transform-origin: 75% 75%
 a.ex-card:hover,
 a.jc-card:hover { transform: translateY(-4px); }
 a.ex-card:hover { box-shadow: 0 18px 44px -10px var(--card-glow); }
-a.jc-card:hover { box-shadow: inset 0 0 0 1px var(--border-primary), 0 18px 44px -10px var(--card-glow); }
+a.jc-card:hover { box-shadow: 0 18px 44px -10px var(--card-glow); }
 a.ex-card:hover::after,
 a.jc-card:hover::after { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25); }
 a.ex-card:hover > .masked,

@@ -431,7 +431,8 @@ html.is-preview .target { min-height: 44px; }
   .target-row .target { padding-inline: 66px; font-size: 13px; }
   .target__togo { display: none; }
   .hud { gap: 6px; }
-  html.is-embedded .chip--mode { display: none; } /* the Arena player's title bar already names the mode */
+  html.is-embedded .chip--mode { display: none; }
+  .icon-btn--sound { display: none; } /* phones: the Sound toggle lives in the pause panel */ /* the Arena player's title bar already names the mode */
   .hint { height: 42px; font-size: 13px; }
   .panel__big { font-size: 48px; }
 }
@@ -459,6 +460,7 @@ html.is-preview .target { min-height: 44px; }
       <span class="wallet__part" id="livesPart" title="Lives left"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.2S2 10.6 2 6.3A3.2 3.2 0 0 1 8 4.4a3.2 3.2 0 0 1 6 1.9c0 4.3-6 7.9-6 7.9Z" fill="#f63d68"/></svg><span id="lives">5</span><span class="sr-only"> lives</span></span>
       <span class="wallet__part" title="Coins"><span aria-hidden="true">🪙</span><span id="coins">0</span><span class="sr-only"> coins</span></span>
     </span>
+    <button class="icon-btn icon-btn--sound" id="soundBtn" type="button" aria-label="Mute sound (M)" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="sound-waves" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
     <button class="icon-btn" id="pauseBtn" type="button" aria-label="Pause (P)"><svg viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><rect x="4" y="3.5" width="3.4" height="11" rx="1"/><rect x="10.6" y="3.5" width="3.4" height="11" rx="1"/></svg></button>
   </div>
 
@@ -491,6 +493,7 @@ html.is-preview .target { min-height: 44px; }
     <p class="panel__sub">The clock is stopped and the board is hidden.</p>
     <div class="actions">
       <button class="btn btn--primary" id="resumeBtn" type="button">Resume</button>
+      <button class="btn btn--ghost" id="soundToggle" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="sound-waves" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span id="soundLbl">Sound: on</span></button>
       <button class="btn btn--ghost" id="restartBtn" type="button">Restart</button>
       <button class="btn btn--ghost" id="quitBtn" type="button">Exit game</button>
     </div>
@@ -533,6 +536,68 @@ html.is-preview .target { min-height: 44px; }
     streak: 0, bestStreak: 0, streaks: 0, lastHit: 0,
   };
   if (GUEST && MODES[S.mode].ranked) S.mode = "practice"; // ranked runs need an account
+
+  // ---------- Sound: synthesised with Web Audio, like Bull Run (no files) ----------
+  const SOUND_KEY = "fast_scan_muted_v1";
+  const audio = {
+    ctx: null, master: null,
+    muted: (() => { try { return localStorage.getItem(SOUND_KEY) === "1"; } catch { return false; } })(),
+    init() {
+      if (PREVIEW) return; // the attract preview is always silent
+      if (this.ctx) { if (this.ctx.state === "suspended") this.ctx.resume(); return; }
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      this.ctx = new AC();
+      this.master = this.ctx.createGain();
+      this.master.gain.value = this.muted ? 0 : 0.4;
+      this.master.connect(this.ctx.destination);
+    },
+    setMuted(m) {
+      this.muted = m;
+      if (this.master) this.master.gain.value = m ? 0 : 0.4;
+      try { localStorage.setItem(SOUND_KEY, m ? "1" : "0"); } catch { /* storage unavailable */ }
+    },
+    tone(freq, dur, { type = "sine", vol = 0.3, when = 0, slide = null } = {}) {
+      if (!this.ctx) return;
+      const t = this.ctx.currentTime + when;
+      const o = this.ctx.createOscillator(), g = this.ctx.createGain();
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      if (slide) o.frequency.exponentialRampToValueAtTime(slide, t + dur);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g).connect(this.master);
+      o.start(t); o.stop(t + dur + 0.05);
+    },
+  };
+  // A pentatonic ladder: each right tap climbs one step, so a clean run sounds like a rising scale
+  const LADDER = [0, 2, 4, 7, 9];
+  const ladder = (i, base = 523.25) => base * Math.pow(2, (LADDER[i % 5] + 12 * Math.floor(i / 5)) / 12);
+  const sfx = {
+    // Tap i of total: the whole board spans the same ladder, so every grid ends on the top note
+    tap: (i, total) => audio.tone(ladder(Math.round((i / Math.max(1, total - 1)) * 14)), 0.09, { type: "triangle", vol: 0.16 }),
+    wrong: () => { audio.tone(196, 0.22, { type: "sawtooth", vol: 0.1, slide: 110 }); audio.tone(92, 0.2, { type: "square", vol: 0.05 }); },
+    streak: () => [0, 7, 12].forEach((st, i) => audio.tone(1046.5 * Math.pow(2, st / 12), 0.14, { type: "triangle", vol: 0.12, when: 0.05 + i * 0.05 })),
+    beep: (hi) => audio.tone(hi ? 880 : 520, hi ? 0.35 : 0.14, { type: "triangle", vol: 0.25 }), // same as Bull Run's countdown
+    urgent: () => audio.tone(740, 0.07, { type: "square", vol: 0.07 }),
+    hint: () => [0, 4, 7].forEach((st, i) => audio.tone(1318.5 * Math.pow(2, st / 12), 0.1, { type: "sine", vol: 0.12, when: i * 0.045 })),
+    clear: (best) => [0, 4, 7, 12, 16].concat(best ? [19, 24] : []).forEach((st, i) => audio.tone(523.25 * Math.pow(2, st / 12), 0.3, { type: "triangle", vol: 0.18, when: i * 0.08 })),
+    fail: () => [7, 4, 0, -5].forEach((st, i) => audio.tone(392 * Math.pow(2, st / 12), 0.26, { type: "triangle", vol: 0.16, when: i * 0.13 })),
+  };
+  const renderSound = () => {
+    const waves = audio.muted ? "M16 9l6 6M22 9l-6 6" : "M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12";
+    document.querySelectorAll(".sound-waves").forEach((p) => p.setAttribute("d", waves));
+    $("soundBtn").setAttribute("aria-label", audio.muted ? "Unmute sound (M)" : "Mute sound (M)");
+    $("soundBtn").setAttribute("aria-pressed", String(audio.muted));
+    $("soundLbl").textContent = audio.muted ? "Sound: off" : "Sound: on";
+  };
+  const toggleSound = () => { audio.init(); audio.setMuted(!audio.muted); renderSound(); };
+  $("soundBtn").addEventListener("click", toggleSound);
+  $("soundToggle").addEventListener("click", toggleSound);
+  // Browsers only allow audio after a gesture: wake the engine on the first tap or key in the game
+  addEventListener("pointerdown", () => audio.init(), { capture: true });
+  addEventListener("keydown", () => audio.init(), { capture: true });
+  renderSound();
 
   const post = (msg) => { if (window.parent !== window) window.parent.postMessage({ source: "fast_scan", ...msg }, "*"); };
   const elapsedMs = () => !S.startAt ? 0 : (S.paused ? S.pausedAt : performance.now()) - S.startAt - S.pausedTotal;
@@ -620,6 +685,9 @@ html.is-preview .target { min-height: 44px; }
       $("timeLeft").textContent = FS.fmtClock(left);
       $("timeBar").style.transform = `scaleX(${Math.max(0, left / (S.timeLimit * 1000))})`;
       $("timeChip").classList.toggle("is-low", left < 5000);
+      // Last five seconds: one warning tick per second
+      const sec = Math.ceil(left / 1000);
+      if (left > 0 && sec <= 5 && sec !== S.lastWarn) { S.lastWarn = sec; sfx.urgent(); }
       if (left <= 0) fail("Time's up!");
     }
   };
@@ -640,13 +708,15 @@ html.is-preview .target { min-height: 44px; }
       S.streak = S.lastHit && now - S.lastHit <= CONFIG.STREAK_WINDOW * 1000 ? S.streak + 1 : 1;
       S.lastHit = now;
       S.bestStreak = Math.max(S.bestStreak, S.streak);
-      if (S.streak === CONFIG.STREAK_MIN) { S.streaks++; if (ranked() && !GUEST && !PREVIEW) toast(`🔥 Streak · +${CONFIG.REWARDS.STREAK_BONUS} coins`); }
+      sfx.tap(S.idx - 1, S.order.length);
+      if (S.streak === CONFIG.STREAK_MIN) { S.streaks++; sfx.streak(); if (ranked() && !GUEST && !PREVIEW) toast(`🔥 Streak · +${CONFIG.REWARDS.STREAK_BONUS} coins`); }
       renderStreak();
       renderTarget();
       // The attract preview loops on its own and never records a run or opens the results panel
       if (S.idx >= S.order.length && !PREVIEW) complete();
     } else {
       S.mistakes++;
+      sfx.wrong();
       S.streak = 0;
       S.lastHit = 0;
       renderStreak();
@@ -663,6 +733,7 @@ html.is-preview .target { min-height: 44px; }
   $("hintReveal").addEventListener("click", () => {
     if (!S.running || !FS.spendCoins(CONFIG.HINT_COST)) return;
     const cell = cellFor(S.order[S.idx]);
+    sfx.hint();
     cell?.classList.add("is-hint");
     setTimeout(() => cell?.classList.remove("is-hint"), 3000);
     $("coins").textContent = FS.wallet().coins;
@@ -671,6 +742,8 @@ html.is-preview .target { min-height: 44px; }
   $("hintTime").addEventListener("click", () => {
     if (!S.running || !S.timeLimit || !FS.spendCoins(CONFIG.HINT_COST)) return;
     S.timeLimit += CONFIG.EXTRA_TIME;
+    S.lastWarn = 0;
+    sfx.hint();
     toast(`+${CONFIG.EXTRA_TIME} seconds`);
     $("coins").textContent = FS.wallet().coins;
     renderHints();
@@ -683,8 +756,9 @@ html.is-preview .target { min-height: 44px; }
     $("end").hidden = true;
     $("pause").hidden = true;
     $("menu").hidden = true;
+    audio.init();
     const lim = FS.limitsFor(S.mode, S.size);
-    Object.assign(S, lim, { idx: 0, mistakes: 0, startAt: 0, pausedTotal: 0, running: false, paused: false, over: false, streak: 0, bestStreak: 0, streaks: 0, lastHit: 0 });
+    Object.assign(S, lim, { idx: 0, mistakes: 0, startAt: 0, pausedTotal: 0, running: false, paused: false, over: false, streak: 0, bestStreak: 0, streaks: 0, lastHit: 0, lastWarn: 0 });
     // Ranked runs cost one life
     if (ranked() && !GUEST && !FS.spendLife()) return showNoLives();
     buildBoard();
@@ -702,6 +776,7 @@ html.is-preview .target { min-height: 44px; }
     const step = (i) => {
       const b = $("countN");
       b.textContent = steps[i];
+      sfx.beep(steps[i] === "GO");
       b.className = steps[i] === "GO" ? "go" : "";
       b.style.animation = "none"; void b.offsetWidth; b.style.animation = "";
       if (i === steps.length - 1) {
@@ -736,6 +811,7 @@ html.is-preview .target { min-height: 44px; }
   const complete = () => {
     finish();
     const { run, newBest } = record(true);
+    sfx.clear(newBest);
     const ev = FS.evaluate(run.timeMs / 1000, run.accuracy, S.size);
     const rank = ranked() && !GUEST ? FS.leaderboard(S.mode, S.size, { name: FS.PLAYER.name, timeMs: FS.best(S.mode, S.size).timeMs, accuracy: run.accuracy }) : null;
     const you = rank?.rows.find((r) => r.you);
@@ -761,6 +837,7 @@ html.is-preview .target { min-height: 44px; }
     if (S.over) return;
     finish();
     const { run } = record(false, reason);
+    sfx.fail();
     cellFor(S.order[S.idx])?.classList.add("is-hint"); // show where the next number was
     showEnd(`
       <p class="panel__eyebrow is-fail">${MODES[S.mode].label} · ${S.size}×${S.size}</p>
@@ -826,6 +903,7 @@ html.is-preview .target { min-height: 44px; }
   $("quitBtn").addEventListener("click", exitGame);
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" || e.key === "p" || e.key === "P") { e.preventDefault(); if (S.running) setPaused(!S.paused); }
+    if ((e.key === "m" || e.key === "M") && !PREVIEW) toggleSound();
   });
   document.addEventListener("visibilitychange", () => { if (document.hidden) setPaused(true); });
 
