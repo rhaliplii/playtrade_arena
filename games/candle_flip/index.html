@@ -1,0 +1,1122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Candle Flip · Profit.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  // Launched straight into a run (from the Arena) or as the attract preview: never flash the menu
+  if (/[?&](autostart|preview)\b/.test(location.search)) document.documentElement.classList.add("direct-start");
+  if (/[?&]preview\b/.test(location.search)) document.documentElement.classList.add("is-preview");
+  if (/[?&]autostart\b/.test(location.search) && window.parent !== window) document.documentElement.classList.add("is-embedded");
+</script>
+<style>
+/* ============================================================================
+   CANDLE FLIP — match the pairs of candlestick patterns from memory.
+   Arena tokens: dark surfaces, Montserrat, Profit mint for right answers and actions.
+   Candle Flip's own identity: the violet of its Arena card, with bull green and bear red.
+   ========================================================================= */
+:root {
+  --bg: #0a0c0f;
+  --surface: #14171c;
+  --surface-2: #1a1d22;
+  --line: #2d2f34;
+  --line-2: #3d3f47;
+  --text: #fff;
+  --text-2: #888b96;
+  --mint: #07d8a2;
+  --mint-soft: rgba(7, 216, 162, 0.14);
+  --mint-ink: #06261c;
+  --loss: #f63d68;
+  --loss-soft: rgba(246, 61, 104, 0.16);
+  --flip: #7c5cff;
+  --flip-soft: rgba(124, 92, 255, 0.16);
+  --bull: #3be39a;
+  --bear: #f63d68;
+  --orange: #ff9100;
+  --gold: #fbb517;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(700px 360px at 50% -120px, rgba(124, 92, 255, 0.16), transparent 70%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Montserrat", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+[hidden] { display: none !important; }
+
+/* ---------- Game screen ---------- */
+.game {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 760px;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 16px 16px max(16px, env(safe-area-inset-bottom));
+}
+.hud { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hud__spacer { flex: 1; }
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.chip svg { width: 16px; height: 16px; flex: none; }
+.chip__lbl { font-size: 12px; font-weight: 600; color: var(--text-2); }
+.chip--mode { font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; }
+.chip--mode i { width: 8px; height: 8px; border-radius: 50%; background: var(--mode-color, var(--mint)); }
+.chip--time { position: relative; overflow: hidden; min-width: 78px; justify-content: center; }
+.chip--time .bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--mint); transform-origin: left; }
+.chip--time.is-low { color: var(--loss); }
+.chip--time.is-low .bar { background: var(--loss); }
+.chip--wallet { gap: 12px; }
+.wallet__part { display: flex; align-items: center; gap: 5px; }
+.wallet__part:not([hidden]) + .wallet__part { padding-left: 12px; border-left: 1px solid var(--line); }
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--text-2);
+}
+.icon-btn:hover { color: var(--text); }
+.icon-btn svg { width: 18px; height: 18px; }
+.icon-btn--sound svg { width: 20px; height: 20px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- The strip above the board ---------- */
+.target-row { position: relative; flex: none; }
+.target {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 8px 92px;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+.target b { color: var(--flip); }
+.target__togo { font-weight: 600; color: var(--text-2); }
+.target__brief { display: none; } /* the short wording phones use instead */
+/* A matched pattern names itself here for a moment — the learning beat of the game */
+.target--learn { box-shadow: inset 0 0 0 1px rgba(124, 92, 255, 0.5); }
+.target__name { color: var(--text); }
+.target__bias { font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; }
+.target__bias--bull { color: var(--bull); }
+.target__bias--bear { color: var(--bear); }
+.target__bias--neutral { color: var(--text-2); }
+.streak {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: rgba(251, 181, 23, 0.12);
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transform: translateY(-50%) scale(0.9);
+  transition: opacity 0.2s, transform 0.2s var(--ease);
+  pointer-events: none;
+}
+.streak.is-on { opacity: 1; transform: translateY(-50%) scale(1); }
+.progress { flex: none; height: 4px; border-radius: 4px; background: var(--surface); overflow: hidden; }
+.progress i { display: block; height: 100%; width: 0; border-radius: 4px; background: linear-gradient(90deg, var(--flip), var(--mint)); transition: width 0.3s var(--ease); }
+
+/* ---------- Board ---------- */
+.board-wrap {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), var(--card, 76px));
+  grid-auto-rows: var(--card-h, calc(var(--card, 76px) * 1.34));
+  gap: var(--gap, 8px);
+  --radius: clamp(5px, calc(var(--card, 76px) * 0.115), 13px);
+  perspective: 900px;
+}
+.board.is-hidden { filter: blur(14px); opacity: 0.35; pointer-events: none; }
+/* The corner radius follows the card size, so small boards do not turn into pills */
+.card { position: relative; width: 100%; height: 100%; border-radius: var(--radius); }
+.card__inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.42s var(--ease);
+}
+.card.is-up .card__inner { transform: rotateY(180deg); }
+.card__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.card__back {
+  background: linear-gradient(150deg, #241a4d 0%, #14162a 62%, #101218 100%);
+  box-shadow: inset 0 0 0 1px rgba(124, 92, 255, 0.35);
+}
+.card__back svg { width: 62%; height: 62%; opacity: 0.85; }
+.card__front {
+  transform: rotateY(180deg);
+  background: linear-gradient(180deg, #1c2029, #12151a);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.card__front svg { width: 100%; height: 100%; min-height: 0; flex: 1; }
+.card__name {
+  width: 100%;
+  flex: none;
+  font-size: clamp(6px, calc(var(--card, 76px) * 0.115), 11px);
+  line-height: 1.15;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card:hover:not(.is-up) .card__back { box-shadow: inset 0 0 0 1px rgba(124, 92, 255, 0.8); }
+.card:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+/* Matched: the pair locks face up with a mint ring */
+.card.is-done .card__front { box-shadow: inset 0 0 0 1px var(--mint), 0 0 20px rgba(7, 216, 162, 0.18); }
+.card.is-done { animation: pop 0.35s var(--ease); }
+@keyframes pop { 30% { transform: scale(1.06); } }
+.card.is-miss .card__front { box-shadow: inset 0 0 0 1px var(--loss); animation: nudge 0.4s; }
+@keyframes nudge { 25% { transform: translateX(-4px); } 60% { transform: translateX(4px); } }
+/* Peek: a card the hint has lifted for a moment */
+.card.is-peek .card__front { box-shadow: inset 0 0 0 1px var(--gold), 0 0 20px rgba(251, 181, 23, 0.25); }
+.board.is-locked { pointer-events: none; }
+
+/* The preview's pointer, standing in for a finger */
+/* Preview only: a quiet touch indicator, with a ring that expands where it taps */
+.pointer {
+  position: absolute;
+  z-index: 3;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.5), 0 2px 8px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: left 0.3s var(--ease), top 0.3s var(--ease), opacity 0.2s, transform 0.18s var(--ease), background 0.18s;
+}
+.pointer.is-on { opacity: 1; }
+.pointer.is-tap { transform: scale(0.72); background: rgba(255, 255, 255, 0.2); }
+.pointer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45);
+  opacity: 0;
+}
+.pointer.is-tap::after { animation: tap 0.45s var(--ease); }
+@keyframes tap { from { opacity: 0.7; transform: scale(1); } to { opacity: 0; transform: scale(2.1); } }
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(10, 12, 15, 0.92);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s, transform 0.2s var(--ease);
+  pointer-events: none;
+}
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+.pv-cleared {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 9, 12, 0.72);
+  font-size: 20px;
+  font-weight: 800;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.pv-cleared.is-on { opacity: 1; }
+
+/* ---------- Hints ---------- */
+.hints { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; flex: none; }
+.hints.is-two { grid-template-columns: repeat(2, 1fr); }
+.hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 8px;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.hint:hover:not(:disabled) { box-shadow: inset 0 0 0 1px var(--line-2); }
+.hint:disabled { opacity: 0.4; cursor: not-allowed; }
+.hint__cost { color: var(--gold); font-size: 12px; }
+.hints-off { margin: 0; flex: none; font-size: 13px; font-weight: 600; color: var(--text-2); text-align: center; }
+
+/* ---------- Overlays ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(6, 7, 9, 0.72);
+  backdrop-filter: blur(6px);
+}
+.countdown { background: rgba(6, 7, 9, 0.35); backdrop-filter: none; pointer-events: none; }
+.countdown b {
+  font-size: 96px;
+  font-weight: 800;
+  letter-spacing: -3px;
+  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  animation: count 0.9s var(--ease) both;
+}
+.countdown b.go { color: var(--mint); }
+@keyframes count { 0% { opacity: 0; transform: scale(1.4); } 25% { opacity: 1; transform: none; } 85% { opacity: 1; } 100% { opacity: 0; transform: scale(0.85); } }
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: min(460px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 28px 24px 24px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #1a1d22, #121418);
+  box-shadow: inset 0 0 0 1px var(--line), 0 30px 80px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  animation: rise 0.3s var(--ease);
+}
+@keyframes rise { from { opacity: 0; transform: translateY(12px) scale(0.98); } }
+.panel__eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: var(--text-2); }
+.panel__eyebrow.is-win { color: var(--mint); }
+.panel__eyebrow.is-fail { color: var(--loss); }
+.panel__title { margin: -6px 0 0; font-size: 26px; line-height: 32px; font-weight: 800; letter-spacing: -0.6px; }
+.panel__big { font-size: 52px; line-height: 1; font-weight: 800; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
+.panel__big small { font-size: 16px; font-weight: 700; letter-spacing: 0; color: var(--text-2); }
+.panel__sub { margin: -4px 0 0; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text-2); }
+.badge-best {
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(251, 181, 23, 0.16);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; width: 100%; }
+.tile { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 12px; border-radius: 14px; background: rgba(255, 255, 255, 0.04); text-align: left; }
+.tile span { font-size: 12px; font-weight: 600; color: var(--text-2); }
+.tile b { font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.tile b.gold { color: var(--gold); }
+.tile b.mint { color: var(--mint); }
+/* The patterns this board taught, shown back at the end */
+.learned { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; width: 100%; }
+.learned__chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px 4px 5px;
+  border-radius: 100px;
+  background: rgba(124, 92, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(124, 92, 255, 0.28);
+  font-size: 11px;
+  font-weight: 700;
+}
+.learned__chip svg { width: 16px; height: 16px; }
+.actions { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.btn--primary { background: var(--mint); color: var(--mint-ink); box-shadow: 0 8px 24px rgba(7, 216, 162, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.35); }
+.btn--primary:hover { background: #2ee6b5; }
+.btn--ghost { background: rgba(255, 255, 255, 0.06); }
+.btn--ghost:hover { background: rgba(255, 255, 255, 0.1); }
+.btn small { font-size: 13px; font-weight: 700; opacity: 0.75; }
+
+/* Stand-alone menu (only when the page is opened directly) */
+.menu__opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.menu__opt, .menu__size {
+  padding: 10px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 13px;
+  font-weight: 700;
+}
+.menu__opt[aria-checked="true"], .menu__size[aria-checked="true"] { box-shadow: inset 0 0 0 1px var(--mint); color: var(--mint); }
+.menu__size small { display: block; font-size: 11px; font-weight: 600; color: var(--text-2); }
+.menu__sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+html.direct-start #menu { display: none !important; }
+
+/* ---------- Attract preview (join screen) ---------- */
+html.is-preview body { background: radial-gradient(520px 300px at 50% 0, rgba(124, 92, 255, 0.2), transparent 70%), #07090c; }
+html.is-preview .game { max-width: none; padding: 14px 18px 18px; gap: 10px; }
+html.is-preview .hud, html.is-preview .hints, html.is-preview .hints-off, html.is-preview .progress { display: none !important; }
+/* The preview is watch-only: none of the game's panels (pause, results, countdown, menu) may show in it */
+html.is-preview .overlay { display: none !important; }
+html.is-preview .board.is-hidden { filter: none; opacity: 1; }
+html.is-preview .target { min-height: 42px; padding-inline: 16px; font-size: 14px; }
+/* The preview shows the artwork alone; the strip above it names the pattern instead */
+html.is-preview .card__name { display: none; }
+
+/* ---------- Phones ---------- */
+@media (max-width: 560px) {
+  .game { gap: 10px; padding: 12px 12px max(12px, env(safe-area-inset-bottom)); }
+  .chip { height: 34px; padding: 0 10px; font-size: 13px; }
+  .target { min-height: 44px; padding: 8px 70px; font-size: 14px; }
+  .target__full { display: none; }
+  .target__brief { display: inline; }
+  .hints { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .hint { height: 42px; font-size: 12px; gap: 4px; padding: 0 4px; }
+  .panel { padding: 22px 18px 18px; border-radius: 20px; }
+  .panel__big { font-size: 44px; }
+  .btn { height: 48px; font-size: 15px; }
+}
+/* Landscape phones: the board needs every pixel of height */
+@media (max-height: 460px) {
+  .game { gap: 8px; }
+  .target { min-height: 38px; padding: 6px 70px; font-size: 13px; }
+  .hints { grid-template-columns: repeat(3, 1fr); }
+  .hint { height: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card__inner, .pointer, .progress i { transition-duration: 0.01ms; }
+  .card.is-done, .card.is-miss, .countdown b, .panel { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<main class="game" id="game">
+  <div class="hud" id="hud">
+    <span class="chip chip--mode" id="modeChip"><i></i><span id="modeLbl">Practice · 4×4</span></span>
+    <span class="chip" title="Time elapsed">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="9" r="5.5"/><path d="M8 6.5V9l1.6 1.2M6.5 1.5h3"/></svg>
+      <span id="elapsed">0:00</span>
+    </span>
+    <span class="chip chip--time" id="timeChip" title="Time left" hidden><span id="timeLeft">2:00</span><span class="bar" id="timeBar"></span></span>
+    <span class="chip" title="Moves made">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.5" y="3" width="5" height="10" rx="1.5"/><rect x="9.5" y="3" width="5" height="10" rx="1.5"/></svg>
+      <span id="moves">0</span><span class="chip__lbl">moves</span>
+    </span>
+    <span class="hud__spacer"></span>
+    <span class="chip chip--wallet" id="walletChip">
+      <span class="wallet__part" id="livesPart" title="Lives left"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.2S2 10.6 2 6.3A3.2 3.2 0 0 1 8 4.4a3.2 3.2 0 0 1 6 1.9c0 4.3-6 7.9-6 7.9Z" fill="#f63d68"/></svg><span id="lives">5</span><span class="sr-only"> lives</span></span>
+      <span class="wallet__part" title="Coins"><span aria-hidden="true">🪙</span><span id="coins">0</span><span class="sr-only"> coins</span></span>
+    </span>
+    <button class="icon-btn icon-btn--sound" id="soundBtn" type="button" aria-label="Mute sound (M)" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="sound-waves" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    <button class="icon-btn" id="pauseBtn" type="button" aria-label="Pause (P)"><svg viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><rect x="4" y="3.5" width="3.4" height="11" rx="1"/><rect x="10.6" y="3.5" width="3.4" height="11" rx="1"/></svg></button>
+  </div>
+
+  <div class="target-row">
+    <div class="target" id="target" aria-live="polite"></div>
+    <span class="streak" id="streakChip" aria-live="polite">🔥 <span id="streakN">x3</span></span>
+  </div>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+  <div class="board-wrap" id="boardWrap">
+    <div class="board" id="board" role="grid" aria-label="Pattern cards"></div>
+    <span class="pointer" id="pointer" aria-hidden="true"></span>
+    <span class="toast" id="toast"></span>
+    <div class="pv-cleared" id="pvCleared" hidden><div>Cleared in <span id="pvTime">0:00</span></div></div>
+  </div>
+
+  <div class="hints" id="hints">
+    <button class="hint" id="hintPeek" type="button">Peek <span class="hint__cost">🪙 25</span></button>
+    <button class="hint" id="hintPair" type="button">Reveal a pair <span class="hint__cost">🪙 50</span></button>
+    <button class="hint" id="hintTime" type="button">+30s <span class="hint__cost">🪙 25</span></button>
+  </div>
+  <p class="hints-off" id="hintsOff" hidden>Hints are off in Blind — the cards are on you.</p>
+</main>
+
+<div class="overlay countdown" id="countdown" hidden><b id="countN">3</b></div>
+
+<div class="overlay" id="pause" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
+    <p class="panel__eyebrow">Paused</p>
+    <h2 class="panel__title" id="pauseTitle">Take a breath</h2>
+    <p class="panel__sub">The clock is stopped and the board is hidden.</p>
+    <div class="actions">
+      <button class="btn btn--primary" id="resumeBtn" type="button">Resume</button>
+      <button class="btn btn--ghost" id="soundToggle" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="sound-waves" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span id="soundLbl">Sound: on</span></button>
+      <button class="btn btn--ghost" id="restartBtn" type="button">Restart</button>
+      <button class="btn btn--ghost" id="quitBtn" type="button">Exit game</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="end" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="endTitle" id="endPanel"></div>
+</div>
+
+<div class="overlay" id="menu">
+  <div class="panel" role="dialog" aria-labelledby="menuTitle">
+    <p class="panel__eyebrow is-win">Profit.com Market Games</p>
+    <h1 class="panel__title" id="menuTitle">Candle Flip</h1>
+    <p class="panel__sub">Flip two cards at a time and match the candlestick patterns from memory.</p>
+    <div class="menu__opts" role="radiogroup" aria-label="Mode" id="menuModes"></div>
+    <div class="menu__sizes" role="radiogroup" aria-label="Level" id="menuLevels"></div>
+    <div class="actions"><button class="btn btn--primary" id="menuStart" type="button">Start</button></div>
+  </div>
+</div>
+
+<script src="patterns.js"></script>
+<script src="candle-flip-core.js"></script>
+<script>
+(() => {
+  const CF = window.CandleFlip;
+  const { CONFIG, MODES } = CF;
+  const $ = (id) => document.getElementById(id);
+  const params = new URLSearchParams(location.search);
+  const PREVIEW = params.has("preview");
+  const EMBEDDED = params.has("autostart") && window.parent !== window;
+  const GUEST = CF.isGuest();
+  const LEVEL_KEYS = CONFIG.LEVELS.map((l) => l.key);
+
+  // ---------- Run state ----------
+  const S = {
+    mode: MODES[params.get("mode")] ? params.get("mode") : "practice",
+    level: LEVEL_KEYS.includes(params.get("level")) ? params.get("level") : CF.prefs().level,
+    cards: [], up: [], matched: 0, pairs: 0, moves: 0, misses: 0,
+    found: [], // pattern ids matched on this board, in order
+    startAt: 0, pausedAt: 0, pausedTotal: 0, running: false, paused: false, over: false, busy: false,
+    timeLimit: 0, flipBackMs: CONFIG.FLIP_BACK_MS, showNames: true,
+    streak: 0, bestStreak: 0, streaks: 0, lastWarn: 0,
+  };
+  if (GUEST && MODES[S.mode].ranked) S.mode = "practice"; // ranked runs need an account
+
+  // ---------- Sound: synthesised with Web Audio, like Bull Run and Fast Scan (no files) ----------
+  const SOUND_KEY = "candle_flip_muted_v1";
+  const audio = {
+    ctx: null, master: null,
+    muted: (() => { try { return localStorage.getItem(SOUND_KEY) === "1"; } catch { return false; } })(),
+    init() {
+      if (PREVIEW) return; // the attract preview is always silent
+      if (this.ctx) { if (this.ctx.state === "suspended") this.ctx.resume(); return; }
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      this.ctx = new AC();
+      this.master = this.ctx.createGain();
+      this.master.gain.value = this.muted ? 0 : 0.4;
+      this.master.connect(this.ctx.destination);
+    },
+    setMuted(m) {
+      this.muted = m;
+      if (this.master) this.master.gain.value = m ? 0 : 0.4;
+      try { localStorage.setItem(SOUND_KEY, m ? "1" : "0"); } catch { /* storage unavailable */ }
+    },
+    tone(freq, dur, { type = "sine", vol = 0.3, when = 0, slide = null } = {}) {
+      if (!this.ctx) return;
+      const t = this.ctx.currentTime + when;
+      const o = this.ctx.createOscillator(), g = this.ctx.createGain();
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      if (slide) o.frequency.exponentialRampToValueAtTime(slide, t + dur);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g).connect(this.master);
+      o.start(t); o.stop(t + dur + 0.05);
+    },
+  };
+  // A pentatonic ladder: each match in a streak climbs one step
+  const LADDER = [0, 2, 4, 7, 9];
+  const ladder = (i, base = 523.25) => base * Math.pow(2, (LADDER[i % 5] + 12 * Math.floor(i / 5)) / 12);
+  const sfx = {
+    flip: () => audio.tone(420, 0.06, { type: "triangle", vol: 0.1, slide: 620 }), // the card turning over
+    match: (n) => { audio.tone(ladder(Math.min(n, 9)), 0.12, { type: "triangle", vol: 0.16 }); audio.tone(ladder(Math.min(n, 9) + 2), 0.16, { type: "triangle", vol: 0.13, when: 0.07 }); },
+    miss: () => { audio.tone(196, 0.22, { type: "sawtooth", vol: 0.09, slide: 110 }); audio.tone(92, 0.2, { type: "square", vol: 0.05 }); },
+    streak: () => [0, 7, 12].forEach((st, i) => audio.tone(1046.5 * Math.pow(2, st / 12), 0.14, { type: "triangle", vol: 0.12, when: 0.05 + i * 0.05 })),
+    beep: (hi) => audio.tone(hi ? 880 : 520, hi ? 0.35 : 0.14, { type: "triangle", vol: 0.25 }), // same as Bull Run's countdown
+    urgent: () => audio.tone(740, 0.07, { type: "square", vol: 0.07 }),
+    hint: () => [0, 4, 7].forEach((st, i) => audio.tone(1318.5 * Math.pow(2, st / 12), 0.1, { type: "sine", vol: 0.12, when: i * 0.045 })),
+    clear: (best) => [0, 4, 7, 12, 16].concat(best ? [19, 24] : []).forEach((st, i) => audio.tone(523.25 * Math.pow(2, st / 12), 0.3, { type: "triangle", vol: 0.18, when: i * 0.08 })),
+    fail: () => [7, 4, 0, -5].forEach((st, i) => audio.tone(392 * Math.pow(2, st / 12), 0.26, { type: "triangle", vol: 0.16, when: i * 0.13 })),
+  };
+  const renderSound = () => {
+    const waves = audio.muted ? "M16 9l6 6M22 9l-6 6" : "M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12";
+    document.querySelectorAll(".sound-waves").forEach((p) => p.setAttribute("d", waves));
+    $("soundBtn").setAttribute("aria-label", audio.muted ? "Unmute sound (M)" : "Mute sound (M)");
+    $("soundBtn").setAttribute("aria-pressed", String(audio.muted));
+    $("soundLbl").textContent = audio.muted ? "Sound: off" : "Sound: on";
+  };
+  const toggleSound = () => { audio.init(); audio.setMuted(!audio.muted); renderSound(); };
+  $("soundBtn").addEventListener("click", toggleSound);
+  $("soundToggle").addEventListener("click", toggleSound);
+  // Browsers only allow audio after a gesture: wake the engine on the first tap or key in the game
+  addEventListener("pointerdown", () => audio.init(), { capture: true });
+  addEventListener("keydown", () => audio.init(), { capture: true });
+  renderSound();
+
+  const post = (msg) => { if (window.parent !== window) window.parent.postMessage({ source: "candle_flip", ...msg }, "*"); };
+  const elapsedMs = () => !S.startAt ? 0 : (S.paused ? S.pausedAt : performance.now()) - S.startAt - S.pausedTotal;
+  const ranked = () => MODES[S.mode].ranked;
+  const levelOf = () => CF.level(S.level);
+
+  // ---------- Board ----------
+  const board = $("board");
+  const buildBoard = () => {
+    const lim = CF.limitsFor(S.mode, S.level);
+    S.cards = CF.buildDeck(S.level).map((c, i) => ({ ...c, i, up: false, done: false }));
+    S.pairs = lim.pairs;
+    board.innerHTML = S.cards.map((c) => `
+      <button class="card" type="button" role="gridcell" data-i="${c.i}" aria-label="Card ${c.i + 1}, face down">
+        <span class="card__inner">
+          <span class="card__face card__back">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <rect x="10" y="18" width="6" height="16" rx="1.5" fill="#7c5cff" opacity=".75"/>
+              <line x1="13" y1="12" x2="13" y2="38" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/>
+              <rect x="21" y="12" width="6" height="22" rx="1.5" fill="#7c5cff"/>
+              <line x1="24" y1="7" x2="24" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".7" stroke-linecap="round"/>
+              <rect x="32" y="22" width="6" height="13" rx="1.5" fill="#7c5cff" opacity=".75"/>
+              <line x1="35" y1="17" x2="35" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="card__face card__front">
+            ${c.pattern.svg}
+            ${lim.showNames ? `<span class="card__name">${c.pattern.name}</span>` : ""}
+          </span>
+        </span>
+      </button>`).join("");
+    fitBoard();
+  };
+  const elFor = (i) => board.querySelector(`.card[data-i="${i}"]`);
+
+  // The board must always fit the viewport, from a 4×4 on a desktop to a 6×8 on a phone.
+  // The levels are laid out portrait (6 wide × 8 tall); on a landscape screen the same
+  // board is turned on its side, which is what lets the cards grow.
+  const fitBoard = () => {
+    const lim = CF.limitsFor(S.mode, S.level);
+    const wrap = $("boardWrap");
+    const W = wrap.clientWidth, H = wrap.clientHeight;
+    if (!W || !H) return;
+    const wide = W > H * 1.05 && lim.rows > lim.cols;
+    const cols = wide ? lim.rows : lim.cols;
+    const rows = wide ? lim.cols : lim.rows;
+    const gap = cols >= 7 ? 6 : cols >= 5 ? 7 : 10;
+    const byWidth = (W - gap * (cols - 1)) / cols;
+    const byHeight = (H - gap * (rows - 1)) / rows;
+    // Cards stay portrait, but where the board is limited by its height they widen into
+    // the spare width instead of leaving it empty.
+    const TALL = 1.34, WIDE = 1.2; // height ÷ width, at its most and least slender
+    const w = Math.min(byWidth, byHeight / WIDE, 132);
+    const ratio = Math.min(TALL, Math.max(WIDE, byHeight / w));
+    board.style.setProperty("--cols", cols);
+    board.style.setProperty("--gap", `${gap}px`);
+    board.style.setProperty("--card", `${Math.max(26, Math.floor(w))}px`);
+    board.style.setProperty("--card-h", `${Math.max(30, Math.floor(w * ratio))}px`);
+  };
+  new ResizeObserver(fitBoard).observe($("boardWrap"));
+
+  // ---------- HUD ----------
+  const renderTarget = (learned) => {
+    const t = $("target");
+    if (learned) {
+      t.className = "target target--learn";
+      t.innerHTML = `<span class="target__name">${learned.name}</span><span class="target__bias target__bias--${learned.bias}">${learned.bias === "neutral" ? "Indecision" : learned.bias === "bull" ? "Bullish" : "Bearish"}</span>`;
+      return;
+    }
+    t.className = "target";
+    if (S.matched >= S.pairs) { t.innerHTML = "Board cleared"; return; }
+    t.innerHTML = `<span class="target__full">Find the matching <b>candlestick patterns</b></span><span class="target__brief">Match the <b>pairs</b></span><span class="target__togo"> · ${S.matched}/${S.pairs} found</span>`;
+  };
+  const renderProgress = () => { $("progress").style.width = `${(S.matched / Math.max(1, S.pairs)) * 100}%`; };
+  const renderHud = () => {
+    const l = levelOf();
+    $("modeLbl").textContent = `${MODES[S.mode].label} · ${l.label}`;
+    $("modeChip").style.setProperty("--mode-color", S.mode === "practice" ? "var(--mint)" : S.mode === "classic" ? "var(--orange)" : "var(--flip)");
+    $("timeChip").hidden = !S.timeLimit;
+    $("moves").textContent = S.moves;
+    $("walletChip").hidden = GUEST;
+    // Lives only matter for ranked runs (Practice is free)
+    $("livesPart").hidden = !ranked();
+    $("lives").textContent = CF.wallet().lives;
+    $("coins").textContent = CF.wallet().coins;
+    renderHints();
+  };
+  const renderHints = () => {
+    const blind = S.mode === "blind";
+    $("hintsOff").hidden = !blind || PREVIEW;
+    $("hints").hidden = blind || GUEST || PREVIEW;
+    $("hintTime").hidden = !S.timeLimit;
+    $("hints").classList.toggle("is-two", !S.timeLimit);
+    const coins = CF.wallet().coins;
+    $("hintPeek").disabled = coins < CONFIG.HINT_COST || !S.running;
+    $("hintPair").disabled = coins < CONFIG.PAIR_COST || !S.running;
+    $("hintTime").disabled = coins < CONFIG.HINT_COST || !S.running;
+  };
+  const renderStreak = () => {
+    $("streakChip").classList.toggle("is-on", S.streak >= CONFIG.STREAK_MIN);
+    $("streakN").textContent = `x${S.streak}`;
+  };
+  let toastTimer = 0;
+  const toast = (text) => {
+    const t = $("toast");
+    t.textContent = text;
+    t.classList.add("is-on");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("is-on"), 1100);
+  };
+
+  // Clock: elapsed time, time left, time-out (a steady 100 ms beat, so it also runs in background tabs)
+  let clock = 0;
+  const startClock = () => { clearInterval(clock); clock = setInterval(tick, 100); };
+  const tick = () => {
+    if (!S.running || S.paused) return;
+    const ms = elapsedMs();
+    $("elapsed").textContent = CF.fmtTime(ms);
+    if (S.timeLimit) {
+      const left = S.timeLimit * 1000 - ms;
+      $("timeLeft").textContent = CF.fmtClock(left);
+      $("timeBar").style.transform = `scaleX(${Math.max(0, left / (S.timeLimit * 1000))})`;
+      $("timeChip").classList.toggle("is-low", left < 15000);
+      // Last five seconds: one warning tick per second
+      const sec = Math.ceil(left / 1000);
+      if (left > 0 && sec <= 5 && sec !== S.lastWarn) { S.lastWarn = sec; sfx.urgent(); }
+      if (left <= 0) fail("Time's up!");
+    }
+  };
+
+  // ---------- Flipping ----------
+  board.addEventListener("click", (e) => {
+    const el = e.target.closest(".card");
+    if (!el || !S.running || S.paused || S.busy || PREVIEW) return;
+    flip(S.cards[Number(el.dataset.i)]);
+  });
+  const faceUp = (c, up) => {
+    c.up = up;
+    const el = elFor(c.i);
+    el.classList.toggle("is-up", up);
+    el.setAttribute("aria-label", up ? `Card ${c.i + 1}, ${c.pattern.name}` : `Card ${c.i + 1}, face down`);
+  };
+
+  const flip = (c) => {
+    if (c.up || c.done || S.up.length >= 2) return;
+    faceUp(c, true);
+    sfx.flip();
+    S.up.push(c);
+    if (S.up.length < 2) return;
+
+    S.moves++;
+    $("moves").textContent = S.moves;
+    const [a, b] = S.up;
+    if (a.patternId === b.patternId) matchPair(a, b);
+    else missPair(a, b);
+  };
+
+  const matchPair = (a, b) => {
+    S.up = [];
+    [a, b].forEach((c) => { c.done = true; elFor(c.i).classList.add("is-done"); });
+    S.matched++;
+    S.found.push(a.patternId);
+    S.streak++;
+    S.bestStreak = Math.max(S.bestStreak, S.streak);
+    sfx.match(S.streak - 1);
+    if (S.streak === CONFIG.STREAK_MIN) {
+      S.streaks++;
+      sfx.streak();
+      if (ranked() && !GUEST && !PREVIEW) toast(`🔥 Streak · +${CONFIG.REWARDS.STREAK_BONUS} coins`);
+    }
+    renderStreak();
+    renderProgress();
+    // Name the pattern you just matched: the learning beat of the game
+    renderTarget(a.pattern);
+    clearTimeout(learnTimer);
+    learnTimer = setTimeout(() => { if (!S.over) renderTarget(); }, 1600);
+    if (S.matched >= S.pairs && !PREVIEW) setTimeout(() => complete(), 450);
+  };
+  let learnTimer = 0;
+
+  const missPair = (a, b) => {
+    S.misses++;
+    S.streak = 0;
+    renderStreak();
+    sfx.miss();
+    S.busy = true;
+    board.classList.add("is-locked");
+    [a, b].forEach((c) => elFor(c.i).classList.add("is-miss"));
+    setTimeout(() => {
+      [a, b].forEach((c) => { elFor(c.i).classList.remove("is-miss"); faceUp(c, false); });
+      S.up = [];
+      S.busy = false;
+      board.classList.remove("is-locked");
+    }, S.flipBackMs);
+  };
+
+  // ---------- Hints (cost coins; never in Blind) ----------
+  $("hintPeek").addEventListener("click", () => {
+    if (!S.running || S.busy || !CF.spendCoins(CONFIG.HINT_COST)) return;
+    const pool = S.cards.filter((c) => !c.done && !c.up);
+    const c = pool[Math.floor(Math.random() * pool.length)];
+    if (!c) return;
+    sfx.hint();
+    const el = elFor(c.i);
+    el.classList.add("is-up", "is-peek");
+    setTimeout(() => { if (!c.done && !c.up) el.classList.remove("is-up"); el.classList.remove("is-peek"); }, 2000);
+    $("coins").textContent = CF.wallet().coins;
+    renderHints();
+  });
+  $("hintPair").addEventListener("click", () => {
+    if (!S.running || S.busy) return;
+    // Only a pair with both cards still face down can be revealed
+    const byPattern = {};
+    S.cards.filter((c) => !c.done && !c.up).forEach((c) => (byPattern[c.patternId] ||= []).push(c));
+    const pair = Object.values(byPattern).filter((cs) => cs.length === 2);
+    if (!pair.length || !CF.spendCoins(CONFIG.PAIR_COST)) return;
+    const [a, b] = pair[Math.floor(Math.random() * pair.length)];
+    sfx.hint();
+    faceUp(a, true); faceUp(b, true);
+    matchPair(a, b);
+    $("coins").textContent = CF.wallet().coins;
+    renderHints();
+  });
+  $("hintTime").addEventListener("click", () => {
+    if (!S.running || !S.timeLimit || !CF.spendCoins(CONFIG.HINT_COST)) return;
+    S.timeLimit += CONFIG.EXTRA_TIME;
+    S.lastWarn = 0;
+    sfx.hint();
+    toast(`+${CONFIG.EXTRA_TIME} seconds`);
+    $("coins").textContent = CF.wallet().coins;
+    renderHints();
+  });
+
+  // ---------- Run lifecycle ----------
+  let countTimer = 0;
+  const start = () => {
+    clearTimeout(countTimer);
+    clearTimeout(learnTimer);
+    $("end").hidden = true;
+    $("pause").hidden = true;
+    $("menu").hidden = true;
+    audio.init();
+    const lim = CF.limitsFor(S.mode, S.level);
+    Object.assign(S, {
+      timeLimit: lim.timeLimit, flipBackMs: lim.flipBackMs, showNames: lim.showNames,
+      up: [], matched: 0, moves: 0, misses: 0, found: [],
+      startAt: 0, pausedTotal: 0, running: false, paused: false, over: false, busy: false,
+      streak: 0, bestStreak: 0, streaks: 0, lastWarn: 0,
+    });
+    // Ranked runs cost one life
+    if (ranked() && !GUEST && !CF.spendLife()) return showNoLives();
+    buildBoard();
+    board.classList.add("is-hidden");
+    renderHud();
+    renderTarget();
+    renderProgress();
+    renderStreak();
+    $("elapsed").textContent = "0:00";
+    if (S.timeLimit) { $("timeLeft").textContent = CF.fmtClock(S.timeLimit * 1000); $("timeBar").style.transform = "scaleX(1)"; $("timeChip").classList.remove("is-low"); }
+    post({ type: "wallet" });
+    // 3 · 2 · 1 · GO, then the clock starts
+    const steps = ["3", "2", "1", "GO"];
+    const cd = $("countdown");
+    cd.hidden = false;
+    const step = (i) => {
+      const b = $("countN");
+      b.textContent = steps[i];
+      sfx.beep(steps[i] === "GO");
+      b.className = steps[i] === "GO" ? "go" : "";
+      b.style.animation = "none"; void b.offsetWidth; b.style.animation = "";
+      if (i === steps.length - 1) {
+        board.classList.remove("is-hidden");
+        S.running = true;
+        S.startAt = performance.now();
+        fitBoard();
+        renderHints();
+        startClock();
+        countTimer = setTimeout(() => (cd.hidden = true), 600);
+      } else countTimer = setTimeout(() => step(i + 1), 650);
+    };
+    step(0);
+  };
+
+  const finish = () => { S.running = false; S.over = true; clearInterval(clock); clearTimeout(learnTimer); renderHints(); };
+  const record = (completed, reason) => {
+    const ms = Math.round(elapsedMs());
+    const score = completed
+      ? CF.scoreFor({ levelKey: S.level, matched: S.matched, longestStreak: S.bestStreak, seconds: ms / 1000, moves: S.moves })
+      : 0;
+    const run = {
+      id: Date.now(), at: Date.now(), mode: S.mode, level: S.level, completed, reason: reason || null,
+      timeMs: ms, matched: S.matched, pairs: S.pairs, moves: S.moves, misses: S.misses,
+      accuracy: S.moves ? Math.round((S.matched / S.moves) * 100) : 100,
+      bestStreak: S.bestStreak, streaks: S.streaks, score, coins: 0,
+      learned: [...new Set(S.found)],
+    };
+    if (completed && ranked() && !GUEST) { run.coins = CF.coinsFor(run); CF.addCoins(run.coins); }
+    const prevBest = GUEST ? null : CF.best(S.mode, S.level);
+    if (!GUEST) { CF.addRun(run); CF.addLearned(run.learned); }
+    post({ type: "run", run });
+    return { run, newBest: completed && !GUEST && (!prevBest || score > prevBest.score) };
+  };
+
+  const patternChips = (ids) => {
+    const list = ids.map((id) => window.CandleFlipPatterns.byId(id)).filter(Boolean).slice(0, 8);
+    if (!list.length) return "";
+    return `<div class="learned">${list.map((p) => `<span class="learned__chip">${p.svg}${p.name}</span>`).join("")}</div>`;
+  };
+
+  const complete = () => {
+    finish();
+    const { run, newBest } = record(true);
+    sfx.clear(newBest);
+    const ev = CF.evaluate(run.timeMs / 1000, run.accuracy, S.level);
+    const best = GUEST ? null : CF.best(S.mode, S.level);
+    const rank = ranked() && !GUEST && best ? CF.leaderboard(S.mode, S.level, { name: CF.PLAYER.name, score: best.score, moves: best.moves }) : null;
+    const you = rank?.rows.find((r) => r.you);
+    showEnd(`
+      <p class="panel__eyebrow is-win">${MODES[S.mode].label} · ${levelOf().label} cleared</p>
+      <div class="panel__big">${CF.fmtScore(run.score)} <small>pts</small></div>
+      ${newBest ? '<span class="badge-best">New personal best</span>' : ""}
+      <h2 class="panel__title" id="endTitle">${ev.title}</h2>
+      <p class="panel__sub">${ev.sub}</p>
+      <div class="tiles">
+        <div class="tile"><span>Time</span><b>${CF.fmtTime(run.timeMs)}</b></div>
+        <div class="tile"><span>Moves</span><b>${run.moves}</b></div>
+        <div class="tile"><span>Accuracy</span><b class="${run.accuracy >= 70 ? "mint" : ""}">${run.accuracy}%</b></div>
+        <div class="tile"><span>Best streak</span><b>${run.bestStreak} 🔥</b></div>
+        ${ranked() && !GUEST
+          ? `<div class="tile"><span>Coins earned</span><b class="gold">+${run.coins}</b></div>`
+          : `<div class="tile"><span>Board</span><b>${run.pairs} pairs</b></div>`}
+        <div class="tile"><span>Patterns matched</span><b>${run.learned.length}</b></div>
+        ${you ? `<div class="tile" style="grid-column:span 2"><span>Leaderboard · ${MODES[S.mode].label} ${levelOf().label}</span><b>#${you.rank} of ${rank.players} players</b></div>` : ""}
+      </div>
+      ${patternChips(run.learned)}
+      ${endActions("Play again", true)}`);
+  };
+
+  const fail = (reason) => {
+    if (S.over) return;
+    finish();
+    const { run } = record(false, reason);
+    sfx.fail();
+    showEnd(`
+      <p class="panel__eyebrow is-fail">${MODES[S.mode].label} · ${levelOf().label}</p>
+      <h2 class="panel__title" id="endTitle">${reason}</h2>
+      <p class="panel__sub">The clock ran out with ${run.pairs - run.matched} ${run.pairs - run.matched === 1 ? "pair" : "pairs"} still face down.</p>
+      <div class="tiles">
+        <div class="tile"><span>Pairs found</span><b>${run.matched} / ${run.pairs}</b></div>
+        <div class="tile"><span>Moves</span><b>${run.moves}</b></div>
+        <div class="tile"><span>Accuracy</span><b>${run.moves ? `${run.accuracy}%` : "—"}</b></div>
+        <div class="tile"><span>Best streak</span><b>${run.bestStreak} 🔥</b></div>
+      </div>
+      ${patternChips(run.learned)}
+      ${endActions("Try again")}`);
+  };
+
+  const nextLevel = () => LEVEL_KEYS[LEVEL_KEYS.indexOf(S.level) + 1] || null;
+  // Cleared a board? The natural next step is the level above, not the same one again.
+  const endActions = (again = "Play again", step = false) => {
+    const cost = ranked() && !GUEST ? ` <small>· 1 ❤️</small>` : "";
+    const up = step ? nextLevel() : null;
+    return `<div class="actions">
+      ${up ? `<button class="btn btn--primary" type="button" data-act="next">Next level · ${CF.level(up).label}${cost}</button>` : ""}
+      <button class="btn btn--${up ? "ghost" : "primary"}" type="button" data-act="again">${up ? `${again} · ${levelOf().label}` : again}${up ? "" : cost}</button>
+      <button class="btn btn--ghost" type="button" data-act="exit">${EMBEDDED ? "Exit game" : "Change settings"}</button>
+    </div>`;
+  };
+  const showEnd = (html) => {
+    // Let the last flip / time-out register on the board before the panel covers it
+    setTimeout(() => {
+      $("endPanel").innerHTML = html;
+      $("end").hidden = false;
+      $("endPanel").querySelector("[data-act=next], [data-act=again]")?.focus();
+    }, 450);
+  };
+  const showNoLives = () => {
+    const w = CF.wallet();
+    $("endPanel").innerHTML = `
+      <p class="panel__eyebrow is-fail">No lives left</p>
+      <h2 class="panel__title" id="endTitle">Out of lives</h2>
+      <p class="panel__sub">Classic and Blind runs cost a life. Your next life arrives in <b id="lifeIn">${CF.fmtClock(w.nextLifeIn)}</b> — Practice is always free.</p>
+      <div class="actions">
+        <button class="btn btn--primary" type="button" data-act="practice">Play Practice</button>
+        <button class="btn btn--ghost" type="button" data-act="exit">${EMBEDDED ? "Exit game" : "Change settings"}</button>
+      </div>`;
+    $("end").hidden = false;
+    const iv = setInterval(() => { const el = $("lifeIn"); if (!el) return clearInterval(iv); el.textContent = CF.fmtClock(CF.wallet().nextLifeIn); }, 1000);
+  };
+  $("end").addEventListener("click", (e) => {
+    const act = e.target.closest("[data-act]")?.dataset.act;
+    if (act === "next") { const up = nextLevel(); if (up) { S.level = up; CF.savePrefs({ level: up }); } start(); }
+    else if (act === "again") start();
+    else if (act === "practice") { S.mode = "practice"; start(); }
+    else if (act === "exit") exitGame();
+  });
+
+  // ---------- Pause ----------
+  const setPaused = (p) => {
+    if (PREVIEW || !S.running || S.paused === p) return; // the attract preview never pauses
+    S.paused = p;
+    if (p) S.pausedAt = performance.now();
+    else S.pausedTotal += performance.now() - S.pausedAt;
+    board.classList.toggle("is-hidden", p);
+    $("pause").hidden = !p;
+    if (p) $("resumeBtn").focus();
+  };
+  $("pauseBtn").addEventListener("click", () => setPaused(true));
+  $("resumeBtn").addEventListener("click", () => setPaused(false));
+  $("restartBtn").addEventListener("click", () => { S.running = false; start(); });
+  $("quitBtn").addEventListener("click", exitGame);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.key === "p" || e.key === "P") { e.preventDefault(); if (S.running) setPaused(!S.paused); }
+    if ((e.key === "m" || e.key === "M") && !PREVIEW) toggleSound();
+  });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) setPaused(true); });
+
+  function exitGame() {
+    S.running = false;
+    if (EMBEDDED) post({ type: "exit" });
+    else { $("end").hidden = true; $("pause").hidden = true; openMenu(); }
+  }
+
+  // ---------- Stand-alone menu ----------
+  const openMenu = () => {
+    const modes = Object.entries(MODES).filter(([, m]) => !(GUEST && m.ranked));
+    $("menuModes").innerHTML = modes.map(([k, m]) => `<button class="menu__opt" role="radio" type="button" data-mode="${k}" aria-checked="${k === S.mode}">${m.label}</button>`).join("");
+    $("menuLevels").innerHTML = CONFIG.LEVELS.map((l) => `<button class="menu__size" role="radio" type="button" data-level="${l.key}" aria-checked="${l.key === S.level}">${l.label}<small>${l.pairs} pairs</small></button>`).join("");
+    $("menu").hidden = false;
+  };
+  $("menu").addEventListener("click", (e) => {
+    const m = e.target.closest("[data-mode]"), z = e.target.closest("[data-level]");
+    if (m) { S.mode = m.dataset.mode; $("menuModes").querySelectorAll("[data-mode]").forEach((b) => b.setAttribute("aria-checked", String(b === m))); }
+    if (z) { S.level = z.dataset.level; CF.savePrefs({ level: S.level }); $("menuLevels").querySelectorAll("[data-level]").forEach((b) => b.setAttribute("aria-checked", String(b === z))); }
+  });
+  $("menuStart").addEventListener("click", start);
+
+  // ---------- Attract preview: the board playing itself on the join screen ----------
+  const runPreview = () => {
+    S.mode = "practice"; S.level = "beginner";
+    Object.assign(S, { timeLimit: 0, up: [], matched: 0, moves: 0, misses: 0, found: [], running: false, paused: false, over: false, busy: false, streak: 0, bestStreak: 0 });
+    buildBoard();
+    renderTarget();
+    $("pvCleared").hidden = true;
+    $("pvCleared").classList.remove("is-on");
+    S.running = true;
+    S.startAt = performance.now();
+    const pointer = $("pointer");
+    const seen = new Map(); // patternId → cards the "player" has already turned over
+    const remember = (c) => { const l = seen.get(c.patternId) || []; if (!l.includes(c)) l.push(c); seen.set(c.patternId, l); };
+    const place = (c, then) => {
+      const wrap = $("boardWrap").getBoundingClientRect(); // measured each move: the preview can resize
+      const r = elFor(c.i).getBoundingClientRect();
+      Object.assign(pointer.style, { left: `${r.left - wrap.left + r.width / 2}px`, top: `${r.top - wrap.top + r.height / 2}px` });
+      pointer.classList.add("is-on");
+      pointer.classList.remove("is-tap"); // travelling
+      setTimeout(() => { pointer.classList.add("is-tap"); then(); }, 340);
+    };
+    const hidden = () => S.cards.filter((c) => !c.done && !c.up);
+    const step = () => {
+      if (!S.running) return;
+      if (S.matched >= S.pairs) {
+        pointer.classList.remove("is-on");
+        $("pvTime").textContent = CF.fmtTime(elapsedMs());
+        $("pvCleared").hidden = false;
+        requestAnimationFrame(() => $("pvCleared").classList.add("is-on"));
+        return setTimeout(runPreview, 1800);
+      }
+      // A pair it has already seen? Take it. Otherwise turn over a new card and try its luck.
+      const known = [...seen.values()].find((cs) => cs.length === 2 && !cs[0].done);
+      const pickFrom = hidden();
+      const a = known ? known[0] : pickFrom[Math.floor(Math.random() * pickFrom.length)];
+      if (!a) return;
+      place(a, () => {
+        flip(a); remember(a);
+        const rest = hidden().filter((c) => c !== a);
+        const mate = known ? known[1] : (seen.get(a.patternId) || []).find((c) => c !== a && !c.done && !c.up);
+        const b = mate || rest[Math.floor(Math.random() * rest.length)];
+        if (!b) return setTimeout(step, 400);
+        place(b, () => {
+          flip(b); remember(b);
+          setTimeout(step, b.patternId === a.patternId ? 420 : S.flipBackMs + 160);
+        });
+      });
+    };
+    setTimeout(step, 600);
+  };
+
+  // ---------- Boot ----------
+  if (EMBEDDED) $("quitBtn").textContent = "Exit game";
+  if (PREVIEW) { runPreview(); }
+  else if (params.has("autostart")) start();
+  else { renderHud(); renderTarget(); openMenu(); }
+})();
+</script>
+</body>
+</html>

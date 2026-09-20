@@ -56,7 +56,7 @@
                 <div class="hero__content">
                   <div class="hero__copy">
                     <h1 class="hero__title">Practice. Compete.<br>Play the Markets.</h1>
-                    <p class="hero__sub">Join simulated trading tournaments or sharpen your market instincts in interactive games.</p>
+                    <p class="hero__sub">Join simulated tournaments and improve your trading skills with interactive games.</p>
                   </div>
                   <div class="hero__bottom">
                     <div class="hero__cta-row">
@@ -81,16 +81,9 @@
             <div class="hero__slide hero__slide--refer" role="group" aria-roledescription="slide" aria-label="2 of 2">
               <div class="hero__inner referral__inner">
                 <div class="referral__art" aria-hidden="true">
-                  <div class="blend" style="left:-60.68px;top:-116.98px;width:553.311px;height:553.311px">
-                    <div class="masked" style="width:492.185px;height:492.185px;-webkit-mask-image:var(--rf-mask-1);mask-image:var(--rf-mask-1);-webkit-mask-position:0.636px 101.122px;mask-position:0.636px 101.122px;-webkit-mask-size:530.415px 419.753px;mask-size:530.415px 419.753px">
-                      <img class="cover" src="assets/rf-mega-a.png" alt=""><img class="cover" src="assets/rf-mega-b.png" alt="">
-                    </div>
-                  </div>
-                  <div class="blend" style="left:154.08px;top:58.91px;width:492.828px;height:492.828px">
-                    <div class="masked" style="width:438.384px;height:438.384px;-webkit-mask-image:var(--rf-mask-2);mask-image:var(--rf-mask-2);-webkit-mask-position:216.391px 5.665px;mask-position:216.391px 5.665px;-webkit-mask-size:291.731px 146.149px;mask-size:291.731px 146.149px">
-                      <img class="cover" src="assets/rf-mega-a.png" alt="">
-                    </div>
-                  </div>
+                  <!-- One flat export of the Figma artwork (node 12913:18494); the old CSS-masked
+                       build of it left visible rectangular seams -->
+                  <img class="referral__mega" src="assets/rf-megaphone.png" alt="">
                 </div>
                 <div class="referral__content">
                   <div class="referral__glows" aria-hidden="true">
@@ -399,7 +392,7 @@
             <div class="mg-card__body">
               <div class="mg-card__copy">
                 <h3 class="mg-card__title">Bull Run</h3>
-                <p class="mg-card__pitch">React to news. Predict the move.</p>
+                <p class="mg-card__pitch">Improve reaction to market news</p>
               </div>
             </div>
           </a>
@@ -419,7 +412,41 @@
             <div class="mg-card__body">
               <div class="mg-card__copy">
                 <h3 class="mg-card__title">Fast Scan</h3>
-                <p class="mg-card__pitch">Spot market signals fast.</p>
+                <p class="mg-card__pitch">Train visual speed and focus</p>
+              </div>
+            </div>
+          </a>
+          <a class="mg-card mg-card--flip" href="candle-flip.html">
+            <div class="mg-card__art" aria-hidden="true">
+              <!-- Three pattern cards caught mid-flip; the middle one turns over on hover -->
+              <div class="mg-flip">
+                <span class="mg-flip__card mg-flip__card--l">
+                  <span class="mg-flip__stock" aria-hidden="true"></span>
+                  <span class="mg-flip__face mg-flip__face--front">
+                    <svg viewBox="0 0 48 48"><rect x="12" y="14" width="7" height="20" rx="2" fill="#3be39a"/><line x1="15.5" y1="8" x2="15.5" y2="40" stroke="#3be39a" stroke-width="2.4" stroke-linecap="round"/><rect x="29" y="20" width="7" height="14" rx="2" fill="#f63d68"/><line x1="32.5" y1="14" x2="32.5" y2="40" stroke="#f63d68" stroke-width="2.4" stroke-linecap="round"/></svg>
+                  </span>
+                </span>
+                <span class="mg-flip__card mg-flip__card--m">
+                  <span class="mg-flip__face mg-flip__face--back">
+                    <svg viewBox="0 0 48 48"><rect x="10" y="18" width="6" height="16" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="13" y1="12" x2="13" y2="38" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/><rect x="21" y="12" width="6" height="22" rx="1.5" fill="#7c5cff"/><line x1="24" y1="7" x2="24" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".7" stroke-linecap="round"/><rect x="32" y="22" width="6" height="13" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="35" y1="17" x2="35" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/></svg>
+                  </span>
+                  <span class="mg-flip__stock" aria-hidden="true"></span>
+                  <span class="mg-flip__face mg-flip__face--front">
+                    <svg viewBox="0 0 48 48"><rect x="20" y="11" width="8" height="10" rx="2" fill="#3be39a"/><line x1="24" y1="8" x2="24" y2="38" stroke="#3be39a" stroke-width="2.6" stroke-linecap="round"/></svg>
+                  </span>
+                </span>
+                <span class="mg-flip__card mg-flip__card--r">
+                  <span class="mg-flip__stock" aria-hidden="true"></span>
+                  <span class="mg-flip__face mg-flip__face--front">
+                    <svg viewBox="0 0 48 48"><polyline points="6,32 15,14 24,28 33,14 42,32" fill="none" stroke="#f63d68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="mg-card__body">
+              <div class="mg-card__copy">
+                <h3 class="mg-card__title">Candle Flip</h3>
+                <p class="mg-card__pitch">Match patterns from memory</p>
               </div>
             </div>
           </a>
@@ -431,7 +458,7 @@
             <div class="mg-card__body">
               <div class="mg-card__copy">
                 <h3 class="mg-card__title">TicTok Trade</h3>
-                <p class="mg-card__pitch">Beat the clock on every trade.</p>
+                <p class="mg-card__pitch">Beat the clock on every trade</p>
               </div>
             </div>
           </div>
@@ -511,8 +538,8 @@
         <div class="faq__cols">
           <!-- Answers are drafts: confirm fees, plan benefits and life refill timing with the team -->
           <div class="faq__col" data-accordion>
-            <div class="faq-item is-open">
-              <button class="faq-item__q" aria-expanded="true"><span>What is Playtrade?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What is Playtrade?</span><span class="faq-icon"><img class="plus" src="assets/faq-plus.svg" alt=""><img class="minus" src="assets/faq-minus.svg" alt=""></span></button>
               <p class="faq-item__a">Playtrade is Profit.com’s trading arena. You trade real market moves with virtual money in tournaments and market games, climb the leaderboard, and can win real cash prizes.</p>
             </div>
             <div class="faq-item">

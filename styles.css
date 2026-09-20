@@ -38,8 +38,6 @@
   --jc-mask-1: url("data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgd2lkdGg9IjEzMS40MDgiIGhlaWdodD0iMTQ5LjM2NyIgdmlld0JveD0iMCAwIDEzMS40MDggMTQ5LjM2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggaWQ9IlZlY3RvciA1OTkiIGQ9Ik05OC4wMTggMzkuMjkwNEw3MC40NjY1IDE2LjIyODZMMTMxLjQwOCAwTDAgMi40MDMxMlYxNDkuMzY3TDk4LjAxOCAxMjkuMjU4TDEwOC45MDMgOTUuMjM2NUw5OC4wMTggMzkuMjkwNFoiIGZpbGw9IiNEOUQ5RDkiLz4KPC9zdmc+Cg==");
   --jc-mask-2: url("data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgd2lkdGg9Ijc5Ljk1NTkiIGhlaWdodD0iMTQ5LjI1MSIgdmlld0JveD0iMCAwIDc5Ljk1NTkgMTQ5LjI1MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggaWQ9IlZlY3RvciA1OTkiIGQ9Ik03Ny4yOTA3IDguNTI4NjRMMjYuMTE4OSAwTDMuMTk4MjQgNS44NjM0NEwxNy4wNTczIDgyLjYyMTFMMjQuMjA0OCAxMTQuMjE4TDkuMDYxNjcgMTQzLjM4OEwwIDE0OS4yNTFMNzEuNDI3MyAxNDcuNjUyTDY4Ljc2MjEgMTA2LjA3NUw3OS45NTU5IDcxLjQyNzNMNzcuMjkwNyA4LjUyODY0WiIgZmlsbD0iI0Q5RDlEOSIvPgo8L3N2Zz4K");
   --jc-mask-3: url("data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgd2lkdGg9Ijk5Ljk1MzEiIGhlaWdodD0iOTMuOTkxIiB2aWV3Qm94PSIwIDAgOTkuOTUzMSA5My45OTEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGlkPSJWZWN0b3IgNTk5IiBkPSJNOTkuOTUzMSA0LjIwODU1TDQwLjY4MyAwSDE2LjgzNDJMNC45MDk5OCAzMy4zMTc3TDAgNDguMDQ3NkwxLjc1MzU2IDY0Ljg4MTlWODIuNzY4Mkw3OC4yMDg5IDkzLjk5MUw5OS45NTMxIDQuMjA4NTVaIiBmaWxsPSIjRDlEOUQ5Ii8+Cjwvc3ZnPgo=");
-  --rf-mask-1: url("data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgd2lkdGg9IjUzMC40MTUiIGhlaWdodD0iNDE5Ljc1MyIgdmlld0JveD0iMCAwIDUzMC40MTUgNDE5Ljc1MyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggaWQ9IlZlY3RvciA2MDQiIGQ9Ik0zODIuODY2IDY5LjMyMjhMMzE2LjcyMyAxMi43MTk4TDI0Mi4zMTIgMEwwIDEzMi4yODZMMTE2LjM4NiA0MTkuNzUzTDUzMC40MTUgMzE1LjQ1MUw1MDUuNjEyIDYyLjMyN0wzODIuODY2IDY5LjMyMjhaIiBmaWxsPSIjRDlEOUQ5Ii8+Cjwvc3ZnPgo=");
-  --rf-mask-2: url("data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgd2lkdGg9IjI5MS43MzEiIGhlaWdodD0iMTQ2LjE0OSIgdmlld0JveD0iMCAwIDI5MS43MzEgMTQ2LjE0OSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggaWQ9IlZlY3RvciA2MDQiIGQ9Ik0xMjUuMTg5IDE0Ni4xNDlMNjYuMjc2OCA5NS43MzMxTDAgODQuNDAzOEw5Ni4yOTk2IDEyLjQ2MjNMMjQ2Ljk4IDBMMjkxLjczMSA3OC43MzkxTDI2MC4wMDkgMTEyLjE2MUwyMzQuNTE4IDEzOS45MThMMTI1LjE4OSAxNDYuMTQ5WiIgZmlsbD0iI0Q5RDlEOSIvPgo8L3N2Zz4K");
 }
 
 *,
@@ -787,14 +785,13 @@ a {
   height: 317.222px;
   pointer-events: none;
 }
-.referral__art .blend {
+.referral__mega {
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  mix-blend-mode: screen;
+  left: -60px; /* the artwork overflows the frame, as it does in Figma */
+  top: -16px;
+  width: 707px;
+  height: 311px;
 }
-.referral__art .blend > .masked { position: relative; rotate: -7.65deg; }
 .referral__content {
   position: relative;
   display: flex;
@@ -1609,6 +1606,101 @@ a.mg-card:hover .mg-scan { transform: translate(-50%, -50%) scale(0.97); } /* ke
 /* ~10% smaller than the Figma crop and nudged down, so the lens no longer touches the top edge */
 .mg-scan { position: absolute; left: 50%; top: 54%; width: 174px; height: 168px; transform: translate(-50%, -50%) scale(0.92); }
 .mg-scan .rot { position: absolute; display: flex; align-items: center; justify-content: center; }
+/* Candle Flip artwork: three pattern cards fanned in perspective on their violet ground */
+.mg-card--flip .mg-card__art { background-image: linear-gradient(142deg, #241a4d 2%, #4b2ea8 62%, #2a1a63 100%); }
+.mg-flip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transform: translate(-50%, -52%);
+  perspective: 470px;
+  transition: transform 0.5s ease;
+}
+a.mg-card:hover .mg-flip { transform: translate(-50%, -52%) scale(0.97); }
+/* The trio sits on a soft contact shadow, so the cards read as objects above the ground */
+.mg-flip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  width: 176px;
+  height: 18px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(8, 4, 24, 0.42), rgba(8, 4, 24, 0) 70%);
+  transform: translateX(-50%);
+}
+.mg-flip__card {
+  position: relative;
+  width: 62px;
+  height: 84px;
+  transform-style: preserve-3d;
+}
+/* Card stock: layers through the depth of the card, so a turned card shows a solid
+   bevelled edge instead of a cut-out */
+.mg-flip__stock,
+.mg-flip__stock::before,
+.mg-flip__stock::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: linear-gradient(158deg, #6f67a4 0%, #3b3560 52%, #211d38 100%);
+}
+.mg-flip__stock { transform-style: preserve-3d; }
+.mg-flip__stock::before { content: ""; transform: translateZ(-2.2px); }
+.mg-flip__stock::after { content: ""; transform: translateZ(2.2px); }
+.mg-flip__face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #1c2029, #12151a);
+  /* a lit top bevel, a shaded lower one, and a restrained shadow under the card */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 10px 16px -8px rgba(0, 0, 0, 0.6);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.mg-flip__card svg { width: 40px; height: 40px; }
+.mg-flip__card--l .mg-flip__face,
+.mg-flip__card--r .mg-flip__face { transform: translateZ(4px); }
+.mg-flip__card--l { transform: rotateY(24deg) rotate(-7deg); }
+.mg-flip__card--r { transform: rotateY(-24deg) rotate(7deg); }
+/* The middle card is caught mid-turn, and completes the flip on hover */
+.mg-flip__card--m {
+  width: 66px;
+  height: 90px;
+  transform: rotateY(-42deg);
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+a.mg-card:hover .mg-flip__card--m { transform: rotateY(-186deg); }
+.mg-flip__face--back { /* the violet back, the side that shows at rest */
+  transform: translateZ(4px);
+  background: linear-gradient(150deg, #2c2064 0%, #171a30 70%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(124, 92, 255, 0.5),
+    0 10px 16px -8px rgba(0, 0, 0, 0.6);
+}
+.mg-flip__face--front { transform: translateZ(-4px) rotateY(180deg); }
+.mg-flip__card--m .mg-flip__face--front {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(59, 227, 154, 0.45),
+    0 10px 16px -8px rgba(0, 0, 0, 0.6);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mg-flip, .mg-flip__card--m { transition: none; }
+}
+
 /* TicTok Trade artwork: the bomb, desaturated while it is coming soon */
 .mg-card--tictok .mg-card__art { background-image: linear-gradient(224.774deg, #3a3d44 3.7%, #1c1f24 60%, #121418 100%); }
 .mg-bomb { position: absolute; left: 50%; top: 50%; width: 196px; height: 196px; object-fit: cover; transform: translate(-50%, -46%); filter: grayscale(1); }
@@ -2192,12 +2284,24 @@ body.is-playing { overflow: hidden; }
   .hero__inner { padding: 28px 16px 24px; }
   .hero__content { gap: 24px; }
   .hero__title { font-size: 34px; line-height: 40px; letter-spacing: -1.2px; }
-  .hero__sub { max-width: 30ch; }
+  .hero__sub { max-width: none; font-size: 15px; line-height: 21px; } /* two lines across the banner */
   .hero__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; white-space: normal; }
   .hero__stat { flex-direction: column; align-items: flex-start; gap: 2px; min-width: 0; }
   .hero__stat b { font-size: 24px; line-height: 30px; }
   .hero__stat span { font-size: 13px; line-height: 17px; }
-  .hero__art { opacity: 0.22; right: -160px; }
+  /* Phones: the artwork runs behind the whole copy, so it is dialled back and a soft
+     veil sits over it — the text stays legible without changing the composition. */
+  .hero__art { opacity: 0.13; right: -160px; }
+  .hero__slide--main .hero__inner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(112deg, rgba(6, 44, 26, 0.66) 0%, rgba(6, 44, 26, 0.42) 46%, rgba(6, 44, 26, 0.1) 82%);
+    pointer-events: none;
+  }
+  .hero__title, .hero__sub { text-shadow: 0 1px 10px rgba(4, 30, 18, 0.35); }
+  /* The button sits last, where the Refer a Friend slide keeps its own */
+  .hero__cta-row { flex-direction: column-reverse; align-items: flex-start; gap: 18px; }
   .referral__inner { padding-bottom: 28px; }
   .referral__content { gap: 24px; }
   .referral__title { font-size: 30px; line-height: 38px; letter-spacing: -1px; }
@@ -2290,6 +2394,7 @@ body.is-playing { overflow: hidden; }
 }
 @media (max-width: 400px) {
   .hero__title { font-size: 30px; line-height: 36px; }
+  .hero__sub { font-size: 14px; line-height: 20px; }
   .hero__stats { gap: 8px; }
   .hero__stat b { font-size: 21px; line-height: 26px; }
   .hero__stat span { font-size: 12px; line-height: 16px; }

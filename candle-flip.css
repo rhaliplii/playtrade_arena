@@ -1,0 +1,131 @@
+/* Candle Flip join screen — Candle Flip specifics only.
+   Layout and shared parts come from practice.css and game-join.css. */
+
+:root {
+  --flip: #7c5cff; /* Candle Flip's own accent: the violet of its Arena card */
+  --bull: #3be39a;
+  --bear: #f63d68;
+  --gold: #fbb517;
+}
+.gold, .cf-gold { color: var(--gold); }
+
+/* Mode colours: Practice mint, Classic orange (ranked), Blind violet */
+.cf-mode--classic { --opt: var(--orange); --opt-glow: rgba(255, 145, 0, 0.2); }
+.cf-mode--blind { --opt: var(--flip); --opt-glow: rgba(124, 92, 255, 0.24); }
+
+/* Preview: the attract board sits on a faint violet glow, like the Arena card */
+.cf-preview {
+  background:
+    radial-gradient(420px 220px at 50% 0, rgba(124, 92, 255, 0.18), transparent 70%),
+    #07090c;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(124, 92, 255, 0.1);
+}
+
+/* Level: one segmented row of three, each with its board size */
+.cf-levels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  width: 100%;
+  max-width: 440px;
+  padding: 4px;
+  border-radius: 14px;
+  background: #1a1d22;
+  box-shadow: inset 0 0 0 1px var(--border-primary);
+}
+.cf-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 4px 7px;
+  border-radius: 10px;
+  color: var(--fg-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.cf-level small { font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; opacity: 0.8; }
+.cf-level:hover { color: var(--fg-primary); }
+.cf-level[aria-checked="true"] { background: var(--bg-1); color: var(--fg-primary); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.cf-level:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+
+.cf-meta { margin: -6px 0 0; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--fg-secondary); text-align: center; }
+.cf-meta__cost { color: var(--fg-primary); }
+.cf-meta__free { color: var(--mint); }
+
+/* Rules panel: two links side by side */
+.cf-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+/* Recent runs: mode badges and failed runs */
+.cf-run--practice { background: rgba(7, 216, 162, 0.16); color: var(--mint); }
+.cf-run--classic { background: rgba(255, 145, 0, 0.16); color: var(--orange); }
+.cf-run--blind { background: rgba(124, 92, 255, 0.18); color: var(--flip); }
+.cf-run__fail { color: var(--fg-secondary); font-weight: 500; }
+.cf-empty { margin: 8px 0 4px; font-size: 13px; line-height: 19px; color: var(--fg-secondary); }
+
+/* Stats: coins and the patterns learned so far */
+.cf-coins { flex-direction: row; align-items: center; justify-content: space-between; height: auto; }
+.cf-learned { flex-direction: row; align-items: center; justify-content: space-between; height: auto; }
+.cf-learned__bar { position: relative; width: 84px; height: 6px; border-radius: 6px; background: var(--bg-1); overflow: hidden; }
+.cf-learned__bar i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--flip), var(--mint)); }
+
+/* Leaderboard */
+.cf-lb-sub { margin: -8px 0 4px; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--fg-secondary); }
+.cf-lb-gap { padding: 2px 0; color: var(--fg-secondary); text-align: center; letter-spacing: 4px; }
+
+/* Pattern guide dialog */
+.cf-guide { width: min(620px, calc(100% - 32px)); }
+.cf-guide__tier { margin: 16px 0 8px; font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--fg-secondary); }
+.cf-guide__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.cf-pat {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.cf-pat__art {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #1c2029, #12151a);
+  box-shadow: inset 0 0 0 1px var(--border-primary);
+}
+.cf-pat__art svg { width: 36px; height: 36px; }
+.cf-pat__name { display: flex; align-items: center; gap: 6px; font-size: 13px; line-height: 18px; font-weight: 700; }
+.cf-pat__tick { color: var(--mint); font-size: 12px; }
+.cf-pat__text { margin: 2px 0 0; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--fg-secondary); }
+.cf-pat__bias { font-size: 11px; font-weight: 700; }
+.cf-pat__bias--bull { color: var(--bull); }
+.cf-pat__bias--bear { color: var(--bear); }
+.cf-pat__bias--neutral { color: var(--fg-secondary); }
+
+/* Guests: sign-in prompts replace personal data */
+.pr-stats.is-guest { display: block; }
+.cf-signin {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(7, 216, 162, 0.08), rgba(7, 216, 162, 0.02));
+  box-shadow: inset 0 0 0 1px rgba(7, 216, 162, 0.2);
+}
+.cf-signin__title { font-size: 15px; line-height: 20px; font-weight: 700; }
+.cf-signin__text { font-size: 13px; line-height: 19px; font-weight: 500; color: var(--fg-secondary); }
+.cf-signin__row { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+.cf-signin__btn { padding: 8px 14px; font-size: 14px; line-height: 18px; font-weight: 600; }
+.cf-signin__link { font-size: 14px; font-weight: 600; color: var(--mint); }
+.cf-signin__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.cf-signin__actions { display: flex; flex-direction: column; gap: 10px; }
+.cf-signin__cta { max-width: none; height: 48px; font-size: 16px; }
+
+@media (max-width: 860px) {
+  .cf-levels { max-width: none; }
+  .cf-guide__list { grid-template-columns: minmax(0, 1fr); }
+}
