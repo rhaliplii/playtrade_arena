@@ -13,6 +13,119 @@ const initTopnav = () => {
   const items = [...bar.querySelectorAll(".topnav__menu > .topnav__item")];
   const byLabel = (label) => items.find((a) => a.textContent.trim() === label);
 
+  // Signed out: the bar trades the account icons for Log in and Get Started. The Arena has no real
+  // authentication yet, so `?guest=1` previews the signed-out bar for this tab and `?guest=0` leaves it.
+  // ---------- Language ----------
+  // Switches the interface language setting; the pages themselves are English-only for now.
+  const LANG_KEY = "pt_lang";
+  const LANGS = [
+    { code: "en", label: "English", short: "EN" },
+    { code: "es", label: "Español", short: "ES" },
+    { code: "fr", label: "Français", short: "FR" },
+  ];
+  let lang = (() => {
+    try { const v = localStorage.getItem(LANG_KEY); return LANGS.some((l) => l.code === v) ? v : "en"; } catch { return "en"; }
+  })();
+  const langOf = () => LANGS.find((l) => l.code === lang);
+  const applyLang = () => {
+    const cur = langOf();
+    bar.querySelector(".topnav__lang")?.setAttribute("aria-label", `Language: ${cur.label}`);
+    document.querySelectorAll("[data-lang-opt]").forEach((b) => {
+      const on = b.dataset.langOpt === lang;
+      b.setAttribute("aria-checked", String(on));
+      b.classList.toggle("is-on", on);
+    });
+    const value = document.querySelector(".mnav__lang-value");
+    if (value) value.textContent = cur.label;
+  };
+  const setLang = (code) => {
+    lang = code;
+    try { localStorage.setItem(LANG_KEY, code); } catch { /* storage unavailable */ }
+    applyLang();
+  };
+
+  // ---------- Theme switcher ----------
+  const THEME_KEY = "pt_theme";
+  const MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" fill="currentColor"/></svg>';
+  const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.5 6.5 5 5M19 19l-1.5-1.5M17.5 6.5 19 5M5 19l1.5-1.5"/></svg>';
+  let theme = (() => { try { return localStorage.getItem(THEME_KEY) || "dark"; } catch { return "dark"; } })();
+  const applyTheme = () => {
+    document.documentElement.dataset.theme = theme;
+    const dark = theme === "dark";
+    document.querySelectorAll("[data-theme-btn]").forEach((b) => {
+      b.innerHTML = dark ? MOON : SUN;
+      b.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+      b.setAttribute("aria-pressed", String(!dark));
+    });
+    const row = document.querySelector(".mnav__theme");
+    if (row) {
+      row.querySelector(".mnav__theme-icon").innerHTML = dark ? MOON : SUN; // the icon is the value here
+      row.setAttribute("aria-label", dark ? "Theme: dark. Switch to light" : "Theme: light. Switch to dark");
+    }
+  };
+  const toggleTheme = () => {
+    theme = theme === "dark" ? "light" : "dark";
+    try { localStorage.setItem(THEME_KEY, theme); } catch { /* storage unavailable */ }
+    applyTheme();
+  };
+  const langBtn = bar.querySelector(".topnav__lang");
+  if (langBtn) {
+    const wrap = document.createElement("div");
+    wrap.className = "lang-dd";
+    langBtn.replaceWith(wrap);
+    wrap.appendChild(langBtn);
+    langBtn.setAttribute("aria-haspopup", "true");
+    langBtn.setAttribute("aria-expanded", "false");
+    const panel = document.createElement("div");
+    panel.className = "lang-dd__panel";
+    panel.setAttribute("role", "menu");
+    panel.setAttribute("aria-label", "Language");
+    panel.innerHTML = LANGS.map((l) =>
+      `<button class="lang-dd__opt" type="button" role="menuitemradio" data-lang-opt="${l.code}" aria-checked="false"><span class="lang-dd__short">${l.short}</span>${l.label}<svg class="lang-dd__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 6.3 12 13 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`).join("");
+    wrap.appendChild(panel);
+    const openLang = (open) => {
+      wrap.classList.toggle("is-open", open);
+      langBtn.setAttribute("aria-expanded", String(open));
+    };
+    langBtn.addEventListener("click", (e) => { e.preventDefault(); openLang(!wrap.classList.contains("is-open")); });
+    panel.addEventListener("click", (e) => {
+      const opt = e.target.closest("[data-lang-opt]");
+      if (!opt) return;
+      setLang(opt.dataset.langOpt);
+      openLang(false);
+      langBtn.focus();
+    });
+    document.addEventListener("click", (e) => { if (!wrap.contains(e.target)) openLang(false); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && wrap.classList.contains("is-open")) { openLang(false); langBtn.focus(); } });
+  }
+
+  const themeBtn = document.createElement("button");
+  themeBtn.type = "button";
+  themeBtn.className = "topnav__theme";
+  themeBtn.setAttribute("data-theme-btn", "");
+  themeBtn.addEventListener("click", toggleTheme);
+  bar.querySelector(".topnav__lang")?.before(themeBtn);
+
+  // The landing page is always signed out (<body data-user="guest">); elsewhere `?guest=1` previews it.
+  const GUEST = (() => {
+    if (document.body.dataset.user === "guest") return true;
+    const q = new URLSearchParams(location.search).get("guest");
+    try {
+      if (q === "1") sessionStorage.setItem("pt_guest", "1");
+      if (q === "0") sessionStorage.removeItem("pt_guest");
+      return sessionStorage.getItem("pt_guest") === "1";
+    } catch { return q === "1"; }
+  })();
+  if (GUEST) {
+    document.body.classList.add("is-guest");
+    // No notifications, messages, avatar or upgrade for a signed-out visitor
+    bar.querySelectorAll(".icon-btn, .topnav__avatar, .topnav__upgrade, .topnav__sale").forEach((el) => el.remove());
+    if (!bar.querySelector(".topnav__cta")) {
+      bar.querySelector(".topnav__icons")?.insertAdjacentHTML("beforeend",
+        '<a class="topnav__login" href="#">Log in</a><a class="btn-brand topnav__cta" href="#">Get Started</a>');
+    }
+  }
+
   // Pages outside the arena (the landing page) set <body data-nav-active="none">
   const outside = document.body.dataset.navActive === "none";
   const active = outside ? "" : document.getElementById("sideNav")?.dataset.active || "tournaments";
@@ -103,7 +216,7 @@ const initTopnav = () => {
         { label: "Screener", icon: "tl-radar.svg", href: "#", sub: true },
         { label: "Watchlist", icon: "tl-star.svg", href: "#", sub: true },
         { label: "Dashboards", icon: "tl-element-plus.svg", href: "#", sub: true },
-        { label: "Messenger", icon: "tl-messages.svg", href: "#" },
+        { label: "Messenger", icon: "tl-messages.svg", href: "#", extra: '<span class="nav-dd__count">1</span>' },
       ],
     },
     {
@@ -214,7 +327,7 @@ const initTopnav = () => {
   byLabel("Plans")?.setAttribute("href", "landing.html#plans");
 
   // ---------- Tablet & phone: ☰ opens the full menu as a drawer ----------
-  const cta = bar.querySelector(".topnav__upgrade");
+  const cta = bar.querySelector(".topnav__upgrade, .topnav__cta");
   const sale = bar.querySelector(".topnav__sale");
   const section = (m) => {
     if (!m.left) return `<a class="mnav__link" href="${m.href}">${m.label}</a>`;
@@ -242,13 +355,49 @@ const initTopnav = () => {
   drawer.inert = true;
   drawer.innerHTML = `
     <div class="mnav__scroll">
-      <button class="mnav__search" type="button"><img src="assets/search.svg" alt="">Search Profit.com</button>
       <div class="mnav__sections">${MENUS.map(section).join("")}</div>
+      <div class="mnav__utils">
+        ${GUEST
+          ? `<a class="mnav__util mnav__util--account" href="#">
+              <svg class="mnav__util-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 3.5h5.2A2.3 2.3 0 0 1 16 5.8v8.4a2.3 2.3 0 0 1-2.3 2.3H8.5M4 10h7.5M9 7.2 11.8 10 9 12.8"/></svg>
+              Log in
+            </a>`
+          : cta ? `<a class="mnav__util mnav__util--account" href="${cta.getAttribute("href")}">
+              <svg class="mnav__util-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.2 12.1 7.5l4.7.7-3.4 3.3.8 4.7-4.2-2.2-4.2 2.2.8-4.7L3.2 8.2l4.7-.7z"/></svg>
+              ${cta.textContent.trim()}${sale ? `<span class="mnav__util-tag">${sale.textContent.trim()}</span>` : ""}
+            </a>` : ""}
+        <button class="mnav__util" type="button" data-lang-row aria-expanded="false" aria-controls="mnav-langs">
+          <img class="mnav__util-ico" src="assets/globe.svg" alt="">Language
+          <span class="mnav__util-value">English</span><img class="mnav__util-caret" src="assets/pr-chevron-right.svg" alt="">
+        </button>
+        <div class="mnav__langs" id="mnav-langs" role="group" aria-label="Language" hidden>${LANGS.map((l) =>
+          `<button class="mnav__lang-opt" type="button" role="menuitemradio" data-lang-opt="${l.code}" aria-checked="false"><span class="lang-dd__short">${l.short}</span>${l.label}<svg class="lang-dd__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 6.3 12 13 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`).join("")}</div>
+        <button class="mnav__util mnav__theme" type="button" data-theme-row>
+          <svg class="mnav__util-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16.5c1.6.4 2.6-.2 3.2-1.2M6.1 13.2l7.7-8.6a2 2 0 0 1 3 2.6l-8.2 8.1"/><path d="M4 16.5c-.6-1.7-.2-2.8.9-3.5 1-.6 2.3-.4 3 .5.6.9.4 2.2-.6 2.9-.9.6-2.2.6-3.3.1Z"/></svg>
+          Theme<span class="mnav__theme-icon" aria-hidden="true"></span>
+        </button>
+      </div>
       ${community}
-      <button class="mnav__lang" type="button"><img src="assets/globe.svg" alt="">English<span>EN</span></button>
-    </div>
-    ${cta ? `<div class="mnav__foot"><a class="btn-brand mnav__cta" href="${cta.getAttribute("href")}">${cta.textContent.trim()}${sale ? `<span class="mnav__sale">${sale.textContent.trim()}</span>` : ""}</a></div>` : ""}`;
+    </div>`;
   document.body.appendChild(drawer);
+
+  drawer.querySelector("[data-theme-row]")?.addEventListener("click", toggleTheme);
+  const langRow = drawer.querySelector("[data-lang-row]");
+  const langList = drawer.querySelector(".mnav__langs");
+  langRow?.addEventListener("click", () => {
+    const open = langList.hidden;
+    langList.hidden = !open;
+    langRow.setAttribute("aria-expanded", String(open));
+  });
+  langList?.addEventListener("click", (e) => {
+    const opt = e.target.closest("[data-lang-opt]");
+    if (!opt) return;
+    setLang(opt.dataset.langOpt);
+    langList.hidden = true;
+    langRow.setAttribute("aria-expanded", "false");
+  });
+  applyTheme();
+  applyLang();
 
   // Accordion sections
   drawer.querySelectorAll(".mnav__head").forEach((head) => {

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="landing.css">
 </head>
-<body class="lp" data-nav-active="none">
+<body class="lp" data-nav-active="none" data-user="guest">
 
   <!-- ============ Top navigation (shared with the arena) ============ -->
   <header class="topnav">
@@ -27,13 +27,11 @@
       <button aria-label="Search"><img class="icon icon-20" src="assets/search.svg" alt=""></button>
       <div class="topnav__icons">
         <img class="vdivider" src="assets/divider.svg" alt="">
-        <button class="topnav__lang"><span class="topnav__globe"><img src="assets/globe.svg" alt=""></span>EN</button>
+        <button class="topnav__lang" aria-label="Language: English"><span class="topnav__globe"><img src="assets/globe.svg" alt=""></span></button>
         <img class="vdivider" src="assets/divider.svg" alt="">
-        <button class="icon-btn" aria-label="Notifications"><img class="icon icon-20" src="assets/bell.svg" alt=""><span class="badge">2</span></button>
-        <button class="icon-btn" aria-label="Messages"><img class="icon icon-20" src="assets/messenger.svg" alt=""><span class="badge">1</span></button>
-        <a class="btn-brand topnav__upgrade" href="index.html">Get Started</a>
+        <a class="topnav__login" href="#">Log in</a>
+        <a class="btn-brand topnav__cta" href="index.html">Get Started</a>
       </div>
-      <img class="topnav__avatar" src="assets/nav-avatar.png" width="32" height="32" alt="Profile">
     </div>
   </header>
   <script src="topnav.js"></script>

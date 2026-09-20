@@ -267,15 +267,78 @@ a {
   gap: 12px;
 }
 .topnav__lang {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  letter-spacing: -0.16px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
   color: var(--fg-secondary);
 }
+.topnav__lang:hover,
+.lang-dd.is-open .topnav__lang { background: var(--bg-1); color: var(--fg-primary); }
+/* Language menu */
+.lang-dd { position: relative; display: flex; }
+.lang-dd__panel {
+  position: absolute;
+  right: -8px;
+  top: calc(100% + 14px);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 188px;
+  padding: 8px;
+  border: 1px solid var(--border-primary);
+  border-radius: 16px;
+  background: rgba(19, 22, 27, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+.lang-dd.is-open .lang-dd__panel { opacity: 1; visibility: visible; transform: none; }
+.lang-dd__opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg-secondary);
+  white-space: nowrap;
+}
+.lang-dd__opt:hover { background: rgba(166, 171, 185, 0.08); color: var(--fg-primary); }
+.lang-dd__opt.is-on { color: var(--fg-primary); }
+.lang-dd__short {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  font-size: 11px;
+  font-weight: 700;
+}
+.lang-dd__tick { width: 16px; height: 16px; margin-left: auto; opacity: 0; color: var(--fg-brand); }
+.lang-dd__opt.is-on .lang-dd__tick,
+.mnav__lang-opt.is-on .lang-dd__tick { opacity: 1; }
+
+.topnav__theme {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  color: var(--fg-secondary);
+}
+.topnav__theme:hover { background: var(--bg-1); color: var(--fg-primary); }
+.topnav__theme { margin-right: 6px; } /* a little air before the language switcher */
+.topnav__theme svg { width: 20px; height: 20px; }
 .topnav__globe {
   position: relative;
   width: 24px;
@@ -316,6 +379,31 @@ a {
   pointer-events: none;
 }
 .topnav__avatar { width: 32px; height: 32px; border-radius: 50%; }
+/* Signed out: Log in + Get Started stand where the account icons are */
+.topnav__login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px; /* narrower than Get Started, so the CTA stays the louder one */
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: -0.14px;
+  white-space: nowrap;
+  color: var(--fg-primary);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.topnav__login:hover { background: rgba(255, 255, 255, 0.07); border-color: #3a3d44; }
+.topnav__cta {
+  padding: 7px 14px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: -0.14px;
+}
 
 /* ---------- Shell ---------- */
 .shell {
@@ -1710,6 +1798,17 @@ body.is-playing { overflow: hidden; }
   background: #2aabee;
 }
 .nav-dd__tg svg { width: 12px; height: 12px; margin-left: -1px; }
+.nav-dd__count {
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 100px;
+  background: var(--fg-magenta);
+  font-size: 11px;
+  font-weight: 700;
+}
 .nav-dd__new {
   display: flex;
   align-items: center;
@@ -1863,8 +1962,21 @@ body.is-playing { overflow: hidden; }
   .topnav > .vdivider,
   .topnav__menu,
   .topnav__lang,
+  .topnav__theme, /* the drawer carries the theme and language controls here */
   .topnav__icons .vdivider,
-  .topnav__right > button { display: none; }
+  .icon-btn[aria-label="Messages"] { display: none; } /* Messenger lives in the drawer here; search takes its place */
+  /* Search is the most-used action on a phone, so it keeps a place in the bar */
+  .topnav__right > button {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-pill);
+    order: 1;
+  }
+  .topnav__right > button:hover { background: var(--bg-1); }
+  .topnav__icons { order: 2; }
+  .topnav__avatar { order: 3; }
   .topnav__right { gap: 8px; }
   .topnav__icons { gap: 4px; }
   .nav-dd__panel { display: none !important; }
@@ -1893,26 +2005,27 @@ body.is-playing { overflow: hidden; }
   .topnav__burger:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
   /* ---- Drawer ---- */
+  /* A full screen menu under the header, not an off-canvas panel: it opens out of the ☰ button,
+     expanding from the top-left corner until it covers the viewport. */
   .mnav {
     position: fixed;
-    top: 56px;
-    bottom: 0;
-    left: 0;
+    inset: 56px 0 0;
     z-index: 65;
     display: flex;
     flex-direction: column;
-    width: min(400px, 100vw);
-    border-right: 1px solid var(--border-primary);
+    width: 100%;
     background: var(--bg-base);
-    transform: translateX(-102%);
+    clip-path: circle(0px at 28px -28px); /* the ☰ button's centre, in the menu's own space */
     visibility: hidden;
-    transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s linear 0.28s;
+    transition: clip-path 0.38s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.38s;
   }
   .mnav.is-open {
-    transform: none;
+    clip-path: circle(150% at 28px -28px);
     visibility: visible;
-    transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
-    box-shadow: 24px 0 48px rgba(0, 0, 0, 0.5);
+    transition: clip-path 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mnav, .mnav.is-open { transition: visibility 0s; }
   }
   .mnav__scroll {
     display: flex;
@@ -1925,21 +2038,6 @@ body.is-playing { overflow: hidden; }
     overscroll-behavior: contain;
   }
   .mnav__scroll > * { flex-shrink: 0; }
-  .mnav__search {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    height: 44px;
-    padding: 0 14px;
-    border-radius: 12px;
-    background: var(--bg-subtle);
-    box-shadow: inset 0 0 0 1px var(--border-primary);
-    color: var(--fg-secondary);
-    font-size: 15px;
-    font-weight: 500;
-    text-align: left;
-  }
-  .mnav__search img { width: 18px; height: 18px; }
   .mnav__sections { display: flex; flex-direction: column; }
   .mnav__section,
   .mnav__link { border-bottom: 1px solid var(--border-primary); }
@@ -1972,27 +2070,43 @@ body.is-playing { overflow: hidden; }
   .mnav__body .nav-dd__partner-text { font-size: 14px; line-height: 20px; }
   .mnav__body .nav-dd__partner-text br { display: none; }
   .mnav__body .nav-dd__refer { margin-top: 8px; }
-  .mnav .nav-dd__community { padding: 0 4px; border-top: 0; }
-  .mnav .nav-dd__stores { max-width: 260px; }
-  .mnav__lang {
+  .mnav .nav-dd__community { margin-top: 0; padding: 14px 4px 0; border-top: 1px solid var(--border-primary); }
+  /* Badges and social icons sit a little larger here, for thumbs; the badges keep
+     their official proportions, the icons only grow their tap area. */
+  .mnav .nav-dd__stores { max-width: 288px; gap: 10px; }
+  .mnav .nav-dd__store { height: 36px; border-radius: 9px; }
+  .mnav .nav-dd__store--apple { font-size: 15.2px; letter-spacing: -0.39px; }
+  .mnav .nav-dd__store--apple img { width: 16.9px; height: 20.3px; }
+  .mnav .nav-dd__store--google .gp-icon { width: 17.7px; height: 20.3px; }
+  .mnav .nav-dd__store--google .gp-text { width: 62.3px; height: 12.6px; }
+  .mnav .nav-dd__social { gap: 10px; }
+  .mnav .nav-dd__social a { width: 40px; height: 40px; }
+  /* Utility rows at the foot of the menu: language, theme, then the account row */
+  /* The scroll column's 16px gap already separates it from the last section's rule */
+  .mnav__utils { display: flex; flex-direction: column; margin-top: -6px; }
+  .mnav__util {
     display: flex;
     align-items: center;
-    gap: 10px;
-    height: 44px;
+    gap: 12px;
+    height: 52px;
     padding: 0 4px;
-    color: var(--fg-secondary);
-    font-size: 15px;
-    font-weight: 500;
+    color: var(--fg-primary);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.16px;
+    text-align: left;
   }
-  .mnav__lang img { width: 18px; height: 18px; }
-  .mnav__lang span { margin-left: auto; padding: 2px 8px; border-radius: 6px; background: var(--bg-subtle); font-size: 12px; font-weight: 700; color: var(--fg-primary); }
-  .mnav__foot {
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-    border-top: 1px solid var(--border-primary);
-    background: var(--bg-base);
-  }
-  .mnav__cta { width: 100%; gap: 8px; height: 48px; font-size: 16px; font-weight: 600; }
-  .mnav__sale {
+  .mnav__util-ico { width: 20px; height: 20px; flex-shrink: 0; color: var(--fg-secondary); }
+  .mnav__util-value { margin-left: auto; font-size: 14px; font-weight: 600; color: var(--fg-secondary); }
+  .mnav__util-caret { width: 16px; height: 16px; margin-left: 8px; opacity: 0.7; }
+  .mnav__util .mnav__theme-icon { margin-left: auto; color: var(--fg-secondary); }
+  [data-lang-row][aria-expanded="true"] .mnav__util-caret { transform: rotate(90deg); }
+  /* Sign in stands out in the brand colour, still a row rather than a button */
+  .mnav__util--account { color: var(--fg-brand); }
+  .mnav__util--account .mnav__util-ico { color: var(--fg-brand); }
+  .mnav__util--account:hover { color: #2ee6b5; }
+  .mnav__util-tag {
+    margin-left: 8px;
     padding: 2px 6px;
     border-radius: 12px;
     background: var(--bg-yellow-bright);
@@ -2001,29 +2115,38 @@ body.is-playing { overflow: hidden; }
     line-height: 14px;
     font-weight: 600;
   }
-  .mnav-scrim {
-    position: fixed;
-    inset: 56px 0 0;
-    z-index: 60;
-    display: block;
-    background: rgba(0, 0, 0, 0.55);
-    opacity: 0;
-    transition: opacity 0.25s ease;
+  .mnav__langs { display: flex; flex-direction: column; gap: 2px; padding: 2px 0 6px; }
+  .mnav__langs[hidden] { display: none; }
+  .mnav__lang-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 42px;
+    padding: 0 8px 0 30px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fg-secondary);
+    text-align: left;
   }
-  .mnav-scrim[hidden] { display: none; }
-  .mnav-scrim.is-on { opacity: 1; }
+  .mnav__lang-opt:hover { background: rgba(166, 171, 185, 0.08); color: var(--fg-primary); }
+  .mnav__lang-opt.is-on { color: var(--fg-primary); }
+  .mnav__theme-icon { display: grid; place-items: center; width: 20px; height: 20px; }
+  .mnav__theme-icon svg { width: 20px; height: 20px; }
+  .mnav-scrim { display: none; } /* the menu itself covers the page now */
   html.has-drawer,
   html.has-drawer body { overflow: hidden; }
+  /* Locking the page stops the bar sticking, so pin it for as long as the drawer is open */
+  html.has-drawer .topnav { position: fixed; top: 0; left: 0; right: 0; }
 }
 @media (max-width: 600px) {
   .topnav { padding-right: 12px; }
   .topnav__logo { width: 124px; height: 22px; }
   .topnav__upgrade,
-  .topnav__sale { display: none; }
+  .topnav__sale,
+  .topnav__login { display: none; } /* Log in moves into the drawer */
+  .topnav__cta { padding: 7px 12px; }
 }
-/* The top bar still shows its main button on tablets, so the drawer only repeats it on phones */
-@media (min-width: 601px) { .mnav__foot { display: none; } }
-
 /* Narrow desktops: stack each hero stat (number over label) and fade the art behind the copy */
 @media (max-width: 1280px) {
   .hero__stats { gap: 28px; }

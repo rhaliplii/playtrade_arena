@@ -132,6 +132,9 @@
     if (el && w.lives < CONFIG.STARTING_LIVES) el.textContent = `Next in ${FS.fmtClock(w.nextLifeIn)}`;
   }, 1000);
 
+  // The game can move the player up a grid ("Next board"): follow it when we come back
+  const syncSize = () => { const p = FS.prefs().size; if (p !== size) setSize(p); else render(); };
+
   // ---------- Guests: ranked modes need an account ----------
   const signin = $("signinDialog");
   signin.addEventListener("click", (e) => { if (e.target === signin) signin.close(); });
@@ -154,8 +157,8 @@
       return true;
     },
     onMode: () => render(),
-    onMessage: () => render(), // a run finished, or lives/coins changed
-    onClose: () => render(),
+    onMessage: () => syncSize(), // a run finished, or lives/coins changed
+    onClose: () => syncSize(),
   });
   render();
 })();
