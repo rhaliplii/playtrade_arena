@@ -461,8 +461,8 @@ a {
   flex-direction: column;
   gap: 56px;
 }
-/* Content column is capped at the design width; the hero banner bleeds full width */
-.main > :not(.hero) {
+/* Every section, the hero banner included, sits in the same capped content column */
+.main > * {
   width: 100%;
   max-width: 1380px;
   margin-inline: auto;

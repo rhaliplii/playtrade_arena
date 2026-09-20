@@ -4,9 +4,6 @@
 .xp { color: #fbb517; }
 .life-loss { color: var(--fg-magenta); }
 
-/* Title: "Run" in the game's mint */
-.gj-title span { color: var(--mint); }
-
 /* BUY / SELL / PASS colours, as in the game */
 .pr-card__sub .gain { font-weight: 700; color: var(--gain); }
 .pr-card__sub .loss { font-weight: 700; color: var(--loss); }

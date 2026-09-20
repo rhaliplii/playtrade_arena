@@ -514,6 +514,11 @@ const withUtm = (url, content) => `${url}${url.includes('?') ? '&' : '?'}${CONFI
 function track(name, props = {}) { (window.dataLayer = window.dataLayer || []).push({ event: `bull_run_${name}`, ...props }); }
 
 const SPEED = 15;
+const WAKE_DIST = 62; // distance at which the news wall lights up (fog hides detail much beyond this)
+const WAKE_TIME = 0.6; // seconds for the edge to go from dormant grey to the category colour
+const WAKE_CONTENT = 0.75; // headline starts fading in at 75% of that (~450ms)
+const DORMANT_RAIL = 'rgba(206,226,220,.26)';
+
 const ROUNDS = 8;
 const STAKE = 1000;
 const START_EQUITY = 10000;
@@ -626,31 +631,108 @@ function buildTextures() {
   markImg.onload = () => { markTex.needsUpdate = true; };
   markImg.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(BRAND.mark.replace(/#22A180/gi, '#ffffff').replace('<svg ', '<svg width="240" height="256" '));
 
+  // The news wall while it waits for a headline: a dark display panel in standby.
+  // Same size and framing as the live wall, but neutral — no category colour, no text.
   TEX = { track, glow, markTex };
   Object.values(TEX).forEach(shared);
 }
 
-function wallTexture(item) {
+// The news wall. Both states share the same panel and the same edge rail; only the rail's colour
+// changes: a thin grey line while dormant, the category colour when the news breaks.
+function drawWallPanel(x, W, H, rail, shade = 0) {
+  x.fillStyle = 'rgba(12,14,18,.98)'; x.fillRect(0, 0, W, H);
+  x.strokeStyle = 'rgba(255,255,255,.05)'; x.lineWidth = 2;
+  for (let i = 0; i < W; i += 32) { x.beginPath(); x.moveTo(i, 0); x.lineTo(i, H); x.stroke(); }
+  for (let i = 0; i < H; i += 32) { x.beginPath(); x.moveTo(0, i); x.lineTo(W, i); x.stroke(); }
+  if (shade > 0) {
+    // Standby: the screen keeps a little depth so it reads as a display, not a hole.
+    // It fades out as the wall wakes, leaving the live wall exactly as it has always been.
+    x.save();
+    x.globalAlpha = shade;
+    const panel = x.createLinearGradient(0, 0, 0, H);
+    panel.addColorStop(0, 'rgba(255,255,255,.012)');
+    panel.addColorStop(0.34, 'rgba(255,255,255,.03)');
+    panel.addColorStop(0.72, 'rgba(255,255,255,.008)');
+    panel.addColorStop(1, 'rgba(0,0,0,.25)');
+    x.fillStyle = panel; x.fillRect(0, 0, W, H);
+    const vig = x.createRadialGradient(W / 2, H * 0.38, W * 0.15, W / 2, H * 0.38, H * 0.6);
+    vig.addColorStop(0, 'rgba(0,0,0,0)'); vig.addColorStop(1, 'rgba(0,0,0,.5)');
+    x.fillStyle = vig; x.fillRect(0, 0, W, H);
+    x.restore();
+  }
+  // The edge rail, in the same place in both states
+  x.strokeStyle = rail || DORMANT_RAIL; x.lineWidth = 10;
+  x.strokeRect(5, 5, W - 10, H - 10);
+}
+
+// The wall's headline block. Alpha lets it fade in behind the rail as the wall wakes.
+function drawWallContent(x, W, H, item, alpha = 1) {
+  if (alpha <= 0) return;
   const cat = CATEGORIES[item.category];
-  return canvasTex(512, 1066, (x, W, H) => {
-    x.fillStyle = 'rgba(12,14,18,.98)'; x.fillRect(0, 0, W, H);
-    x.strokeStyle = 'rgba(255,255,255,.05)'; x.lineWidth = 2;
-    for (let i = 0; i < W; i += 32) { x.beginPath(); x.moveTo(i, 0); x.lineTo(i, H); x.stroke(); }
-    for (let i = 0; i < H; i += 32) { x.beginPath(); x.moveTo(0, i); x.lineTo(W, i); x.stroke(); }
-    x.strokeStyle = cat.color; x.lineWidth = 10; x.strokeRect(5, 5, W - 10, H - 10);
+  x.save();
+  x.globalAlpha = alpha;
+  {
     x.textAlign = 'center'; x.textBaseline = 'middle';
     const cy = H * 0.34;
-    x.fillStyle = cat.color; x.font = FONT(900, 28); x.fillText(`NEWS BREAKS · ${cat.label.toUpperCase()}`, W / 2, cy - 74);
+    // Keep the eyebrow clear of the edge rail: shrink it only when a long category would reach it
+    const eyebrow = `NEWS BREAKS · ${cat.label.toUpperCase()}`;
+    let ez = 28; x.font = FONT(900, ez);
+    while (x.measureText(eyebrow).width > W - 112 && ez > 18) { ez -= 1; x.font = FONT(900, ez); }
+    x.fillStyle = cat.color; x.fillText(eyebrow, W / 2, cy - 74);
     x.fillStyle = '#ffffff';
     let size = 60; x.font = FONT(900, size);
     while (x.measureText(item.name).width > W - 60 && size > 28) { size -= 4; x.font = FONT(900, size); }
     x.fillText(item.name, W / 2, cy - 16);
+    // Lifted a touch so the row clears the road rather than sitting on it
+    const by = cy + 38;
     x.font = FONT(900, 40);
-    x.fillStyle = '#ff6b93'; x.fillText('SELL', W / 2 - 110, cy + 52);
-    x.fillStyle = 'rgba(255,255,255,.5)'; x.fillText('or', W / 2, cy + 52);
-    x.fillStyle = '#3be39a'; x.fillText('BUY', W / 2 + 110, cy + 52);
+    x.fillStyle = '#ff6b93'; x.fillText('SELL', W / 2 - 110, by);
+    x.fillStyle = 'rgba(255,255,255,.5)'; x.fillText('or', W / 2, by);
+    x.fillStyle = '#3be39a'; x.fillText('BUY', W / 2 + 110, by);
+  }
+  x.restore();
+}
+
+// The wall is composited from finished layers, never from blended colours:
+//   · dormant  — the standby panel with its grey edge
+//   · live     — the panel with the category edge, drawn in its exact final colour from the first frame
+//   · headline — the news block
+// Waking cross-dissolves dormant out and live in (normal alpha, one rail on screen at a time), so the
+// category edge has exactly the same colour at every step of the fade; only its opacity moves.
+function wallLayer(draw) {
+  const c = document.createElement('canvas');
+  c.width = 512; c.height = 1066;
+  draw(c.getContext('2d'), 512, 1066);
+  return c;
+}
+function buildWallLayers(R) {
+  R.layerDormant = wallLayer((x, W, H) => drawWallPanel(x, W, H, DORMANT_RAIL, 1));
+  R.layerLive = wallLayer((x, W, H) => drawWallPanel(x, W, H, CATEGORIES[R.item.category].color, 0));
+  R.layerNews = wallLayer((x, W, H) => drawWallContent(x, W, H, R.item, 1));
+  // The finished wall, drawn in one pass exactly as it always has been: what the fade lands on
+  R.layerFinal = wallLayer((x, W, H) => {
+    drawWallPanel(x, W, H, CATEGORIES[R.item.category].color, 0);
+    drawWallContent(x, W, H, R.item, 1);
   });
 }
+function paintWall(R, k) {
+  const x = R.wallCtx;
+  x.clearRect(0, 0, 512, 1066);
+  if (k >= 1) {
+    x.drawImage(R.layerFinal, 0, 0); // the live wall, pixel for pixel as before
+    R.layerDormant = R.layerLive = R.layerNews = R.layerFinal = null; // the fade is over: let the layers go
+  } else {
+    const e = k <= 0 ? 0 : k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; // ease-in-out
+    x.globalAlpha = 1 - e; x.drawImage(R.layerDormant, 0, 0);
+    x.globalAlpha = e; x.drawImage(R.layerLive, 0, 0);
+    // The headline follows the edge: it starts appearing once the edge is lit
+    x.globalAlpha = clamp((k - WAKE_CONTENT) / (1 - WAKE_CONTENT), 0, 1); x.drawImage(R.layerNews, 0, 0);
+    x.globalAlpha = 1;
+  }
+  R.wallTex.needsUpdate = true;
+  R.wakeK = k;
+}
+
 
 /* =========================================================
    Environment: sky, stars, grid, motes
@@ -1021,11 +1103,27 @@ function buildRun(mode) {
 function buildRoundObjects(R) {
   if (!R || R.wallMesh) return;
   {
-    const wallMat = new THREE.MeshBasicMaterial({ map: wallTexture(R.item), transparent: true, opacity: 0.98, side: THREE.DoubleSide, toneMapped: false });
+    // One canvas per wall: dormant now, animated to the live wall when the news breaks (see paintWall)
+    R.wallCanvas = document.createElement('canvas');
+    R.wallCanvas.width = 512; R.wallCanvas.height = 1066;
+    R.wallCtx = R.wallCanvas.getContext('2d');
+    R.wallTex = new THREE.CanvasTexture(R.wallCanvas);
+    R.wallTex.colorSpace = THREE.SRGBColorSpace;
+    R.wallTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    R.wakeT = null; R.wakeK = 0;
+    buildWallLayers(R);
+    paintWall(R, 0);
+    const wallMat = new THREE.MeshBasicMaterial({ map: R.wallTex, transparent: true, opacity: 0.98, side: THREE.DoubleSide, toneMapped: false });
     R.wallMesh = new THREE.Mesh(new THREE.PlaneGeometry(24, 50), wallMat);
     R.wallMesh.position.set(0, R.h0 - 5, -R.wall);
     world.add(R.wallMesh);
   }
+}
+
+// The news breaks: start the edge's run from dormant grey to the category colour.
+function wakeWall(R) {
+  if (!R || !R.wallMesh || R.wakeT != null) return;
+  R.wakeT = G.t;
 }
 
 function disposeRoundObjects(R) {
@@ -1034,6 +1132,9 @@ function disposeRoundObjects(R) {
   disposeTree(R.wallMesh);
   R.wallMesh = null;
   R.openT = null;
+  R.wallCanvas = R.wallCtx = R.wallTex = null;
+  R.layerDormant = R.layerLive = R.layerNews = null;
+  R.wakeT = null; R.wakeK = 0;
 }
 
 function buildSharedMaterials() {
@@ -1269,6 +1370,9 @@ function roundUpdate() {
   if (!R) return;
   if (G.phase === 'lead' && G.d >= R.aStart) beginApproach(R);
   if (G.phase === 'approach') {
+    // The wall waits in standby until the runner is close enough for the headline to read,
+    // well before the decision matters (WAKE_DIST / SPEED seconds of run-up).
+    if (R.wall - G.d <= WAKE_DIST) wakeWall(R);
     const frac = clamp((R.wall - G.d) / (R.wall - R.aStart), 0, 1);
     $('newsBar').style.width = `${frac * 100}%`;
     const urgent = frac < 0.3;
@@ -1750,10 +1854,11 @@ function update(dt) {
   bull.aura.material.color.set(G.lane === 2 ? GAIN : G.lane === 0 ? LOSS : '#9ba1a8');
   bull.aura.material.opacity = 0.55 + Math.sin(t * 6) * 0.2;
 
-  // walls open
+  // walls wake, then open
   if (RUN) {
     for (const R of RUN.rounds) {
       if (!R.wallMesh) continue;
+      if (R.wakeT != null && R.wakeK < 1) paintWall(R, Math.min(1, (G.t - R.wakeT) / WAKE_TIME));
       if (R.openT != null && R.wallMesh.visible) {
         const k = Math.min(1, (t - R.openT) / 0.35);
         R.wallMesh.material.opacity = 0.98 * (1 - k);
