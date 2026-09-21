@@ -70,16 +70,43 @@ document.querySelectorAll("[data-accordion]").forEach((col) => {
   hero.addEventListener("focusin", stop);
   hero.addEventListener("focusout", (e) => { if (!hero.contains(e.relatedTarget)) start(); });
 
-  // Swipe on touch screens
-  let x0 = null;
-  track.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; stop(); }, { passive: true });
-  track.addEventListener("touchend", (e) => {
-    if (x0 === null) return;
-    const dx = e.changedTouches[0].clientX - x0;
-    x0 = null;
-    if (Math.abs(dx) > 40) go(current + (dx < 0 ? 1 : -1));
-    start();
+  // Drag the banner with a mouse, a finger or a pen: the slide follows the pointer and
+  // settles on the nearest one when let go
+  let dragFrom = 0, dragging = false, moved = false, heroWidth = 1;
+  const offsetBy = (px) => (track.style.transform = `translateX(${-100 * current}%) translateX(${px}px)`);
+  track.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    dragging = true;
+    moved = false;
+    dragFrom = e.clientX;
+    heroWidth = hero.getBoundingClientRect().width || 1;
+    track.style.transition = "none";
+    track.classList.add("is-dragging");
+    try { track.setPointerCapture(e.pointerId); } catch { /* not capturable */ }
+    stop();
   });
+  track.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - dragFrom;
+    if (Math.abs(dx) > 4) moved = true;
+    offsetBy(dx);
+  });
+  const endDrag = (e) => {
+    if (!dragging) return;
+    dragging = false;
+    track.classList.remove("is-dragging");
+    track.style.transition = "";
+    const dx = e.clientX - dragFrom;
+    // past a tenth of the banner, move on; otherwise the slide springs back
+    if (Math.abs(dx) > Math.min(90, heroWidth * 0.1)) go(current + (dx < 0 ? 1 : -1));
+    else go(current);
+    start();
+  };
+  track.addEventListener("pointerup", endDrag);
+  track.addEventListener("pointercancel", endDrag);
+  // A drag must not follow through as a click on the banner's own links
+  track.addEventListener("click", (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  track.addEventListener("dragstart", (e) => e.preventDefault());
 
   go(0);
   start();
