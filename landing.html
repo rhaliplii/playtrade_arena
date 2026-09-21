@@ -308,9 +308,35 @@
 
   <!-- ============ Footer ============ -->
   <!-- ============ Global footer ============
-       One component for the whole platform (.pf-footer, styles.css): brand row, the
-       navigation columns, the comparison line and a quiet legal bar. -->
+       One component for the whole platform (.pf-footer, styles.css): a utility bar,
+       the navigation columns, then the disclaimer beside the language switcher. -->
   <footer class="pf-footer">
+
+    <div class="pf-footer__bar">
+      <div class="pf-footer__bar-group">
+        <a class="footer__logo" href="landing.html" aria-label="Profit.com"><img class="mark" src="assets/ft-logo-mark.svg" alt=""><img class="word" src="assets/ft-logo-word.svg" alt=""></a>
+        <span class="pf-footer__rule" aria-hidden="true"></span>
+        <p class="pf-footer__copy">© <span data-year>2026</span> Profit.com. All rights reserved.</p>
+      </div>
+
+      <div class="pf-footer__bar-group">
+        <div class="pf-app">
+          <span class="pf-app__label">Get the app</span>
+          <a class="pf-app__btn" href="#"><img class="pf-app__ico pf-app__ico--apple" src="assets/ft-apple.svg" alt="">iOS</a>
+          <a class="pf-app__btn" href="#"><img class="pf-app__ico" src="assets/ft-playstore.svg" alt="">Android</a>
+        </div>
+        <span class="pf-footer__rule" aria-hidden="true"></span>
+        <div class="socials">
+            <a class="social" href="#" aria-label="Telegram"><span class="ico"><img src="assets/ft-telegram.svg" alt=""></span></a>
+            <a class="social" href="#" aria-label="Instagram"><span class="ico"><img src="assets/ft-instagram.svg" alt=""></span></a>
+            <a class="social" href="#" aria-label="Facebook"><span class="ico"><img src="assets/ft-facebook.svg" alt=""></span></a>
+            <a class="social" href="#" aria-label="YouTube"><span class="ico"><img src="assets/ft-youtube.svg" alt=""></span></a>
+            <a class="social" href="#" aria-label="X"><span class="ico"><img src="assets/ft-x.svg" alt=""></span></a>
+            <a class="social" href="#" aria-label="LinkedIn"><span class="ico"><span class="li"><img src="assets/ft-linkedin.svg" alt=""></span></span></a>
+            <a class="social" href="#" aria-label="TikTok"><span class="ico"><img src="assets/ft-tiktok.svg" alt=""></span></a>
+        </div>
+      </div>
+    </div>
 
     <nav class="pf-footer__grid" aria-label="Footer">
       <details class="pf-col" open>
@@ -365,9 +391,9 @@
         <summary><h3>Company</h3></summary>
         <ul>
           <li><a href="#">About Profit.com</a></li>
+          <li><a href="#">Mobile App</a></li>
           <li><a href="#">Refer a Friend</a></li>
           <li><a href="#">Become an Affiliate</a></li>
-          <li><a href="#">Mobile App</a></li>
           <li><a href="#">Contact Us</a></li>
         </ul>
       </details>
@@ -385,65 +411,25 @@
           <li><a href="#">Release Notes</a></li>
         </ul>
       </details>
-      <details class="pf-col" open>
-        <summary><h3>Compare</h3></summary>
-        <ul>
-          <li><a href="#">Bloomberg</a></li>
-          <li><a href="#">TradingView</a></li>
-          <li><a href="#">Yahoo Finance</a></li>
-          <li><a href="#">Google Finance</a></li>
-          <li><a href="#">Finviz</a></li>
-          <li><a href="#">Koyfin</a></li>
-          <li><a href="#">All Alternatives</a></li>
-        </ul>
-      </details>
     </nav>
 
-    <div class="pf-footer__bar">
-      <div class="pf-footer__bar-group">
-        <a class="footer__logo" href="landing.html" aria-label="Profit.com"><img class="mark" src="assets/ft-logo-mark.svg" alt=""><img class="word" src="assets/ft-logo-word.svg" alt=""></a>
-        <span class="pf-footer__rule" aria-hidden="true"></span>
-        <p class="pf-footer__copy">© <span data-year>2026</span> Profit.com. All rights reserved.</p>
+    <div class="pf-footer__legal">
+      <div class="pf-footer__disclaimer" role="note" aria-label="Disclaimer">
+        <p>Profit.com is an educational, subscription-based software platform providing financial market analytics and simulated trading using real-time market data and virtual funds. All trading activity on the platform is simulated. No real capital is used, no customer deposits are collected, and no real-money trades are executed or facilitated.</p>
+        <p>Profit.com is not a broker and does not provide brokerage, investment, or other financial services or investment advice. All content, tools and features are provided for educational and informational purposes only. Simulated trading results are hypothetical and are not indicative of actual or future results. The terms “trading” and “trader” refer exclusively to simulated activity on Profit.com and should not be interpreted as real-money trading or investing.</p>
       </div>
-
-      <div class="pf-footer__bar-group">
-        <div class="socials">
-          <a class="social" href="#" aria-label="Telegram"><span class="ico"><img src="assets/ft-telegram.svg" alt=""></span></a>
-          <a class="social" href="#" aria-label="Instagram"><span class="ico"><img src="assets/ft-instagram.svg" alt=""></span></a>
-          <a class="social" href="#" aria-label="Facebook"><span class="ico"><img src="assets/ft-facebook.svg" alt=""></span></a>
-          <a class="social" href="#" aria-label="YouTube"><span class="ico"><img src="assets/ft-youtube.svg" alt=""></span></a>
-          <a class="social" href="#" aria-label="X"><span class="ico"><img src="assets/ft-x.svg" alt=""></span></a>
-          <a class="social" href="#" aria-label="LinkedIn"><span class="ico"><span class="li"><img src="assets/ft-linkedin.svg" alt=""></span></span></a>
-          <a class="social" href="#" aria-label="TikTok"><span class="ico"><img src="assets/ft-tiktok.svg" alt=""></span></a>
-        </div>
-        <span class="pf-footer__rule" aria-hidden="true"></span>
-        <div class="pf-lang">
+      <div class="pf-lang">
         <button class="pf-footer__lang" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Change language">
-          <img src="assets/globe.svg" alt=""><span data-lang-value>EN</span>
+          <img src="assets/globe.svg" alt=""><span data-lang-value>English</span>
           <svg class="pf-lang__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-          <div class="lang-dd__panel pf-lang__panel" role="menu" aria-label="Language"></div>
-        </div>
-      </div>
-
-      <div class="pf-footer__app">
-        <p class="pf-footer__app-title">Get the Profit.com App</p>
-        <p class="pf-footer__app-note">Trade smarter, anytime, anywhere.</p>
-        <div class="pf-footer__stores">
-          <a class="store-btn store-btn--apple" href="#"><img src="assets/ft-apple.svg" alt=""><span>App Store</span></a>
-          <a class="store-btn store-btn--google" href="#" aria-label="Get it on Google Play"><img class="gp-icon" src="assets/ft-playstore.svg" alt=""><img class="gp-text" src="assets/ft-googleplay-text.svg" alt=""></a>
-        </div>
+        <div class="lang-dd__panel pf-lang__panel" role="menu" aria-label="Language"></div>
       </div>
     </div>
 
   </footer>
 
-  <!-- ============ Legal disclaimer ============ -->
-  <div class="legal-disclaimer lp-disclaimer" role="note" aria-label="Disclaimer">
-    <p>Profit.com is an educational, subscription-based software platform providing financial market analytics and simulated trading using real-time market data and virtual funds. All trading activity on the platform is simulated. No real capital is used, no customer deposits are collected, and no real-money trades are executed or facilitated.</p>
-    <p>Profit.com is not a broker and does not provide brokerage, investment, or other financial services or investment advice. All content, tools and features are provided for educational and informational purposes only. Simulated trading results are hypothetical and are not indicative of actual or future results. The terms “trading” and “trader” refer exclusively to simulated activity on Profit.com and should not be interpreted as real-money trading or investing.</p>
-  </div>
-
   <script src="landing.js"></script>
+  <script src="footer.js"></script>
 </body>
 </html>

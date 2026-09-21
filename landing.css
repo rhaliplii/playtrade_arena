@@ -11,8 +11,7 @@
 }
 .lp main { display: block; }
 /* The global footer and the disclaimer line up with the page's own column */
-.lp .pf-footer,
-.lp .pf-footer + .legal-disclaimer { --pf-max: var(--lp-max); --pf-gutter: var(--lp-gutter); }
+.lp .pf-footer { --pf-max: var(--lp-max); --pf-gutter: var(--lp-gutter); }
 .lp ul { margin: 0; padding: 0; list-style: none; }
 .lp h2, .lp h3, .lp h4 { margin: 0; }
 .lp figure, .lp blockquote { margin: 0; }
@@ -704,7 +703,6 @@
 
 /* ---------- Footer ---------- */
 
-.lp-disclaimer { padding: 24px max(80px, calc((100% - 1280px) / 2)) 48px; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1280px) {
@@ -756,7 +754,6 @@
   .lp-guarantee { font-size: 14px; line-height: 20px; }
   .lp-cta { flex-direction: column; align-items: flex-start; padding: 40px 24px; }
   .lp-cta__title { font-size: 32px; line-height: 40px; letter-spacing: -1px; }
-  .lp-disclaimer { padding-left: 16px; padding-right: 16px; }
   .lp-compare__line2 { flex-wrap: wrap; justify-content: center; white-space: normal; }
   .lp-pill { padding: 0 14px; }
   /* Table scrolls sideways; the feature column stays pinned */

@@ -1348,99 +1348,10 @@ a {
 
 /* ---------- Footer ---------- */
 /* Legal disclaimer, shown under the footer on every page that has one */
-.legal-disclaimer {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 24px 24px 40px;
-  border-top: 1px solid var(--border-primary);
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.4);
-}
-.legal-disclaimer p { max-width: 1240px; }
 /* In the arena the footer and disclaimer sit in the spaced main column; pull them together */
-.main > .legal-disclaimer { margin-top: -56px; }
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  padding: 0 24px 40px;
-  background: #13161b;
-}
-.footer__cta-row { display: flex; align-items: flex-end; gap: 32px; width: 100%; }
-.footer__pitch { display: flex; flex: 1; flex-direction: column; gap: 8px; min-width: 0; font-weight: 700; line-height: 1.3; }
-.footer__pitch p:first-child { font-size: 20px; opacity: 0.5; }
-.footer__pitch p:last-child { font-size: 40px; }
-.footer__play { padding: 12px 24px; font-size: 16px; line-height: 24px; font-weight: 600; letter-spacing: -0.16px; }
-.footer__body { display: flex; flex-direction: column; gap: 32px; width: 100%; }
-.footer__cols { display: flex; align-items: flex-start; gap: 32px; }
-.footer__links { display: flex; flex: 1; align-items: flex-start; gap: 32px; min-width: 0; }
-.footer__col {
-  display: flex;
-  flex: 1 0 0;
-  flex-direction: column;
-  gap: 24px;
-  min-width: 0;
-  font-size: 14px;
-  line-height: 1.3;
-}
-.footer__col--fixed { flex: none; width: 192px; }
-.footer__col--app { flex: none; width: 160px; }
-.footer__col h4 { margin: 0; font-size: 14px; font-weight: 700; opacity: 0.75; }
-.footer__col ul {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-weight: 500;
-}
-.footer__col li a:not(.store-btn) { opacity: 0.5; }
-.footer__col li a:not(.store-btn):hover { opacity: 0.9; }
-.footer__more { display: flex; align-items: center; gap: 8px; opacity: 0.3; }
-.footer__more img { width: 9px; height: 4.5px; }
-.store-btn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 112px;
-  height: 40px;
-  overflow: hidden;
-  border-radius: 8px;
-}
-.store-btn--apple { background: var(--bg-inversed); color: var(--fg-primary-inversed); }
-.store-btn--apple img { position: absolute; left: 7.52px; top: 7.52px; width: 18.81px; height: 22.572px; }
-.store-btn--apple span {
-  position: absolute;
-  left: 33.86px;
-  top: calc(50% + 0.09px);
-  transform: translateY(-50%);
-  width: 73.359px;
-  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  font-size: 16.929px;
-  line-height: 1;
-  font-weight: 500;
-  letter-spacing: -0.442px;
-}
-.store-btn--google { gap: 6.222px; padding: 4.978px 7.467px; background: var(--bg-1-glass); }
-.store-btn--google .gp-icon { width: 19.576px; height: 22.372px; }
-.store-btn--google .gp-text { width: 68.981px; height: 13.983px; transform: scaleY(-1); }
-.footer__bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 24px;
-  border-top: 1px solid #1e2227;
-}
 .footer__logo { display: flex; gap: 8px; }
 .footer__logo .mark { width: 29.997px; height: 32px; }
 .footer__logo .word { width: 102.315px; height: 31.999px; }
-.footer__legal { display: flex; align-items: center; gap: 24px; }
-.footer__copy { font-size: 14px; line-height: 1.3; font-weight: 500; opacity: 0.3; white-space: nowrap; }
 .socials { display: flex; gap: 8px; }
 .social {
   display: flex;
@@ -1471,8 +1382,6 @@ a {
   .mission { flex: none; } /* overflow:hidden would otherwise let the stacked rows collapse */
   .faq__cols { flex-direction: column; }
   .faq__col { width: 100%; }
-  .footer__cols { flex-direction: column; }
-  .footer__links { flex-wrap: wrap; width: 100%; }
   .referral__art { opacity: 0.35; }
   .referral__title { width: auto; max-width: 579px; }
 }
@@ -1496,9 +1405,6 @@ a {
   .jc-metrics { gap: 8px; }
   .jc-metric { min-width: 0; }
   .explore-grid { grid-template-columns: minmax(0, 1fr); }
-  .footer__cta-row { flex-direction: column; align-items: flex-start; }
-  .footer__pitch p:last-child { font-size: 28px; }
-  .footer__bottom, .footer__legal { flex-direction: column; align-items: flex-start; gap: 16px; }
 }
 
 /* Cards that open a competition screen */
@@ -2395,17 +2301,7 @@ body.is-playing { overflow: hidden; }
   .faq-agent__cta { flex-basis: 100%; }
 
   /* ---- Footer ---- */
-  .footer { padding: 0 16px 32px; gap: 32px; }
-  .footer__pitch p:first-child { font-size: 16px; }
-  .footer__pitch p:last-child { font-size: 26px; line-height: 1.25; }
-  .footer__cols { gap: 32px; }
-  .footer__links { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 28px 16px; }
-  .footer__col--fixed,
-  .footer__col--app { width: auto; }
-  .footer__col { gap: 16px; }
-  .footer__col ul { gap: 12px; }
   .socials { flex-wrap: wrap; }
-  .legal-disclaimer { padding: 20px 16px 32px; font-size: 11px; line-height: 16px; }
 
   /* Game player: follow the visible viewport as mobile browser bars show and hide */
   .game-modal { bottom: auto; height: 100dvh; }
@@ -2417,7 +2313,6 @@ body.is-playing { overflow: hidden; }
   .joined-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
-  .footer__play { align-self: stretch; }
 }
 @media (max-width: 400px) {
   .hero__title { font-size: 30px; line-height: 36px; }
@@ -2432,13 +2327,11 @@ body.is-playing { overflow: hidden; }
 /* =====================================================================
    Global footer (.pf-footer)
    One component for every Profit.com page:
-     1 grid — seven navigation columns, resources among them
-     2 bar  — logo, copyright, socials, language and the app, on one line
-   The regulatory disclaimer stays a separate block underneath.
+     1 bar   — logo, copyright, the app buttons and the socials
+     2 grid  — six navigation columns
+     3 legal — the disclaimer beside the language switcher
    ===================================================================== */
-/* The host page sets its own column on .pf-footer; these are the defaults */
-.pf-footer,
-.pf-footer + .legal-disclaimer {
+.pf-footer {
   --pf-max: 1380px;
   --pf-gutter: 24px;
 }
@@ -2447,13 +2340,52 @@ body.is-playing { overflow: hidden; }
   padding: 0 max(var(--pf-gutter), calc((100% - var(--pf-max)) / 2)) 32px;
 }
 
-/* ---- 1 · Navigation ---- */
+/* ---- 1 · Utility bar ---- */
+.pf-footer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 32px;
+  flex-wrap: wrap;
+  padding: 28px 0;
+  border-top: 1px solid var(--border-primary);
+}
+.pf-footer__bar-group { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.pf-footer__rule { width: 1px; height: 28px; flex: none; background: var(--border-primary); }
+.pf-footer__copy {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.58);
+}
+/* The app buttons are platform pills rather than store badges: quieter beside the logo */
+.pf-app { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.pf-app__label { font-size: 14px; line-height: 20px; font-weight: 600; color: var(--fg-primary); }
+.pf-app__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--fg-primary);
+  white-space: nowrap;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+.pf-app__btn:hover { background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34); }
+.pf-app__ico { width: 18px; height: 18px; object-fit: contain; }
+.pf-app__ico--apple { filter: invert(1); }
+
+/* ---- 2 · Navigation ---- */
 .pf-footer__grid {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 32px 20px;
-  padding: 40px 0 32px;
-  border-top: 1px solid var(--border-primary);
+  padding: 8px 0 36px;
 }
 .pf-col { min-width: 0; }
 .pf-col > summary {
@@ -2464,73 +2396,61 @@ body.is-playing { overflow: hidden; }
 .pf-col > summary::-webkit-details-marker { display: none; }
 .pf-col h3 {
   margin: 0;
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 15px;
+  line-height: 20px;
   font-weight: 700;
-  letter-spacing: -0.1px;
+  letter-spacing: -0.15px;
   color: var(--fg-primary);
 }
 .pf-footer .pf-col ul {
   display: flex;
   flex-direction: column;
-  gap: 11px;
-  margin: 16px 0 0;
+  gap: 12px;
+  margin: 20px 0 0;
   padding: 0;
   list-style: none;
 }
 .pf-col a {
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.58); /* secondary, but never mistaken for disabled */
+  color: rgba(255, 255, 255, 0.62);
   transition: color 0.15s ease;
 }
 .pf-col a:hover { color: var(--fg-primary); }
 .pf-col a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 4px; }
 
-/* ---- 2 · Utility bar: identity, socials, language and the app ---- */
-.pf-footer__bar {
+/* ---- 3 · Disclaimer and language ---- */
+.pf-footer__legal {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px 28px;
-  flex-wrap: wrap;
+  gap: 20px 32px;
   padding-top: 24px;
   border-top: 1px solid var(--border-primary);
 }
-.pf-footer__bar-group { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-.pf-footer__rule { width: 1px; height: 28px; flex: none; background: var(--border-primary); }
-.pf-footer__app { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
-.pf-footer__app-title { font-size: 14px; line-height: 20px; font-weight: 700; color: var(--fg-primary); }
-.pf-footer__app-note { font-size: 13px; line-height: 18px; font-weight: 400; color: rgba(255, 255, 255, 0.58); }
-.pf-footer__stores { display: flex; gap: 10px; margin-top: 8px; }
-/* Both badges use their dark variant with a hairline edge, so neither shouts on a dark
-   footer, and they carry equal weight. Sizes stay in proportion, part for part. */
-.pf-footer .store-btn { width: 120px; height: 43px; border-radius: 9px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22); }
-.pf-footer .store-btn--apple { background: transparent; color: var(--fg-primary); }
-.pf-footer .store-btn--apple img { left: 8px; top: 8px; width: 20.1px; height: 24.1px; filter: invert(1); }
-.pf-footer .store-btn--apple span { left: 36.2px; width: 78.5px; font-size: 18.1px; letter-spacing: -0.47px; }
-.pf-footer .store-btn--google { gap: 6.6px; padding: 5.3px 8px; background: transparent; }
-.pf-footer .store-btn--google .gp-icon { width: 20.9px; height: 23.9px; }
-.pf-footer .store-btn--google .gp-text { width: 73.8px; height: 15px; }
-.pf-footer .store-btn:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38); }
-.pf-footer__copy {
-  font-size: 13px;
+.pf-footer__disclaimer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 1000px;
+  font-size: 12px;
   line-height: 18px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.55);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.42);
 }
 .pf-footer__lang {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 14px;
+  flex: none;
+  padding: 9px 16px;
   border-radius: var(--radius-pill);
   box-shadow: inset 0 0 0 1px var(--border-primary);
-  font-size: 13px;
-  line-height: 18px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.68);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
   transition: background 0.15s ease, color 0.15s ease;
 }
 .pf-footer__lang img { width: 16px; height: 16px; }
@@ -2543,24 +2463,25 @@ body.is-playing { overflow: hidden; }
 .pf-lang__panel { right: 0; top: auto; bottom: calc(100% + 10px); transform: translateY(6px); }
 .pf-lang.is-open .pf-lang__panel { opacity: 1; visibility: visible; transform: none; }
 
-/* The disclaimer shares the footer's column, and sits tighter than under the older footer */
-.pf-footer + .legal-disclaimer {
-  padding: 18px max(var(--pf-gutter), calc((100% - var(--pf-max)) / 2)) 28px;
-  border-top: 0; /* the legal bar's rule already closes the footer, and it is inset */
-}
-.pf-footer + .legal-disclaimer p { max-width: none; }
-
 /* ---- Narrower desktops and tablets ---- */
 @media (max-width: 1180px) {
-  .pf-footer__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .pf-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 860px) {
-  .pf-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pf-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pf-footer__legal { flex-direction: column; align-items: flex-start; }
 }
 
 /* ---- Phones: the columns fold, so the footer stays a short scroll ---- */
 @media (max-width: 600px) {
-  .pf-footer__grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 28px 0 20px; }
+  .pf-footer__bar { padding: 24px 0 20px; gap: 18px; }
+  .pf-footer__bar-group { gap: 16px; }
+  .pf-footer__rule { display: none; }
+  /* Comfortable thumb targets for the socials */
+  .pf-footer .socials { gap: 10px; }
+  .pf-footer .social { width: 40px; height: 40px; }
+  .pf-footer .social .ico { width: 22px; height: 22px; }
+  .pf-footer__grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 4px 0 20px; }
   .pf-col { border-bottom: 1px solid var(--border-primary); }
   .pf-col > summary {
     display: flex;
@@ -2584,7 +2505,5 @@ body.is-playing { overflow: hidden; }
   }
   .pf-col[open] > summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
   .pf-footer .pf-col ul { margin: 0 0 18px; gap: 14px; }
-  .pf-footer__bar { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 20px; }
-  .pf-footer__bar-group { gap: 16px; }
-  .pf-footer__rule { display: none; }
+  .pf-footer__legal { gap: 18px; padding-top: 20px; }
 }
