@@ -1193,7 +1193,6 @@ a {
   background: rgba(8, 10, 13, 0.58);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.14);
   font-size: 14px;
   line-height: 18px;
   font-weight: 600;
@@ -2428,4 +2427,164 @@ body.is-playing { overflow: hidden; }
   .hero__stat span { font-size: 12px; line-height: 16px; }
   .stat-card__body .t-h1 { font-size: 18px; line-height: 24px; }
   .jc-metrics { flex-wrap: wrap; }
+}
+
+/* =====================================================================
+   Global footer (.pf-footer)
+   One component for every Profit.com page:
+     1 grid — seven navigation columns, resources among them
+     2 bar  — logo, copyright, socials, language and the app, on one line
+   The regulatory disclaimer stays a separate block underneath.
+   ===================================================================== */
+/* The host page sets its own column on .pf-footer; these are the defaults */
+.pf-footer,
+.pf-footer + .legal-disclaimer {
+  --pf-max: 1380px;
+  --pf-gutter: 24px;
+}
+.pf-footer {
+  width: 100%;
+  padding: 0 max(var(--pf-gutter), calc((100% - var(--pf-max)) / 2)) 32px;
+}
+
+/* ---- 1 · Navigation ---- */
+.pf-footer__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 32px 20px;
+  padding: 40px 0 32px;
+  border-top: 1px solid var(--border-primary);
+}
+.pf-col { min-width: 0; }
+.pf-col > summary {
+  list-style: none;
+  cursor: default;
+  pointer-events: none; /* the columns only fold on phones */
+}
+.pf-col > summary::-webkit-details-marker { display: none; }
+.pf-col h3 {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  color: var(--fg-primary);
+}
+.pf-footer .pf-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pf-col a {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.58); /* secondary, but never mistaken for disabled */
+  transition: color 0.15s ease;
+}
+.pf-col a:hover { color: var(--fg-primary); }
+.pf-col a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 4px; }
+
+/* ---- 2 · Utility bar: identity, socials, language and the app ---- */
+.pf-footer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 28px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-primary);
+}
+.pf-footer__bar-group { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.pf-footer__rule { width: 1px; height: 28px; flex: none; background: var(--border-primary); }
+.pf-footer__app { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.pf-footer__app-title { font-size: 14px; line-height: 20px; font-weight: 700; color: var(--fg-primary); }
+.pf-footer__app-note { font-size: 13px; line-height: 18px; font-weight: 400; color: rgba(255, 255, 255, 0.58); }
+.pf-footer__stores { display: flex; gap: 10px; margin-top: 8px; }
+/* Both badges use their dark variant with a hairline edge, so neither shouts on a dark
+   footer, and they carry equal weight. Sizes stay in proportion, part for part. */
+.pf-footer .store-btn { width: 120px; height: 43px; border-radius: 9px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22); }
+.pf-footer .store-btn--apple { background: transparent; color: var(--fg-primary); }
+.pf-footer .store-btn--apple img { left: 8px; top: 8px; width: 20.1px; height: 24.1px; filter: invert(1); }
+.pf-footer .store-btn--apple span { left: 36.2px; width: 78.5px; font-size: 18.1px; letter-spacing: -0.47px; }
+.pf-footer .store-btn--google { gap: 6.6px; padding: 5.3px 8px; background: transparent; }
+.pf-footer .store-btn--google .gp-icon { width: 20.9px; height: 23.9px; }
+.pf-footer .store-btn--google .gp-text { width: 73.8px; height: 15px; }
+.pf-footer .store-btn:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38); }
+.pf-footer__copy {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+.pf-footer__lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1px var(--border-primary);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.68);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.pf-footer__lang img { width: 16px; height: 16px; }
+.pf-footer__lang:hover { background: var(--bg-1); color: var(--fg-primary); }
+/* The switcher is a menu: it carries a caret and opens upwards, being at the page foot */
+.pf-lang { position: relative; }
+.pf-lang__caret { width: 12px; height: 12px; opacity: 0.8; transition: transform 0.2s ease; }
+.pf-lang.is-open .pf-lang__caret { transform: rotate(180deg); }
+.pf-lang.is-open .pf-footer__lang { background: var(--bg-1); color: var(--fg-primary); }
+.pf-lang__panel { right: 0; top: auto; bottom: calc(100% + 10px); transform: translateY(6px); }
+.pf-lang.is-open .pf-lang__panel { opacity: 1; visibility: visible; transform: none; }
+
+/* The disclaimer shares the footer's column, and sits tighter than under the older footer */
+.pf-footer + .legal-disclaimer {
+  padding: 18px max(var(--pf-gutter), calc((100% - var(--pf-max)) / 2)) 28px;
+  border-top: 0; /* the legal bar's rule already closes the footer, and it is inset */
+}
+.pf-footer + .legal-disclaimer p { max-width: none; }
+
+/* ---- Narrower desktops and tablets ---- */
+@media (max-width: 1180px) {
+  .pf-footer__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .pf-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---- Phones: the columns fold, so the footer stays a short scroll ---- */
+@media (max-width: 600px) {
+  .pf-footer__grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 28px 0 20px; }
+  .pf-col { border-bottom: 1px solid var(--border-primary); }
+  .pf-col > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  .pf-col h3 { font-size: 16px; }
+  /* the chevron turns as the section opens */
+  .pf-col > summary::after {
+    content: "";
+    width: 9px;
+    height: 9px;
+    margin-right: 4px;
+    border-right: 2px solid var(--fg-secondary);
+    border-bottom: 2px solid var(--fg-secondary);
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 0.2s ease;
+  }
+  .pf-col[open] > summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
+  .pf-footer .pf-col ul { margin: 0 0 18px; gap: 14px; }
+  .pf-footer__bar { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 20px; }
+  .pf-footer__bar-group { gap: 16px; }
+  .pf-footer__rule { display: none; }
 }

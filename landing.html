@@ -307,38 +307,135 @@
   </main>
 
   <!-- ============ Footer ============ -->
-  <footer class="lp-footer">
-    <div class="lp-footer__cta">
-      <div>
-        <p class="lp-footer__kicker">WHAT ARE YOU WAITING FOR?</p>
-        <p class="lp-footer__title">Get started today</p>
+  <!-- ============ Global footer ============
+       One component for the whole platform (.pf-footer, styles.css): brand row, the
+       navigation columns, the comparison line and a quiet legal bar. -->
+  <footer class="pf-footer">
+
+    <nav class="pf-footer__grid" aria-label="Footer">
+      <details class="pf-col" open>
+        <summary><h3>Playtrade</h3></summary>
+        <ul>
+          <li><a href="index.html">Tournaments</a></li>
+          <li><a href="index.html#games-title">Market Games</a></li>
+          <li><a href="#">Leaderboard</a></li>
+          <li><a href="#">Missions</a></li>
+          <li><a href="#">Toolbox</a></li>
+          <li><a href="#">Wallet</a></li>
+          <li><a href="#plans">Plans</a></li>
+        </ul>
+      </details>
+      <details class="pf-col" open>
+        <summary><h3>Tools</h3></summary>
+        <ul>
+          <li><a href="#">Discover</a></li>
+          <li><a href="#">Billionaire Portfolios</a></li>
+          <li><a href="#">Screeners</a></li>
+          <li><a href="#">Charts</a></li>
+          <li><a href="#">Market Overview</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Economic Calendar</a></li>
+          <li><a href="#">Trading Signals</a></li>
+          <li><a href="#">Watchlists</a></li>
+        </ul>
+      </details>
+      <details class="pf-col" open>
+        <summary><h3>Learn</h3></summary>
+        <ul>
+          <li><a href="#">Video Tutorials</a></li>
+          <li><a href="#">Weekly Briefs</a></li>
+          <li><a href="#">AI Daily Brief</a></li>
+          <li><a href="#">Market Pulse</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#faq">FAQs</a></li>
+        </ul>
+      </details>
+      <details class="pf-col" open>
+        <summary><h3>Business Solutions</h3></summary>
+        <ul>
+          <li><a href="#">Widgets</a></li>
+          <li><a href="#">Data API</a></li>
+          <li><a href="#">Charts Library</a></li>
+          <li><a href="#">Signals</a></li>
+          <li><a href="#">Advertising</a></li>
+          <li><a href="#plans">Pricing</a></li>
+        </ul>
+      </details>
+      <details class="pf-col" open>
+        <summary><h3>Company</h3></summary>
+        <ul>
+          <li><a href="#">About Profit.com</a></li>
+          <li><a href="#">Refer a Friend</a></li>
+          <li><a href="#">Become an Affiliate</a></li>
+          <li><a href="#">Mobile App</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </details>
+      <details class="pf-col" open>
+        <summary><h3>Resources</h3></summary>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Compare Brokers</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Risk Disclosure</a></li>
+          <li><a href="#">House Rules</a></li>
+          <li><a href="#">Affiliate Rules</a></li>
+          <li><a href="#">Release Notes</a></li>
+        </ul>
+      </details>
+      <details class="pf-col" open>
+        <summary><h3>Compare</h3></summary>
+        <ul>
+          <li><a href="#">Bloomberg</a></li>
+          <li><a href="#">TradingView</a></li>
+          <li><a href="#">Yahoo Finance</a></li>
+          <li><a href="#">Google Finance</a></li>
+          <li><a href="#">Finviz</a></li>
+          <li><a href="#">Koyfin</a></li>
+          <li><a href="#">All Alternatives</a></li>
+        </ul>
+      </details>
+    </nav>
+
+    <div class="pf-footer__bar">
+      <div class="pf-footer__bar-group">
+        <a class="footer__logo" href="landing.html" aria-label="Profit.com"><img class="mark" src="assets/ft-logo-mark.svg" alt=""><img class="word" src="assets/ft-logo-word.svg" alt=""></a>
+        <span class="pf-footer__rule" aria-hidden="true"></span>
+        <p class="pf-footer__copy">© <span data-year>2026</span> Profit.com. All rights reserved.</p>
       </div>
-      <a class="lp-footer__btn" href="index.html">Explore Now</a>
-    </div>
-    <div class="lp-footer__cols">
-      <div><h4>Tools</h4><ul><li><a href="#">Terminal</a></li><li><a href="index.html">Playtrade</a></li><li><a href="#">Research</a></li><li><a href="#">Messenger</a></li><li><a href="#">Mobile App</a></li></ul></div>
-      <div><h4>Solutions</h4><ul><li><a href="#">Widgets</a></li><li><a href="#">Data API</a></li><li><a href="#">Charts Library</a></li><li><a href="#">Trading Signals</a></li><li><a href="#">Advertising</a></li></ul></div>
-      <div><h4>About</h4><ul><li><a href="#">Company</a></li><li><a href="#">Rebranding</a></li><li><a href="#">Investors</a></li><li><a href="#">Partners</a></li><li><a href="#">Refer a Friend</a></li><li><a href="#">Become an Affiliate</a></li><li><a href="#">Contact us</a></li></ul></div>
-      <div><h4>Resources</h4><ul><li><a href="#">Help Center</a></li><li><a href="#">Terms &amp; Conditions</a></li><li><a href="#">Cookie Policy</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Risks Disclosure</a></li><li><a href="#">Release Notes</a></li></ul></div>
-      <div><h4>Compare</h4><ul><li><a href="#">Yahoo Finance</a></li><li><a href="#">Morningstar</a></li><li><a href="#">Bloomberg</a></li><li><a href="#">Google Finance</a></li><li><button class="lp-footer__more" type="button">Show more<img src="assets/ft-chevron.svg" alt=""></button></li></ul></div>
-      <div class="lp-footer__app"><h4>Profit mobile app</h4><p>Discover the world of finance in your pocket</p><img src="assets/lp-qr.png" width="96" height="96" alt="QR code to download the Profit.com app"></div>
-    </div>
-    <div class="lp-footer__bottom">
-      <a class="footer__logo" href="landing.html" aria-label="Profit.com"><img class="mark" src="assets/ft-logo-mark.svg" alt=""><img class="word" src="assets/ft-logo-word.svg" alt=""></a>
-      <div class="lp-footer__legal">
-        <p>© 2025 All rights reserved</p>
-        <div class="lp-footer__social">
-          <a href="#" aria-label="Facebook"><img src="assets/ft-facebook.svg" alt=""></a>
-          <a href="#" aria-label="X"><img src="assets/ft-x.svg" alt=""></a>
-          <a href="#" aria-label="YouTube"><img src="assets/ft-youtube.svg" alt=""></a>
-          <a href="#" aria-label="Instagram"><img src="assets/ft-instagram.svg" alt=""></a>
-          <a href="#" aria-label="LinkedIn"><img src="assets/ft-linkedin.svg" alt=""></a>
-          <a href="#" aria-label="Telegram"><img src="assets/ft-telegram.svg" alt=""></a>
-          <a href="#" aria-label="TikTok"><img src="assets/ft-tiktok.svg" alt=""></a>
+
+      <div class="pf-footer__bar-group">
+        <div class="socials">
+          <a class="social" href="#" aria-label="Telegram"><span class="ico"><img src="assets/ft-telegram.svg" alt=""></span></a>
+          <a class="social" href="#" aria-label="Instagram"><span class="ico"><img src="assets/ft-instagram.svg" alt=""></span></a>
+          <a class="social" href="#" aria-label="Facebook"><span class="ico"><img src="assets/ft-facebook.svg" alt=""></span></a>
+          <a class="social" href="#" aria-label="YouTube"><span class="ico"><img src="assets/ft-youtube.svg" alt=""></span></a>
+          <a class="social" href="#" aria-label="X"><span class="ico"><img src="assets/ft-x.svg" alt=""></span></a>
+          <a class="social" href="#" aria-label="LinkedIn"><span class="ico"><span class="li"><img src="assets/ft-linkedin.svg" alt=""></span></span></a>
+          <a class="social" href="#" aria-label="TikTok"><span class="ico"><img src="assets/ft-tiktok.svg" alt=""></span></a>
+        </div>
+        <span class="pf-footer__rule" aria-hidden="true"></span>
+        <div class="pf-lang">
+        <button class="pf-footer__lang" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Change language">
+          <img src="assets/globe.svg" alt=""><span data-lang-value>EN</span>
+          <svg class="pf-lang__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+          <div class="lang-dd__panel pf-lang__panel" role="menu" aria-label="Language"></div>
         </div>
       </div>
-      <button class="lp-footer__lang" type="button"><img src="assets/globe.svg" alt="">EN</button>
+
+      <div class="pf-footer__app">
+        <p class="pf-footer__app-title">Get the Profit.com App</p>
+        <p class="pf-footer__app-note">Trade smarter, anytime, anywhere.</p>
+        <div class="pf-footer__stores">
+          <a class="store-btn store-btn--apple" href="#"><img src="assets/ft-apple.svg" alt=""><span>App Store</span></a>
+          <a class="store-btn store-btn--google" href="#" aria-label="Get it on Google Play"><img class="gp-icon" src="assets/ft-playstore.svg" alt=""><img class="gp-text" src="assets/ft-googleplay-text.svg" alt=""></a>
+        </div>
+      </div>
     </div>
+
   </footer>
 
   <!-- ============ Legal disclaimer ============ -->
