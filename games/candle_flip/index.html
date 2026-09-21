@@ -841,6 +841,10 @@ html.is-preview .card__name { display: none; }
     if (!pair.length || !CF.spendCoins(CONFIG.PAIR_COST)) return;
     const [a, b] = pair[Math.floor(Math.random() * pair.length)];
     sfx.hint();
+    // Any card the player had already turned over goes back down first: matchPair clears
+    // the flipped list, which would otherwise leave that card face up for the rest of the run
+    S.up.forEach((c) => faceUp(c, false));
+    S.up = [];
     faceUp(a, true); faceUp(b, true);
     matchPair(a, b);
     $("coins").textContent = CF.wallet().coins;

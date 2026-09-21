@@ -267,8 +267,8 @@ a {
 .topnav__lang {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 40px; /* the same hit area as the bell and the messenger */
+  height: 40px;
   border-radius: var(--radius-pill);
   color: var(--fg-secondary);
 }
@@ -329,20 +329,21 @@ a {
 .topnav__theme {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
+  margin-right: 2px; /* the gap the design asks for */
   border-radius: var(--radius-pill);
   color: var(--fg-secondary);
 }
-.topnav__theme:hover { background: var(--bg-1); color: var(--fg-primary); }
-.topnav__theme { margin-right: 6px; } /* a little air before the language switcher */
+/* The moon and the sun warm up on hover, the one place the bar carries a warm accent */
+.topnav__theme:hover { background: var(--bg-1); color: #f0b45f; }
 .topnav__theme svg { width: 20px; height: 20px; }
 .topnav__globe {
   position: relative;
-  width: 24px;
-  height: 24px;
+  width: 20px; /* the glyph fills the box, matching the theme icon */
+  height: 20px;
 }
-.topnav__globe img { position: absolute; inset: 12.5%; width: 75%; height: 75%; }
+.topnav__globe img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .icon-btn {
   position: relative;
   display: flex;
@@ -1357,13 +1358,17 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   padding: 12px;
   border: 1px solid var(--border-primary);
   border-radius: 24px;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
-.social:hover { border-color: var(--bg-2); }
+/* The hover the app buttons use, and a white mark: the flat SVGs need a filter for that */
+.social:hover { border-color: rgba(255, 255, 255, 0.34); background: rgba(255, 255, 255, 0.05); }
+.social .ico img { transition: filter 0.15s ease; }
+.social:hover .ico img { filter: brightness(0) invert(1); }
 .social .ico { position: relative; width: 20px; height: 20px; flex-shrink: 0; }
 .social .ico > img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .social .ico .li { position: absolute; inset: 12.5%; }
@@ -1968,9 +1973,11 @@ body.is-playing { overflow: hidden; }
   height: 32px;
   border: 1px solid var(--border-primary);
   border-radius: 24px;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
-.nav-dd__social a:hover { border-color: var(--bg-2); }
-.nav-dd__social img { width: 20px; height: 20px; }
+.nav-dd__social a:hover { border-color: rgba(255, 255, 255, 0.34); background: rgba(255, 255, 255, 0.05); }
+.nav-dd__social img { width: 20px; height: 20px; transition: filter 0.15s ease; }
+.nav-dd__social a:hover img { filter: brightness(0) invert(1); }
 
 /* =====================================================================
    Top navigation below the desktop width (≤ 1024px)
@@ -2477,10 +2484,7 @@ body.is-playing { overflow: hidden; }
   .pf-footer__bar { padding: 24px 0 20px; gap: 18px; }
   .pf-footer__bar-group { gap: 16px; }
   .pf-footer__rule { display: none; }
-  /* Comfortable thumb targets for the socials */
   .pf-footer .socials { gap: 10px; }
-  .pf-footer .social { width: 40px; height: 40px; }
-  .pf-footer .social .ico { width: 22px; height: 22px; }
   .pf-footer__grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 4px 0 20px; }
   .pf-col { border-bottom: 1px solid var(--border-primary); }
   .pf-col > summary {
