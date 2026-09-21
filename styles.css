@@ -2496,7 +2496,7 @@ body.is-playing { overflow: hidden; }
   .pf-footer__bar-group { gap: 16px; }
   .pf-footer__rule { display: none; }
   .pf-footer .socials { gap: 10px; }
-  .pf-footer__grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 4px 0 20px; }
+  .pf-footer__grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 4px 0 12px; }
   .pf-col { border-bottom: 1px solid var(--border-primary); }
   .pf-col > summary {
     display: flex;
@@ -2520,5 +2520,6 @@ body.is-playing { overflow: hidden; }
   }
   .pf-col[open] > summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
   .pf-footer .pf-col ul { margin: 0 0 18px; gap: 14px; }
-  .pf-footer__legal { gap: 18px; padding-top: 20px; }
+  /* The last accordion's rule already closes the columns, so the legal row drops its own */
+  .pf-footer__legal { gap: 18px; padding-top: 14px; border-top: 0; }
 }
