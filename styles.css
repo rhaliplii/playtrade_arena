@@ -1176,12 +1176,40 @@ a {
 .ex-card .glass-tag,
 .ex-card__top { position: relative; z-index: 1; } /* keep the title and timer tag above the artwork */
 .ex-card--practice { background-image: linear-gradient(225.44deg, #ff2441 3.7149%, #f40051 51.906%, #64000f 96.793%); }
-.ex-card--battle { background-image: linear-gradient(224.385deg, #06b9fa 9.8708%, #006fee 52%, #00368b 91.241%); }
 .ex-card--warriors { gap: 13.6px; background-image: linear-gradient(224.385deg, #1988ff 9.8708%, #002ef9 52%, #011865 91.241%); }
-.ex-card--bitcoin {
+/* Not open yet: a dark, unlit card instead of the tournament's own colour */
+/* A joined tournament carries its live status across the top of the card */
+.ex-card--joined { padding-top: 0; }
+.ex-status {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  width: calc(100% + 48px);
+  margin: 0 -24px 14px;
+  padding: 8px 16px;
+  background: rgba(8, 10, 13, 0.58);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.14);
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: -0.14px;
+}
+.ex-status__state { color: var(--fg-brand); }
+.ex-status__phase { font-weight: 700; text-align: center; white-space: nowrap; }
+.ex-status__time { color: var(--fg-brand); text-align: right; font-variant-numeric: tabular-nums; }
+
+.ex-card--bitcoin,
+.ex-card--battle {
   border: 1px solid var(--border-card-glass);
   background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 333 332' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(20.841 21.165 -26.69 24.411 104.21 107.73)'><stop stop-color='rgba(0,0,0,0)' offset='0.21152'/><stop stop-color='rgba(49,49,49,0.265)' offset='0.60576'/><stop stop-color='rgba(98,98,98,0.53)' offset='1'/></radialGradient></defs></svg>");
 }
+.ex-card--battle .ex-art img { filter: grayscale(1) brightness(0.82); }
+.ex-card.is-locked { cursor: default; }
 .ex-art {
   position: absolute;
   display: flex;
@@ -1478,9 +1506,8 @@ a {
 /* Hover for cards that open a competition screen: lift, a glow in the card's own colour,
    a faint light edge and a slight zoom of the artwork. */
 .ex-card--practice, .jc-card--red { --card-glow: rgba(244, 0, 81, 0.4); }
-.ex-card--battle { --card-glow: rgba(0, 111, 238, 0.4); }
 .ex-card--warriors { --card-glow: rgba(0, 46, 249, 0.4); }
-.ex-card--bitcoin, .jc-card--grey { --card-glow: rgba(160, 165, 180, 0.22); }
+.ex-card--bitcoin, .ex-card--battle, .jc-card--grey { --card-glow: rgba(160, 165, 180, 0.22); }
 a.ex-card,
 a.jc-card { transition: transform 0.2s ease, box-shadow 0.25s ease; }
 a.ex-card::after {
@@ -1527,9 +1554,10 @@ a.jc-card:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
   overflow-x: auto;
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
-  /* room inside the scroller for the hover lift and glow, which it would otherwise clip */
-  padding: 8px 24px 32px;
-  margin: -8px -24px -32px;
+  /* Room inside the scroller for the hover lift and glow, which it would otherwise clip:
+     the glow reaches 56px below a card (16px offset + 40px blur) and 24px above it. */
+  padding: 32px 24px 64px;
+  margin: -32px -24px -64px;
   scroll-padding-inline: 24px;
 }
 .mg-row::-webkit-scrollbar { display: none; }
