@@ -101,11 +101,20 @@
     };
 
     /* ---------- sizing ---------- */
+    let sizeRetry = 0;
     function resize() {
       const r = canvas.getBoundingClientRect();
+      /* The canvas can be measured before it has been laid out — the Arena's preview boots
+         it inside a hidden panel. Sizing the bitmap to a fallback then leaves it stretched
+         to whatever box it lands in, so wait for a real rect instead of guessing. */
+      if (!r.width || !r.height) {
+        if (sizeRetry < 60) { sizeRetry++; requestAnimationFrame(resize); }
+        return;
+      }
+      sizeRetry = 0;
       dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-      W = Math.max(240, Math.round(r.width));
-      H = Math.max(180, Math.round(r.height));
+      W = Math.max(120, Math.round(r.width));
+      H = Math.max(80, Math.round(r.height));
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
