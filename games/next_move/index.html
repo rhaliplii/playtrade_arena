@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Next Move · Playtrade by profit.com</title>
+<meta name="description" content="Read the chart. Predict the move. A fast technical-analysis trainer: UP, DOWN, or NO TRADE — then watch the next candles reveal whether the setup played out.">
+<meta name="theme-color" content="#0b0d11">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/game.css">
+</head>
+<body data-state="MENU">
+<script>
+  /* Launched from the Arena (a run or the attract preview): never flash the game's own menu */
+  if (/[?&](autostart|preview)\b/.test(location.search)) document.documentElement.classList.add('direct-start');
+  if (/[?&]preview\b/.test(location.search)) document.documentElement.classList.add('is-preview');
+  if (/[?&]autostart\b/.test(location.search) && window.parent !== window) document.documentElement.classList.add('is-embedded');
+</script>
+
+<div class="brandbar">
+  <span class="logo" id="logo"></span>
+  <span class="sep"></span>
+  <span class="pt">Playtrade</span>
+</div>
+
+<!-- =========================================================
+     Play screen
+     ========================================================= -->
+<main id="play" hidden>
+
+  <header class="hud">
+    <div class="hud-left">
+      <div class="lives" id="lives" role="status"></div>
+      <div class="streak" id="streak" role="status" aria-label="Current streak"></div>
+      <span class="progress-note" id="progress" hidden></span>
+    </div>
+
+    <div class="timer" id="timerWrap" role="timer" aria-label="Time remaining">
+      <svg viewBox="0 0 42 42" aria-hidden="true">
+        <circle class="t-track" cx="21" cy="21" r="16"></circle>
+        <circle class="t-arc" id="timerArc" cx="21" cy="21" r="16"></circle>
+      </svg>
+      <span id="timerNum">0</span>
+    </div>
+
+    <div class="hud-right">
+      <div class="score-box"><b id="score">0</b><small>SCORE</small></div>
+      <span class="lvl-chip" id="lvlChip">LVL 1</span>
+      <button class="icon-btn" id="btnSound" aria-label="Mute sound" title="Mute sound">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="btnPause" aria-label="Pause" title="Pause">
+        <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="stage">
+    <div class="chart-panel" id="chartPanel">
+      <div class="chart-head">
+        <span class="sym" id="symName">—</span>
+        <span class="tf" id="symTf">1D</span>
+        <span class="chip diff" id="diffChip">Beginner</span>
+        <span class="chip cat" id="catChip" hidden></span>
+        <span class="spacer"></span>
+        <span class="prompt" id="prompt">What happens next?</span>
+        <span class="sim" title="Constructed teaching scenario. Real symbol, invented price action — not historical or live market data.">SIMULATED</span>
+      </div>
+      <canvas id="chart" role="img" aria-label="Price chart with hidden future candles"></canvas>
+      <div class="hints" id="hints" hidden></div>
+    </div>
+
+    <div class="feedback" id="feedback" role="status" hidden></div>
+  </section>
+
+  <footer class="controls">
+    <div class="powerups" id="powerups" hidden></div>
+
+    <!-- DOWN left, UP right: matches the other Playtrade games, where
+         selling sits on the left and buying on the right. -->
+    <div class="answers" id="answers">
+      <button data-a="DOWN" aria-label="Down — price will fall">
+        <span><span class="a-icon" aria-hidden="true">↓</span>DOWN</span>
+        <small>Price will fall</small>
+      </button>
+      <button data-a="NO_TRADE" aria-label="No trade — no clear direction">
+        <span><span class="a-icon" aria-hidden="true">—</span>NO TRADE</span>
+        <small>No clear direction</small>
+      </button>
+      <button data-a="UP" aria-label="Up — price will rise">
+        <span><span class="a-icon" aria-hidden="true">↑</span>UP</span>
+        <small>Price will rise</small>
+      </button>
+    </div>
+
+    <p class="keyhint">
+      <kbd>↓</kbd>/<kbd>S</kbd> down · <kbd>Space</kbd> no trade · <kbd>↑</kbd>/<kbd>W</kbd> up · <kbd>1</kbd>–<kbd>5</kbd> power-ups · <kbd>P</kbd> pause
+    </p>
+  </footer>
+</main>
+
+<div id="countdown" aria-hidden="true"></div>
+<div id="pops" aria-hidden="true"></div>
+<div id="toasts" role="status" aria-live="polite"></div>
+
+<!-- =========================================================
+     Home
+     ========================================================= -->
+<section class="overlay" id="home" hidden>
+  <div class="card">
+    <span class="kicker">A Playtrade mini-game</span>
+    <h1 class="title">Next <em>Move</em></h1>
+    <p class="tagline">Read the chart, call the next move, then see what actually happened.</p>
+
+    <!-- The three answers, explained once, in the same left-to-right order
+         as the in-game controls. -->
+    <div class="legend">
+      <div class="lg down">
+        <svg viewBox="0 0 64 20" aria-hidden="true"><polyline points="2,4 18,8 32,7 46,14 62,17"/></svg>
+        <b><span class="lg-i">▼</span> DOWN</b>
+        <span>setup favours lower</span>
+      </div>
+      <div class="lg flat">
+        <svg viewBox="0 0 64 20" aria-hidden="true"><polyline points="2,10 62,10"/></svg>
+        <b><span class="lg-i">●</span> NO TRADE</b>
+        <span>no clear edge</span>
+      </div>
+      <div class="lg up">
+        <svg viewBox="0 0 64 20" aria-hidden="true"><polyline points="2,17 18,12 32,13 46,6 62,3"/></svg>
+        <b><span class="lg-i">▲</span> UP</b>
+        <span>setup favours higher</span>
+      </div>
+    </div>
+
+    <div class="section-label">Select mode</div>
+    <div class="modes" id="modes" role="radiogroup" aria-label="Game mode">
+      <button class="mode practice" id="modePractice" role="radio" aria-checked="false">
+        <span class="radio" aria-hidden="true"></span>
+        <span class="k">Practice</span>
+        <b>12 chapters</b>
+        <span class="m-desc">Hints on, no lives. Replay any chart.</span>
+      </button>
+      <button class="mode survival" id="modeSurvival" role="radio" aria-checked="true">
+        <span class="radio" aria-hidden="true"></span>
+        <span class="k">Survival</span>
+        <b>3 lives</b>
+        <span class="m-desc">Harder charts as you go. No hints.</span>
+      </button>
+    </div>
+
+    <div class="menu-controls">
+      <kbd>↓</kbd>/<kbd>S</kbd> down<span class="sep">·</span><kbd>Space</kbd> no trade<span class="sep">·</span><kbd>↑</kbd>/<kbd>W</kbd> up<span class="sep">·</span><kbd>P</kbd> pause
+    </div>
+
+    <button class="btn big" id="btnStart">Start Survival</button>
+
+    <div class="home-foot">
+      <div class="home-stats-inline" id="homeStats">
+        <span class="lvl-pill" id="homeLevel">LVL 1</span>
+        <span id="homeStatLine">New player</span>
+      </div>
+    </div>
+
+    <details class="how" id="howBox">
+      <summary><span>How to play</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="how-body">
+        <p class="how-lead">Every round shows a chart with the next candles hidden. Read the setup
+        and make one call.</p>
+
+        <div class="how-answers">
+          <div class="how-a down"><b>↓ Down</b><span>The setup favours lower prices.</span></div>
+          <div class="how-a flat"><b>— No trade</b><span>No clear edge. Passing is a real answer, and often the right one.</span></div>
+          <div class="how-a up"><b>↑ Up</b><span>The setup favours higher prices.</span></div>
+        </div>
+
+        <ul class="how-rules">
+          <li><b>Lives</b> Survival gives you three. A wrong call costs one; at zero the run ends.</li>
+          <li><b>Timer</b> Every chart has a clock, and harder charts give you less of it. Running out counts as a miss.</li>
+          <li><b>Streak</b> Consecutive correct calls raise your multiplier, up to ×2.</li>
+          <li><b>Scoring</b> Harder charts pay more, a quick answer adds a little, and a correct NO TRADE earns a discipline bonus.</li>
+          <li><b>Power-ups</b> Earned as you play: an extra clue, more time, 50/50, a shield, a streak saver.</li>
+          <li><b>Practice</b> No lives, a longer clock, three observations on every chart, and you can replay any of them.</li>
+        </ul>
+
+        <p class="how-note">The hidden candles reveal as soon as you choose, and the reason is
+        explained straight away. Only the tools a lesson needs are drawn — nothing is on the chart
+        for decoration. Markets are probabilistic: the goal is reading setups well, not being
+        right every time.</p>
+      </div>
+    </details>
+
+    <p class="fineprint">
+      Educational game using constructed, simulated scenarios. Charts carry real symbols so they read naturally,
+      but the price action is invented to teach a concept — it is not historical or live market data, and nothing
+      here is investment advice.
+    </p>
+  </div>
+</section>
+
+<!-- =========================================================
+     Onboarding — one panel only (spec §25)
+     ========================================================= -->
+<section class="overlay" id="onboard" hidden>
+  <div class="card">
+    <span class="kicker">How it works</span>
+    <h2 class="title" style="font-size:28px">Read the chart.<br>Predict what happens next.</h2>
+
+    <div class="ob-list">
+      <div class="ob-row up"><span class="ob-k">↑</span><div><b>UP</b><span>The technical setup favours higher prices.</span></div></div>
+      <div class="ob-row down"><span class="ob-k">↓</span><div><b>DOWN</b><span>The technical setup favours lower prices.</span></div></div>
+      <div class="ob-row nt"><span class="ob-k">—</span><div><b>NO TRADE</b><span>There isn't a clear technical edge. Passing is a real answer, and often the right one.</span></div></div>
+    </div>
+
+    <p class="tagline" style="font-size:12.5px">
+      The hidden candles reveal after you choose, and the reason is explained straight away.
+      Markets are probabilistic — the goal is reading setups well, not being right every time.
+    </p>
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:18px">
+      <button class="btn big" id="btnOnboardStart">Start with Practice</button>
+      <button class="link-btn" id="btnOnboardSkip" style="align-self:center">Skip to menu</button>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     Practice chapters
+     ========================================================= -->
+<section class="overlay" id="chapters" hidden>
+  <div class="card">
+    <span class="kicker">Practice</span>
+    <h2 class="title" style="font-size:26px">Choose a chapter</h2>
+    <p class="tagline" style="font-size:12.5px">No lives, generous clock, three observations per chart. The number on the right is your current rating in that skill.</p>
+    <div class="chapter-list" id="chapterList"></div>
+    <button class="link-btn" id="btnChaptersClose" style="display:block;margin:0 auto">Back</button>
+  </div>
+</section>
+
+<!-- =========================================================
+     Paused
+     ========================================================= -->
+<section class="overlay" id="paused" hidden>
+  <div class="card" style="max-width:380px">
+    <span class="kicker">Paused</span>
+    <h2 class="title" style="font-size:26px">Take your time</h2>
+    <p class="tagline" style="font-size:12.5px">The clock is stopped.</p>
+    <div class="pause-actions">
+      <button class="btn" id="btnResume">Resume</button>
+      <button class="btn ghost" id="btnQuit">End run &amp; see results</button>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     Run summary
+     ========================================================= -->
+<section class="overlay" id="summary" hidden>
+  <div class="card wide" id="summaryCard"></div>
+</section>
+
+<!-- =========================================================
+     Scripts — plain classic scripts sharing one window.NM namespace,
+     so the game opens straight from the filesystem with no build
+     step and no server (spec §37: minimal friction).
+     ========================================================= -->
+<script src="brand/logo.js"></script>
+<script src="js/rng.js"></script>
+<script src="js/series.js"></script>
+<script src="js/indicators.js"></script>
+<script src="js/scenarios.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/scoring.js"></script>
+<script src="js/progression.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+<script src="next-move-core.js"></script>
+<script src="arena.js"></script>
+<script>
+  (function () {
+    var b = window.PROFIT_BRAND;
+    var el = document.getElementById('logo');
+    if (b && b.logo && el) el.innerHTML = b.logo;
+  })();
+</script>
+</body>
+</html>

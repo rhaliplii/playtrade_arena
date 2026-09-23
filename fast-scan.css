@@ -5,7 +5,7 @@
   --scan: #ff3b3b; /* Fast Scan's own accent: the scanner red of its Arena card */
   --gold: #fbb517;
 }
-.gold, .fs-gold { color: var(--gold); }
+.gold { color: var(--gold); }
 
 /* Mode colours: Practice mint, Classic orange (ranked), Hardcore scanner red */
 .fs-mode--classic { --opt: var(--orange); --opt-glow: rgba(255, 145, 0, 0.2); }
@@ -45,7 +45,6 @@
 .fs-size:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
 
 .fs-meta { margin: -6px 0 0; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--fg-secondary); text-align: center; }
-.fs-meta__cost { color: var(--fg-primary); }
 .fs-meta__free { color: var(--mint); }
 
 /* Recent runs: mode badges and failed runs */
@@ -54,9 +53,6 @@
 .fs-run--hardcore { background: rgba(255, 59, 59, 0.16); color: var(--scan); }
 .fs-run__fail { color: var(--fg-secondary); font-weight: 500; }
 .fs-empty { margin: 8px 0 4px; font-size: 13px; line-height: 19px; color: var(--fg-secondary); }
-
-/* Stats: coins row */
-.fs-coins { flex-direction: row; align-items: center; justify-content: space-between; height: auto; }
 
 /* Leaderboard */
 .fs-lb-sub { margin: -8px 0 4px; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--fg-secondary); }

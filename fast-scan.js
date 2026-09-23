@@ -48,7 +48,7 @@
     const { timeLimit, maxMistakes } = FS.limitsFor(m, size);
     $("runMeta").innerHTML = m === "practice"
       ? `${size}×${size} · no clock · <span class="fs-meta__free">free</span>`
-      : `${size}×${size} · ${timeLimit}s · ${maxMistakes} mistakes · <span class="fs-meta__cost">costs ❤️ 1</span>`;
+      : `${size}×${size} · ${timeLimit}s · ${maxMistakes} mistakes`;
     $("ruleLimits").innerHTML = `Classic and Hardcore: <b>${timeLimit || FS.limitsFor("classic", size).timeLimit}s</b> and <b>${maxMistakes || FS.limitsFor("classic", size).maxMistakes} mistakes</b> on a ${size}×${size} grid.`;
   };
 
@@ -95,8 +95,7 @@
       <div class="pr-stat pr-stat--wide pr-stat--lives">
         <div><span class="pr-stat__label">Lives</span><p class="pr-stat__label" id="lifeTimer">${w.lives >= CONFIG.STARTING_LIVES ? "Fully equipped" : `Next in ${FS.fmtClock(w.nextLifeIn)}`}</p></div>
         <div class="pr-lives">${hearts(w.lives)}</div>
-      </div>
-      <div class="pr-stat pr-stat--wide fs-coins"><span class="pr-stat__label">Coins</span><span class="pr-stat__value fs-gold">🪙 ${w.coins}</span></div>`;
+      </div>`;
   };
 
   const renderBoard = () => {

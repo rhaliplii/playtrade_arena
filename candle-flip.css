@@ -7,7 +7,7 @@
   --bear: #f63d68;
   --gold: #fbb517;
 }
-.gold, .cf-gold { color: var(--gold); }
+.gold { color: var(--gold); }
 
 /* Mode colours: Practice mint, Classic orange (ranked), Blind violet */
 .cf-mode--classic { --opt: var(--orange); --opt-glow: rgba(255, 145, 0, 0.2); }
@@ -51,7 +51,6 @@
 .cf-level:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
 
 .cf-meta { margin: -6px 0 0; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--fg-secondary); text-align: center; }
-.cf-meta__cost { color: var(--fg-primary); }
 .cf-meta__free { color: var(--mint); }
 
 /* Rules panel: two links side by side */
@@ -64,8 +63,6 @@
 .cf-run__fail { color: var(--fg-secondary); font-weight: 500; }
 .cf-empty { margin: 8px 0 4px; font-size: 13px; line-height: 19px; color: var(--fg-secondary); }
 
-/* Stats: coins and the patterns learned so far */
-.cf-coins { flex-direction: row; align-items: center; justify-content: space-between; height: auto; }
 .cf-learned { flex-direction: row; align-items: center; justify-content: space-between; height: auto; }
 .cf-learned__bar { position: relative; width: 84px; height: 6px; border-radius: 6px; background: var(--bg-1); overflow: hidden; }
 .cf-learned__bar i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--flip), var(--mint)); }

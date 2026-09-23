@@ -52,7 +52,7 @@
     const { timeLimit } = CF.limitsFor(m, level);
     $("runMeta").innerHTML = m === "practice"
       ? `${l.pairs} pairs · no clock · <span class="cf-meta__free">free</span>`
-      : `${l.pairs} pairs · ${CF.fmtClock(timeLimit * 1000)} · <span class="cf-meta__cost">costs ❤️ 1</span>`;
+      : `${l.pairs} pairs · ${CF.fmtClock(timeLimit * 1000)}`;
     $("ruleLimits").innerHTML = `Classic and Blind on ${l.label}: <b>${CF.fmtClock(l.time * 1000)}</b> to clear <b>${l.pairs} pairs</b>.`;
   };
 
@@ -104,8 +104,7 @@
       <div class="pr-stat pr-stat--wide pr-stat--lives">
         <div><span class="pr-stat__label">Lives</span><p class="pr-stat__label" id="lifeTimer">${w.lives >= CONFIG.STARTING_LIVES ? "Fully equipped" : `Next in ${CF.fmtClock(w.nextLifeIn)}`}</p></div>
         <div class="pr-lives">${hearts(w.lives)}</div>
-      </div>
-      <div class="pr-stat pr-stat--wide cf-coins"><span class="pr-stat__label">Coins</span><span class="pr-stat__value cf-gold">🪙 ${w.coins}</span></div>`;
+      </div>`;
   };
 
   const renderBoard = () => {

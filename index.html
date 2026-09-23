@@ -51,7 +51,7 @@
         <div class="hero__banner">
           <div class="hero__track" id="heroTrack" aria-live="polite">
             <!-- Slide 1: Playtrade -->
-            <div class="hero__slide hero__slide--main" role="group" aria-roledescription="slide" aria-label="1 of 2">
+            <div class="hero__slide hero__slide--main" role="group" aria-roledescription="slide" aria-label="1 of 3">
               <div class="hero__inner">
                 <div class="hero__content">
                   <div class="hero__copy">
@@ -78,7 +78,7 @@
             </div>
 
             <!-- Slide 2: Refer a Friend -->
-            <div class="hero__slide hero__slide--refer" role="group" aria-roledescription="slide" aria-label="2 of 2">
+            <div class="hero__slide hero__slide--refer" role="group" aria-roledescription="slide" aria-label="2 of 3">
               <div class="hero__inner referral__inner">
                 <div class="referral__art" aria-hidden="true">
                   <!-- One flat export of the Figma artwork (node 12913:18494); the old CSS-masked
@@ -110,6 +110,28 @@
               <!-- Top-right light leak: rendered from Figma group 12913:18446 (additive layer) -->
               <img class="referral__glow-top" src="assets/rf-glow-top.png" alt="" aria-hidden="true">
             </div>
+
+            <!-- Slide 3: Playtrade Arena, with the bull-and-bear artwork -->
+            <div class="hero__slide hero__slide--arena" role="group" aria-roledescription="slide" aria-label="3 of 3">
+              <div class="hero__inner">
+                <div class="hero__content">
+                  <div class="hero__copy">
+                    <h1 class="hero__title">Practice. Compete.<br>Play the Markets.</h1>
+                    <p class="hero__sub">Join simulated tournaments and improve your trading skills with interactive games.</p>
+                  </div>
+                  <div class="hero__bottom">
+                    <div class="hero__cta-row">
+                      <a class="hero__cta t-m-semibold" href="#explore-title">Explore Arena</a>
+                      <div class="hero__stats">
+                        <div class="hero__stat"><b>10M+</b><span class="t-m-medium">Trades</span></div>
+                        <div class="hero__stat"><b>220K+</b><span class="t-m-medium">Playtraders</span></div>
+                        <div class="hero__stat"><b>100%</b><span class="t-m-medium">Virtual Funds</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="hero__controls">
             <div class="hero__arrows">
@@ -121,6 +143,7 @@
         <div class="hero__dots" role="tablist" aria-label="Slides">
           <button class="hero__dot is-active" role="tab" aria-selected="true" aria-label="Slide 1: Playtrade"></button>
           <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 2: Refer a Friend"></button>
+          <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 3: Playtrade Arena"></button>
         </div>
       </section>
 
@@ -466,6 +489,55 @@
               <div class="mg-card__copy">
                 <h3 class="mg-card__title">Candle Flip</h3>
                 <p class="mg-card__pitch">Match patterns from memory</p>
+              </div>
+            </div>
+          </a>
+          <a class="mg-card mg-card--next" href="next-move.html">
+            <div class="mg-card__art" aria-hidden="true">
+              <!-- A setup read left to right, with the next move still a sealed block -->
+              <div class="mg-next">
+                <div class="mg-next__row">
+                  <span class="mg-next__c mg-next__c--1">
+                    <span class="mg-next__wick"></span>
+                    <span class="mg-next__body">
+                      <span class="mg-next__stock"></span>
+                      <span class="mg-next__face"></span>
+                    </span>
+                  </span>
+                  <span class="mg-next__c mg-next__c--2 mg-next__c--down">
+                    <span class="mg-next__wick"></span>
+                    <span class="mg-next__body">
+                      <span class="mg-next__stock"></span>
+                      <span class="mg-next__face"></span>
+                    </span>
+                  </span>
+                  <span class="mg-next__c mg-next__c--3">
+                    <span class="mg-next__wick"></span>
+                    <span class="mg-next__body">
+                      <span class="mg-next__stock"></span>
+                      <span class="mg-next__face"></span>
+                    </span>
+                  </span>
+                  <span class="mg-next__c mg-next__c--4">
+                    <span class="mg-next__wick"></span>
+                    <span class="mg-next__body">
+                      <span class="mg-next__stock"></span>
+                      <span class="mg-next__face"></span>
+                    </span>
+                  </span>
+                  <span class="mg-next__c mg-next__c--q">
+                    <span class="mg-next__q">
+                      <span class="mg-next__q-stock"></span>
+                      <span class="mg-next__q-face">?</span>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="mg-card__body">
+              <div class="mg-card__copy">
+                <h3 class="mg-card__title">Next Move</h3>
+                <p class="mg-card__pitch">Read the chart. Predict the move</p>
               </div>
             </div>
           </a>

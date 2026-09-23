@@ -1,0 +1,70 @@
+/* Next Move join screen — Next Move specifics only.
+   Layout and shared parts come from practice.css and game-join.css. */
+
+:root {
+  --nm: #2f8cff; /* Next Move's own accent: the chart blue of its Arena card */
+  --gold: #fbb517;
+}
+.gold { color: var(--gold); }
+.nm-up { color: var(--gain); }
+.nm-down { color: var(--loss); }
+
+/* Preview: the attract chart sits on a faint blue glow, like the Arena card */
+.nm-preview {
+  background:
+    radial-gradient(420px 220px at 50% 0, rgba(47, 140, 255, 0.16), transparent 70%),
+    #07090c;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(47, 140, 255, 0.1);
+}
+
+
+/* Recent runs: mode badges and the score line */
+.nm-run--practice { background: rgba(7, 216, 162, 0.16); color: var(--mint); }
+.nm-run--survival { background: rgba(47, 140, 255, 0.18); color: var(--nm); }
+.nm-empty { margin: 8px 0 4px; font-size: 13px; line-height: 19px; color: var(--fg-secondary); }
+
+/* Leaderboard */
+.nm-lb-sub { margin: -8px 0 4px; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--fg-secondary); }
+.nm-lb-gap { padding: 2px 0; color: var(--fg-secondary); text-align: center; letter-spacing: 4px; }
+
+/* The three calls, listed in the rules dialog */
+.nm-calls { margin: -4px 0 12px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.nm-calls li { font-size: 14px; line-height: 21px; color: var(--fg-secondary); }
+.nm-calls b { color: var(--fg-primary); }
+.nm-calls .nm-up { color: var(--gain); }
+.nm-calls .nm-down { color: var(--loss); }
+
+/* The keys in the rules dialog */
+.gj-dialog kbd {
+  display: inline-block;
+  min-width: 20px;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: var(--bg-1);
+  box-shadow: inset 0 0 0 1px var(--border-primary);
+  color: var(--fg-primary);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Guests: sign-in prompts replace personal data */
+.pr-stats.is-guest { display: block; }
+.nm-signin {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(7, 216, 162, 0.08), rgba(7, 216, 162, 0.02));
+  box-shadow: inset 0 0 0 1px rgba(7, 216, 162, 0.2);
+}
+.nm-signin__title { font-size: 15px; line-height: 20px; font-weight: 700; }
+.nm-signin__text { font-size: 13px; line-height: 19px; font-weight: 500; color: var(--fg-secondary); }
+.nm-signin__row { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+.nm-signin__btn { padding: 8px 14px; font-size: 14px; line-height: 18px; font-weight: 600; }
+.nm-signin__link { font-size: 14px; font-weight: 600; color: var(--mint); }
+.nm-signin__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.nm-signin__actions { display: flex; flex-direction: column; gap: 10px; }
+.nm-signin__cta { max-width: none; height: 48px; font-size: 16px; }
