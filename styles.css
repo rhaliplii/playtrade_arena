@@ -1670,7 +1670,7 @@ a.mg-card:hover .mg-flip__card--m { transform: rotateY(-186deg); }
     /* the ground falls away below the row as a straight vertical fade, so it cannot ring
        the objects the way a radial does */
     linear-gradient(to bottom, rgba(1, 4, 14, 0) 42%, rgba(1, 4, 14, 0.58) 76%, rgba(1, 4, 14, 0.92) 100%),
-    linear-gradient(142deg, #032027 2%, #0d686f 62%, #031c26 100%);
+    linear-gradient(142deg, #032027 2%, #0b565c 62%, #031c26 100%);
 }
 .mg-next {
   position: absolute;
