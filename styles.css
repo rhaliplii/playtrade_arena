@@ -1490,9 +1490,21 @@ a.jc-card:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
   padding: 32px 24px 64px;
   margin: -32px -24px -64px;
   scroll-padding-inline: 24px;
-  /* cards fade out at the right edge, as the Top Playtraders row does */
-  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 120px), transparent);
-  mask-image: linear-gradient(to right, #000 calc(100% - 120px), transparent);
+}
+/* Cards fade out at the right edge, as the Top Playtraders row does. This is an overlay
+   rather than a mask on the scroller: a mask puts the row in its own compositing layer,
+   and the cards inside transform on hover, which left a hairline at the artwork's clip
+   edge — bright mint on the Bull Run cover. */
+.section--games { position: relative; }
+.section--games::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 120px;
+  background: linear-gradient(to right, rgba(19, 22, 27, 0), var(--bg-base));
+  pointer-events: none;
 }
 .mg-row::-webkit-scrollbar { display: none; }
 .mg-card {
