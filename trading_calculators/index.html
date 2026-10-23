@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trading Calculators: Free Profit, Risk &amp; Margin Tools</title>
+  <meta name="description" content="Free trading calculators for stocks, crypto and options: profit after fees, position size, options P&amp;L and margin call price. No sign-up.">
+  <link rel="canonical" href="https://www.profit.com/trading-calculators">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Profit.com">
+  <meta property="og:title" content="Trading Calculators: Free Profit, Risk &amp; Margin Tools">
+  <meta property="og:description" content="Free trading calculators for stocks, crypto and options: profit after fees, position size, options P&amp;L and margin call price. No sign-up.">
+  <meta property="og:url" content="https://www.profit.com/trading-calculators">
+  <meta property="og:image" content="https://www.profit.com/trading_calculators/og/hub.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.profit.com/trading_calculators/og/hub.jpg">
+  <meta name="theme-color" content="#13161b">
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "CollectionPage",
+ "name": "Trading Calculators: Free Profit, Risk & Margin Tools",
+ "url": "https://www.profit.com/trading-calculators",
+ "description": "Free trading calculators for stocks, crypto and options: profit after fees, position size, options P&L and margin call price. No sign-up.",
+ "mainEntity": {
+  "@type": "ItemList",
+  "itemListElement": [
+   {
+    "@type": "ListItem",
+    "position": 1,
+    "url": "https://www.profit.com/stock-profit-calculator",
+    "name": "Stock Profit Calculator"
+   },
+   {
+    "@type": "ListItem",
+    "position": 2,
+    "url": "https://www.profit.com/crypto-profit-calculator",
+    "name": "Crypto Profit Calculator"
+   },
+   {
+    "@type": "ListItem",
+    "position": 3,
+    "url": "https://www.profit.com/position-size-calculator",
+    "name": "Position Size Calculator"
+   },
+   {
+    "@type": "ListItem",
+    "position": 4,
+    "url": "https://www.profit.com/options-profit-calculator",
+    "name": "Options Profit Calculator"
+   },
+   {
+    "@type": "ListItem",
+    "position": 5,
+    "url": "https://www.profit.com/margin-calculator",
+    "name": "Margin Call Calculator"
+   }
+  ]
+ }
+}</script>
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Profit.com",
+   "item": "https://www.profit.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Trading calculators",
+   "item": "https://www.profit.com/trading-calculators"
+  }
+ ]
+}</script>
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Are these trading calculators free?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. All five are free and work without an account."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I save or share a calculation?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Your inputs are stored in the page link. Use “Copy link” on any calculator, or bookmark the page."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do the calculators include fees?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, where they matter: commissions on stock trades, maker and taker fees on crypto, per-contract fees on options, and round-trip fees and slippage in position sizing."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is this investment advice?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The calculators do arithmetic on the numbers you enter. They don't recommend trades, and Profit.com is not a broker."
+   }
+  }
+ ]
+}</script>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("pt_theme")||"dark"}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../trading_calculators/calc.css">
+  <script src="../trading_calculators/calc-shell.js"></script>
+</head>
+<body class="calc-page" data-calc="hub" data-nav-active="none">
+  <script>document.body.dataset.user = new URLSearchParams(location.search).get("guest") === "0" ? "member" : "guest";</script>
+
+  <!-- ============ Top navigation (shared component, signed-out bar) ============ -->
+<header class="topnav">
+    <a href="../landing.html" aria-label="Profit.com home"><img class="topnav__logo" src="../assets/logo.svg" alt="Profit.com"></a>
+    <img class="vdivider" src="../assets/divider.svg" alt="">
+    <nav class="topnav__menu" aria-label="Primary">
+      <a class="topnav__item" href="#"><img class="icon" src="../assets/cup.svg" width="16" height="16" alt="">Playtrade<span class="topnav__caret"><img src="../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Tools<span class="topnav__caret"><img src="../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Learn<span class="topnav__caret"><img src="../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Plans</a>
+      <a class="topnav__item" href="#">More<span class="topnav__caret"><img src="../assets/dropdown-arrow.svg" alt=""></span></a>
+    </nav>
+    <div class="topnav__right">
+      <button aria-label="Search"><img class="icon icon-20" src="../assets/search.svg" alt=""></button>
+      <div class="topnav__icons">
+        <img class="vdivider" src="../assets/divider.svg" alt="">
+        <button class="topnav__lang" aria-label="Language: English"><span class="topnav__globe"><img src="../assets/globe.svg" alt=""></span></button>
+        <img class="vdivider" src="../assets/divider.svg" alt="">
+        <button class="icon-btn" aria-label="Notifications"><img class="icon icon-20" src="../assets/bell.svg" alt=""><span class="badge">2</span></button>
+        <button class="icon-btn" aria-label="Messages"><img class="icon icon-20" src="../assets/messenger.svg" alt=""><span class="badge">1</span></button>
+        <a class="btn-brand topnav__upgrade" href="#">Upgrade</a>
+        <span class="topnav__sale">37% OFF</span>
+      </div>
+      <img class="topnav__avatar" src="../assets/nav-avatar.png" width="32" height="32" alt="Profile">
+    </div>
+  </header>
+  <script src="../topnav.js"></script>
+
+  <div class="shell calc-shell">
+  <aside class="side-nav is-collapsed calc-nav" id="sideNav" data-nav="calc" data-active="hub" aria-label="Trading calculators">
+    <div class="side-nav__scroll">
+      <nav class="side-nav__group" aria-label="Main"><a class="side-nav__item is-active" href="index.html" aria-current="page"><span class="side-nav__icon"><img src="../assets/tl-calc-all.svg" alt=""></span><span class="side-nav__label">All calculators</span></a><a class="side-nav__item" href="stock-profit-calculator/index.html"><span class="side-nav__icon"><img src="../assets/tl-calc-stock.svg" alt=""></span><span class="side-nav__label">Stock profit</span></a><a class="side-nav__item" href="crypto-profit-calculator/index.html"><span class="side-nav__icon"><img src="../assets/tl-calc-crypto.svg" alt=""></span><span class="side-nav__label">Crypto profit</span></a><a class="side-nav__item" href="position-size-calculator/index.html"><span class="side-nav__icon"><img src="../assets/tl-calc-position.svg" alt=""></span><span class="side-nav__label">Position size</span></a><a class="side-nav__item" href="options-profit-calculator/index.html"><span class="side-nav__icon"><img src="../assets/tl-calc-options.svg" alt=""></span><span class="side-nav__label">Options profit</span></a><a class="side-nav__item" href="margin-calculator/index.html"><span class="side-nav__icon"><img src="../assets/tl-calc-margin.svg" alt=""></span><span class="side-nav__label">Margin</span></a></nav>
+    </div>
+  </aside>
+  <script src="../sidebar.js"></script>
+  <main class="calc" id="main">
+    <header class="calc-hero">
+      <h1>Trading Calculators</h1>
+      <p>Free trading calculators for stocks, crypto and options: work out your profit after fees, your position size, options profit and loss, and your margin call price, in seconds. No sign-up needed.</p>
+    </header>
+    <div class="calc-grid">
+    <div class="calc-main">
+      <section class="hub-grid" aria-label="Calculators">
+        <a class="hub-card" href="stock-profit-calculator/index.html">
+          <span class="hub-card__art hub-card__art--stock"><img class="hub-card__img" src="art/stock.webp" srcset="art/stock.webp 1x, art/stock@4x.webp 2x" alt=""></span>
+          <span class="hub-card__body">
+            <span class="hub-card__q">Already traded, or planning an exit?</span>
+            <h2>Stock Profit Calculator</h2>
+            <p>Calculate your profit and loss after fees</p>
+          </span>
+        </a>
+        <a class="hub-card" href="crypto-profit-calculator/index.html">
+          <span class="hub-card__art hub-card__art--crypto"><img class="hub-card__img" src="art/crypto.webp" srcset="art/crypto.webp 1x, art/crypto@4x.webp 2x" alt=""></span>
+          <span class="hub-card__body">
+            <span class="hub-card__q">Trading Bitcoin or another coin?</span>
+            <h2>Crypto Profit Calculator</h2>
+            <p>Work out your crypto gains and losses</p>
+          </span>
+        </a>
+        <a class="hub-card" href="position-size-calculator/index.html">
+          <span class="hub-card__art hub-card__art--position"><img class="hub-card__img" src="art/position.webp" srcset="art/position.webp 1x, art/position@4x.webp 2x" alt=""></span>
+          <span class="hub-card__body">
+            <span class="hub-card__q">About to enter a trade?</span>
+            <h2>Position Size Calculator</h2>
+            <p>Find the right position size for your risk</p>
+          </span>
+        </a>
+        <a class="hub-card" href="options-profit-calculator/index.html">
+          <span class="hub-card__art hub-card__art--options"><img class="hub-card__img" src="art/options.webp" srcset="art/options.webp 1x, art/options@4x.webp 2x" alt=""></span>
+          <span class="hub-card__body">
+            <span class="hub-card__q">Trading options?</span>
+            <h2>Options Profit Calculator</h2>
+            <p>See the payoff, max loss and break-even</p>
+          </span>
+        </a>
+        <a class="hub-card" href="margin-calculator/index.html">
+          <span class="hub-card__art hub-card__art--margin"><img class="hub-card__img" src="art/margin.webp" srcset="art/margin.webp 1x, art/margin@4x.webp 2x" alt=""></span>
+          <span class="hub-card__body">
+            <span class="hub-card__q">Using borrowed money?</span>
+            <h2>Margin Calculator</h2>
+            <p>Check the margin needed and the price of a margin call</p>
+          </span>
+        </a>
+      </section>
+      <article class="c-card calc-article">
+        <h2>How these calculators work</h2>
+        <p>Each one uses standard industry formulas and states its assumptions on the page: how fees are charged, what a contract is worth, which margin rules apply. Results update as you type, and the link in your address bar stores your inputs, so you can bookmark a setup or send it to someone.</p>
+        <p>They do arithmetic, not forecasts. A calculator can tell you what a price move would be worth; it can't tell you whether it will happen.</p>
+      </article>
+      <section class="section faq" aria-labelledby="faq-title">
+        <a class="section__head" href="#faq-title">
+          <h2 class="t-h1" id="faq-title">FAQs</h2>
+          <span class="section-title-arrow"><img src="../assets/faq-arrow.svg" alt=""></span>
+        </a>
+        <div class="faq__cols">
+          <div class="faq__col" data-accordion>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Are these trading calculators free?</span><span class="faq-icon"><img class="plus" src="../assets/faq-plus.svg" alt=""><img class="minus" src="../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes. All five are free and work without an account.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Can I save or share a calculation?</span><span class="faq-icon"><img class="plus" src="../assets/faq-plus.svg" alt=""><img class="minus" src="../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes. Your inputs are stored in the page link. Use “Copy link” on any calculator, or bookmark the page.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Do the calculators include fees?</span><span class="faq-icon"><img class="plus" src="../assets/faq-plus.svg" alt=""><img class="minus" src="../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes, where they matter: commissions on stock trades, maker and taker fees on crypto, per-contract fees on options, and round-trip fees and slippage in position sizing.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Is this investment advice?</span><span class="faq-icon"><img class="plus" src="../assets/faq-plus.svg" alt=""><img class="minus" src="../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">No. The calculators do arithmetic on the numbers you enter. They don't recommend trades, and Profit.com is not a broker.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <p class="calc-disclaimer"><b>For education and planning only, not investment advice.</b> Results are calculated from the numbers you enter and the assumptions stated on this page.</p>
+    </div>
+    <aside class="calc-rail" aria-label="Advertisement">
+      <div class="ad-slot ad-slot--rail">
+        <a class="house-ad" href="#" data-cta="adslot" data-member-href="index.html" aria-label="Playtrade: practice trading with virtual money. Play free">
+          <span class="ha-eyebrow"><img src="../assets/cup.svg" alt="">Playtrade</span>
+          <span class="ha-kick">100% Virtual Funds</span>
+          <span class="ha-title">Practice Trading. Risk Nothing.</span>
+          <span class="ha-text">Trade stocks and crypto with virtual money on live prices, and see how you rank.</span>
+          <span class="ha-tags"><span>Tournaments</span><span>Games</span><span>Leaderboard</span></span>
+          <span class="ha-arena" aria-hidden="true"><span class="mg-card mg-card--flip ha-tile ha-tile--back"><span class="mg-card__art"><span class="mg-flip"><span class="mg-flip__card mg-flip__card--l"><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><rect x="12" y="14" width="7" height="20" rx="2" fill="#3be39a"/><line x1="15.5" y1="8" x2="15.5" y2="40" stroke="#3be39a" stroke-width="2.4" stroke-linecap="round"/><rect x="29" y="20" width="7" height="14" rx="2" fill="#f63d68"/><line x1="32.5" y1="14" x2="32.5" y2="40" stroke="#f63d68" stroke-width="2.4" stroke-linecap="round"/></svg></span></span><span class="mg-flip__card mg-flip__card--m"><span class="mg-flip__face mg-flip__face--back"><svg viewBox="0 0 48 48"><rect x="10" y="18" width="6" height="16" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="13" y1="12" x2="13" y2="38" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/><rect x="21" y="12" width="6" height="22" rx="1.5" fill="#7c5cff"/><line x1="24" y1="7" x2="24" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".7" stroke-linecap="round"/><rect x="32" y="22" width="6" height="13" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="35" y1="17" x2="35" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/></svg></span><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><rect x="20" y="11" width="8" height="10" rx="2" fill="#3be39a"/><line x1="24" y1="8" x2="24" y2="38" stroke="#3be39a" stroke-width="2.6" stroke-linecap="round"/></svg></span></span><span class="mg-flip__card mg-flip__card--r"><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><polyline points="6,32 15,14 24,28 33,14 42,32" fill="none" stroke="#f63d68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></span></span><span class="mg-card mg-card--bull ha-tile ha-tile--mid"><span class="mg-card__art"><img class="mg-card__scene" src="../assets/mg-bullrun-cover.jpg" alt="" loading="lazy"></span></span><span class="ha-duel"><img src="../assets/ex-bullbear-ad.webp" alt="" loading="lazy" width="512" height="512"></span></span>
+          <span class="ha-people"><span class="ha-faces" aria-hidden="true"><img src="../assets/lp-av-2.png" alt="" loading="lazy"><img src="../assets/pr-av-a.png" alt="" loading="lazy"><img src="../assets/lp-av-4.png" alt="" loading="lazy"><img src="../assets/lp-av-1.png" alt="" loading="lazy"></span><b>220K+</b> traders joined</span>
+          <span class="calc-cta-btn ha-btn">Play free</span>
+          <span class="ha-note">Virtual money · No deposit</span>
+        </a>
+      </div>
+    </aside>
+    </div>
+  </main>
+  </div>
+
+    <!-- ============ Global footer ============
+         One component for the whole platform (.pf-footer, styles.css): a utility bar,
+         the navigation columns, then the disclaimer beside the language switcher. -->
+    <footer class="pf-footer">
+
+      <div class="pf-footer__bar">
+        <div class="pf-footer__bar-group">
+          <a class="footer__logo" href="../landing.html" aria-label="Profit.com"><img class="mark" src="../assets/ft-logo-mark.svg" alt=""><img class="word" src="../assets/ft-logo-word.svg" alt=""></a>
+          <span class="pf-footer__rule" aria-hidden="true"></span>
+          <p class="pf-footer__copy">© <span data-year>2026</span> Profit.com. All rights reserved.</p>
+        </div>
+
+        <div class="pf-footer__bar-group">
+          <div class="pf-app">
+            <span class="pf-app__label">Get the app</span>
+            <a class="pf-app__btn" href="#"><img class="pf-app__ico pf-app__ico--apple" src="../assets/ft-apple.svg" alt="">iOS</a>
+            <a class="pf-app__btn" href="#"><img class="pf-app__ico" src="../assets/ft-playstore.svg" alt="">Android</a>
+          </div>
+          <span class="pf-footer__rule" aria-hidden="true"></span>
+          <div class="socials">
+              <a class="social" href="#" aria-label="Telegram"><span class="ico"><img src="../assets/ft-telegram.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="Instagram"><span class="ico"><img src="../assets/ft-instagram.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="Facebook"><span class="ico"><img src="../assets/ft-facebook.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="YouTube"><span class="ico"><img src="../assets/ft-youtube.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="X"><span class="ico"><img src="../assets/ft-x.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="LinkedIn"><span class="ico"><span class="li"><img src="../assets/ft-linkedin.svg" alt=""></span></span></a>
+              <a class="social" href="#" aria-label="TikTok"><span class="ico"><img src="../assets/ft-tiktok.svg" alt=""></span></a>
+          </div>
+        </div>
+      </div>
+
+      <nav class="pf-footer__grid" aria-label="Footer">
+        <details class="pf-col" open>
+          <summary><h3>Playtrade</h3></summary>
+          <ul>
+            <li><a href="../index.html">Tournaments</a></li>
+            <li><a href="../index.html#games-title">Market Games</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="#">Missions</a></li>
+            <li><a href="#">Toolbox</a></li>
+            <li><a href="#">Wallet</a></li>
+            <li><a href="#plans">Plans</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Tools</h3></summary>
+          <ul>
+            <li><a href="#">Discover</a></li>
+            <li><a href="#">Billionaire Portfolios</a></li>
+            <li><a href="#">Screeners</a></li>
+            <li><a href="#">Charts</a></li>
+            <li><a href="#">Market Overview</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Economic Calendar</a></li>
+            <li><a href="#">Trading Signals</a></li>
+            <li><a href="#">Watchlists</a></li>
+            <li><a href="../trading_calculators/index.html">Calculators</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Learn</h3></summary>
+          <ul>
+            <li><a href="#">Video Tutorials</a></li>
+            <li><a href="#">Weekly Briefs</a></li>
+            <li><a href="#">AI Daily Brief</a></li>
+            <li><a href="#">Market Pulse</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#faq">FAQs</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Business Solutions</h3></summary>
+          <ul>
+            <li><a href="#">Widgets</a></li>
+            <li><a href="#">Data API</a></li>
+            <li><a href="#">Charts Library</a></li>
+            <li><a href="#">Signals</a></li>
+            <li><a href="#">Advertising</a></li>
+            <li><a href="#plans">Pricing</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Company</h3></summary>
+          <ul>
+            <li><a href="#">About Profit.com</a></li>
+            <li><a href="#">Mobile App</a></li>
+            <li><a href="#">Refer a Friend</a></li>
+            <li><a href="#">Become an Affiliate</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Resources</h3></summary>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Compare Brokers</a></li>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Risk Disclosure</a></li>
+            <li><a href="#">House Rules</a></li>
+            <li><a href="#">Affiliate Rules</a></li>
+            <li><a href="#">Release Notes</a></li>
+          </ul>
+        </details>
+      </nav>
+
+      <div class="pf-footer__legal">
+        <div class="pf-footer__disclaimer" role="note" aria-label="Disclaimer">
+          <p>Profit.com is an educational, subscription-based software platform providing financial market analytics and simulated trading using real-time market data and virtual funds. All trading activity on the platform is simulated. No real capital is used, no customer deposits are collected, and no real-money trades are executed or facilitated.</p>
+          <p>Profit.com is not a broker and does not provide brokerage, investment, or other financial services or investment advice. All content, tools and features are provided for educational and informational purposes only. Simulated trading results are hypothetical and are not indicative of actual or future results. The terms “trading” and “trader” refer exclusively to simulated activity on Profit.com and should not be interpreted as real-money trading or investing.</p>
+        </div>
+        <div class="pf-lang">
+          <button class="pf-footer__lang" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Change language">
+            <img src="../assets/globe.svg" alt=""><span data-lang-value>English</span>
+            <svg class="pf-lang__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="lang-dd__panel pf-lang__panel" role="menu" aria-label="Language"></div>
+        </div>
+      </div>
+
+    </footer>
+  <script src="../footer.js"></script>
+</body>
+</html>

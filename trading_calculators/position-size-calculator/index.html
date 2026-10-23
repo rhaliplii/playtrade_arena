@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Position Size Calculator: How Many Shares to Buy</title>
+  <meta name="description" content="Free position size calculator: how many shares, ETF shares or coins to buy from your account size, risk per trade and stop-loss.">
+  <link rel="canonical" href="https://www.profit.com/position-size-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Profit.com">
+  <meta property="og:title" content="Position Size Calculator: How Many Shares to Buy">
+  <meta property="og:description" content="Free position size calculator: how many shares, ETF shares or coins to buy from your account size, risk per trade and stop-loss.">
+  <meta property="og:url" content="https://www.profit.com/position-size-calculator">
+  <meta property="og:image" content="https://www.profit.com/trading_calculators/og/position.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.profit.com/trading_calculators/og/position.jpg">
+  <meta name="theme-color" content="#13161b">
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Position Size Calculator",
+ "url": "https://www.profit.com/position-size-calculator",
+ "description": "Free position size calculator: how many shares, ETF shares or coins to buy from your account size, risk per trade and stop-loss.",
+ "applicationCategory": "FinanceApplication",
+ "operatingSystem": "Any",
+ "browserRequirements": "Requires JavaScript",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Profit.com",
+  "url": "https://www.profit.com"
+ }
+}</script>
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Profit.com",
+   "item": "https://www.profit.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Trading calculators",
+   "item": "https://www.profit.com/trading-calculators"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Position Size Calculator",
+   "item": "https://www.profit.com/position-size-calculator"
+  }
+ ]
+}</script>
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I calculate position size?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Multiply your account by the % you are willing to risk, then divide by the distance between your entry and your stop. $10,000 × 1% = $100; with a $2 stop distance that is 50 shares."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What percentage of my account should I risk per trade?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "That is your decision, and this calculator doesn't make it. It shows the arithmetic for whatever figure you choose. Many trading textbooks discuss risking a small, fixed percentage so that a run of losses doesn't empty the account."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it work for short positions?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Choose Short and put the stop above your entry. The size, risk and take profit are worked out the same way, mirrored."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I use it for crypto or fractional shares?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Pick Crypto (up to 8 decimals) or Other (any fraction) as the asset type, or set the rounding yourself under More options → Round to. The size is rounded down to that step so you stay within your risk."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is my position smaller than expected?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Either fees and slippage took part of the risk budget, the size was rounded down to whole units, or the position hit the buying-power cap (account × max leverage). The results say which."
+   }
+  }
+ ]
+}</script>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("pt_theme")||"dark"}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../trading_calculators/calc.css">
+  <script src="../../trading_calculators/calc-shell.js"></script>
+</head>
+<body class="calc-page" data-calc="position" data-nav-active="none">
+  <script>document.body.dataset.user = new URLSearchParams(location.search).get("guest") === "0" ? "member" : "guest";</script>
+
+  <!-- ============ Top navigation (shared component, signed-out bar) ============ -->
+<header class="topnav">
+    <a href="../../landing.html" aria-label="Profit.com home"><img class="topnav__logo" src="../../assets/logo.svg" alt="Profit.com"></a>
+    <img class="vdivider" src="../../assets/divider.svg" alt="">
+    <nav class="topnav__menu" aria-label="Primary">
+      <a class="topnav__item" href="#"><img class="icon" src="../../assets/cup.svg" width="16" height="16" alt="">Playtrade<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Tools<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Learn<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Plans</a>
+      <a class="topnav__item" href="#">More<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+    </nav>
+    <div class="topnav__right">
+      <button aria-label="Search"><img class="icon icon-20" src="../../assets/search.svg" alt=""></button>
+      <div class="topnav__icons">
+        <img class="vdivider" src="../../assets/divider.svg" alt="">
+        <button class="topnav__lang" aria-label="Language: English"><span class="topnav__globe"><img src="../../assets/globe.svg" alt=""></span></button>
+        <img class="vdivider" src="../../assets/divider.svg" alt="">
+        <button class="icon-btn" aria-label="Notifications"><img class="icon icon-20" src="../../assets/bell.svg" alt=""><span class="badge">2</span></button>
+        <button class="icon-btn" aria-label="Messages"><img class="icon icon-20" src="../../assets/messenger.svg" alt=""><span class="badge">1</span></button>
+        <a class="btn-brand topnav__upgrade" href="#">Upgrade</a>
+        <span class="topnav__sale">37% OFF</span>
+      </div>
+      <img class="topnav__avatar" src="../../assets/nav-avatar.png" width="32" height="32" alt="Profile">
+    </div>
+  </header>
+  <script src="../../topnav.js"></script>
+
+  <div class="shell calc-shell">
+  <aside class="side-nav is-collapsed calc-nav" id="sideNav" data-nav="calc" data-active="position" aria-label="Trading calculators">
+    <div class="side-nav__scroll">
+      <nav class="side-nav__group" aria-label="Main"><a class="side-nav__item" href="../../trading_calculators/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-all.svg" alt=""></span><span class="side-nav__label">All calculators</span></a><a class="side-nav__item" href="../../trading_calculators/stock-profit-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-stock.svg" alt=""></span><span class="side-nav__label">Stock profit</span></a><a class="side-nav__item" href="../../trading_calculators/crypto-profit-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-crypto.svg" alt=""></span><span class="side-nav__label">Crypto profit</span></a><a class="side-nav__item is-active" href="../../trading_calculators/position-size-calculator/index.html" aria-current="page"><span class="side-nav__icon"><img src="../../assets/tl-calc-position.svg" alt=""></span><span class="side-nav__label">Position size</span></a><a class="side-nav__item" href="../../trading_calculators/options-profit-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-options.svg" alt=""></span><span class="side-nav__label">Options profit</span></a><a class="side-nav__item" href="../../trading_calculators/margin-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-margin.svg" alt=""></span><span class="side-nav__label">Margin</span></a></nav>
+    </div>
+  </aside>
+  <script src="../../sidebar.js"></script>
+  <main class="calc" id="main">
+    <nav class="calc-crumbs" aria-label="Breadcrumb"><ol><li><a href="../../trading_calculators/index.html">Trading calculators</a></li><li aria-current="page">Position Size Calculator</li></ol></nav>
+    <header class="calc-hero">
+      <h1>Position Size Calculator</h1>
+      <p>Use this free position size calculator to work out how many shares, ETF shares or coins to buy from your account size, risk per trade and stop-loss. Works for stocks, ETFs, crypto and any other asset, so you never risk more than you planned.</p>
+    </header>
+    <nav class="calc-chips" aria-label="Trading calculators" data-chips><a class="calc-chip" href="../../trading_calculators/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-all.svg" alt=""></span>All calculators</a><a class="calc-chip" href="../../trading_calculators/stock-profit-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-stock.svg" alt=""></span>Stock profit</a><a class="calc-chip" href="../../trading_calculators/crypto-profit-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-crypto.svg" alt=""></span>Crypto profit</a><a class="calc-chip is-active" href="../../trading_calculators/position-size-calculator/index.html" aria-current="page"><span class="calc-chip__icon"><img src="../../assets/tl-calc-position.svg" alt=""></span>Position size</a><a class="calc-chip" href="../../trading_calculators/options-profit-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-options.svg" alt=""></span>Options profit</a><a class="calc-chip" href="../../trading_calculators/margin-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-margin.svg" alt=""></span>Margin</a></nav>
+
+    <div class="calc-grid">
+    <div class="calc-main">
+      <section class="c-card calc-tool" id="calculator" data-calc-root aria-labelledby="tool-title">
+        <div class="calc-tool__bar">
+          <h2 id="tool-title">Calculate position size</h2>
+          <div class="calc-tool__actions">
+            <label class="sr-only" for="in-cur">Currency</label>
+            <span class="fld__box"><select id="in-cur" data-k="cur"><option value="USD">USD $</option><option value="EUR">EUR €</option><option value="GBP">GBP £</option><option value="JPY">JPY ¥</option><option value="CAD">CAD $</option><option value="AUD">AUD $</option><option value="CHF">CHF</option><option value="INR">INR ₹</option></select></span>
+            <button type="button" class="c-btn c-btn--ghost" data-share><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8.5 11.5a3.5 3.5 0 0 0 5 0l2.5-2.5a3.5 3.5 0 0 0-5-5l-.8.8M11.5 8.5a3.5 3.5 0 0 0-5 0L4 11a3.5 3.5 0 0 0 5 5l.8-.8"/></svg><span>Share result</span></button>
+            <button type="button" class="c-btn c-btn--ghost" data-reset>Reset</button>
+          </div>
+        </div>
+        <form class="calc-form" novalidate onsubmit="return false">
+
+          <div class="ps-top">
+            <div class="fld" data-f="side">
+  <span class="fld__label" id="lbl-side">Position</span>
+  <div class="seg tabs" role="radiogroup" aria-labelledby="lbl-side" data-k="side"><button type="button" class="tab" role="radio" aria-checked="false" data-v="long">Long</button><button type="button" class="tab" role="radio" aria-checked="false" data-v="short">Short</button></div>
+</div>
+            <div class="fld ps-asset"><label class="sr-only" for="in-at">Asset type</label><span class="fld__box"><select id="in-at" data-k="at"><option value="stock">Stocks &amp; ETFs</option><option value="crypto">Crypto</option><option value="other">Other</option></select></span></div>
+          </div>
+          <div class="fld c-ticker" data-f="ticker" data-kind="any">
+  <label for="in-tk-btn">Ticker <span class="fld__opt">(optional)</span></label>
+  <span class="fld__box"><button type="button" id="in-tk-btn" class="c-ticker__btn" data-ticker-open aria-describedby="in-tk-hint"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m13.5 13.5 3.5 3.5"/></svg><span data-tk-label>Search stock or coin to fill the price</span></button><button type="button" class="c-ticker__clear" data-tk-clear aria-label="Clear ticker" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15"/></svg></button></span>
+  <input type="hidden" id="in-tk" data-k="tk">
+  <p class="fld__hint fld__hint--on" id="in-tk-hint" data-tk-hint></p>
+</div>
+          <div class="fld " data-f="account">
+  <label for="in-acc">Account size (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-acc" data-k="acc" placeholder="10,000" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+          <div class="fld" data-f="riskPct" data-show="rm=pct">
+  <div class="fld__top"><label for="in-rp">Risk (%)</label><button type="button" class="fld__use" data-set="rm=amount">Use <span data-cur-sym>$</span></button></div>
+  <span class="fld__box"><input type="text" id="in-rp" data-k="rp" inputmode="decimal" spellcheck="false" autocomplete="off" placeholder="1" aria-describedby="in-rp-hint"></span>
+  <p class="fld__hint fld__hint--on" id="in-rp-hint"></p>
+</div>
+          <div class="fld" data-f="riskAmount" data-show="rm=amount">
+  <div class="fld__top"><label for="in-ra">Risk (<span data-cur-sym>$</span>)</label><button type="button" class="fld__use" data-set="rm=pct">Use %</button></div>
+  <span class="fld__box"><input type="text" id="in-ra" data-k="ra" inputmode="decimal" spellcheck="false" autocomplete="off" placeholder="100" aria-describedby="in-ra-hint"></span>
+  <p class="fld__hint fld__hint--on" id="in-ra-hint"></p>
+</div>
+          <div class="ps-chips" data-show="rm=pct" role="group" aria-label="Quick risk">
+            <button type="button" class="ps-chip" data-set="rp=0.5">0.5%</button><button type="button" class="ps-chip" data-set="rp=1">1%</button><button type="button" class="ps-chip" data-set="rp=2">2%</button>
+          </div>
+          <div class="fld " data-f="entry">
+  <label for="in-en">Entry price (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-en" data-k="en" placeholder="0.00" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+          <div class="fld" data-f="stop" data-show="sm=price">
+  <div class="fld__top"><label for="in-st">Stop-loss (<span data-cur-sym>$</span>)</label><button type="button" class="fld__use" data-set="sm=pct">Use %</button></div>
+  <span class="fld__box"><input type="text" id="in-st" data-k="st" inputmode="decimal" spellcheck="false" autocomplete="off" placeholder="0.00" aria-describedby="in-st-hint"></span>
+  <p class="fld__hint fld__hint--on" id="in-st-hint"></p>
+</div>
+          <div class="fld" data-f="stopPct" data-show="sm=pct">
+  <div class="fld__top"><label for="in-sp">Stop distance (%)</label><button type="button" class="fld__use" data-set="sm=price">Use price</button></div>
+  <span class="fld__box"><input type="text" id="in-sp" data-k="sp" inputmode="decimal" spellcheck="false" autocomplete="off" placeholder="2" aria-describedby="in-sp-hint"></span>
+  <p class="fld__hint fld__hint--on" id="in-sp-hint"></p>
+</div>
+          <button type="button" class="c-toggle" data-toggle="mo" aria-controls="more-position" aria-expanded="false">More options</button>
+          <div class="c-panel" id="more-position" data-show="mo=1">
+            <div class="fld" data-f="target" data-show="tm=price">
+  <div class="fld__top"><label for="in-tp">Take profit (<span data-cur-sym>$</span>) <span class="fld__opt">optional</span></label><button type="button" class="fld__use" data-set="tm=pct">Use %</button></div>
+  <span class="fld__box"><input type="text" id="in-tp" data-k="tp" inputmode="decimal" spellcheck="false" autocomplete="off" placeholder="0.00" aria-describedby="in-tp-hint"></span>
+  <p class="fld__hint fld__hint--on" id="in-tp-hint"></p>
+</div>
+            <div class="fld" data-f="targetPct" data-show="tm=pct">
+  <div class="fld__top"><label for="in-tpp">Take profit (%) <span class="fld__opt">optional</span></label><button type="button" class="fld__use" data-set="tm=price">Use price</button></div>
+  <span class="fld__box"><input type="text" id="in-tpp" data-k="tpp" inputmode="decimal" spellcheck="false" autocomplete="off" placeholder="10" aria-describedby="in-tpp-hint"></span>
+  <p class="fld__hint fld__hint--on" id="in-tpp-hint"></p>
+</div>
+            <div class="fld" data-f="step">
+  <label for="in-step">Round to</label>
+  <span class="fld__box"><select id="in-step" data-k="step"><option value="1">Whole numbers</option><option value="0.01">0.01</option><option value="0.0001">0.0001</option><option value="0.00000001">0.00000001 (8 decimals)</option><option value="0">Any fraction</option></select></span>
+</div>
+            <div class="fld " data-f="fees">
+  <label for="in-fee">Fees, round trip (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-fee" data-k="fee" placeholder="0" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="slippage">
+  <label for="in-slip">Slippage per share (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-slip" data-k="slip" placeholder="0" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="leverage">
+  <label for="in-lev">Max leverage (×)</label>
+  <span class="fld__box"><input type="text" id="in-lev" data-k="lev" placeholder="1" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+          </div>
+        </form>
+        <div class="calc-out" aria-live="polite"></div>
+      </section>
+      <article class="c-card calc-article">
+        <h2>How position sizing works</h2>
+        <p>Position sizing starts from the loss, not the gain. You decide how much of your account you are prepared to lose if the trade goes wrong, put your stop where the trade idea stops making sense, and let the distance between the two set the size.</p>
+        <p class="calc-formula">Amount at risk = Account × Risk %
+Position size (shares or coins) = Amount at risk ÷ |Entry − Stop|</p>
+        <p>A wider stop means a smaller position; a tighter stop means a larger one. Either way, a stopped-out trade costs the same amount, which is what keeps one bad trade from doing outsized damage.</p>
+<p class="calc-tip"><b>Tip:</b> set your stop where the trade idea stops making sense, then let the calculator size the position. Moving the stop closer just to buy more shares defeats the point.</p>
+        <h2>Worked example</h2>
+        <p>Your account is <strong>$10,000</strong> and you risk <strong>1%</strong> per trade. You want to buy at <strong>$50</strong> with a stop at <strong>$48</strong>.</p>
+        <ol>
+          <li>Amount at risk: 10,000 × 1% = <strong>$100</strong>.</li>
+          <li>Risk per share: 50 − 48 = <strong>$2</strong>.</li>
+          <li>Shares: 100 ÷ 2 = <strong>50 shares</strong>, a $2,500 position (25% of the account).</li>
+          <li>If the stop fills at $48, you lose 50 × 2 = <strong>$100</strong>. A move to $54 (2R) would make $200.</li>
+        </ol>
+        <h2>Shorts, fees and slippage</h2>
+        <p>For a short, the stop sits above the entry and the maths is the same. Fees and slippage make the real loss bigger than the price distance alone, so the calculator takes them off the budget first: Shares = (Amount at risk − Fees) ÷ (|Entry − Stop| + Slippage). Then it rounds <strong>down</strong> to whole shares (or your crypto step), so the actual risk never goes over what you set.</p>
+        <h2>When the stop is very tight</h2>
+        <p>A tight stop can produce a position bigger than your account: $100 of risk on a $0.10 stop at $100 a share is 1,000 shares, or $100,000. The calculator caps the size at account × max leverage (1× for a cash account) and tells you when that happens, along with the smaller risk you are actually taking.</p>
+        <h2>Reward-to-risk and R-multiples</h2>
+        <p>Traders measure outcomes in <strong>R</strong>, the amount risked. A take profit twice as far from the entry as the stop is a 2R target. Add a take profit to see the ratio, or use the 1R, 2R and 3R levels in the results. They are arithmetic, not predictions: they show what a move would be worth, not whether it will happen.</p>
+        <h2>Common mistakes</h2>
+        <ul>
+          <li><strong>Choosing the size first and the stop second.</strong> Then the stop goes wherever the loss feels bearable, not where the trade idea fails.</li>
+          <li><strong>Rounding up.</strong> 466.7 shares should be 466, or you are over your risk.</li>
+          <li><strong>Ignoring gaps.</strong> A stop is an instruction, not a guarantee. A stock that opens far below your stop fills at the open.</li>
+          <li><strong>Sizing on a balance you don't have.</strong> Use the account value you would actually trade from.</li>
+        </ul>
+        <h2>Assumptions</h2>
+        <p class="calc-assume"><b>How this calculator works.</b> The stop is assumed to fill at the stop price plus the slippage you enter; real fills can be worse after a gap. Fees are one round-trip amount. Units are rounded down to the step you choose. The position is capped at account × max leverage. Margin interest and borrow costs are not included.</p>
+      </article>
+      <section class="section faq" aria-labelledby="faq-title">
+        <a class="section__head" href="../../trading_calculators/index.html#faq-title">
+          <h2 class="t-h1" id="faq-title">FAQs</h2>
+          <span class="section-title-arrow"><img src="../../assets/faq-arrow.svg" alt=""></span>
+        </a>
+        <div class="faq__cols">
+          <div class="faq__col" data-accordion>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>How do I calculate position size?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Multiply your account by the % you are willing to risk, then divide by the distance between your entry and your stop. $10,000 × 1% = $100; with a $2 stop distance that is 50 shares.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What percentage of my account should I risk per trade?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">That is your decision, and this calculator doesn't make it. It shows the arithmetic for whatever figure you choose. Many trading textbooks discuss risking a small, fixed percentage so that a run of losses doesn't empty the account.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Does it work for short positions?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes. Choose Short and put the stop above your entry. The size, risk and take profit are worked out the same way, mirrored.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Can I use it for crypto or fractional shares?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes. Pick <b>Crypto</b> (up to 8 decimals) or <b>Other</b> (any fraction) as the asset type, or set the rounding yourself under More options → Round to. The size is rounded down to that step so you stay within your risk.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Why is my position smaller than expected?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Either fees and slippage took part of the risk budget, the size was rounded down to whole units, or the position hit the buying-power cap (account × max leverage). The results say which.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section calc-more" aria-labelledby="more-title">
+        <a class="section__head" href="../../trading_calculators/index.html">
+          <h2 class="t-h1" id="more-title">More trading calculators</h2>
+          <span class="section-title-arrow"><img src="../../assets/faq-arrow.svg" alt=""></span>
+        </a>
+        <div class="calc-more__wrap" data-carousel>
+          <div class="calc-more__row" tabindex="0" aria-label="Other calculators">
+          <a class="hub-card" href="../../trading_calculators/stock-profit-calculator/index.html">
+            <span class="hub-card__art hub-card__art--stock"><img class="hub-card__img" src="../../trading_calculators/art/stock.webp" srcset="../../trading_calculators/art/stock.webp 1x, ../../trading_calculators/art/stock@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Stock Profit Calculator</h3>
+              <p>Calculate your profit and loss after fees</p>
+            </span>
+          </a>
+          <a class="hub-card" href="../../trading_calculators/crypto-profit-calculator/index.html">
+            <span class="hub-card__art hub-card__art--crypto"><img class="hub-card__img" src="../../trading_calculators/art/crypto.webp" srcset="../../trading_calculators/art/crypto.webp 1x, ../../trading_calculators/art/crypto@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Crypto Profit Calculator</h3>
+              <p>Work out your crypto gains and losses</p>
+            </span>
+          </a>
+          <a class="hub-card" href="../../trading_calculators/options-profit-calculator/index.html">
+            <span class="hub-card__art hub-card__art--options"><img class="hub-card__img" src="../../trading_calculators/art/options.webp" srcset="../../trading_calculators/art/options.webp 1x, ../../trading_calculators/art/options@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Options Profit Calculator</h3>
+              <p>See the payoff, max loss and break-even</p>
+            </span>
+          </a>
+          <a class="hub-card" href="../../trading_calculators/margin-calculator/index.html">
+            <span class="hub-card__art hub-card__art--margin"><img class="hub-card__img" src="../../trading_calculators/art/margin.webp" srcset="../../trading_calculators/art/margin.webp 1x, ../../trading_calculators/art/margin@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Margin Calculator</h3>
+              <p>Check the margin needed and the price of a margin call</p>
+            </span>
+          </a>
+          </div>
+          <button type="button" class="calc-more__nav calc-more__nav--prev" aria-label="Previous calculators" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15l-5-5 5-5"/></svg></button>
+          <button type="button" class="calc-more__nav calc-more__nav--next" aria-label="Next calculators" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5l5 5-5 5"/></svg></button>
+        </div>
+      </section>
+      <p class="calc-disclaimer"><b>For education and planning only, not investment advice.</b> Results are calculated from the numbers you enter and the assumptions stated on this page.</p>
+    </div>
+    <aside class="calc-rail" aria-label="Advertisement">
+      <div class="ad-slot ad-slot--rail">
+        <a class="house-ad" href="#" data-cta="adslot" data-member-href="index.html" aria-label="Playtrade: practice trading with virtual money. Play free">
+          <span class="ha-eyebrow"><img src="../../assets/cup.svg" alt="">Playtrade</span>
+          <span class="ha-kick">100% Virtual Funds</span>
+          <span class="ha-title">Practice Trading. Risk Nothing.</span>
+          <span class="ha-text">Trade stocks and crypto with virtual money on live prices, and see how you rank.</span>
+          <span class="ha-tags"><span>Tournaments</span><span>Games</span><span>Leaderboard</span></span>
+          <span class="ha-arena" aria-hidden="true"><span class="mg-card mg-card--flip ha-tile ha-tile--back"><span class="mg-card__art"><span class="mg-flip"><span class="mg-flip__card mg-flip__card--l"><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><rect x="12" y="14" width="7" height="20" rx="2" fill="#3be39a"/><line x1="15.5" y1="8" x2="15.5" y2="40" stroke="#3be39a" stroke-width="2.4" stroke-linecap="round"/><rect x="29" y="20" width="7" height="14" rx="2" fill="#f63d68"/><line x1="32.5" y1="14" x2="32.5" y2="40" stroke="#f63d68" stroke-width="2.4" stroke-linecap="round"/></svg></span></span><span class="mg-flip__card mg-flip__card--m"><span class="mg-flip__face mg-flip__face--back"><svg viewBox="0 0 48 48"><rect x="10" y="18" width="6" height="16" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="13" y1="12" x2="13" y2="38" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/><rect x="21" y="12" width="6" height="22" rx="1.5" fill="#7c5cff"/><line x1="24" y1="7" x2="24" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".7" stroke-linecap="round"/><rect x="32" y="22" width="6" height="13" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="35" y1="17" x2="35" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/></svg></span><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><rect x="20" y="11" width="8" height="10" rx="2" fill="#3be39a"/><line x1="24" y1="8" x2="24" y2="38" stroke="#3be39a" stroke-width="2.6" stroke-linecap="round"/></svg></span></span><span class="mg-flip__card mg-flip__card--r"><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><polyline points="6,32 15,14 24,28 33,14 42,32" fill="none" stroke="#f63d68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></span></span><span class="mg-card mg-card--bull ha-tile ha-tile--mid"><span class="mg-card__art"><img class="mg-card__scene" src="../../assets/mg-bullrun-cover.jpg" alt="" loading="lazy"></span></span><span class="ha-duel"><img src="../../assets/ex-bullbear-ad.webp" alt="" loading="lazy" width="512" height="512"></span></span>
+          <span class="ha-people"><span class="ha-faces" aria-hidden="true"><img src="../../assets/lp-av-2.png" alt="" loading="lazy"><img src="../../assets/pr-av-a.png" alt="" loading="lazy"><img src="../../assets/lp-av-4.png" alt="" loading="lazy"><img src="../../assets/lp-av-1.png" alt="" loading="lazy"></span><b>220K+</b> traders joined</span>
+          <span class="calc-cta-btn ha-btn">Play free</span>
+          <span class="ha-note">Virtual money · No deposit</span>
+        </a>
+      </div>
+    </aside>
+    </div>
+  </main>
+  </div>
+
+    <!-- ============ Global footer ============
+         One component for the whole platform (.pf-footer, styles.css): a utility bar,
+         the navigation columns, then the disclaimer beside the language switcher. -->
+    <footer class="pf-footer">
+
+      <div class="pf-footer__bar">
+        <div class="pf-footer__bar-group">
+          <a class="footer__logo" href="../../landing.html" aria-label="Profit.com"><img class="mark" src="../../assets/ft-logo-mark.svg" alt=""><img class="word" src="../../assets/ft-logo-word.svg" alt=""></a>
+          <span class="pf-footer__rule" aria-hidden="true"></span>
+          <p class="pf-footer__copy">© <span data-year>2026</span> Profit.com. All rights reserved.</p>
+        </div>
+
+        <div class="pf-footer__bar-group">
+          <div class="pf-app">
+            <span class="pf-app__label">Get the app</span>
+            <a class="pf-app__btn" href="#"><img class="pf-app__ico pf-app__ico--apple" src="../../assets/ft-apple.svg" alt="">iOS</a>
+            <a class="pf-app__btn" href="#"><img class="pf-app__ico" src="../../assets/ft-playstore.svg" alt="">Android</a>
+          </div>
+          <span class="pf-footer__rule" aria-hidden="true"></span>
+          <div class="socials">
+              <a class="social" href="#" aria-label="Telegram"><span class="ico"><img src="../../assets/ft-telegram.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="Instagram"><span class="ico"><img src="../../assets/ft-instagram.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="Facebook"><span class="ico"><img src="../../assets/ft-facebook.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="YouTube"><span class="ico"><img src="../../assets/ft-youtube.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="X"><span class="ico"><img src="../../assets/ft-x.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="LinkedIn"><span class="ico"><span class="li"><img src="../../assets/ft-linkedin.svg" alt=""></span></span></a>
+              <a class="social" href="#" aria-label="TikTok"><span class="ico"><img src="../../assets/ft-tiktok.svg" alt=""></span></a>
+          </div>
+        </div>
+      </div>
+
+      <nav class="pf-footer__grid" aria-label="Footer">
+        <details class="pf-col" open>
+          <summary><h3>Playtrade</h3></summary>
+          <ul>
+            <li><a href="../../index.html">Tournaments</a></li>
+            <li><a href="../../index.html#games-title">Market Games</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="#">Missions</a></li>
+            <li><a href="#">Toolbox</a></li>
+            <li><a href="#">Wallet</a></li>
+            <li><a href="#plans">Plans</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Tools</h3></summary>
+          <ul>
+            <li><a href="#">Discover</a></li>
+            <li><a href="#">Billionaire Portfolios</a></li>
+            <li><a href="#">Screeners</a></li>
+            <li><a href="#">Charts</a></li>
+            <li><a href="#">Market Overview</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Economic Calendar</a></li>
+            <li><a href="#">Trading Signals</a></li>
+            <li><a href="#">Watchlists</a></li>
+            <li><a href="../../trading_calculators/index.html">Calculators</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Learn</h3></summary>
+          <ul>
+            <li><a href="#">Video Tutorials</a></li>
+            <li><a href="#">Weekly Briefs</a></li>
+            <li><a href="#">AI Daily Brief</a></li>
+            <li><a href="#">Market Pulse</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#faq">FAQs</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Business Solutions</h3></summary>
+          <ul>
+            <li><a href="#">Widgets</a></li>
+            <li><a href="#">Data API</a></li>
+            <li><a href="#">Charts Library</a></li>
+            <li><a href="#">Signals</a></li>
+            <li><a href="#">Advertising</a></li>
+            <li><a href="#plans">Pricing</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Company</h3></summary>
+          <ul>
+            <li><a href="#">About Profit.com</a></li>
+            <li><a href="#">Mobile App</a></li>
+            <li><a href="#">Refer a Friend</a></li>
+            <li><a href="#">Become an Affiliate</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Resources</h3></summary>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Compare Brokers</a></li>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Risk Disclosure</a></li>
+            <li><a href="#">House Rules</a></li>
+            <li><a href="#">Affiliate Rules</a></li>
+            <li><a href="#">Release Notes</a></li>
+          </ul>
+        </details>
+      </nav>
+
+      <div class="pf-footer__legal">
+        <div class="pf-footer__disclaimer" role="note" aria-label="Disclaimer">
+          <p>Profit.com is an educational, subscription-based software platform providing financial market analytics and simulated trading using real-time market data and virtual funds. All trading activity on the platform is simulated. No real capital is used, no customer deposits are collected, and no real-money trades are executed or facilitated.</p>
+          <p>Profit.com is not a broker and does not provide brokerage, investment, or other financial services or investment advice. All content, tools and features are provided for educational and informational purposes only. Simulated trading results are hypothetical and are not indicative of actual or future results. The terms “trading” and “trader” refer exclusively to simulated activity on Profit.com and should not be interpreted as real-money trading or investing.</p>
+        </div>
+        <div class="pf-lang">
+          <button class="pf-footer__lang" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Change language">
+            <img src="../../assets/globe.svg" alt=""><span data-lang-value>English</span>
+            <svg class="pf-lang__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="lang-dd__panel pf-lang__panel" role="menu" aria-label="Language"></div>
+        </div>
+      </div>
+
+    </footer>
+  <script src="../../footer.js"></script>
+  <script src="../../trading_calculators/lib/core.js"></script>
+  <script src="../../trading_calculators/lib/position.js"></script>
+  <script src="../../trading_calculators/calc-ui.js"></script>
+  <script src="../../trading_calculators/ticker-search.js"></script>
+  <script src="../../trading_calculators/pages/position.js"></script>
+</body>
+</html>

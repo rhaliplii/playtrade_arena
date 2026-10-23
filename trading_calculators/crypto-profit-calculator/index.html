@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crypto Profit Calculator: Bitcoin Profit After Fees</title>
+  <meta name="description" content="Free crypto profit calculator: profit, return and break-even on Bitcoin or any coin after exchange fees, with average cost across several buys.">
+  <link rel="canonical" href="https://www.profit.com/crypto-profit-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Profit.com">
+  <meta property="og:title" content="Crypto Profit Calculator: Bitcoin Profit After Fees">
+  <meta property="og:description" content="Free crypto profit calculator: profit, return and break-even on Bitcoin or any coin after exchange fees, with average cost across several buys.">
+  <meta property="og:url" content="https://www.profit.com/crypto-profit-calculator">
+  <meta property="og:image" content="https://www.profit.com/trading_calculators/og/crypto.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.profit.com/trading_calculators/og/crypto.jpg">
+  <meta name="theme-color" content="#13161b">
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Crypto Profit Calculator",
+ "url": "https://www.profit.com/crypto-profit-calculator",
+ "description": "Free crypto profit calculator: profit, return and break-even on Bitcoin or any coin after exchange fees, with average cost across several buys.",
+ "applicationCategory": "FinanceApplication",
+ "operatingSystem": "Any",
+ "browserRequirements": "Requires JavaScript",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Profit.com",
+  "url": "https://www.profit.com"
+ }
+}</script>
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Profit.com",
+   "item": "https://www.profit.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Trading calculators",
+   "item": "https://www.profit.com/trading-calculators"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Crypto Profit Calculator",
+   "item": "https://www.profit.com/crypto-profit-calculator"
+  }
+ ]
+}</script>
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I calculate profit on crypto?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Divide the amount you spent by the buy price to get your coins. Profit is (sell price − buy price) × coins, minus the buy and sell fees. $1,000 of Bitcoin bought at $50,000 and sold at $60,000 with 0.1% fees each way makes $197.80, a 19.76% return."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do exchange fees affect my profit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "They are charged on both the buy and the sell, as a percentage of the order. At 0.1% each way, a coin has to rise about 0.2% before you break even; at 0.5% each way, about 1%. On frequent small trades that adds up quickly."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is my average entry price if I bought several times?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Total money spent divided by total coins bought, not the average of the prices. Add each extra buy under More options → More buys and the calculator shows the true average, fees included."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What price do I need to sell at to make a certain profit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Use “Find the price for a target profit” under the result and enter the profit you want, as an amount or (under More options) a % return. The calculator returns the sell price that delivers it after both fees, and after tax if you entered a rate."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I calculate profit on a crypto short?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Pick Short, enter the price you sold at and how much you sold, then the buy-back price. The calculator takes the fee off both sides and shows your profit or loss and the break-even buy-back price. Borrow interest, funding rates and liquidation aren't included."
+   }
+  }
+ ]
+}</script>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("pt_theme")||"dark"}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../trading_calculators/calc.css">
+  <script src="../../trading_calculators/calc-shell.js"></script>
+</head>
+<body class="calc-page" data-calc="crypto" data-nav-active="none">
+  <script>document.body.dataset.user = new URLSearchParams(location.search).get("guest") === "0" ? "member" : "guest";</script>
+
+  <!-- ============ Top navigation (shared component, signed-out bar) ============ -->
+<header class="topnav">
+    <a href="../../landing.html" aria-label="Profit.com home"><img class="topnav__logo" src="../../assets/logo.svg" alt="Profit.com"></a>
+    <img class="vdivider" src="../../assets/divider.svg" alt="">
+    <nav class="topnav__menu" aria-label="Primary">
+      <a class="topnav__item" href="#"><img class="icon" src="../../assets/cup.svg" width="16" height="16" alt="">Playtrade<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Tools<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Learn<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Plans</a>
+      <a class="topnav__item" href="#">More<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+    </nav>
+    <div class="topnav__right">
+      <button aria-label="Search"><img class="icon icon-20" src="../../assets/search.svg" alt=""></button>
+      <div class="topnav__icons">
+        <img class="vdivider" src="../../assets/divider.svg" alt="">
+        <button class="topnav__lang" aria-label="Language: English"><span class="topnav__globe"><img src="../../assets/globe.svg" alt=""></span></button>
+        <img class="vdivider" src="../../assets/divider.svg" alt="">
+        <button class="icon-btn" aria-label="Notifications"><img class="icon icon-20" src="../../assets/bell.svg" alt=""><span class="badge">2</span></button>
+        <button class="icon-btn" aria-label="Messages"><img class="icon icon-20" src="../../assets/messenger.svg" alt=""><span class="badge">1</span></button>
+        <a class="btn-brand topnav__upgrade" href="#">Upgrade</a>
+        <span class="topnav__sale">37% OFF</span>
+      </div>
+      <img class="topnav__avatar" src="../../assets/nav-avatar.png" width="32" height="32" alt="Profile">
+    </div>
+  </header>
+  <script src="../../topnav.js"></script>
+
+  <div class="shell calc-shell">
+  <aside class="side-nav is-collapsed calc-nav" id="sideNav" data-nav="calc" data-active="crypto" aria-label="Trading calculators">
+    <div class="side-nav__scroll">
+      <nav class="side-nav__group" aria-label="Main"><a class="side-nav__item" href="../../trading_calculators/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-all.svg" alt=""></span><span class="side-nav__label">All calculators</span></a><a class="side-nav__item" href="../../trading_calculators/stock-profit-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-stock.svg" alt=""></span><span class="side-nav__label">Stock profit</span></a><a class="side-nav__item is-active" href="../../trading_calculators/crypto-profit-calculator/index.html" aria-current="page"><span class="side-nav__icon"><img src="../../assets/tl-calc-crypto.svg" alt=""></span><span class="side-nav__label">Crypto profit</span></a><a class="side-nav__item" href="../../trading_calculators/position-size-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-position.svg" alt=""></span><span class="side-nav__label">Position size</span></a><a class="side-nav__item" href="../../trading_calculators/options-profit-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-options.svg" alt=""></span><span class="side-nav__label">Options profit</span></a><a class="side-nav__item" href="../../trading_calculators/margin-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-margin.svg" alt=""></span><span class="side-nav__label">Margin</span></a></nav>
+    </div>
+  </aside>
+  <script src="../../sidebar.js"></script>
+  <main class="calc" id="main">
+    <nav class="calc-crumbs" aria-label="Breadcrumb"><ol><li><a href="../../trading_calculators/index.html">Trading calculators</a></li><li aria-current="page">Crypto Profit Calculator</li></ol></nav>
+    <header class="calc-hero">
+      <h1>Crypto Profit Calculator</h1>
+      <p>Use this free crypto profit calculator to work out your profit and return on Bitcoin, Ethereum or any coin after exchange fees, your break-even price and your average cost across several buys, long or short.</p>
+    </header>
+    <nav class="calc-chips" aria-label="Trading calculators" data-chips><a class="calc-chip" href="../../trading_calculators/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-all.svg" alt=""></span>All calculators</a><a class="calc-chip" href="../../trading_calculators/stock-profit-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-stock.svg" alt=""></span>Stock profit</a><a class="calc-chip is-active" href="../../trading_calculators/crypto-profit-calculator/index.html" aria-current="page"><span class="calc-chip__icon"><img src="../../assets/tl-calc-crypto.svg" alt=""></span>Crypto profit</a><a class="calc-chip" href="../../trading_calculators/position-size-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-position.svg" alt=""></span>Position size</a><a class="calc-chip" href="../../trading_calculators/options-profit-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-options.svg" alt=""></span>Options profit</a><a class="calc-chip" href="../../trading_calculators/margin-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-margin.svg" alt=""></span>Margin</a></nav>
+
+    <div class="calc-grid">
+    <div class="calc-main">
+      <section class="c-card calc-tool" id="calculator" data-calc-root aria-labelledby="tool-title">
+        <div class="calc-tool__bar">
+          <h2 id="tool-title">Calculate crypto profit</h2>
+          <div class="calc-tool__actions">
+            <label class="sr-only" for="in-cur">Currency</label>
+            <span class="fld__box"><select id="in-cur" data-k="cur"><option value="USD">USD $</option><option value="EUR">EUR €</option><option value="GBP">GBP £</option><option value="JPY">JPY ¥</option><option value="CAD">CAD $</option><option value="AUD">AUD $</option><option value="CHF">CHF</option><option value="INR">INR ₹</option><option value="USDT">USDT</option></select></span>
+            <button type="button" class="c-btn c-btn--ghost" data-share><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8.5 11.5a3.5 3.5 0 0 0 5 0l2.5-2.5a3.5 3.5 0 0 0-5-5l-.8.8M11.5 8.5a3.5 3.5 0 0 0-5 0L4 11a3.5 3.5 0 0 0 5 5l.8-.8"/></svg><span>Share result</span></button>
+            <button type="button" class="c-btn c-btn--ghost" data-reset>Reset</button>
+          </div>
+        </div>
+        <form class="calc-form" novalidate onsubmit="return false">
+
+          <div class="fld" data-f="side">
+  <span class="fld__label" id="lbl-side">Direction</span>
+  <div class="seg tabs" role="radiogroup" aria-labelledby="lbl-side" data-k="side"><button type="button" class="tab" role="radio" aria-checked="false" data-v="long">Long</button><button type="button" class="tab" role="radio" aria-checked="false" data-v="short">Short</button></div>
+</div>
+          <div class="fld c-ticker" data-f="ticker" data-kind="crypto">
+  <label for="in-tk-btn">Coin <span class="fld__opt">(optional)</span></label>
+  <span class="fld__box"><button type="button" id="in-tk-btn" class="c-ticker__btn" data-ticker-open aria-describedby="in-tk-hint"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m13.5 13.5 3.5 3.5"/></svg><span data-tk-label>Search coin to fill the price</span></button><button type="button" class="c-ticker__clear" data-tk-clear aria-label="Clear coin" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15"/></svg></button></span>
+  <input type="hidden" id="in-tk" data-k="tk">
+  <p class="fld__hint fld__hint--on" id="in-tk-hint" data-tk-hint></p>
+</div>
+          <div class="fld-row calc-main-row">
+            <div class="fld" data-f="buys.0.amount" data-show="sz=amount">
+  <div class="fld__top"><label for="in-amt">Amount (<span data-cur-sym>$</span>)</label><button type="button" class="fld__use" data-set="sz=coins">Use coins</button></div>
+  <span class="fld__box"><input type="text" id="in-amt" data-k="amt" inputmode="decimal" spellcheck="false" autocomplete="off" placeholder="1,000" aria-describedby="in-amt-hint"></span>
+  <p class="fld__hint fld__hint--on" id="in-amt-hint"><span data-size-hint></span></p>
+</div>
+            <div class="fld" data-f="buys.0.coins" data-show="sz=coins">
+  <div class="fld__top"><label for="in-co">Coins</label><button type="button" class="fld__use" data-set="sz=amount">Use <span data-cur-sym>$</span></button></div>
+  <span class="fld__box"><input type="text" id="in-co" data-k="co" inputmode="decimal" spellcheck="false" autocomplete="off" placeholder="0.5" aria-describedby="in-co-hint"></span>
+  <p class="fld__hint fld__hint--on" id="in-co-hint"><span data-size-hint></span></p>
+</div>
+            <div class="fld " data-f="buys.0.price">
+  <label for="in-bp"><span data-show="side!=short">Buy price</span><span data-show="side=short">Sell price (opened)</span> (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-bp" data-k="bp" placeholder="0.00" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="exit" data-show="mode=profit">
+  <label for="in-ex"><span data-show="side!=short">Sell price</span><span data-show="side=short">Buy-back price</span> (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-ex" data-k="ex" placeholder="0.00" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="target" data-show="mode=target">
+  <label for="in-tg">Target profit (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-tg" data-k="tg" placeholder="1,000" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld" data-f="fee" data-show="fs=total">
+  <div class="fld__top"><label for="in-fee"><span data-show="ft!=pct">Fees (<span data-cur-sym>$</span>)</span><span data-show="ft=pct">Fees (%)</span></label><button type="button" class="fld__use" data-set="ft=pct" data-show="ft!=pct">Use %</button><button type="button" class="fld__use" data-set="ft=flat" data-show="ft=pct">Use <span data-cur-sym>$</span></button></div>
+  <span class="fld__box"><input type="text" id="in-fee" data-k="fee" inputmode="decimal" spellcheck="false" autocomplete="off" placeholder="0" aria-describedby="in-fee-hint"></span>
+  <p class="fld__hint fld__hint--on" id="in-fee-hint"><span data-show="ft!=pct">Total for buy and sell</span><span data-show="ft=pct">Charged on buy and on sell</span></p>
+</div>
+          </div>
+          <button type="button" class="c-toggle" data-toggle="mo" aria-controls="more-crypto" aria-expanded="false">More options</button>
+          <div class="c-panel" id="more-crypto" data-show="mo=1">
+            <div class="fld" data-f="fs">
+  <span class="fld__label" id="lbl-fs">Fees</span>
+  <div class="seg tabs" role="radiogroup" aria-labelledby="lbl-fs" data-k="fs"><button type="button" class="tab" role="radio" aria-checked="false" data-v="total">One fee</button><button type="button" class="tab" role="radio" aria-checked="false" data-v="split">Buy & sell</button></div>
+</div>
+            <div class="fld" data-f="tgt" data-show="mode=target">
+  <span class="fld__label" id="lbl-tgt">Target as</span>
+  <div class="seg tabs" role="radiogroup" aria-labelledby="lbl-tgt" data-k="tgt"><button type="button" class="tab" role="radio" aria-checked="false" data-v="amount">$</button><button type="button" class="tab" role="radio" aria-checked="false" data-v="pct">% return</button></div>
+</div>
+            <div class="fld-row" data-show="fs=split">
+              <div class="fld " data-f="buyFee">
+  <label for="in-bf">Buy fee (%)</label>
+  <span class="fld__box"><input type="text" id="in-bf" data-k="bf" placeholder="0.1" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+              <div class="fld " data-f="sellFee">
+  <label for="in-sf">Sell fee (%)</label>
+  <span class="fld__box"><input type="text" id="in-sf" data-k="sf" placeholder="0.1" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            </div>
+            <div class="fld " data-f="otherCosts">
+  <label for="in-oc">Other costs (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-oc" data-k="oc" placeholder="0" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="taxRate">
+  <label for="in-tax">Tax on profit (%)</label>
+  <span class="fld__box"><input type="text" id="in-tax" data-k="tax" placeholder="0" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="borrowRate" data-show="side=short">
+  <label for="in-bfr">Borrow fee (% a year)</label>
+  <span class="fld__box"><input type="text" id="in-bfr" data-k="bfr" placeholder="0" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="borrowDays" data-show="side=short">
+  <label for="in-bdy">Days held</label>
+  <span class="fld__box"><input type="text" id="in-bdy" data-k="bdy" placeholder="0" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="coin">
+  <label for="in-coin">Coin</label>
+  <span class="fld__box"><input type="text" id="in-coin" data-k="coin" placeholder="BTC" autocomplete="off" inputmode="text" spellcheck="false"></span>
+  
+</div>
+            <div class="c-buys">
+              <p class="fld__label"><span data-show="side!=short">More buys (average in)</span><span data-show="side=short">More sales (average in)</span></p>
+              <div class="c-rows" data-buys></div>
+            </div>
+          </div>
+        </form>
+        <div class="calc-out" aria-live="polite"></div>
+      </section>
+      <article class="c-card calc-article">
+        <h2>How to calculate crypto profit</h2>
+        <p>Crypto profit is what you get when you sell, minus everything you spent to buy, minus fees. The catch is that exchange fees are charged as a percentage on both sides, and on a volatile coin you often buy in several times at different prices. Both change your real result more than people expect.</p>
+        <p class="calc-formula">Coins = Amount spent ÷ Buy price
+Profit = (Sell price − Buy price) × Coins − Buy fee − Sell fee</p>
+        <p>The amount spent is before fees: the exchange adds the buy fee on top. Your <strong>return</strong> divides the profit by everything you put in, the amount plus that buy fee. If you entered coins instead of an amount, the amount is coins × buy price.</p>
+        <p class="calc-formula">Return = Profit ÷ (Amount spent + Buy fee)</p>
+<p class="calc-tip"><b>Tip:</b> on small trades, network and withdrawal fees can cost more than the exchange fee. Add them under <b>More options → Other costs</b> so your break-even is real.</p>
+        <h2>Worked example</h2>
+        <p>You spend <strong>$1,000</strong> on Bitcoin at <strong>$50,000</strong>. The exchange charges <strong>0.1%</strong> each way. You sell at <strong>$60,000</strong>.</p>
+        <ol>
+          <li>Coins: 1,000 ÷ 50,000 = <strong>0.02 BTC</strong>.</li>
+          <li>The price move: (60,000 − 50,000) × 0.02 = <strong>$200</strong>.</li>
+          <li>Fees are $1.00 to buy (0.1% of $1,000) and $1.20 to sell (0.1% of $1,200): <strong>$2.20</strong>. Profit = 200 − 2.20 = <strong>$197.80</strong>.</li>
+          <li>You put in 1,000 + 1 = $1,001, so the return is 197.80 ÷ 1,001 = <strong>19.76%</strong>.</li>
+          <li>Break-even: the sale, after its fee, has to bring back $1,001: 1,001 ÷ (0.02 × 0.999) = <strong>$50,100.10</strong>. The coin has to rise 0.2% just to cover fees.</li>
+        </ol>
+        <h2>Buying in several times (dollar-cost averaging)</h2>
+        <p>If you buy $500 at $100 and $500 at $50, you own 5 + 10 = 15 coins for $1,000. Your average entry is 1,000 ÷ 15 = <strong>$66.67</strong>, not the $75 midpoint, because the cheaper buy got you more coins. Add each extra buy under <strong>More options → More buys</strong> and the calculator does this for you, fees included.</p>
+        <h2>Shorting crypto</h2>
+        <p>A short reverses the order: you sell coins you have borrowed, then buy them back later. You profit when the price falls: (sell price − buy-back price) × coins, minus the fee on each side. Pick <strong>Short</strong>, enter the amount or number of coins sold and the price you sold at, then the buy-back price. Unlike a spot purchase, a short has no ceiling on the loss, because the price can keep rising. Borrow interest, funding rates and liquidation aren't included; check those with your exchange.</p>
+        <h2>Exchange fees: maker and taker</h2>
+        <p>Most exchanges charge a lower <strong>maker</strong> fee on limit orders that wait on the order book and a higher <strong>taker</strong> fee on orders that fill straight away. Use the rate you actually pay on each side. On small trades, also add network or withdrawal fees under “Other costs”; a flat $5 withdrawal fee on a $200 trade is 2.5% before the price even moves.</p>
+        <h2>Common mistakes</h2>
+        <ul>
+          <li><strong>Averaging prices instead of costs.</strong> The average of $100 and $50 is not your entry price if you spent the same amount at each. Average the money, not the prices.</li>
+          <li><strong>Counting fees once.</strong> You pay the exchange to buy and again to sell.</li>
+          <li><strong>Forgetting the stablecoin.</strong> If you trade against USDT, your profit is in USDT. Pick USDT as the currency so the results say so.</li>
+          <li><strong>Calling unrealised gains profit.</strong> Until you sell, the number moves every second. The profit or loss chart shows the range.</li>
+        </ul>
+        <h2>Assumptions</h2>
+        <p class="calc-assume"><b>How this calculator works.</b> Fees are a % of each order’s value, as on spot exchanges, or a $ total for buy and sell. An amount spent is before fees: the buy fee is added on top, as it is for coins bought. Several buys are combined into one position and sold in one go. Other costs are a flat amount. Tax is a single rate on a profit; a loss is not taxed. On a short, the amount is the position value sold and the opening fee is added on top; return is measured against the position value plus fees. Leverage, borrow interest, funding rates and liquidation are not modelled.</p>
+      </article>
+      <section class="section faq" aria-labelledby="faq-title">
+        <a class="section__head" href="../../trading_calculators/index.html#faq-title">
+          <h2 class="t-h1" id="faq-title">FAQs</h2>
+          <span class="section-title-arrow"><img src="../../assets/faq-arrow.svg" alt=""></span>
+        </a>
+        <div class="faq__cols">
+          <div class="faq__col" data-accordion>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>How do I calculate profit on crypto?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Divide the amount you spent by the buy price to get your coins. Profit is (sell price − buy price) × coins, minus the buy and sell fees. $1,000 of Bitcoin bought at $50,000 and sold at $60,000 with 0.1% fees each way makes $197.80, a 19.76% return.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>How do exchange fees affect my profit?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">They are charged on both the buy and the sell, as a percentage of the order. At 0.1% each way, a coin has to rise about 0.2% before you break even; at 0.5% each way, about 1%. On frequent small trades that adds up quickly.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What is my average entry price if I bought several times?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Total money spent divided by total coins bought, not the average of the prices. Add each extra buy under More options → More buys and the calculator shows the true average, fees included.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What price do I need to sell at to make a certain profit?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Use “Find the price for a target profit” under the result and enter the profit you want, as an amount or (under More options) a % return. The calculator returns the sell price that delivers it after both fees, and after tax if you entered a rate.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Can I calculate profit on a crypto short?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes. Pick Short, enter the price you sold at and how much you sold, then the buy-back price. The calculator takes the fee off both sides and shows your profit or loss and the break-even buy-back price. Borrow interest, funding rates and liquidation aren't included.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section calc-more" aria-labelledby="more-title">
+        <a class="section__head" href="../../trading_calculators/index.html">
+          <h2 class="t-h1" id="more-title">More trading calculators</h2>
+          <span class="section-title-arrow"><img src="../../assets/faq-arrow.svg" alt=""></span>
+        </a>
+        <div class="calc-more__wrap" data-carousel>
+          <div class="calc-more__row" tabindex="0" aria-label="Other calculators">
+          <a class="hub-card" href="../../trading_calculators/stock-profit-calculator/index.html">
+            <span class="hub-card__art hub-card__art--stock"><img class="hub-card__img" src="../../trading_calculators/art/stock.webp" srcset="../../trading_calculators/art/stock.webp 1x, ../../trading_calculators/art/stock@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Stock Profit Calculator</h3>
+              <p>Calculate your profit and loss after fees</p>
+            </span>
+          </a>
+          <a class="hub-card" href="../../trading_calculators/position-size-calculator/index.html">
+            <span class="hub-card__art hub-card__art--position"><img class="hub-card__img" src="../../trading_calculators/art/position.webp" srcset="../../trading_calculators/art/position.webp 1x, ../../trading_calculators/art/position@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Position Size Calculator</h3>
+              <p>Find the right position size for your risk</p>
+            </span>
+          </a>
+          <a class="hub-card" href="../../trading_calculators/options-profit-calculator/index.html">
+            <span class="hub-card__art hub-card__art--options"><img class="hub-card__img" src="../../trading_calculators/art/options.webp" srcset="../../trading_calculators/art/options.webp 1x, ../../trading_calculators/art/options@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Options Profit Calculator</h3>
+              <p>See the payoff, max loss and break-even</p>
+            </span>
+          </a>
+          <a class="hub-card" href="../../trading_calculators/margin-calculator/index.html">
+            <span class="hub-card__art hub-card__art--margin"><img class="hub-card__img" src="../../trading_calculators/art/margin.webp" srcset="../../trading_calculators/art/margin.webp 1x, ../../trading_calculators/art/margin@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Margin Calculator</h3>
+              <p>Check the margin needed and the price of a margin call</p>
+            </span>
+          </a>
+          </div>
+          <button type="button" class="calc-more__nav calc-more__nav--prev" aria-label="Previous calculators" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15l-5-5 5-5"/></svg></button>
+          <button type="button" class="calc-more__nav calc-more__nav--next" aria-label="Next calculators" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5l5 5-5 5"/></svg></button>
+        </div>
+      </section>
+      <p class="calc-disclaimer"><b>For education and planning only, not investment advice.</b> Results are calculated from the numbers you enter and the assumptions stated on this page.</p>
+      <p class="calc-disclaimer calc-disclaimer--risk"><b>Crypto risk warning.</b> Crypto-assets are highly volatile and largely unregulated. You can lose all of the money you put in, and there is usually no investor compensation scheme if an exchange fails.</p>
+    </div>
+    <aside class="calc-rail" aria-label="Advertisement">
+      <div class="ad-slot ad-slot--rail">
+        <a class="house-ad" href="#" data-cta="adslot" data-member-href="index.html" aria-label="Playtrade: practice trading with virtual money. Play free">
+          <span class="ha-eyebrow"><img src="../../assets/cup.svg" alt="">Playtrade</span>
+          <span class="ha-kick">100% Virtual Funds</span>
+          <span class="ha-title">Practice Trading. Risk Nothing.</span>
+          <span class="ha-text">Trade stocks and crypto with virtual money on live prices, and see how you rank.</span>
+          <span class="ha-tags"><span>Tournaments</span><span>Games</span><span>Leaderboard</span></span>
+          <span class="ha-arena" aria-hidden="true"><span class="mg-card mg-card--flip ha-tile ha-tile--back"><span class="mg-card__art"><span class="mg-flip"><span class="mg-flip__card mg-flip__card--l"><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><rect x="12" y="14" width="7" height="20" rx="2" fill="#3be39a"/><line x1="15.5" y1="8" x2="15.5" y2="40" stroke="#3be39a" stroke-width="2.4" stroke-linecap="round"/><rect x="29" y="20" width="7" height="14" rx="2" fill="#f63d68"/><line x1="32.5" y1="14" x2="32.5" y2="40" stroke="#f63d68" stroke-width="2.4" stroke-linecap="round"/></svg></span></span><span class="mg-flip__card mg-flip__card--m"><span class="mg-flip__face mg-flip__face--back"><svg viewBox="0 0 48 48"><rect x="10" y="18" width="6" height="16" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="13" y1="12" x2="13" y2="38" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/><rect x="21" y="12" width="6" height="22" rx="1.5" fill="#7c5cff"/><line x1="24" y1="7" x2="24" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".7" stroke-linecap="round"/><rect x="32" y="22" width="6" height="13" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="35" y1="17" x2="35" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/></svg></span><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><rect x="20" y="11" width="8" height="10" rx="2" fill="#3be39a"/><line x1="24" y1="8" x2="24" y2="38" stroke="#3be39a" stroke-width="2.6" stroke-linecap="round"/></svg></span></span><span class="mg-flip__card mg-flip__card--r"><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><polyline points="6,32 15,14 24,28 33,14 42,32" fill="none" stroke="#f63d68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></span></span><span class="mg-card mg-card--bull ha-tile ha-tile--mid"><span class="mg-card__art"><img class="mg-card__scene" src="../../assets/mg-bullrun-cover.jpg" alt="" loading="lazy"></span></span><span class="ha-duel"><img src="../../assets/ex-bullbear-ad.webp" alt="" loading="lazy" width="512" height="512"></span></span>
+          <span class="ha-people"><span class="ha-faces" aria-hidden="true"><img src="../../assets/lp-av-2.png" alt="" loading="lazy"><img src="../../assets/pr-av-a.png" alt="" loading="lazy"><img src="../../assets/lp-av-4.png" alt="" loading="lazy"><img src="../../assets/lp-av-1.png" alt="" loading="lazy"></span><b>220K+</b> traders joined</span>
+          <span class="calc-cta-btn ha-btn">Play free</span>
+          <span class="ha-note">Virtual money · No deposit</span>
+        </a>
+      </div>
+    </aside>
+    </div>
+  </main>
+  </div>
+
+    <!-- ============ Global footer ============
+         One component for the whole platform (.pf-footer, styles.css): a utility bar,
+         the navigation columns, then the disclaimer beside the language switcher. -->
+    <footer class="pf-footer">
+
+      <div class="pf-footer__bar">
+        <div class="pf-footer__bar-group">
+          <a class="footer__logo" href="../../landing.html" aria-label="Profit.com"><img class="mark" src="../../assets/ft-logo-mark.svg" alt=""><img class="word" src="../../assets/ft-logo-word.svg" alt=""></a>
+          <span class="pf-footer__rule" aria-hidden="true"></span>
+          <p class="pf-footer__copy">© <span data-year>2026</span> Profit.com. All rights reserved.</p>
+        </div>
+
+        <div class="pf-footer__bar-group">
+          <div class="pf-app">
+            <span class="pf-app__label">Get the app</span>
+            <a class="pf-app__btn" href="#"><img class="pf-app__ico pf-app__ico--apple" src="../../assets/ft-apple.svg" alt="">iOS</a>
+            <a class="pf-app__btn" href="#"><img class="pf-app__ico" src="../../assets/ft-playstore.svg" alt="">Android</a>
+          </div>
+          <span class="pf-footer__rule" aria-hidden="true"></span>
+          <div class="socials">
+              <a class="social" href="#" aria-label="Telegram"><span class="ico"><img src="../../assets/ft-telegram.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="Instagram"><span class="ico"><img src="../../assets/ft-instagram.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="Facebook"><span class="ico"><img src="../../assets/ft-facebook.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="YouTube"><span class="ico"><img src="../../assets/ft-youtube.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="X"><span class="ico"><img src="../../assets/ft-x.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="LinkedIn"><span class="ico"><span class="li"><img src="../../assets/ft-linkedin.svg" alt=""></span></span></a>
+              <a class="social" href="#" aria-label="TikTok"><span class="ico"><img src="../../assets/ft-tiktok.svg" alt=""></span></a>
+          </div>
+        </div>
+      </div>
+
+      <nav class="pf-footer__grid" aria-label="Footer">
+        <details class="pf-col" open>
+          <summary><h3>Playtrade</h3></summary>
+          <ul>
+            <li><a href="../../index.html">Tournaments</a></li>
+            <li><a href="../../index.html#games-title">Market Games</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="#">Missions</a></li>
+            <li><a href="#">Toolbox</a></li>
+            <li><a href="#">Wallet</a></li>
+            <li><a href="#plans">Plans</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Tools</h3></summary>
+          <ul>
+            <li><a href="#">Discover</a></li>
+            <li><a href="#">Billionaire Portfolios</a></li>
+            <li><a href="#">Screeners</a></li>
+            <li><a href="#">Charts</a></li>
+            <li><a href="#">Market Overview</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Economic Calendar</a></li>
+            <li><a href="#">Trading Signals</a></li>
+            <li><a href="#">Watchlists</a></li>
+            <li><a href="../../trading_calculators/index.html">Calculators</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Learn</h3></summary>
+          <ul>
+            <li><a href="#">Video Tutorials</a></li>
+            <li><a href="#">Weekly Briefs</a></li>
+            <li><a href="#">AI Daily Brief</a></li>
+            <li><a href="#">Market Pulse</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#faq">FAQs</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Business Solutions</h3></summary>
+          <ul>
+            <li><a href="#">Widgets</a></li>
+            <li><a href="#">Data API</a></li>
+            <li><a href="#">Charts Library</a></li>
+            <li><a href="#">Signals</a></li>
+            <li><a href="#">Advertising</a></li>
+            <li><a href="#plans">Pricing</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Company</h3></summary>
+          <ul>
+            <li><a href="#">About Profit.com</a></li>
+            <li><a href="#">Mobile App</a></li>
+            <li><a href="#">Refer a Friend</a></li>
+            <li><a href="#">Become an Affiliate</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Resources</h3></summary>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Compare Brokers</a></li>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Risk Disclosure</a></li>
+            <li><a href="#">House Rules</a></li>
+            <li><a href="#">Affiliate Rules</a></li>
+            <li><a href="#">Release Notes</a></li>
+          </ul>
+        </details>
+      </nav>
+
+      <div class="pf-footer__legal">
+        <div class="pf-footer__disclaimer" role="note" aria-label="Disclaimer">
+          <p>Profit.com is an educational, subscription-based software platform providing financial market analytics and simulated trading using real-time market data and virtual funds. All trading activity on the platform is simulated. No real capital is used, no customer deposits are collected, and no real-money trades are executed or facilitated.</p>
+          <p>Profit.com is not a broker and does not provide brokerage, investment, or other financial services or investment advice. All content, tools and features are provided for educational and informational purposes only. Simulated trading results are hypothetical and are not indicative of actual or future results. The terms “trading” and “trader” refer exclusively to simulated activity on Profit.com and should not be interpreted as real-money trading or investing.</p>
+        </div>
+        <div class="pf-lang">
+          <button class="pf-footer__lang" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Change language">
+            <img src="../../assets/globe.svg" alt=""><span data-lang-value>English</span>
+            <svg class="pf-lang__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="lang-dd__panel pf-lang__panel" role="menu" aria-label="Language"></div>
+        </div>
+      </div>
+
+    </footer>
+  <script src="../../footer.js"></script>
+  <script src="../../trading_calculators/lib/core.js"></script>
+  <script src="../../trading_calculators/lib/crypto.js"></script>
+  <script src="../../trading_calculators/calc-ui.js"></script>
+  <script src="../../trading_calculators/ticker-search.js"></script>
+  <script src="../../trading_calculators/pages/crypto.js"></script>
+</body>
+</html>

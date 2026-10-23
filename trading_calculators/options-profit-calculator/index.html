@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Options Profit Calculator: Calls, Puts &amp; Spreads</title>
+  <meta name="description" content="Free options profit calculator for calls, puts, spreads and iron condors: profit and loss at expiry, max loss, break-even and a payoff chart.">
+  <link rel="canonical" href="https://www.profit.com/options-profit-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Profit.com">
+  <meta property="og:title" content="Options Profit Calculator: Calls, Puts &amp; Spreads">
+  <meta property="og:description" content="Free options profit calculator for calls, puts, spreads and iron condors: profit and loss at expiry, max loss, break-even and a payoff chart.">
+  <meta property="og:url" content="https://www.profit.com/options-profit-calculator">
+  <meta property="og:image" content="https://www.profit.com/trading_calculators/og/options.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.profit.com/trading_calculators/og/options.jpg">
+  <meta name="theme-color" content="#13161b">
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Options Profit Calculator",
+ "url": "https://www.profit.com/options-profit-calculator",
+ "description": "Free options profit calculator for calls, puts, spreads and iron condors: profit and loss at expiry, max loss, break-even and a payoff chart.",
+ "applicationCategory": "FinanceApplication",
+ "operatingSystem": "Any",
+ "browserRequirements": "Requires JavaScript",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Profit.com",
+  "url": "https://www.profit.com"
+ }
+}</script>
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Profit.com",
+   "item": "https://www.profit.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Trading calculators",
+   "item": "https://www.profit.com/trading-calculators"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Options Profit Calculator",
+   "item": "https://www.profit.com/options-profit-calculator"
+  }
+ ]
+}</script>
+  <script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do you calculate profit on a call option?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "At expiry: (stock price − strike, or zero if negative) minus the premium, times 100 shares per contract. A $100 call bought for $5 is worth (120 − 100 − 5) × 100 = $1,500 profit if the stock ends at $120."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is the break-even for an option?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "For a long call, strike plus premium. For a long put, strike minus premium. Spreads and combinations can have one or two break-evens; the calculator finds all of them."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does the calculator say max loss is unlimited?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because a short call that isn't covered by stock or a higher long call loses more the higher the stock goes, with no ceiling. Max profit is unlimited for a long call for the same reason."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it show profit before expiration?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. The main result is the profit or loss at expiration. Under More options, enter today's stock price, the days left and the implied volatility, and the chart adds a dashed “today” curve and Details shows what the position is worth if you closed it now. It uses the Black-Scholes model, so it is an estimate: real option prices also move with demand, dividends and early exercise."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does the 100 multiplier mean?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "One US equity option contract covers 100 shares, so quoted premiums are per share and are multiplied by 100. Change “Shares per contract” for mini or adjusted contracts."
+   }
+  }
+ ]
+}</script>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("pt_theme")||"dark"}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../trading_calculators/calc.css">
+  <script src="../../trading_calculators/calc-shell.js"></script>
+</head>
+<body class="calc-page" data-calc="options" data-nav-active="none">
+  <script>document.body.dataset.user = new URLSearchParams(location.search).get("guest") === "0" ? "member" : "guest";</script>
+
+  <!-- ============ Top navigation (shared component, signed-out bar) ============ -->
+<header class="topnav">
+    <a href="../../landing.html" aria-label="Profit.com home"><img class="topnav__logo" src="../../assets/logo.svg" alt="Profit.com"></a>
+    <img class="vdivider" src="../../assets/divider.svg" alt="">
+    <nav class="topnav__menu" aria-label="Primary">
+      <a class="topnav__item" href="#"><img class="icon" src="../../assets/cup.svg" width="16" height="16" alt="">Playtrade<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Tools<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Learn<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+      <a class="topnav__item" href="#">Plans</a>
+      <a class="topnav__item" href="#">More<span class="topnav__caret"><img src="../../assets/dropdown-arrow.svg" alt=""></span></a>
+    </nav>
+    <div class="topnav__right">
+      <button aria-label="Search"><img class="icon icon-20" src="../../assets/search.svg" alt=""></button>
+      <div class="topnav__icons">
+        <img class="vdivider" src="../../assets/divider.svg" alt="">
+        <button class="topnav__lang" aria-label="Language: English"><span class="topnav__globe"><img src="../../assets/globe.svg" alt=""></span></button>
+        <img class="vdivider" src="../../assets/divider.svg" alt="">
+        <button class="icon-btn" aria-label="Notifications"><img class="icon icon-20" src="../../assets/bell.svg" alt=""><span class="badge">2</span></button>
+        <button class="icon-btn" aria-label="Messages"><img class="icon icon-20" src="../../assets/messenger.svg" alt=""><span class="badge">1</span></button>
+        <a class="btn-brand topnav__upgrade" href="#">Upgrade</a>
+        <span class="topnav__sale">37% OFF</span>
+      </div>
+      <img class="topnav__avatar" src="../../assets/nav-avatar.png" width="32" height="32" alt="Profile">
+    </div>
+  </header>
+  <script src="../../topnav.js"></script>
+
+  <div class="shell calc-shell">
+  <aside class="side-nav is-collapsed calc-nav" id="sideNav" data-nav="calc" data-active="options" aria-label="Trading calculators">
+    <div class="side-nav__scroll">
+      <nav class="side-nav__group" aria-label="Main"><a class="side-nav__item" href="../../trading_calculators/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-all.svg" alt=""></span><span class="side-nav__label">All calculators</span></a><a class="side-nav__item" href="../../trading_calculators/stock-profit-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-stock.svg" alt=""></span><span class="side-nav__label">Stock profit</span></a><a class="side-nav__item" href="../../trading_calculators/crypto-profit-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-crypto.svg" alt=""></span><span class="side-nav__label">Crypto profit</span></a><a class="side-nav__item" href="../../trading_calculators/position-size-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-position.svg" alt=""></span><span class="side-nav__label">Position size</span></a><a class="side-nav__item is-active" href="../../trading_calculators/options-profit-calculator/index.html" aria-current="page"><span class="side-nav__icon"><img src="../../assets/tl-calc-options.svg" alt=""></span><span class="side-nav__label">Options profit</span></a><a class="side-nav__item" href="../../trading_calculators/margin-calculator/index.html"><span class="side-nav__icon"><img src="../../assets/tl-calc-margin.svg" alt=""></span><span class="side-nav__label">Margin</span></a></nav>
+    </div>
+  </aside>
+  <script src="../../sidebar.js"></script>
+  <main class="calc" id="main">
+    <nav class="calc-crumbs" aria-label="Breadcrumb"><ol><li><a href="../../trading_calculators/index.html">Trading calculators</a></li><li aria-current="page">Options Profit Calculator</li></ol></nav>
+    <header class="calc-hero">
+      <h1>Options Profit Calculator</h1>
+      <p>Use this free options profit calculator to see the profit and loss of calls, puts and strategies like spreads and iron condors: max profit, max loss, break-even, a payoff chart and an estimate of today's value.</p>
+    </header>
+    <nav class="calc-chips" aria-label="Trading calculators" data-chips><a class="calc-chip" href="../../trading_calculators/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-all.svg" alt=""></span>All calculators</a><a class="calc-chip" href="../../trading_calculators/stock-profit-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-stock.svg" alt=""></span>Stock profit</a><a class="calc-chip" href="../../trading_calculators/crypto-profit-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-crypto.svg" alt=""></span>Crypto profit</a><a class="calc-chip" href="../../trading_calculators/position-size-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-position.svg" alt=""></span>Position size</a><a class="calc-chip is-active" href="../../trading_calculators/options-profit-calculator/index.html" aria-current="page"><span class="calc-chip__icon"><img src="../../assets/tl-calc-options.svg" alt=""></span>Options profit</a><a class="calc-chip" href="../../trading_calculators/margin-calculator/index.html"><span class="calc-chip__icon"><img src="../../assets/tl-calc-margin.svg" alt=""></span>Margin</a></nav>
+
+    <div class="calc-grid">
+    <div class="calc-main">
+      <section class="c-card calc-tool" id="calculator" data-calc-root aria-labelledby="tool-title">
+        <div class="calc-tool__bar">
+          <h2 id="tool-title">Calculate options profit</h2>
+          <div class="calc-tool__actions">
+            <label class="sr-only" for="in-cur">Currency</label>
+            <span class="fld__box"><select id="in-cur" data-k="cur"><option value="USD">USD $</option><option value="EUR">EUR €</option><option value="GBP">GBP £</option><option value="JPY">JPY ¥</option><option value="CAD">CAD $</option><option value="AUD">AUD $</option><option value="CHF">CHF</option><option value="INR">INR ₹</option></select></span>
+            <button type="button" class="c-btn c-btn--ghost" data-share><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8.5 11.5a3.5 3.5 0 0 0 5 0l2.5-2.5a3.5 3.5 0 0 0-5-5l-.8.8M11.5 8.5a3.5 3.5 0 0 0-5 0L4 11a3.5 3.5 0 0 0 5 5l.8-.8"/></svg><span>Share result</span></button>
+            <button type="button" class="c-btn c-btn--ghost" data-reset>Reset</button>
+          </div>
+        </div>
+        <form class="calc-form" novalidate onsubmit="return false">
+
+          <div class="fld" data-f="pre">
+  <label for="in-pre">Strategy</label>
+  <span class="fld__box"><select id="in-pre" data-k="pre"><option value="long-call">Long call</option><option value="long-put">Long put</option><option value="short-call">Short call</option><option value="short-put">Short put</option><option value="covered-call">Covered call</option><option value="cash-secured-put">Cash-secured put</option><option value="protective-put">Protective put</option><option value="bull-call-spread">Bull call spread</option><option value="bear-put-spread">Bear put spread</option><option value="long-straddle">Long straddle</option><option value="long-strangle">Long strangle</option><option value="short-straddle">Short straddle</option><option value="short-strangle">Short strangle</option><option value="iron-condor">Iron condor</option><option value="custom">Custom (build legs)</option></select></span>
+</div>
+          <div class="c-rows" data-legs data-show="pre!=long-call&pre!=long-put&pre!=short-call&pre!=short-put"></div>
+          <div class="fld-row calc-main-row">
+            <div class="fld " data-f="legs.0.strike" data-show="pre=long-call|long-put|short-call|short-put">
+  <label for="in-k">Strike price (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-k" data-k="k" placeholder="100" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="legs.0.premium" data-show="pre=long-call|long-put|short-call|short-put">
+  <label for="in-pr">Premium per share (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-pr" data-k="pr" placeholder="0.00" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="legs.0.qty" data-show="pre=long-call|long-put|short-call|short-put">
+  <label for="in-n">Contracts</label>
+  <span class="fld__box"><input type="text" id="in-n" data-k="n" placeholder="1" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="at">
+  <label for="in-at">Stock price at expiry (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-at" data-k="at" placeholder="110" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+          </div>
+          <button type="button" class="c-toggle" data-toggle="mo" aria-controls="more-options" aria-expanded="false">More options</button>
+          <div class="c-panel" id="more-options" data-show="mo=1">
+            <div class="fld " data-f="und">
+  <label for="in-und">Stock price today (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-und" data-k="und" placeholder="100" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="days">
+  <label for="in-dte">Days to expiry</label>
+  <span class="fld__box"><input type="text" id="in-dte" data-k="dte" placeholder="30" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="iv">
+  <label for="in-iv">Implied volatility (%)</label>
+  <span class="fld__box"><input type="text" id="in-iv" data-k="iv" placeholder="30" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="rate">
+  <label for="in-rate">Interest rate (%)</label>
+  <span class="fld__box"><input type="text" id="in-rate" data-k="rate" placeholder="4" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="multiplier">
+  <label for="in-mult">Shares per contract</label>
+  <span class="fld__box"><input type="text" id="in-mult" data-k="mult" placeholder="100" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <div class="fld " data-f="feePerContract">
+  <label for="in-fee">Fee per contract (<span data-cur-sym>$</span>)</label>
+  <span class="fld__box"><input type="text" id="in-fee" data-k="fee" placeholder="0" autocomplete="off" inputmode="decimal" spellcheck="false"></span>
+  
+</div>
+            <p class="fld__hint c-panel__note" data-show="pre!=long-call&pre!=long-put&pre!=short-call&pre!=short-put&pre!=custom">The strategy's strikes are placed around today's stock price, with <b>example premiums</b>. Replace them with the quotes you see.</p>
+          </div>
+        </form>
+        <div class="calc-out" aria-live="polite"></div>
+      </section>
+      <article class="c-card calc-article">
+        <h2>How options profit is calculated</h2>
+        <p>At expiration an option is worth only its <strong>intrinsic value</strong>: what you would gain by exercising it. A call is worth how far the stock is above the strike; a put is worth how far it is below. Your profit is that value minus the premium you paid, multiplied by the number of shares the contract covers, which is <strong>100</strong> for US stock options.</p>
+        <p class="calc-formula">Long call P/L = (max(Stock − Strike, 0) − Premium) × 100 × Contracts
+Long put P/L  = (max(Strike − Stock, 0) − Premium) × 100 × Contracts</p>
+        <p>Selling an option flips the sign: you keep the premium and owe the intrinsic value. A multi-leg strategy is just the sum of its legs.</p>
+<p class="calc-tip"><b>Tip:</b> before expiry an option also has time value. Add the days left and implied volatility under <b>More options</b> to see what the position is worth today, not just at expiry.</p>
+        <h2 id="ox-title">Worked example: <span data-ox-name>single call</span></h2>
+        <p class="ox-note">The stock is at $100, one contract (100 shares) per leg, no fees, values at expiry.</p>
+        <div class="tabs ox-tabs" role="tablist" aria-label="Strategy"><button type="button" class="tab is-active" role="tab" id="ox-tab-long-call" aria-controls="ox-long-call" aria-selected="true" tabindex="0" data-ox-tab="long-call">Single call</button><button type="button" class="tab" role="tab" id="ox-tab-long-put" aria-controls="ox-long-put" aria-selected="false" tabindex="-1" data-ox-tab="long-put">Single put</button><button type="button" class="tab" role="tab" id="ox-tab-covered-call" aria-controls="ox-covered-call" aria-selected="false" tabindex="-1" data-ox-tab="covered-call">Covered call</button><button type="button" class="tab" role="tab" id="ox-tab-cash-secured-put" aria-controls="ox-cash-secured-put" aria-selected="false" tabindex="-1" data-ox-tab="cash-secured-put">Cash-secured put</button><button type="button" class="tab" role="tab" id="ox-tab-protective-put" aria-controls="ox-protective-put" aria-selected="false" tabindex="-1" data-ox-tab="protective-put">Protective put</button><button type="button" class="tab" role="tab" id="ox-tab-bull-call-spread" aria-controls="ox-bull-call-spread" aria-selected="false" tabindex="-1" data-ox-tab="bull-call-spread">Bull call spread</button><button type="button" class="tab" role="tab" id="ox-tab-bear-put-spread" aria-controls="ox-bear-put-spread" aria-selected="false" tabindex="-1" data-ox-tab="bear-put-spread">Bear put spread</button><button type="button" class="tab" role="tab" id="ox-tab-long-straddle" aria-controls="ox-long-straddle" aria-selected="false" tabindex="-1" data-ox-tab="long-straddle">Long straddle</button><button type="button" class="tab" role="tab" id="ox-tab-long-strangle" aria-controls="ox-long-strangle" aria-selected="false" tabindex="-1" data-ox-tab="long-strangle">Long strangle</button><button type="button" class="tab" role="tab" id="ox-tab-short-straddle" aria-controls="ox-short-straddle" aria-selected="false" tabindex="-1" data-ox-tab="short-straddle">Short straddle</button><button type="button" class="tab" role="tab" id="ox-tab-short-strangle" aria-controls="ox-short-strangle" aria-selected="false" tabindex="-1" data-ox-tab="short-strangle">Short strangle</button><button type="button" class="tab" role="tab" id="ox-tab-iron-condor" aria-controls="ox-iron-condor" aria-selected="false" tabindex="-1" data-ox-tab="iron-condor">Iron condor</button></div>
+        <div class="ox-panels">
+          <div class="ox" role="tabpanel" id="ox-long-call" aria-labelledby="ox-tab-long-call" data-ox="long-call"><p>You think the stock will rise, so you buy one $100 call for $5.00 a share.</p><ol><li>Cost: 5.00 a share × 100 = <strong>$500</strong> paid.</li><li>Max loss <strong>$500</strong>; max profit unlimited.</li><li>Break-even at expiry: <strong>$105.00</strong>.</li><li>At $120 at expiry, the $100 call is worth $20.00 a share. P/L = (20.00 − 5.00) × 100 = <strong>$1,500 profit</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-long-put" aria-labelledby="ox-tab-long-put" data-ox="long-put" hidden><p>You think the stock will fall, so you buy one $100 put for $4.00 a share.</p><ol><li>Cost: 4.00 a share × 100 = <strong>$400</strong> paid.</li><li>Max loss <strong>$400</strong>; max profit <strong>$9,600</strong>.</li><li>Break-even at expiry: <strong>$96.00</strong>.</li><li>At $85 at expiry, the $100 put is worth $15.00 a share. P/L = (15.00 − 4.00) × 100 = <strong>$1,100 profit</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-covered-call" aria-labelledby="ox-tab-covered-call" data-ox="covered-call" hidden><p>You own 100 shares bought at $100 and sell one $110 call against them for $2.00.</p><ol><li>Credit: 2.00 a share × 100 = <strong>$200</strong> received, on top of $10,000 for the shares.</li><li>Max loss <strong>$9,800</strong>; max profit <strong>$1,200</strong>.</li><li>Break-even at expiry: <strong>$98.00</strong>.</li><li>At $115 at expiry, the 100 shares are worth $115 each; the $110 call is worth $5.00 a share. P/L = (115 − 100) × 100 + (2.00 − 5.00) × 100 = <strong>$1,200 profit</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-cash-secured-put" aria-labelledby="ox-tab-cash-secured-put" data-ox="cash-secured-put" hidden><p>You sell one $95 put for $2.00 and keep $9,500 in cash in case you have to buy the shares.</p><ol><li>Credit: 2.00 a share × 100 = <strong>$200</strong> received.</li><li>Max loss <strong>$9,300</strong>; max profit <strong>$200</strong>.</li><li>Break-even at expiry: <strong>$93.00</strong>.</li><li>At $90 at expiry, the $95 put is worth $5.00 a share. P/L = (2.00 − 5.00) × 100 = <strong>$300 loss</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-protective-put" aria-labelledby="ox-tab-protective-put" data-ox="protective-put" hidden><p>You own 100 shares bought at $100 and buy one $95 put for $2.00 as insurance.</p><ol><li>Cost: 2.00 a share × 100 = <strong>$200</strong> paid, on top of $10,000 for the shares.</li><li>Max loss <strong>$700</strong>; max profit unlimited.</li><li>Break-even at expiry: <strong>$102.00</strong>.</li><li>At $85 at expiry, the 100 shares are worth $85 each; the $95 put is worth $10.00 a share. P/L = (85 − 100) × 100 + (10.00 − 2.00) × 100 = <strong>$700 loss</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-bull-call-spread" aria-labelledby="ox-tab-bull-call-spread" data-ox="bull-call-spread" hidden><p>You buy the $100 call for $5.00 and sell the $110 call for $2.00.</p><ol><li>Cost: 5.00 − 2.00 = 3.00 a share, × 100 = <strong>$300</strong> paid.</li><li>Max loss <strong>$300</strong>; max profit <strong>$700</strong>.</li><li>Break-even at expiry: <strong>$103.00</strong>.</li><li>At $106 at expiry, the $100 call is worth $6.00 a share; the $110 call expires worthless. P/L = (6.00 − 5.00) × 100 + (2.00 − 0.00) × 100 = <strong>$300 profit</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-bear-put-spread" aria-labelledby="ox-tab-bear-put-spread" data-ox="bear-put-spread" hidden><p>You buy the $100 put for $5.00 and sell the $90 put for $2.00.</p><ol><li>Cost: 5.00 − 2.00 = 3.00 a share, × 100 = <strong>$300</strong> paid.</li><li>Max loss <strong>$300</strong>; max profit <strong>$700</strong>.</li><li>Break-even at expiry: <strong>$97.00</strong>.</li><li>At $94 at expiry, the $100 put is worth $6.00 a share; the $90 put expires worthless. P/L = (6.00 − 5.00) × 100 + (2.00 − 0.00) × 100 = <strong>$300 profit</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-long-straddle" aria-labelledby="ox-tab-long-straddle" data-ox="long-straddle" hidden><p>You expect a big move but not its direction, so you buy the $100 call and the $100 put for $5.00 each.</p><ol><li>Cost: 5.00 + 5.00 = 10.00 a share, × 100 = <strong>$1,000</strong> paid.</li><li>Max loss <strong>$1,000</strong>; max profit unlimited.</li><li>Break-evens at expiry: <strong>$90.00</strong> and <strong>$110.00</strong>.</li><li>At $120 at expiry, the $100 call is worth $20.00 a share; the $100 put expires worthless. P/L = (20.00 − 5.00) × 100 + (0.00 − 5.00) × 100 = <strong>$1,000 profit</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-long-strangle" aria-labelledby="ox-tab-long-strangle" data-ox="long-strangle" hidden><p>A cheaper bet on a big move: you buy the $105 call and the $95 put for $3.00 each.</p><ol><li>Cost: 3.00 + 3.00 = 6.00 a share, × 100 = <strong>$600</strong> paid.</li><li>Max loss <strong>$600</strong>; max profit unlimited.</li><li>Break-evens at expiry: <strong>$89.00</strong> and <strong>$111.00</strong>.</li><li>At $85 at expiry, the $105 call expires worthless; the $95 put is worth $10.00 a share. P/L = (0.00 − 3.00) × 100 + (10.00 − 3.00) × 100 = <strong>$400 profit</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-short-straddle" aria-labelledby="ox-tab-short-straddle" data-ox="short-straddle" hidden><p>You expect the stock to stay put, so you sell the $100 call and the $100 put for $5.00 each.</p><ol><li>Credit: 5.00 + 5.00 = 10.00 a share, × 100 = <strong>$1,000</strong> received.</li><li>Max loss unlimited, because the stock can keep rising; max profit <strong>$1,000</strong>.</li><li>Break-evens at expiry: <strong>$90.00</strong> and <strong>$110.00</strong>.</li><li>At $105 at expiry, the $100 call is worth $5.00 a share; the $100 put expires worthless. P/L = (5.00 − 5.00) × 100 + (5.00 − 0.00) × 100 = <strong>$500 profit</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-short-strangle" aria-labelledby="ox-tab-short-strangle" data-ox="short-strangle" hidden><p>You expect a quiet market and sell the $105 call and the $95 put for $3.00 each.</p><ol><li>Credit: 3.00 + 3.00 = 6.00 a share, × 100 = <strong>$600</strong> received.</li><li>Max loss unlimited, because the stock can keep rising; max profit <strong>$600</strong>.</li><li>Break-evens at expiry: <strong>$89.00</strong> and <strong>$111.00</strong>.</li><li>At $100 at expiry, the $105 call expires worthless; the $95 put expires worthless. P/L = (3.00 − 0.00) × 100 + (3.00 − 0.00) × 100 = <strong>$600 profit</strong>.</li></ol></div>
+          <div class="ox" role="tabpanel" id="ox-iron-condor" aria-labelledby="ox-tab-iron-condor" data-ox="iron-condor" hidden><p>You expect the stock to stay in a range. You sell the $95 put and the $105 call for $2.50 each, and buy the $85 put and the $115 call for $1.00 each as protection.</p><ol><li>Credit: 2.50 + 2.50 − 1.00 − 1.00 = 3.00 a share, × 100 = <strong>$300</strong> received.</li><li>Max loss <strong>$700</strong>; max profit <strong>$300</strong>.</li><li>Break-evens at expiry: <strong>$92.00</strong> and <strong>$108.00</strong>.</li><li>At $110 at expiry, the $85 put expires worthless; the $95 put expires worthless; the $105 call is worth $5.00 a share; the $115 call expires worthless. P/L = (0.00 − 1.00) × 100 + (2.50 − 0.00) × 100 + (2.50 − 5.00) × 100 + (0.00 − 1.00) × 100 = <strong>$200 loss</strong>.</li></ol></div>
+        </div>
+        <h2>Break-evens, max profit and max loss</h2>
+        <p>At expiry the P/L line is made of straight segments that only bend at strike prices, so the extremes and break-evens can be found exactly rather than estimated. The calculator checks every strike and the direction of the line beyond the highest one. If you are left holding uncovered short calls, the line keeps falling as the stock rises and the max loss is <strong>unlimited</strong>; a long call, or long stock, makes max profit unlimited.</p>
+        <h2>Covered calls and protective puts</h2>
+        <p>Add a stock leg to model positions that combine shares and options. A covered call (100 shares plus one short call) caps your upside at the strike plus the premium; a protective put (100 shares plus one long put) puts a floor under your loss at the strike minus the premium.</p>
+        <h2>Common mistakes</h2>
+        <ul>
+          <li><strong>Forgetting the ×100.</strong> A $2.00 premium costs $200 per contract.</li>
+          <li><strong>Reading the expiry chart as today's value.</strong> Before expiry, options also carry time value, so a position can show a loss on your broker's screen even when it would profit at expiry, and the other way round.</li>
+          <li><strong>Assuming you hold to expiry.</strong> American-style options can be exercised early, and short legs can be assigned, especially around dividends.</li>
+          <li><strong>Ignoring per-contract fees.</strong> On a four-leg iron condor they are charged on every contract, and again to close.</li>
+        </ul>
+        <h2>Assumptions</h2>
+        <p class="calc-assume"><b>How this calculator works.</b> The main result is the value at expiration, using intrinsic value. The optional “today” view prices each option with Black-Scholes (European exercise, no dividends) from today's stock price, the days left, one implied volatility for every leg and an interest rate. One contract = the shares-per-contract you set (100 by default). Fees are charged once per contract to open; closing, exercise and assignment fees, dividends and early assignment are not modelled. Strategy presets use example premiums, not market prices.</p>
+      </article>
+      <section class="section faq" aria-labelledby="faq-title">
+        <a class="section__head" href="../../trading_calculators/index.html#faq-title">
+          <h2 class="t-h1" id="faq-title">FAQs</h2>
+          <span class="section-title-arrow"><img src="../../assets/faq-arrow.svg" alt=""></span>
+        </a>
+        <div class="faq__cols">
+          <div class="faq__col" data-accordion>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>How do you calculate profit on a call option?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">At expiry: (stock price − strike, or zero if negative) minus the premium, times 100 shares per contract. A $100 call bought for $5 is worth (120 − 100 − 5) × 100 = $1,500 profit if the stock ends at $120.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What is the break-even for an option?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">For a long call, strike plus premium. For a long put, strike minus premium. Spreads and combinations can have one or two break-evens; the calculator finds all of them.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Why does the calculator say max loss is unlimited?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Because a short call that isn't covered by stock or a higher long call loses more the higher the stock goes, with no ceiling. Max profit is unlimited for a long call for the same reason.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>Does it show profit before expiration?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">Yes. The main result is the profit or loss at expiration. Under More options, enter today's stock price, the days left and the implied volatility, and the chart adds a dashed “today” curve and Details shows what the position is worth if you closed it now. It uses the Black-Scholes model, so it is an estimate: real option prices also move with demand, dividends and early exercise.</p>
+            </div>
+            <div class="faq-item">
+              <button class="faq-item__q" aria-expanded="false"><span>What does the 100 multiplier mean?</span><span class="faq-icon"><img class="plus" src="../../assets/faq-plus.svg" alt=""><img class="minus" src="../../assets/faq-minus.svg" alt=""></span></button>
+              <p class="faq-item__a">One US equity option contract covers 100 shares, so quoted premiums are per share and are multiplied by 100. Change “Shares per contract” for mini or adjusted contracts.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section calc-more" aria-labelledby="more-title">
+        <a class="section__head" href="../../trading_calculators/index.html">
+          <h2 class="t-h1" id="more-title">More trading calculators</h2>
+          <span class="section-title-arrow"><img src="../../assets/faq-arrow.svg" alt=""></span>
+        </a>
+        <div class="calc-more__wrap" data-carousel>
+          <div class="calc-more__row" tabindex="0" aria-label="Other calculators">
+          <a class="hub-card" href="../../trading_calculators/stock-profit-calculator/index.html">
+            <span class="hub-card__art hub-card__art--stock"><img class="hub-card__img" src="../../trading_calculators/art/stock.webp" srcset="../../trading_calculators/art/stock.webp 1x, ../../trading_calculators/art/stock@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Stock Profit Calculator</h3>
+              <p>Calculate your profit and loss after fees</p>
+            </span>
+          </a>
+          <a class="hub-card" href="../../trading_calculators/crypto-profit-calculator/index.html">
+            <span class="hub-card__art hub-card__art--crypto"><img class="hub-card__img" src="../../trading_calculators/art/crypto.webp" srcset="../../trading_calculators/art/crypto.webp 1x, ../../trading_calculators/art/crypto@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Crypto Profit Calculator</h3>
+              <p>Work out your crypto gains and losses</p>
+            </span>
+          </a>
+          <a class="hub-card" href="../../trading_calculators/position-size-calculator/index.html">
+            <span class="hub-card__art hub-card__art--position"><img class="hub-card__img" src="../../trading_calculators/art/position.webp" srcset="../../trading_calculators/art/position.webp 1x, ../../trading_calculators/art/position@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Position Size Calculator</h3>
+              <p>Find the right position size for your risk</p>
+            </span>
+          </a>
+          <a class="hub-card" href="../../trading_calculators/margin-calculator/index.html">
+            <span class="hub-card__art hub-card__art--margin"><img class="hub-card__img" src="../../trading_calculators/art/margin.webp" srcset="../../trading_calculators/art/margin.webp 1x, ../../trading_calculators/art/margin@4x.webp 2x" alt="" loading="lazy"></span>
+            <span class="hub-card__body">
+              <h3>Margin Calculator</h3>
+              <p>Check the margin needed and the price of a margin call</p>
+            </span>
+          </a>
+          </div>
+          <button type="button" class="calc-more__nav calc-more__nav--prev" aria-label="Previous calculators" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15l-5-5 5-5"/></svg></button>
+          <button type="button" class="calc-more__nav calc-more__nav--next" aria-label="Next calculators" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5l5 5-5 5"/></svg></button>
+        </div>
+      </section>
+      <p class="calc-disclaimer"><b>For education and planning only, not investment advice.</b> Results are calculated from the numbers you enter and the assumptions stated on this page.</p>
+    </div>
+    <aside class="calc-rail" aria-label="Advertisement">
+      <div class="ad-slot ad-slot--rail">
+        <a class="house-ad" href="#" data-cta="adslot" data-member-href="index.html" aria-label="Playtrade: practice trading with virtual money. Play free">
+          <span class="ha-eyebrow"><img src="../../assets/cup.svg" alt="">Playtrade</span>
+          <span class="ha-kick">100% Virtual Funds</span>
+          <span class="ha-title">Practice Trading. Risk Nothing.</span>
+          <span class="ha-text">Trade stocks and crypto with virtual money on live prices, and see how you rank.</span>
+          <span class="ha-tags"><span>Tournaments</span><span>Games</span><span>Leaderboard</span></span>
+          <span class="ha-arena" aria-hidden="true"><span class="mg-card mg-card--flip ha-tile ha-tile--back"><span class="mg-card__art"><span class="mg-flip"><span class="mg-flip__card mg-flip__card--l"><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><rect x="12" y="14" width="7" height="20" rx="2" fill="#3be39a"/><line x1="15.5" y1="8" x2="15.5" y2="40" stroke="#3be39a" stroke-width="2.4" stroke-linecap="round"/><rect x="29" y="20" width="7" height="14" rx="2" fill="#f63d68"/><line x1="32.5" y1="14" x2="32.5" y2="40" stroke="#f63d68" stroke-width="2.4" stroke-linecap="round"/></svg></span></span><span class="mg-flip__card mg-flip__card--m"><span class="mg-flip__face mg-flip__face--back"><svg viewBox="0 0 48 48"><rect x="10" y="18" width="6" height="16" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="13" y1="12" x2="13" y2="38" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/><rect x="21" y="12" width="6" height="22" rx="1.5" fill="#7c5cff"/><line x1="24" y1="7" x2="24" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".7" stroke-linecap="round"/><rect x="32" y="22" width="6" height="13" rx="1.5" fill="#7c5cff" opacity=".75"/><line x1="35" y1="17" x2="35" y2="40" stroke="#7c5cff" stroke-width="2" opacity=".55" stroke-linecap="round"/></svg></span><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><rect x="20" y="11" width="8" height="10" rx="2" fill="#3be39a"/><line x1="24" y1="8" x2="24" y2="38" stroke="#3be39a" stroke-width="2.6" stroke-linecap="round"/></svg></span></span><span class="mg-flip__card mg-flip__card--r"><span class="mg-flip__stock" aria-hidden="true"></span><span class="mg-flip__face mg-flip__face--front"><svg viewBox="0 0 48 48"><polyline points="6,32 15,14 24,28 33,14 42,32" fill="none" stroke="#f63d68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></span></span><span class="mg-card mg-card--bull ha-tile ha-tile--mid"><span class="mg-card__art"><img class="mg-card__scene" src="../../assets/mg-bullrun-cover.jpg" alt="" loading="lazy"></span></span><span class="ha-duel"><img src="../../assets/ex-bullbear-ad.webp" alt="" loading="lazy" width="512" height="512"></span></span>
+          <span class="ha-people"><span class="ha-faces" aria-hidden="true"><img src="../../assets/lp-av-2.png" alt="" loading="lazy"><img src="../../assets/pr-av-a.png" alt="" loading="lazy"><img src="../../assets/lp-av-4.png" alt="" loading="lazy"><img src="../../assets/lp-av-1.png" alt="" loading="lazy"></span><b>220K+</b> traders joined</span>
+          <span class="calc-cta-btn ha-btn">Play free</span>
+          <span class="ha-note">Virtual money · No deposit</span>
+        </a>
+      </div>
+    </aside>
+    </div>
+  </main>
+  </div>
+
+    <!-- ============ Global footer ============
+         One component for the whole platform (.pf-footer, styles.css): a utility bar,
+         the navigation columns, then the disclaimer beside the language switcher. -->
+    <footer class="pf-footer">
+
+      <div class="pf-footer__bar">
+        <div class="pf-footer__bar-group">
+          <a class="footer__logo" href="../../landing.html" aria-label="Profit.com"><img class="mark" src="../../assets/ft-logo-mark.svg" alt=""><img class="word" src="../../assets/ft-logo-word.svg" alt=""></a>
+          <span class="pf-footer__rule" aria-hidden="true"></span>
+          <p class="pf-footer__copy">© <span data-year>2026</span> Profit.com. All rights reserved.</p>
+        </div>
+
+        <div class="pf-footer__bar-group">
+          <div class="pf-app">
+            <span class="pf-app__label">Get the app</span>
+            <a class="pf-app__btn" href="#"><img class="pf-app__ico pf-app__ico--apple" src="../../assets/ft-apple.svg" alt="">iOS</a>
+            <a class="pf-app__btn" href="#"><img class="pf-app__ico" src="../../assets/ft-playstore.svg" alt="">Android</a>
+          </div>
+          <span class="pf-footer__rule" aria-hidden="true"></span>
+          <div class="socials">
+              <a class="social" href="#" aria-label="Telegram"><span class="ico"><img src="../../assets/ft-telegram.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="Instagram"><span class="ico"><img src="../../assets/ft-instagram.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="Facebook"><span class="ico"><img src="../../assets/ft-facebook.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="YouTube"><span class="ico"><img src="../../assets/ft-youtube.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="X"><span class="ico"><img src="../../assets/ft-x.svg" alt=""></span></a>
+              <a class="social" href="#" aria-label="LinkedIn"><span class="ico"><span class="li"><img src="../../assets/ft-linkedin.svg" alt=""></span></span></a>
+              <a class="social" href="#" aria-label="TikTok"><span class="ico"><img src="../../assets/ft-tiktok.svg" alt=""></span></a>
+          </div>
+        </div>
+      </div>
+
+      <nav class="pf-footer__grid" aria-label="Footer">
+        <details class="pf-col" open>
+          <summary><h3>Playtrade</h3></summary>
+          <ul>
+            <li><a href="../../index.html">Tournaments</a></li>
+            <li><a href="../../index.html#games-title">Market Games</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="#">Missions</a></li>
+            <li><a href="#">Toolbox</a></li>
+            <li><a href="#">Wallet</a></li>
+            <li><a href="#plans">Plans</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Tools</h3></summary>
+          <ul>
+            <li><a href="#">Discover</a></li>
+            <li><a href="#">Billionaire Portfolios</a></li>
+            <li><a href="#">Screeners</a></li>
+            <li><a href="#">Charts</a></li>
+            <li><a href="#">Market Overview</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Economic Calendar</a></li>
+            <li><a href="#">Trading Signals</a></li>
+            <li><a href="#">Watchlists</a></li>
+            <li><a href="../../trading_calculators/index.html">Calculators</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Learn</h3></summary>
+          <ul>
+            <li><a href="#">Video Tutorials</a></li>
+            <li><a href="#">Weekly Briefs</a></li>
+            <li><a href="#">AI Daily Brief</a></li>
+            <li><a href="#">Market Pulse</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#faq">FAQs</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Business Solutions</h3></summary>
+          <ul>
+            <li><a href="#">Widgets</a></li>
+            <li><a href="#">Data API</a></li>
+            <li><a href="#">Charts Library</a></li>
+            <li><a href="#">Signals</a></li>
+            <li><a href="#">Advertising</a></li>
+            <li><a href="#plans">Pricing</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Company</h3></summary>
+          <ul>
+            <li><a href="#">About Profit.com</a></li>
+            <li><a href="#">Mobile App</a></li>
+            <li><a href="#">Refer a Friend</a></li>
+            <li><a href="#">Become an Affiliate</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </details>
+        <details class="pf-col" open>
+          <summary><h3>Resources</h3></summary>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Compare Brokers</a></li>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Risk Disclosure</a></li>
+            <li><a href="#">House Rules</a></li>
+            <li><a href="#">Affiliate Rules</a></li>
+            <li><a href="#">Release Notes</a></li>
+          </ul>
+        </details>
+      </nav>
+
+      <div class="pf-footer__legal">
+        <div class="pf-footer__disclaimer" role="note" aria-label="Disclaimer">
+          <p>Profit.com is an educational, subscription-based software platform providing financial market analytics and simulated trading using real-time market data and virtual funds. All trading activity on the platform is simulated. No real capital is used, no customer deposits are collected, and no real-money trades are executed or facilitated.</p>
+          <p>Profit.com is not a broker and does not provide brokerage, investment, or other financial services or investment advice. All content, tools and features are provided for educational and informational purposes only. Simulated trading results are hypothetical and are not indicative of actual or future results. The terms “trading” and “trader” refer exclusively to simulated activity on Profit.com and should not be interpreted as real-money trading or investing.</p>
+        </div>
+        <div class="pf-lang">
+          <button class="pf-footer__lang" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Change language">
+            <img src="../../assets/globe.svg" alt=""><span data-lang-value>English</span>
+            <svg class="pf-lang__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="lang-dd__panel pf-lang__panel" role="menu" aria-label="Language"></div>
+        </div>
+      </div>
+
+    </footer>
+  <script src="../../footer.js"></script>
+  <script src="../../trading_calculators/lib/core.js"></script>
+  <script src="../../trading_calculators/lib/options.js"></script>
+  <script src="../../trading_calculators/calc-ui.js"></script>
+  <script src="../../trading_calculators/pages/options.js"></script>
+</body>
+</html>

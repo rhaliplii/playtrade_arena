@@ -148,11 +148,34 @@ const initTopnav = () => {
     it.tools
       ? '<span class="nav-dd__icon ico-flip"><img class="ico-flip__img" src="assets/sb2-tools.svg" alt=""></span>'
       : `<span class="nav-dd__icon"><img src="assets/${it.icon}" alt=""></span>`;
+  let subSeq = 0;
   const item = (it) => {
     const on = Boolean(it.id) && it.id === active;
     const chevron = it.sub ? '<img class="nav-dd__chev" src="assets/tl-chevron.svg" alt="">' : "";
+    if (it.children) {
+      // An item with its own submenu: on desktop a second panel opens beside the menu on
+      // hover or focus; in the phone drawer the chevron row expands the list in place.
+      const id = `navsub-${++subSeq}`;
+      return `<div class="nav-dd__subwrap">
+        <a class="nav-dd__item nav-dd__item--parent" href="${it.href}" role="menuitem" aria-haspopup="true" aria-expanded="false" aria-controls="${id}">${icon(it)}${it.label}${it.extra || ""}${chevron}</a>
+        <div class="nav-dd__flyout" id="${id}" role="menu" aria-label="${it.label}">${it.children.map(item).join("")}</div>
+      </div>`;
+    }
     return `<a class="nav-dd__item${on ? " is-active" : ""}" href="${it.href}" role="menuitem"${on ? ' aria-current="page"' : ""}>${icon(it)}${it.label}${it.extra || ""}${chevron}</a>`;
   };
+  // keep aria-expanded honest on the submenu parents, and let the drawer toggle them
+  document.addEventListener("mouseover", (e) => {
+    document.querySelectorAll(".nav-dd__panel .nav-dd__subwrap").forEach((w) =>
+      w.querySelector(".nav-dd__item--parent").setAttribute("aria-expanded", String(w.matches(":hover, :focus-within"))));
+  });
+  document.addEventListener("click", (e) => {
+    const p = e.target.closest(".mnav .nav-dd__item--parent");
+    if (!p) return;
+    e.preventDefault();
+    const w = p.parentElement, open = !w.classList.contains("is-open");
+    w.classList.toggle("is-open", open);
+    p.setAttribute("aria-expanded", String(open));
+  });
   const list = (arr) => arr.map(item).join("");
 
   const faces = '<span class="nav-dd__faces" aria-hidden="true"><img src="assets/tl-bn-1.png" alt=""><img src="assets/tl-bn-2.png" alt=""><img src="assets/tl-bn-3.png" alt=""></span>';
@@ -211,12 +234,20 @@ const initTopnav = () => {
         { label: "News", icon: "tl-document.svg", href: "#" },
         { label: "Calendar", icon: "tl-calendar.svg", href: "#" },
         { label: "Trading Signals", icon: "tl-signal.svg", href: "#", extra: telegram },
+        { label: "Messenger", icon: "tl-messages.svg", href: "#", extra: '<span class="nav-dd__count">1</span>' },
       ],
       right: [
         { label: "Screener", icon: "tl-radar.svg", href: "#", sub: true },
         { label: "Watchlist", icon: "tl-star.svg", href: "#", sub: true },
         { label: "Dashboards", icon: "tl-element-plus.svg", href: "#", sub: true },
-        { label: "Messenger", icon: "tl-messages.svg", href: "#", extra: '<span class="nav-dd__count">1</span>' },
+        { label: "Calculators", icon: "tl-calculator.svg", href: "trading_calculators/index.html", sub: true, children: [
+          { label: "All calculators", icon: "tl-calc-all.svg", href: "trading_calculators/index.html" },
+          { label: "Stock profit", icon: "tl-calc-stock.svg", href: "trading_calculators/stock-profit-calculator/index.html" },
+          { label: "Crypto profit", icon: "tl-calc-crypto.svg", href: "trading_calculators/crypto-profit-calculator/index.html" },
+          { label: "Position size", icon: "tl-calc-position.svg", href: "trading_calculators/position-size-calculator/index.html" },
+          { label: "Options profit", icon: "tl-calc-options.svg", href: "trading_calculators/options-profit-calculator/index.html" },
+          { label: "Margin", icon: "tl-calc-margin.svg", href: "trading_calculators/margin-calculator/index.html" },
+        ] },
       ],
     },
     {

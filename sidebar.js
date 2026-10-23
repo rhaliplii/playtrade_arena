@@ -6,6 +6,16 @@
   if (!nav) return;
   const active = nav.dataset.active;
 
+  // Trading calculator pages (data-nav="calc"): the calculators only, no Pro card or bottom group.
+  const CALC_MAIN = [
+    { id: "hub", label: "All calculators", icon: "tl-calc-all.svg", href: "trading_calculators/index.html" },
+    { id: "stock", label: "Stock profit", icon: "tl-calc-stock.svg", href: "trading_calculators/stock-profit-calculator/index.html" },
+    { id: "crypto", label: "Crypto profit", icon: "tl-calc-crypto.svg", href: "trading_calculators/crypto-profit-calculator/index.html" },
+    { id: "position", label: "Position size", icon: "tl-calc-position.svg", href: "trading_calculators/position-size-calculator/index.html" },
+    { id: "options", label: "Options profit", icon: "tl-calc-options.svg", href: "trading_calculators/options-profit-calculator/index.html" },
+    { id: "margin", label: "Margin", icon: "tl-calc-margin.svg", href: "trading_calculators/margin-calculator/index.html" },
+  ];
+
   const MAIN = [
     { id: "tournaments", label: "Tournaments", icon: "nav-cup.svg", href: "index.html", whiteIcon: true },
     { id: "games", label: "Market Games", icon: "nav-game.svg", href: "index.html#games-title", badge: 1 },
@@ -43,10 +53,13 @@
     return `<a class="${cls}" href="${item.href}" data-label="${item.label}"${current}>${icon(item)}${badge}<span class="side-nav__label">${item.label}</span>${extra(item)}</a>`;
   };
 
+  const calc = nav.dataset.nav === "calc";
+  const mainItems = calc ? CALC_MAIN : MAIN;
+
   nav.innerHTML = `
     <div class="side-nav__scroll">
-      <nav class="side-nav__group" aria-label="Main">${MAIN.map(link).join("")}</nav>
-      <div class="side-nav__bottom">
+      <nav class="side-nav__group" aria-label="Main">${mainItems.map(link).join("")}</nav>
+      ${calc ? "" : `<div class="side-nav__bottom">
         <div class="side-nav__pro">
           <img src="assets/nav-pro.svg" alt="" width="30" height="30">
           <div class="side-nav__pro-copy">
@@ -56,7 +69,7 @@
           <a class="btn-brand side-nav__pro-btn" href="#">Become Pro</a>
         </div>
         <div class="side-nav__group">${BOTTOM.map(link).join("")}</div>
-      </div>
+      </div>`}
     </div>
     <button class="side-nav__toggle" type="button"><img src="assets/nav-toggle-arrow.svg" alt=""></button>`;
 

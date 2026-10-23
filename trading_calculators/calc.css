@@ -1,0 +1,1235 @@
+/* Profit.com trading calculators.
+   Built on the platform tokens and components in ../styles.css (topnav, footer, .tabs/.tab,
+   .faq-item, .btn-brand). This file adds only what the calculators need, and the light
+   theme, which the platform's theme switch toggles via <html data-theme>. The light
+   palette is scoped to the calculator pages until the rest of the platform adopts it. */
+
+.calc-page {
+  font-size: 16px;
+  font-weight: 500;
+  --c-card: #16191e;
+  --c-field: #1d2026;
+  --c-field-line: #2d2f34;
+  --c-up: #3dbb9a;
+  --c-down: #f63d68;
+  --c-up-soft: rgba(61, 187, 154, 0.14);
+  --c-down-soft: rgba(246, 61, 104, 0.14);
+  --c-chart-grid: rgba(255, 255, 255, 0.07);
+  --c-crumb-current: #5d5e66;
+}
+html[data-theme="light"] .calc-page {
+  --bg-base: #ffffff;
+  --bg-1: #e8ebf1;
+  --bg-2: #dde1e8;
+  --bg-subtle: #ffffff;
+  --bg-brand-opacity: rgba(34, 161, 128, 0.12);
+  --fg-primary: #13161b;
+  --fg-secondary: #5b6170;          /* 5.9:1 on white */
+  --fg-secondary-opacity: rgba(19, 22, 27, 0.64);
+  --fg-brand: #157a61;              /* 5.4:1 on white; the dark theme's #3dbb9a is too light here */
+  --fg-magenta: #c8234b;
+  --border-primary: #e2e5ec;
+  --c-card: #ffffff;
+  --c-field: #f4f6fa;
+  --c-field-line: #d9dde5;
+  --c-up: #157a61;
+  --c-down: #c8234b;
+  --c-up-soft: rgba(21, 122, 97, 0.1);
+  --c-down-soft: rgba(200, 35, 75, 0.09);
+  --c-chart-grid: rgba(19, 22, 27, 0.07);
+  --c-crumb-current: rgb(136 139 150 / 1);
+  color-scheme: light;
+}
+/* light theme: shared chrome that was drawn for a dark ground */
+html[data-theme="light"] .calc-page .topnav { background: rgba(255, 255, 255, 0.92); }
+html[data-theme="light"] .calc-page .topnav__logo { filter: brightness(0) saturate(100%) invert(7%); }
+html[data-theme="light"] .calc-page .faq-icon img,
+html[data-theme="light"] .calc-page .topnav__caret img,
+html[data-theme="light"] .calc-page .pf-footer img[src*="ft-"]:not(.mark):not(.word):not([src*="playstore"]) { filter: invert(1) brightness(0.45); }
+html[data-theme="light"] .calc-page .footer__logo .word { filter: brightness(0) saturate(100%) invert(7%); }
+html[data-theme="light"] .calc-page .faq-item { filter: none; }
+
+/* ---------------------------------------------------------------- layout --- */
+.calc { width: 100%; max-width: 1380px; margin: 0 auto; padding: 24px 24px 64px;   /* = the Arena content column (styles.css .main > *) */ display: flex; flex-direction: column; gap: 24px; }
+.calc-crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--fg-secondary); }
+.calc-crumbs li + li::before { content: "/"; margin-right: 6px; color: var(--fg-secondary); }
+.calc-crumbs a { color: inherit; text-decoration: none; }
+.calc-crumbs a:hover { color: var(--fg-primary); }
+/* as on profit.com (Billionaires / Larry Fink): links grey, the current page a step dimmer */
+.calc-crumbs [aria-current] { color: var(--c-crumb-current); }
+
+.calc-hero { display: flex; flex-direction: column; gap: 10px; max-width: 820px; }
+.calc-hero h1 { margin: 0; font-size: 32px; line-height: 40px; font-weight: 700; letter-spacing: -1px; }   /* = .t-h1 */
+.calc-hero p { margin: 0; font-size: 16px; line-height: 26px; font-weight: 500; color: var(--fg-secondary); }
+.calc-sibling { font-size: 16px; font-weight: 500; color: var(--fg-secondary); }
+.calc-sibling a { color: var(--fg-brand); text-decoration: none; }
+.calc-sibling a:hover { text-decoration: underline; }
+
+.calc-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; }
+.calc-main { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+
+.c-card { border-radius: 24px; background: var(--c-card); box-shadow: inset 0 0 0 1px var(--border-primary); padding: 24px; }
+.c-card__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+.c-card__head h2 { margin: 0; font-size: 20px; line-height: 26px; font-weight: 700; letter-spacing: -0.4px; }
+
+/* scenario table + chart */
+.c-table-wrap { overflow-x: auto; border-radius: 14px; box-shadow: inset 0 0 0 1px var(--border-primary); }
+.c-table { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.c-table th, .c-table td { padding: 10px 14px; text-align: right; white-space: nowrap; }
+.c-table th:first-child, .c-table td:first-child { text-align: left; }
+.c-table thead th { font-size: 12px; font-weight: 700; color: var(--fg-secondary); border-bottom: 1px solid var(--border-primary); }
+.c-table tbody tr + tr td { border-top: 1px solid var(--border-primary); }
+.c-table .is-up { color: var(--c-up); font-weight: 700; }
+.c-table .is-down { color: var(--c-down); font-weight: 700; }
+.c-table tr.is-mark td { background: var(--bg-brand-opacity); }
+.c-chart { position: relative; }
+.c-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.c-chart__tip { position: absolute; pointer-events: none; padding: 6px 9px; border-radius: 8px; background: var(--fg-primary); color: var(--bg-base); font-size: 12px; font-weight: 700; white-space: nowrap; transform: translate(-50%, calc(-100% - 10px)); opacity: 0; transition: opacity 0.1s; font-variant-numeric: tabular-nums; }
+.c-chart.is-hover .c-chart__tip { opacity: 1; }
+.c-chart text { fill: var(--fg-secondary); font: 600 11px var(--font); }
+.c-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 12px; font-weight: 600; color: var(--fg-secondary); }
+.c-legend i { display: inline-block; width: 10px; height: 3px; margin-right: 6px; border-radius: 2px; vertical-align: middle; }
+
+/* ---------------------------------------------------------------- content --- */
+.calc-article { display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 27px; font-weight: 500; color: var(--fg-secondary); }
+.calc-article h2 { margin: 18px 0 0; font-size: 24px; line-height: 32px; font-weight: 700; letter-spacing: -0.5px; color: var(--fg-primary); }
+.calc-article h2:first-child { margin-top: 0; }
+.calc-article h3 { margin: 8px 0 0; font-size: 18px; line-height: 26px; font-weight: 700; color: var(--fg-primary); }
+.calc-article p, .calc-article ul, .calc-article ol { margin: 0; }
+.calc-article ul, .calc-article ol { padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+.calc-article strong { color: var(--fg-primary); }
+.calc-article a { color: var(--fg-brand); font-weight: 600; }
+.calc-formula { margin: 0; padding: 14px 16px; border-radius: 12px; background: var(--c-field); box-shadow: inset 0 0 0 1px var(--c-field-line); color: var(--fg-primary); font: 600 14px/22px ui-monospace, "SF Mono", Menlo, monospace; overflow-x: auto; white-space: pre-wrap; }
+.calc-assume { margin: 0; padding: 14px 16px; border-radius: 12px; background: var(--c-field); font-size: 16px; line-height: 26px; font-weight: 500; color: var(--fg-secondary); }
+.calc-assume b { color: var(--fg-primary); }
+.calc-tip, .calc-inline-cta { padding: 14px 16px; border-radius: 12px; background: rgba(61, 187, 154, 0.14); box-shadow: inset 0 0 0 1px rgba(61, 187, 154, 0.35); color: var(--fg-primary) !important; }
+html[data-theme="light"] .calc-page :is(.calc-tip, .calc-inline-cta) { background: #e3f4ea; box-shadow: inset 0 0 0 1px rgba(21, 122, 97, 0.22); }   /* = the net-profit tile */
+
+
+.calc-related h2 { margin: 0 0 14px; font-size: 20px; font-weight: 700; letter-spacing: -0.4px; }
+.calc-related ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.calc-related a { display: flex; flex-direction: column; gap: 4px; padding: 16px 18px; border-radius: 16px; background: var(--c-card); box-shadow: inset 0 0 0 1px var(--border-primary); color: var(--fg-primary); text-decoration: none; font-weight: 700; font-size: 15px; }
+.calc-related a span { font-size: 16px; line-height: 22px; font-weight: 500; color: var(--fg-secondary); }
+.calc-related a:hover { box-shadow: inset 0 0 0 1px var(--fg-brand); }
+
+.calc-disclaimer { margin: 0; padding: 14px 16px; border-radius: 12px; background: var(--c-field); font-size: 16px; line-height: 26px; font-weight: 500; color: var(--fg-secondary); }
+.calc-disclaimer b { color: var(--fg-primary); }
+.calc-disclaimer--risk { box-shadow: inset 0 0 0 1px rgba(246, 61, 104, 0.35); }
+
+/* ---------------------------------------------------------------- sidebar --- */
+
+
+/* ---------------------------------------------------------------- hub --- */
+.hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(256px, 1fr)); gap: 16px; }
+.hub-card { position: relative; display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: var(--c-card); color: var(--fg-primary); text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+/* the border is an overlay so it also runs over the cover artwork (as .mg-card::before) */
+.hub-card::before { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--border-primary); pointer-events: none; transition: box-shadow 0.2s ease; }
+.hub-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(7, 216, 162, 0.14); }
+.hub-card:hover::before { box-shadow: inset 0 0 0 1px rgba(61, 187, 154, 0.55); }
+.hub-card p {
+  margin: 0; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--fg-secondary);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;   /* two lines at most */
+}
+.hub-card__art { position: relative; display: block; height: 142px; overflow: hidden; }       /* = .mg-card__art */
+.hub-card__art::after {                                                                       /* seat the art into the body */
+  content: ""; position: absolute; inset: auto 0 0 0; z-index: 2; height: 44px; pointer-events: none;
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--c-card) 72%, transparent) 62%, var(--c-card));
+}
+.hub-card__body { display: flex; flex: 1; flex-direction: column; gap: 10px; padding: 20px 24px 24px;   /* same in both themes, so the card height matches */ }
+.hub-card h2 { margin: 0; font-size: 19px; line-height: 25px; font-weight: 700; letter-spacing: -0.3px; }
+.hub-card__go { margin-top: auto; padding-top: 6px; font-size: 16px; font-weight: 700; color: var(--fg-brand); }
+
+/* ---------------------------------------------------------------- responsive --- */
+@media (max-width: 860px) {
+  .calc { padding: 16px 16px 48px; gap: 20px; }
+  .calc-hero h1 { font-size: 24px; line-height: 32px; letter-spacing: -0.5px; }
+  .calc-related ul { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .c-card:not(.calc-tool) { padding: 18px; }
+  .calc-article h2 { font-size: 21px; line-height: 28px; }
+  .c-table { font-size: 12.5px; }
+  .c-table th, .c-table td { padding: 9px 8px; }
+  .c-table thead th { font-size: 11px; white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hub-card { transition: none; }
+}
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* data-show / [hidden] must win over component display rules */
+.calc-page [hidden] { display: none !important; }
+.calc-hero .calc-sibling { font-size: 16px; line-height: 26px; font-weight: 500; }
+
+/* light theme: footer text the platform hard-codes as white */
+html[data-theme="light"] .calc-page .pf-footer__disclaimer { color: rgba(19, 22, 27, 0.66); }
+html[data-theme="light"] .calc-page .pf-footer__lang { color: rgba(19, 22, 27, 0.78); }
+html[data-theme="light"] .calc-page .pf-app__btn { box-shadow: inset 0 0 0 1px rgba(19, 22, 27, 0.18); }
+html[data-theme="light"] .calc-page .pf-col a:focus-visible { outline-color: var(--fg-primary); }
+.c-mult { color: var(--fg-secondary); }
+@media (max-width: 520px) { .c-mult { display: none; } }
+
+/* the platform FAQ component (styles.css .faq / .faq-item) sits inside the content column:
+   the column already has the page gutters, so drop the section's own */
+.calc-main > .section { padding: 0; }
+
+/* ================================================================ Hub covers ===
+   The Market Games cover construction (.mg-flip, styles.css), as in the Academy's path
+   covers: a saturated ground, objects made of a stacked "stock" (side face) and a lit
+   front face, a contact shadow, and a hover that acts out the calculator. Markup comes
+   from _src/covers.py. */
+.hc {
+  position: absolute; inset: 0; display: grid; place-items: center; padding-top: 6px;
+  perspective: 470px; overflow: hidden;
+  --fi: linear-gradient(180deg, #3b4252, #1a1e27);
+  --ki: linear-gradient(158deg, #2f3542 0%, #151920 52%, #07090c 100%);
+  --fw: linear-gradient(180deg, #ffffff, #d6dbe4);
+  --kw: linear-gradient(158deg, #d3d8e0 0%, #7e8595 52%, #2c3038 100%);
+}
+.hc::before { content: ""; position: absolute; inset: 0; background-image: var(--ground); }
+.hc__s { position: relative; transform-style: preserve-3d; transform: rotateY(-24deg) translateY(4px) scale(0.9); transition: transform 0.5s ease; }
+.hc__s::after {
+  content: ""; position: absolute; left: 50%; bottom: -13px; width: 76%; height: 18px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(4, 6, 12, 0.5), rgba(4, 6, 12, 0) 70%); transform: translateX(-50%);
+}
+.hub-card:hover .hc__s { transform: rotateY(-24deg) translateY(4px) scale(0.87); }
+.cv-o { display: block; position: relative; transform-style: preserve-3d; --r: 5px; }
+.cv-o__k, .cv-o__k::before, .cv-o__k::after { position: absolute; inset: 0; border-radius: var(--r); background: var(--k); }
+.cv-o__k { transform-style: preserve-3d; }
+.cv-o__k::before { content: ""; transform: translateZ(-2.8px); }
+.cv-o__k::after  { content: ""; transform: translateZ(2.8px); }
+.cv-o__f, .cv-s > .cv-s__f {
+  position: absolute; inset: 0; border-radius: var(--r);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 50%), var(--f);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26), inset 0 -3px 6px rgba(0, 0, 0, 0.28), inset 0 -1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: translateZ(5px);
+}
+.cv-o__f { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26), inset 0 -3px 6px rgba(0, 0, 0, 0.28), inset 0 -1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 16px -8px rgba(0, 0, 0, 0.6); }
+.cv-s { display: block; position: relative; transform-style: preserve-3d; --r: 5px; }
+.cv-s > i {
+  position: absolute; inset: 0; display: block; border-radius: var(--r); background: var(--k);
+  clip-path: var(--clip, none); -webkit-mask: var(--mask, none); mask: var(--mask, none);
+}
+.cv-c { display: block; position: relative; width: var(--w, 20px); height: var(--h); transform-style: preserve-3d; }
+.cv-c > .cv-o { position: absolute; inset: 0; }
+.cv-c__w { position: absolute; left: 50%; top: calc((var(--h) - var(--wk)) / 2); width: 3px; height: var(--wk); border-radius: 2px; background: var(--k); transform: translateX(-50%) translateZ(3.6px); }
+.cv-box { display: block; position: relative; transform-style: preserve-3d; }
+.cv-at  { position: absolute; display: block; transform-style: preserve-3d; }
+.cv-glyph { display: grid; place-items: center; font: 800 40px/1 var(--font); color: rgba(92, 52, 0, 0.62); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35); transform: translateZ(7px); }
+/* a flat embossed ring on the coin face: no thickness, so it never cuts into the coin */
+.cv-rim { display: block; border-radius: 50%; box-shadow: inset 0 0 0 3px rgba(150, 95, 10, 0.55), inset 0 2px 0 3px rgba(255, 236, 170, 0.35); transform: translateZ(6px); }
+.cv-level { display: block; height: 3px; border-radius: 2px; background: repeating-linear-gradient(90deg, #ff8d98 0 8px, transparent 8px 14px); transform: translateZ(9px); }
+
+/* hover: each cover acts out its calculator */
+.cv-g { position: absolute; inset: 0; display: block; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.cv-g--bob { transition-delay: calc(var(--i) * 70ms); }
+.hub-card:hover .cv-g--bob { transform: translateY(-5px); }
+.cv-g--rise { transition-delay: 0.2s; }
+.hub-card:hover .cv-g--rise { transform: translateY(-7px); }
+/* crypto: the front coin hops, the back pair fans out — all movement in the coins' own plane */
+.hub-card:hover .cv-g--hop { transform: translateY(-7px); }
+.cv-g--fan-l, .cv-g--fan-r { transition-delay: 0.05s; }
+.hub-card:hover .cv-g--fan-l { transform: translateX(-6px); }
+.hub-card:hover .cv-g--fan-r { transform: translateX(6px); }
+.hub-card:hover .cv-g--pulse { transform: scale(1.07); }
+.cv-g--bar { transition-delay: calc(var(--i) * 80ms); }
+.hub-card:hover .cv-g--bar { transform: scaleY(1.12); }
+.cv-g--tilt { transform: rotate(7deg); }                 /* the borrowed side weighs it down */
+.hub-card:hover .cv-g--tilt { transform: rotate(12deg); }
+@media (prefers-reduced-motion: reduce) { .cv-g, .hc__s { transition: none; animation: none !important; } }
+
+/* grounds and colours, one set per calculator */
+.hc--stock {
+  --ground: linear-gradient(142deg, #06231f 2%, #0a5744 62%, #04201c 100%);
+  --f: linear-gradient(180deg, #2ee39f, #12a87a); --k: linear-gradient(158deg, #1fb98a 0%, #0d7255 52%, #05301f 100%);
+  --fd: linear-gradient(180deg, #ff7b83, #dd4a58); --kd: linear-gradient(158deg, #d15b66 0%, #8e2f3b 52%, #3d1319 100%);
+}
+.hc--crypto {
+  --ground: linear-gradient(142deg, #2b1d05 2%, #6e4a08 62%, #241905 100%);
+  --f: linear-gradient(180deg, #ffd166, #e09a13); --k: linear-gradient(158deg, #e8b54a 0%, #93690f 52%, #3a2806 100%);
+  --fm: linear-gradient(180deg, #f2b53a, #c98207); --km: linear-gradient(158deg, #c98a1c 0%, #7a540c 52%, #2c1d04 100%);
+}
+.hc--position {
+  --ground: linear-gradient(142deg, #0b1733 2%, #163a80 62%, #0a152e 100%);
+  --f: linear-gradient(180deg, #ff7b83, #dd4a58); --k: linear-gradient(158deg, #d15b66 0%, #8e2f3b 52%, #3d1319 100%);
+}
+.hc--options {
+  --ground: linear-gradient(142deg, #241a4d 2%, #4b2ea8 62%, #2a1a63 100%);
+  --f: linear-gradient(180deg, #2ee39f, #12a87a); --k: linear-gradient(158deg, #1fb98a 0%, #0d7255 52%, #05301f 100%);
+  --fm: linear-gradient(180deg, #8f7be3, #5d48b0); --km: linear-gradient(158deg, #7c6bc9 0%, #45387f 52%, #211d38 100%);
+}
+.hc--margin {
+  --ground: linear-gradient(142deg, #330711 2%, #740d27 62%, #2a0610 100%);
+  --f: linear-gradient(180deg, #2ee39f, #12a87a); --k: linear-gradient(158deg, #1fb98a 0%, #0d7255 52%, #05301f 100%);
+  --fm: linear-gradient(180deg, #8a93a8, #5b6273); --km: linear-gradient(158deg, #7a8296 0%, #464c5a 52%, #1d2027 100%);
+  --fi: linear-gradient(180deg, #3b4252, #1a1e27); --ki: linear-gradient(158deg, #2f3542 0%, #151920 52%, #07090c 100%);
+}
+
+/* the landing hero CTA (.lp-btn-hero, landing.css): brand pill, sparkle, soft green glow */
+.calc-cta-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px; height: 56px; padding: 12px 32px 12px 24px;
+  border-radius: 32px; background: var(--bg-brand-solid); color: #fff; font-size: 16px; line-height: 24px; font-weight: 600;
+  letter-spacing: -0.16px; text-decoration: none; white-space: nowrap;
+  box-shadow: 0 41px 50px rgba(16, 129, 90, 0.16), 0 12.36px 15px rgba(16, 129, 90, 0.1), 0 5px 6px rgba(16, 129, 90, 0.08), 0 1.9px 2.3px rgba(16, 129, 90, 0.06);
+  transition: background 0.15s ease;
+}
+.calc-cta-btn:hover { background: #1d8c6f; }
+.calc-cta-btn:focus-visible { outline: 2px solid var(--fg-primary); outline-offset: 3px; }
+.calc-cta-btn img { width: 20px; height: 20px; }
+
+.res-cta { background: var(--bg-subtle); box-shadow: inset 0 0 0 1px var(--border-primary); }
+.res-cta .calc-cta-btn { height: 52px; }
+
+/* signed in: no sign-up prompts, and the calculator takes the full width */
+.calc-page[data-user="member"] .calc-inline-cta { display: none; }
+
+
+
+/* ===================================================================== Calculator ===
+   One card, one flow: toolbar → inputs (an even 3-column grid) → results (tiles, the
+   headline first, then the plain-English summary). Every control is 44px tall with a
+   12px radius, so toggles, inputs and fee switches line up on a single rhythm. */
+.calc-tool { container: calctool / inline-size; padding: 0; overflow: hidden; }   /* the form and results size to the card, not the window */
+.calc-tool__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 16px 24px; border-bottom: 1px solid var(--border-primary); }
+.calc-tool__bar h2 { margin: 0; font-size: 18px; line-height: 24px; font-weight: 700; letter-spacing: -0.3px; }
+.calc-tool__actions { display: flex; align-items: center; gap: 8px; }
+.calc-tool__actions .fld__box { height: 36px; border-radius: var(--radius-pill); }
+.calc-tool__actions select { padding: 0 32px 0 14px; font-size: 13px; }
+
+.c-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 14px; border: 0; border-radius: var(--radius-pill); background: none; box-shadow: inset 0 0 0 1px var(--border-primary); color: var(--fg-primary); font: 600 13px/1 var(--font); white-space: nowrap; cursor: pointer; text-decoration: none; }
+.c-btn:hover { background: var(--bg-1); }
+.c-btn svg { width: 15px; height: 15px; }
+
+/* ---- inputs ---- */
+.calc-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: end; padding: 20px 24px 24px; }
+.calc-form .fld-row { display: contents; }
+.calc-form > .c-opt, .calc-form > .c-rows, .calc-form > p { grid-column: 1 / -1; }
+.calc-form .fld__hint { display: none; }              /* conventions are explained under the calculator */
+.calc-form > p.fld__hint { display: block; margin: -4px 0 0; }
+
+.fld { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fld > label, .fld__top > label, .fld__label { font-size: 13px; line-height: 18px; font-weight: 600; color: var(--fg-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fld__hint { margin: 0; font-size: 13px; line-height: 18px; font-weight: 500; color: var(--fg-secondary); }
+.fld__err { margin: 0; font-size: 12.5px; line-height: 17px; font-weight: 600; color: var(--c-down); }
+.fld__box { display: flex; align-items: center; height: 44px; min-width: 0; border-radius: 12px; background: var(--c-field); box-shadow: inset 0 0 0 1px var(--c-field-line); transition: box-shadow 0.15s ease; }
+.fld__box:focus-within, .fld-fee:focus-within { box-shadow: inset 0 0 0 1.5px var(--fg-brand); }
+.fld.is-invalid .fld__box, .fld.is-invalid .fld-fee { box-shadow: inset 0 0 0 1.5px var(--c-down); }
+.fld__box input, .fld__box select { flex: 1; min-width: 0; height: 100%; padding: 0 14px; border: 0; background: none; outline: none; color: var(--fg-primary); font: 600 15px/1 var(--font); font-variant-numeric: tabular-nums; }
+.fld__box input::placeholder { color: var(--fg-secondary); font-weight: 500; }
+.fld__box select { appearance: none; cursor: pointer; padding-right: 34px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%23888b96' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center; }
+.fld__affix { flex: none; font-size: 14px; font-weight: 600; color: var(--fg-secondary); white-space: nowrap; }
+.fld__affix:first-child { padding-left: 14px; margin-right: -6px; }
+.fld__affix:last-child { padding-right: 14px; margin-left: -6px; }
+
+/* segmented toggle: a 44px track with equal segments, the same footprint as an input */
+.seg.tabs { display: flex; flex-wrap: nowrap; gap: 2px; width: 100%; height: 44px; margin: 0; padding: 4px; overflow: visible; border-radius: 12px; background: var(--c-field); box-shadow: inset 0 0 0 1px var(--c-field-line); }
+.seg .tab { flex: 1 1 0; min-width: 0; height: 36px; padding: 0 10px; border-radius: 9px; font-size: 14px; line-height: 36px; font-weight: 600; color: var(--fg-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.seg .tab:hover { color: var(--fg-primary); }
+.seg .tab.is-active { min-width: 0; background: var(--bg-1); color: var(--fg-primary); }
+html[data-theme="light"] .calc-page .seg .tab.is-active { background: #ffffff; box-shadow: 0 1px 2px rgba(19, 22, 27, 0.14); }
+.seg .tab:focus-visible, .c-btn:focus-visible, .c-link:focus-visible { outline: 2px solid var(--fg-brand); outline-offset: 2px; }
+
+/* fee: amount and a $/% switch inside one field */
+.fld-fee { display: flex; align-items: center; height: 44px; border-radius: 12px; background: var(--c-field); box-shadow: inset 0 0 0 1px var(--c-field-line); }
+.fld-fee > .fld__box { flex: 1; height: 100%; background: none; box-shadow: none; }
+.fld-fee > .seg.tabs { flex: none; width: 76px; height: 36px; margin-right: 4px; padding: 3px; border-radius: 9px; background: var(--bg-base); box-shadow: none; }
+html[data-theme="light"] .calc-page .fld-fee > .seg.tabs { background: var(--bg-1); }
+.fld-fee .seg .tab { height: 30px; line-height: 30px; padding: 0; border-radius: 7px; font-size: 13px; }
+
+/* rows the user can add (crypto buys, option legs) and the optional section */
+.c-rows { display: flex; flex-direction: column; gap: 12px; }
+.c-rowline { display: grid; gap: 16px; align-items: end; }
+.c-link { justify-self: start; padding: 0; border: 0; background: none; color: var(--fg-brand); font: 600 14px/20px var(--font); cursor: pointer; text-decoration: none; text-align: left; }
+.c-link:hover { text-decoration: underline; }
+.c-x { flex: none; width: 36px; height: 44px; border: 0; border-radius: 12px; background: none; color: var(--fg-secondary); font-size: 20px; cursor: pointer; }
+.c-x:hover { color: var(--c-down); background: var(--c-down-soft); }
+.leg { display: grid; grid-template-columns: 1.1fr 1fr 1fr 1fr 0.9fr 36px; gap: 12px; align-items: end; padding: 14px; border-radius: 14px; box-shadow: inset 0 0 0 1px var(--border-primary); }
+.c-opt { border-radius: 12px; box-shadow: inset 0 0 0 1px var(--border-primary); }
+.c-opt > summary { display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 16px; cursor: pointer; list-style: none; font-size: 14px; font-weight: 700; }
+.c-opt > summary::-webkit-details-marker { display: none; }
+.c-opt > summary span { font-weight: 500; color: var(--fg-secondary); }
+.c-opt > summary::after { content: ""; margin-left: auto; width: 7px; height: 7px; border-right: 2px solid var(--fg-secondary); border-bottom: 2px solid var(--fg-secondary); transform: translateY(-2px) rotate(45deg); transition: transform 0.15s; }
+.c-opt[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.c-opt > .c-more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: end; padding: 0 16px 16px; }
+.c-opt > .c-more .fld-row { display: contents; }
+
+/* narrower card: two columns, then one */
+.calc-page[data-calc="stock"] .calc-form, .calc-page[data-calc="crypto"] .calc-form, .calc-page[data-calc="options"] .calc-form, .calc-page[data-calc="margin"] .calc-form { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* 8 fields: two full rows */
+@container calctool (max-width: 690px) {
+  .calc-form, .c-opt > .c-more, .calc-page[data-calc="stock"] .calc-form, .calc-page[data-calc="crypto"] .calc-form, .calc-page[data-calc="options"] .calc-form, .calc-page[data-calc="margin"] .calc-form, .seg-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .leg { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .leg > :last-child { grid-row: 1; grid-column: 3; justify-self: end; }
+}
+@container calctool (max-width: 420px) {
+  .calc-form, .c-opt > .c-more, .calc-page[data-calc="stock"] .calc-form, .calc-page[data-calc="crypto"] .calc-form, .calc-page[data-calc="options"] .calc-form, .calc-page[data-calc="margin"] .calc-form { grid-template-columns: minmax(0, 1fr); }
+  .c-rowline { grid-template-columns: minmax(0, 1fr) 36px !important; }
+  .c-rowline > .fld + .fld { grid-column: 1; }
+  .c-rowline:not(:has(.c-x)) { grid-template-columns: minmax(0, 1fr) !important; }
+  .c-opt > summary span { display: none; }
+}
+
+/* ---- results ---- */
+/* tiles wrap and stretch, so every row of results is full */
+.calc-out { container: calcout / inline-size; display: flex; flex-wrap: wrap; gap: 12px; padding: 20px 24px 24px; border-top: 1px solid var(--border-primary); }
+.calc-out > * { order: 2; flex: 1 1 100%; margin: 0; }
+.calc-out > div:first-child, .calc-out > .res-grid { order: 0; }
+.calc-out > .res-say:not([style]) { order: 1; }
+.calc-out > div:first-child:not(.res-empty) { flex: 1.2 1 240px; padding: 16px 18px; border-radius: 12px; background: var(--c-up-soft); }
+.calc-out > div:first-child:has(.res-big.is-down) { background: var(--c-down-soft); }
+.res-grid { display: contents; }
+.res-grid > div { flex: 1 1 140px; display: flex; flex-direction: column; justify-content: flex-start; gap: 4px; min-width: 0; padding: 14px 16px; border-radius: 12px; background: var(--c-field); }
+.res-grid dt { font-size: 13px; line-height: 18px; font-weight: 600; color: var(--fg-secondary); }
+.res-grid dd { margin: 0; font-size: 18px; line-height: 24px; font-weight: 700; font-variant-numeric: tabular-nums; overflow-wrap: break-word; }   /* break between words, never inside a number */
+.res-kick { margin: 0; font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--fg-secondary); }
+.res-big { margin: 4px 0 0; font-size: 30px; line-height: 36px; font-weight: 800; letter-spacing: -0.8px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.res-big.is-up, .res-sub.is-up { color: var(--c-up); }
+.res-big.is-down, .res-sub.is-down { color: var(--c-down); }
+.res-sub { margin: 2px 0 0; font-size: 14px; line-height: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.res-say { padding: 14px 16px; border-radius: 12px; background: var(--bg-brand-opacity); font-size: 15px; line-height: 23px; font-weight: 500; }
+.res-empty { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 140px; text-align: center; color: var(--fg-secondary); font-size: 15px; line-height: 22px; font-weight: 500; }
+.res-empty b { color: var(--fg-primary); font-size: 16px; }
+.res-warn { font-size: 14px; line-height: 20px; font-weight: 500; color: var(--fg-secondary); }
+.res-warn::before { content: "ⓘ "; }
+@container calcout (max-width: 300px) { .res-big { font-size: 26px; } }
+
+@media (max-width: 520px) {
+  .calc-tool__bar { padding: 14px 16px; }
+  .calc-form, .calc-out { padding: 16px; }
+  .calc-form { gap: 14px; }
+}
+
+/* the account card keeps its dark brief-card look in both themes */
+/* the benefit ticks are the Plans section's (landing.css .lp-plan__points li::before) */
+
+/* ---- simplified view: one toggle, the key inputs, the rest behind "More options" ---- */
+.calc-form > .fld:has(> .seg[data-k="side"]) { grid-column: 1 / -1; }
+.calc-form > .fld:has(> .seg[data-k="side"]) .seg { width: 200px; }
+/* a disclosure link: "More options", "Details" */
+.c-toggle { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 0; border: 0; background: none; color: var(--fg-primary); font: 600 14px/20px var(--font); cursor: pointer; }
+.c-toggle::after { content: ""; width: 7px; height: 7px; border-right: 2px solid var(--fg-secondary); border-bottom: 2px solid var(--fg-secondary); transform: translateY(-2px) rotate(45deg); transition: transform 0.15s; }
+.c-toggle[aria-expanded="true"]::after { transform: translateY(2px) rotate(-135deg); }
+.c-toggle:hover { color: var(--fg-brand); }
+.c-toggle:focus-visible { outline: 2px solid var(--fg-brand); outline-offset: 3px; border-radius: 4px; }
+.calc-form > .c-toggle, .calc-form > .c-panel { grid-column: 1 / -1; }
+.calc-form > .c-toggle { margin-top: -4px; }
+.c-panel { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: end; padding: 16px; border-radius: 12px; box-shadow: inset 0 0 0 1px var(--border-primary); }
+.c-panel .fld-row { display: contents; }
+@container calctool (max-width: 690px) { .c-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container calctool (max-width: 420px) { .c-panel { grid-template-columns: minmax(0, 1fr); } .calc-form > .fld:has(> .seg[data-k="side"]) .seg { width: 100%; } }
+/* under the result: Details on the left, the target-price link on the right */
+.res-links { display: flex; align-items: center; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; }
+.res-links .c-link { font-size: 14px; }
+.res-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; margin: 0; padding: 4px 16px; border-radius: 12px; box-shadow: inset 0 0 0 1px var(--border-primary); }
+.res-details > div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border-primary); font-size: 14px; line-height: 20px; }
+.res-details > div:nth-last-child(-n + 2):nth-child(odd), .res-details > div:last-child { border-bottom: 0; }
+.res-details dt { color: var(--fg-secondary); font-weight: 600; }
+.res-details dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+@container calcout (max-width: 520px) { .res-details { grid-template-columns: minmax(0, 1fr); } .res-details > div:nth-last-child(2):nth-child(odd) { border-bottom: 1px solid var(--border-primary); } }
+
+/* hub cards stay dark in both themes, like the Arena's Market Games cards */
+html[data-theme="light"] .calc-page .hub-card {
+  --c-card: #16191e; --fg-primary: #ffffff; --fg-secondary: #888b96; --fg-brand: #3dbb9a; --border-primary: #2d2f34;
+  color-scheme: dark;
+}
+/* the "FAQs ›" arrow is a white icon; darken it on the light theme */
+html[data-theme="light"] .calc-page .section-title-arrow img { filter: invert(1) brightness(0.1); }
+
+/* two related toggles side by side (options: Call/Put, Buy/Sell), on their own row */
+.calc-form > .seg-row { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.c-panel__note { grid-column: 1 / -1; display: block !important; margin: -4px 0 0; }
+.calc-form > .c-rows { grid-column: 1 / -1; }
+@container calctool (max-width: 690px) { .calc-form > .seg-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container calctool (max-width: 300px) { .calc-form > .seg-row { grid-template-columns: minmax(0, 1fr); } }
+.res-grid dd.is-up { color: var(--c-up); }
+.res-grid dd.is-down { color: var(--c-down); }
+/* tile labels stay on one line: tiles size to their label first, then share the rest */
+.res-grid > div { flex-basis: auto; }
+.res-grid dt { white-space: nowrap; }
+/* the headline tile matches the others: same label and value size, only its tint marks it */
+.calc-out > div:first-child:not(.res-empty) { flex: 1 1 auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.calc-out > div:first-child .res-kick { font-size: 13px; line-height: 18px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.calc-out > div:first-child .res-big { margin: 0; font-size: 18px; line-height: 24px; letter-spacing: 0; font-weight: 700; }
+.calc-out > div:first-child .res-sub { margin: 0; font-size: 13px; line-height: 18px; }
+@container calcout (max-width: 300px) { .calc-out > div:first-child .res-big { font-size: 18px; } }
+/* numbers: 16px / 600 everywhere in the calculator — inputs and every result tile */
+.fld__box input, .fld__box select { font-size: 16px; font-weight: 600; letter-spacing: 0; }
+.fld__affix { font-size: 16px; font-weight: 600; }
+.fld__affix:first-child { padding-left: 14px; margin-right: -8px; }
+.res-grid dd, .calc-out > div:first-child .res-big { font-size: 16px; line-height: 22px; font-weight: 600; letter-spacing: 0; }
+.res-grid > div, .calc-out > div:first-child:not(.res-empty) { gap: 2px; padding: 12px 16px; }
+.calc-out { gap: 10px; }
+.res-say { padding: 12px 16px; font-size: 15px; line-height: 22px; }
+/* Montserrat's tabular figures are very wide: use its proportional figures, slightly tightened */
+.calc-tool input, .calc-tool select, .calc-tool .fld__affix, .res-grid dd, .res-big, .res-sub, .res-say, .res-details dd {
+  font-variant-numeric: proportional-nums; letter-spacing: -0.2px;
+}
+
+/* "More trading calculators ›": the hub cards in a horizontal scroll row */
+.calc-more__row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, calc((100% - 32px) / 3)); gap: 16px;
+  overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; scrollbar-width: thin; }
+.calc-more__row > .hub-card { scroll-snap-align: start; }
+.hub-card h3 { margin: 0; font-size: 19px; line-height: 25px; font-weight: 700; letter-spacing: -0.3px; }
+.calc-more__row .hub-card:hover { transform: none; }
+@media (max-width: 860px) { .calc-more__row { grid-auto-columns: 78%; } }
+/* the disclaimer is small print */
+.calc-disclaimer { font-size: 13px; line-height: 20px; }
+.calc-crumbs ol { letter-spacing: -0.16px; }
+/* result numbers: bigger and bolder than the labels, the same size in every tile */
+.res-grid dd, .calc-out > div:first-child .res-big { font-size: 22px; line-height: 28px; font-weight: 700; letter-spacing: -0.3px; }
+/* green fills (net profit tile, summary): a clear mint, as #e6f4ed in the reference */
+html[data-theme="light"] .calc-page { --c-up-soft: #e3f4ea; --c-down-soft: #fbe7ea; --bg-brand-opacity: #e3f4ea; }
+.calc-page { --c-up-soft: rgba(61, 187, 154, 0.2); --c-down-soft: rgba(246, 61, 104, 0.18); }
+.res-say { background: var(--c-up-soft); }
+/* the size field's unit switch is wider than the fee one: "Shares" | "$" */
+.fld-fee > .seg--unit.tabs { width: 112px; }
+.fld-fee > .seg--unit .tab:first-child { flex: 1.7 1 0; }
+.fld-fee > .seg--unit.tabs { width: 90px; }
+.fld-fee > .seg--unit .tab { font-size: 12px; padding: 0 4px; }
+.fld-fee > .seg--unit-eq.tabs { width: 72px; }
+.fld-fee > .seg--unit-eq .tab:first-child { flex: 1 1 0; }
+.fld-fee > .fld__box input { padding-right: 6px; }
+/* fields align by their top (labels are one line), so an error message under one input
+   adds space below its row instead of pushing that input — or its neighbours — up */
+.calc-form, .c-panel, .c-opt > .c-more, .c-rowline, .leg { align-items: start; }
+.leg > .c-x, .c-rowline > .c-x { align-self: end; }
+
+/* ======================================================= Tickers page styles (Figma) ===
+   Tickers Page, node 2142:38374 — measured: Montserrat throughout; breadcrumbs Medium 16
+   (#5c5e66 links, #888b96 current, −1%); page title Bold 28/36 −2%; section titles Bold
+   32/40 −1px; sub-heads SemiBold 24/32; card titles and figures SemiBold 20/26 −2%; body
+   Medium 16/24 −1% #5c5e66; small Regular 14/18; cards #fff with a 1px #e3e6f2 stroke,
+   radius 32 (blocks) / 24 (FAQ); tiles #f6f8fd radius 12; brand #22a180, red #e31b54;
+   highlight gradient #e8fbf3 → #c1e4f8. */
+html[data-theme="light"] .calc-page {
+  --fg-primary: #13161b; --fg-secondary: #5c5e66; --c-crumb-current: #888b96;
+  --border-primary: #e3e6f2; --c-field: #f6f8fd; --c-field-line: #e3e6f2; --bg-1: #f1f3fa;
+  --fg-brand: #22a180; --c-up: #22a180; --c-down: #e31b54;
+  --c-up-soft: #e8fbf3; --c-down-soft: #fdebf0; --bg-brand-opacity: #e8fbf3;
+}
+.calc-page { letter-spacing: -0.16px; }
+
+/* breadcrumbs */
+.calc-crumbs ol { font-size: 16px; line-height: 24px; font-weight: 500; letter-spacing: -0.16px; color: var(--fg-secondary); }
+
+/* page title, section titles, sub-heads, body */
+.calc-hero h1 { font-size: 28px; line-height: 36px; font-weight: 700; letter-spacing: -0.56px; }
+.calc-hero p { font-size: 16px; line-height: 24px; font-weight: 500; letter-spacing: -0.16px; }
+.calc-article h2, .c-card__head h2 { font-size: 32px; line-height: 40px; font-weight: 700; letter-spacing: -1px; color: var(--fg-primary); }
+.calc-article h3 { font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.24px; }
+.calc-article { font-size: 16px; line-height: 24px; font-weight: 500; letter-spacing: -0.16px; }
+.calc-tool__bar h2, .hub-card h2, .hub-card h3 { font-size: 20px; line-height: 26px; font-weight: 600; letter-spacing: -0.4px; }
+
+/* cards: white with a hairline stroke, radius 32 */
+html[data-theme="light"] .calc-page .c-card { background: #fff; box-shadow: inset 0 0 0 1px #e3e6f2; }
+.c-card { border-radius: 32px; }
+.calc-tool__bar { padding: 20px 32px; }
+.calc-form, .calc-out { padding-left: 32px; padding-right: 32px; }
+.c-card:not(.calc-tool) { padding: 32px; }
+
+/* result tiles: #f6f8fd, radius 12; label Regular 14/18, figure SemiBold 20/26 */
+.res-grid > div, .calc-out > div:first-child:not(.res-empty) { border-radius: 12px; padding: 16px; gap: 4px; }
+.res-grid dt, .calc-out > div:first-child .res-kick { font-size: 14px; line-height: 18px; font-weight: 500; letter-spacing: -0.14px; text-transform: none; color: var(--fg-secondary); }   /* = the field labels */
+.res-grid dd, .calc-out > div:first-child .res-big { font-size: 20px; line-height: 26px; font-weight: 600; letter-spacing: -0.4px; }
+/* the highlight: the Figma card gradient on a gain, a soft red on a loss */
+html[data-theme="light"] .calc-page .calc-out > div:first-child:not(.res-empty) { background: linear-gradient(110deg, #e8fbf3 0%, #c1e4f8 100%); }
+html[data-theme="light"] .calc-page .calc-out > div:first-child:has(.res-big.is-down) { background: linear-gradient(110deg, #fdebf0 0%, #fbd7e0 100%); }
+html[data-theme="light"] .calc-page .res-say { background: #f6f8fd; }
+.res-say { border-radius: 12px; font-size: 16px; line-height: 24px; font-weight: 500; }
+
+/* inputs and labels */
+.fld > label, .fld__top > label, .fld__label { font-size: 14px; line-height: 18px; font-weight: 500; letter-spacing: -0.14px; }
+.fld__box, .fld-fee, .seg.tabs { border-radius: 12px; }
+
+@media (max-width: 860px) {
+  .calc-hero h1 { font-size: 24px; line-height: 32px; }
+  .calc-article h2, .c-card__head h2 { font-size: 24px; line-height: 32px; letter-spacing: -0.5px; }
+  .calc-tool__bar { padding: 16px 20px; }
+  .calc-form, .calc-out { padding-left: 20px; padding-right: 20px; }
+  .c-card:not(.calc-tool) { padding: 20px; }
+}
+/* light theme: the net-profit tile is a flat green again (red on a loss) … */
+html[data-theme="light"] .calc-page .calc-out > div:first-child:not(.res-empty) { background: #e3f4ea; }
+html[data-theme="light"] .calc-page .calc-out > div:first-child:has(.res-big.is-down) { background: #fbe7ea; }
+/* … and the Figma highlight gradient moves to the account card, with dark text on it */
+
+/* ---- FAQ, as the Figma "faq+" component (Tickers page 5227:80568) ----
+   closed: white, 1px #e3e6f2, a faint drop shadow · open: #f6f8fd · plus/minus #30836d.
+   The component has no hover variant: hover borrows the open fill and a green edge. */
+html[data-theme="light"] .calc-page .faq-item { background: #fff; box-shadow: inset 0 0 0 1px #e3e6f2, 0 119px 246px rgba(81, 85, 105, 0.04); filter: none; }
+html[data-theme="light"] .calc-page .faq-item.is-open { background: #f6f8fd; box-shadow: inset 0 0 0 1px #e3e6f2; }
+.calc-page .faq-item { transition: background-color 0.15s ease, box-shadow 0.15s ease; }
+.calc-page .faq-item__q { cursor: pointer; }
+.calc-page .faq-item:hover { box-shadow: inset 0 0 0 1px rgba(48, 131, 109, 0.55) !important; }
+html[data-theme="light"] .calc-page .faq-item:not(.is-open):hover { background: #f6f8fd; }
+.calc-page .faq-item:not(.is-open):hover { background: var(--bg-subtle); }
+/* plus / minus drawn in the brand green, in both themes */
+.calc-page .faq-icon img { display: none !important; }
+.calc-page .faq-icon::before, .calc-page .faq-icon::after { content: ""; position: absolute; left: 50%; top: 50%; width: 16px; height: 2px; border-radius: 1px; background: #30836d; transform: translate(-50%, -50%); }
+.calc-page .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform 0.2s ease; }
+.calc-page .faq-item.is-open .faq-icon::after { transform: translate(-50%, -50%) rotate(0deg); }
+html:not([data-theme="light"]) .calc-page .faq-icon::before, html:not([data-theme="light"]) .calc-page .faq-icon::after { background: #3dbb9a; }
+
+/* section heads that link ("FAQs ›", "More trading calculators ›"): green on hover */
+.calc-page a.section__head .t-h1 { transition: color 0.15s ease; }
+.calc-page a.section__head:hover .t-h1 { color: var(--fg-brand); }
+.calc-page a.section__head:hover .section-title-arrow img { filter: brightness(0) saturate(100%) invert(48%) sepia(62%) saturate(520%) hue-rotate(117deg) brightness(92%) !important; }
+
+/* light theme: hub/related cards get a white body under the artwork, no fade between them */
+html[data-theme="light"] .calc-page .hub-card {
+  --c-card: #ffffff; --fg-primary: #13161b; --fg-secondary: #5c5e66; --fg-brand: #22a180; --border-primary: #e3e6f2;
+  color-scheme: light;
+}
+html[data-theme="light"] .calc-page .hub-card__art::after { display: none; }
+
+/* ---- "More trading calculators" carousel ----
+   The row fades at whichever edge still has cards beyond it (a mask, so it blends into
+   any page background); arrows on desktop, native swipe with a peeking card on phones. */
+.calc-more__wrap { position: relative; }
+.calc-more__row {
+  display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 2.4); gap: 16px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 2px 0 6px;
+  scrollbar-width: none; outline: none;
+  --fade-l: 48px; --fade-r: 64px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent 100%);
+}
+.calc-more__row::-webkit-scrollbar { display: none; }
+.calc-more__wrap.at-start .calc-more__row { --fade-l: 0px; }
+.calc-more__wrap.at-end .calc-more__row { --fade-r: 0px; }
+.calc-more__row > .hub-card { scroll-snap-align: start; }
+.calc-more__row:focus-visible { outline: 2px solid var(--fg-brand); outline-offset: 4px; border-radius: 24px; }
+.calc-more__nav {
+  position: absolute; top: 50%; z-index: 4; display: grid; place-items: center; width: 44px; height: 44px;
+  border: 0; border-radius: 50%; cursor: pointer; transform: translateY(-50%);
+  background: var(--bg-1); color: var(--fg-primary); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transition: background 0.15s ease;
+}
+html[data-theme="light"] .calc-page .calc-more__nav { background: #fff; box-shadow: inset 0 0 0 1px #e3e6f2, 0 6px 16px rgba(19, 22, 27, 0.08); }
+.calc-more__nav:hover { background: var(--bg-2); }
+html[data-theme="light"] .calc-page .calc-more__nav:hover { background: #f6f8fd; }
+.calc-more__nav:focus-visible { outline: 2px solid var(--fg-brand); outline-offset: 2px; }
+.calc-more__nav svg { width: 18px; height: 18px; }
+.calc-more__nav--prev { left: -8px; }
+.calc-more__nav--next { right: -8px; }
+.calc-more__nav[hidden] { display: none !important; }
+@media (max-width: 860px) {
+  .calc-more__row { grid-auto-columns: 85%; --fade-r: 32px; }
+  .calc-more__nav { display: none !important; }
+}
+
+/* ======================================================= Calculator navigation ===
+   Desktop (≥1024): the Arena side nav (.side-nav in styles.css, expanded width 200px),
+   sticky under the top bar, listing only the calculators. Below 1024 it gives way to a
+   scrolling chip row under the H1. Icons are the Tools menu's calculator icons: grey, white
+   when current (styles.css .side-nav__item.is-active), near-black in the light theme. */
+.calc-shell { min-width: 0; }
+.calc-shell > .calc { flex: 1; min-width: 0; }
+.calc-nav .side-nav__item { text-decoration: none; }
+html[data-theme="light"] .calc-page .calc-nav .side-nav__item.is-active .side-nav__icon img { filter: brightness(0) invert(0.07); }
+.calc-chip__icon { display: block; flex: none; width: 20px; height: 20px; }
+.calc-chip__icon img { display: block; width: 100%; height: 100%; }
+.calc-chip.is-active .calc-chip__icon img { filter: brightness(0) invert(1); }
+html[data-theme="light"] .calc-page .calc-chip.is-active .calc-chip__icon img { filter: brightness(0) invert(0.07); }
+html[data-theme="light"] .calc-page .calc-nav .side-nav__item:hover { background: #f4f6fa; }
+html[data-theme="light"] .calc-page .calc-nav .side-nav__item.is-active { background: #eef1f6; }
+
+.calc-chips { position: relative; display: none; gap: 8px; margin: 0 -16px; padding: 0 16px 2px; overflow-x: auto; scrollbar-width: none; }
+.calc-chips::-webkit-scrollbar { display: none; }
+.calc-chip {
+  display: inline-flex; align-items: center; gap: 8px; flex: none; height: 40px; padding: 0 14px 0 12px; border-radius: 100px;
+  background: var(--c-card); box-shadow: inset 0 0 0 1px var(--border-primary);
+  color: var(--fg-secondary); font-size: 14px; line-height: 18px; font-weight: 600; letter-spacing: -0.14px; white-space: nowrap; text-decoration: none;
+}
+.calc-chip:hover { color: var(--fg-primary); }
+.calc-chip.is-active { background: var(--bg-brand-opacity); box-shadow: inset 0 0 0 1.5px var(--fg-brand); color: var(--fg-primary); }
+
+/* ad rail: a sticky 300×600 slot beside the content, from 1280px up only; narrower, the
+   content takes the full width. Until real ads run it holds a Playtrade house ad. */
+.calc-rail { display: none; position: sticky; top: 80px; }
+.ad-slot--rail { width: 300px; height: 600px; }
+@media (min-width: 1280px) {
+  .calc-shell .calc-grid { grid-template-columns: minmax(0, 1fr) 300px; }
+  .calc-rail { display: block; }
+}
+
+/* the house ad: a generic Playtrade creative, dark in both themes on the Academy Arena
+   banner's ground. The whole card is one sign-up link (data-cta="adslot"). */
+.house-ad {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; height: 100%; padding: 22px 20px 16px; overflow: hidden;
+  border-radius: 24px; color: #fff; color-scheme: dark; text-decoration: none;
+  background: linear-gradient(165deg, #0c2a22 0%, #10372d 45%, #1d1846 100%);
+  box-shadow: inset 0 0 0 1px rgba(7, 216, 162, 0.22);
+  transition: box-shadow 0.2s ease;
+}
+.house-ad:hover { box-shadow: inset 0 0 0 1px rgba(7, 216, 162, 0.5), 0 14px 32px rgba(0, 0, 0, 0.3); }
+.house-ad:hover .ha-btn { background: #1d8c6f; }
+.ha-tag { position: absolute; top: 12px; right: 14px; font-size: 10px; line-height: 14px; font-weight: 600; letter-spacing: 0.3px; color: rgba(255, 255, 255, 0.72); }
+.ha-eyebrow { display: flex; align-items: center; gap: 6px; font-size: 15px; line-height: 20px; font-weight: 700; }
+.ha-eyebrow img { width: 18px; height: 18px; }
+.ha-kick { display: flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 11.5px; line-height: 16px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #6fe3b8; }
+.ha-kick::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.ha-title { margin-top: 6px; font-size: 26px; line-height: 30px; font-weight: 800; letter-spacing: -0.6px; }
+.ha-text { margin-top: 8px; font-size: 14px; line-height: 20px; font-weight: 500; color: rgba(255, 255, 255, 0.72); }
+.ha-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+.ha-tags span {                                    /* as the Academy banner's game tags */
+  padding: 3px 7px; border-radius: 7px; font-size: 11px; line-height: 16px; font-weight: 600; color: rgba(255, 255, 255, 0.78);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+}
+.ha-people { display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 18px; font-weight: 500; color: rgba(255, 255, 255, 0.8); }
+.ha-people b { font-weight: 700; color: #fff; margin-right: -4px; }
+.ha-faces { display: flex; }
+.ha-faces > * { width: 26px; height: 26px; margin-right: -8px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px #142a2a; }
+.ha-faces > :last-child { margin-right: 0; }
+.ha-btn { width: 100%; height: 48px; margin-top: 12px; padding: 0 24px; }
+.ha-note { align-self: center; margin-top: 8px; font-size: 12px; line-height: 16px; font-weight: 500; color: rgba(255, 255, 255, 0.6); }
+
+/* desktop: "More trading calculators" shows all four others in one row (no scrolling, so
+   the carousel's fades and arrows stay off); narrower, it is the swipe carousel */
+@media (min-width: 1024px) {
+  .calc-more__row { grid-auto-columns: calc((100% - 48px) / 4); }
+  .calc-more .hub-card p { -webkit-line-clamp: 3; }   /* narrower cards: the short copy in full */
+}
+@media (max-width: 1023px) {
+  .calc-nav { display: none; }
+  .calc-chips { display: flex; }
+}
+@media (min-width: 861px) and (max-width: 1023px) { .calc-chips { margin: 0 -24px; padding: 0 24px 2px; } }
+
+/* the art: the Academy Arena banner's (academy.css .ac-arena__art), scaled to the slot —
+   two Market Games tiles dimmed behind, the 1-to-1 bull-vs-bear duel sharp in front.
+   It takes the spare height, so the button and note sit at the foot of the 600px slot. */
+.ha-arena { position: relative; flex: 1 1 auto; align-self: stretch; min-height: 170px; margin: 6px -4px 10px; pointer-events: none; }
+.ha-tile {
+  position: absolute; display: block; width: 148px; height: 86px; overflow: hidden; border-radius: 12px;
+  box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  filter: brightness(0.55) saturate(0.85);
+}
+.ha-tile.mg-card::before { display: none; }
+.ha-tile .mg-card__art { display: block; height: 100%; }
+.ha-tile .mg-card__art::after { display: none; }
+.ha-tile .mg-flip { transform: translate(-50%, -52%) scale(0.58); }
+.ha-tile--back { right: 4px; top: calc(50% - 80px); transform: rotate(6deg); }
+.ha-tile--mid  { left: 12px; top: calc(50% - 64px); transform: rotate(-5deg); }
+.ha-duel {
+  position: absolute; left: 50%; top: calc(50% - 30px); width: 214px; aspect-ratio: 1024 / 532; overflow: hidden; transform: translateX(-50%);
+  filter: drop-shadow(0 14px 16px rgba(0, 0, 0, 0.55));
+}
+.ha-duel img { display: block; width: 100%; height: auto; }
+
+/* light theme: the same dark creative and artwork as the dark theme, lifted 20% so it sits
+   on the white page (ground colours × 1.2, the dimmed tiles 0.55 → 0.66) */
+html[data-theme="light"] .calc-page .house-ad { background: linear-gradient(165deg, #0e3229 0%, #134236 45%, #231d54 100%); }
+html[data-theme="light"] .calc-page .ha-tile { filter: brightness(0.66) saturate(0.85); }
+html[data-theme="light"] .calc-page .ha-duel img { filter: brightness(1.2); }
+
+/* the figures in the result sentence: a step heavier than the text, no colour */
+.res-say b { font-weight: 600; }
+
+/* a hint that stays visible under its input (the stock Fees field: how the fee is applied) */
+.calc-form .fld__hint.fld__hint--on { display: block; margin-top: 2px; font-size: 13px; line-height: 17px; font-weight: 500; }
+
+/* chart marker labels: a halo in the card colour, so a line they cross doesn't run through the text */
+.c-chart__mlabel { paint-order: stroke; stroke: var(--c-card); stroke-width: 5px; stroke-linejoin: round; }
+
+/* a field whose unit is picked by a "Use …" link at the right of its label row */
+.fld__top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; min-width: 0; }
+.fld__top label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fld__use {
+  flex: none; padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: 14px; line-height: 18px; font-weight: 600; color: var(--fg-brand);
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+.fld__use:hover { text-decoration-thickness: 2px; }
+.fld__use:focus-visible { outline: 2px solid var(--fg-brand); outline-offset: 2px; border-radius: 4px; }
+
+/* stock "More options": the two dates start their own row, side by side */
+.c-panel > .fld[data-f="startDate"] { grid-column-start: 1; }
+
+/* crypto "More options": extra buys (average in) span the panel, under the other options */
+.c-panel > .c-buys { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; }
+.c-buys .c-rows { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.c-buys .c-rowline { width: 100%; }
+
+/* light theme: the whole house ad (ground, artwork, text, button) a further 20% brighter */
+html[data-theme="light"] .calc-page .house-ad { filter: brightness(1.2); }
+
+/* ---- dropdowns: the platform menu panel (styles.css .lang-dd), drawn over a hidden <select> */
+.fld__box.has-dd { position: relative; }
+.fld__box.has-dd > select { position: absolute; inset: 0; width: 100%; opacity: 0; pointer-events: none; }
+.c-dd__btn {
+  flex: 1; min-width: 0; height: 100%; padding: 0 34px 0 14px; border: 0; border-radius: inherit; background: none; cursor: pointer;
+  color: var(--fg-primary); font: 600 16px/1 var(--font); text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%23888b96' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+}
+.c-dd__btn:focus-visible { outline: none; }
+.fld__box.is-open .c-dd__btn { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 6.5 6 1.5l5 5' stroke='%23888b96' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.fld__box.is-open { box-shadow: inset 0 0 0 1.5px var(--fg-brand); }
+.c-dd__panel {
+  position: fixed; top: 0; left: 0; z-index: 70;              /* placed by calc-shell.js */
+  display: flex; flex-direction: column; gap: 2px; width: max-content; max-width: 320px; max-height: 340px; overflow-y: auto;
+  padding: 8px; border: 1px solid var(--border-primary); border-radius: 16px;
+  background: rgba(19, 22, 27, 0.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.7);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+.fld__box.is-open .c-dd__panel { opacity: 1; visibility: visible; transform: none; }
+.c-dd__opt {
+  display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 10px; border: 0; border-radius: 10px; background: none; cursor: pointer;
+  font: 600 15px/1 var(--font); color: var(--fg-secondary); text-align: left; white-space: nowrap;
+}
+.c-dd__opt:hover, .c-dd__opt:focus-visible { background: rgba(166, 171, 185, 0.08); color: var(--fg-primary); outline: none; }
+.c-dd__opt.is-on { color: var(--fg-primary); }
+.c-dd__tick { flex: none; width: 16px; height: 16px; margin-left: auto; padding-left: 12px; box-sizing: content-box; opacity: 0; color: var(--fg-brand); }
+.c-dd__opt.is-on .c-dd__tick { opacity: 1; }
+.calc-tool__actions .c-dd__btn { padding: 0 32px 0 14px; font-size: 13px; }
+html[data-theme="light"] .calc-page .c-dd__panel { background: rgba(255, 255, 255, 0.97); box-shadow: 0 24px 48px -20px rgba(19, 22, 27, 0.25); }
+html[data-theme="light"] .calc-page .c-dd__opt:hover, html[data-theme="light"] .calc-page .c-dd__opt:focus-visible { background: #f4f6fa; }
+
+/* options: the way into the strategies, under the Call/Put and Buy/Sell toggles */
+.res-grid dd.is-down { color: var(--c-down); }
+
+/* ===================================================== Ticker search (Global search) ===
+   The Global search popup (Figma 7587:18283), opened from the stock / crypto calculator's
+   Stock or Coin field on its Tickers tab. */
+html.gs-open { overflow: hidden; }
+.gs { position: fixed; inset: 0; z-index: 200; display: flex; justify-content: center; align-items: flex-start; padding: 72px 16px 16px; }
+.gs__backdrop { position: absolute; inset: 0; background: rgba(5, 6, 8, 0.6); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.gs__panel {
+  position: relative; display: flex; flex-direction: column; width: 100%; max-width: 880px; max-height: min(640px, calc(100vh - 96px));
+  border: 1px solid var(--border-primary); border-radius: 24px; background: #13161b; color: #fff;
+  box-shadow: 0 40px 80px -24px rgba(0, 0, 0, 0.7); overflow: hidden; color-scheme: dark;
+}
+.gs__top { display: flex; align-items: center; gap: 12px; padding: 20px 20px 0; }
+.gs__search { display: flex; flex: 1; align-items: center; gap: 10px; height: 44px; padding: 0 16px; border-radius: 100px; background: #22252b; }
+.gs__search svg { flex: none; width: 20px; height: 20px; color: rgba(255, 255, 255, 0.7); }
+.gs__search input { flex: 1; min-width: 0; border: 0; background: none; outline: none; color: #fff; font: 500 16px/1 var(--font); }
+.gs__search input::placeholder { color: rgba(255, 255, 255, 0.4); }
+.gs__search:focus-within { box-shadow: inset 0 0 0 1.5px var(--c-up); }
+.gs__clear { border: 0; background: none; color: rgba(255, 255, 255, 0.5); font: 500 12px/1 var(--font); cursor: pointer; }
+.gs__clear:hover { color: #fff; }
+.gs__x { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 50%; background: none; color: #fff; cursor: pointer; }
+.gs__x svg { width: 18px; height: 18px; }
+.gs__x:hover { background: rgba(255, 255, 255, 0.06); }
+.gs__tabs { display: flex; align-items: flex-end; gap: 24px; padding: 14px 20px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.gs__tab { position: relative; display: flex; align-items: center; height: 36px; padding: 0 0 10px; border: 0; background: none; color: rgba(255, 255, 255, 0.55); font: 600 15px/1 var(--font); cursor: pointer; }
+.gs__tab--icon svg { width: 18px; height: 18px; }
+.gs__tab:hover, .gs__tab.is-on { color: #fff; }
+.gs__tab.is-on::after { content: ""; position: absolute; left: -12px; right: -12px; bottom: -1px; height: 2px; background: var(--c-up); }
+.gs__tab--icon.is-on::after { left: -6px; right: -6px; }
+.gs__bar { display: flex; align-items: center; padding: 20px 20px 8px; }
+.gs__bar[hidden] { display: none; }
+.gs__chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.gs__chip { display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 0; border-radius: 100px; background: none; color: rgba(255, 255, 255, 0.65); font: 600 14px/1 var(--font); cursor: pointer; }
+.gs__chip:hover { color: #fff; }
+.gs__chip.is-on { background: #2a2d33; color: #fff; }
+.gs__n { font-size: 11px; font-weight: 500; color: rgba(255, 255, 255, 0.45); }
+.gs__list { flex: 1; min-height: 120px; overflow-y: auto; padding: 4px 20px 8px; scrollbar-width: thin; }
+.gs__row {
+  display: grid; grid-template-columns: 24px 64px minmax(0, 1fr) 80px 92px; align-items: center; gap: 12px; width: 100%; height: 42px; padding: 0 12px;
+  border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.07); border-radius: 0; background: none; color: #fff; font: 500 14px/1 var(--font); text-align: left; cursor: pointer;
+}
+.gs__row.is-hi { background: rgba(166, 171, 185, 0.08); border-radius: 10px; border-bottom-color: transparent; }
+.gs-logo { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: hsl(var(--h) 55% 45%); color: #fff; font-size: 11px; font-weight: 800; }
+.gs__sym { color: rgba(255, 255, 255, 0.6); }
+.gs__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gs__type, .gs__ex { color: rgba(255, 255, 255, 0.45); white-space: nowrap; }
+.gs__ex { text-align: right; }
+.gs__empty { margin: 24px 12px; color: rgba(255, 255, 255, 0.55); font-size: 14px; }
+.gs__note { margin: 0; padding: 10px 20px 14px; border-top: 1px solid rgba(255, 255, 255, 0.07); color: rgba(255, 255, 255, 0.45); font-size: 12px; }
+html[data-theme="light"] .gs__panel { background: #fff; color: #13161b; color-scheme: light; border-color: #e3e6f2; box-shadow: 0 40px 80px -24px rgba(19, 22, 27, 0.3); }
+html[data-theme="light"] .gs__search { background: #f4f6fa; }
+html[data-theme="light"] .gs__search svg, html[data-theme="light"] .gs__clear { color: #5b6170; }
+html[data-theme="light"] .gs__search input { color: #13161b; }
+html[data-theme="light"] .gs__search input::placeholder { color: #888b96; }
+html[data-theme="light"] .gs__x { color: #13161b; border-color: #e3e6f2; }
+html[data-theme="light"] .gs__tabs { border-bottom-color: #e3e6f2; }
+html[data-theme="light"] .gs__tab { color: #5b6170; }
+html[data-theme="light"] .gs__tab:hover, html[data-theme="light"] .gs__tab.is-on, html[data-theme="light"] .gs__chip:hover { color: #13161b; }
+html[data-theme="light"] .gs__chip { color: #5b6170; }
+html[data-theme="light"] .gs__chip.is-on { background: #eef1f6; color: #13161b; }
+html[data-theme="light"] .gs__n, html[data-theme="light"] .gs__type, html[data-theme="light"] .gs__ex, html[data-theme="light"] .gs__note { color: #888b96; }
+html[data-theme="light"] .gs__row { color: #13161b; border-bottom-color: #eef1f6; }
+html[data-theme="light"] .gs__row.is-hi { background: #f4f6fa; }
+html[data-theme="light"] .gs__sym, html[data-theme="light"] .gs__empty { color: #5b6170; }
+html[data-theme="light"] .gs__note { border-top-color: #eef1f6; }
+@media (max-width: 640px) {
+  .gs { padding: 0; }
+  .gs__panel { max-width: none; max-height: none; height: 100%; border-radius: 0; border: 0; }
+  .gs__top { padding: 16px 16px 0; }
+  .gs__tabs, .gs__bar { padding-left: 16px; padding-right: 16px; }
+  .gs__list { padding: 4px 8px 8px; }
+  .gs__row { grid-template-columns: 24px 56px minmax(0, 1fr) 72px; }
+  .gs__ex { display: none; }
+}
+
+/* the calculator's Stock / Coin field: a search box that opens the popup */
+.c-ticker .fld__box { position: relative; }
+.c-ticker__btn {
+  display: flex; flex: 1; align-items: center; gap: 8px; min-width: 0; height: 100%; padding: 0 14px; border: 0; border-radius: inherit; background: none; cursor: pointer;
+  color: var(--fg-secondary); font: 500 16px/1 var(--font); text-align: left;
+}
+.c-ticker__btn svg { flex: none; width: 18px; height: 18px; }
+.c-ticker__btn:focus-visible { outline: none; }
+.c-ticker .fld__box:has(.c-ticker__btn:focus-visible) { box-shadow: inset 0 0 0 1.5px var(--fg-brand); }
+.c-ticker__btn span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.c-ticker.is-set .c-ticker__btn { color: var(--fg-primary); font-weight: 600; }
+.c-ticker.is-set .c-ticker__btn .gs-logo { width: 22px; height: 22px; font-size: 10px; }
+.c-ticker__clear { display: grid; place-items: center; flex: none; width: 32px; height: 32px; margin-right: 6px; border: 0; border-radius: 50%; background: none; color: var(--fg-secondary); cursor: pointer; }
+.c-ticker__clear:hover { background: var(--bg-1); color: var(--fg-primary); }
+.c-ticker__clear svg { width: 14px; height: 14px; }
+.fld__opt { font-weight: 500; opacity: 0.75; }
+/* Direction and the ticker share the first row; the size field starts the next */
+.calc-page[data-calc="stock"] .fld[data-f="shares"], .calc-page[data-calc="stock"] .fld[data-f="amount"],
+.calc-page[data-calc="crypto"] .fld[data-f="buys.0.amount"], .calc-page[data-calc="crypto"] .fld[data-f="buys.0.coins"] { grid-column-start: 1; }
+
+/* toast: "Link copied", top right under the top bar */
+.c-toast {
+  position: fixed; top: 72px; right: 16px; z-index: 300;
+  display: flex; align-items: center; gap: 8px; padding: 12px 18px 12px 14px; border-radius: 12px;
+  background: var(--bg-brand-solid, #22a180); color: #fff; font: 600 15px/20px var(--font);
+  box-shadow: 0 12px 32px -8px rgba(16, 129, 90, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  pointer-events: none;
+}
+.c-toast.is-on { opacity: 1; visibility: visible; transform: none; }
+.c-toast svg { flex: none; width: 18px; height: 18px; }
+@media (prefers-reduced-motion: reduce) { .c-toast { transition: opacity 0.2s ease, visibility 0.2s; transform: none; } }
+
+/* ===================================================== Position size: two-column layout ===
+   Inputs stacked on the left, the answer on the right: a headline, the target / stop bar, one
+   sentence, then Details. Stacked (inputs above the answer) where the card is too narrow. */
+.calc-page[data-calc="position"] .calc-form { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+.calc-page[data-calc="position"] .calc-form > .fld:has(> .seg[data-k="side"]) .seg { width: 100%; max-width: 280px; }
+.calc-page[data-calc="position"] .c-panel { grid-template-columns: minmax(0, 1fr); }   /* the input column is narrow: one field per row */
+.calc-page[data-calc="position"] .fld__hint--on:empty { display: none; }
+.ps-chips { display: flex; gap: 8px; margin-top: -4px; }
+.ps-chip {
+  height: 36px; padding: 0 16px; border: 0; border-radius: 100px; background: none; cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--c-field-line); color: var(--fg-secondary); font: 600 14px/1 var(--font);
+}
+.ps-chip:hover { color: var(--fg-primary); }
+.ps-chip.is-on { box-shadow: inset 0 0 0 1.5px var(--fg-brand); background: var(--c-up-soft); color: var(--fg-brand); }
+@media (min-width: 1180px) {
+  .calc-page[data-calc="position"] .calc-tool { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
+  .calc-page[data-calc="position"] .calc-tool__bar { grid-column: 1 / -1; }
+  .calc-page[data-calc="position"] .calc-out { align-content: start; border-top: 0; border-left: 1px solid var(--border-primary); padding: 24px 28px; }
+}
+.ps { display: flex; flex-direction: column; gap: 14px; }
+.ps-kick { margin: 0 0 -10px; font-size: 14px; line-height: 18px; font-weight: 500; letter-spacing: -0.14px; color: var(--fg-secondary); }   /* = the field / tile labels */
+.ps-head { margin: 0; font-size: 34px; line-height: 40px; font-weight: 700; letter-spacing: -0.8px; color: var(--fg-primary); }
+.ps-sub { margin: -10px 0 4px; font-size: 16px; line-height: 22px; font-weight: 500; color: var(--fg-secondary); }
+.ps-bar { display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; }
+.ps-zone { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 18px; font-size: 15px; font-weight: 600; }
+.ps-zone--win { background: var(--c-up-soft); color: var(--c-up); }
+.ps-zone--loss { background: var(--c-down-soft); color: var(--c-down); }
+.ps-zone--empty { background: var(--c-field); color: var(--fg-secondary); font-weight: 500; justify-content: center; }
+.ps-entry { position: relative; height: 0; border-top: 2px dashed var(--fg-primary); }
+.ps-entry span {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%); padding: 4px 10px; border-radius: 8px;
+  background: var(--fg-primary); color: var(--bg-base); font-size: 14px; font-weight: 700; white-space: nowrap;
+}
+.ps .res-say b.is-up { color: var(--c-up); }
+.ps .res-say b.is-down { color: var(--c-down); }
+.ps .res-links { margin-top: -2px; }
+html[data-theme="light"] .calc-page .ps-zone--win { background: #e3f4ea; }
+html[data-theme="light"] .calc-page .ps-zone--loss { background: #fbe7ea; }
+html[data-theme="light"] .calc-page .ps-entry span { background: #13161b; color: #fff; }
+
+/* position size: Long / Short with the asset type beside it, a quiet dropdown */
+.ps-top { display: flex; align-items: flex-end; gap: 12px; min-width: 0; }
+.ps-top > .fld:first-child { flex: 1 1 auto; }
+.calc-page[data-calc="position"] .ps-top .seg { width: 100%; max-width: 280px; }
+.ps-asset { flex: none; }
+.ps-asset .fld__box { height: 44px; background: none; box-shadow: inset 0 0 0 1px var(--c-field-line); border-radius: 100px; }
+.ps-asset .c-dd__btn { padding: 0 32px 0 16px; font-size: 14px; font-weight: 600; color: var(--fg-secondary); }
+.ps-asset .c-dd__btn:hover { color: var(--fg-primary); }
+
+/* position size: the risk : reward card (a true-scale price bar with an axis) */
+.rr { display: flex; flex-direction: column; gap: 14px; padding: 18px 20px 18px 16px; border-radius: 20px; background: var(--c-card); box-shadow: inset 0 0 0 1px var(--border-primary); }
+.rr-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-left: 4px; }
+.rr-head span { font-size: 15px; font-weight: 500; color: var(--fg-secondary); }
+.rr-head b { font-size: 26px; line-height: 30px; font-weight: 700; letter-spacing: -0.4px; color: var(--fg-primary); font-variant-numeric: tabular-nums; }
+.rr-plot { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 10px; margin: 4px 0 8px; }   /* room for the end prices */
+.rr-axis { position: relative; }
+.rr-axis span { position: absolute; right: 0; transform: translateY(-50%); font-size: 14px; font-weight: 500; color: var(--fg-secondary); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rr-bar { position: relative; display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; }
+.rr-zone { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 18px; font-size: 15px; font-weight: 600; }
+.rr-zone--win { background: var(--c-up-soft); color: var(--c-up); }
+.rr-zone--loss { background: var(--c-down-soft); color: var(--c-down); }
+.rr-zone--empty { justify-content: center; background: var(--c-field); color: var(--fg-secondary); font-weight: 500; }
+.rr-entry { position: absolute; left: 0; right: 0; height: 0; border-top: 2px solid var(--fg-primary); }
+.rr-entry span {
+  position: absolute; left: 14px; top: 0; transform: translateY(-50%); padding: 4px 10px; border-radius: 8px;
+  background: var(--fg-primary); color: var(--bg-base); font-size: 14px; font-weight: 700; white-space: nowrap;
+}
+.rr-note { margin: 0; padding-left: 4px; font-size: 15px; line-height: 22px; font-weight: 500; color: var(--fg-secondary); }
+.rr-note b { color: var(--fg-primary); font-weight: 700; }
+html[data-theme="light"] .calc-page .rr-zone--win { background: #e3f4ea; }
+html[data-theme="light"] .calc-page .rr-zone--loss { background: #fbe7ea; }
+html[data-theme="light"] .calc-page .rr-entry { border-top-color: #13161b; }
+html[data-theme="light"] .calc-page .rr-entry span { background: #13161b; color: #fff; }
+@container calcout (max-width: 360px) { .rr-plot { grid-template-columns: 52px minmax(0, 1fr); } .rr-zone { padding: 0 12px; font-size: 14px; white-space: nowrap; } .rr-of { display: none; } }
+
+/* article: more air — taller lines, more room between paragraphs, list items and sections */
+.calc-article { gap: 20px; line-height: 28px; padding: 32px; }
+.calc-article h2 { margin-top: 28px; }
+.calc-article h2:first-child { margin-top: 0; }
+.calc-article h2 + * { margin-top: -4px; }
+.calc-article ul, .calc-article ol { gap: 14px; padding-left: 24px; }
+.calc-article li { padding-left: 4px; }
+@media (max-width: 520px) { .calc-article { padding: 22px 18px; gap: 16px; } .calc-article h2 { margin-top: 20px; } .calc-article ul, .calc-article ol { gap: 12px; } }
+
+.rr-edit { padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; }
+.rr-edit:hover { text-decoration-style: solid; }
+
+/* calculator header controls: quiet text controls, not pills (currency, Share result, Reset) */
+.calc-tool__actions { gap: 4px; }
+.calc-tool__actions .c-btn { height: 32px; padding: 0 10px; box-shadow: none; background: none; color: var(--fg-secondary); font-weight: 600; border-radius: 8px; }
+.calc-tool__actions .c-btn:hover { background: var(--c-field); color: var(--fg-primary); }
+.calc-tool__actions .c-btn:focus-visible { outline: 2px solid var(--fg-brand); outline-offset: 1px; }
+.calc-tool__actions .fld__box { height: 32px; background: none; box-shadow: none; border-radius: 8px; }
+.calc-tool__actions .fld__box:hover, .calc-tool__actions .fld__box.is-open { background: var(--c-field); box-shadow: none; }
+.calc-tool__actions .c-dd__btn { padding: 0 26px 0 10px; color: var(--fg-secondary); background-position: right 8px center; }
+.calc-tool__actions .fld__box:hover .c-dd__btn, .calc-tool__actions .is-open .c-dd__btn { color: var(--fg-primary); }
+html[data-theme="light"] .calc-page .calc-tool__actions .c-btn:hover,
+html[data-theme="light"] .calc-page .calc-tool__actions .fld__box:hover,
+html[data-theme="light"] .calc-page .calc-tool__actions .fld__box.is-open { background: #f4f6fa; }
+
+/* hub cards: the question each calculator answers, above its name */
+.hub-card__q { font-size: 14px; line-height: 18px; font-weight: 600; color: var(--fg-brand); margin-bottom: -4px; }
+
+/* the Stock / Coin / Ticker field: Direction and the search box share the first row;
+   the size field starts the next (position size: its own full row) */
+.calc-page[data-calc="stock"] .calc-form > .fld:has(> .seg[data-k="side"]),
+.calc-page[data-calc="crypto"] .calc-form > .fld:has(> .seg[data-k="side"]) { grid-column: span 1; }
+.calc-form > .c-ticker { grid-column: span 3; }
+.calc-page[data-calc="position"] .calc-form > .c-ticker { grid-column: 1 / -1; }
+.c-ticker .fld__hint--on:empty { display: none; }
+@container calctool (max-width: 690px) { .calc-form > .c-ticker { grid-column: span 1; } }
+@container calctool (max-width: 420px) { .calc-form > .c-ticker { grid-column: 1 / -1; } }
+
+/* options article: worked examples as tabs (the platform .tabs pills), one panel at a time */
+.ox-note { color: var(--fg-secondary); }
+.ox-tabs { display: flex; flex-wrap: wrap; gap: 4px; width: fit-content; max-width: 100%; }
+.ox-tabs .tab { flex: none; white-space: nowrap; }
+.ox { display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; border-radius: 16px; background: var(--c-field); }
+.ox[hidden] { display: none; }
+.ox ol { margin: 0; }
+@media (max-width: 600px) { .ox-tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; width: auto; } .ox-tabs::-webkit-scrollbar { display: none; } }
+/* worked-example tabs: outlined chips, so each reads as a button; the active one filled */
+.ox-tabs { gap: 8px; }
+.ox-tabs .tab { box-shadow: inset 0 0 0 1px var(--c-field-line); background: none; border-radius: 100px; }
+.ox-tabs .tab:hover { box-shadow: inset 0 0 0 1px var(--fg-secondary); color: var(--fg-primary); }
+.ox-tabs .tab.is-active { box-shadow: inset 0 0 0 1.5px var(--fg-brand); background: var(--c-up-soft); color: var(--fg-primary); }
+.ox-tabs .tab:focus-visible { outline: 2px solid var(--fg-brand); outline-offset: 2px; }
+
+/* ===================================================== Stock and crypto: two columns ===
+   As position size: inputs stacked on the left; the result, sentence and the "What if the
+   price moves?" chart on the right, so every keystroke visibly moves the line. Below 1180px
+   the card stacks (inputs, then results) with the inputs back in their grid. */
+.calc-out > .res-chart { order: 1; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.res-chart h3 { margin: 0; font-size: 16px; line-height: 22px; font-weight: 700; color: var(--fg-primary); }
+@media (min-width: 1180px) {
+  .calc-page:is([data-calc="stock"], [data-calc="crypto"]) .calc-tool { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.56fr); }   /* inputs ~39%, results and chart ~61% */
+  .calc-page:is([data-calc="stock"], [data-calc="crypto"]) .calc-tool__bar { grid-column: 1 / -1; }
+  .calc-page:is([data-calc="stock"], [data-calc="crypto"]) .calc-out { align-content: start; border-top: 0; border-left: 1px solid var(--border-primary); padding: 24px 28px; }
+  .calc-page:is([data-calc="stock"], [data-calc="crypto"]) .calc-form { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .calc-page:is([data-calc="stock"], [data-calc="crypto"]) .calc-form > * { grid-column: 1 / -1 !important; }
+  .calc-page:is([data-calc="stock"], [data-calc="crypto"]) .calc-form > .fld:has(> .seg[data-k="side"]) .seg { width: 100%; max-width: 280px; }
+  /* the input column is narrow here: More options stacks one field per row, toggles full width */
+  .calc-page:is([data-calc="stock"], [data-calc="crypto"]) .c-panel { grid-template-columns: minmax(0, 1fr); }
+  .calc-page:is([data-calc="stock"], [data-calc="crypto"]) .c-panel > * { grid-column: 1 / -1 !important; }
+  .calc-page:is([data-calc="stock"], [data-calc="crypto"]) .c-panel .seg { width: 100%; }
+}
+/* in the results column the chart is ~460px wide; enlarge its type so labels stay ~11px */
+.res-chart .c-chart svg text { font-size: 15px; }
+.res-chart .c-legend { font-size: 12px; }
+
+/* More options: margin's longer labels get two columns; any panel label wraps rather than clip */
+.calc-page[data-calc="margin"] .c-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@container calctool (max-width: 420px) { .calc-page[data-calc="margin"] .c-panel { grid-template-columns: minmax(0, 1fr); } }
+.c-panel .fld > label, .c-panel .fld__top > label { white-space: normal; overflow: visible; }
+/* tablets (card under ~900px): More options and margin's main row in two columns, so toggles
+   and longer labels keep their room */
+@container calctool (max-width: 900px) {
+  .c-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .calc-page[data-calc="margin"] .calc-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@container calctool (max-width: 420px) {
+  .c-panel { grid-template-columns: minmax(0, 1fr); }
+  .calc-page[data-calc="margin"] .calc-form { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* the result sentence: a little tighter, and red when the result is a loss (as the hero tile) */
+.calc-out > .res-say { padding: 10px 14px; font-size: 15px; line-height: 22px; border-radius: 10px; }
+.calc-page:not([data-calc="margin"]) .calc-out:has(.res-big.is-down) > .res-say { background: var(--c-down-soft); }
+html[data-theme="light"] .calc-page:not([data-calc="margin"]) .calc-out:has(.res-big.is-down) > .res-say { background: #fbe7ea; }
+
+/* very narrow phones (≤ 360px) */
+@container calctool (max-width: 330px) {
+  .ps-top { flex-wrap: wrap; }                                   /* position size: asset type under Long / Short */
+  .ps-top > .fld:first-child { flex: 1 1 100%; }
+  .leg { grid-template-columns: repeat(2, minmax(0, 1fr)); }     /* options legs: two per row, toggles full width */
+  .leg > :last-child { grid-column: 2; }
+  .leg .seg { width: 100%; }
+}
+
+/* calculator card artwork (Figma "Profit.com — Calculator cards"): a 378 × 240 art panel with a
+   diagonal gradient and the calculator's 3D asset, exported from Figma at 2× exactly as framed,
+   placed bottom-right at Figma's size and offsets (in % of the panel, so it scales with the card). */
+.hub-card__art { height: auto; aspect-ratio: 378 / 240; }
+.hub-card__img { position: absolute; right: 6.35%; object-fit: contain; object-position: right bottom; transform-origin: 70% 100%; transition: transform 0.5s ease; }
+.hub-card:hover .hub-card__img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .hub-card__img { transition: none; } }
+.hub-card__art--stock    { background: linear-gradient(32.41deg, #014c3e 0%, #01c493 100%); }
+.hub-card__art--crypto   { background: linear-gradient(32.41deg, #d73d04 0%, #ff9e16 100%); }
+.hub-card__art--position { background: linear-gradient(32.41deg, #011865 0%, #1988ff 100%); }
+.hub-card__art--options  { background: linear-gradient(32.41deg, #35067f 0%, #9d3ef9 100%); }
+.hub-card__art--margin   { background: linear-gradient(32.41deg, #64000f 0%, #ff2441 100%); }
+.hub-card__art--stock    .hub-card__img { right: 16.14%; bottom: 0; width: 50.79%; height: 91.67%; }
+.hub-card__art--crypto   .hub-card__img { right: 8.47%; bottom: 0; width: 68.25%; height: 87.5%; }   /* Figma clips its 6px overhang */
+.hub-card__art--position .hub-card__img { bottom: 8.33%; width: 61.38%; height: 75%; }
+.hub-card__art--options  .hub-card__img { right: 6.08%; bottom: 11.67%; width: 73.54%; height: 71.67%; }
+.hub-card__art--margin   .hub-card__img { right: 6.35%; bottom: 8.33%; width: 75.93%; height: 80.42%; }
+
+/* dark theme hover: the lift put the card on fractional pixels and a 1px sliver of the art's
+   gradient showed under its overlay fade. The card rasterises as one layer while it moves. */
+.hub-card { will-change: transform; backface-visibility: hidden; }
+/* the fade is a mask on the art panel itself (not an overlay), so its edge is transparent and the
+   card body shows through: nothing can peek out below it at any sub-pixel offset */
+/* dark theme: a taller, eased fade into the card body, from 55% of the art's height to the
+   bottom edge. Written as a mask, the inverse of an overlay of the card colour (overlay
+   0 / .15 / .45 / .85 / 1 → art 1 / .85 / .55 / .15 / 0), so the card's own background shows
+   through and there is no seam at the join. */
+.hub-card__art { -webkit-mask-image: linear-gradient(to bottom, #000 55%, rgba(0,0,0,.85) 70%, rgba(0,0,0,.55) 85%, rgba(0,0,0,.15) 97%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, rgba(0,0,0,.85) 70%, rgba(0,0,0,.55) 85%, rgba(0,0,0,.15) 97%, transparent 100%); }
+.hub-card__art::after { display: none; }
+html[data-theme="light"] .calc-page .hub-card__art { -webkit-mask-image: none; mask-image: none; }
+
+/* card titles: exactly the Arena's Market Games card title (styles.css .mg-card__title) */
+.calc-page .hub-card h2, .calc-page .hub-card h3 { margin: 0; font-size: 20px; line-height: 1.2; font-weight: 700; letter-spacing: -0.48px; }
+
+/* card descriptions: up to three lines, so the full sentence shows at every width */
+.calc-page .hub-card p, .calc-page .calc-more .hub-card p { -webkit-line-clamp: 4; }
+
+/* ===================================================== Top nav menus, light theme ===
+   As Figma "Navigation" (light): white glass panels with a #e3e6f2 border and a soft shadow,
+   #13161b items with dark icons, a pale grey-blue fill on hover and for the current item. */
+html[data-theme="light"] .calc-page :is(.nav-dd__panel, .nav-dd__flyout, .lang-dd__panel) {
+  background: rgba(255, 255, 255, 0.94); border-color: #e3e6f2;
+  box-shadow: 0 40px 32px rgba(15, 15, 15, 0.04), 0 8px 24px rgba(19, 22, 27, 0.06);
+}
+html[data-theme="light"] .calc-page :is(.nav-dd__item, .lang-dd__opt, .nav-dd__title) { color: #13161b; }
+html[data-theme="light"] .calc-page :is(.nav-dd__item, .lang-dd__opt):is(:hover, :focus-visible),
+html[data-theme="light"] .calc-page .nav-dd__subwrap:is(:hover, :focus-within) > .nav-dd__item--parent,
+html[data-theme="light"] .calc-page .nav-dd__item.is-active { background: rgba(188, 197, 226, 0.2); }
+html[data-theme="light"] .calc-page .lang-dd__opt:not(.is-on) { color: #5b6170; }
+html[data-theme="light"] .calc-page .lang-dd__short { background: #eef1f6; color: #13161b; }
+html[data-theme="light"] .calc-page :is(.nav-dd__icon, .nav-dd__chev) img:not([src*="ln-play"]),   /* the play icon stays green, as in Figma */
+html[data-theme="light"] .calc-page img.nav-dd__chev,
+html[data-theme="light"] .calc-page .nav-dd__icon .ico-flip__img { filter: brightness(0) saturate(100%) invert(7%); }
+html[data-theme="light"] .calc-page .nav-dd__community { border-top-color: #e3e6f2; }
+html[data-theme="light"] .calc-page .nav-dd__store--apple { background: #13161b; color: #fff; }
+html[data-theme="light"] .calc-page .nav-dd__store--apple img { filter: brightness(0) invert(1); }   /* white logo on the black button */
+html[data-theme="light"] .calc-page .nav-dd__store--google { background: rgba(196, 205, 232, 0.24); }
+html[data-theme="light"] .calc-page .nav-dd__store--google .gp-text { filter: brightness(0) saturate(100%) invert(7%); }
+html[data-theme="light"] .calc-page .nav-dd__social a { border-color: #e3e6f2; }
+html[data-theme="light"] .calc-page .nav-dd__social a:hover { border-color: #c9cfdc; background: rgba(188, 197, 226, 0.2); }
+html[data-theme="light"] .calc-page .nav-dd__social img { filter: brightness(0) saturate(100%) invert(7%); opacity: 0.85; }
+html[data-theme="light"] .calc-page .nav-dd__social a:hover img { filter: brightness(0) saturate(100%) invert(7%); opacity: 1; }
+html[data-theme="light"] .calc-page .mnav { background: #fff; }
+
+/* options: the Strategy menu leads the form, on its own row */
+.calc-page[data-calc="options"] .calc-form > .fld[data-f="pre"] { grid-column: 1 / -1; max-width: 360px; }
+
+/* ===================================================== Options: two columns ===
+   As stock and crypto: the setup on the left; the result, sentence and payoff chart on the right.
+   The setup column is a little wider (≈45/55) for the strategy legs, which become compact
+   two-row cards: Call/Put and Buy/Sell on top (× in the corner), Strike, Premium, Qty below. */
+@media (min-width: 1180px) {
+  .calc-page[data-calc="options"] .calc-tool { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr); }
+  .calc-page[data-calc="options"] .calc-tool__bar { grid-column: 1 / -1; }
+  .calc-page[data-calc="options"] .calc-out { align-content: start; border-top: 0; border-left: 1px solid var(--border-primary); padding: 24px 28px; }
+  .calc-page[data-calc="options"] .calc-form { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .calc-page[data-calc="options"] .calc-form > * { grid-column: 1 / -1 !important; }
+  .calc-page[data-calc="options"] .calc-form > .fld[data-f="pre"] { max-width: none; }
+  .calc-page[data-calc="options"] .c-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .calc-page[data-calc="options"] .c-panel > * { grid-column: auto !important; }
+  .calc-page[data-calc="options"] .c-panel > .fld[data-f="pre"], .calc-page[data-calc="options"] .c-panel > .c-panel__note { grid-column: 1 / -1 !important; }
+  .calc-page[data-calc="options"] .leg { position: relative; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 12px 44px 12px 12px; }
+  .calc-page[data-calc="options"] .leg > .fld:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .calc-page[data-calc="options"] .leg > .fld:nth-child(2) { grid-column: 2; grid-row: 1; }
+  .calc-page[data-calc="options"] .leg > .fld:nth-child(3) { grid-column: 1; grid-row: 2; }
+  .calc-page[data-calc="options"] .leg > .fld:nth-child(4) { grid-column: 2; grid-row: 2; }
+  .calc-page[data-calc="options"] .leg > .fld:nth-child(5) { grid-column: 3; grid-row: 2; }
+  .calc-page[data-calc="options"] .leg > :last-child:not(.fld) { position: absolute; top: 10px; right: 8px; }
+}
+@media (min-width: 1180px) {
+  /* labels that wrap to two lines keep their inputs level */
+  .calc-page[data-calc="options"] .c-panel { align-items: end; }
+}
+@media (min-width: 1180px) {
+  /* a 4-leg strategy makes the setup column tall: the result and payoff chart stay in view beside it */
+  .calc-page[data-calc="options"] .calc-out { position: sticky; top: 72px; align-self: start; }
+}
+@media (min-width: 1180px) {
+  /* sticky needs a non-scrolling card (clip, not hidden); the column divider moves to the form so it runs full height */
+  .calc-page[data-calc="options"] .calc-tool { overflow: clip; }
+  .calc-page[data-calc="options"] .calc-out { border-left: 0; }
+  .calc-page[data-calc="options"] .calc-form { border-right: 1px solid var(--border-primary); }
+}
+
+/* ===================================================== Margin: two columns ===
+   As the other calculators: the setup on the left; the call price, sentence and the equity
+   chart on the right. Four inputs stack; More options keeps two columns. */
+@media (min-width: 1180px) {
+  .calc-page[data-calc="margin"] .calc-tool { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.56fr); overflow: clip; }
+  .calc-page[data-calc="margin"] .calc-tool__bar { grid-column: 1 / -1; }
+  .calc-page[data-calc="margin"] .calc-out { align-content: start; border-top: 0; padding: 24px 28px; }
+  .calc-page[data-calc="margin"] .calc-form { grid-template-columns: minmax(0, 1fr); gap: 14px; border-right: 1px solid var(--border-primary); }
+  .calc-page[data-calc="margin"] .calc-form > * { grid-column: 1 / -1 !important; }
+  .calc-page[data-calc="margin"] .calc-form > .fld:has(> .seg[data-k="side"]) .seg { width: 100%; max-width: 280px; }
+  .calc-page[data-calc="margin"] .c-panel { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* position size: the result as the other calculators' tiles. The hero tile is neutral (a size, not
+   a profit); the risk : reward chart sits under its heading without its own frame. */
+.calc-out > .ps-hero { order: 0; flex: 1.2 1 240px; display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 12px; background: var(--c-field); }
+html[data-theme="light"] .calc-page .calc-out > .ps-hero { background: #f6f8fd; }
+.res-dd-note { font-size: 14px; font-weight: 500; color: var(--fg-secondary); }
+.res-chart .rr-plot { margin: 8px 0 8px; }
+.calc-out > div.ps-hero:first-child:not(.res-empty) { flex: 1 1 100%; background: var(--c-field); }
+html[data-theme="light"] .calc-page .calc-out > div.ps-hero:first-child { background: #f6f8fd; }
+.calc-page[data-calc="position"] .calc-out > .res-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* hairlines: the side nav keeps its right edge when collapsed, and the top bar always has its
+   bottom edge (not only once the page has scrolled) */
+.calc-page .side-nav.is-collapsed { border-right-color: var(--border-primary); }
+.calc-page .side-nav.is-collapsed:hover, .calc-page .side-nav.is-collapsed:focus-within { border-right-color: #3dbb9a; }
+.calc-page .topnav { box-shadow: 0 1px 0 var(--border-primary); }
+.calc-page .topnav.is-scrolled { box-shadow: 0 1px 0 var(--border-primary), 0 8px 24px rgba(0, 0, 0, 0.35); }
+html[data-theme="light"] .calc-page .topnav.is-scrolled { box-shadow: 0 1px 0 var(--border-primary), 0 8px 24px rgba(19, 22, 27, 0.06); }
+.calc-tip b { font-weight: 700; }
+
+/* QA: text-link controls get a 32px-tall hit area (WCAG 2.5.8) without moving the layout */
+.c-link, .c-toggle, .fld__use, .rr-edit { padding-block: 6px; margin-block: -6px; }
+.calc-form > .c-toggle { margin-top: -10px; }
+/* the empty take-profit zone wraps on a narrow card instead of running off it */
+.rr-zone--empty { white-space: normal; text-align: center; line-height: 18px; }
+/* the strategy tabs scroll sideways on a phone: fade the right edge so it reads as a strip */
+@media (max-width: 600px) {
+  .ox-tabs { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent); padding-right: 32px; }
+}
+/* chart labels: a fixed on-screen size at any chart width (--k is set by CalcUI.lineChart) */
+.c-chart svg text { font-size: calc(12px * var(--k, 1)); }
+.res-chart .c-chart svg text { font-size: calc(13px * var(--k, 1)); }
+.c-chart__mlabel { stroke-width: calc(4px * var(--k, 1)); }
+/* phones: a formula keeps its lines whole and scrolls sideways inside its box */
+@media (max-width: 600px) { .calc-formula { white-space: pre; font-size: 13px; line-height: 21px; } }
+/* tablets: options' four long field labels need two per row */
+@container calctool (min-width: 480px) and (max-width: 760px) { .calc-page[data-calc="options"] .calc-form { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

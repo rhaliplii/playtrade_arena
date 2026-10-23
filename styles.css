@@ -541,6 +541,10 @@ a {
 .side-nav__toggle img { width: 12px; height: 12px; transition: transform 0.2s ease; }
 .side-nav:not(.is-collapsed) .side-nav__toggle img { transform: rotate(180deg); }
 
+/* Anchor jumps (the side nav, the hero's Explore Arena) target a section's heading. The top
+   bar is sticky over 56px, so without this the heading lands underneath it and the section
+   appears to start at its first row instead of its title. */
+[id$="-title"] { scroll-margin-top: 76px; }
 .main {
   flex: 1;
   min-width: 0;
@@ -2029,6 +2033,34 @@ body.is-playing { overflow: hidden; }
 .nav-dd__item:not(.is-active) .nav-dd__icon img[src$="nav-cup.svg"] { filter: brightness(0) invert(0.56); }
 /* Tools menu extras: submenu chevron, billionaire faces, "hot" and Telegram badges */
 .nav-dd__chev { width: 20px; height: 20px; margin-left: auto; margin-right: -6px; }
+/* Submenu (Tools › Calculators): a second panel beside the menu, its top aligned with it */
+.nav-dd__subwrap { display: flex; flex-direction: column; }
+.nav-dd__flyout {
+  position: absolute;               /* relative to .nav-dd__panel */
+  top: -1px;
+  left: calc(100% + 12px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 260px;
+  padding: 20px;
+  border: 1px solid var(--border-primary);
+  border-radius: 24px;
+  background: rgba(19, 22, 27, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 40px 64px -32px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-6px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+/* invisible bridge across the gap, so the pointer can travel into the second panel */
+.nav-dd__flyout::before { content: ""; position: absolute; top: 0; bottom: 0; left: -14px; width: 14px; }
+.nav-dd__subwrap:hover .nav-dd__flyout,
+.nav-dd__subwrap:focus-within .nav-dd__flyout { opacity: 1; visibility: visible; transform: none; }
+.nav-dd__subwrap:hover > .nav-dd__item--parent,
+.nav-dd__subwrap:focus-within > .nav-dd__item--parent { background: rgba(166, 171, 185, 0.08); }
 .nav-dd__faces { display: flex; margin-left: 2px; }
 .nav-dd__faces img {
   width: 26px;
@@ -2249,7 +2281,8 @@ body.is-playing { overflow: hidden; }
     display: block;
     height: 2px;
     border-radius: 2px;
-    background: var(--fg-primary);
+    /* matches the search icon beside it, which is stroked #888B96 */
+    background: var(--fg-secondary);
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
   .topnav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -2316,6 +2349,12 @@ body.is-playing { overflow: hidden; }
   .mnav__body { display: flex; flex-direction: column; gap: 2px; padding: 0 0 12px; }
   .mnav__body[hidden] { display: none; }
   .mnav__body .nav-dd__item { height: 44px; padding: 10px 12px; font-size: 15px; }
+  /* in the drawer a submenu expands in place, indented under its row */
+  .mnav__body .nav-dd__flyout { position: static; display: none; width: auto; padding: 0 0 4px 20px; border: 0; background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; opacity: 1; visibility: visible; transform: none; }
+  .mnav__body .nav-dd__flyout::before { display: none; }
+  .mnav__body .nav-dd__subwrap.is-open .nav-dd__flyout { display: flex; }
+  .mnav__body .nav-dd__item--parent .nav-dd__chev { transition: transform 0.2s ease; }
+  .mnav__body .nav-dd__subwrap.is-open .nav-dd__chev { transform: rotate(90deg); }
   .mnav__body .nav-dd__eyebrow { margin-top: 8px; }
   .mnav__body .nav-dd__partner { padding: 10px 12px; gap: 12px; }
   .mnav__body .nav-dd__partner-logo { width: 48px; height: 48px; }
@@ -2741,4 +2780,11 @@ body.is-playing { overflow: hidden; }
   .pf-footer .pf-col ul { margin: 0 0 18px; gap: 14px; }
   /* The last accordion's rule already closes the columns, so the legal row drops its own */
   .pf-footer__legal { gap: 18px; padding-top: 14px; border-top: 0; }
+}
+
+/* very narrow phones (≤ 360px): the signed-out bar (search, Get Started) fits without sideways scroll */
+@media (max-width: 360px) {
+  .topnav__right, .topnav__icons { gap: 4px; }
+  .topnav__cta { padding-inline: 10px; }
+  .topnav__logo { width: 104px; height: auto; }   /* scaled, not squashed */
 }
