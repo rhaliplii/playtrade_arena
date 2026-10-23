@@ -1086,7 +1086,7 @@ html[data-theme="light"] .calc-page:not([data-calc="margin"]) .calc-out:has(.res
 .hub-card__img { position: absolute; right: 6.35%; object-fit: contain; object-position: right bottom; transform-origin: 70% 100%; transition: transform 0.5s ease; }
 .hub-card:hover .hub-card__img { transform: scale(1.04); }
 @media (prefers-reduced-motion: reduce) { .hub-card__img { transition: none; } }
-.hub-card__art--stock    { background: linear-gradient(32.41deg, #014c3e 0%, #01c493 100%); }
+.hub-card__art--stock    { background: linear-gradient(32.41deg, #014c3e 0%, #01d9a0 100%); }
 .hub-card__art--crypto   { background: linear-gradient(32.41deg, #d73d04 0%, #ff9e16 100%); }
 .hub-card__art--position { background: linear-gradient(32.41deg, #011865 0%, #1988ff 100%); }
 .hub-card__art--options  { background: linear-gradient(32.41deg, #35067f 0%, #9d3ef9 100%); }
@@ -1233,3 +1233,19 @@ html[data-theme="light"] .calc-page .topnav.is-scrolled { box-shadow: 0 1px 0 va
 @media (max-width: 600px) { .calc-formula { white-space: pre; font-size: 13px; line-height: 21px; } }
 /* tablets: options' four long field labels need two per row */
 @container calctool (min-width: 480px) and (max-width: 760px) { .calc-page[data-calc="options"] .calc-form { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* risk : reward chart: the price column is only as wide as its longest price (sized by a hidden
+   copy of it), so the axis starts at the column's left edge like the other results */
+.rr-plot { grid-template-columns: max-content minmax(0, 1fr); gap: 12px; }
+@container calcout (max-width: 360px) { .rr-plot { grid-template-columns: max-content minmax(0, 1fr); gap: 10px; } }
+.rr-axis__w { display: block; height: 0; overflow: hidden; visibility: hidden; font-size: 14px; font-weight: 500; font-style: normal; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rr-axis b { font-weight: inherit; }
+.rr-short { display: none; }
+@container calcout (max-width: 360px) { .rr-full { display: none; } .rr-short { display: inline; } }
+@container calcout (max-width: 360px) {
+  .rr-zone { white-space: normal; line-height: 18px; }
+  .rr-zone > :first-child { flex: none; white-space: nowrap; }
+  .rr-zone > :last-child { min-width: 0; text-align: right; }
+}
+@container calcout (max-width: 360px) {
+  .rr-entry span { left: 8px; max-width: calc(100% - 16px); padding: 4px 8px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; }
+}

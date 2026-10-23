@@ -57,11 +57,15 @@
       ? `You risk ${m(r.risk)} to make ${m(t.reward)}. At ${ratio} you need to win ${be === "under 1" ? "<b>under 1%</b>" : `more than <b>${be}%</b>`} of trades to break even.`
       : t ? `At this take profit the trade still loses ${m(Math.abs(t.reward))} after fees, so there is no reward to weigh.`
       : `You risk ${m(r.risk)} (${pc(r.riskPct)} of your account) if the stop is hit.`;
+    // an axis price: in full, plus a short form ($59.9k) that narrow phones show for big prices
+    const ax = (v) => (v >= 1e4 ? `<b class="rr-full">${p(v)}</b><b class="rr-short">${CalcUI.currency.sym + CalcUI.compact(v)}</b>` : p(v));
+    const longest = [top, i.entry, bottom].filter((v) => v !== null).sort((a, b) => p(b).length - p(a).length)[0];
     const plot = `<div class="rr-plot" role="img" aria-label="${esc(`Entry ${p(i.entry)}, stop ${p(r.stop)}${t ? `, take profit ${p(t.price)}` : ""}`)}">
           <div class="rr-axis">
-            ${top !== null ? `<span style="top:0">${p(top)}</span>` : ""}
-            <span style="top:${entryAt}px">${p(i.entry)}</span>
-            ${bottom !== null ? `<span style="top:100%">${p(bottom)}</span>` : ""}
+            <i class="rr-axis__w" aria-hidden="true">${ax(longest)}</i>
+            ${top !== null ? `<span style="top:0">${ax(top)}</span>` : ""}
+            <span style="top:${entryAt}px">${ax(i.entry)}</span>
+            ${bottom !== null ? `<span style="top:100%">${ax(bottom)}</span>` : ""}
           </div>
           <div class="rr-bar">${zones}<div class="rr-entry" style="top:${entryAt}px"><span>Entry · ${esc(size)}</span></div></div>
         </div>`;
