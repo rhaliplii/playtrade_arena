@@ -72,7 +72,7 @@ FAQ = [
     ("What is the difference between initial and maintenance margin?",
      "<p>Initial margin is the share of a new position you must fund yourself (50% under Regulation T). Maintenance margin is the minimum equity you must keep as the price moves (at least 25% for longs and 30% for most shorts under FINRA rules; brokers often require more).</p>"),
     ("How much buying power do I have?",
-     "<p>Your cash divided by the initial margin rate. At 50%, $10,000 of cash buys up to $20,000 of marginable stock. Enter your cash under “Interest and buying power” to see it.</p>"),
+     "<p>Your cash divided by the initial margin rate. At 50%, $10,000 of cash buys up to $20,000 of marginable stock. Enter your cash under More options → Cash available to see it.</p>"),
     ("What happens in a margin call?",
      "<p>Your broker asks you to bring equity back above the maintenance level, by depositing cash or reducing the position. If you don't, or if prices move fast, the broker can sell your shares without asking first.</p>"),
     ("Why is a short sale called sooner than a long?",

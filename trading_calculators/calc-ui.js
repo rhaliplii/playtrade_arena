@@ -7,7 +7,7 @@
 //   <div class="fld" data-f="entry"> … <p class="fld__err">  where errors for "entry" go
 // and hands CalcUI.create() its defaults and a render(state) function. CalcUI keeps the
 // state in the URL (so every result is a shareable link), restores it on load, re-renders
-// on every keystroke, and handles Reset, Copy link and the currency selector.
+// on every keystroke, and handles Reset, Share result and the currency selector.
 (() => {
   "use strict";
 
@@ -349,7 +349,7 @@
       all[n].click(); all[n].focus();
     });
 
-    // toolbar: reset and copy link
+    // toolbar: Reset and Share result
     root.querySelector("[data-reset]")?.addEventListener("click", () => {
       state = Object.assign({}, defaults);
       apply(); run();

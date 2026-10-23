@@ -86,7 +86,7 @@ FAQ = [
     ("Does the calculator include taxes?",
      "<p>Only if you enter a tax rate. It then applies that single rate to a profit (a loss is not taxed and gives no credit). Real capital-gains rules depend on where you live, how long you held and your other gains and losses, so treat the after-tax figure as an estimate.</p>"),
     ("Can I calculate profit on a short sale?",
-     "<p>Yes. Choose Short, enter the price you sold at as the entry and the price you bought back at as the exit. Profit is (entry − exit) × shares minus fees, and any dividends paid while you were short are subtracted.</p>"),
+     "<p>Yes. Choose Short, enter the price you sold at as the entry and the price you bought back at as the exit. Profit is (entry − exit) × shares minus fees, and any dividends paid while you were short are subtracted. Add the stock-borrow fee under More options to include it too.</p>"),
     ("How do I find the price I need to sell at for a target profit?",
-     "<p>Switch to “Price for a target” and enter the profit you want, as an amount or a % return. The calculator solves for the sell price that delivers it after fees, and after tax if you entered a rate.</p>"),
+     "<p>Use “Find the price for a target profit” under the result and enter the profit you want, as an amount or (under More options) a % return. The calculator solves for the sell price that delivers it after fees, and after tax if you entered a rate.</p>"),
 ]

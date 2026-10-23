@@ -85,5 +85,5 @@ FAQ = [
     ("Can I use it for crypto or fractional shares?",
      "<p>Yes. Pick <b>Crypto</b> (up to 8 decimals) or <b>Other</b> (any fraction) as the asset type, or set the rounding yourself under More options → Round to. The size is rounded down to that step so you stay within your risk.</p>"),
     ("Why is my position smaller than expected?",
-     "<p>Either fees and slippage took part of the risk budget, the size was rounded down to whole units, or the position hit the buying-power cap (account × max leverage). The results say which.</p>"),
+     "<p>Three things can make it smaller: fees and slippage use part of the risk budget, the size is rounded down to the “Round to” step (whole shares by default), or the position hits the buying-power cap (account × max leverage). If it is capped, the result says so.</p>"),
 ]

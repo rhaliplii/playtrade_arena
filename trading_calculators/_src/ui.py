@@ -111,7 +111,7 @@ def ticker_field(kind):
 
 
 def tool(title, form_html, currencies=CURRENCIES, stacked=False):
-    """The calculator card: toolbar (title, currency, copy link, reset), inputs, results."""
+    """The calculator card: toolbar (title, currency, Share result, Reset), inputs, results."""
     opts = "".join(f'<option value="{v}">{t}</option>' for v, t in currencies)
     return f'''      <section class="c-card calc-tool{" calc-tool--stack" if stacked else ""}" id="calculator" data-calc-root aria-labelledby="tool-title">
         <div class="calc-tool__bar">

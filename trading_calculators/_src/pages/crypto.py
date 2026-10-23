@@ -94,5 +94,5 @@ FAQ = [
     ("What price do I need to sell at to make a certain profit?",
      "<p>Use “Find the price for a target profit” under the result and enter the profit you want, as an amount or (under More options) a % return. The calculator returns the sell price that delivers it after both fees, and after tax if you entered a rate.</p>"),
     ("Can I calculate profit on a crypto short?",
-     "<p>Yes. Pick Short, enter the price you sold at and how much you sold, then the buy-back price. The calculator takes the fee off both sides and shows your profit or loss and the break-even buy-back price. Borrow interest, funding rates and liquidation aren't included.</p>"),
+     "<p>Yes. Pick Short, enter the price you sold at and how much you sold, then the buy-back price. The calculator takes the fee off both sides and shows your profit or loss and the break-even buy-back price. Add a borrow fee under More options to include it; funding rates and liquidation aren't included.</p>"),
 ]
