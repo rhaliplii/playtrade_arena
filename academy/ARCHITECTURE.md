@@ -103,8 +103,8 @@ Analytics events: `lesson_start`, `card_answer`, `lesson_complete`, `challenge_s
 `build/pages/start.py`, `js/onboarding.js`, `css/onboarding.css`, strings `locales/en/onboarding.json`, questions
 `content/en/onboarding.json` (schema `onboarding.schema.json`).
 
-- **Guest home hero:** always "Take the quiz" → `/academy/start` + "Start learning free" → the Trading Foundations path page (the sticky phone bar and the
-  "Ready when you are" button mirror the first). The quiz page opens where the guest is: question 1, the next
+- **Guest home hero:** always "Take the quiz" → `/academy/start` + "Start learning free" → the Trading Foundations path page (the sticky phone bar mirrors
+  the first; the "Ready when you are" card has its own "Sign up free": the sign-up sheet, then Lesson 1). The quiz page opens where the guest is: question 1, the next
   question, or the saved result with the sign-up buttons. Members never see the guest hero or the quiz.
 - **`/academy/start`:** 5 questions, one per screen (the shared player frame), tapping an option answers it; feedback
   right away (right: "Good call · +10 XP"; not right: the idea + "You'll learn this in Chapter N"; only the learner's pick

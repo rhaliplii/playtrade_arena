@@ -222,9 +222,8 @@
     return hero;
   }
   /** Phones, guests: a sticky copy of the hero's main button once the hero has scrolled out of view (canvas
-      Home-Guest-C-Mobile). Hidden on desktop by CSS. Desktop: the "Ready when you are" button mirrors the hero too. */
+      Home-Guest-C-Mobile). Hidden on desktop by CSS. (The "Ready when you are" card has its own button: Sign up free.) */
   function guestSticky() {
-    mirrorHeroCta($("[data-ready-cta]"));   // desktop "Ready when you are": the same button as the hero
     var bar = $("[data-gh-sticky]"), hero = bar && mirrorHeroCta($("[data-gh-sticky-cta]", bar));
     if (!hero) return;
     function show(on) {

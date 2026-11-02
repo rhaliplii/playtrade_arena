@@ -271,7 +271,8 @@ def ready_card(t, base, first_r, first_l):
             f'<span class="ac-eyebrow ac-eyebrow--mint">{esc(t("home.ready.eyebrow"))}</span>'
             f'<h2 id="ready-title" class="ac-h2">{esc(t("home.ready.title", n=mins))}</h2>'
             f'<p class="ac-ready__text">{esc(t("home.ready.text"))}</p>'
-            f'<a class="ac-btn ac-btn--primary ac-ready__btn" href="{href(base, first_r)}" data-ready-cta><span data-gh-cta-label>{esc(t("home.hero.cta"))}</span>{icon("chev", 16, 2.5)}</a>'
+            # the closing ask: sign up (the sheet), then straight into Lesson 1 (shell.js: a sign-up link lands on its href)
+            f'<a class="ac-btn ac-btn--primary ac-ready__btn" href="{href(base, first_r)}" data-action="signup" data-reason="{esc(t("chapter.signupReason"))}">{esc(t("home.ready.cta"))}{icon("chev", 16, 2.5)}</a>'
             # the board's "N min" ring: a quarter arc on a track, the minutes in the middle (decorative; the title says it)
             f'<svg class="ac-ready__ring" viewBox="0 0 150 150" aria-hidden="true" focusable="false">'
             f'<circle class="ac-ready__track" cx="75" cy="75" r="60"/>'
