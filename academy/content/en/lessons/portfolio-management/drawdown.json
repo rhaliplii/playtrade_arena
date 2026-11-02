@@ -1,0 +1,341 @@
+{
+ "id": "drawdown",
+ "chapter": "portfolio-management",
+ "n": 7,
+ "title": "Drawdown: staying in the game",
+ "minutes": 5,
+ "desc": "Measure a drawdown and size for the worst fall",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Back to even",
+   "situation": "Your $10,000 portfolio falls 50% to $5,000. What gain do you need to get back to $10,000?",
+   "visual": {
+    "kind": "barchart",
+    "title": "Down and back",
+    "label": "$10,000 falls to $5,000; what gain gets it back to $10,000?",
+    "groups": [
+     {
+      "label": "Start",
+      "values": [
+       10000
+      ],
+      "displays": [
+       "$10,000"
+      ],
+      "tones": [
+       "blue"
+      ]
+     },
+     {
+      "label": "After −50%",
+      "values": [
+       5000
+      ],
+      "displays": [
+       "$5,000"
+      ],
+      "tones": [
+       "down"
+      ]
+     },
+     {
+      "label": "Back to even",
+      "values": [
+       10000
+      ],
+      "displays": [
+       "+ ?"
+      ],
+      "tones": [
+       "up"
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "50%",
+     "feedback": "The gain works on a smaller pot. 50% of $5,000 is only $2,500."
+    },
+    {
+     "text": "100%",
+     "feedback": "A 50% loss needs a 100% gain. Losses hurt more than gains help."
+    },
+    {
+     "text": "75%",
+     "feedback": "Closer, but 75% of $5,000 is $3,750. You need $5,000 more: the whole pot again."
+    }
+   ],
+   "answer": 1,
+   "idea": "loss-recovery-math",
+   "work": "$5,000 + 50% = $7,500. To reach $10,000 you need +$5,000 on $5,000: +100%.",
+   "added": "Feedback for C written for the Academy"
+  },
+  {
+   "type": "learn",
+   "title": "Drawdown",
+   "text": "A **[[drawdown|drawdown]]** is the fall from a peak to the lowest point after it. It’s the pain you have to sit through.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "series",
+      "title": "Your portfolio",
+      "aside": "−30%",
+      "asideTone": "down",
+      "ends": false,
+      "label": "The portfolio peaks at $12,000 and falls to a low of $8,400, a 30% drawdown",
+      "series": [
+       {
+        "values": [
+         10000,
+         11000,
+         12000,
+         11000,
+         9800,
+         8900,
+         8400,
+         9000,
+         9900,
+         10600
+        ],
+        "tone": "blue"
+       }
+      ],
+      "hlines": [
+       {
+        "value": 12000,
+        "label": "peak",
+        "tone": "up"
+       },
+       {
+        "value": 8400,
+        "label": "low",
+        "tone": "down"
+       }
+      ],
+      "points": [
+       {
+        "i": 2,
+        "label": "$12,000",
+        "tone": "up"
+       },
+       {
+        "i": 6,
+        "label": "$8,400",
+        "tone": "down",
+        "pos": "below"
+       }
+      ]
+     }
+    },
+    {
+     "side": true,
+     "tip": "$12,000 → $8,400 = −30%. Broad stock markets have fallen 50% or more in their worst crashes."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "The recovery math",
+   "text": "The deeper the fall, the bigger the climb back. And it grows fast.",
+   "visual": {
+    "kind": "hbars",
+    "heads": [
+     "Fall",
+     "Gain to get back"
+    ],
+    "label": "A 10% fall needs 11% to recover, 20% needs 25%, 30% needs 43%, 50% needs 100%",
+    "rows": [
+     {
+      "label": "−10%",
+      "value": 10,
+      "tone": "down",
+      "value2": 11,
+      "display2": "+11%"
+     },
+     {
+      "label": "−20%",
+      "value": 20,
+      "tone": "down",
+      "value2": 25,
+      "display2": "+25%"
+     },
+     {
+      "label": "−30%",
+      "value": 30,
+      "tone": "down",
+      "value2": 43,
+      "display2": "+43%"
+     },
+     {
+      "label": "−50%",
+      "value": 50,
+      "tone": "down",
+      "value2": 100,
+      "display2": "+100%"
+     }
+    ]
+   },
+   "foot": "Small falls are easy to repair. Deep ones can take years, so avoiding them matters most.",
+   "footTone": "gold",
+   "added": "Board label “tap a row”: built as ▶ Play on the hbars (hbars rows aren’t tappable)"
+  },
+  {
+   "type": "trap",
+   "title": "Size for the worst",
+   "text": "You have $100,000. Picture stocks falling 50%, as they have in big crashes. Assume bonds and cash hold steady.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "split",
+      "label": "In a 50% stock crash an 80/20 mix loses $40,000 and a 40/60 mix loses $20,000",
+      "rows": [
+       {
+        "label": "80/20 mix",
+        "aside": "−$40,000",
+        "segments": [
+         {
+          "value": 80,
+          "tone": "up",
+          "label": "80% stocks"
+         },
+         {
+          "value": 20,
+          "tone": "blue"
+         }
+        ]
+       },
+       {
+        "label": "40/60 mix",
+        "aside": "−$20,000",
+        "segments": [
+         {
+          "value": 40,
+          "tone": "up",
+          "label": "40% stocks"
+         },
+         {
+          "value": 60,
+          "tone": "blue",
+          "label": "60% bonds and cash"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "rule": "if that fall would make you sell at the bottom, you hold too much risk."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Find the drawdown",
+   "q": "Your portfolio peaked at $40,000, fell to $30,000, and is now back at $36,000. What was the drawdown?",
+   "idea": "drawdown-from-peak",
+   "visual": {
+    "kind": "series",
+    "title": "Peak to low",
+    "ends": false,
+    "label": "Peak $40,000, low $30,000, now $36,000",
+    "series": [
+     {
+      "values": [
+       32,
+       36,
+       40,
+       38,
+       36,
+       34,
+       30,
+       31,
+       33,
+       36
+      ],
+      "tone": "blue"
+     }
+    ],
+    "points": [
+     {
+      "i": 2,
+      "label": "$40k",
+      "tone": "up"
+     },
+     {
+      "i": 6,
+      "label": "$30k",
+      "tone": "down",
+      "pos": "below"
+     },
+     {
+      "i": 9,
+      "label": "$36k",
+      "tone": "blue"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "10%",
+     "feedback": "That’s the gap between the peak and today. A drawdown runs from the peak to the low."
+    },
+    {
+     "text": "25%",
+     "feedback": "Peak to low: $10,000 off $40,000."
+    },
+    {
+     "text": "33%",
+     "feedback": "A drawdown is measured from the peak, not from the low."
+    },
+    {
+     "text": "40%",
+     "feedback": "Too big. The fall was $10,000, measured against the $40,000 peak."
+    }
+   ],
+   "answer": 1,
+   "work": "$40,000 − $30,000 = $10,000. $10,000 ÷ $40,000 = 25%.",
+   "added": "Feedback for the options the board doesn’t show written for the Academy"
+  },
+  {
+   "type": "check",
+   "title": "Why size for drawdowns?",
+   "q": "What’s the main reason to size your portfolio for a big drawdown?",
+   "options": [
+    {
+     "text": "So you never lose money",
+     "feedback": "No portfolio avoids every loss. The goal is a fall you can live through, so you stay in for the recovery."
+    },
+    {
+     "text": "So you can sit through the worst and not sell at the bottom",
+     "feedback": "A fall you can live through keeps you in for the recovery."
+    },
+    {
+     "text": "To make your returns bigger",
+     "feedback": "Sizing for drawdowns is about surviving the fall, not boosting returns."
+    },
+    {
+     "text": "To avoid paying fees",
+     "feedback": "Fees are a separate cost. Sizing is about a fall you can sit through."
+    }
+   ],
+   "answer": 1,
+   "idea": "size-for-drawdown",
+   "added": "Feedback for the options the board doesn’t show written for the Academy",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can plan to stay in the game.",
+   "lines": [
+    "Drawdown: the fall from peak to low.",
+    "A 50% loss needs a 100% gain to recover.",
+    "Size for the worst fall you could live through."
+   ]
+  }
+ ]
+}

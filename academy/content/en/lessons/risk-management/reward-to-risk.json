@@ -1,0 +1,250 @@
+{
+ "id": "reward-to-risk",
+ "chapter": "risk-management",
+ "n": 5,
+ "title": "Reward-to-risk",
+ "minutes": 5,
+ "desc": "Why a 2:1 trade can pay even when you’re wrong most of the time",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Board P1-Ch05-L5 card 1",
+   "pose": "think",
+   "title": "Which setup pays?",
+   "situation": "You win 4 trades out of 10. Setup A risks $2 to make $2. Setup B risks $2 to make $6. Which one pays over time?",
+   "visual": {
+    "kind": "stack",
+    "layout": "row",
+    "items": [
+     {
+      "kind": "rr",
+      "compact": true,
+      "title": "Setup A",
+      "aside": "1:1",
+      "entry": 50,
+      "stop": 48,
+      "target": 52,
+      "label": "Setup A: risk $2 to make $2"
+     },
+     {
+      "kind": "rr",
+      "compact": true,
+      "title": "Setup B",
+      "aside": "3:1",
+      "entry": 50,
+      "stop": 48,
+      "target": 56,
+      "label": "Setup B: risk $2 to make $6"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Setup A",
+     "feedback": "At 1:1 you need to win more than half your trades. At 40%, A slowly loses."
+    },
+    {
+     "text": "Setup B",
+     "feedback": "B’s wins are three times its losses. That pays even when you’re wrong 6 times in 10."
+    },
+    {
+     "text": "Both the same: you win 40% either way",
+     "feedback": "Same win rate, different payoffs. What each win pays compared with each loss decides the result."
+    }
+   ],
+   "answer": 1,
+   "idea": "reward-beats-win-rate",
+   "work": "10 trades, 4 wins, 6 losses. A: 4 × $2 − 6 × $2 = −$4. B: 4 × $6 − 6 × $2 = +$12."
+  },
+  {
+   "type": "learn",
+   "title": "Reward-to-risk",
+   "text": "Compare what you could make with what you could lose. Pros aim for **2:1 or more**: at least $2 of reward for every $1 of risk.",
+   "visual": {
+    "kind": "rr",
+    "title": "Trade plan",
+    "aside": "2:1",
+    "entry": 50,
+    "stop": 48,
+    "target": 54,
+    "label": "Entry $50, stop $48, target $54: risk $2 to make $4"
+   },
+   "blocks": [
+    {
+     "visual": {
+      "kind": "formula",
+      "terms": [
+       {
+        "text": "Reward-to-risk",
+        "tone": "up"
+       },
+       {
+        "op": "="
+       },
+       {
+        "text": "Target − Entry",
+        "tone": "up"
+       },
+       {
+        "op": "÷"
+       },
+       {
+        "text": "Entry − Stop",
+        "tone": "down"
+       }
+      ],
+      "foot": "$54 − $50 = $4. $50 − $48 = $2. $4 ÷ $2 = 2:1."
+     }
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap a row",
+   "title": "Right less than half the time",
+   "text": "The better the [[reward-to-risk|reward-to-risk]], the fewer trades you need to win just to break even.",
+   "visual": {
+    "kind": "table",
+    "label": "Wins needed to break even: 1:1 50%, 2:1 33%, 3:1 25%",
+    "cols": [
+     {
+      "label": "Reward-to-risk"
+     },
+     {
+      "label": "Wins needed to break even",
+      "align": "right"
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "1:1",
+       "50%"
+      ],
+      "note": "Win $1, lose $1: you need a win for every loss."
+     },
+     {
+      "cells": [
+       "2:1",
+       {
+        "text": "33%",
+        "tone": "gold"
+       }
+      ],
+      "note": "One $2 win covers two $1 losses: 1 win in 3."
+     },
+     {
+      "cells": [
+       "3:1",
+       {
+        "text": "25%",
+        "tone": "up"
+       }
+      ],
+      "note": "One $3 win covers three $1 losses: 1 win in 4."
+     }
+    ]
+   },
+   "foot": "At 2:1, winning 4 of 10 trades: 4 × $200 − 6 × $100 = +$200.",
+   "footTone": "green"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "The target has to be real",
+   "text": "A 5:1 plan means nothing if the target sits **past resistance** that price keeps failing at. Put the target just before the next ceiling. If 2:1 doesn’t fit, **skip the trade**.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Stop",
+      "value": "$48"
+     },
+     {
+      "label": "Entry",
+      "value": "$50"
+     },
+     {
+      "label": "Resistance",
+      "value": "$54"
+     },
+     {
+      "label": "Target",
+      "value": "$53.80 · 1.9:1 · skip",
+      "tone": "gold"
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Work out the ratio",
+   "q": "Entry $30, stop $28, target $36. What’s the reward-to-risk?",
+   "idea": "reward-to-risk-ratio",
+   "visual": {
+    "kind": "rr",
+    "title": "Trade plan",
+    "entry": 30,
+    "stop": 28,
+    "target": 36,
+    "label": "Entry $30, stop $28, target $36"
+   },
+   "options": [
+    {
+     "text": "1:3",
+     "feedback": "That’s upside down. Reward goes first: $6 of reward against $2 of risk."
+    },
+    {
+     "text": "2:1",
+     "feedback": "$2 is the risk, not the ratio. Divide the $6 reward by it."
+    },
+    {
+     "text": "3:1",
+     "feedback": "$6 of reward for $2 of risk: three dollars for every one you put on the line."
+    },
+    {
+     "text": "6:1",
+     "feedback": "$6 is the reward. Divide it by the $2 risk."
+    }
+   ],
+   "answer": 2,
+   "work": "$36 − $30 = $6. $30 − $28 = $2. $6 ÷ $2 = 3:1."
+  },
+  {
+   "type": "check",
+   "title": "Win rate 40%",
+   "q": "You win about 4 trades in 10. Which reward-to-risk can keep you profitable over time, before fees?",
+   "options": [
+    {
+     "text": "1:1",
+     "feedback": "At 1:1 you need to win over 50%. At 2:1, 40% is enough: 4 × $2 − 6 × $1 = +$2."
+    },
+    {
+     "text": "2:1",
+     "feedback": "At 2:1 you break even at about 33%, so 40% wins pays: 4 × $2 − 6 × $1 = +$2."
+    },
+    {
+     "text": "1:2",
+     "feedback": "At 1:2 each win is half a loss. You’d need to win about two trades in three."
+    },
+    {
+     "text": "It doesn’t matter",
+     "feedback": "It matters a lot. With 40% wins, only a reward bigger than the risk keeps you ahead."
+    }
+   ],
+   "answer": 1,
+   "idea": "break-even-win-rate",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can tell if a trade is worth taking.",
+   "lines": [
+    "Reward-to-risk = (target − entry) ÷ (entry − stop).",
+    "Aim for 2:1 or more.",
+    "At 2:1 you can be right less than half the time."
+   ]
+  }
+ ]
+}

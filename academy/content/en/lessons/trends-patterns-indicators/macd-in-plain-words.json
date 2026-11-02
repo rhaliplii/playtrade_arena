@@ -1,0 +1,564 @@
+{
+ "id": "macd-in-plain-words",
+ "chapter": "trends-patterns-indicators",
+ "n": 7,
+ "title": "MACD in plain words",
+ "minutes": 5,
+ "desc": "Two averages, their gap and the bars, and why crosses come late",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "think",
+   "title": "The crossover",
+   "situation": "The MACD line just crossed above its signal line. The stock is already up 5% from its low. What does the cross tell you?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "MACD line",
+      "tone": "gold"
+     },
+     {
+      "label": "signal",
+      "tone": "down"
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       60
+      ],
+      [
+       20,
+       56
+      ],
+      [
+       30,
+       50
+      ],
+      [
+       34,
+       52.5
+      ],
+      [
+       50,
+       54.5
+      ]
+     ],
+     "seed": 41,
+     "height": 80,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "priceLabel": "Price",
+     "extra": [
+      {
+       "price": 48.3
+      },
+      {
+       "price": 61
+      }
+     ],
+     "marks": [
+      {
+       "i": 30,
+       "price": 50,
+       "tone": "blue",
+       "label": "low $50",
+       "pos": "below"
+      },
+      {
+       "i": 34,
+       "price": 52.5,
+       "tone": "gold",
+       "label": "cross $52.50",
+       "pos": "above"
+      }
+     ],
+     "panels": [
+      {
+       "type": "macd",
+       "label": "MACD line · signal",
+       "height": 64,
+       "show": [
+        "lines"
+       ],
+       "marks": [
+        {
+         "i": 34,
+         "label": "cross",
+         "tone": "gold"
+        }
+       ]
+      }
+     ],
+     "label": "Price bottoms at $50; the MACD line crosses above its signal later, at $52.50"
+    }
+   },
+   "options": [
+    {
+     "text": "The bottom is happening right now",
+     "feedback": "MACD is built from moving averages, so it lags. The cross confirms a turn that started earlier."
+    },
+    {
+     "text": "Momentum turned up: it confirms a move already under way",
+     "feedback": "The cross says momentum has turned. It comes after the low, never at it."
+    },
+    {
+     "text": "Price will rise another 5%",
+     "feedback": "The cross says nothing about how far price goes. It only confirms that momentum turned up after the low."
+    }
+   ],
+   "answer": 1,
+   "idea": "macd-cross-confirms",
+   "work": "Low $50. The cross came at $52.50: price was already up 5%."
+  },
+  {
+   "type": "learn",
+   "title": "Two averages and their gap",
+   "text": "[[macd|MACD]] takes a **fast** exponential average of price (12 days) and a **slow** one (26 days). Exponential means recent days count more. The gap between them is the MACD line.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "MACD line",
+        "value": "fast average − slow average",
+        "tone": "gold"
+       },
+       {
+        "label": "Signal line",
+        "value": "9-day average of the MACD line",
+        "tone": "down"
+       },
+       {
+        "label": "Bars (histogram)",
+        "value": "MACD line − signal line"
+       }
+      ]
+     }
+    },
+    {
+     "tip": "Gap growing: momentum building. Gap shrinking: momentum fading. Above zero: the fast average is above the slow one."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "Read the bars",
+   "text": "The bars show the gap between the MACD line and its signal line. Watch them grow, then shrink.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       8,
+       40.5
+      ],
+      [
+       22,
+       50
+      ],
+      [
+       32,
+       54
+      ],
+      [
+       48,
+       57
+      ]
+     ],
+     "seed": 43,
+     "height": 90,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "noise": 0.4,
+     "priceLabel": "Price",
+     "explore": "play",
+     "marks": [
+      {
+       "i": 29,
+       "price": 53.2,
+       "tone": "up"
+      }
+     ],
+     "panels": [
+      {
+       "type": "macd",
+       "label": "MACD bars",
+       "show": [
+        "hist"
+       ],
+       "height": 60,
+       "macd": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0.0,
+        0.07,
+        0.11,
+        0.12,
+        0.15,
+        0.12,
+        0.11,
+        0.09,
+        0.04,
+        0.03,
+        0.01,
+        -0.03,
+        -0.05,
+        -0.08,
+        -0.11,
+        -0.12,
+        -0.16,
+        -0.18,
+        -0.22,
+        -0.25,
+        -0.23,
+        -0.26,
+        -0.26,
+        -0.25
+       ],
+       "signal": [],
+       "hist": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0.0,
+        0.074,
+        0.11,
+        0.125,
+        0.148,
+        0.116,
+        0.108,
+        0.092,
+        0.038,
+        0.03,
+        0.011,
+        -0.033,
+        -0.053,
+        -0.084,
+        -0.111,
+        -0.125,
+        -0.164,
+        -0.184,
+        -0.221,
+        -0.246,
+        -0.233,
+        -0.262,
+        -0.262,
+        -0.249
+       ],
+       "marks": [
+        {
+         "i": 29,
+         "value": 0.148,
+         "tone": "up",
+         "label": "bars peak",
+         "pos": "above"
+        }
+       ]
+      }
+     ],
+     "label": "The MACD bars grow, peak and shrink while price keeps climbing"
+    }
+   },
+   "foot": "Price kept climbing after the bars peaked. Shrinking bars mean the push is fading, not that price must fall.",
+   "footTone": "gold"
+  },
+  {
+   "type": "trap",
+   "title": "Crosses in a choppy market",
+   "text": "When price goes sideways, the two lines cross back and forth. Each cross looks like a signal. Most go nowhere.",
+   "visual": {
+    "kind": "candles",
+    "title": "Sideways",
+    "aside": "5 crosses",
+    "chart": {
+     "path": [
+      [
+       0,
+       50.0
+      ],
+      [
+       2,
+       51.85
+      ],
+      [
+       4,
+       51.49
+      ],
+      [
+       6,
+       49.73
+      ],
+      [
+       8,
+       48.72
+      ],
+      [
+       10,
+       48.96
+      ],
+      [
+       12,
+       49.65
+      ],
+      [
+       14,
+       50.56
+      ],
+      [
+       16,
+       51.46
+      ],
+      [
+       18,
+       51.14
+      ],
+      [
+       20,
+       49.29
+      ],
+      [
+       22,
+       47.93
+      ],
+      [
+       24,
+       48.95
+      ],
+      [
+       26,
+       51.13
+      ],
+      [
+       28,
+       51.8
+      ],
+      [
+       30,
+       50.6
+      ],
+      [
+       32,
+       49.29
+      ],
+      [
+       34,
+       48.89
+      ],
+      [
+       36,
+       49.07
+      ],
+      [
+       38,
+       49.83
+      ],
+      [
+       40,
+       51.16
+      ],
+      [
+       42,
+       51.73
+      ],
+      [
+       44,
+       50.31
+      ],
+      [
+       46,
+       48.28
+      ],
+      [
+       48,
+       48.2
+      ],
+      [
+       50,
+       50.13
+      ],
+      [
+       52,
+       51.59
+      ],
+      [
+       54,
+       51.21
+      ],
+      [
+       56,
+       50.04
+      ],
+      [
+       58,
+       49.23
+      ],
+      [
+       60,
+       48.83
+      ]
+     ],
+     "seed": 50,
+     "height": 60,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "noise": 0.8,
+     "priceLabel": "Price",
+     "panels": [
+      {
+       "type": "macd",
+       "label": "MACD",
+       "show": [
+        "lines"
+       ],
+       "height": 60,
+       "marks": [
+        {
+         "i": 33,
+         "tone": "white"
+        },
+        {
+         "i": 39,
+         "tone": "white"
+        },
+        {
+         "i": 46,
+         "tone": "white"
+        },
+        {
+         "i": 51,
+         "tone": "white"
+        },
+        {
+         "i": 58,
+         "tone": "white"
+        }
+       ]
+      }
+     ],
+     "label": "Sideways price; the MACD lines cross back and forth five times"
+    }
+   },
+   "rule": "a cross confirms a trend. It’s never a reason on its own."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Above zero",
+   "idea": "macd-above-zero",
+   "q": "The MACD line is above zero. What does that mean?",
+   "options": [
+    {
+     "text": "The fast average is above the slow one",
+     "feedback": "Above zero means the fast average sits above the slow one: recent prices average higher than older ones."
+    },
+    {
+     "text": "The company made a profit",
+     "feedback": "MACD is built from price only. It knows nothing about the company’s profits."
+    },
+    {
+     "text": "Price will rise tomorrow",
+     "feedback": "MACD only describes the past. Above zero means recent prices average higher than older ones."
+    },
+    {
+     "text": "Volume is above normal",
+     "feedback": "MACD doesn’t use volume. Above zero means the fast average is above the slow one."
+    }
+   ],
+   "answer": 0,
+   "work": "Fast average $52 − slow average $50 = +2."
+  },
+  {
+   "type": "check",
+   "title": "Always after",
+   "q": "Why do MACD crossovers usually come after a turn has already started?",
+   "options": [
+    {
+     "text": "They’re built from moving averages, which lag",
+     "feedback": "Averages of past prices turn after price does, so a MACD cross confirms a turn rather than calls it."
+    },
+    {
+     "text": "The data arrives a day late",
+     "feedback": "The data isn’t late. The lag comes from averaging past prices: the averages turn after price does."
+    },
+    {
+     "text": "They use volume, which comes later",
+     "feedback": "MACD doesn’t use volume at all. It lags because it’s built from moving averages of past prices."
+    },
+    {
+     "text": "They predict the next turn",
+     "feedback": "MACD can’t see ahead. It’s made of averages of past prices, so its crosses come after the turn."
+    }
+   ],
+   "answer": 0,
+   "idea": "macd-lags"
+  },
+  {
+   "type": "keep",
+   "headline": "You can read MACD in plain words.",
+   "lines": [
+    "MACD is the gap between a fast and a slow average.",
+    "The signal line and bars show momentum building or fading.",
+    "Crossovers lag, and whipsaw when the market goes sideways."
+   ]
+  }
+ ]
+}

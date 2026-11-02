@@ -1,0 +1,367 @@
+{
+ "id": "moving-averages",
+ "chapter": "trends-patterns-indicators",
+ "n": 3,
+ "title": "Moving averages: the smoothed trend",
+ "minutes": 5,
+ "desc": "A 50-day average smooths price into one line, and it always lags",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "think",
+   "title": "Above or below?",
+   "situation": "A stock trades at $62. Its 50-day moving average is $55 and rising. What does that suggest?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily · 4 months",
+    "legend": [
+     {
+      "label": "price",
+      "tone": "blue"
+     },
+     {
+      "label": "50-day",
+      "tone": "gold"
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       48
+      ],
+      [
+       10,
+       50
+      ],
+      [
+       18,
+       49.5
+      ],
+      [
+       30,
+       56
+      ],
+      [
+       36,
+       55
+      ],
+      [
+       45,
+       62
+      ]
+     ],
+     "seed": 21,
+     "height": 120,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "noise": 0.5,
+     "overlays": [
+      {
+       "values": [
+        46.5,
+        46.7,
+        46.89,
+        47.09,
+        47.29,
+        47.49,
+        47.7,
+        47.9,
+        48.1,
+        48.31,
+        48.52,
+        48.73,
+        48.93,
+        49.14,
+        49.36,
+        49.57,
+        49.78,
+        50.0,
+        50.21,
+        50.43,
+        50.65,
+        50.87,
+        51.09,
+        51.31,
+        51.53,
+        51.75,
+        51.98,
+        52.2,
+        52.43,
+        52.66,
+        52.89,
+        53.12,
+        53.35,
+        53.58,
+        53.82,
+        54.05,
+        54.29,
+        54.52,
+        54.76,
+        55.0
+       ],
+       "tone": "gold"
+      }
+     ],
+     "marks": [
+      {
+       "i": 45,
+       "price": 62,
+       "label": "$62",
+       "tone": "blue"
+      }
+     ],
+     "label": "Price at $62 above a rising 50-day average at $55"
+    }
+   },
+   "options": [
+    {
+     "text": "The trend is up: price is above a rising average",
+     "feedback": "Price above a rising average: the trend is up. It doesn’t say how long it lasts."
+    },
+    {
+     "text": "A crash is near: it’s too far above",
+     "feedback": "Price above a rising average is what an uptrend looks like. Far above can mean stretched, but it’s no crash signal."
+    },
+    {
+     "text": "Nothing: the average is random",
+     "feedback": "The average isn’t random: it’s the last 50 closes smoothed into one line. Price above it, with the average rising, shows the trend."
+    }
+   ],
+   "answer": 0,
+   "idea": "price-vs-average",
+   "work": "$62 − $55 = $7, about 13% above the average."
+  },
+  {
+   "type": "learn",
+   "title": "The smoothed trend",
+   "text": "A **[[moving-average|50-day moving average]]** is the average close of the last 50 days. Each day it adds the newest close and drops the oldest. The wiggles shrink and the trend shows.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "candles",
+      "title": "Daily",
+      "legend": [
+       {
+        "label": "price",
+        "tone": "blue"
+       },
+       {
+        "label": "50-day",
+        "tone": "gold"
+       }
+      ],
+      "chart": {
+       "path": [
+        [
+         0,
+         30
+        ],
+        [
+         8,
+         33
+        ],
+        [
+         14,
+         31.5
+        ],
+        [
+         22,
+         36
+        ],
+        [
+         28,
+         35
+        ],
+        [
+         36,
+         40
+        ],
+        [
+         40,
+         39.5
+        ]
+       ],
+       "seed": 24,
+       "height": 110,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "noise": 0.9,
+       "overlays": [
+        {
+         "period": 10,
+         "tone": "gold"
+        }
+       ],
+       "label": "Wiggly price with a smooth rising average under it"
+      }
+     }
+    },
+    {
+     "tip": "Above a rising average: uptrend. Below a falling one: downtrend."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "It’s always late",
+   "text": "An average is built from past prices, so it turns after price does.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "price",
+      "tone": "blue"
+     },
+     {
+      "label": "average",
+      "tone": "gold"
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       20,
+       52
+      ],
+      [
+       34,
+       44
+      ]
+     ],
+     "seed": 27,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "noise": 0.7,
+     "overlays": [
+      {
+       "period": 10,
+       "tone": "gold"
+      }
+     ],
+     "explore": "play",
+     "extra": [
+      {
+       "price": 54.5
+      }
+     ],
+     "marks": [
+      {
+       "i": 20,
+       "price": 52,
+       "label": "price turned",
+       "tone": "blue",
+       "pos": "above"
+      },
+      {
+       "i": 25,
+       "price": 50.6,
+       "label": "average turned",
+       "tone": "gold",
+       "pos": "below"
+      }
+     ],
+     "label": "Price turns down first; the average turns several days later"
+    }
+   },
+   "foot": "A slow average gives fewer false turns but reacts late. A faster one, like a 20-day, reacts sooner but flips more often.",
+   "footTone": "gold"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "rico": true,
+   "pose": "point",
+   "title": "Use it as a filter",
+   "text": "Use the 50-day to decide **which side** to look at, not when to click. Price above a rising average? You look at buys only. Below a falling one? You wait.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Above it, average rising",
+      "value": "Uptrend"
+     },
+     {
+      "label": "Below it, average falling",
+      "value": "Downtrend"
+     },
+     {
+      "label": "Crossing back and forth, flat",
+      "value": "No trend: expect chop"
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Work it out",
+   "idea": "moving-average-math",
+   "q": "The last five closes were $10, $11, $12, $13 and $14. What’s the 5-day moving average?",
+   "options": [
+    {
+     "text": "$10",
+     "feedback": "$10 is just the oldest close. The average adds all five and divides by five, so it lands in the middle."
+    },
+    {
+     "text": "$12",
+     "feedback": "Add the five closes and divide by five. In a steady rise, the average sits below the latest price."
+    },
+    {
+     "text": "$14",
+     "feedback": "$14 is just the latest close. The average adds all five and divides by five, so in a rise it sits below price."
+    },
+    {
+     "text": "$60",
+     "feedback": "$60 is the sum of the five closes. Divide it by five to get the average."
+    }
+   ],
+   "answer": 1,
+   "work": "(10 + 11 + 12 + 13 + 14) ÷ 5 = 60 ÷ 5 = $12."
+  },
+  {
+   "type": "check",
+   "title": "Barely moved",
+   "q": "Price fell 15% in two weeks, but the 50-day average has barely dipped. Why?",
+   "options": [
+    {
+     "text": "The average is broken",
+     "feedback": "Nothing is broken. The 50-day spreads over 50 closes, so 10 new ones barely move it."
+    },
+    {
+     "text": "It spreads over 50 days, so two weeks count for little",
+     "feedback": "Two weeks is about 10 trading days. Mixed with 40 older closes, they move the 50-day average only a little."
+    },
+    {
+     "text": "Price is about to bounce back",
+     "feedback": "The average says nothing about a bounce. It moves slowly because 10 new days are mixed with 40 older ones."
+    },
+    {
+     "text": "Averages only use the highs",
+     "feedback": "A moving average uses closing prices, not the highs. It moves slowly because 10 new days are mixed with 40 older ones."
+    }
+   ],
+   "answer": 1,
+   "idea": "average-lags"
+  },
+  {
+   "type": "keep",
+   "headline": "You can read the trend through the noise.",
+   "lines": [
+    "A moving average smooths price into one line.",
+    "Above a rising average: uptrend. Below a falling one: downtrend.",
+    "It lags: it turns after price does."
+   ]
+  }
+ ]
+}

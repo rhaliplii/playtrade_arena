@@ -1,0 +1,186 @@
+{
+ "id": "other-side",
+ "chapter": "how-markets-work",
+ "n": 2,
+ "title": "Who’s on the other side",
+ "minutes": 4,
+ "desc": "The players you trade against, and your real edge",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Who sold you those shares?",
+   "situation": "You buy 10 shares of a company in your app. Someone sold them to you. Who?",
+   "visual": {
+    "kind": "ticket",
+    "side": "Buy",
+    "title": "10 shares · $50.00",
+    "sub": "Order filled · just now",
+    "aside": "Seller",
+    "mark": "?"
+   },
+   "options": [
+    {
+     "text": "The company itself",
+     "feedback": "The company sold its shares long ago, when it first listed. Today you buy from someone who already owns them."
+    },
+    {
+     "text": "Your app",
+     "feedback": "Your app only passes your order on. The shares come from someone who already owns them and wants to sell."
+    },
+    {
+     "text": "Another trader, a fund or a market maker",
+     "feedback": "Every trade has two sides. When you buy, someone else sells, and they often have more money and data than you."
+    },
+    {
+     "text": "Nobody: new shares are created",
+     "feedback": "Buying doesn’t create shares. Someone who already owns them has to sell them to you."
+    }
+   ],
+   "answer": 2,
+   "idea": "two-sides-every-trade",
+   "added": "Feedback for B and D written for the Academy"
+  },
+  {
+   "type": "walkthrough",
+   "title": "Meet the players",
+   "text": "Tap each one, from [[market-maker|market makers]] to funds, to see their edge and your move.",
+   "steps": [
+    {
+     "label": "Market makers",
+     "sub": "Always quote a buy and a sell price.",
+     "edge": "Earn the spread, see order flow.",
+     "move": "Pay as little spread as you can (Lesson 4)."
+    },
+    {
+     "label": "Institutions (funds, banks)",
+     "sub": "Move billions, slowly.",
+     "edge": "Huge research and size.",
+     "move": "You’re small, so you get in and out instantly."
+    },
+    {
+     "label": "High-frequency traders",
+     "sub": "Trade in thousandths of a second.",
+     "edge": "Speed: they react before you see the news.",
+     "move": "Don’t chase tiny moves in seconds. Hold longer."
+    },
+    {
+     "label": "Long-term investors",
+     "sub": "Buy and hold for years.",
+     "edge": "Patience.",
+     "move": "Borrow their patience: hold your best ideas longer."
+    },
+    {
+     "label": "Other app traders",
+     "sub": "Trade from apps, like you.",
+     "edge": "Little or none.",
+     "move": "Have a plan and stick to it."
+    }
+   ],
+   "added": "Edges and moves for the last four players from the earlier lesson (p.8 table); the canvas shows the first one open"
+  },
+  {
+   "type": "pro",
+   "tag": "Your edge",
+   "title": "Your real edge",
+   "text": "You won’t out-speed the robots or out-research a hedge fund. Your real edges are **patience**, **flexibility** and **picking only the trades you understand**.",
+   "blocks": [
+    {
+     "chips": [
+      "Patience",
+      "Flexibility",
+      "Pick your trades"
+     ]
+    },
+    {
+     "tip": "A small trader can sit in cash for a month. A **$10B fund usually can’t**: it’s paid to stay invested.",
+     "tone": "plain"
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "sort",
+   "title": "Who wins this fight?",
+   "q": "Drag each fight into the right box.",
+   "idea": "where-you-win",
+   "items": [
+    "Reacting to news in 0.001 seconds",
+    "Waiting a month for the right setup",
+    "Reading 500 reports on one company"
+   ],
+   "given": [
+    {
+     "item": "Selling 20 shares instantly",
+     "bucket": "you"
+    }
+   ],
+   "buckets": [
+    {
+     "id": "they",
+     "label": "They win",
+     "sub": "funds, banks, robots",
+     "tone": "down"
+    },
+    {
+     "id": "you",
+     "label": "You win",
+     "sub": "small and patient",
+     "tone": "up"
+    }
+   ],
+   "solution": {
+    "they": [
+     "Reacting to news in 0.001 seconds",
+     "Reading 500 reports on one company"
+    ],
+    "you": [
+     "Waiting a month for the right setup"
+    ]
+   },
+   "itemFeedback": {
+    "Reacting to news in 0.001 seconds": "A robot reacts in 0.001 seconds; your thumb needs about 0.3. That’s 300 times slower. Don’t race it.",
+    "Reading 500 reports on one company": "Funds pay whole teams to read every report. Research is their fight.",
+    "Waiting a month for the right setup": "A big fund must stay invested. You can sit in cash for a month. That edge is yours."
+   },
+   "right": "Speed and research belong to them. Patience and small size belong to you. Pick fights in your box.",
+   "added": "Item feedback from the earlier lesson (p.8 table)"
+  },
+  {
+   "type": "check",
+   "pose": "detective",
+   "title": "Big news just dropped",
+   "q": "The price jumps in 0.1 seconds. You see the news 5 seconds later. What’s your best move?",
+   "options": [
+    {
+     "text": "Buy now, before it rises more",
+     "feedback": "Robots moved the price in 0.1 seconds. Chasing it means buying from them, late. Your edge is patience, not speed."
+    },
+    {
+     "text": "Don’t chase it. Stick to your plan",
+     "feedback": "The robots already moved the price. Sticking to your plan keeps you out of a race you can’t win."
+    },
+    {
+     "text": "Ask a friend at the company what’s next",
+     "feedback": "Trading on secret company information is insider trading. It’s illegal, and never an edge you can use."
+    },
+    {
+     "text": "Sell everything you own",
+     "feedback": "Panic selling on news you saw late is chasing too, just the other way. Your edge is patience, not speed."
+    }
+   ],
+   "answer": 1,
+   "idea": "your-edge-patience",
+   "added": "Feedback for B and D written for the Academy"
+  },
+  {
+   "type": "keep",
+   "headline": "You know who you trade against, and where you can win.",
+   "lines": [
+    "Every trade has someone on the other side, often with more money and data.",
+    "Don’t fight robots on speed or funds on research.",
+    "Your edge: patience, flexibility and picking only the trades you understand."
+   ]
+  }
+ ]
+}

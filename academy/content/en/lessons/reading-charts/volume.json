@@ -1,0 +1,557 @@
+{
+ "id": "volume",
+ "chapter": "reading-charts",
+ "n": 4,
+ "title": "Volume: the crowd behind the move",
+ "minutes": 5,
+ "desc": "Volume shows how many people backed a move",
+ "cards": [
+  {
+   "type": "call",
+   "title": "Which breakout?",
+   "situation": "Two stocks break above $50 on the same day. Which breakout is more believable?",
+   "visual": {
+    "kind": "chart-pair",
+    "items": [
+     {
+      "label": "Stock A",
+      "aside": "3× vol",
+      "tone": "white",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "ohlc": [
+        [
+         46,
+         46.6,
+         45.4,
+         46.3
+        ],
+        [
+         46.3,
+         47.1,
+         45.9,
+         46.9
+        ],
+        [
+         46.9,
+         47.5,
+         46.5,
+         47.3
+        ],
+        [
+         47.3,
+         48,
+         46.9,
+         47.8
+        ],
+        [
+         47.8,
+         48.5,
+         47.4,
+         48.2
+        ],
+        [
+         48.2,
+         48.9,
+         47.9,
+         48.6
+        ],
+        [
+         48.7,
+         51.9,
+         48.5,
+         51.5
+        ]
+       ],
+       "height": 120,
+       "hlines": [
+        {
+         "price": 50,
+         "tone": "gold"
+        }
+       ],
+       "volume": [
+        1,
+        1.1,
+        0.9,
+        1,
+        1.05,
+        1,
+        3
+       ],
+       "volHeight": 30,
+       "label": "Stock A breaks above $50 on three times its normal volume"
+      }
+     },
+     {
+      "label": "Stock B",
+      "aside": "½ vol",
+      "tone": "white",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "ohlc": [
+        [
+         46,
+         46.6,
+         45.4,
+         46.3
+        ],
+        [
+         46.3,
+         47.1,
+         45.9,
+         46.9
+        ],
+        [
+         46.9,
+         47.5,
+         46.5,
+         47.3
+        ],
+        [
+         47.3,
+         48,
+         46.9,
+         47.8
+        ],
+        [
+         47.8,
+         48.5,
+         47.4,
+         48.2
+        ],
+        [
+         48.2,
+         48.9,
+         47.9,
+         48.6
+        ],
+        [
+         48.7,
+         51.9,
+         48.5,
+         51.5
+        ]
+       ],
+       "height": 120,
+       "hlines": [
+        {
+         "price": 50,
+         "tone": "gold"
+        }
+       ],
+       "volume": [
+        1,
+        1.1,
+        0.9,
+        1,
+        1.05,
+        1,
+        0.5
+       ],
+       "volHeight": 30,
+       "label": "Stock B breaks above $50 on half its normal volume"
+      }
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "A: three times its normal volume",
+     "feedback": "Lots of buyers backed A’s move. More people agreed on the new price."
+    },
+    {
+     "text": "B: half its normal volume",
+     "feedback": "B broke out while few people were trading. That’s easier to reverse."
+    },
+    {
+     "text": "Neither: volume doesn’t matter",
+     "feedback": "Volume shows how many people backed the move. A breakout with more of them behind it is harder to reverse."
+    }
+   ],
+   "answer": 0,
+   "idea": "volume-confirms-breakout",
+   "work": "Normal day: 1M shares. A traded 3M. B traded 0.5M."
+  },
+  {
+   "type": "learn",
+   "title": "Volume: how many traded",
+   "text": "The bars under a chart are **[[volume|volume]]**: how many shares changed hands in each candle. A tall bar means lots of people agreed to trade at those prices.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "candles",
+      "title": "Daily",
+      "aside": "price + volume",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "ohlc": [
+        [
+         40,
+         40.6,
+         39.2,
+         40.4
+        ],
+        [
+         40.4,
+         41.5,
+         40.2,
+         41.2
+        ],
+        [
+         41.2,
+         41.6,
+         40.9,
+         41.4
+        ],
+        [
+         41.4,
+         43,
+         41.3,
+         42.8
+        ],
+        [
+         42.8,
+         43.4,
+         42.4,
+         43
+        ],
+        [
+         43,
+         43.4,
+         42.6,
+         42.8
+        ],
+        [
+         42.8,
+         44.6,
+         42.7,
+         44.2
+        ],
+        [
+         44.6,
+         44.8,
+         44.2,
+         44.4
+        ],
+        [
+         44.4,
+         44.7,
+         44.2,
+         44.5
+        ],
+        [
+         44.5,
+         45.6,
+         44.3,
+         45.3
+        ]
+       ],
+       "height": 100,
+       "volume": [
+        3,
+        3.4,
+        2.4,
+        3,
+        4,
+        3.2,
+        2.6,
+        6.5,
+        2.6,
+        3.4
+       ],
+       "volHeight": 40,
+       "label": "Ten daily candles rising from $40 to $45, with a volume bar under each"
+      }
+     }
+    },
+    {
+     "tip": "Moves on high volume have more people behind them. Moves on low volume are easier to reverse."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "Read price and volume together",
+   "text": "",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "candles",
+      "title": "Strong",
+      "aside": "price up · volume up",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "ohlc": [
+        [
+         50,
+         50.6,
+         49.6,
+         50.4
+        ],
+        [
+         50.4,
+         51.4,
+         50.2,
+         51.1
+        ],
+        [
+         51.1,
+         51.8,
+         51,
+         51.6
+        ],
+        [
+         51.6,
+         52.8,
+         51.5,
+         52.5
+        ],
+        [
+         52.5,
+         53,
+         52.4,
+         52.7
+        ]
+       ],
+       "height": 56,
+       "volume": [
+        2,
+        2.5,
+        3,
+        3.5,
+        4.2
+       ],
+       "volHeight": 34,
+       "label": "Price rises and volume rises with it"
+      }
+     },
+     {
+      "kind": "candles",
+      "title": "Running out of buyers",
+      "aside": "price up · volume down",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "ohlc": [
+        [
+         50,
+         50.9,
+         49.7,
+         50.7
+        ],
+        [
+         50.7,
+         51.8,
+         50.5,
+         51.5
+        ],
+        [
+         51.5,
+         52.2,
+         51.3,
+         52
+        ],
+        [
+         52,
+         52.4,
+         51.9,
+         52.3
+        ],
+        [
+         52.3,
+         52.6,
+         52.2,
+         52.45
+        ]
+       ],
+       "height": 56,
+       "volume": [
+        4.2,
+        3.5,
+        3,
+        2.3,
+        1.6
+       ],
+       "volHeight": 34,
+       "label": "Price rises while volume shrinks every day"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "type": "trap",
+   "title": "Volume doesn’t pick a side",
+   "text": "A huge red candle on huge volume means heavy selling. Volume shows how strong a move is, not which way it goes.",
+   "visual": {
+    "kind": "candles",
+    "title": "Bad news day",
+    "aside": "−10% · 4× vol",
+    "chart": {
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "ohlc": [
+      [
+       50,
+       50.3,
+       49.8,
+       50.1
+      ],
+      [
+       50.1,
+       50.4,
+       49.9,
+       50.2
+      ],
+      [
+       50.2,
+       50.3,
+       49.9,
+       50
+      ],
+      [
+       50,
+       50.1,
+       44.6,
+       45
+      ]
+     ],
+     "height": 90,
+     "volume": [
+      1,
+      1,
+      1,
+      4
+     ],
+     "volHeight": 36,
+     "label": "Three quiet days, then a red candle down 10% on four times the volume"
+    }
+   },
+   "rule": "Check the color and the volume together."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Rising on fumes",
+   "q": "The price rose five days in a row, but each day traded fewer shares than the day before. What does that suggest?",
+   "idea": "volume-fading-rise",
+   "visual": {
+    "kind": "candles",
+    "title": "5 days",
+    "chart": {
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "ohlc": [
+      [
+       50,
+       50.9,
+       49.7,
+       50.7
+      ],
+      [
+       50.7,
+       51.8,
+       50.5,
+       51.5
+      ],
+      [
+       51.5,
+       52.2,
+       51.3,
+       52
+      ],
+      [
+       52,
+       52.4,
+       51.9,
+       52.3
+      ],
+      [
+       52.3,
+       52.6,
+       52.2,
+       52.45
+      ]
+     ],
+     "height": 70,
+     "volume": [
+      4.2,
+      3.5,
+      3,
+      2.3,
+      1.6
+     ],
+     "volHeight": 36,
+     "label": "Five rising candles while volume shrinks every day"
+    }
+   },
+   "options": [
+    {
+     "text": "The rise is getting stronger",
+     "feedback": "Price is still rising, but fewer people are backing it each day. That’s a rise running out of buyers."
+    },
+    {
+     "text": "Fewer buyers are joining: be careful",
+     "feedback": "Price is rising, but fewer shares trade each day. Fewer buyers are joining, so the rise is easier to reverse."
+    },
+    {
+     "text": "Volume data is broken",
+     "feedback": "Falling volume is normal data, not an error. It tells you fewer people are trading the move."
+    },
+    {
+     "text": "Buy more now",
+     "feedback": "Buying more into a rise that fewer people back is risky. Wait for volume to confirm the move."
+    }
+   ],
+   "answer": 1
+  },
+  {
+   "type": "check",
+   "title": "What volume tells you",
+   "q": "Volume on a chart tells you…",
+   "options": [
+    {
+     "text": "Which way price will go next",
+     "feedback": "Volume shows how strong a move is. It doesn’t say which way price goes next."
+    },
+    {
+     "text": "How many people backed the move",
+     "feedback": "Volume counts the shares traded: how many people backed the move. That’s its strength, not its direction."
+    },
+    {
+     "text": "The company’s profit",
+     "feedback": "Profit comes from the company’s earnings. Volume counts the shares traded on the chart."
+    },
+    {
+     "text": "The spread",
+     "feedback": "The spread is the gap between bid and ask. Volume counts how many shares changed hands."
+    }
+   ],
+   "answer": 1,
+   "idea": "volume-strength-not-direction"
+  },
+  {
+   "type": "keep",
+   "headline": "You can see the crowd behind a move.",
+   "lines": [
+    "Volume = how many shares changed hands.",
+    "Big moves on big volume are more believable.",
+    "Volume shows strength, not direction."
+   ]
+  }
+ ]
+}

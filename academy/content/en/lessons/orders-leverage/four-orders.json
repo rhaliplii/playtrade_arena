@@ -1,0 +1,1104 @@
+{
+ "id": "four-orders",
+ "chapter": "orders-leverage",
+ "n": 1,
+ "title": "The four orders you’ll use 95% of the time",
+ "minutes": 5,
+ "desc": "Market, limit and stop orders, and your stop-loss",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Common-sense opener built on the p.13 “speed vs price” idea · Visual: Falling 1-minute chart for the opener, $50.00 → $49.60 (illustrative)",
+   "pose": "worried",
+   "name": "Bad news",
+   "title": "Get me out",
+   "situation": "Bad news just hit a stock you own. It was $50 a minute ago and it’s falling fast. You open your app to sell. What do you tell it?",
+   "visual": {
+    "kind": "candles",
+    "card": {
+     "sym": "ACME",
+     "name": "Acme Corp · 1-minute",
+     "price": "$49.60",
+     "change": "−0.8% in a minute",
+     "tone": "down"
+    },
+    "chart": {
+     "ohlc": [
+      [
+       49.992,
+       50.009,
+       49.968,
+       50.0
+      ],
+      [
+       49.993,
+       50.01,
+       49.962,
+       50.001
+      ],
+      [
+       50.001,
+       50.005,
+       50.0,
+       50.005
+      ],
+      [
+       50.007,
+       50.036,
+       49.985,
+       49.999
+      ],
+      [
+       49.993,
+       50.053,
+       49.976,
+       49.993
+      ],
+      [
+       50.002,
+       50.029,
+       49.999,
+       50.025
+      ],
+      [
+       50.025,
+       50.058,
+       49.974,
+       50.003
+      ],
+      [
+       49.995,
+       50.011,
+       49.986,
+       50.008
+      ],
+      [
+       50.007,
+       50.059,
+       50.001,
+       50.043
+      ],
+      [
+       50.036,
+       50.071,
+       50.011,
+       50.019
+      ],
+      [
+       50.026,
+       50.038,
+       49.908,
+       49.954
+      ],
+      [
+       49.96,
+       49.962,
+       49.92,
+       49.944
+      ],
+      [
+       49.935,
+       49.968,
+       49.865,
+       49.87
+      ],
+      [
+       49.88,
+       49.894,
+       49.762,
+       49.774
+      ],
+      [
+       49.773,
+       49.817,
+       49.681,
+       49.72
+      ],
+      [
+       49.709,
+       49.732,
+       49.641,
+       49.657
+      ],
+      [
+       49.669,
+       49.69,
+       49.599,
+       49.6
+      ]
+     ],
+     "height": 84,
+     "fmt": 2,
+     "ticks": 2,
+     "axis": true,
+     "lastTag": true,
+     "marks": [
+      {
+       "i": 9,
+       "price": 50.04,
+       "tone": "gold",
+       "label": "news"
+      }
+     ],
+     "label": "Price near $50, news hits, then it falls fast to $49.60"
+    }
+   },
+   "options": [
+    {
+     "text": "Sell only if I get $50 or more",
+     "feedback": "It sounds safe, but the price is already under $50 and falling. This order may never fill, and you could still be holding as the price slides."
+    },
+    {
+     "text": "Do nothing and wait for it to come back",
+     "feedback": "Hoping isn’t a plan. The price may keep falling, and every dollar it drops is another dollar lost on each share."
+    },
+    {
+     "text": "Sell now, at whatever price buyers will pay",
+     "feedback": "When a price is falling fast, speed matters more than price. You may get a bit less than $50, but you’re out before it drops further."
+    }
+   ],
+   "answer": 2,
+   "idea": "market-order-speed",
+   "work": "Sell now: $50 − $49.60 = $0.40 less a share. A $50 limit never fills: still holding at $45 = $5 a share lost."
+  },
+  {
+   "type": "learn",
+   "added": "Side-by-side replay of the Call: a market order fills at about $49.60, a $50 limit never fills",
+   "tag": "two orders",
+   "title": "Sell now = a market order",
+   "text": "Your two choices have names. **[[market-order|Market order]]**: “fill me now at the best price available”. You get speed, not a set price. **[[limit-order|Limit order]]**: “only at this price or better”. You get your price, but it may never fill. Every order is a trade-off between speed and price.",
+   "visual": {
+    "kind": "compare",
+    "items": [
+     {
+      "title": "Market order",
+      "icon": "ok",
+      "chart": {
+       "ohlc": [
+        [
+         49.99,
+         50.02,
+         49.98,
+         50.0
+        ],
+        [
+         49.99,
+         50.03,
+         49.91,
+         49.94
+        ],
+        [
+         49.95,
+         49.96,
+         49.92,
+         49.96
+        ],
+        [
+         49.95,
+         49.96,
+         49.87,
+         49.88
+        ],
+        [
+         49.89,
+         49.91,
+         49.81,
+         49.85
+        ],
+        [
+         49.84,
+         49.87,
+         49.67,
+         49.7
+        ],
+        [
+         49.71,
+         49.74,
+         49.65,
+         49.67
+        ],
+        [
+         49.67,
+         49.68,
+         49.54,
+         49.56
+        ],
+        [
+         49.58,
+         49.6,
+         49.41,
+         49.43
+        ],
+        [
+         49.45,
+         49.49,
+         49.35,
+         49.37
+        ],
+        [
+         49.38,
+         49.4,
+         49.3,
+         49.3
+        ]
+       ],
+       "height": 194,
+       "fmt": 0,
+       "ticks": 2,
+       "axis": false,
+       "lastTag": false,
+       "marks": [
+        {
+         "i": 7,
+         "price": 49.6,
+         "tone": "up"
+        }
+       ],
+       "label": "Filled at about $49.60 while the price keeps falling"
+      },
+      "result": "Sold at about $49.60",
+      "sub": "Filled now. You’re out.",
+      "tone": "up"
+     },
+     {
+      "title": "Limit at $50",
+      "icon": "wait",
+      "chart": {
+       "ohlc": [
+        [
+         49.99,
+         50.02,
+         49.98,
+         50.0
+        ],
+        [
+         49.99,
+         50.03,
+         49.91,
+         49.94
+        ],
+        [
+         49.95,
+         49.96,
+         49.92,
+         49.96
+        ],
+        [
+         49.95,
+         49.96,
+         49.87,
+         49.88
+        ],
+        [
+         49.89,
+         49.91,
+         49.81,
+         49.85
+        ],
+        [
+         49.84,
+         49.87,
+         49.67,
+         49.7
+        ],
+        [
+         49.71,
+         49.74,
+         49.65,
+         49.67
+        ],
+        [
+         49.67,
+         49.68,
+         49.54,
+         49.56
+        ],
+        [
+         49.58,
+         49.6,
+         49.41,
+         49.43
+        ],
+        [
+         49.45,
+         49.49,
+         49.35,
+         49.37
+        ],
+        [
+         49.38,
+         49.4,
+         49.3,
+         49.3
+        ]
+       ],
+       "height": 194,
+       "fmt": 0,
+       "ticks": 2,
+       "axis": false,
+       "lastTag": false,
+       "hlines": [
+        {
+         "price": 50.0,
+         "tone": "muted",
+         "style": "text",
+         "label": "limit $50"
+        }
+       ],
+       "label": "A $50 limit above a falling price never fills"
+      },
+      "result": "Waiting… not filled",
+      "sub": "Price keeps falling.",
+      "tone": "muted"
+     }
+    ]
+   }
+  },
+  {
+   "type": "walkthrough",
+   "added": "Interactive replay; the numbers are the book’s ($100 / $95, Quiz 2.1) · Visual: Interactive replay drawn in its played state (book numbers $100 / $95)",
+   "tag": "tap Play",
+   "title": "Buy cheaper, or not at all",
+   "text": "A stock is at $100. You’d happily own it at $95, but not at $100. Your **buy limit** waits at $95. If the price dips there, you buy at $95 or less. If it never dips, nothing happens and you keep your cash.",
+   "visual": {
+    "kind": "candles",
+    "chart": {
+     "ohlc": [
+      [
+       102.4,
+       102.64,
+       102.37,
+       102.5
+      ],
+      [
+       102.35,
+       102.4,
+       101.34,
+       102.38
+      ],
+      [
+       102.44,
+       102.72,
+       101.56,
+       101.64
+      ],
+      [
+       101.53,
+       101.65,
+       101.43,
+       101.6
+      ],
+      [
+       101.42,
+       101.45,
+       100.79,
+       101.06
+      ],
+      [
+       101.02,
+       101.52,
+       100.88,
+       101.36
+      ],
+      [
+       101.2,
+       101.4,
+       101.01,
+       101.19
+      ],
+      [
+       101.13,
+       101.25,
+       100.35,
+       100.64
+      ],
+      [
+       100.79,
+       100.92,
+       100.31,
+       100.38
+      ],
+      [
+       100.55,
+       100.72,
+       99.6,
+       99.61
+      ],
+      [
+       99.64,
+       99.85,
+       99.08,
+       99.78
+      ],
+      [
+       99.72,
+       99.83,
+       98.46,
+       98.56
+      ],
+      [
+       98.41,
+       98.57,
+       97.97,
+       98.36
+      ],
+      [
+       98.49,
+       98.67,
+       97.9,
+       97.9
+      ],
+      [
+       97.92,
+       98.02,
+       96.58,
+       96.59
+      ],
+      [
+       96.59,
+       96.72,
+       96.41,
+       96.66
+      ],
+      [
+       96.49,
+       96.6,
+       95.29,
+       95.47
+      ],
+      [
+       95.43,
+       95.71,
+       94.54,
+       95.03
+      ],
+      [
+       94.99,
+       95.68,
+       94.65,
+       95.48
+      ],
+      [
+       95.38,
+       96.9,
+       95.15,
+       96.88
+      ],
+      [
+       96.97,
+       97.06,
+       96.55,
+       96.69
+      ],
+      [
+       96.66,
+       97.83,
+       96.39,
+       97.8
+      ]
+     ],
+     "height": 170,
+     "fmt": 0,
+     "ticks": 3,
+     "axis": true,
+     "lastTag": false,
+     "marks": [
+      {
+       "i": 9,
+       "price": 100,
+       "tone": "white",
+       "label": "$100 now"
+      },
+      {
+       "i": 17,
+       "price": 95.1,
+       "tone": "up",
+       "label": "filled $95",
+       "pos": "below"
+      }
+     ],
+     "hlines": [
+      {
+       "price": 95,
+       "tone": "up",
+       "style": "left",
+       "label": "BUY $95"
+      }
+     ],
+     "ghost": [
+      [
+       9,
+       100
+      ],
+      [
+       13,
+       101.6
+      ],
+      [
+       17,
+       102.9
+      ],
+      [
+       21,
+       104
+      ]
+     ],
+     "label": "Path 1 dips from $100 to $95 and the buy limit fills; dashed path 2 rises to $104 and it doesn’t",
+     "lo": 92.5
+    },
+    "foot": "**▶ Played both paths.** Dashed path 2 rises to $104: not filled, cash kept."
+   }
+  },
+  {
+   "type": "walkthrough",
+   "added": "Stop definition from p.13; $100 / $92 numbers from the illustrative order chart · Visual: Sell stop drawn in its triggered state: $100 → $92, loss about $8 a share",
+   "tag": "tap Play",
+   "title": "A stop is a tripwire",
+   "text": "A **[[stop-order|stop order]]** waits. When the price touches your level, it turns into a market order. You own a stock at $100 and set a **sell stop at $92**. If the price falls to $92, the app sells for you. Your loss is usually near $8 a share. That’s a **[[stop-loss|stop-loss]]**. A gap can jump past it. More in Lesson 5.",
+   "visual": {
+    "kind": "candles",
+    "chart": {
+     "ohlc": [
+      [
+       97.99,
+       98.24,
+       97.62,
+       98.0
+      ],
+      [
+       97.8,
+       98.31,
+       97.63,
+       98.14
+      ],
+      [
+       98.22,
+       99.62,
+       97.99,
+       99.31
+      ],
+      [
+       99.17,
+       99.83,
+       99.1,
+       99.66
+      ],
+      [
+       99.48,
+       100.46,
+       99.38,
+       100.41
+      ],
+      [
+       100.34,
+       100.82,
+       99.96,
+       100.29
+      ],
+      [
+       100.11,
+       100.42,
+       99.54,
+       99.72
+      ],
+      [
+       99.91,
+       100.05,
+       99.84,
+       99.89
+      ],
+      [
+       99.75,
+       100.48,
+       99.36,
+       100.32
+      ],
+      [
+       100.4,
+       100.58,
+       99.33,
+       99.38
+      ],
+      [
+       99.34,
+       99.71,
+       99.15,
+       99.36
+      ],
+      [
+       99.31,
+       99.78,
+       98.24,
+       98.34
+      ],
+      [
+       98.53,
+       98.67,
+       97.91,
+       98.15
+      ],
+      [
+       98.22,
+       98.29,
+       96.73,
+       96.86
+      ],
+      [
+       96.81,
+       97.35,
+       96.0,
+       96.03
+      ],
+      [
+       95.85,
+       95.99,
+       95.31,
+       95.6
+      ],
+      [
+       95.49,
+       95.76,
+       94.79,
+       94.92
+      ],
+      [
+       94.76,
+       94.94,
+       94.41,
+       94.47
+      ],
+      [
+       94.29,
+       94.33,
+       93.42,
+       93.7
+      ],
+      [
+       93.52,
+       93.72,
+       92.83,
+       92.89
+      ],
+      [
+       92.8,
+       93.55,
+       91.89,
+       92.0
+      ]
+     ],
+     "height": 170,
+     "fmt": 0,
+     "ticks": 3,
+     "axis": true,
+     "lastTag": false,
+     "marks": [
+      {
+       "i": 4,
+       "price": 100,
+       "tone": "white",
+       "label": "You own it at $100"
+      },
+      {
+       "i": 20,
+       "price": 92,
+       "tone": "down",
+       "label": "SOLD near $92"
+      }
+     ],
+     "hlines": [
+      {
+       "price": 92,
+       "tone": "down",
+       "style": "left",
+       "label": "SELL STOP $92"
+      }
+     ],
+     "label": "Bought at $100, the price falls to $92 and the sell stop sells"
+    },
+    "foot": "Loss about {down}$8 a share{/down}. Near, not exactly: it becomes a market order."
+   }
+  },
+  {
+   "type": "pro",
+   "added": "The “$8 → $30” contrast is added to give the p.13 rule a felt cost · Visual: Entry and stop checklist icon",
+   "tag": "Rico’s rule",
+   "title": "Decide your exit before you enter",
+   "text": "Every trade gets a stop-loss **the moment it’s opened**. Not later. Not “when it gets bad.” Now. Without one, nothing gets you out while you’re asleep or busy, and an $8 loss can grow to $30.",
+   "visual": {
+    "kind": "checks",
+    "items": [
+     {
+      "title": "Entry",
+      "sub": "Buy at $100",
+      "ok": true
+     },
+     {
+      "title": "Stop-loss",
+      "sub": "Sell stop at $92",
+      "ok": true
+     }
+    ]
+   }
+  },
+  {
+   "type": "walkthrough",
+   "added": "Illustrative price path with the three orders the book’s p.13 chart describes, shown with all three explored",
+   "tag": "tap 1–3",
+   "title": "Above to buy strength, below to buy weakness",
+   "text": "Price is $100. **1 · Buy stop $105** sits above: you buy only if the price proves itself by breaking higher. **2 · Buy limit $95** sits below: you buy only cheaper than today. **3 · Sell stop $92**: your stop-loss.",
+   "visual": {
+    "kind": "candles",
+    "chart": {
+     "ohlc": [
+      [
+       97.34,
+       97.63,
+       96.93,
+       97.5
+      ],
+      [
+       97.41,
+       98.14,
+       96.92,
+       98.12
+      ],
+      [
+       98.04,
+       98.17,
+       97.75,
+       98.03
+      ],
+      [
+       97.87,
+       98.44,
+       97.24,
+       98.33
+      ],
+      [
+       98.23,
+       98.37,
+       97.69,
+       98.09
+      ],
+      [
+       98.11,
+       98.2,
+       97.91,
+       98.07
+      ],
+      [
+       97.92,
+       98.82,
+       97.81,
+       98.75
+      ],
+      [
+       98.94,
+       99.7,
+       97.88,
+       98.4
+      ],
+      [
+       98.45,
+       99.06,
+       98.12,
+       98.74
+      ],
+      [
+       98.77,
+       98.9,
+       98.37,
+       98.51
+      ],
+      [
+       98.66,
+       98.86,
+       98.58,
+       98.59
+      ],
+      [
+       98.48,
+       99.16,
+       98.14,
+       99.05
+      ],
+      [
+       99.18,
+       99.39,
+       98.67,
+       98.8
+      ],
+      [
+       98.9,
+       99.18,
+       98.62,
+       98.86
+      ],
+      [
+       98.85,
+       99.21,
+       98.51,
+       99.06
+      ],
+      [
+       99.05,
+       99.93,
+       98.9,
+       99.56
+      ],
+      [
+       99.54,
+       99.6,
+       98.73,
+       99.33
+      ],
+      [
+       99.15,
+       100.6,
+       98.79,
+       100.31
+      ],
+      [
+       100.33,
+       100.8,
+       99.94,
+       100.0
+      ]
+     ],
+     "height": 190,
+     "fmt": 0,
+     "ticks": 0,
+     "axis": true,
+     "lastTag": true,
+     "hlines": [
+      {
+       "price": 105,
+       "tone": "sky",
+       "style": "pill",
+       "label": "1 · BUY STOP $105 · strength"
+      },
+      {
+       "price": 95,
+       "tone": "up",
+       "style": "pill",
+       "label": "2 · BUY LIMIT $95 · cheaper"
+      },
+      {
+       "price": 92,
+       "tone": "down",
+       "style": "pill",
+       "label": "3 · SELL STOP $92 · stop-loss"
+      }
+     ],
+     "label": "Price at $100 with a buy stop at $105 above, a buy limit at $95 and a sell stop at $92 below"
+    }
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "added": "New situation for the buy-stop idea (p.13); numbers $30 / $32 · Visual: Mini chart for the breakout Try it: $30 now, $32 level",
+   "name": "Breakout",
+   "title": "Only if it breaks out",
+   "q": "A stock trades at $30. You want to buy only if it breaks above $32 and shows strength. Which order?",
+   "idea": "limit-vs-stop",
+   "visual": {
+    "kind": "candles",
+    "chart": {
+     "ohlc": [
+      [
+       29.6,
+       29.7,
+       29.34,
+       29.6
+      ],
+      [
+       29.64,
+       29.71,
+       29.49,
+       29.66
+      ],
+      [
+       29.6,
+       29.87,
+       29.48,
+       29.74
+      ],
+      [
+       29.74,
+       30.02,
+       29.55,
+       29.93
+      ],
+      [
+       29.92,
+       30.36,
+       29.92,
+       30.32
+      ],
+      [
+       30.37,
+       30.51,
+       30.24,
+       30.41
+      ],
+      [
+       30.48,
+       30.51,
+       30.07,
+       30.2
+      ],
+      [
+       30.22,
+       30.24,
+       30.16,
+       30.2
+      ],
+      [
+       30.19,
+       30.25,
+       30.1,
+       30.1
+      ],
+      [
+       30.14,
+       30.16,
+       29.92,
+       29.93
+      ],
+      [
+       29.87,
+       29.87,
+       29.55,
+       29.65
+      ],
+      [
+       29.64,
+       30.04,
+       29.42,
+       30.01
+      ],
+      [
+       30.01,
+       30.14,
+       29.85,
+       29.89
+      ],
+      [
+       29.85,
+       30.09,
+       29.78,
+       30.07
+      ],
+      [
+       30.08,
+       30.35,
+       30.06,
+       30.3
+      ],
+      [
+       30.36,
+       30.5,
+       30.27,
+       30.46
+      ],
+      [
+       30.47,
+       30.47,
+       30.43,
+       30.45
+      ],
+      [
+       30.43,
+       30.51,
+       30.27,
+       30.29
+      ],
+      [
+       30.32,
+       30.34,
+       30.11,
+       30.15
+      ],
+      [
+       30.22,
+       30.24,
+       29.99,
+       30.0
+      ]
+     ],
+     "height": 130,
+     "fmt": 1,
+     "ticks": 2,
+     "axis": true,
+     "lastTag": true,
+     "hlines": [
+      {
+       "price": 32,
+       "tone": "sky",
+       "style": "pill",
+       "label": "breakout level $32"
+      }
+     ],
+     "label": "Price moving sideways around $30, below a $32 breakout level"
+    },
+    "foot": "Pick the order to drop on the $32 line."
+   },
+   "options": [
+    {
+     "text": "Buy limit at $32",
+     "feedback": "A limit at $32 sounds like “at $32”. But a buy limit means “$32 or less”. The price is $30, so it fills right away, before any breakout."
+    },
+    {
+     "text": "Market order now",
+     "feedback": "It gets you in, but right now at $30. You wanted to wait for proof that the price breaks up to $32."
+    },
+    {
+     "text": "Buy stop at $32",
+     "feedback": "A buy stop waits above the price and fires only when $32 trades. You buy only once the price shows strength."
+    },
+    {
+     "text": "Sell stop at $32",
+     "feedback": "The $32 trigger looks right, but a sell stop sells shares. You want to buy."
+    }
+   ],
+   "answer": 2,
+   "work": null
+  },
+  {
+   "type": "check",
+   "title": "Buy the dip",
+   "q": "A stock trades at $100. You want to buy only if it dips to $95. Which order?",
+   "options": [
+    {
+     "text": "Sell stop at $95",
+     "feedback": "The $95 level looks right, but a sell stop sells shares. You want to buy."
+    },
+    {
+     "text": "Buy limit at $95",
+     "feedback": "A buy limit means “at $95 or less”. If the price never dips that far, you don’t buy at all."
+    },
+    {
+     "text": "Buy stop at $95",
+     "feedback": "A stop sounds like “wait for $95”. But a buy stop fires when the price is at or above its level. The price is already $100, so you’d buy at about $100."
+    },
+    {
+     "text": "Market order",
+     "feedback": "A market order buys right away at $100. That’s $5 a share more than you wanted to pay."
+    }
+   ],
+   "answer": 1,
+   "idea": "limit-vs-stop",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can pick the right order and set your stop.",
+   "lines": [
+    "Market = now, any price. Limit = your price or better, maybe never.",
+    "Buy stop above (strength), buy limit below (weakness).",
+    "Every trade gets a stop-loss the moment it opens. A gap can still jump it."
+   ]
+  }
+ ]
+}

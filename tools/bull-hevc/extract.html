@@ -1,0 +1,32 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Bull frame extractor</title>
+<!-- Decodes each transparent WebM in Chrome (which keeps VP9 alpha) and posts every
+     frame as a PNG to server.py. Run by build.sh; not part of the prototype. -->
+<script src="../../assets/mascot/bull/manifest.js"></script>
+<canvas id="c"></canvas>
+<script>
+(async () => {
+  const FPS = 30, A = "../../assets/mascot/bull/animations/";
+  const only = new URLSearchParams(location.search).get("only");
+  const clips = [...new Set(Object.values(BULL_MANIFEST.states).flatMap((s) => [s.clip, s.clipBust]).filter(Boolean))]
+    .filter((f) => !only || f === only);
+  const c = document.getElementById("c"), g = c.getContext("2d");
+  const log = [];
+  for (const f of clips) {
+    const v = document.createElement("video");
+    v.muted = true; v.preload = "auto"; v.src = A + f;
+    await new Promise((r, j) => { v.onloadeddata = r; v.onerror = () => j(f); });
+    c.width = v.videoWidth; c.height = v.videoHeight;
+    const n = Math.round(v.duration * FPS);
+    for (let i = 0; i < n; i++) {
+      await new Promise((r) => { v.onseeked = r; v.currentTime = Math.min((i + 0.5) / FPS, v.duration - 0.001); });
+      g.clearRect(0, 0, c.width, c.height); g.drawImage(v, 0, 0);
+      const blob = await new Promise((r) => c.toBlob(r, "image/png"));
+      await fetch(`/save/${f.replace(".webm", "")}/${String(i).padStart(4, "0")}.png`, { method: "POST", body: blob });
+    }
+    log.push(`${f} ${n} ${c.width}x${c.height}`);
+  }
+  await fetch("/done", { method: "POST", body: log.join("\n") });
+})();
+</script>

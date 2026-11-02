@@ -1,0 +1,294 @@
+{
+ "id": "bid-ask-spread",
+ "chapter": "how-markets-work",
+ "n": 4,
+ "title": "Bid, ask and the spread",
+ "minutes": 5,
+ "desc": "The toll you pay on every trade",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Where did the $0.10 go?",
+   "situation": "You buy a stock at $50.05. A second later your position shows −$0.10 a share, but the price didn’t move. Where did it go?",
+   "visual": {
+    "kind": "position",
+    "label": "Your position",
+    "title": "Bought 1 share @ $50.05",
+    "value": "$49.95",
+    "change": "−$0.10",
+    "tone": "down"
+   },
+   "options": [
+    {
+     "text": "A bug in the app",
+     "feedback": "Not a bug. Your app shows what you’d get selling now, and that’s less than you paid."
+    },
+    {
+     "text": "Someone took it",
+     "feedback": "Nobody took it. Your app values your share at what you’d get selling now, a bit less than you paid."
+    },
+    {
+     "text": "You paid a toll for buying instantly",
+     "feedback": "Buying now costs a bit more than selling now. That gap is the toll for trading instantly."
+    }
+   ],
+   "answer": 2,
+   "idea": "spread-is-a-toll",
+   "work": "Paid $50.05 − sell now $49.95 = $0.10 a share.",
+   "added": "Feedback for B written for the Academy"
+  },
+  {
+   "type": "learn",
+   "title": "Two prices, not one",
+   "text": "The price on your screen is the **last handshake**: the latest deal.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "handshake",
+      "left": "B",
+      "right": "S",
+      "text": "Last trade $50.00"
+     },
+     "side": true
+    },
+    {
+     "p": "Right now there are two prices: the **[[bid|bid]]** (from buyers) and the **[[ask|ask]]** (from sellers). The gap is the **[[spread|spread]]**. Your app values your shares at the bid."
+    },
+    {
+     "visual": {
+      "kind": "quotes",
+      "items": [
+       {
+        "label": "Bid",
+        "value": "$49.95",
+        "sub": "you sell here",
+        "tone": "down"
+       },
+       {
+        "label": "Spread",
+        "value": "$0.10",
+        "sub": "the gap",
+        "tone": "gold"
+       },
+       {
+        "label": "Ask",
+        "value": "$50.05",
+        "sub": "you buy here",
+        "tone": "up"
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "You {up}buy at the ask{/up} and {down}sell at the bid{/down}: every [[round-trip|round trip]] pays the spread.",
+     "side": true,
+     "tone": "plain"
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Round trip, no move",
+   "q": "You buy {n} shares and sell them straight away. The price doesn’t move. What’s your result?",
+   "idea": "spread-round-trip-cost",
+   "visual": {
+    "kind": "quotes",
+    "items": [
+     {
+      "label": "Bid",
+      "value": "$49.95",
+      "sub": "you sell here",
+      "tone": "down"
+     },
+     {
+      "label": "Spread",
+      "value": "$0.10",
+      "sub": "the gap",
+      "tone": "gold"
+     },
+     {
+      "label": "Ask",
+      "value": "$50.05",
+      "sub": "you buy here",
+      "tone": "up"
+     }
+    ]
+   },
+   "scale": {
+    "label": "Shares",
+    "value": 100,
+    "min": 100,
+    "max": 1000,
+    "step": 100
+   },
+   "options": [
+    {
+     "text": "$0.00",
+     "feedback": "The price didn’t move, but you bought at the higher ask and sold at the lower bid.",
+     "amount": 0
+    },
+    {
+     "text": "+$10.00",
+     "feedback": "You can’t gain when the price stands still. You bought at the higher ask and sold at the lower bid.",
+     "amount": 0.1
+    },
+    {
+     "text": "−$10.00",
+     "feedback": "You bought at the ask and sold at the bid, so you paid the spread on every share.",
+     "amount": -0.1
+    },
+    {
+     "text": "−$5.00",
+     "feedback": "That’s only half the gap. On a round trip you pay the full spread on every share.",
+     "amount": -0.05
+    }
+   ],
+   "answer": 2,
+   "work": "$50.05 − $49.95 = $0.10 a share. × {n} shares = {total} lost.",
+   "added": "Feedback for B, C and D from the earlier lesson, shortened"
+  },
+  {
+   "type": "trap",
+   "pose": "worried",
+   "title": "The fee that eats over-traders",
+   "text": "Every round trip pays the spread, even when the price never moves. Trade a lot, and it adds up fast.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "rows",
+      "title": "The working",
+      "tone": "down",
+      "rows": [
+       {
+        "label": "$0.10 × 100 shares",
+        "value": "$10 a round trip"
+       },
+       {
+        "label": "$10 × 20 round trips",
+        "value": "$200 a day"
+       }
+      ]
+     },
+     "side": true
+    }
+   ],
+   "rule": "fewer, better trades beat many average ones."
+  },
+  {
+   "type": "learn",
+   "title": "Tight toll, wide toll",
+   "text": "**[[liquidity|Liquidity]]** is how easily you can buy or sell without moving the price. The more people trade something, the smaller the spread.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "stack",
+      "items": [
+       {
+        "kind": "quotes",
+        "head": {
+         "title": "Busy stock",
+         "badge": "0.02% toll",
+         "tone": "up",
+         "sub": "Millions of shares trade every day"
+        },
+        "items": [
+         {
+          "label": "Bid",
+          "value": "$99.99",
+          "sub": "you sell here",
+          "tone": "down"
+         },
+         {
+          "label": "Spread",
+          "value": "$0.02",
+          "sub": "the gap",
+          "tone": "gold"
+         },
+         {
+          "label": "Ask",
+          "value": "$100.01",
+          "sub": "you buy here",
+          "tone": "up"
+         }
+        ]
+       },
+       {
+        "kind": "quotes",
+        "head": {
+         "title": "New, thin coin",
+         "badge": "≈10% toll",
+         "tone": "down",
+         "sub": "Few people trade it"
+        },
+        "items": [
+         {
+          "label": "Bid",
+          "value": "$0.095",
+          "sub": "you sell here",
+          "tone": "down"
+         },
+         {
+          "label": "Spread",
+          "value": "$0.01",
+          "sub": "the gap",
+          "tone": "gold"
+         },
+         {
+          "label": "Ask",
+          "value": "$0.105",
+          "sub": "you buy here",
+          "tone": "up"
+         }
+        ]
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "Low liquidity also means you might be the only one trying to sell."
+    }
+   ]
+  },
+  {
+   "type": "check",
+   "pose": "detective",
+   "title": "The day trader’s bill",
+   "q": "A day trader makes 500 round trips a year. The spread costs him $10 each time. What does he pay in a year?",
+   "options": [
+    {
+     "text": "$10",
+     "feedback": "$10 is the cost of one round trip. He makes 500 of them, and pays the toll every time."
+    },
+    {
+     "text": "$500",
+     "feedback": "He pays the toll on every single round trip, and each one costs $10."
+    },
+    {
+     "text": "$5,000",
+     "feedback": "He pays $10 on every one of his 500 round trips. An investor with one round trip pays $10."
+    },
+    {
+     "text": "$50,000",
+     "feedback": "That’s ten times too much. Multiply the 500 round trips by the $10 each one costs."
+    }
+   ],
+   "answer": 2,
+   "idea": "fewer-trades-smaller-toll",
+   "work": "500 round trips × $10 = $5,000 a year. An investor with 1 round trip pays $10.",
+   "added": "Feedback for A, C and D written for the Academy"
+  },
+  {
+   "type": "keep",
+   "headline": "You can spot the toll on any trade.",
+   "lines": [
+    "You buy at the ask and sell at the bid. The gap is the spread.",
+    "The spread is a toll on every round trip, even if the price never moves.",
+    "Busy markets and fewer trades keep the toll small."
+   ]
+  }
+ ]
+}

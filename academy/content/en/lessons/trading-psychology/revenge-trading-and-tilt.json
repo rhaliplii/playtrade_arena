@@ -1,0 +1,276 @@
+{
+ "id": "revenge-trading-and-tilt",
+ "chapter": "trading-psychology",
+ "n": 2,
+ "title": "Revenge trading and tilt",
+ "minutes": 5,
+ "desc": "Stop one bad trade from turning into a bad day",
+ "cards": [
+  {
+   "type": "call",
+   "title": "After a bad morning",
+   "situation": "You lost $300 on your first trade today. You’re angry. A so-so setup appears, and you want to double your size to win it back. What should you do?",
+   "visual": {
+    "kind": "series",
+    "title": "Today’s P&L",
+    "aside": "1 trade",
+    "height": 110,
+    "label": "Today’s profit and loss falls to −$300",
+    "series": [
+     {
+      "values": [
+       0,
+       -40,
+       -70,
+       -110,
+       -150,
+       -190,
+       -230,
+       -260,
+       -290,
+       -300,
+       -300
+      ],
+      "tone": "down",
+      "area": true,
+      "end": "−$300"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Double up: one good trade fixes it",
+     "feedback": "Most people feel that urge. Bigger size on a weak setup turns one bad trade into a bad week."
+    },
+    {
+     "text": "Take it at your normal size",
+     "feedback": "Better than doubling, but anger is still choosing the trade. A so-so setup on a hot head is how one loss becomes two."
+    },
+    {
+     "text": "Skip it and step away for today",
+     "feedback": "Anger makes bad setups look good. Stepping away keeps one loss from turning into three."
+    }
+   ],
+   "answer": 2,
+   "idea": "step-away-after-loss",
+   "work": "Down $300. Double size on a weak setup: one more loss costs $600, and the day ends at −$900."
+  },
+  {
+   "type": "learn",
+   "title": "Revenge trading and tilt",
+   "text": "**[[revenge-trading|Revenge trading]]** is rushing into a bigger trade to win back a loss. **[[tilt|Tilt]]** is the angry state behind it. Poker players named it.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "bars",
+      "caption": "Your trade size, loss after loss",
+      "bars": [
+       {
+        "label": "trade 1",
+        "value": 1,
+        "display": "1×",
+        "tone": "blue"
+       },
+       {
+        "label": "trade 2",
+        "value": 1,
+        "display": "1×",
+        "tone": "blue"
+       },
+       {
+        "label": "trade 3",
+        "value": 2,
+        "display": "2×",
+        "tone": "gold"
+       },
+       {
+        "label": "trade 4",
+        "value": 4,
+        "display": "4×",
+        "tone": "down"
+       }
+      ]
+     }
+    },
+    {
+     "tip": "Signs of tilt: bigger size, faster trades, setups you’d normally skip, and a hot head.",
+     "side": true,
+     "tone": "red"
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "title": "How a bad day snowballs",
+   "text": "Say you lose $100 twice, then double your size each time to win it back.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "series",
+      "title": "No rule",
+      "aside": "4 trades",
+      "height": 100,
+      "lo": -850,
+      "hi": 50,
+      "label": "Without a rule: −$100, −$100, −$200, −$400, ending at −$800",
+      "series": [
+       {
+        "values": [
+         0,
+         -100,
+         -200,
+         -400,
+         -800
+        ],
+        "tone": "down",
+        "area": true,
+        "end": "−$800"
+       }
+      ],
+      "points": [
+       {
+        "i": 3,
+        "label": "2× size",
+        "tone": "gold"
+       }
+      ]
+     },
+     {
+      "kind": "series",
+      "title": "Rule: stop after 2 losses",
+      "aside": "2 trades",
+      "height": 100,
+      "lo": -850,
+      "hi": 50,
+      "label": "With the rule: two $100 losses, then no more trades, ending at −$200",
+      "series": [
+       {
+        "values": [
+         0,
+         -100,
+         -200,
+         -200,
+         -200
+        ],
+        "tone": "blue",
+        "area": true,
+        "end": false
+       }
+      ],
+      "points": [
+       {
+        "i": 2,
+        "label": "stops here",
+        "tone": "gold",
+        "pos": "below"
+       }
+      ]
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "Same losses, same day. The rule kept the loss at $200 instead of $800.",
+     "tone": "green"
+    }
+   ]
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Decide the limit before the day starts",
+   "text": "Write your limits **before** the first trade, while you’re calm. Then you don’t have to decide anything when you’re angry.",
+   "visual": {
+    "kind": "list",
+    "style": "cards",
+    "items": [
+     {
+      "title": "2 losses in a day: done",
+      "text": "Close the app. Tomorrow is a new day."
+     },
+     {
+      "title": "A daily loss limit",
+      "text": "For example 2% of the account: $200 on $10,000."
+     },
+     {
+      "title": "Never size up to win it back",
+      "text": "Same size after a loss, or smaller."
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Rule or setup?",
+   "q": "Your rule: stop after 2 losses a day. It’s 11am and you’ve lost on trades 1 and 2. Then a perfect setup appears. What do you do?",
+   "idea": "rule-beats-setup",
+   "visual": {
+    "kind": "list",
+    "style": "cards",
+    "items": [
+     {
+      "title": "2 losses in a day: done",
+      "text": "Today: loss, loss.",
+      "tone": "down"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Take it: it’s a perfect setup",
+     "feedback": "Most people feel that pull. A rule only works if it holds on the days it hurts. Setups come back tomorrow, a blown account doesn’t."
+    },
+    {
+     "text": "Stop for the day, as your rule says",
+     "feedback": "The rule holds on the day it hurts. Setups come back tomorrow, and your account will be there for them."
+    },
+    {
+     "text": "Take it at half size",
+     "feedback": "Smaller size still breaks the rule. The rule is about you after two losses, not about this setup."
+    },
+    {
+     "text": "Take it at double size",
+     "feedback": "Doubling after two losses is revenge trading. Your rule exists for exactly this moment."
+    }
+   ],
+   "answer": 1
+  },
+  {
+   "type": "check",
+   "title": "Spot the tilt",
+   "q": "Which of these is a sign you’re on tilt?",
+   "options": [
+    {
+     "text": "Keeping your normal size after a loss",
+     "feedback": "Easy to mix up: normal size after a loss is discipline. Sizing up to win it back is tilt."
+    },
+    {
+     "text": "Raising your size to win a loss back",
+     "feedback": "Bigger size to win it back is the classic sign: anger is choosing the trade."
+    },
+    {
+     "text": "Taking a break after a loss",
+     "feedback": "A break after a loss is the cure for tilt, not a sign of it."
+    },
+    {
+     "text": "Writing the loss in your journal",
+     "feedback": "Logging a loss is a calm, healthy habit. Tilt shows up as bigger size and faster trades."
+    }
+   ],
+   "answer": 1,
+   "idea": "spot-tilt"
+  },
+  {
+   "type": "keep",
+   "headline": "You can stop a bad day from getting worse.",
+   "lines": [
+    "Revenge trading = a bigger trade to win back a loss.",
+    "Set a daily limit, like stop after 2 losses.",
+    "Never size up after a loss."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,353 @@
+{
+ "id": "rebalancing",
+ "chapter": "portfolio-management",
+ "n": 4,
+ "title": "Rebalancing",
+ "minutes": 5,
+ "desc": "Bring a drifting portfolio back to its target split",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "After a good year",
+   "situation": "Your target is 60% stocks, 40% bonds. After a strong year you have $8,000 in stocks and $3,000 in bonds. What brings you back to target?",
+   "visual": {
+    "kind": "split",
+    "label": "Target 60% stocks, 40% bonds; now 73% stocks, 27% bonds",
+    "rows": [
+     {
+      "label": "Target",
+      "aside": "60/40",
+      "segments": [
+       {
+        "value": 60,
+        "tone": "up",
+        "label": "Stocks 60%"
+       },
+       {
+        "value": 40,
+        "tone": "blue",
+        "label": "Bonds 40%"
+       }
+      ]
+     },
+     {
+      "label": "Now",
+      "aside": "73/27",
+      "segments": [
+       {
+        "value": 73,
+        "tone": "up",
+        "label": "Stocks 73%"
+       },
+       {
+        "value": 27,
+        "tone": "blue",
+        "label": "27%"
+       }
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Nothing: let the winners run",
+     "feedback": "Letting it run means 73% in stocks. You’re now taking more risk than you chose."
+    },
+    {
+     "text": "Sell some stocks, buy bonds",
+     "feedback": "Trim what grew, top up what lagged. That’s rebalancing."
+    },
+    {
+     "text": "Sell bonds, buy more stocks",
+     "feedback": "That pushes you even further from 60/40. Stocks are already above target."
+    }
+   ],
+   "answer": 1,
+   "idea": "rebalance-trim-winners",
+   "work": "Total $11,000. 60% = $6,600 in stocks. Sell $1,400 of stocks, buy $1,400 of bonds.",
+   "added": "Feedback for C written for the Academy"
+  },
+  {
+   "type": "learn",
+   "title": "Drift",
+   "text": "Prices move, so your split slowly **drifts** away from the target. After a run-up in stocks, you hold more risk than you planned.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "split",
+      "label": "The split drifts from 60/40 in January to 66/34 in June and 73/27 in December",
+      "legend": [
+       {
+        "label": "Stocks",
+        "tone": "up"
+       },
+       {
+        "label": "Bonds",
+        "tone": "blue"
+       }
+      ],
+      "rows": [
+       {
+        "label": "January",
+        "aside": "target",
+        "segments": [
+         {
+          "value": 60,
+          "tone": "up",
+          "label": "60%"
+         },
+         {
+          "value": 40,
+          "tone": "blue",
+          "label": "40%"
+         }
+        ]
+       },
+       {
+        "label": "June",
+        "aside": "drifting",
+        "segments": [
+         {
+          "value": 66,
+          "tone": "up",
+          "label": "66%"
+         },
+         {
+          "value": 34,
+          "tone": "blue",
+          "label": "34%"
+         }
+        ]
+       },
+       {
+        "label": "December",
+        "aside": "drifted",
+        "segments": [
+         {
+          "value": 73,
+          "tone": "up",
+          "label": "73%"
+         },
+         {
+          "value": 27,
+          "tone": "blue",
+          "label": "27%"
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "side": true,
+     "tip": "**[[rebalancing|Rebalancing]]**: bring the split back to target, once or twice a year."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "Back to 60/40",
+   "text": "Total $11,000. The target says $6,600 in stocks and $4,400 in bonds.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "barchart",
+      "title": "Before and after",
+      "aside": "before · after",
+      "label": "Stocks go from $8,000 to $6,600; bonds from $3,000 to $4,400",
+      "series": [
+       {
+        "tone": "up"
+       },
+       {
+        "tone": "up"
+       }
+      ],
+      "groups": [
+       {
+        "label": "Stocks",
+        "values": [
+         8000,
+         6600
+        ],
+        "displays": [
+         "$8,000",
+         "$6,600"
+        ],
+        "dim": [
+         0
+        ]
+       },
+       {
+        "label": "Bonds",
+        "values": [
+         3000,
+         4400
+        ],
+        "displays": [
+         "$3,000",
+         "$4,400"
+        ],
+        "tones": [
+         "blue",
+         "blue"
+        ],
+        "dim": [
+         0
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Sell stocks",
+        "value": "−$1,400",
+        "tone": "down",
+        "strong": true
+       },
+       {
+        "label": "Buy bonds",
+        "value": "+$1,400",
+        "tone": "up",
+        "strong": true
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "You sell a bit of what rose and buy what lagged. It feels wrong, and that’s the point.",
+   "footTone": "gold"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Keep it simple",
+   "text": "Check the split on a set date, **once or twice a year**. Rebalance if it’s off by more than about 5 points.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Every day or week",
+        "value": "Too often",
+        "tone": "down",
+        "strong": true
+       },
+       {
+        "label": "Once or twice a year",
+        "value": "Enough",
+        "tone": "up",
+        "strong": true
+       },
+       {
+        "label": "Off by 5+ points",
+        "value": "Time to act",
+        "tone": "gold",
+        "strong": true
+       }
+      ]
+     }
+    },
+    {
+     "side": true,
+     "tip": "Each sale can cost fees, and in some accounts taxes. Rebalancing too often eats returns.",
+     "tone": "red"
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "How much to sell?",
+   "q": "Your target is 50% stocks, 50% bonds. Now you have $14,000 in stocks and $6,000 in bonds. How much stock do you sell?",
+   "idea": "rebalance-amount",
+   "visual": {
+    "kind": "split",
+    "label": "$20,000 now: 70% stocks, 30% bonds; target 50/50",
+    "rows": [
+     {
+      "label": "$20,000 now",
+      "aside": "target 50/50",
+      "segments": [
+       {
+        "value": 70,
+        "tone": "up",
+        "label": "Stocks 70%"
+       },
+       {
+        "value": 30,
+        "tone": "blue",
+        "label": "30%"
+       }
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "$4,000",
+     "feedback": "Half of the whole $20,000 is $10,000. You hold $14,000, so the extra comes off."
+    },
+    {
+     "text": "$7,000",
+     "feedback": "Half of $14,000 isn’t the target. Half of the whole $20,000 is."
+    },
+    {
+     "text": "$2,000",
+     "feedback": "That only gets stocks to $12,000, still 60%. The target is half of the whole $20,000."
+    },
+    {
+     "text": "$14,000",
+     "feedback": "That sells every stock. The target is 50% stocks, not zero."
+    }
+   ],
+   "answer": 0,
+   "work": "50% × $20,000 = $10,000. $14,000 − $10,000 = $4,000 to sell.",
+   "added": "Feedback for the options the board doesn’t show written for the Academy"
+  },
+  {
+   "type": "check",
+   "title": "How often?",
+   "q": "How often does a typical long-term investor rebalance?",
+   "options": [
+    {
+     "text": "Every day",
+     "feedback": "Daily rebalancing piles up costs and chases noise. Once or twice a year keeps the split close enough."
+    },
+    {
+     "text": "Once or twice a year",
+     "feedback": "Once or twice a year keeps the split close enough without piling up costs."
+    },
+    {
+     "text": "Never",
+     "feedback": "Without rebalancing the split keeps drifting, and your risk drifts with it."
+    },
+    {
+     "text": "Only after a crash",
+     "feedback": "Drift comes from good years too. A set date, once or twice a year, catches both."
+    }
+   ],
+   "answer": 1,
+   "idea": "rebalance-how-often",
+   "added": "Feedback for the options the board doesn’t show written for the Academy",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can steer back to your split.",
+   "lines": [
+    "Prices move, so the split drifts.",
+    "Rebalance: trim what grew, top up what lagged.",
+    "Once or twice a year is enough."
+   ]
+  }
+ ]
+}

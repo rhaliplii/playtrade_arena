@@ -1,0 +1,211 @@
+{
+ "id": "pick-your-style-and-markets",
+ "chapter": "trading-plan",
+ "n": 1,
+ "title": "Pick your style and markets",
+ "minutes": 5,
+ "desc": "Choose a trading style that fits your time, and a short list of markets",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Which style fits you?",
+   "situation": "You work 9 to 5. You have 30 minutes each evening to look at charts. Which trading style fits your time?",
+   "options": [
+    {
+     "text": "Day trading: in and out the same day",
+     "feedback": "Day trading looks exciting, but it needs you at the screen during work hours. You can’t give it that time."
+    },
+    {
+     "text": "Swing trading: holds for days to weeks",
+     "feedback": "Swing trades can be checked once a day, after the close. That fits your evenings."
+    },
+    {
+     "text": "Quick trades on your lunch break",
+     "feedback": "Lunch-break trades are rushed day trades. You can’t watch them once you’re back at work."
+    }
+   ],
+   "answer": 1,
+   "idea": "style-fits-your-clock",
+   "work": "Day trading needs hours at the screen while the market is open. You have 30 minutes after it closes."
+  },
+  {
+   "type": "learn",
+   "title": "Pick a style that fits your clock",
+   "text": "Your **[[trading-style|style]]** is how long you hold a trade. Pick the one that fits the time you really have, not the one that looks most exciting.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "table",
+      "label": "Three trading styles: how long each holds a trade and how often you check it",
+      "cols": [
+       {
+        "label": "Style",
+        "w": 1.1
+       },
+       {
+        "label": "Holds for"
+       },
+       {
+        "label": "Routine",
+        "align": "right"
+       }
+      ],
+      "rows": [
+       {
+        "cells": [
+         {
+          "text": "Day trading",
+          "strong": true
+         },
+         "minutes to hours",
+         "closes all by the bell"
+        ]
+       },
+       {
+        "cells": [
+         {
+          "text": "Swing trading",
+          "strong": true
+         },
+         "days to weeks",
+         "checks once a day"
+        ]
+       },
+       {
+        "cells": [
+         {
+          "text": "Position trading",
+          "strong": true
+         },
+         "weeks to months",
+         "checks once a week"
+        ]
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "visual": {
+      "kind": "planbar",
+      "sections": [
+       "Style",
+       "Entry",
+       "Exit & risk",
+       "Checklist",
+       "Review"
+      ],
+      "current": 0
+     }
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "A few markets, known well",
+   "text": "Forty markets means you know none of them well. Four means you learn how each one moves.",
+   "visual": {
+    "kind": "stack",
+    "layout": "row",
+    "items": [
+     {
+      "kind": "units",
+      "heading": "40 markets",
+      "total": 40,
+      "cols": 8,
+      "tones": [
+       "up",
+       "down",
+       "blue",
+       "gold",
+       "up",
+       "down",
+       "blue",
+       "gold"
+      ],
+      "layout": "stack",
+      "foot": "Skims them all",
+      "label": "A grid of 40 markets"
+     },
+     {
+      "kind": "stats",
+      "cols": 1,
+      "items": [
+       {
+        "label": "4 markets",
+        "text": "US index fund · Big tech stock · Big bank stock · Gold",
+        "sub": "Knows them well"
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "For each market you learn its normal daily move, its busy hours and its big news dates, like earnings.",
+   "footTone": "sky"
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Once a week",
+   "q": "You can only look at the market on Sunday evenings. You want to hold for weeks or months. Which style fits?",
+   "options": [
+    {
+     "text": "Day trading",
+     "feedback": "Day trading needs hours at the screen while markets are open. One look a week can’t cover that."
+    },
+    {
+     "text": "Swing trading",
+     "feedback": "Swing trades often need a look every day. One check a week, holding for months, is position trading."
+    },
+    {
+     "text": "Position trading",
+     "feedback": "Position trades last weeks to months and need a look about once a week. That fits your Sunday evenings."
+    },
+    {
+     "text": "Any: style doesn’t matter",
+     "feedback": "Style matters: it has to fit the time you really have. One look a week fits only the slowest style."
+    }
+   ],
+   "answer": 2,
+   "idea": "position-trading-weekly",
+   "work": null
+  },
+  {
+   "type": "check",
+   "title": "A starter list",
+   "q": "Which list of markets is the better start for a beginner?",
+   "options": [
+    {
+     "text": "Every market on the app, so you never miss a move",
+     "feedback": "Watching everything means knowing nothing well. A short list lets you learn how each market really moves."
+    },
+    {
+     "text": "4 or 5 markets you follow and understand",
+     "feedback": "A short list lets you learn each market’s normal daily move, busy hours and news dates."
+    },
+    {
+     "text": "Whatever is trending online today",
+     "feedback": "What’s trending changes every day. You’d never learn how any one market really moves."
+    },
+    {
+     "text": "Only the markets that moved most this week",
+     "feedback": "Last week’s biggest movers change every week. You’d never learn how any one market really moves."
+    }
+   ],
+   "answer": 1,
+   "idea": "few-markets-known-well",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "Your style fits your clock.",
+   "lines": [
+    "Pick the style that fits the time you really have.",
+    "Day trading needs hours at the screen while markets are open.",
+    "Start with a few markets you understand."
+   ]
+  }
+ ]
+}

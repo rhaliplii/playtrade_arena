@@ -1,0 +1,108 @@
+{
+ "id": "how-markets-work",
+ "path": "learn-to-trade",
+ "n": 1,
+ "title": "How Markets Actually Work",
+ "short": "Markets",
+ "promise": "Why the bull and the bear never stop fighting, who you trade against, and the toll on every trade.",
+ "minutes": 16,
+ "pages": "6–11",
+ "guest": true,
+ "unlock": [
+  "Tell a bull market from a bear market",
+  "Know who is on the other side of your trade",
+  "Rank the six asset classes by risk",
+  "Spot the spread you pay on every trade"
+ ],
+ "terms": [
+  "bid",
+  "ask",
+  "spread",
+  "liquidity",
+  "bull-market",
+  "bear-market",
+  "market-maker",
+  "asset-class"
+ ],
+ "lessons": [
+  "bulls-vs-bears",
+  "other-side",
+  "asset-classes",
+  "bid-ask-spread"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "A stock fell from a high of $200 to $150 over four months. By the usual definition, is it in a bear market?",
+    "options": [
+     "Yes: it’s down 25% from the high",
+     "No: it’s only down $50",
+     "No: bear markets need a year"
+    ],
+    "answer": 0,
+    "why": "Use percent, not dollars: the $50 fall ÷ the $200 high = 25% down. That’s past the 20% line, so it’s a bear market. Time doesn’t decide it.",
+    "idea": "bear-market-20-percent"
+   },
+   {
+    "lesson": 2,
+    "q": "Big news hits. Robots trade on it in 0.001 seconds. What’s your smartest move?",
+    "options": [
+     "Race to buy in the first second",
+     "Copy whatever the robots did",
+     "Wait for your plan’s setup"
+    ],
+    "answer": 2,
+    "why": "You can’t beat a robot’s speed, and copying it means arriving late. Your edge is patience: let the rush pass and trade only if your setup appears.",
+    "idea": "your-edge-patience"
+   },
+   {
+    "lesson": 3,
+    "q": "A friend wants his first investment to be steady and to pay him interest. Which class fits best?",
+    "options": [
+     "Bonds",
+     "Forex with leverage",
+     "A new crypto token"
+    ],
+    "answer": 0,
+    "why": "A bond is a loan to a government or company. It pays interest and is one of the calmest choices. Leverage and new tokens are the riskiest.",
+    "idea": "asset-class-risk-ladder"
+   },
+   {
+    "lesson": 4,
+    "q": "You want to put $1,000 into a new token. Bid $0.095, ask $0.105, and only a few thousand dollars of orders on each side. What do you do?",
+    "options": [
+     "The spread doesn’t matter if I hold for years",
+     "Pass, or buy small: you start about 10% down",
+     "Buy $1,000 now: at $0.10 it can only go up"
+    ],
+    "answer": 1,
+    "why": "You buy at $0.105 but can only sell at $0.095, so about $95 of your $1,000 is gone at once. Holding doesn’t avoid it, and few orders make the exit worse.",
+    "idea": "spread-round-trip-cost"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "bear-market-20-percent",
+   "title": "Lesson 1 · Bulls vs bears",
+   "text": "A bear market is a fall of about 20% or more from a recent high. Use percent: fall ÷ high. A $100 stock that drops to $78 is down $22 ÷ $100 = 22%."
+  },
+  {
+   "idea": "your-edge-patience",
+   "title": "Lesson 2 · Who’s on the other side",
+   "text": "You can’t beat robots on speed or funds on research. Your edge is patience: let the rush pass and trade only your plan’s setups."
+  },
+  {
+   "idea": "asset-class-risk-ladder",
+   "title": "Lesson 3 · The six asset classes and their risk",
+   "text": "From lower to higher risk: bonds and broad index ETFs, then stocks, commodities and forex, then crypto. Bonds pay interest and swing the least."
+  },
+  {
+   "idea": "spread-round-trip-cost",
+   "title": "Lesson 4 · Bid, ask and the spread",
+   "text": "You buy at the ask and sell at the bid. The gap × shares is what a round trip costs: $0.10 × 100 = $10."
+  }
+ ],
+ "next": "orders-leverage"
+}

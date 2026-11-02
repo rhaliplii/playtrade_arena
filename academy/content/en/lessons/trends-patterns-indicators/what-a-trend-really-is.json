@@ -1,0 +1,499 @@
+{
+ "id": "what-a-trend-really-is",
+ "chapter": "trends-patterns-indicators",
+ "n": 1,
+ "title": "What a trend really is",
+ "minutes": 5,
+ "desc": "Read the swings: higher highs and lows, lower ones, or a range",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "think",
+   "title": "Which way is it going?",
+   "situation": "This stock zigzags. Its lows went $40, $43, $46. Its highs went $45, $48, $51. What is it?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily · 4 months",
+    "chart": {
+     "path": [
+      [
+       0,
+       42
+      ],
+      [
+       2,
+       40
+      ],
+      [
+       5,
+       45
+      ],
+      [
+       8,
+       43
+      ],
+      [
+       11,
+       48
+      ],
+      [
+       14,
+       46
+      ],
+      [
+       17,
+       51
+      ]
+     ],
+     "seed": 3,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "zigzag": "blue",
+     "swings": [
+      {
+       "i": 2,
+       "price": 40,
+       "label": "$40"
+      },
+      {
+       "i": 5,
+       "price": 45,
+       "label": "$45"
+      },
+      {
+       "i": 8,
+       "price": 43,
+       "label": "$43"
+      },
+      {
+       "i": 11,
+       "price": 48,
+       "label": "$48"
+      },
+      {
+       "i": 14,
+       "price": 46,
+       "label": "$46"
+      },
+      {
+       "i": 17,
+       "price": 51,
+       "label": "$51"
+      }
+     ],
+     "label": "Lows at $40, $43, $46 and highs at $45, $48, $51: each one higher than the last"
+    }
+   },
+   "options": [
+    {
+     "text": "A downtrend: it keeps falling back",
+     "feedback": "The dips are real, but each low is higher than the last. A downtrend needs lower highs and lower lows."
+    },
+    {
+     "text": "An uptrend: higher highs and higher lows",
+     "feedback": "Higher highs and higher lows: that’s an uptrend, even with dips along the way."
+    },
+    {
+     "text": "Sideways: it just goes up and down",
+     "feedback": "Every chart goes up and down. What counts is that each low and each high beats the last one."
+    }
+   ],
+   "answer": 1,
+   "idea": "read-the-swings",
+   "work": "Lows $40 → $43 → $46. Highs $45 → $48 → $51. Each one higher than the last."
+  },
+  {
+   "type": "learn",
+   "title": "Three kinds of market",
+   "text": "Look at the **[[swing|swings]]**: the peaks and dips. Compare each one with the last. Are they climbing, falling, or stuck in a range?",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "stack",
+      "layout": "row",
+      "items": [
+       {
+        "kind": "candles",
+        "title": "Uptrend",
+        "foot": "Higher highs, higher lows",
+        "chart": {
+         "path": [
+          [
+           0,
+           10
+          ],
+          [
+           3,
+           14
+          ],
+          [
+           5,
+           12
+          ],
+          [
+           8,
+           17
+          ],
+          [
+           10,
+           15
+          ],
+          [
+           13,
+           20
+          ]
+         ],
+         "seed": 1,
+         "height": 70,
+         "axis": false,
+         "lastTag": false,
+         "ticks": 0,
+         "noise": 0.3,
+         "label": "Uptrend: higher highs, higher lows"
+        }
+       },
+       {
+        "kind": "candles",
+        "title": "Downtrend",
+        "foot": "Lower highs, lower lows",
+        "chart": {
+         "path": [
+          [
+           0,
+           20
+          ],
+          [
+           3,
+           16
+          ],
+          [
+           5,
+           18
+          ],
+          [
+           8,
+           13
+          ],
+          [
+           10,
+           15
+          ],
+          [
+           13,
+           10
+          ]
+         ],
+         "seed": 2,
+         "height": 70,
+         "axis": false,
+         "lastTag": false,
+         "ticks": 0,
+         "noise": 0.3,
+         "label": "Downtrend: lower highs, lower lows"
+        }
+       },
+       {
+        "kind": "candles",
+        "title": "Sideways",
+        "foot": "No new highs or lows",
+        "chart": {
+         "path": [
+          [
+           0,
+           14
+          ],
+          [
+           3,
+           18
+          ],
+          [
+           6,
+           14
+          ],
+          [
+           9,
+           18
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           13,
+           15
+          ]
+         ],
+         "seed": 4,
+         "height": 70,
+         "axis": false,
+         "lastTag": false,
+         "ticks": 0,
+         "noise": 0.3,
+         "label": "Sideways: no new highs or lows"
+        }
+       }
+      ]
+     }
+    },
+    {
+     "tip": "A trend lasts until the pattern breaks. One red day doesn’t end an uptrend."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap the swings",
+   "title": "When the pattern breaks",
+   "text": "Label each swing. The uptrend holds while the lows keep rising.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "aside": "- - last higher low $49",
+    "asideTone": "gold",
+    "chart": {
+     "path": [
+      [
+       0,
+       44
+      ],
+      [
+       3,
+       47
+      ],
+      [
+       5,
+       45
+      ],
+      [
+       8,
+       50
+      ],
+      [
+       10,
+       48
+      ],
+      [
+       13,
+       53
+      ],
+      [
+       15,
+       49
+      ],
+      [
+       17,
+       52
+      ],
+      [
+       19,
+       47.5
+      ]
+     ],
+     "seed": 6,
+     "height": 150,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 49,
+       "tone": "gold"
+      }
+     ],
+     "zigzag": "blue",
+     "swings": [
+      {
+       "i": 3,
+       "price": 47,
+       "label": "H",
+       "tone": "up"
+      },
+      {
+       "i": 5,
+       "price": 45,
+       "label": "HL",
+       "tone": "up"
+      },
+      {
+       "i": 8,
+       "price": 50,
+       "label": "HH",
+       "tone": "up"
+      },
+      {
+       "i": 10,
+       "price": 48,
+       "label": "HL",
+       "tone": "up"
+      },
+      {
+       "i": 13,
+       "price": 53,
+       "label": "HH",
+       "tone": "up"
+      },
+      {
+       "i": 15,
+       "price": 49,
+       "label": "HL",
+       "tone": "up"
+      },
+      {
+       "i": 17,
+       "price": 52,
+       "label": "LH",
+       "tone": "down"
+      },
+      {
+       "i": 19,
+       "price": 47.5,
+       "label": "LL",
+       "tone": "down"
+      }
+     ],
+     "label": "Higher highs and higher lows, then a lower high at $52 and a lower low under $49"
+    }
+   },
+   "foot": "First a {down}lower high{/down} at $52, then a {down}lower low{/down} under $49. The uptrend is broken. That’s a warning, not a promise of a fall.",
+   "footTone": "gold"
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Name the trend",
+   "idea": "spot-a-downtrend",
+   "q": "Highs went $80, $76, $71. Lows went $72, $68, $63. What is it?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "path": [
+      [
+       0,
+       77
+      ],
+      [
+       2,
+       80
+      ],
+      [
+       5,
+       72
+      ],
+      [
+       8,
+       76
+      ],
+      [
+       11,
+       68
+      ],
+      [
+       14,
+       71
+      ],
+      [
+       17,
+       63
+      ]
+     ],
+     "seed": 5,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "zigzag": "blue",
+     "swings": [
+      {
+       "i": 2,
+       "price": 80,
+       "label": "$80"
+      },
+      {
+       "i": 5,
+       "price": 72,
+       "label": "$72"
+      },
+      {
+       "i": 8,
+       "price": 76,
+       "label": "$76"
+      },
+      {
+       "i": 11,
+       "price": 68,
+       "label": "$68"
+      },
+      {
+       "i": 14,
+       "price": 71,
+       "label": "$71"
+      },
+      {
+       "i": 17,
+       "price": 63,
+       "label": "$63"
+      }
+     ],
+     "label": "Highs at $80, $76, $71 and lows at $72, $68, $63"
+    }
+   },
+   "options": [
+    {
+     "text": "Uptrend",
+     "feedback": "The bounces go up, but each high and each low ends lower than the last. Rising bounces aren’t rising swings."
+    },
+    {
+     "text": "Downtrend",
+     "feedback": "Lower highs and lower lows: that’s a downtrend, even with bounces along the way."
+    },
+    {
+     "text": "Sideways",
+     "feedback": "Each high is lower than the last, and so is each low. That’s a downtrend, not a range."
+    },
+    {
+     "text": "Can’t tell",
+     "feedback": "Three highs and three lows are enough to tell. Compare each one with the last: every one is lower."
+    }
+   ],
+   "answer": 1,
+   "work": "Highs 80 → 76 → 71. Lows 72 → 68 → 63."
+  },
+  {
+   "type": "check",
+   "title": "Stuck in a box",
+   "q": "For three months a stock bounced between $20 and $24. It never broke out either way. What is it?",
+   "options": [
+    {
+     "text": "An uptrend",
+     "feedback": "A few rises inside the box aren’t a trend. No higher highs and no lower lows means sideways."
+    },
+    {
+     "text": "A downtrend",
+     "feedback": "A few drops inside the box aren’t a trend. No lower lows and no higher highs means sideways."
+    },
+    {
+     "text": "Sideways: a range",
+     "feedback": "No new highs and no new lows for three months: price is stuck in a range between $20 and $24."
+    },
+    {
+     "text": "It’s about to break out higher",
+     "feedback": "Nothing on the chart says which way it will break, or when. Until it does, it’s a range."
+    }
+   ],
+   "answer": 2,
+   "idea": "sideways-range"
+  },
+  {
+   "type": "keep",
+   "headline": "You can tell which way a market is going.",
+   "lines": [
+    "Uptrend: higher highs and higher lows.",
+    "Downtrend: lower highs and lower lows.",
+    "Sideways: no new highs or lows, just a range."
+   ]
+  }
+ ]
+}

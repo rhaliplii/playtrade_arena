@@ -1,0 +1,273 @@
+{
+ "id": "debt-and-cash-flow",
+ "chapter": "company-fundamentals",
+ "n": 4,
+ "title": "Debt and cash flow",
+ "minutes": 5,
+ "desc": "Why profit isn’t cash, and what debt does to a company in a bad year",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Profit, but less cash?",
+   "situation": "Acme reports a $10M profit this year. Yet its bank balance fell by $5M. How can both be true?",
+   "visual": {
+    "kind": "stats",
+    "items": [
+     {
+      "label": "Profit",
+      "value": "+$10M",
+      "sub": "on paper",
+      "tone": "up"
+     },
+     {
+      "label": "Cash in the bank",
+      "value": "−$5M",
+      "sub": "this year",
+      "tone": "down"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "The numbers must be wrong",
+     "feedback": "Both can be right. A sale counts as profit when it’s made, but the cash arrives only when the customer pays."
+    },
+    {
+     "text": "Customers haven’t paid yet: profit isn’t cash",
+     "feedback": "Profit counts the sale. Cash waits for the payment."
+    },
+    {
+     "text": "Profit and cash are always equal",
+     "feedback": "They often aren’t. Profit counts a sale when it’s made; the cash arrives only when the customer pays."
+    }
+   ],
+   "answer": 1,
+   "idea": "profit-vs-cash",
+   "work": "Acme booked $40M of sales but collected only $25M. The rest is still owed by customers."
+  },
+  {
+   "type": "learn",
+   "title": "Cash pays the bills",
+   "text": "**[[cash-flow|Cash flow]]** is the money that really came in, minus what really went out. Wages, suppliers and loan interest are paid in cash, not in profit.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Cash in from customers",
+      "value": "+$50M",
+      "tone": "up"
+     },
+     {
+      "label": "Wages and suppliers",
+      "value": "−$40M",
+      "tone": "down"
+     },
+     {
+      "label": "Interest on loans",
+      "value": "−$4M",
+      "tone": "down"
+     },
+     {
+      "label": "Cash flow",
+      "value": "+$6M",
+      "tone": "up",
+      "strong": true
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "A company can show a profit and still run out of cash."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "added": "Tap notes written for the Academy (the working for each year)",
+   "tag": "tap a year",
+   "title": "Debt in a bad year",
+   "text": "Two firms run the same business. One has no debt. The other pays $8M interest every year.",
+   "visual": {
+    "kind": "barchart",
+    "title": "Profit after interest",
+    "label": "Good year: $20M with no debt, $12M with big debt. Bad year: $6M and −$2M",
+    "series": [
+     {
+      "label": "No debt",
+      "tone": "up"
+     },
+     {
+      "label": "Big debt",
+      "tone": "down"
+     }
+    ],
+    "groups": [
+     {
+      "label": "Good year",
+      "values": [
+       20,
+       12
+      ],
+      "displays": [
+       "$20M",
+       "$12M"
+      ],
+      "note": "No debt keeps $20M. Big debt: $20M − $8M interest = $12M."
+     },
+     {
+      "label": "Bad year",
+      "values": [
+       6,
+       -2
+      ],
+      "displays": [
+       "$6M",
+       "−$2M"
+      ],
+      "note": "No debt keeps $6M. Big debt: $6M − $8M interest = −$2M, a loss."
+     }
+    ]
+   },
+   "foot": "Business earnings fell from $20M to $6M. Interest stayed at $8M, so the indebted firm made a loss.",
+   "footTone": "red"
+  },
+  {
+   "type": "trap",
+   "title": "Profit that never turns into cash",
+   "text": "Profit rising every year while cash flow keeps going negative is a warning sign. Find out why: the money may never arrive.",
+   "visual": {
+    "kind": "barchart",
+    "title": "Northwind · 3 years",
+    "label": "Profit $8M, $10M, $12M while cash flow is −$2M, −$4M, −$6M",
+    "series": [
+     {
+      "label": "Profit",
+      "tone": "up"
+     },
+     {
+      "label": "Cash flow",
+      "tone": "down"
+     }
+    ],
+    "groups": [
+     {
+      "label": "Year 1",
+      "values": [
+       8,
+       -2
+      ],
+      "displays": [
+       "$8M",
+       "−$2M"
+      ]
+     },
+     {
+      "label": "Year 2",
+      "values": [
+       10,
+       -4
+      ],
+      "displays": [
+       "$10M",
+       "−$4M"
+      ]
+     },
+     {
+      "label": "Year 3",
+      "values": [
+       12,
+       -6
+      ],
+      "displays": [
+       "$12M",
+       "−$6M"
+      ]
+     }
+    ]
+   },
+   "rule": "check that profit turns into cash."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "A bad year with debt",
+   "q": "Northwind usually earns $15M before interest and pays $12M interest a year. This year it earns only $9M before interest. What’s left?",
+   "idea": "debt-in-bad-year",
+   "visual": {
+    "kind": "stats",
+    "items": [
+     {
+      "label": "Earned",
+      "value": "$9M",
+      "sub": "before interest",
+      "tone": "up"
+     },
+     {
+      "label": "Interest",
+      "value": "$12M",
+      "sub": "every year",
+      "tone": "down"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "A $3M profit",
+     "feedback": "$3M profit is a normal year. Interest doesn’t shrink when earnings do."
+    },
+    {
+     "text": "A $3M loss",
+     "feedback": "Interest stays at $12M even in a bad year, and $9M of earnings can’t cover it."
+    },
+    {
+     "text": "$9M: interest drops in bad years",
+     "feedback": "Interest is set by the loan. It doesn’t shrink when earnings fall."
+    },
+    {
+     "text": "$21M profit",
+     "feedback": "Interest is a cost, so you take it away from earnings, not add it."
+    }
+   ],
+   "answer": 1,
+   "work": "$9M − $12M interest = −$3M. A normal year: $15M − $12M = $3M."
+  },
+  {
+   "type": "check",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Same profit, different cash",
+   "q": "Both firms report a $10M profit. Acme turned it into $9M of cash. Northwind’s cash flow was −$2M. Which is on safer ground?",
+   "options": [
+    {
+     "text": "Northwind: same profit",
+     "feedback": "Same profit on paper, but Northwind’s cash went out, not in. Bills are paid in cash."
+    },
+    {
+     "text": "Acme: its profit arrived as cash",
+     "feedback": "Bills are paid in cash, and Acme’s profit showed up in the bank as $9M. Northwind’s didn’t."
+    },
+    {
+     "text": "Same: profit is all that matters",
+     "feedback": "Bills are paid in cash. Acme’s profit showed up in the bank. Northwind’s didn’t."
+    },
+    {
+     "text": "You can’t compare them",
+     "feedback": "You can: compare how much of each profit arrived as cash. Acme +$9M, Northwind −$2M."
+    }
+   ],
+   "answer": 1,
+   "idea": "profit-vs-cash",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can check cash and debt.",
+   "lines": [
+    "Cash flow pays the bills. Profit can sit on paper.",
+    "Debt costs the same in good and bad years.",
+    "Profit that never becomes cash is a warning sign."
+   ]
+  }
+ ]
+}

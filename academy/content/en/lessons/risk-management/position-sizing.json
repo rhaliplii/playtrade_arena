@@ -1,0 +1,234 @@
+{
+ "id": "position-sizing",
+ "chapter": "risk-management",
+ "n": 3,
+ "title": "Position sizing in one formula",
+ "minutes": 5,
+ "desc": "Turn your account, risk and stop into the right number of shares",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Board P1-Ch05-L3 card 1",
+   "pose": "think",
+   "title": "How many shares?",
+   "situation": "$10,000 account, 1% risk. You buy at $50 with a stop at $48. How many shares should you buy?",
+   "visual": {
+    "kind": "fields",
+    "items": [
+     {
+      "label": "Account",
+      "value": "$10,000"
+     },
+     {
+      "label": "Risk",
+      "value": "1%"
+     },
+     {
+      "label": "Entry",
+      "value": "$50",
+      "tone": "blue"
+     },
+     {
+      "label": "Stop",
+      "value": "$48",
+      "tone": "down"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "200: all you can afford",
+     "feedback": "200 shares × $2 = $400 at risk. That’s 4% of the account, not 1%."
+    },
+    {
+     "text": "50 shares",
+     "feedback": "50 shares. If the stop is hit, you lose about $100, or 1%."
+    },
+    {
+     "text": "2 shares",
+     "feedback": "That’s the dollars lost per share, not the share count. Divide your $100 risk by it."
+    }
+   ],
+   "answer": 1,
+   "idea": "position-size-formula",
+   "work": "$10,000 × 1% = $100. $50 − $48 = $2 a share. $100 ÷ $2 = 50 shares."
+  },
+  {
+   "type": "learn",
+   "title": "One formula sets the size",
+   "text": "You don’t pick the [[position-size|number of shares]] by feel. The **stop** and your **risk** decide it.",
+   "visual": {
+    "kind": "formula",
+    "terms": [
+     {
+      "text": "Shares",
+      "tone": "up"
+     },
+     {
+      "op": "="
+     },
+     {
+      "text": "Account × Risk %",
+      "tone": "gold"
+     },
+     {
+      "op": "÷"
+     },
+     {
+      "text": "Entry − Stop",
+      "tone": "down"
+     }
+    ],
+    "foot": "Dollars you’ll risk ÷ dollars lost per share"
+   },
+   "blocks": [
+    {
+     "tip": "Find the stop first. The share count comes last."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap a step",
+   "title": "Size it in three steps",
+   "text": "",
+   "steps": [
+    {
+     "label": "Risk in dollars",
+     "text": "$10,000 × 1% = $100"
+    },
+    {
+     "label": "Risk per share",
+     "text": "$50 − $48 = $2"
+    },
+    {
+     "label": "Shares",
+     "text": "$100 ÷ $2 = 50 shares"
+    }
+   ],
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Position value",
+      "value": "50 × $50 = $2,500"
+     },
+     {
+      "label": "Lost if the stop is hit",
+      "value": "about $100",
+      "tone": "down"
+     }
+    ]
+   },
+   "foot": "You hold $2,500 of stock, but only about $100 is at risk.",
+   "footTone": "green"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Wider stop, fewer shares",
+   "text": "Same $100 risk, different stops. A **wider stop** means **fewer shares**. The risk in dollars never changes.",
+   "visual": {
+    "kind": "table",
+    "label": "For $100 of risk: $1 stop → 100 shares, $2 → 50, $5 → 20",
+    "cols": [
+     {
+      "label": "Stop distance"
+     },
+     {
+      "label": "Shares for $100",
+      "align": "right"
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "$1 below",
+       "100 shares"
+      ]
+     },
+     {
+      "cells": [
+       "$2 below",
+       "50 shares"
+      ]
+     },
+     {
+      "cells": [
+       "$5 below",
+       "20 shares"
+      ]
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "If the share count costs more than your account, the stop is too tight or the trade is too small.",
+     "tone": "gold"
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Size the trade",
+   "q": "$20,000 account, 1% risk. Entry $40, stop $36. How many shares?",
+   "idea": "size-the-trade",
+   "options": [
+    {
+     "text": "5 shares",
+     "feedback": "The decimal slipped. Your $200 risk ÷ $4 a share is ten times that."
+    },
+    {
+     "text": "50 shares",
+     "feedback": "$200 of risk ÷ $4 a share. If the stop is hit, you lose 1%."
+    },
+    {
+     "text": "100 shares",
+     "feedback": "That’s $400 at risk, 2% of the account. Use the full $4 gap between entry and stop."
+    },
+    {
+     "text": "500 shares",
+     "feedback": "500 shares is the whole account. A $4 drop would cost $2,000, which is 10%."
+    }
+   ],
+   "answer": 1,
+   "work": "$20,000 × 1% = $200. $40 − $36 = $4. $200 ÷ $4 = 50 shares."
+  },
+  {
+   "type": "check",
+   "title": "Move the stop",
+   "q": "Same account, same 1% risk. You move your stop further from your entry. What happens to the number of shares?",
+   "options": [
+    {
+     "text": "It goes up",
+     "feedback": "It’s the other way round. Each share now loses more at the stop, so you can hold fewer."
+    },
+    {
+     "text": "It goes down",
+     "feedback": "More dollars at risk per share means fewer shares for the same dollar risk."
+    },
+    {
+     "text": "It stays the same",
+     "feedback": "More dollars lost per share means fewer shares for the same dollar risk."
+    },
+    {
+     "text": "It doubles",
+     "feedback": "A wider stop costs more per share, so the count can’t go up. It shrinks."
+    }
+   ],
+   "answer": 1,
+   "idea": "wider-stop-fewer-shares",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can size any trade.",
+   "lines": [
+    "Shares = (account × risk %) ÷ (entry − stop).",
+    "Set the stop first. The size comes last.",
+    "Wider stop, fewer shares. Same dollar risk."
+   ]
+  }
+ ]
+}

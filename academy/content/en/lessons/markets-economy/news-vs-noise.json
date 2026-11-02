@@ -1,0 +1,261 @@
+{
+ "id": "news-vs-noise",
+ "chapter": "markets-economy",
+ "n": 5,
+ "title": "News vs noise",
+ "minutes": 5,
+ "desc": "Priced in: why good news can still sink a price",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "detective",
+   "title": "Big news, small move",
+   "situation": "Traders had expected a rate cut for weeks. Today it came. Stocks rose just 0.1%. Why so little?",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "headline",
+      "text": "Central bank cuts rates"
+     },
+     {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Expected",
+        "value": "Cut 0.25 pts · for weeks",
+        "strong": true
+       },
+       {
+        "label": "Actual",
+        "value": "Cut 0.25 pts",
+        "strong": true
+       },
+       {
+        "label": "Stocks",
+        "value": "+0.1%",
+        "tone": "muted"
+       }
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Traders missed the news",
+     "feedback": "The news hit every screen in seconds. Traders had already bought on the expectation."
+    },
+    {
+     "text": "It was already priced in",
+     "feedback": "Prices already reflected the cut. With no surprise, there was little left to move."
+    },
+    {
+     "text": "Rate cuts are bad for stocks",
+     "feedback": "Cuts usually help stocks. The move was small because traders had expected this cut for weeks."
+    }
+   ],
+   "answer": 1,
+   "idea": "priced-in",
+   "work": "Expected cut 0.25 points. Actual cut 0.25 points. Surprise: zero."
+  },
+  {
+   "type": "learn",
+   "title": "Headlines move prices, briefly",
+   "text": "Most headlines cause a quick jump that fades. Ask one question first: **is this already [[priced-in|priced in]]?**",
+   "visual": {
+    "kind": "series",
+    "title": "Headline day",
+    "ends": false,
+    "height": 100,
+    "label": "A stock jumps 3% on a headline at 10:00, then fades to +0.4% at the close",
+    "series": [
+     {
+      "values": [
+       0,
+       0.15,
+       0.05,
+       3,
+       2.4,
+       1.9,
+       1.3,
+       0.8,
+       0.5,
+       0.4,
+       0.4
+      ],
+      "tone": "up",
+      "area": true
+     }
+    ],
+    "points": [
+     {
+      "i": 3,
+      "label": "+3% at 10:00",
+      "tone": "up",
+      "anchor": "end"
+     },
+     {
+      "i": 10,
+      "label": "+0.4% at close",
+      "tone": "gold",
+      "anchor": "end"
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "If everyone expected it, the price has likely moved already."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap a row",
+   "title": "Good news, falling price",
+   "text": "Prices move on the news versus what was expected. Same profit growth, three outcomes.",
+   "visual": {
+    "kind": "table",
+    "label": "Same +20% profit growth against three expectations",
+    "cols": [
+     {
+      "label": "Expected"
+     },
+     {
+      "label": "Actual",
+      "align": "right"
+     },
+     {
+      "label": "Stock",
+      "align": "right"
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "Profit +10%",
+       "+20%",
+       {
+        "text": "+5%",
+        "tone": "up",
+        "strong": true
+       }
+      ],
+      "note": "Beat by 10 points: a happy surprise."
+     },
+     {
+      "cells": [
+       "Profit +20%",
+       "+20%",
+       {
+        "text": "Flat",
+        "tone": "muted",
+        "strong": true
+       }
+      ],
+      "note": "Just as expected: nothing new to price in."
+     },
+     {
+      "cells": [
+       "Profit +30%",
+       "+20%",
+       {
+        "text": "−6%",
+        "tone": "down",
+        "strong": true
+       }
+      ],
+      "note": "Missed by 10 points: good, but not good enough."
+     }
+    ]
+   },
+   "foot": "Good news can still sink a price if it’s less good than hoped.",
+   "footTone": "gold"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Rico’s headline filter",
+   "text": "Before you trade a headline, ask three questions. Not **yes** to all three? Let it pass.",
+   "visual": {
+    "kind": "list",
+    "items": [
+     {
+      "title": "Is it new?"
+     },
+     {
+      "title": "Is it a surprise versus what was expected?"
+     },
+     {
+      "title": "Does it change the next year, not just today?"
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Beat or miss?",
+   "q": "A company reports profit up 15%. Analysts expected 25%. The stock falls 8%. Why?",
+   "idea": "expectations-beat-miss",
+   "visual": {
+    "kind": "headline",
+    "text": "Profit up 15%"
+   },
+   "options": [
+    {
+     "text": "Profit growth always sinks prices",
+     "feedback": "Profit grew, but less than hoped. The price had been set for 25%."
+    },
+    {
+     "text": "Profit grew less than expected",
+     "feedback": "Profit grew, but 10 points less than hoped. The price had been set for 25%."
+    },
+    {
+     "text": "Traders hadn’t read the report yet",
+     "feedback": "The report hits screens in seconds. Traders sold because profit grew less than the 25% they expected."
+    },
+    {
+     "text": "The whole market crashed",
+     "feedback": "Nothing says the market crashed. This stock fell because profit grew less than the 25% expected."
+    }
+   ],
+   "answer": 1,
+   "work": "Expected +25%. Actual +15%. A 10-point miss."
+  },
+  {
+   "type": "check",
+   "title": "Phone buzzing",
+   "q": "Ten headlines about the economy hit your phone today. What’s the best approach for a beginner?",
+   "options": [
+    {
+     "text": "Trade each one fast, before others do",
+     "feedback": "Chasing every headline means paying spreads and getting bounced in and out. Most news is noise."
+    },
+    {
+     "text": "Act only on news that’s new, surprising and lasting",
+     "feedback": "News that’s new, surprising and lasting can change the outlook. Most of the rest is noise you can let pass."
+    },
+    {
+     "text": "Do the opposite of every headline",
+     "feedback": "Doing the opposite is still trading every headline. Most news is noise: filter it first."
+    },
+    {
+     "text": "Turn off your stops for the day",
+     "feedback": "Stops matter most on busy news days, when price can jump. Keep them on."
+    }
+   ],
+   "answer": 1,
+   "idea": "headline-filter",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can tell news from noise.",
+   "lines": [
+    "Headlines often move prices only briefly.",
+    "Ask: is it new, a surprise, or already priced in?",
+    "Most days, the best trade on a headline is none."
+   ]
+  }
+ ]
+}

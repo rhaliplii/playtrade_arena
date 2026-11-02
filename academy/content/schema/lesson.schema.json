@@ -1,0 +1,937 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "$id": "academy/lesson",
+ "title": "Academy lesson",
+ "description": "One lesson = an ordered list of typed cards. Order: call first, check second to last, keep last; between them 1–5 learn cards and exactly one exercise (in any position). Exactly 3 scored questions (call, exercise, check).",
+ "type": "object",
+ "required": [
+  "id",
+  "chapter",
+  "n",
+  "title",
+  "minutes",
+  "desc",
+  "cards"
+ ],
+ "additionalProperties": false,
+ "properties": {
+  "id": {
+   "type": "string",
+   "pattern": "^[a-z0-9-]+$",
+   "description": "URL slug, unique in the path"
+  },
+  "chapter": {
+   "type": "string",
+   "pattern": "^[a-z0-9-]+$"
+  },
+  "n": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "title": {
+   "type": "string",
+   "maxLength": 60
+  },
+  "minutes": {
+   "type": "integer",
+   "minimum": 1,
+   "maximum": 5
+  },
+  "desc": {
+   "type": "string",
+   "maxLength": 90
+  },
+  "cards": {
+   "type": "array",
+   "minItems": 6,
+   "maxItems": 10,
+   "items": {
+    "$ref": "#/$defs/card"
+   }
+  },
+  "intro": {
+   "type": "string",
+   "maxLength": 90,
+   "description": "Rico's line on the first-visit Welcome screen (the path's first lesson)"
+  }
+ },
+ "$defs": {
+  "text": {
+   "type": "string",
+   "description": "Inline markup: **bold**, {up}…{/up}, {down}…{/down}, [[term-id|text]]"
+  },
+  "option": {
+   "type": "object",
+   "required": [
+    "text",
+    "feedback"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "text": {
+     "type": "string",
+     "maxLength": 90
+    },
+    "feedback": {
+     "type": "string",
+     "description": "≤ 40 words; never names the right option"
+    },
+    "amount": {
+     "type": "number",
+     "description": "choice exercise with a `scale`: the result per unit (e.g. per share); the option text is re-rendered as amount × the stepper value"
+    },
+    "candles": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 3,
+     "items": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+       "type": "number"
+      }
+     },
+     "description": "draw these candles ([o,h,l,c]) as a small glyph before the option text (Spot the doji)"
+    }
+   }
+  },
+  "options": {
+   "type": "array",
+   "minItems": 2,
+   "maxItems": 4,
+   "items": {
+    "$ref": "#/$defs/option"
+   }
+  },
+  "visual": {
+   "$ref": "visual.schema.json"
+  },
+  "field": {
+   "type": "object",
+   "required": [
+    "label",
+    "value"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "label": {
+     "type": "string"
+    },
+    "value": {
+     "type": "string"
+    }
+   }
+  },
+  "common": {
+   "added": {
+    "type": "string",
+    "description": "Provenance: what isn't from the book (reviewed, never shown)"
+   },
+   "pose": {
+    "type": "string",
+    "enum": [
+     "think",
+     "present",
+     "point",
+     "point2",
+     "worried",
+     "worried2",
+     "celebrate",
+     "celebrate2",
+     "star",
+     "thumbs",
+     "detective",
+     "front",
+     "shrug",
+     "side",
+     "side_r",
+     "back",
+     "head"
+    ]
+   }
+  },
+  "card": {
+   "type": "object",
+   "required": [
+    "type"
+   ],
+   "discriminator": {
+    "propertyName": "type",
+    "mapping": {
+     "call": "#/$defs/call",
+     "learn": "#/$defs/learn",
+     "walkthrough": "#/$defs/walkthrough",
+     "trap": "#/$defs/trap",
+     "myth": "#/$defs/myth",
+     "pro": "#/$defs/pro",
+     "exercise": "#/$defs/exercise",
+     "check": "#/$defs/check",
+     "keep": "#/$defs/keep"
+    }
+   }
+  },
+  "call": {
+   "type": "object",
+   "required": [
+    "type",
+    "title",
+    "situation",
+    "options",
+    "answer",
+    "idea"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "const": "call"
+    },
+    "added": {
+     "$ref": "#/$defs/common/added"
+    },
+    "pose": {
+     "$ref": "#/$defs/common/pose"
+    },
+    "name": {
+     "type": "string",
+     "maxLength": 24,
+     "description": "Optional eyebrow after \"Rico's Call ·\""
+    },
+    "title": {
+     "type": "string",
+     "maxLength": 40
+    },
+    "situation": {
+     "$ref": "#/$defs/text"
+    },
+    "visual": {
+     "$ref": "#/$defs/visual"
+    },
+    "options": {
+     "$ref": "#/$defs/options"
+    },
+    "answer": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "idea": {
+     "type": "string",
+     "pattern": "^[a-z0-9-]+$"
+    },
+    "work": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "description": "The working: only for a calculation; names every number"
+    }
+   }
+  },
+  "learn": {
+   "type": "object",
+   "required": [
+    "type",
+    "title",
+    "text"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "const": "learn"
+    },
+    "added": {
+     "$ref": "#/$defs/common/added"
+    },
+    "pose": {
+     "$ref": "#/$defs/common/pose"
+    },
+    "tag": {
+     "type": "string",
+     "maxLength": 24
+    },
+    "title": {
+     "type": "string",
+     "maxLength": 60
+    },
+    "text": {
+     "$ref": "#/$defs/text"
+    },
+    "visual": {
+     "$ref": "#/$defs/visual"
+    },
+    "deeper": {
+     "$ref": "#/$defs/deeper"
+    },
+    "blocks": {
+     "$ref": "#/$defs/blocks"
+    }
+   }
+  },
+  "walkthrough": {
+   "type": "object",
+   "required": [
+    "type",
+    "title",
+    "text"
+   ],
+   "additionalProperties": false,
+   "description": "Hotspot / walk-through: the learner taps each step (or moves the visual) before continuing.",
+   "properties": {
+    "type": {
+     "const": "walkthrough"
+    },
+    "added": {
+     "$ref": "#/$defs/common/added"
+    },
+    "pose": {
+     "$ref": "#/$defs/common/pose"
+    },
+    "tag": {
+     "type": "string",
+     "maxLength": 24
+    },
+    "title": {
+     "type": "string",
+     "maxLength": 60
+    },
+    "text": {
+     "$ref": "#/$defs/text"
+    },
+    "visual": {
+     "$ref": "#/$defs/visual"
+    },
+    "steps": {
+     "type": "array",
+     "maxItems": 6,
+     "items": {
+      "type": "object",
+      "required": [
+       "label"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "label": {
+        "type": "string",
+        "maxLength": 32
+       },
+       "text": {
+        "$ref": "#/$defs/text"
+       },
+       "sub": {
+        "type": "string",
+        "maxLength": 60,
+        "description": "one line under the label (row style: label + sub, opens to edge + move)"
+       },
+       "edge": {
+        "$ref": "#/$defs/text"
+       },
+       "move": {
+        "$ref": "#/$defs/text"
+       }
+      }
+     }
+    },
+    "foot": {
+     "$ref": "#/$defs/text",
+     "description": "shown once everything is seen; placed right after the visual"
+    },
+    "blocks": {
+     "$ref": "#/$defs/blocks"
+    },
+    "footTone": {
+     "type": "string",
+     "enum": [
+      "sky",
+      "plain",
+      "red",
+      "gold",
+      "green"
+     ],
+     "description": "render `foot` as a toned box (canvas-p1); without it the foot is a plain line (Chapter 1)"
+    }
+   }
+  },
+  "trap": {
+   "type": "object",
+   "required": [
+    "type",
+    "title",
+    "text",
+    "rule"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "const": "trap"
+    },
+    "added": {
+     "$ref": "#/$defs/common/added"
+    },
+    "pose": {
+     "$ref": "#/$defs/common/pose"
+    },
+    "title": {
+     "type": "string",
+     "maxLength": 60
+    },
+    "text": {
+     "$ref": "#/$defs/text"
+    },
+    "visual": {
+     "$ref": "#/$defs/visual"
+    },
+    "rule": {
+     "type": "string",
+     "maxLength": 90
+    },
+    "line": {
+     "type": "string",
+     "maxLength": 80,
+     "description": "Rico's line (≤ 20 words); Bear Trap is the only learn card with Rico"
+    },
+    "blocks": {
+     "$ref": "#/$defs/blocks"
+    },
+    "note": {
+     "$ref": "#/$defs/text",
+     "description": "a toned box under the rule (default red): a caveat in the card, not Rico's line"
+    },
+    "noteTone": {
+     "type": "string",
+     "enum": [
+      "sky",
+      "plain",
+      "red",
+      "gold",
+      "green"
+     ]
+    }
+   }
+  },
+  "myth": {
+   "type": "object",
+   "required": [
+    "type",
+    "title",
+    "myth",
+    "reality"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "const": "myth"
+    },
+    "added": {
+     "$ref": "#/$defs/common/added"
+    },
+    "pose": {
+     "$ref": "#/$defs/common/pose"
+    },
+    "title": {
+     "type": "string",
+     "maxLength": 60
+    },
+    "myth": {
+     "type": "string",
+     "maxLength": 120
+    },
+    "reality": {
+     "$ref": "#/$defs/text"
+    },
+    "text": {
+     "$ref": "#/$defs/text"
+    },
+    "rule": {
+     "type": "string",
+     "maxLength": 120,
+     "description": "the gold \"Rule:\" box under the reality (write it without the \"Rule:\" label)"
+    },
+    "visual": {
+     "$ref": "#/$defs/visual"
+    },
+    "visualPos": {
+     "type": "string",
+     "enum": [
+      "before",
+      "after"
+     ],
+     "description": "before: between the myth and the reality; after (default): under the reality"
+    }
+   }
+  },
+  "pro": {
+   "type": "object",
+   "required": [
+    "type",
+    "title",
+    "text"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "const": "pro"
+    },
+    "added": {
+     "$ref": "#/$defs/common/added"
+    },
+    "pose": {
+     "$ref": "#/$defs/common/pose"
+    },
+    "tag": {
+     "type": "string",
+     "maxLength": 24
+    },
+    "title": {
+     "type": "string",
+     "maxLength": 60
+    },
+    "text": {
+     "$ref": "#/$defs/text"
+    },
+    "visual": {
+     "$ref": "#/$defs/visual"
+    },
+    "blocks": {
+     "$ref": "#/$defs/blocks"
+    },
+    "rico": {
+     "type": "boolean",
+     "description": "show the text in a box next to Rico (pose), like Rico's Call"
+    }
+   }
+  },
+  "exercise": {
+   "type": "object",
+   "required": [
+    "type",
+    "kind",
+    "title",
+    "idea"
+   ],
+   "additionalProperties": false,
+   "description": "Try it. kind=choice (pick an answer), sort (place items in buckets), slider (move to a target), point (tap the right candle: answer = candle index), order (put items in order: items = right order, start = shown order), line (drag a line on a drawline visual into place).",
+   "properties": {
+    "type": {
+     "const": "exercise"
+    },
+    "added": {
+     "$ref": "#/$defs/common/added"
+    },
+    "pose": {
+     "$ref": "#/$defs/common/pose"
+    },
+    "kind": {
+     "type": "string",
+     "enum": [
+      "choice",
+      "sort",
+      "slider",
+      "point",
+      "order",
+      "line"
+     ]
+    },
+    "name": {
+     "type": "string",
+     "maxLength": 24
+    },
+    "title": {
+     "type": "string",
+     "maxLength": 60
+    },
+    "q": {
+     "$ref": "#/$defs/text"
+    },
+    "idea": {
+     "type": "string",
+     "pattern": "^[a-z0-9-]+$"
+    },
+    "fields": {
+     "type": "array",
+     "maxItems": 4,
+     "items": {
+      "$ref": "#/$defs/field"
+     }
+    },
+    "visual": {
+     "$ref": "#/$defs/visual"
+    },
+    "options": {
+     "$ref": "#/$defs/options"
+    },
+    "answer": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "work": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "items": {
+     "type": "array",
+     "items": {
+      "type": [
+       "string",
+       "object"
+      ],
+      "required": [
+       "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "text": {
+        "type": "string",
+        "maxLength": 60
+       },
+       "sub": {
+        "type": "string",
+        "maxLength": 40
+       }
+      },
+      "description": "a chip (string) or a card {text, sub}"
+     },
+     "description": "sort: chips (string) or cards {text, sub} · order: the items in the RIGHT order"
+    },
+    "buckets": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "label"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "label": {
+        "type": "string"
+       },
+       "tone": {
+        "type": "string"
+       },
+       "sub": {
+        "type": "string",
+        "maxLength": 32
+       },
+       "icon": {
+        "type": "string",
+        "enum": [
+         "up",
+         "down",
+         "flat"
+        ]
+       }
+      }
+     }
+    },
+    "solution": {
+     "type": "object",
+     "description": "sort: bucket id → items"
+    },
+    "itemFeedback": {
+     "type": "object",
+     "description": "sort: item → why it belongs where it does (≤ 40 words)"
+    },
+    "right": {
+     "type": "string",
+     "description": "sort/slider: feedback when right (≤ 40 words)"
+    },
+    "wrong": {
+     "type": "string",
+     "description": "slider: feedback when wrong (≤ 40 words)"
+    },
+    "model": {
+     "type": "object",
+     "description": "slider/predict parameters"
+    },
+    "given": {
+     "type": "array",
+     "maxItems": 2,
+     "description": "sort: examples already placed (not scored)",
+     "items": {
+      "type": "object",
+      "required": [
+       "item",
+       "bucket"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "item": {
+        "type": [
+         "string",
+         "object"
+        ],
+        "required": [
+         "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+         "text": {
+          "type": "string",
+          "maxLength": 60
+         },
+         "sub": {
+          "type": "string",
+          "maxLength": 40
+         }
+        },
+        "description": "a chip (string) or a card {text, sub}"
+       },
+       "bucket": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "scale": {
+     "type": "object",
+     "required": [
+      "label",
+      "value",
+      "min",
+      "max",
+      "step"
+     ],
+     "additionalProperties": false,
+     "description": "choice: a stepper (e.g. Shares − 100 +). Options with `amount` show amount × value; {n} in q/work is the value, {total} the right option's amount × value",
+     "properties": {
+      "label": {
+       "type": "string"
+      },
+      "value": {
+       "type": "number"
+      },
+      "min": {
+       "type": "number"
+      },
+      "max": {
+       "type": "number"
+      },
+      "step": {
+       "type": "number"
+      }
+     }
+    },
+    "tolerance": {
+     "type": "integer",
+     "minimum": 0,
+     "description": "point: candles either side of `answer` that also count as right"
+    },
+    "hints": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string"
+     },
+     "description": "point: candle index → feedback for that wrong pick (≤ 40 words)"
+    },
+    "start": {
+     "type": "array",
+     "items": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "description": "order: the order the items are shown in (indexes into items); must not already be right"
+    },
+    "hint": {
+     "type": "string",
+     "description": "point/order: the small hint under the interaction"
+    }
+   }
+  },
+  "check": {
+   "type": "object",
+   "required": [
+    "type",
+    "title",
+    "q",
+    "options",
+    "answer",
+    "idea"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "const": "check"
+    },
+    "added": {
+     "$ref": "#/$defs/common/added"
+    },
+    "pose": {
+     "$ref": "#/$defs/common/pose"
+    },
+    "title": {
+     "type": "string",
+     "maxLength": 60
+    },
+    "q": {
+     "$ref": "#/$defs/text"
+    },
+    "visual": {
+     "$ref": "#/$defs/visual"
+    },
+    "options": {
+     "$ref": "#/$defs/options"
+    },
+    "answer": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "idea": {
+     "type": "string",
+     "pattern": "^[a-z0-9-]+$"
+    },
+    "work": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   }
+  },
+  "keep": {
+   "type": "object",
+   "required": [
+    "type",
+    "headline",
+    "lines"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "const": "keep"
+    },
+    "added": {
+     "$ref": "#/$defs/common/added"
+    },
+    "pose": {
+     "$ref": "#/$defs/common/pose"
+    },
+    "headline": {
+     "type": "string",
+     "maxLength": 60
+    },
+    "lines": {
+     "type": "array",
+     "minItems": 3,
+     "maxItems": 3,
+     "items": {
+      "type": "string",
+      "maxLength": 140
+     }
+    }
+   }
+  },
+  "block": {
+   "type": "object",
+   "additionalProperties": false,
+   "description": "One piece of a learn-type card, in reading order. Exactly one of p / visual / tip / say / chips. side: on desktop it moves to the right-hand column.",
+   "properties": {
+    "p": {
+     "$ref": "#/$defs/text"
+    },
+    "visual": {
+     "$ref": "#/$defs/visual"
+    },
+    "tip": {
+     "$ref": "#/$defs/text"
+    },
+    "tone": {
+     "type": "string",
+     "enum": [
+      "sky",
+      "plain",
+      "red",
+      "gold",
+      "green"
+     ],
+     "description": "tip colour (default sky): red = a warning, gold = the key note / rule, green = the good outcome, plain = gray (canvas-p1 boards)"
+    },
+    "say": {
+     "type": "object",
+     "required": [
+      "title",
+      "rows"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "title": {
+       "type": "string"
+      },
+      "rows": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "required": [
+         "term",
+         "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+         "term": {
+          "$ref": "#/$defs/text"
+         },
+         "text": {
+          "type": "string"
+         },
+         "tone": {
+          "type": "string",
+          "enum": [
+           "up",
+           "down",
+           "muted"
+          ]
+         }
+        }
+       }
+      }
+     }
+    },
+    "chips": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "maxLength": 32
+     }
+    },
+    "side": {
+     "type": "boolean"
+    }
+   }
+  },
+  "blocks": {
+   "type": "array",
+   "maxItems": 6,
+   "items": {
+    "$ref": "#/$defs/block"
+   }
+  },
+  "deeper": {
+   "type": "object",
+   "required": [
+    "title",
+    "text"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "title": {
+     "type": "string"
+    },
+    "text": {
+     "$ref": "#/$defs/text",
+     "description": "paragraphs separated by a blank line"
+    },
+    "note": {
+     "$ref": "#/$defs/text",
+     "description": "a worked example in a dark box"
+    },
+    "href": {
+     "type": "string"
+    }
+   }
+  }
+ }
+}

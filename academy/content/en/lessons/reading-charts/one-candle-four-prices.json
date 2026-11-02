@@ -1,0 +1,277 @@
+{
+ "id": "one-candle-four-prices",
+ "chapter": "reading-charts",
+ "n": 1,
+ "title": "One candle, four prices",
+ "minutes": 5,
+ "desc": "Open, high, low and close: what every candle tells you",
+ "cards": [
+  {
+   "type": "call",
+   "title": "Where did it end the day?",
+   "situation": "This green candle is one day of trading. Where did the price close?",
+   "visual": {
+    "kind": "candle",
+    "items": [
+     {
+      "ohlc": [
+       100,
+       108,
+       97,
+       105
+      ],
+      "labels": {
+       "open": "?",
+       "high": "?",
+       "low": "?",
+       "close": "?"
+      },
+      "label": "A green candle with four unknown prices"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "$108, the top of the thin line",
+     "feedback": "The thin line is the wick. It shows how high price went, not where it ended."
+    },
+    {
+     "text": "$105, the top of the thick part",
+     "feedback": "The thick part is the body. On a green candle, its top is the close."
+    },
+    {
+     "text": "$97, the bottom",
+     "feedback": "The bottom of the lower wick is the day’s low. On a green candle, the close is the top of the body."
+    }
+   ],
+   "answer": 1,
+   "idea": "candle-body-close",
+   "work": "Green = it closed above where it opened. Top of the body = close = $105. The thin line above reaches the day’s high, $108."
+  },
+  {
+   "type": "learn",
+   "title": "One candle, four prices",
+   "text": "Each candle shows **[[ohlc|open, high, low and close]]**. The thick body runs from open to close. The thin [[wick|wicks]] reach the high and the low.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "candle",
+      "items": [
+       {
+        "ohlc": [
+         100,
+         108,
+         97,
+         105
+        ],
+        "caption": "Green · up"
+       },
+       {
+        "ohlc": [
+         105,
+         107,
+         96,
+         98
+        ],
+        "caption": "Red · down"
+       }
+      ]
+     }
+    },
+    {
+     "tip": "{up}Green{/up}: it closed above its open. {down}Red{/down}: it closed below."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "A line hides the fight",
+   "text": "A line chart only joins the closes. Candles also show how far price swung before it settled.",
+   "visual": {
+    "kind": "stack",
+    "layout": "row",
+    "items": [
+     {
+      "kind": "series",
+      "title": "Line",
+      "aside": "closes only",
+      "height": 90,
+      "ends": false,
+      "y": {
+       "axis": false,
+       "ticks": 0
+      },
+      "series": [
+       {
+        "values": [
+         100,
+         102,
+         99,
+         104,
+         103,
+         106,
+         105
+        ],
+        "tone": "blue",
+        "end": false
+       }
+      ],
+      "label": "A line through the seven closes: day 3 just dips to $99"
+     },
+     {
+      "kind": "candles",
+      "title": "Candles",
+      "aside": "all day",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "ohlc": [
+        [
+         99,
+         101,
+         98.5,
+         100
+        ],
+        [
+         100,
+         102.5,
+         99.5,
+         102
+        ],
+        [
+         102,
+         102.5,
+         97,
+         99
+        ],
+        [
+         99,
+         104.5,
+         98.8,
+         104
+        ],
+        [
+         102.6,
+         103.6,
+         102.2,
+         103
+        ],
+        [
+         103,
+         106.5,
+         102.8,
+         106
+        ],
+        [
+         106,
+         106.6,
+         104.6,
+         105
+        ]
+       ],
+       "height": 90,
+       "label": "Seven candles: on day 3 price fell to $97, then closed at $99"
+      }
+     }
+    ]
+   },
+   "foot": "Day 3: the line just dips. The candle shows price fell to $97, then buyers pulled it back to $99.",
+   "footTone": "sky"
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Read the red candle",
+   "q": "It opened at $50, went up to $51 and down to $45. Where did it close?",
+   "idea": "candle-body-close",
+   "visual": {
+    "kind": "candle",
+    "items": [
+     {
+      "ohlc": [
+       50,
+       51,
+       45,
+       46
+      ],
+      "labels": {
+       "close": "?"
+      },
+      "label": "A red candle: open $50, high $51, low $45, close unknown"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "$51",
+     "feedback": "$51 is the high, the top of the upper wick. Price only touched it."
+    },
+    {
+     "text": "$50",
+     "feedback": "$50 is the open, the top of the red body. A red candle closes below its open."
+    },
+    {
+     "text": "$46",
+     "feedback": "A red body runs from the open at the top down to the close at the bottom: $46."
+    },
+    {
+     "text": "$45",
+     "feedback": "$45 is the low, the bottom of the wick. A red body ends at the close."
+    }
+   ],
+   "answer": 2,
+   "work": "Red body: open $50 at the top, close $46 at the bottom."
+  },
+  {
+   "type": "check",
+   "title": "The long top wick",
+   "q": "A candle has a long upper wick and closes near where it opened. What happened?",
+   "visual": {
+    "kind": "candle",
+    "items": [
+     {
+      "ohlc": [
+       50,
+       56,
+       49.8,
+       50.3
+      ],
+      "labels": false,
+      "label": "A small green body at the bottom with a long upper wick"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Buyers pushed it up, then sellers pushed it back",
+     "feedback": "The long wick is a round trip: buyers took price far up, and sellers pushed it back before the close."
+    },
+    {
+     "text": "The price never moved",
+     "feedback": "The body is small, but the wick shows price went far up before it came back."
+    },
+    {
+     "text": "The market was closed",
+     "feedback": "A closed market makes no candle at all. This one shows a big move up and back."
+    },
+    {
+     "text": "Sellers won all day",
+     "feedback": "If sellers had won all day, you’d see a long red body. This candle closed near its open."
+    }
+   ],
+   "answer": 0,
+   "idea": "wick-rejection"
+  },
+  {
+   "type": "keep",
+   "headline": "You can read any candle.",
+   "lines": [
+    "Each candle shows open, high, low and close.",
+    "Green closes above its open, red below.",
+    "Wicks show how far price went, and got pushed back."
+   ]
+  }
+ ]
+}

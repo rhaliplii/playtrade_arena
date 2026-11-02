@@ -1,0 +1,391 @@
+{
+ "id": "rsi-overbought",
+ "chapter": "trends-patterns-indicators",
+ "n": 6,
+ "title": "RSI: overbought isn’t a sell signal",
+ "minutes": 5,
+ "desc": "RSI measures speed, and strong trends can stay overbought",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "worried",
+   "title": "“Overbought. Sell!”",
+   "situation": "A stock has climbed for weeks. Its RSI reads 75, above 70. Your friend says: “Overbought. Sell!” Is he right?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "path": [
+      [
+       0,
+       50
+      ],
+      [
+       15,
+       52
+      ],
+      [
+       25,
+       58
+      ],
+      [
+       40,
+       66
+      ],
+      [
+       50,
+       72
+      ]
+     ],
+     "seed": 31,
+     "height": 80,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "noise": 0.6,
+     "priceLabel": "Price",
+     "panels": [
+      {
+       "type": "rsi",
+       "label": "RSI (14)",
+       "values": [
+        60.1,
+        59.8,
+        61.7,
+        63.0,
+        63.2,
+        64.3,
+        65.0,
+        65.2,
+        66.7,
+        67.4,
+        68.1,
+        70.5,
+        76.1,
+        79.4,
+        79.3,
+        80.0,
+        79.7,
+        78.0,
+        76.9,
+        73.9,
+        73.4,
+        71.6,
+        72.6,
+        72.9,
+        72.2,
+        73.8,
+        75.8,
+        79.1,
+        78.9,
+        79.8,
+        78.7,
+        78.2,
+        76.4,
+        74.6,
+        73.5,
+        72.3,
+        75
+       ],
+       "marks": [
+        {
+         "i": 50,
+         "label": "75",
+         "tone": "down",
+         "pos": "above"
+        }
+       ]
+      }
+     ],
+     "label": "Price climbs for weeks while RSI stays above 70, now 75"
+    }
+   },
+   "options": [
+    {
+     "text": "Yes: above 70 means it will fall",
+     "feedback": "RSI above 70 says price rose fast, not that it must fall. In strong uptrends it can stay up there for weeks."
+    },
+    {
+     "text": "Not necessarily: strong trends stay overbought",
+     "feedback": "Overbought means fast, not finished. Strong trends can stay above 70 for a long time."
+    },
+    {
+     "text": "No: above 70 means buy more",
+     "feedback": "Above 70 isn’t a buy signal either. RSI only says price rose fast; it doesn’t say what comes next."
+    }
+   ],
+   "answer": 1,
+   "idea": "overbought-isnt-sell",
+   "work": "RSI crossed 70 weeks ago. Since then, price rose about another 24%."
+  },
+  {
+   "type": "learn",
+   "title": "RSI: a speed gauge",
+   "text": "The **[[rsi|Relative Strength Index]]** compares the size of recent up days with recent down days, usually over 14 days. It always reads between 0 and 100.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "gauge",
+      "bands": [
+       {
+        "to": 30,
+        "label": "Oversold",
+        "tone": "blue"
+       },
+       {
+        "to": 70,
+        "label": "Neutral",
+        "tone": "muted"
+       },
+       {
+        "to": 100,
+        "label": "Overbought",
+        "tone": "down"
+       }
+      ],
+      "ticks": [
+       0,
+       30,
+       70,
+       100
+      ],
+      "label": "RSI scale: below 30 oversold, 30 to 70 neutral, above 70 overbought"
+     }
+    },
+    {
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Above 70",
+        "value": "Price rose fast: overbought"
+       },
+       {
+        "label": "Below 30",
+        "value": "Price fell fast: oversold"
+       }
+      ]
+     }
+    },
+    {
+     "tip": "Fast isn’t the same as finished. RSI measures speed, not value."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "Strong trends stay overbought",
+   "text": "Watch RSI cross 70, then stay there while price keeps climbing.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "aside": "+24% after",
+    "asideTone": "up",
+    "chart": {
+     "path": [
+      [
+       0,
+       50
+      ],
+      [
+       12,
+       51
+      ],
+      [
+       20,
+       56.5
+      ],
+      [
+       35,
+       63
+      ],
+      [
+       50,
+       70
+      ]
+     ],
+     "seed": 33,
+     "height": 90,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "noise": 0.5,
+     "priceLabel": "Price",
+     "marks": [
+      {
+       "i": 20,
+       "price": 56.5,
+       "tone": "down",
+       "label": "first 70",
+       "pos": "below"
+      }
+     ],
+     "panels": [
+      {
+       "type": "rsi",
+       "label": "RSI (14)",
+       "values": [
+        62.0,
+        63.4,
+        64.2,
+        65.6,
+        66.8,
+        68.1,
+        70.5,
+        76.9,
+        77.6,
+        78.8,
+        80.6,
+        77.7,
+        77.8,
+        75.6,
+        74.6,
+        72.3,
+        72.2,
+        71.5,
+        72.4,
+        74.1,
+        74.9,
+        75.6,
+        76.9,
+        80.1,
+        79.5,
+        78.4,
+        79.2,
+        76.8,
+        75.5,
+        74.2,
+        71.6,
+        71.2,
+        72.6,
+        71.7,
+        74.6,
+        74.7,
+        76
+       ]
+      }
+     ],
+     "label": "RSI crosses 70, then stays there while price rises another 24%"
+    }
+   },
+   "foot": "Selling the first time RSI hit 70 meant missing the next 24%. Here, [[overbought|overbought]] was a sign of strength.",
+   "footTone": "gold"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "rico": true,
+   "pose": "point",
+   "title": "Let the trend lead",
+   "text": "In an uptrend, RSI often swings between **40 and 80**. Watch the dips toward 40, not the peaks above 70. The classic 70 and 30 work best when the market goes sideways.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Uptrend",
+      "value": "RSI often 40 to 80"
+     },
+     {
+      "label": "Downtrend",
+      "value": "RSI often 20 to 60"
+     },
+     {
+      "label": "Sideways range",
+      "value": "70 and 30 matter most"
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Read the gauge",
+   "idea": "rsi-measures-speed",
+   "q": "A stock’s RSI reads 25. What does that tell you?",
+   "visual": {
+    "kind": "gauge",
+    "bands": [
+     {
+      "to": 30,
+      "label": "Oversold",
+      "tone": "blue",
+      "on": true
+     },
+     {
+      "to": 70,
+      "label": "Neutral",
+      "tone": "muted"
+     },
+     {
+      "to": 100,
+      "label": "Overbought",
+      "tone": "down"
+     }
+    ],
+    "ticks": [
+     0,
+     30,
+     70,
+     100
+    ],
+    "label": "RSI marker at 25, inside the oversold band",
+    "value": 25,
+    "valueLabel": "25"
+   },
+   "options": [
+    {
+     "text": "Price has fallen fast lately",
+     "feedback": "Below 30 means price fell fast lately. That’s all it says: it can keep falling."
+    },
+    {
+     "text": "The stock is cheap: buy now",
+     "feedback": "Below 30 just means price dropped fast. It can keep falling, so oversold isn’t a buy signal on its own."
+    },
+    {
+     "text": "The company is in trouble",
+     "feedback": "RSI reads only price changes. It says nothing about the business: just that price fell fast."
+    },
+    {
+     "text": "Volume is low",
+     "feedback": "RSI is built from price changes, not volume. A reading of 25 means price fell fast."
+    }
+   ],
+   "answer": 0
+  },
+  {
+   "type": "check",
+   "title": "Where 70 and 30 work",
+   "q": "When do the 70 and 30 lines work best as turning points?",
+   "options": [
+    {
+     "text": "In a strong uptrend",
+     "feedback": "In a strong uptrend RSI can stay above 70 for weeks. In a range, price swings between floor and ceiling, so the extremes turn more often."
+    },
+    {
+     "text": "In a sideways range",
+     "feedback": "In a range, price swings between floor and ceiling, so readings near 70 and 30 turn more often."
+    },
+    {
+     "text": "In a strong downtrend",
+     "feedback": "In a strong downtrend RSI can stay below 30 for weeks. The extremes turn most often in a range."
+    },
+    {
+     "text": "They never work",
+     "feedback": "They do work, just not everywhere. In a sideways range, the extremes turn more often."
+    }
+   ],
+   "answer": 1,
+   "idea": "rsi-works-in-ranges"
+  },
+  {
+   "type": "keep",
+   "headline": "You can read RSI without panicking.",
+   "lines": [
+    "RSI runs 0 to 100 and measures speed.",
+    "Above 70 is overbought, below 30 oversold: fast, not finished.",
+    "Strong trends stay overbought. Let the trend lead."
+   ]
+  }
+ ]
+}

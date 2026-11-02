@@ -1,0 +1,305 @@
+{
+ "id": "measuring-your-results",
+ "chapter": "portfolio-management",
+ "n": 6,
+ "title": "Measuring your results",
+ "minutes": 5,
+ "desc": "Compare your results with the right benchmark, after costs",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "A good year?",
+   "situation": "Your stock portfolio rose 8% this year. A broad stock index, the kind you could have bought in one fund, rose 15%. How did you do?",
+   "visual": {
+    "kind": "series",
+    "title": "This year",
+    "label": "Over the year the index rises 15% and your portfolio 8%",
+    "series": [
+     {
+      "label": "Index",
+      "end": "+15%",
+      "tone": "gold",
+      "dashed": true,
+      "values": [
+       100,
+       101.5,
+       103,
+       102.5,
+       105,
+       106,
+       107.5,
+       108.5,
+       109,
+       110.5,
+       112,
+       113.5,
+       115
+      ]
+     },
+     {
+      "label": "You",
+      "end": "+8%",
+      "tone": "blue",
+      "values": [
+       100,
+       101,
+       102.5,
+       101.5,
+       103.5,
+       103,
+       105,
+       106,
+       105.5,
+       107,
+       108,
+       108,
+       108
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Well: 8% is a solid gain",
+     "feedback": "A gain isn’t the whole story. The extra work earned less than the easy option."
+    },
+    {
+     "text": "You lagged the index by 7 points",
+     "feedback": "A gain only looks good next to what you could have had."
+    },
+    {
+     "text": "Better: any gain is a win",
+     "feedback": "A gain can still trail the easy option. One index fund would have made 15%."
+    }
+   ],
+   "answer": 1,
+   "idea": "return-vs-benchmark",
+   "work": "8% − 15% = −7 points. A simple index fund would have made $700 more on $10,000.",
+   "added": "Feedback for C written for the Academy"
+  },
+  {
+   "type": "learn",
+   "title": "Pick a benchmark",
+   "text": "A **[[benchmark|benchmark]]** is an index that matches what you hold. It’s the bar your results must clear.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Large US stocks",
+        "value": "a broad US stock index",
+        "tone": "up",
+        "strong": true
+       },
+       {
+        "label": "Stocks worldwide",
+        "value": "a global stock index",
+        "tone": "up",
+        "strong": true
+       },
+       {
+        "label": "Bonds",
+        "value": "a bond index",
+        "tone": "blue",
+        "strong": true
+       },
+       {
+        "label": "60/40 mix",
+        "value": "60% stock + 40% bond index",
+        "tone": "gold",
+        "strong": true
+       }
+      ]
+     }
+    },
+    {
+     "side": true,
+     "tip": "Compare like with like: a stock portfolio against a stock index, not against cash."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "Count every cost",
+   "text": "You made 12% on your picks. The index fund made 11%. Then come fund fees, trading fees and spreads.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "barchart",
+      "title": "Your year",
+      "label": "Your year: +12% before costs, +10% after costs; the index fund +11%",
+      "groups": [
+       {
+        "label": "Before costs",
+        "values": [
+         12
+        ],
+        "displays": [
+         "+12%"
+        ],
+        "tones": [
+         "blue"
+        ],
+        "dim": [
+         0
+        ]
+       },
+       {
+        "label": "After costs",
+        "values": [
+         10
+        ],
+        "displays": [
+         "+10%"
+        ],
+        "tones": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Index fund",
+        "values": [
+         11
+        ],
+        "displays": [
+         "+11%"
+        ],
+        "tones": [
+         "gold"
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Costs",
+        "value": "−2 points",
+        "tone": "down",
+        "strong": true
+       },
+       {
+        "label": "Versus the index",
+        "value": "−1 point",
+        "tone": "down",
+        "strong": true
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "Before costs you beat the index. After costs you lagged it. Only the after-cost number counts.",
+   "footTone": "gold"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Keep score honestly",
+   "text": "Judge over **years, not weeks**. One great month can be luck. Three years against the right index tells you far more.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Return",
+        "value": "after all costs",
+        "tone": "up",
+        "strong": true
+       },
+       {
+        "label": "Benchmark",
+        "value": "same kind of assets",
+        "tone": "up",
+        "strong": true
+       },
+       {
+        "label": "Time",
+        "value": "3 years or more",
+        "tone": "up",
+        "strong": true
+       },
+       {
+        "label": "Count",
+        "value": "every trade, not just winners",
+        "tone": "up",
+        "strong": true
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Did you beat it?",
+   "q": "You made 10% before costs and paid 1.5% in fees and trading costs. The index fund returned 9% after its own fee. Did you beat it?",
+   "idea": "beat-after-costs",
+   "options": [
+    {
+     "text": "Yes, by 1 point",
+     "feedback": "10% is before costs. Take the costs off first, then compare."
+    },
+    {
+     "text": "No, you lagged by 0.5 point",
+     "feedback": "After costs you made 8.5%, just under the index fund’s 9%."
+    },
+    {
+     "text": "Yes, by 2.5 points",
+     "feedback": "That adds the costs instead of taking them off. Costs come out of your return."
+    },
+    {
+     "text": "They can’t be compared",
+     "feedback": "They can: both are after-cost returns once you take your 1.5% off."
+    }
+   ],
+   "answer": 1,
+   "work": "10% − 1.5% = 8.5%. The index: 9%. You lagged by 0.5 point.",
+   "added": "Feedback for the options the board doesn’t show written for the Academy"
+  },
+  {
+   "type": "check",
+   "title": "The right bar",
+   "q": "Your portfolio holds large US companies. Which benchmark fits best?",
+   "options": [
+    {
+     "text": "A broad large-stock index",
+     "feedback": "Large stocks belong next to a large-stock index: same kind of assets, same risks."
+    },
+    {
+     "text": "The bank’s savings rate",
+     "feedback": "A savings rate carries almost no risk, so beating it says little. Large stocks belong next to a large-stock index."
+    },
+    {
+     "text": "The price of gold",
+     "feedback": "Gold is a different asset with its own drivers. Compare like with like."
+    },
+    {
+     "text": "A friend’s returns",
+     "feedback": "A friend’s returns could be luck, or a different mix. Use an index that matches what you hold."
+    }
+   ],
+   "answer": 0,
+   "idea": "right-benchmark",
+   "added": "Feedback for the options the board doesn’t show written for the Academy",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can keep an honest score.",
+   "lines": [
+    "Compare with an index that matches what you hold.",
+    "Take off every fee before you compare.",
+    "Judge over years, not weeks."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,510 @@
+{
+ "id": "portfolio-management",
+ "path": "learn-to-trade",
+ "n": 9,
+ "title": "Building a Portfolio",
+ "short": "Portfolio",
+ "promise": "Single trades are battles. Your portfolio is the war.",
+ "minutes": 35,
+ "pages": "59–65",
+ "unlock": [
+  "Spread your money so one bad pick only hurts a little",
+  "Spot holdings that look different but move together",
+  "Split money between stocks, bonds and cash by goal and time",
+  "Rebalance a drifting portfolio back to its target",
+  "See what a small yearly fee costs over 20 years",
+  "Score your results against the right benchmark",
+  "Size your portfolio for a fall you can live through"
+ ],
+ "terms": [
+  "diversification",
+  "correlation",
+  "asset-allocation",
+  "rebalancing",
+  "benchmark",
+  "drawdown",
+  "bond",
+  "index"
+ ],
+ "lessons": [
+  "eggs-in-one-basket",
+  "correlation",
+  "asset-allocation",
+  "rebalancing",
+  "costs-that-compound",
+  "measuring-your-results",
+  "drawdown"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "You have $20,000: $10,000 in one stock and $1,000 in each of 10 others. The big holding falls 40%. How much do you lose?",
+    "options": [
+     "$4,000: a fifth of all your money",
+     "$2,000: 10% of your money",
+     "$8,000: 40% of everything"
+    ],
+    "answer": 0,
+    "why": "Only the big holding fell, but it was half your money. Its 40% fall costs $4,000, a fifth of your $20,000.",
+    "work": "$10,000 × 40% = $4,000. $4,000 ÷ $20,000 = 20%, a fifth.",
+    "idea": "diversify-cuts-the-hit",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "You own one bank stock. Which addition spreads your risk the most?",
+    "options": [
+     "Another bank stock",
+     "A fund of bank stocks",
+     "A bond fund"
+    ],
+    "answer": 2,
+    "why": "Two banks face the same rates and news, so they tend to fall together. A bond fund is a different asset type.",
+    "work": "Bank stocks often drop together on the same news. Bonds often move differently, though not always.",
+    "idea": "pair-that-spreads-risk",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "You need $15,000 for a wedding in 18 months. In this example, where does that money belong?",
+    "options": [
+     "Mostly stocks: they grow the most",
+     "Cash and short-term bonds: it must be there on the day",
+     "Half in one stock, half in cash"
+    ],
+    "answer": 1,
+    "why": "Money you need within 2 to 3 years stays out of stocks. A crash right before the wedding could leave you short.",
+    "idea": "time-horizon-risk",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "Your target is 70% stocks, 30% bonds. After a bad year you have $6,000 in stocks and $4,000 in bonds. What brings you back to target?",
+    "options": [
+     "Move $1,000 from bonds into stocks",
+     "Sell stocks: they’re falling",
+     "Wait until stocks recover"
+    ],
+    "answer": 0,
+    "why": "Rebalancing tops up what lagged. Stocks are now below target, so move money from bonds into stocks.",
+    "work": "Total $10,000. 70% = $7,000 in stocks. $7,000 − $6,000 = $1,000 to move from bonds.",
+    "visual": {
+     "kind": "split",
+     "label": "Target 70% stocks, 30% bonds; after a bad year",
+     "legend": [
+      {
+       "label": "Stocks",
+       "tone": "up"
+      },
+      {
+       "label": "Bonds",
+       "tone": "blue"
+      }
+     ],
+     "rows": [
+      {
+       "label": "Target",
+       "segments": [
+        {
+         "value": 70,
+         "label": "70%",
+         "tone": "up"
+        },
+        {
+         "value": 30,
+         "label": "30%",
+         "tone": "blue"
+        }
+       ]
+      },
+      {
+       "label": "After a bad year",
+       "segments": [
+        {
+         "value": 60,
+         "label": "$6,000 · 60%",
+         "tone": "up"
+        },
+        {
+         "value": 40,
+         "label": "$4,000 · 40%",
+         "tone": "blue"
+        }
+       ]
+      }
+     ]
+    },
+    "idea": "rebalance-trim-winners",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Two funds track the same index. Fund A charges 0.05% a year, Fund B 0.75%. On $40,000, how much more does B cost this year?",
+    "options": [
+     "$280",
+     "$300",
+     "$28"
+    ],
+    "answer": 0,
+    "why": "Compare the fees as a gap: 0.75% − 0.05% = 0.70% a year on the same $40,000.",
+    "work": "$40,000 × 0.70% = $280 more this year.",
+    "idea": "yearly-fee-math",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 6,
+    "q": "Your stock portfolio returned 14% after costs. Your benchmark, a broad stock index, returned 18%. Cash paid 4%. How did you do?",
+    "options": [
+     "Great: 10 points ahead of cash",
+     "You lagged your benchmark by 4 points",
+     "You beat the index by 4 points"
+    ],
+    "answer": 1,
+    "why": "Judge a stock portfolio against a stock index, not against cash. The index made more.",
+    "work": "14% − 18% = −4 points.",
+    "visual": {
+     "kind": "barchart",
+     "title": "Returns",
+     "label": "You 14%, the index 18%, cash 4%",
+     "groups": [
+      {
+       "label": "You",
+       "values": [
+        14
+       ],
+       "displays": [
+        "14%"
+       ],
+       "tones": [
+        "blue"
+       ]
+      },
+      {
+       "label": "Index",
+       "values": [
+        18
+       ],
+       "displays": [
+        "18%"
+       ],
+       "tones": [
+        "gold"
+       ]
+      },
+      {
+       "label": "Cash",
+       "values": [
+        4
+       ],
+       "displays": [
+        "4%"
+       ],
+       "tones": [
+        "muted"
+       ]
+      }
+     ]
+    },
+    "idea": "return-vs-benchmark",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 7,
+    "q": "You have $50,000. In a crash, Mix A could fall 40% and Mix B 15%. You know you’d sell in panic after a $10,000 loss. Which mix fits you?",
+    "options": [
+     "Mix A: more growth is worth it",
+     "Mix B: a fall you can sit through",
+     "Either: drawdowns don’t matter"
+    ],
+    "answer": 1,
+    "why": "Mix A’s fall is twice your limit. Pick the fall you can sit through, so you don’t sell at the bottom.",
+    "work": "Mix A: $50,000 × 40% = $20,000. Mix B: $50,000 × 15% = $7,500, under your $10,000.",
+    "visual": {
+     "kind": "barchart",
+     "title": "In a crash",
+     "aside": "on $50,000",
+     "label": "In a crash Mix A falls 40%, Mix B 15%",
+     "groups": [
+      {
+       "label": "Mix A",
+       "values": [
+        -40
+       ],
+       "displays": [
+        "−40%"
+       ],
+       "tones": [
+        "down"
+       ]
+      },
+      {
+       "label": "Mix B",
+       "values": [
+        -15
+       ],
+       "displays": [
+        "−15%"
+       ],
+       "tones": [
+        "down"
+       ]
+      }
+     ]
+    },
+    "idea": "size-for-drawdown",
+    "added": "New situation written for the Academy"
+   }
+  ],
+  "retry": [
+   {
+    "lesson": 1,
+    "q": "You have $50,000 split equally across 20 stocks. One of them goes to zero. How much of your money do you lose?",
+    "options": [
+     "$25,000: half",
+     "$2,500: 5% of your money",
+     "$50,000: everything"
+    ],
+    "answer": 1,
+    "why": "Each stock held a twentieth of your money. Losing all of one costs that slice, and the other 19 are untouched.",
+    "work": "$50,000 ÷ 20 = $2,500 a stock. $2,500 ÷ $50,000 = 5%.",
+    "idea": "one-holding-loss",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "You own 3 airline stocks and 2 cruise-line stocks. Fuel prices jump and people travel less. What likely happens?",
+    "options": [
+     "They mostly fall together: it’s one bet on travel",
+     "They cancel out: five different companies",
+     "Only the airlines fall"
+    ],
+    "answer": 0,
+    "why": "Airlines and cruise lines face the same fuel costs and the same travel demand, so the same news hits all five.",
+    "idea": "same-industry-one-bet",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "Ana, 30, is saving for retirement at 65. Leo needs his money for school fees in 2 years. In these examples, who can keep more in stocks?",
+    "options": [
+     "Leo: he needs fast growth",
+     "Ana: she has decades to recover from falls",
+     "Neither: stocks are only for experts"
+    ],
+    "answer": 1,
+    "why": "Ana has 35 years to sit through falls. Leo’s money must be there in 2 years, so it belongs in cash and bonds.",
+    "idea": "time-horizon-risk",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "Your target is 60% stocks, 40% bonds. After a strong year you have $15,000 in stocks and $5,000 in bonds. What brings you back to target?",
+    "options": [
+     "Nothing: let the winners run",
+     "Sell $3,000 of stocks, buy $3,000 of bonds",
+     "Sell $5,000 of bonds, buy stocks"
+    ],
+    "answer": 1,
+    "why": "Stocks grew past target, so trim them and top up bonds until the split is back to 60/40.",
+    "work": "Total $20,000. 60% = $12,000 in stocks. $15,000 − $12,000 = $3,000 to move into bonds.",
+    "visual": {
+     "kind": "split",
+     "label": "Target 60% stocks, 40% bonds; after a strong year",
+     "legend": [
+      {
+       "label": "Stocks",
+       "tone": "up"
+      },
+      {
+       "label": "Bonds",
+       "tone": "blue"
+      }
+     ],
+     "rows": [
+      {
+       "label": "Target",
+       "segments": [
+        {
+         "value": 60,
+         "label": "60%",
+         "tone": "up"
+        },
+        {
+         "value": 40,
+         "label": "40%",
+         "tone": "blue"
+        }
+       ]
+      },
+      {
+       "label": "After a strong year",
+       "segments": [
+        {
+         "value": 75,
+         "label": "$15,000 · 75%",
+         "tone": "up"
+        },
+        {
+         "value": 25,
+         "label": "$5,000 · 25%",
+         "tone": "blue"
+        }
+       ]
+      }
+     ]
+    },
+    "idea": "rebalance-amount",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Two funds track the same index. Fund A charges 0.2% a year, Fund B 1.2%. On $25,000, how much more does B cost this year?",
+    "options": [
+     "$25",
+     "$300",
+     "$250"
+    ],
+    "answer": 2,
+    "why": "Compare the fees as a gap: 1.2% − 0.2% = 1% a year on the same $25,000.",
+    "work": "$25,000 × 1% = $250 more this year.",
+    "idea": "yearly-fee-math",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 6,
+    "q": "Your bond portfolio returned 5% after costs. A broad bond index returned 4%. A stock index returned 20%. How did you do?",
+    "options": [
+     "You lagged by 15 points",
+     "It can’t be compared to anything",
+     "You beat your benchmark by 1 point"
+    ],
+    "answer": 2,
+    "why": "Bonds belong next to a bond index, not a stock index. Against the right bar, you came out ahead.",
+    "work": "5% − 4% = +1 point against the bond index.",
+    "visual": {
+     "kind": "barchart",
+     "title": "Returns",
+     "label": "You 5%, the bond index 4%, a stock index 20%",
+     "groups": [
+      {
+       "label": "You",
+       "values": [
+        5
+       ],
+       "displays": [
+        "5%"
+       ],
+       "tones": [
+        "blue"
+       ]
+      },
+      {
+       "label": "Bond index",
+       "values": [
+        4
+       ],
+       "displays": [
+        "4%"
+       ],
+       "tones": [
+        "gold"
+       ]
+      },
+      {
+       "label": "Stock index",
+       "values": [
+        20
+       ],
+       "displays": [
+        "20%"
+       ],
+       "tones": [
+        "muted"
+       ]
+      }
+     ]
+    },
+    "idea": "right-benchmark",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 7,
+    "q": "Your portfolio peaked at $60,000, fell to $45,000, and is now at $54,000. What was the drawdown?",
+    "options": [
+     "10%",
+     "25%",
+     "33%"
+    ],
+    "answer": 1,
+    "why": "A drawdown runs from the peak to the low after it, measured against the peak.",
+    "work": "$60,000 − $45,000 = $15,000. $15,000 ÷ $60,000 = 25%.",
+    "idea": "drawdown-from-peak",
+    "added": "Retry question written for the Academy"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "diversify-cuts-the-hit",
+   "title": "Lesson 1 · Don’t put all your eggs in one basket",
+   "text": "Spread money so one bad pick hurts a little. A 50% fall in a stock that’s a tenth of your money costs you 5%. Work out each holding’s share first."
+  },
+  {
+   "idea": "pair-that-spreads-risk",
+   "title": "Lesson 2 · Correlation: when everything falls together",
+   "text": "Assets that move together don’t protect each other. Two banks are one bet. Mix asset types, like stocks and bonds."
+  },
+  {
+   "idea": "time-horizon-risk",
+   "title": "Lesson 3 · Asset allocation",
+   "text": "The sooner you need the money, the less of it sits in stocks. Money needed within 2–3 years stays in cash and bonds."
+  },
+  {
+   "idea": "rebalance-trim-winners",
+   "title": "Lesson 4 · Rebalancing",
+   "text": "Rebalancing brings the split back to target: trim what grew, top up what lagged. Work out the target in dollars from the total first."
+  },
+  {
+   "idea": "yearly-fee-math",
+   "title": "Lesson 5 · Costs that compound",
+   "text": "Compare fees as a gap: 0.75% − 0.05% = 0.70%. On $40,000 that’s $280 more a year. Fees compound, so check the yearly fee first."
+  },
+  {
+   "idea": "return-vs-benchmark",
+   "title": "Lesson 6 · Measuring your results",
+   "text": "A gain only counts next to the right benchmark: an index that matches what you hold. Compare a stock portfolio with a stock index, not cash."
+  },
+  {
+   "idea": "size-for-drawdown",
+   "title": "Lesson 7 · Drawdown: staying in the game",
+   "text": "Size for the worst fall you could live through. If a fall would make you sell at the bottom, you hold too much risk."
+  },
+  {
+   "idea": "one-holding-loss",
+   "title": "Lesson 1 · Don’t put all your eggs in one basket",
+   "text": "A fall only hits the money in that holding: holding × fall. $2,000 × 50% = $1,000, or 10% of a $10,000 portfolio."
+  },
+  {
+   "idea": "same-industry-one-bet",
+   "title": "Lesson 2 · Correlation: when everything falls together",
+   "text": "Five stocks in one industry face the same news, so they move together. That’s one bet five times, not five bets."
+  },
+  {
+   "idea": "rebalance-amount",
+   "title": "Lesson 4 · Rebalancing",
+   "text": "Target % × the whole portfolio = where you should be. The difference from what you hold now is what you move."
+  },
+  {
+   "idea": "right-benchmark",
+   "title": "Lesson 6 · Measuring your results",
+   "text": "Pick a benchmark that matches what you hold: large stocks against a large-stock index, bonds against a bond index."
+  },
+  {
+   "idea": "drawdown-from-peak",
+   "title": "Lesson 7 · Drawdown: staying in the game",
+   "text": "A drawdown is the fall from the peak to the low, measured against the peak: $10,000 ÷ $40,000 = 25%."
+  }
+ ],
+ "next": "trading-plan"
+}

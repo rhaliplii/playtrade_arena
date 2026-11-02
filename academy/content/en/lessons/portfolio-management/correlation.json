@@ -1,0 +1,332 @@
+{
+ "id": "correlation",
+ "chapter": "portfolio-management",
+ "n": 2,
+ "title": "Correlation: when everything falls together",
+ "minutes": 5,
+ "desc": "Why owning many similar assets is still one bet",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Five stocks, one bet?",
+   "situation": "You own 5 stocks. All five are big tech companies. Are you well diversified?",
+   "visual": {
+    "kind": "split",
+    "label": "Five holdings, all in tech",
+    "legend": [
+     {
+      "label": "Tech",
+      "tone": "blue"
+     }
+    ],
+    "rows": [
+     {
+      "label": "Your 5 stocks",
+      "aside": "all tech",
+      "segments": [
+       {
+        "value": 1,
+        "tone": "blue"
+       },
+       {
+        "value": 1,
+        "tone": "blue"
+       },
+       {
+        "value": 1,
+        "tone": "blue"
+       },
+       {
+        "value": 1,
+        "tone": "blue"
+       },
+       {
+        "value": 1,
+        "tone": "blue"
+       }
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Yes: 5 stocks is plenty",
+     "feedback": "The count looks good, but the same news hits all five. When tech falls, they fall together."
+    },
+    {
+     "text": "Not really: they tend to move together",
+     "feedback": "Same industry, same news, same moves. You own one bet five times."
+    },
+    {
+     "text": "Yes: big companies don’t fall",
+     "feedback": "Big companies fall too. And when tech has a bad month, all five big tech names usually fall at once."
+    }
+   ],
+   "answer": 1,
+   "idea": "same-industry-one-bet",
+   "work": "Tech sell-off: all five fall around 20% together. Five stocks, one bet.",
+   "added": "Feedback for C written for the Academy"
+  },
+  {
+   "type": "learn",
+   "title": "Correlation",
+   "text": "**[[correlation|Correlation]]** shows how two assets move together. Assets that rise and fall as one don’t protect each other.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "stack",
+      "items": [
+       {
+        "kind": "series",
+        "title": "Move together",
+        "foot": "High correlation. Little protection.",
+        "height": 50,
+        "ends": false,
+        "series": [
+         {
+          "values": [
+           10,
+           12,
+           11,
+           14,
+           13,
+           16
+          ],
+          "tone": "up"
+         },
+         {
+          "values": [
+           9,
+           11,
+           10,
+           13,
+           13,
+           15
+          ],
+          "tone": "blue"
+         }
+        ]
+       },
+       {
+        "kind": "series",
+        "title": "No clear link",
+        "foot": "Low correlation. Some protection.",
+        "height": 50,
+        "ends": false,
+        "series": [
+         {
+          "values": [
+           10,
+           11,
+           10,
+           13,
+           11,
+           12
+          ],
+          "tone": "up"
+         },
+         {
+          "values": [
+           11,
+           10,
+           13,
+           11,
+           12,
+           11
+          ],
+          "tone": "blue"
+         }
+        ]
+       },
+       {
+        "kind": "series",
+        "title": "Move opposite",
+        "foot": "Negative correlation. Most protection.",
+        "height": 50,
+        "ends": false,
+        "series": [
+         {
+          "values": [
+           10,
+           11,
+           13,
+           12,
+           14,
+           15
+          ],
+          "tone": "up"
+         },
+         {
+          "values": [
+           15,
+           14,
+           12,
+           13,
+           11,
+           10
+          ],
+          "tone": "blue"
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "side": true,
+     "tip": "Mix things that don’t all move the same way: different industries, countries and asset types."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "A bad month for tech",
+   "text": "Two tech stocks and a bond fund, through the same sell-off.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "series",
+      "title": "6 weeks",
+      "label": "Over six weeks Tech A falls 14%, Tech B falls 20%, the bond fund rises about 2%",
+      "series": [
+       {
+        "label": "Bonds",
+        "tone": "gold",
+        "values": [
+         100,
+         100.5,
+         101,
+         101.2,
+         101.6,
+         102,
+         102
+        ]
+       },
+       {
+        "label": "Tech A",
+        "tone": "blue",
+        "values": [
+         100,
+         97,
+         93,
+         90,
+         88,
+         86,
+         86
+        ]
+       },
+       {
+        "label": "Tech B",
+        "tone": "blue",
+        "dashed": true,
+        "values": [
+         100,
+         95,
+         90,
+         86,
+         82,
+         80,
+         80
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Tech A · Tech B",
+        "value": "−14% · −20%",
+        "tone": "down",
+        "strong": true
+       },
+       {
+        "label": "Bond fund",
+        "value": "about +2%",
+        "tone": "gold",
+        "strong": true
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "The two tech stocks fell as one. Bonds often hold steadier in a sell-off, though not always.",
+   "footTone": "gold"
+  },
+  {
+   "type": "myth",
+   "title": "More stocks, more safety?",
+   "myth": "20 stocks means I’m safe.",
+   "reality": "20 stocks in one industry is still one bet. And in a real crash, most stocks fall together, so even a wide spread of stocks drops.",
+   "rule": "count the different kinds of risk, not the number of stocks."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Pick the best pair",
+   "q": "Which pair is most likely to spread your risk?",
+   "idea": "pair-that-spreads-risk",
+   "options": [
+    {
+     "text": "Two big bank stocks",
+     "feedback": "Two banks face the same rates, rules and news. Stocks and bonds are different asset types that often move differently."
+    },
+    {
+     "text": "Two oil companies",
+     "feedback": "Two oil companies rise and fall with the same oil price. That’s one bet twice."
+    },
+    {
+     "text": "A stock fund and a bond fund",
+     "feedback": "Stocks and bonds are different asset types, and they often move differently."
+    },
+    {
+     "text": "Two chip makers",
+     "feedback": "Two chip makers ride the same chip cycle and the same tech news, so they tend to move together."
+    }
+   ],
+   "answer": 2,
+   "added": "Feedback for the options the board doesn’t show written for the Academy",
+   "work": null
+  },
+  {
+   "type": "check",
+   "title": "High correlation",
+   "q": "Two assets have a high correlation. That means they…",
+   "options": [
+    {
+     "text": "Usually move the same way",
+     "feedback": "High correlation means they rise and fall together, so they give each other little protection."
+    },
+    {
+     "text": "Usually move opposite ways",
+     "feedback": "Opposite moves are negative correlation. High correlation means they rise and fall together."
+    },
+    {
+     "text": "Have no link at all",
+     "feedback": "No clear link is low correlation. High correlation means they rise and fall together."
+    },
+    {
+     "text": "Protect each other well",
+     "feedback": "Assets that move together don’t protect each other. When one falls, the other usually falls too."
+    }
+   ],
+   "answer": 0,
+   "idea": "high-correlation",
+   "added": "Feedback for the options the board doesn’t show written for the Academy",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can spot a fake spread.",
+   "lines": [
+    "Correlation: how two assets move together.",
+    "Same industry often means the same moves.",
+    "In a crash, most stocks fall together."
+   ]
+  }
+ ]
+}

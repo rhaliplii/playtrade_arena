@@ -1,0 +1,1465 @@
+{
+ "id": "trends-patterns-indicators",
+ "path": "learn-to-trade",
+ "n": 4,
+ "title": "Trends, Patterns & Indicators",
+ "short": "Trends",
+ "promise": "The map (trends, support, resistance) and the instruments (indicators) of technical analysis.",
+ "minutes": 40,
+ "pages": "25–35",
+ "unlock": [
+  "Tell an uptrend, a downtrend and a range from the swings",
+  "Draw trendlines and channels without forcing them",
+  "Use a moving average to pick which side to trade",
+  "Spot double tops, double bottoms and head and shoulders, then wait for the break",
+  "Read RSI and MACD without panicking",
+  "Build a clean chart where every tool answers a different question"
+ ],
+ "terms": [
+  "uptrend",
+  "downtrend",
+  "sideways",
+  "swing",
+  "trendline",
+  "channel",
+  "moving-average",
+  "double-top",
+  "double-bottom",
+  "head-and-shoulders",
+  "neckline",
+  "rsi",
+  "overbought",
+  "oversold",
+  "macd",
+  "confluence"
+ ],
+ "lessons": [
+  "what-a-trend-really-is",
+  "trendlines-and-channels",
+  "moving-averages",
+  "double-tops-and-bottoms",
+  "head-and-shoulders",
+  "rsi-overbought",
+  "macd-in-plain-words",
+  "confluence-over-clutter"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "Over two months, a stock’s highs went $30, $33, $36. Its lows went $27, $29, $32. What’s the trend?",
+    "options": [
+     "Up: higher highs and higher lows",
+     "Sideways: it keeps pulling back",
+     "Sideways: the lows are still close together"
+    ],
+    "answer": 0,
+    "why": "Each high beats the last, and so does each low. Pullbacks along the way don’t make it a range.",
+    "idea": "read-the-swings",
+    "work": "Highs $30 → $33 → $36. Lows $27 → $29 → $32. Each one higher than the last.",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 2 months",
+     "chart": {
+      "path": [
+       [
+        0,
+        28
+       ],
+       [
+        1,
+        27
+       ],
+       [
+        4,
+        30
+       ],
+       [
+        7,
+        29
+       ],
+       [
+        10,
+        33
+       ],
+       [
+        13,
+        32
+       ],
+       [
+        16,
+        36
+       ]
+      ],
+      "seed": 61,
+      "height": 120,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "zigzag": "blue",
+      "swings": [
+       {
+        "i": 1,
+        "price": 27,
+        "label": "$27"
+       },
+       {
+        "i": 4,
+        "price": 30,
+        "label": "$30"
+       },
+       {
+        "i": 7,
+        "price": 29,
+        "label": "$29"
+       },
+       {
+        "i": 10,
+        "price": 33,
+        "label": "$33"
+       },
+       {
+        "i": 13,
+        "price": 32,
+        "label": "$32"
+       },
+       {
+        "i": 16,
+        "price": 36,
+        "label": "$36"
+       }
+      ],
+      "label": "Highs at $30, $33, $36 and lows at $27, $29, $32"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "Price closes 1% below a 3-month rising trendline. What does that tell you?",
+    "options": [
+     "Sell everything: the trend is over",
+     "Buy more: it’s a bargain now",
+     "A warning: watch the next highs and lows"
+    ],
+    "answer": 2,
+    "why": "A break is a warning, not a signal. Price often slips under a line and climbs back.",
+    "idea": "trendline-break-warning",
+    "work": "One close, 1% below the line. A lower high and a lower low would confirm the turn.",
+    "visual": {
+     "kind": "candles",
+     "title": "Weekly · 3 months",
+     "aside": "last close: 1% below the line",
+     "asideTone": "down",
+     "chart": {
+      "path": [
+       [
+        0,
+        40.5
+       ],
+       [
+        2,
+        40.1
+       ],
+       [
+        4,
+        42.5
+       ],
+       [
+        6,
+        41.9
+       ],
+       [
+        8,
+        44.2
+       ],
+       [
+        10,
+        43.6
+       ],
+       [
+        12,
+        45.3
+       ],
+       [
+        13,
+        44.35
+       ]
+      ],
+      "seed": 62,
+      "height": 100,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "trendlines": [
+       {
+        "from": [
+         2,
+         40.0
+        ],
+        "to": [
+         10,
+         43.5
+        ],
+        "tone": "gold"
+       }
+      ],
+      "marks": [
+       {
+        "i": 13,
+        "price": 44.35,
+        "tone": "down",
+        "pos": "below"
+       }
+      ],
+      "label": "A rising trendline; the last weekly close is about 1% below it"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "A stock trades at $40. Its 50-day moving average is $44 and falling. What does that suggest?",
+    "options": [
+     "An uptrend: the average will pull it up",
+     "A downtrend: price is below a falling average",
+     "A buy signal: it’s cheap below its average"
+    ],
+    "answer": 1,
+    "why": "Price below a falling average is what a downtrend looks like. Below the average doesn’t mean cheap, and the average follows price, not the other way around.",
+    "idea": "price-vs-average",
+    "work": "$44 − $40 = $4, about 9% below the average.",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 4 months",
+     "legend": [
+      {
+       "label": "price",
+       "tone": "blue"
+      },
+      {
+       "label": "50-day",
+       "tone": "gold"
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        52
+       ],
+       [
+        10,
+        50
+       ],
+       [
+        18,
+        50.5
+       ],
+       [
+        30,
+        45
+       ],
+       [
+        36,
+        45.5
+       ],
+       [
+        45,
+        40
+       ]
+      ],
+      "seed": 63,
+      "height": 120,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "overlays": [
+       {
+        "values": [
+         53.0,
+         52.79,
+         52.58,
+         52.37,
+         52.16,
+         51.95,
+         51.73,
+         51.52,
+         51.3,
+         51.08,
+         50.86,
+         50.64,
+         50.42,
+         50.2,
+         49.98,
+         49.75,
+         49.53,
+         49.3,
+         49.07,
+         48.84,
+         48.61,
+         48.38,
+         48.14,
+         47.91,
+         47.67,
+         47.44,
+         47.2,
+         46.96,
+         46.72,
+         46.48,
+         46.24,
+         45.99,
+         45.75,
+         45.5,
+         45.25,
+         45.01,
+         44.76,
+         44.51,
+         44.25,
+         44.0
+        ],
+        "tone": "gold"
+       }
+      ],
+      "marks": [
+       {
+        "i": 45,
+        "price": 44,
+        "label": "$44",
+        "tone": "gold",
+        "pos": "above"
+       },
+       {
+        "i": 45,
+        "price": 40,
+        "label": "$40",
+        "tone": "blue",
+        "pos": "below"
+       }
+      ],
+      "label": "Price at $40 below a falling 50-day average at $44"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "A double bottom: two lows at $20, middle high at $24. Price is now $23. Is it confirmed?",
+    "options": [
+     "Yes: two lows at $20 are enough",
+     "Not yet: it needs a close above $24",
+     "Yes: price already bounced $3"
+    ],
+    "answer": 1,
+    "why": "Two lows only show a range. The double bottom counts on a close above the $24 middle high, and $23 is still below it.",
+    "idea": "confirm-through-the-middle",
+    "work": "Lows $20 and $20. Middle high $24. Now $23: still below $24.",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily",
+     "legend": [
+      {
+       "label": "middle high $24 · now $23",
+       "tone": "gold",
+       "dashed": true
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        23
+       ],
+       [
+        3,
+        20
+       ],
+       [
+        7,
+        24
+       ],
+       [
+        11,
+        20
+       ],
+       [
+        14,
+        23
+       ]
+      ],
+      "seed": 64,
+      "height": 120,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 24,
+        "tone": "gold"
+       }
+      ],
+      "swings": [
+       {
+        "i": 3,
+        "price": 20,
+        "label": "$20",
+        "tone": "up"
+       },
+       {
+        "i": 7,
+        "price": 24,
+        "label": "$24"
+       },
+       {
+        "i": 11,
+        "price": 20,
+        "label": "$20",
+        "tone": "up"
+       }
+      ],
+      "marks": [
+       {
+        "i": 14,
+        "price": 23,
+        "tone": "blue"
+       }
+      ],
+      "label": "Two lows at $20, a middle high at $24, price now $23"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "A head and shoulders has its neckline at $80. Price closes at $78. What does that mean?",
+    "options": [
+     "Confirmed, but it can still fail: use a stop",
+     "Nothing yet: it must fall to the target first",
+     "A buy: it’s near support"
+    ],
+    "answer": 0,
+    "why": "A close below the neckline confirms the pattern. Patterns still fail often, so a confirmed break needs a stop.",
+    "idea": "neckline-trigger",
+    "work": "Neckline $80. Close $78: below it.",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily",
+     "legend": [
+      {
+       "label": "neckline $80",
+       "tone": "gold",
+       "dashed": true
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        74
+       ],
+       [
+        4,
+        84
+       ],
+       [
+        7,
+        80.3
+       ],
+       [
+        10,
+        88
+       ],
+       [
+        13,
+        80.2
+       ],
+       [
+        16,
+        84.5
+       ],
+       [
+        19,
+        78
+       ]
+      ],
+      "seed": 65,
+      "height": 120,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 80,
+        "tone": "gold"
+       }
+      ],
+      "swings": [
+       {
+        "i": 4,
+        "price": 84,
+        "label": "left"
+       },
+       {
+        "i": 10,
+        "price": 88,
+        "label": "head"
+       },
+       {
+        "i": 16,
+        "price": 84.5,
+        "label": "right"
+       }
+      ],
+      "marks": [
+       {
+        "i": 19,
+        "price": 78,
+        "label": "$78",
+        "tone": "down",
+        "pos": "below"
+       }
+      ],
+      "label": "A head and shoulders; price closes at $78 below the $80 neckline"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 6,
+    "q": "A stock in a strong uptrend has an RSI of 75. What is the most sensible read?",
+    "options": [
+     "Sell now: it’s overbought",
+     "Short it: RSI must fall back to 50",
+     "Price is rising fast, and that can last"
+    ],
+    "answer": 2,
+    "why": "RSI 75 says price rose fast, not that it must fall. Strong trends can stay overbought for weeks.",
+    "idea": "overbought-isnt-sell",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · strong uptrend",
+     "aside": "RSI 75",
+     "asideTone": "down",
+     "chart": {
+      "path": [
+       [
+        0,
+        50
+       ],
+       [
+        15,
+        53
+       ],
+       [
+        25,
+        59
+       ],
+       [
+        40,
+        67
+       ],
+       [
+        50,
+        73
+       ]
+      ],
+      "seed": 66,
+      "height": 70,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "noise": 0.5,
+      "priceLabel": "Price",
+      "panels": [
+       {
+        "type": "rsi",
+        "label": "RSI (14)",
+        "values": [
+         61.9,
+         61.7,
+         62.8,
+         63.7,
+         65.2,
+         66.5,
+         67.1,
+         68.1,
+         70.5,
+         76.9,
+         79.1,
+         78.4,
+         78.9,
+         79.2,
+         78.1,
+         75.7,
+         73.2,
+         72.2,
+         71.1,
+         71,
+         72.7,
+         72.4,
+         75.6,
+         77.4,
+         76.9,
+         78.8,
+         79.5,
+         78.0,
+         78.0,
+         77.6,
+         74.0,
+         73.6,
+         71.2,
+         71.7,
+         72.6,
+         71.8,
+         75
+        ],
+        "mid": false,
+        "marks": [
+         {
+          "i": 50,
+          "tone": "gold"
+         }
+        ]
+       }
+      ],
+      "label": "A strong uptrend with RSI at 75"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 7,
+    "q": "The MACD line crosses below its signal line. The stock has gone sideways for two months. How much weight should the cross get?",
+    "options": [
+     "Little: in sideways markets most crosses go nowhere",
+     "A lot: it’s a clear sell signal",
+     "It means price will fall 10%"
+    ],
+    "answer": 0,
+    "why": "When price goes sideways, the lines cross back and forth and most crosses go nowhere. A cross confirms a trend; it’s never a reason on its own.",
+    "idea": "macd-whipsaw",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 2 months sideways",
+     "legend": [
+      {
+       "label": "MACD line",
+       "tone": "gold"
+      },
+      {
+       "label": "signal",
+       "tone": "down"
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        50.64
+       ],
+       [
+        2,
+        50.16
+       ],
+       [
+        4,
+        48.97
+       ],
+       [
+        6,
+        48.04
+       ],
+       [
+        8,
+        48.54
+       ],
+       [
+        10,
+        50.01
+       ],
+       [
+        12,
+        50.98
+       ],
+       [
+        14,
+        51.05
+       ],
+       [
+        16,
+        51.02
+       ],
+       [
+        18,
+        51.14
+       ],
+       [
+        20,
+        50.58
+       ],
+       [
+        22,
+        49.14
+       ],
+       [
+        24,
+        48.07
+       ],
+       [
+        26,
+        48.46
+       ],
+       [
+        28,
+        49.69
+       ],
+       [
+        30,
+        50.47
+       ],
+       [
+        32,
+        50.7
+       ],
+       [
+        34,
+        51.12
+       ],
+       [
+        36,
+        51.54
+       ],
+       [
+        38,
+        50.95
+       ],
+       [
+        40,
+        49.37
+       ]
+      ],
+      "seed": 70,
+      "height": 60,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "noise": 0.8,
+      "priceLabel": "Price",
+      "panels": [
+       {
+        "type": "macd",
+        "label": "MACD",
+        "show": [
+         "lines"
+        ],
+        "marks": [
+         {
+          "i": 40,
+          "label": "cross",
+          "tone": "gold",
+          "pos": "above"
+         }
+        ]
+       }
+      ],
+      "label": "Two months sideways; the MACD line just crossed below its signal"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 8,
+    "q": "You use a 50-day average for the trend. Which pair adds the most new information?",
+    "options": [
+     "A 20-day and a 100-day average",
+     "Support levels and volume",
+     "RSI and Stochastic"
+    ],
+    "answer": 1,
+    "why": "More averages repeat the trend question, and RSI with Stochastic repeat one momentum view. Levels and volume answer new questions: where, and who’s behind it.",
+    "idea": "real-confluence",
+    "visual": {
+     "kind": "candles",
+     "title": "Your chart now",
+     "legend": [
+      {
+       "label": "50-day",
+       "tone": "gold"
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        52
+       ],
+       [
+        8,
+        60
+       ],
+       [
+        12,
+        64
+       ],
+       [
+        18,
+        58.5
+       ],
+       [
+        22,
+        61.5
+       ]
+      ],
+      "seed": 68,
+      "height": 110,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "overlays": [
+       {
+        "values": [
+         51.0,
+         51.39,
+         51.77,
+         52.16,
+         52.53,
+         52.9,
+         53.27,
+         53.63,
+         53.99,
+         54.34,
+         54.69,
+         55.03,
+         55.37,
+         55.7,
+         56.03,
+         56.36,
+         56.68,
+         56.99,
+         57.3,
+         57.61,
+         57.91,
+         58.21,
+         58.5
+        ],
+        "tone": "gold"
+       }
+      ],
+      "label": "Price above a rising 50-day average"
+     }
+    },
+    "added": "New situation written for the Academy"
+   }
+  ],
+  "retry": [
+   {
+    "lesson": 1,
+    "q": "Over six weeks, a stock’s highs went $62, $58, $55. Its lows went $57, $53, $50. What’s the trend?",
+    "options": [
+     "Up: it keeps bouncing back",
+     "Down: lower highs and lower lows",
+     "Sideways: the swings are about the same size"
+    ],
+    "answer": 1,
+    "why": "Each high is lower than the last, and so is each low. The bounces along the way don’t change that.",
+    "idea": "read-the-swings",
+    "work": "Highs $62 → $58 → $55. Lows $57 → $53 → $50. Each one lower than the last.",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 6 weeks",
+     "chart": {
+      "path": [
+       [
+        0,
+        59
+       ],
+       [
+        1,
+        62
+       ],
+       [
+        4,
+        57
+       ],
+       [
+        7,
+        58
+       ],
+       [
+        10,
+        53
+       ],
+       [
+        13,
+        55
+       ],
+       [
+        16,
+        50
+       ]
+      ],
+      "seed": 71,
+      "height": 120,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "zigzag": "blue",
+      "swings": [
+       {
+        "i": 1,
+        "price": 62,
+        "label": "$62"
+       },
+       {
+        "i": 4,
+        "price": 57,
+        "label": "$57"
+       },
+       {
+        "i": 7,
+        "price": 58,
+        "label": "$58"
+       },
+       {
+        "i": 10,
+        "price": 53,
+        "label": "$53"
+       },
+       {
+        "i": 13,
+        "price": 55,
+        "label": "$55"
+       },
+       {
+        "i": 16,
+        "price": 50,
+        "label": "$50"
+       }
+      ],
+      "label": "Highs at $62, $58, $55 and lows at $57, $53, $50"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "Price closed just under a rising trendline yesterday. Today the next swing low holds above the last one. What does that tell you?",
+    "options": [
+     "The uptrend is over: sell now",
+     "The warning hasn’t been confirmed: no lower low yet",
+     "Trendlines stop working after a break"
+    ],
+    "answer": 1,
+    "why": "A break is a warning. The trend turns only when the swings turn: a lower high and a lower low. A higher low means the uptrend still holds.",
+    "idea": "trendline-break-warning",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "A stock trades at $75. Its 50-day moving average is $70 and rising. What does that suggest?",
+    "options": [
+     "A downtrend: it must fall back to $70",
+     "An uptrend: price is above a rising average",
+     "Nothing: you need a 200-day too"
+    ],
+    "answer": 1,
+    "why": "Price above a rising average is what an uptrend looks like. It doesn’t say how long it lasts.",
+    "idea": "price-vs-average",
+    "work": "$75 − $70 = $5, about 7% above the average.",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 4 months",
+     "legend": [
+      {
+       "label": "price",
+       "tone": "blue"
+      },
+      {
+       "label": "50-day",
+       "tone": "gold"
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        62
+       ],
+       [
+        10,
+        64
+       ],
+       [
+        18,
+        63.5
+       ],
+       [
+        30,
+        70
+       ],
+       [
+        36,
+        69
+       ],
+       [
+        45,
+        75
+       ]
+      ],
+      "seed": 73,
+      "height": 120,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "overlays": [
+       {
+        "values": [
+         61.5,
+         61.7,
+         61.89,
+         62.09,
+         62.29,
+         62.49,
+         62.7,
+         62.9,
+         63.1,
+         63.31,
+         63.52,
+         63.73,
+         63.93,
+         64.14,
+         64.36,
+         64.57,
+         64.78,
+         65.0,
+         65.21,
+         65.43,
+         65.65,
+         65.87,
+         66.09,
+         66.31,
+         66.53,
+         66.75,
+         66.98,
+         67.2,
+         67.43,
+         67.66,
+         67.89,
+         68.12,
+         68.35,
+         68.58,
+         68.82,
+         69.05,
+         69.29,
+         69.52,
+         69.76,
+         70.0
+        ],
+        "tone": "gold"
+       }
+      ],
+      "marks": [
+       {
+        "i": 45,
+        "price": 75,
+        "label": "$75",
+        "tone": "blue",
+        "pos": "above"
+       }
+      ],
+      "label": "Price at $75 above a rising 50-day average at $70"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "A double top: two peaks at $60, middle low at $54. Price closes at $53. What does that mean?",
+    "options": [
+     "Confirmed: it closed below the $54 middle low",
+     "Not yet: it must fall to $48 first",
+     "Nothing: two peaks never matter"
+    ],
+    "answer": 0,
+    "why": "A close through the middle point confirms it, and $53 is below the $54 middle low. The rough target, about $48, is only a guide.",
+    "idea": "confirm-through-the-middle",
+    "work": "Middle low $54. Close $53: below it. Height $60 − $54 = $6, so a rough target near $48.",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily",
+     "legend": [
+      {
+       "label": "middle low $54",
+       "tone": "gold",
+       "dashed": true
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        55
+       ],
+       [
+        4,
+        60
+       ],
+       [
+        8,
+        54
+       ],
+       [
+        12,
+        60
+       ],
+       [
+        16,
+        53
+       ]
+      ],
+      "seed": 74,
+      "height": 120,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 54,
+        "tone": "gold"
+       }
+      ],
+      "swings": [
+       {
+        "i": 4,
+        "price": 60,
+        "label": "$60",
+        "tone": "down"
+       },
+       {
+        "i": 12,
+        "price": 60,
+        "label": "$60",
+        "tone": "down"
+       }
+      ],
+      "marks": [
+       {
+        "i": 16,
+        "price": 53,
+        "label": "close $53",
+        "tone": "down",
+        "pos": "below"
+       }
+      ],
+      "label": "Two peaks at $60 and a close at $53, below the $54 middle low"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Left shoulder $40, head $46, right shoulder $41. The neckline is $37 and price is at $38. Is the pattern confirmed?",
+    "options": [
+     "Yes: the right shoulder has formed",
+     "Not yet: it needs a close below $37",
+     "Yes: price is falling from the shoulder"
+    ],
+    "answer": 1,
+    "why": "The shape alone is only a hint. The pattern counts on a close below the $37 neckline, and $38 is still above it.",
+    "idea": "neckline-trigger",
+    "work": "Neckline $37. Now $38: still above it.",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily",
+     "legend": [
+      {
+       "label": "neckline $37",
+       "tone": "gold",
+       "dashed": true
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        33
+       ],
+       [
+        4,
+        40
+       ],
+       [
+        7,
+        37.2
+       ],
+       [
+        10,
+        46
+       ],
+       [
+        13,
+        37.1
+       ],
+       [
+        16,
+        41
+       ],
+       [
+        19,
+        38
+       ]
+      ],
+      "seed": 75,
+      "height": 120,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 37,
+        "tone": "gold"
+       }
+      ],
+      "swings": [
+       {
+        "i": 4,
+        "price": 40,
+        "label": "$40"
+       },
+       {
+        "i": 10,
+        "price": 46,
+        "label": "$46"
+       },
+       {
+        "i": 16,
+        "price": 41,
+        "label": "$41"
+       }
+      ],
+      "marks": [
+       {
+        "i": 19,
+        "price": 38,
+        "label": "now $38",
+        "tone": "blue",
+        "pos": "below"
+       }
+      ],
+      "label": "Shoulders at $40 and $41, head at $46, neckline $37, price now $38"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 6,
+    "q": "A stock in a strong uptrend has had an RSI above 70 for three weeks. Your friend says it must fall now. What’s the sensible read?",
+    "options": [
+     "It must fall: three weeks is too long",
+     "Strong trends can stay overbought for weeks",
+     "Short it until RSI hits 50"
+    ],
+    "answer": 1,
+    "why": "Above 70 says price rose fast, not that it must fall. In strong uptrends RSI can stay up there for weeks.",
+    "idea": "overbought-isnt-sell",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 7,
+    "q": "A stock has gone sideways for three months. The MACD line crosses above its signal line. How much weight should the cross get?",
+    "options": [
+     "A lot: it’s a clear buy signal",
+     "Little: in sideways markets most crosses go nowhere",
+     "It means price will rise 10%"
+    ],
+    "answer": 1,
+    "why": "Sideways markets make the lines cross back and forth, and most crosses go nowhere. A cross confirms a trend; it’s never a reason on its own.",
+    "idea": "macd-whipsaw",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 3 months sideways",
+     "legend": [
+      {
+       "label": "MACD line",
+       "tone": "gold"
+      },
+      {
+       "label": "signal",
+       "tone": "down"
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        49.17
+       ],
+       [
+        3,
+        51.02
+       ],
+       [
+        6,
+        51.09
+       ],
+       [
+        9,
+        50.96
+       ],
+       [
+        12,
+        50.28
+       ],
+       [
+        15,
+        48.38
+       ],
+       [
+        18,
+        48.42
+       ],
+       [
+        21,
+        50.36
+       ],
+       [
+        24,
+        51.01
+       ],
+       [
+        27,
+        51.07
+       ],
+       [
+        30,
+        50.94
+       ],
+       [
+        33,
+        49.1
+       ],
+       [
+        36,
+        48.05
+       ],
+       [
+        39,
+        49.57
+       ],
+       [
+        42,
+        50.72
+       ],
+       [
+        45,
+        50.97
+       ],
+       [
+        48,
+        51.36
+       ],
+       [
+        51,
+        50.02
+       ],
+       [
+        54,
+        48.15
+       ],
+       [
+        57,
+        48.85
+       ],
+       [
+        60,
+        50.26
+       ]
+      ],
+      "seed": 81,
+      "height": 60,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "noise": 0.8,
+      "priceLabel": "Price",
+      "panels": [
+       {
+        "type": "macd",
+        "label": "MACD",
+        "show": [
+         "lines"
+        ],
+        "marks": [
+         {
+          "i": 60,
+          "label": "cross",
+          "tone": "gold",
+          "pos": "above"
+         }
+        ]
+       }
+      ],
+      "label": "Three months sideways; the MACD line just crossed above its signal"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 8,
+    "q": "You use a 50-day average for the trend and RSI for momentum. Which addition brings new information?",
+    "options": [
+     "Stochastic",
+     "A 100-day average",
+     "Volume on the move"
+    ],
+    "answer": 2,
+    "why": "Stochastic repeats RSI, and another average repeats the trend. Volume answers a new question: who’s behind the move.",
+    "idea": "real-confluence",
+    "added": "New situation written for the Academy"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "read-the-swings",
+   "title": "Lesson 1 · What a trend really is",
+   "text": "Compare each swing with the last. Higher highs and higher lows: uptrend. Lower highs and lower lows: downtrend. No new highs or lows: sideways."
+  },
+  {
+   "idea": "trendline-break-warning",
+   "title": "Lesson 2 · Trendlines and channels",
+   "text": "Draw the line under at least two rising lows. A break is a warning, not a signal: wait for lower highs and lower lows."
+  },
+  {
+   "idea": "price-vs-average",
+   "title": "Lesson 3 · Moving averages: the smoothed trend",
+   "text": "Above a rising average: uptrend. Below a falling one: downtrend. The average lags, so it confirms the trend; it doesn’t predict it."
+  },
+  {
+   "idea": "confirm-through-the-middle",
+   "title": "Lesson 4 · Double tops and double bottoms",
+   "text": "Two failed tries at a level are only a range until price closes through the middle point. No break, no pattern."
+  },
+  {
+   "idea": "neckline-trigger",
+   "title": "Lesson 5 · Head and shoulders",
+   "text": "The pattern counts only on a close through the neckline. Patterns fail often, so a confirmed break still needs a stop."
+  },
+  {
+   "idea": "overbought-isnt-sell",
+   "title": "Lesson 6 · RSI: overbought isn’t a sell signal",
+   "text": "RSI measures speed. Above 70 means price rose fast, not that it must fall: strong trends stay overbought for weeks."
+  },
+  {
+   "idea": "macd-whipsaw",
+   "title": "Lesson 7 · MACD in plain words",
+   "text": "MACD crosses lag, and in a sideways market they flip back and forth. A cross confirms a trend; it’s never a reason on its own."
+  },
+  {
+   "idea": "real-confluence",
+   "title": "Lesson 8 · Confluence over clutter",
+   "text": "Indicators built from the same prices repeat each other. Real confluence is trend, level and volume agreeing: three different questions."
+  }
+ ],
+ "next": "risk-management"
+}

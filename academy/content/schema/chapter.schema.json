@@ -1,0 +1,198 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "academy/chapter",
+  "title": "Academy chapter",
+  "type": "object",
+  "required": [
+    "id",
+    "path",
+    "n",
+    "title",
+    "short",
+    "promise",
+    "minutes",
+    "lessons",
+    "unlock",
+    "terms",
+    "challenge",
+    "refresher"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "path": {
+      "type": "string"
+    },
+    "n": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "short": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "promise": {
+      "type": "string",
+      "maxLength": 160
+    },
+    "minutes": {
+      "type": "integer"
+    },
+    "pages": {
+      "type": "string",
+      "description": "pages in the guide (PDF)"
+    },
+    "guest": {
+      "type": "boolean",
+      "description": "Lesson 1 of this chapter is playable without an account"
+    },
+    "unlock": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What you'll unlock"
+    },
+    "terms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "glossary term ids"
+    },
+    "lessons": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 10,
+      "items": {
+        "type": "string"
+      }
+    },
+    "challenge": {
+      "type": "object",
+      "required": [
+        "questions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/question"
+          },
+          "description": "one question per lesson, in lesson order (lesson: 1..N)"
+        },
+        "retry": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/question"
+          },
+          "description": "optional second set for 'Retry with new questions': same length, order and shape as questions"
+        }
+      }
+    },
+    "refresher": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "idea",
+          "title",
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "idea": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "next": {
+      "type": "string"
+    },
+    "plan": {
+      "type": "array",
+      "description": "My Trading Plan sections (last chapter only): one {label, value} per lesson, in lesson order; value is the default a finished lesson fills in",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "value"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "question": {
+      "type": "object",
+      "required": [
+        "lesson",
+        "q",
+        "options",
+        "answer",
+        "why",
+        "idea"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "lesson": {
+          "type": "integer"
+        },
+        "q": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "type": "string"
+          }
+        },
+        "answer": {
+          "type": "integer"
+        },
+        "why": {
+          "type": "string"
+        },
+        "idea": {
+          "type": "string"
+        },
+        "added": {
+          "type": "string"
+        },
+        "visual": {
+          "$ref": "visual.schema.json",
+          "description": "optional chart/diagram shown with the question (any visual kind)"
+        },
+        "work": {
+          "type": "string",
+          "description": "\"The working\" line on the answer sheet (a real calculation only)"
+        }
+      }
+    }
+  }
+}

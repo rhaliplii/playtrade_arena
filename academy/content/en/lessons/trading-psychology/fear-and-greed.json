@@ -1,0 +1,433 @@
+{
+ "id": "fear-and-greed",
+ "chapter": "trading-psychology",
+ "n": 1,
+ "title": "Fear and greed in your own head",
+ "minutes": 5,
+ "desc": "Spot the two feelings that cut winners short and let losers run",
+ "cards": [
+  {
+   "type": "call",
+   "title": "Winning most trades",
+   "situation": "You close winners fast at +$50, scared the gain will vanish. You hold losers to −$150, hoping they come back. You win 6 of 10 trades. Are you making money?",
+   "visual": {
+    "kind": "trades",
+    "title": "Your last 10 trades",
+    "aside": "6 wins · 4 losses",
+    "label": "Six wins of +$50 and four losses of −$150",
+    "values": [
+     50,
+     -150,
+     50,
+     50,
+     -150,
+     50,
+     -150,
+     50,
+     50,
+     -150
+    ],
+    "displays": [
+     "+50",
+     "−150",
+     "+50",
+     "+50",
+     "−150",
+     "+50",
+     "−150",
+     "+50",
+     "+50",
+     "−150"
+    ]
+   },
+   "options": [
+    {
+     "text": "Yes: you win most of your trades",
+     "feedback": "Easy to miss: winning often isn’t the same as making money. The few losses are three times the size of the wins."
+    },
+    {
+     "text": "No: you’re losing money overall",
+     "feedback": "Small wins and big losses. Fear cut the winners short and hope let the losers run."
+    },
+    {
+     "text": "You’re breaking even",
+     "feedback": "Add it up: the four losses are bigger than the six wins put together. Each loss is three times the size of a win."
+    }
+   ],
+   "answer": 1,
+   "idea": "win-rate-vs-payoff",
+   "work": "6 wins × $50 = +$300. 4 losses × $150 = −$600. Net −$300."
+  },
+  {
+   "type": "learn",
+   "title": "Two feelings in every trade",
+   "text": "Every trader feels **[[fear-and-greed|fear]]** and **[[fear-and-greed|greed]]**. They aren’t the problem. Letting them make the decisions is.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "stack",
+      "items": [
+       {
+        "kind": "gauge",
+        "style": "arc",
+        "value": 50,
+        "label": "A dial from fear through calm to greed, pointing at calm",
+        "bands": [
+         {
+          "to": 33,
+          "tone": "down"
+         },
+         {
+          "to": 66,
+          "tone": "blue"
+         },
+         {
+          "to": 100,
+          "tone": "gold"
+         }
+        ],
+        "labels": [
+         {
+          "text": "Fear",
+          "tone": "down"
+         },
+         {
+          "text": "Calm",
+          "tone": "muted"
+         },
+         {
+          "text": "Greed",
+          "tone": "gold"
+         }
+        ]
+       },
+       {
+        "kind": "stats",
+        "items": [
+         {
+          "value": "Fear",
+          "tone": "down",
+          "sub": "Closes winners early",
+          "text": "Skips good setups after a loss."
+         },
+         {
+          "value": "Greed",
+          "tone": "gold",
+          "sub": "Wants too much",
+          "text": "Trades too big. Holds past the target."
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "learn",
+   "title": "The cycle every market repeats",
+   "text": "Fear and greed move the whole crowd in this loop. When it feels safest, risk is often highest.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "cycle",
+      "curve": "sentiment",
+      "height": 220,
+      "label": "The market emotion cycle, from hope to euphoria, then down through fear and panic to despair",
+      "points": [
+       {
+        "t": 0.06,
+        "label": "Hope",
+        "tone": "up"
+       },
+       {
+        "t": 0.17,
+        "label": "Optimism",
+        "tone": "up"
+       },
+       {
+        "t": 0.29,
+        "label": "Excitement",
+        "tone": "up"
+       },
+       {
+        "t": 0.4,
+        "label": "Euphoria",
+        "tone": "gold",
+        "pos": "above",
+        "big": true
+       },
+       {
+        "t": 0.5,
+        "label": "Anxiety",
+        "tone": "gold"
+       },
+       {
+        "t": 0.59,
+        "label": "Denial",
+        "tone": "gold"
+       },
+       {
+        "t": 0.68,
+        "label": "Fear",
+        "tone": "gold"
+       },
+       {
+        "t": 0.76,
+        "label": "Panic",
+        "tone": "down"
+       },
+       {
+        "t": 0.85,
+        "label": "Capitulation",
+        "tone": "down",
+        "pos": "left"
+       },
+       {
+        "t": 0.93,
+        "label": "Despair",
+        "tone": "down",
+        "pos": "above"
+       }
+      ],
+      "callouts": [
+       {
+        "t": 0.4,
+        "y": 0.4,
+        "text": "Max risk:\nyou feel invincible",
+        "tone": "down",
+        "from": 0.4
+       },
+       {
+        "t": 0.86,
+        "y": 0.1,
+        "text": "Max opportunity:\nyou feel hopeless",
+        "tone": "up",
+        "from": 0.88
+       }
+      ]
+     }
+    },
+    {
+     "tip": "A classic picture, not a timing tool.",
+     "tone": "plain"
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "title": "Where the money leaks",
+   "text": "Two of your trades. Both had a plan: stop at −$50, target at +$300.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "series",
+      "title": "Winner · closed by fear",
+      "aside": "missed $250",
+      "ends": false,
+      "height": 110,
+      "label": "The winner was sold at +$50, then went on to the +$300 target",
+      "series": [
+       {
+        "values": [
+         0,
+         15,
+         25,
+         20,
+         30,
+         45,
+         40,
+         70,
+         65,
+         120,
+         170,
+         210,
+         250,
+         300
+        ],
+        "tone": "up",
+        "area": true
+       }
+      ],
+      "hlines": [
+       {
+        "value": 300,
+        "label": "target +$300",
+        "tone": "up",
+        "pos": "left"
+       }
+      ],
+      "points": [
+       {
+        "i": 4,
+        "label": "sold +$50",
+        "tone": "gold"
+       }
+      ]
+     },
+     {
+      "kind": "series",
+      "title": "Loser · held on hope",
+      "aside": "lost $100 extra",
+      "ends": false,
+      "height": 110,
+      "label": "The loser passed the −$50 stop and was held to −$150",
+      "series": [
+       {
+        "values": [
+         0,
+         -10,
+         -20,
+         -30,
+         -45,
+         -42,
+         -60,
+         -80,
+         -95,
+         -90,
+         -115,
+         -135,
+         -128,
+         -150
+        ],
+        "tone": "down",
+        "area": true
+       }
+      ],
+      "hlines": [
+       {
+        "value": -50,
+        "label": "stop −$50",
+        "tone": "down",
+        "pos": "left"
+       }
+      ],
+      "points": [
+       {
+        "i": 13,
+        "label": "−$150",
+        "tone": "down",
+        "pos": "below",
+        "anchor": "end"
+       }
+      ]
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "The fix: set the stop and the target before you enter. Then let the plan decide, not the feeling.",
+     "tone": "green"
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Name the feeling",
+   "q": "You’re up $80 on a trade with a $200 target. Nothing on the chart has changed, but you want to close now, “before it’s gone”. Which feeling is that?",
+   "idea": "name-the-fear",
+   "visual": {
+    "kind": "series",
+    "title": "Open trade",
+    "ends": false,
+    "height": 110,
+    "lo": 0,
+    "hi": 220,
+    "label": "An open trade at +$80, with the target at +$200",
+    "series": [
+     {
+      "values": [
+       0,
+       10,
+       20,
+       15,
+       30,
+       40,
+       35,
+       50,
+       60,
+       55,
+       70,
+       80
+      ],
+      "tone": "up",
+      "area": true
+     }
+    ],
+    "hlines": [
+     {
+      "value": 200,
+      "label": "target +$200",
+      "tone": "up",
+      "pos": "left"
+     }
+    ],
+    "points": [
+     {
+      "i": 11,
+      "label": "+$80 now",
+      "tone": "gold",
+      "anchor": "end"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Greed",
+     "feedback": "Easy to mix up. Greed wants more. The urge to grab a small gain before it disappears is fear of losing it."
+    },
+    {
+     "text": "Fear",
+     "feedback": "Nothing on the chart changed. Only the feeling did: the worry that the gain will vanish."
+    },
+    {
+     "text": "Boredom",
+     "feedback": "Boredom makes you trade when nothing is happening. Here you want out of a winner before the gain disappears."
+    },
+    {
+     "text": "Confidence",
+     "feedback": "Confidence would let the trade run to the $200 target. Grabbing $80 “before it’s gone” comes from worry."
+    }
+   ],
+   "answer": 1
+  },
+  {
+   "type": "check",
+   "title": "Best defense",
+   "q": "What’s the best defense against fear and greed?",
+   "options": [
+    {
+     "text": "Trust your gut on each trade",
+     "feedback": "Most people go with their gut, but that’s where fear and greed live. A plan made before the trade, while you’re calm, decides for you."
+    },
+    {
+     "text": "Set entry, stop and target before you trade",
+     "feedback": "A plan made while you’re calm decides the trade, so fear and greed don’t get a vote."
+    },
+    {
+     "text": "Watch your profit every minute",
+     "feedback": "Watching every tick feeds the feelings. Each wiggle pulls you toward closing early or holding too long."
+    },
+    {
+     "text": "Trade bigger so each win counts",
+     "feedback": "Bigger size makes every move feel bigger, so fear and greed get louder, not quieter."
+    }
+   ],
+   "answer": 1,
+   "idea": "plan-before-the-trade"
+  },
+  {
+   "type": "keep",
+   "headline": "You can spot fear and greed in your trades.",
+   "lines": [
+    "Fear closes winners early. Hope lets losers run.",
+    "Winning often isn’t the same as making money.",
+    "Set stop and target before you enter, then follow them."
+   ]
+  }
+ ]
+}

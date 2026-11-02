@@ -1,0 +1,577 @@
+{
+ "id": "orders-leverage",
+ "path": "learn-to-trade",
+ "n": 2,
+ "title": "Orders, Leverage & the Mechanics",
+ "short": "Orders",
+ "promise": "How a trade is actually placed, and the one tool that turns small mistakes into account-killers.",
+ "minutes": 24,
+ "pages": "12–17",
+ "unlock": [
+  "Pick the right order and set a stop-loss the moment you trade",
+  "Profit from falls as well as rises (and know the risk)",
+  "Work out what leverage really does to your money",
+  "Spot the four costs nobody advertises",
+  "Size a trade so an overnight gap can’t knock you out"
+ ],
+ "terms": [
+  "market-order",
+  "limit-order",
+  "stop-order",
+  "stop-loss",
+  "stop-limit",
+  "long",
+  "short",
+  "leverage",
+  "margin",
+  "margin-call",
+  "commission",
+  "slippage",
+  "swap",
+  "gap"
+ ],
+ "lessons": [
+  "four-orders",
+  "long-and-short",
+  "leverage",
+  "hidden-costs",
+  "overnight-gamble"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "You buy at $30. You want out automatically if it falls to $27. Which order?",
+    "options": [
+     "A sell stop at $27",
+     "A sell limit at $27",
+     "A buy limit at $27"
+    ],
+    "answer": 0,
+    "why": "A sell stop below the price waits and fires only if it falls to $27. A sell limit means “$27 or better”, so it would sell now at $30. A buy limit buys.",
+    "idea": "limit-vs-stop",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 1 month",
+     "chart": {
+      "height": 90,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "noise": 0.4,
+      "path": [
+       [
+        0,
+        28.2
+       ],
+       [
+        4,
+        28.7
+       ],
+       [
+        6,
+        28.4
+       ],
+       [
+        9,
+        29.4
+       ],
+       [
+        11,
+        30
+       ],
+       [
+        14,
+        29.6
+       ],
+       [
+        17,
+        30.2
+       ],
+       [
+        19,
+        29.9
+       ]
+      ],
+      "n": 20,
+      "seed": 21,
+      "marks": [
+       {
+        "i": 11,
+        "price": 30,
+        "tone": "blue",
+        "label": "you buy $30"
+       }
+      ],
+      "hlines": [
+       {
+        "price": 27,
+        "tone": "gold",
+        "style": "text",
+        "label": "$27"
+       }
+      ],
+      "label": "You bought at $30; the $27 level sits below the price"
+     }
+    }
+   },
+   {
+    "lesson": 2,
+    "q": "You short 200 shares at $25 and buy them back at $22. Ignoring costs, what’s your result?",
+    "options": [
+     "−$600",
+     "+$300",
+     "+$600"
+    ],
+    "answer": 2,
+    "why": "A short gains when the price falls. You sold high and bought back lower, so you made money.",
+    "idea": "short-pnl",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 1 month",
+     "chart": {
+      "height": 90,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "noise": 0.4,
+      "path": [
+       [
+        0,
+        24.6
+       ],
+       [
+        3,
+        25
+       ],
+       [
+        6,
+        24.4
+       ],
+       [
+        9,
+        24
+       ],
+       [
+        12,
+        23.4
+       ],
+       [
+        15,
+        22.6
+       ],
+       [
+        17,
+        22
+       ],
+       [
+        21,
+        22.6
+       ]
+      ],
+      "n": 22,
+      "seed": 22,
+      "marks": [
+       {
+        "i": 3,
+        "price": 25,
+        "tone": "gold",
+        "label": "short $25"
+       },
+       {
+        "i": 17,
+        "price": 22,
+        "tone": "blue",
+        "label": "buy back $22",
+        "pos": "below"
+       }
+      ],
+      "label": "Shorted at $25, the price falls and you buy back at $22"
+     }
+    },
+    "work": "($25 − $22) × 200 shares = $600 gained."
+   },
+   {
+    "lesson": 3,
+    "q": "You put $500 in at 20× leverage. How big is the position, and what move wipes you out?",
+    "options": [
+     "$5,000; a 10% move",
+     "$10,000; a 5% move",
+     "$10,000; a 20% move"
+    ],
+    "answer": 1,
+    "why": "$500 × 20 = $10,000 position. At 20×, a 5% move against you (100% ÷ 20) costs $500, your whole margin.",
+    "idea": "wipe-out-move",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "hbars",
+     "title": "20× leverage",
+     "aside": "to scale",
+     "rows": [
+      {
+       "label": "your $500",
+       "value": 500,
+       "display": "",
+       "tone": "gold"
+      },
+      {
+       "label": "position",
+       "value": 10000,
+       "display": "",
+       "tone": "blue"
+      }
+     ]
+    }
+   },
+   {
+    "lesson": 4,
+    "q": "You buy and sell 100 shares once. Broker A: $0 commission, $0.05 spread. Broker B: $1 per trade, $0.01 spread. Which is cheaper?",
+    "options": [
+     "Broker A: $0 vs $2",
+     "Same cost",
+     "Broker B: $3 vs $5"
+    ],
+    "answer": 2,
+    "why": "Add both costs. A: $0.05 spread × 100 shares = $5. B: $1 × 2 trades = $2 commission + $0.01 × 100 = $1 spread, $3 total.",
+    "idea": "total-trading-cost",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Your account is $10,000 and you risk 1% on a stock that often gaps 10% on news. What’s the largest sensible position?",
+    "options": [
+     "$1,000",
+     "$10,000",
+     "$100"
+    ],
+    "answer": 0,
+    "why": "1% of $10,000 = $100 you can risk. A 10% gap should cost no more than that: $100 ÷ 10% = $1,000 position.",
+    "idea": "size-for-the-gap",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 1 month",
+     "chart": {
+      "height": 90,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "noise": 0.3,
+      "path": [
+       [
+        0,
+        50
+       ],
+       [
+        2,
+        51.5
+       ],
+       [
+        3,
+        52.5
+       ],
+       [
+        4,
+        52.4
+       ],
+       [
+        5,
+        47.2
+       ],
+       [
+        6,
+        46.5
+       ],
+       [
+        7,
+        46.8
+       ],
+       [
+        8,
+        46.3
+       ],
+       [
+        9,
+        45.8
+       ],
+       [
+        10,
+        50.5
+       ],
+       [
+        11,
+        50.8
+       ],
+       [
+        12,
+        51.3
+       ],
+       [
+        14,
+        50.6
+       ]
+      ],
+      "n": 15,
+      "seed": 23,
+      "vlines": [
+       {
+        "i": 5,
+        "label": "gap −10%",
+        "tone": "gold"
+       },
+       {
+        "i": 10,
+        "label": "gap +10%",
+        "tone": "gold"
+       }
+      ],
+      "label": "Two overnight gaps of about 10%, one down and one up"
+     }
+    }
+   }
+  ],
+  "retry": [
+   {
+    "lesson": 1,
+    "q": "A stock trades at $80. You want to buy it only if it dips to $75. Which order?",
+    "options": [
+     "A buy stop at $75",
+     "A buy limit at $75",
+     "A market order now"
+    ],
+    "answer": 1,
+    "why": "A buy limit waits below the price: “$75 or less”. A buy stop at $75 fires right away, since the price is already above it. A market order buys now at $80.",
+    "idea": "limit-vs-stop",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 1 month",
+     "chart": {
+      "height": 90,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "noise": 0.4,
+      "path": [
+       [
+        0,
+        77.5
+       ],
+       [
+        4,
+        78.6
+       ],
+       [
+        7,
+        78
+       ],
+       [
+        10,
+        79.4
+       ],
+       [
+        13,
+        79
+       ],
+       [
+        16,
+        80.2
+       ],
+       [
+        19,
+        80
+       ]
+      ],
+      "n": 20,
+      "seed": 24,
+      "marks": [
+       {
+        "i": 19,
+        "price": 80,
+        "tone": "blue",
+        "label": "now $80"
+       }
+      ],
+      "hlines": [
+       {
+        "price": 75,
+        "tone": "gold",
+        "style": "text",
+        "label": "$75"
+       }
+      ],
+      "label": "The price is at $80, above a $75 level"
+     }
+    }
+   },
+   {
+    "lesson": 2,
+    "q": "You short 100 shares at $50. The price rises and you buy them back at $56. Ignoring costs, what’s your result?",
+    "options": [
+     "+$600",
+     "−$600",
+     "−$56"
+    ],
+    "answer": 1,
+    "why": "A short loses when the price rises. You sold at $50 and had to buy back higher, so every share cost you more than you got.",
+    "work": "($50 − $56) × 100 shares = −$600.",
+    "idea": "short-pnl",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 1 month",
+     "chart": {
+      "height": 90,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "noise": 0.4,
+      "path": [
+       [
+        0,
+        49.4
+       ],
+       [
+        3,
+        50
+       ],
+       [
+        6,
+        50.6
+       ],
+       [
+        9,
+        52
+       ],
+       [
+        12,
+        53.2
+       ],
+       [
+        15,
+        55
+       ],
+       [
+        17,
+        56
+       ],
+       [
+        20,
+        55.6
+       ]
+      ],
+      "n": 21,
+      "seed": 25,
+      "marks": [
+       {
+        "i": 3,
+        "price": 50,
+        "tone": "gold",
+        "label": "short $50",
+        "pos": "below"
+       },
+       {
+        "i": 17,
+        "price": 56,
+        "tone": "blue",
+        "label": "buy back $56"
+       }
+      ],
+      "label": "Shorted at $50, the price rises and you buy back at $56"
+     }
+    }
+   },
+   {
+    "lesson": 3,
+    "q": "You put $2,000 into a forex trade at 50× leverage. How big is the position, and what move wipes you out?",
+    "options": [
+     "$100,000; a 2% move",
+     "$40,000; a 5% move",
+     "$100,000; a 50% move"
+    ],
+    "answer": 0,
+    "why": "Position = margin × leverage. The move that takes all your margin is 100% ÷ leverage, and a margin call comes even earlier.",
+    "work": "$2,000 × 50 = $100,000. 100% ÷ 50 = a 2% move costs your $2,000.",
+    "idea": "wipe-out-move",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "hbars",
+     "title": "50× leverage",
+     "aside": "to scale",
+     "rows": [
+      {
+       "label": "your $2,000",
+       "value": 2000,
+       "display": "",
+       "tone": "gold"
+      },
+      {
+       "label": "position",
+       "value": 100000,
+       "display": "",
+       "tone": "blue"
+      }
+     ]
+    }
+   },
+   {
+    "lesson": 4,
+    "q": "You buy and sell 200 shares once. Broker A: $0 commission, $0.04 spread. Broker B: $2 per trade, $0.01 spread. Which is cheaper?",
+    "options": [
+     "Broker A: $0 vs $4",
+     "Broker B: $6 vs $8",
+     "Same cost"
+    ],
+    "answer": 1,
+    "why": "Add both costs: commission on each trade plus the spread on every share. A’s wider spread costs more than B’s fees.",
+    "work": "A: $0.04 × 200 shares = $8. B: $2 × 2 trades = $4 commission + $0.01 × 200 = $2 spread, $6 total.",
+    "idea": "total-trading-cost",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Your account is $20,000 and you risk 1%. The stock can gap 20% on earnings. What’s the largest sensible position?",
+    "options": [
+     "$1,000",
+     "$4,000",
+     "$20,000"
+    ],
+    "answer": 0,
+    "why": "Size for the gap, not the stop: your risk budget divided by the gap gives the largest position.",
+    "work": "1% of $20,000 = $200. $200 ÷ 20% = $1,000 position.",
+    "idea": "size-for-the-gap",
+    "added": "New situation written for the Academy"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "limit-vs-stop",
+   "title": "Lesson 1 · The four orders you’ll use 95% of the time",
+   "text": "A limit waits for your price or better: a buy limit sits below the price. A stop waits for the price to reach a level, then trades: a sell stop below the price is your stop-loss."
+  },
+  {
+   "idea": "short-pnl",
+   "title": "Lesson 2 · Long and short",
+   "text": "A short sells first and buys back later. Profit is (sell − buy) × shares. Short 50 at $40 and buy back at $34? You gain $300."
+  },
+  {
+   "idea": "wipe-out-move",
+   "title": "Lesson 3 · Leverage, the double-edged sword",
+   "text": "Position = margin × leverage. The move against you that takes all your margin = 100% ÷ leverage: 10× → 10%, 100× → 1%. A margin call comes even earlier."
+  },
+  {
+   "idea": "total-trading-cost",
+   "title": "Lesson 4 · The costs nobody advertises",
+   "text": "Add every cost before you compare: commission on each trade plus the spread on every share of every round trip. Zero commission with a wide spread can cost more."
+  },
+  {
+   "idea": "size-for-the-gap",
+   "title": "Lesson 5 · The overnight gamble",
+   "text": "A gap can jump your stop, so size is your protection. Risk 1% of the account, then divide by the typical gap. $5,000 × 1% = $50, and $50 ÷ 10% = $500."
+  }
+ ],
+ "next": "reading-charts"
+}

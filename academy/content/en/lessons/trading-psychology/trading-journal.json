@@ -1,0 +1,377 @@
+{
+ "id": "trading-journal",
+ "chapter": "trading-psychology",
+ "n": 5,
+ "title": "Your trading journal",
+ "minutes": 5,
+ "desc": "Log six fields for every trade and find your patterns each week",
+ "cards": [
+  {
+   "type": "call",
+   "title": "“I’m doing OK”",
+   "situation": "You’ve made 40 trades in two months and written nothing down. You feel you’re doing OK. What can’t you tell without a record?",
+   "visual": {
+    "kind": "series",
+    "title": "40 trades · no notes",
+    "aside": "why?",
+    "ends": false,
+    "height": 100,
+    "label": "An account line that wanders up and down and ends a little lower",
+    "series": [
+     {
+      "values": [
+       0,
+       60,
+       30,
+       110,
+       80,
+       150,
+       120,
+       60,
+       90,
+       20,
+       50,
+       -30,
+       -10,
+       -90,
+       -140
+      ],
+      "tone": "muted",
+      "area": true
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Nothing: your memory is enough",
+     "feedback": "Everyone’s memory keeps the big wins and quietly drops the small losses. Only a record shows what really works."
+    },
+    {
+     "text": "Which setups make money and which lose it",
+     "feedback": "Without notes you can’t see which trades to repeat and which to stop."
+    },
+    {
+     "text": "How many trades you made",
+     "feedback": "Your broker already counts your trades. What it can’t tell you is why each one won or lost."
+    }
+   ],
+   "answer": 1,
+   "idea": "why-keep-a-journal",
+   "work": "Your broker shows 22 wins and 18 losses, net −$140. Your memory said “doing OK”."
+  },
+  {
+   "type": "learn",
+   "title": "Six things to log",
+   "text": "A **[[trading-journal|trading journal]]** is a short note for every trade. The same six fields each time, written the same day.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "rows",
+      "icon": "journal",
+      "title": "Journal · trade #41",
+      "aside": "Tue",
+      "rows": [
+       {
+        "label": "Setup",
+        "value": "Bounce at support $40"
+       },
+       {
+        "label": "Entry",
+        "value": "$41"
+       },
+       {
+        "label": "Stop",
+        "value": "$38",
+        "tone": "down"
+       },
+       {
+        "label": "Target",
+        "value": "$47",
+        "tone": "up"
+       },
+       {
+        "label": "Result",
+        "value": "+$6 a share · target hit",
+        "tone": "up"
+       },
+       {
+        "label": "Emotion",
+        "value": "Calm · on plan",
+        "tone": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "tip": "The emotion line matters as much as the numbers. It shows why a trade went wrong.",
+     "side": true
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "title": "The weekly review",
+   "text": "Every weekend, you sort the week’s trades by emotion.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "table",
+      "label": "Five trades this week, each with its emotion and result",
+      "cols": [
+       {
+        "w": 0.5
+       },
+       {
+        "w": 1.8
+       },
+       {
+        "w": 0.9,
+        "align": "center"
+       },
+       {
+        "w": 0.8,
+        "align": "right"
+       }
+      ],
+      "rows": [
+       {
+        "cells": [
+         {
+          "text": "Mon",
+          "tone": "muted"
+         },
+         "Bounce at support",
+         {
+          "text": "Calm",
+          "badge": true,
+          "tone": "up"
+         },
+         {
+          "text": "+$180",
+          "tone": "up"
+         }
+        ]
+       },
+       {
+        "cells": [
+         {
+          "text": "Tue",
+          "tone": "muted"
+         },
+         "Chased a spike",
+         {
+          "text": "FOMO",
+          "badge": true,
+          "tone": "gold"
+         },
+         {
+          "text": "−$240",
+          "tone": "down"
+         }
+        ]
+       },
+       {
+        "cells": [
+         {
+          "text": "Tue",
+          "tone": "muted"
+         },
+         "Bigger, after a loss",
+         {
+          "text": "Revenge",
+          "badge": true,
+          "tone": "down"
+         },
+         {
+          "text": "−$370",
+          "tone": "down"
+         }
+        ]
+       },
+       {
+        "cells": [
+         {
+          "text": "Wed",
+          "tone": "muted"
+         },
+         "Breakout on volume",
+         {
+          "text": "Calm",
+          "badge": true,
+          "tone": "up"
+         },
+         {
+          "text": "+$220",
+          "tone": "up"
+         }
+        ]
+       },
+       {
+        "cells": [
+         {
+          "text": "Thu",
+          "tone": "muted"
+         },
+         "Bounce at support",
+         {
+          "text": "Calm",
+          "badge": true,
+          "tone": "up"
+         },
+         {
+          "text": "+$120",
+          "tone": "up"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "stats",
+      "items": [
+       {
+        "label": "Calm · 3 trades",
+        "value": "+$520",
+        "tone": "up"
+       },
+       {
+        "label": "FOMO + revenge · 2",
+        "value": "−$610",
+        "tone": "down"
+       }
+      ]
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "One pattern found: the off-plan trades cost the week.",
+     "tone": "gold"
+    }
+   ]
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Log daily, review weekly",
+   "text": "A journal you never read is just a diary. The **[[weekly-review|weekly review]]** is where it pays.",
+   "visual": {
+    "kind": "list",
+    "style": "cards",
+    "items": [
+     {
+      "title": "Log every trade the same day",
+      "text": "All six fields, wins and losses alike."
+     },
+     {
+      "title": "Write the emotion honestly",
+      "text": "“Bored”, “angry” and “FOMO” are useful answers."
+     },
+     {
+      "title": "Every weekend, look for one pattern",
+      "text": "Keep what works. Cut one thing that doesn’t."
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "On plan or not?",
+   "q": "Here’s your entry for trade #42. Was the −$2 loss on plan?",
+   "idea": "on-plan-or-not",
+   "visual": {
+    "kind": "rows",
+    "icon": "journal",
+    "title": "Journal · trade #42",
+    "aside": "Thu",
+    "rows": [
+     {
+      "label": "Setup",
+      "value": "Breakout above $25"
+     },
+     {
+      "label": "Entry",
+      "value": "$25.40"
+     },
+     {
+      "label": "Stop",
+      "value": "$24",
+      "tone": "down"
+     },
+     {
+      "label": "Target",
+      "value": "$30",
+      "tone": "up"
+     },
+     {
+      "label": "Result",
+      "value": "−$2 a share",
+      "tone": "down"
+     },
+     {
+      "label": "Emotion",
+      "value": "Rushed",
+      "tone": "gold"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Yes: −$2 is a small loss",
+     "feedback": "Easy to miss: small isn’t the test. The stop set the plan. Losing more means the stop was moved or ignored."
+    },
+    {
+     "text": "No: you lost more than planned",
+     "feedback": "The stop capped the plan at about $1.40 a share. Losing $2 means it was moved or ignored, and “Rushed” hints why."
+    },
+    {
+     "text": "Yes: your target was $30",
+     "feedback": "The target doesn’t decide this. Compare the loss with the distance from entry to stop."
+    },
+    {
+     "text": "You can’t tell from this entry",
+     "feedback": "The entry has what you need: entry, stop and result. Compare the loss with the risk you planned."
+    }
+   ],
+   "answer": 1,
+   "work": "Planned: $25.40 − $24 = about $1.40 a share. Actual: $2."
+  },
+  {
+   "type": "check",
+   "title": "Why the feelings?",
+   "q": "Why should you log your emotion as well as the numbers?",
+   "options": [
+    {
+     "text": "It makes the journal look complete",
+     "feedback": "It isn’t for looks. The emotion line is where your losing patterns show up."
+    },
+    {
+     "text": "It shows which feelings lead to your losing trades",
+     "feedback": "The numbers show what happened. The emotion shows why, and that’s the part you can change."
+    },
+    {
+     "text": "Your broker needs it",
+     "feedback": "Your broker never sees your journal. It’s for you, to find the feelings behind your trades."
+    },
+    {
+     "text": "Emotions don’t matter if the numbers are right",
+     "feedback": "The numbers show what happened. The emotion shows why, and that’s the part you can change."
+    }
+   ],
+   "answer": 1,
+   "idea": "log-the-emotion"
+  },
+  {
+   "type": "keep",
+   "headline": "You can learn from every trade you make.",
+   "lines": [
+    "Log setup, entry, stop, target, result and emotion.",
+    "Write it the same day, wins and losses alike.",
+    "Review weekly and fix one pattern at a time."
+   ]
+  }
+ ]
+}

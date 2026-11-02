@@ -1,0 +1,18 @@
+/* Profit.com Academy · celebration burst (Challenge passed, path finished): confetti + Profit Coins from one point.
+   Every element animates once for at most 300 ms (staggered starts); nothing at all under reduced motion
+   (the OS setting or Settings › Reduce motion: html.ac-reduce-motion). js/celebrate.js adds and removes the layer. */
+.ac-cele-burst { position: fixed; inset: 0; z-index: 90; overflow: hidden; pointer-events: none; }
+.ac-cele-burst__p { position: absolute; left: var(--x); top: var(--y); width: 8px; height: 12px; margin: -6px 0 0 -4px; border-radius: 2px; background: var(--c);
+  opacity: 0; animation: ac-cele-fly .3s cubic-bezier(.2, .7, .3, 1) var(--d) both; }
+.ac-cele-burst__p--round { width: 9px; height: 9px; border-radius: 50%; }
+.ac-cele-burst__coin { position: absolute; left: var(--x); top: var(--y); display: grid; place-items: center; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--ac-hero-gold), var(--ac-gold) 60%, var(--ac-amber)); box-shadow: inset 0 0 0 2px var(--ac-gold-ring);
+  opacity: 0; animation: ac-cele-fly .3s cubic-bezier(.2, .7, .3, 1) var(--d) both; }
+.ac-cele-burst__coin::after { content: ""; width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--ac-amber); }
+@keyframes ac-cele-fly {
+  0% { opacity: 1; transform: translate(0, 0) rotate(0) scale(.6); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r)) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .ac-cele-burst { display: none !important; } }
+html.ac-reduce-motion .ac-cele-burst { display: none !important; }

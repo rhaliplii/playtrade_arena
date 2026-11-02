@@ -1,0 +1,76 @@
+/* Profit.com Academy · rank-up screen and rank card (static/js/rankup.js). Standalone: needs only tokens.css and base.css.
+   Tokens only; alpha variants via color-mix. */
+
+.ac-rank--rookie { --rank: var(--ac-rank-rookie); }
+.ac-rank--analyst { --rank: var(--ac-rank-analyst); }
+.ac-rank--strategist { --rank: var(--ac-rank-strategist); }
+.ac-rank--trader { --rank: var(--ac-rank-trader); }
+.ac-rank--legend { --rank: var(--ac-rank-legend); }
+.ac-btn--gold { background: var(--ac-gold); color: var(--ac-ink) !important; box-shadow: inset 0 1px 2px color-mix(in srgb, var(--ac-white) 30%, transparent); }
+
+/* ---------- rank card (Lesson complete, Gym done, path finish) */
+.ac-rkcard { display: flex; flex-direction: column; gap: 8px; padding: 12px 16px; border-radius: 18px; background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); }
+.ac-rkcard__row { display: flex; align-items: center; gap: 10px; }
+/* the learner's avatar (shell.js AC.userAvatar) ringed in the rank colour, the level on its corner (like the podium place) */
+.ac-rkcard__badge { position: relative; flex: none; width: 44px; height: 44px; }
+.ac-rkcard__ava { width: 44px; height: 44px; font-size: 15px; box-shadow: 0 0 0 2px var(--rank); object-fit: cover; }
+.ac-rkcard__lv { position: absolute; right: -6px; bottom: -4px; display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; border-radius: 999px; background: var(--rank); color: var(--ac-ink); box-shadow: 0 0 0 2px var(--ac-surface); font: 800 11.5px/1 var(--ac-font); }
+.ac-rkcard__who { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.ac-rkcard__who b { font: 800 15px/1.3 var(--ac-font); }
+.ac-rkcard__who span { font: 600 12px/1.3 var(--ac-font); color: var(--ac-text-muted); }
+.ac-rkcard.is-up .ac-rkcard__who span { color: var(--ac-gold); animation: acRuPop .3s ease both .2s; }
+.ac-rkcard.is-up .ac-rkcard__badge { animation: acRuPop .3s cubic-bezier(.3, 1.4, .5, 1) both .2s; }
+.ac-rkcard__xp { font: 800 17px/1.2 var(--ac-font); }
+.ac-rkcard__bar { position: relative; height: 8px; border-radius: 999px; background: var(--ac-line); overflow: hidden; }
+.ac-rkcard__before, .ac-rkcard__gain { position: absolute; top: 0; bottom: 0; left: 0; }
+.ac-rkcard__before { background: var(--ac-primary-ink); }
+.ac-rkcard__gain { background: var(--ac-primary-ink); animation: acRuGrow .3s cubic-bezier(.3, .7, .3, 1) both .2s; transform-origin: left; }
+.ac-rkcard__ticks { display: flex; justify-content: space-between; font: 600 11.5px/1.3 var(--ac-font); color: var(--ac-text-muted); }
+.ac-rkcard__ticks .ac-up { color: var(--ac-primary-ink); }
+
+/* ---------- rank up (canvas Rank-Up / Rank-Up-Desktop): one Rico, the new rank look */
+.ac-rankup { width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: radial-gradient(60% 40% at 50% 28%, var(--ac-gold-soft), transparent 70%), var(--ac-page); color: var(--ac-text); }
+.ac-rankup::backdrop { background: var(--ac-page); }
+.ac-rankup__box { display: flex; flex-direction: column; align-items: center; gap: 14px; min-height: 100%; max-width: 520px; margin: 0 auto; padding: 40px 20px 24px; text-align: center; }
+.ac-rankup__eb { font: 800 13px var(--ac-font); letter-spacing: .1em; text-transform: uppercase; color: var(--ac-gold); }
+.ac-rankup__new { height: 220px; width: auto; filter: drop-shadow(0 0 40px var(--ac-gold-soft)); animation: acRuPop .3s ease both .1s; }
+.ac-rankup__path { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--ac-surface-raised); font: 700 13px var(--ac-font); color: var(--ac-text-muted); }
+.ac-rankup__path b { color: var(--ac-gold); }
+.ac-rankup__arrow { display: inline-flex; color: var(--ac-gold); }
+.ac-rankup__arrow svg { width: 14px; height: 14px; }
+.ac-rankup__name { margin: 0; font: 800 40px/1.1 var(--ac-font); color: var(--ac-gold); }
+.ac-rankup__text { margin: 0; font: 500 15px/1.5 var(--ac-font); color: var(--ac-text-soft); }
+.ac-rankup__look { display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: 18px; background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); text-align: left; }
+.ac-rankup__look > span:last-child { display: flex; flex-direction: column; }
+.ac-rankup__look b { font: 800 16px/1.3 var(--ac-font); }
+.ac-rankup__look span span { font: 500 13px/1.4 var(--ac-font); color: var(--ac-text-muted); }
+.ac-rankup__ico { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--ac-gold-soft); color: var(--ac-gold); font-size: 18px; }
+.ac-rankup__fine { margin: 0; font: 500 13px/1.45 var(--ac-font); color: var(--ac-text-muted); }
+.ac-rankup__btns { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: auto; padding-top: 16px; }
+.ac-rankup__btns .ac-btn { width: 100%; min-height: 52px; }
+@keyframes acRuPop { 0% { transform: scale(.4); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: none; } }
+@keyframes acRuGrow { from { transform: scaleX(0); } to { transform: none; } }
+
+@media (min-width: 861px) {
+  .ac-rankup__box { max-width: 640px; padding-top: 56px; }
+  .ac-rankup__new { height: 300px; }
+  .ac-rankup__name { font-size: 56px; }
+  .ac-rankup__btns { flex-direction: row; justify-content: center; margin-top: 16px; }
+  .ac-rankup__btns .ac-btn { width: auto; min-width: 220px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ac-rankup *, .ac-rkcard, .ac-rkcard * { animation: none !important; transition: none !important; }
+}
+
+/* Chapter Challenge results: the Profit Coins row under the XP total (canvas P1-ChNN-Challenge "Coins +50 Profit Coins") */
+.ac-res__xp > .ac-res__coins { align-items: baseline; }
+.ac-res__coins > b { font: 800 15px var(--ac-font); color: var(--ac-gold); }
+html.ac-reduce-motion .ac-rankup *, html.ac-reduce-motion .ac-rkcard, html.ac-reduce-motion .ac-rkcard * { animation: none !important; transition: none !important; }
+
+/* new-level cue on the Challenge result (the lesson's rank card shows the same line) */
+.ac-lvlup { display: inline-flex; align-items: center; align-self: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: 999px; background: var(--ac-gold-soft); color: var(--ac-gold); font: 800 14px/1.3 var(--ac-font); animation: acRuPop .3s cubic-bezier(.3, 1.4, .5, 1) both .2s; }
+.ac-lvlup__badge { display: grid; place-items: center; min-width: 26px; height: 26px; padding: 0 6px; border-radius: 999px; background: var(--ac-gold); color: var(--ac-text-on-inverse); font: 800 13px/1 var(--ac-font); }
+.ac-res__xp > .ac-res__lvl { justify-content: flex-start; }
+.ac-res__lvl .ac-lvlup { align-self: flex-start; }
+@media (prefers-reduced-motion: reduce) { .ac-lvlup { animation: none !important; } }
+html.ac-reduce-motion .ac-lvlup { animation: none !important; }

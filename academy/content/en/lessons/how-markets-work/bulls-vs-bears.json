@@ -1,0 +1,644 @@
+{
+ "id": "bulls-vs-bears",
+ "chapter": "how-markets-work",
+ "n": 1,
+ "title": "Bulls vs bears",
+ "minutes": 3,
+ "desc": "What traders mean by a bull or bear market",
+ "intro": "I’ll coach you through every lesson. First one: bulls and bears.",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Bear market, or a bad week?",
+   "situation": "The market fell 5% this week. A headline shouts “Bear market!” Is it right?",
+   "visual": {
+    "kind": "line",
+    "title": "Market index · this week",
+    "change": "−5%",
+    "tone": "down",
+    "ohlc": [
+     [
+      100.0,
+      100.4,
+      98.6,
+      98.9
+     ],
+     [
+      98.9,
+      99.8,
+      98.5,
+      99.3
+     ],
+     [
+      99.3,
+      99.5,
+      96.8,
+      97.1
+     ],
+     [
+      97.1,
+      98.2,
+      96.9,
+      97.7
+     ],
+     [
+      97.7,
+      97.9,
+      94.8,
+      95.0
+     ]
+    ],
+    "height": 120,
+    "ticks": 3,
+    "from": "Mon open 100",
+    "to": "Fri close 95",
+    "tag": {
+     "label": "Headline",
+     "text": "“Bear market is here!”"
+    },
+    "label": "Daily candlestick chart: the market index opens at 100 on Monday and closes at 95 on Friday"
+   },
+   "options": [
+    {
+     "text": "Yes: prices are falling",
+     "feedback": "Falling isn’t enough. A bear market is a fall of about 20% from the high. 5% is a normal dip."
+    },
+    {
+     "text": "Not yet: it needs a bigger fall",
+     "feedback": "A bad week isn’t a bear market. That takes a fall of about 20% from the high."
+    },
+    {
+     "text": "No: it’s a bull market",
+     "feedback": "A bull market is a rise of about 20% or more. This market fell 5%: a normal dip, not a bull market."
+    }
+   ],
+   "answer": 1,
+   "idea": "bear-market-20-percent",
+   "work": "100 → 95 = −5%. A bear market needs −20%: 100 → 80.",
+   "added": "Feedback for option C written for the Academy (not on the canvas)"
+  },
+  {
+   "type": "learn",
+   "title": "Bulls and bears",
+   "text": "Traders fall into two camps, named after how each animal attacks.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "bullbear",
+      "items": [
+       {
+        "name": "Bull",
+        "tag": "Horns charge up",
+        "tone": "up",
+        "text": "Expects prices to {up}rise{/up}",
+        "chart": {
+         "ohlc": [
+          [
+           100,
+           101.5,
+           99.8,
+           101.2
+          ],
+          [
+           101.2,
+           101.4,
+           100.0,
+           100.6
+          ],
+          [
+           100.6,
+           102.8,
+           100.2,
+           102.4
+          ],
+          [
+           102.4,
+           104.3,
+           102.1,
+           103.9
+          ],
+          [
+           103.9,
+           104.4,
+           102.7,
+           103.1
+          ],
+          [
+           103.1,
+           105.5,
+           102.7,
+           105.0
+          ],
+          [
+           105.0,
+           107.3,
+           104.7,
+           106.8
+          ],
+          [
+           106.8,
+           107.0,
+           105.8,
+           106.0
+          ],
+          [
+           106.0,
+           108.6,
+           105.8,
+           108.1
+          ],
+          [
+           108.1,
+           110.4,
+           107.7,
+           110.0
+          ]
+         ],
+         "height": 150,
+         "axis": false,
+         "lastTag": false,
+         "ticks": 0,
+         "label": "Mini candlestick chart: prices rising"
+        }
+       },
+       {
+        "name": "Bear",
+        "tag": "Paws swipe down",
+        "tone": "down",
+        "text": "Expects prices to {down}fall{/down}",
+        "chart": {
+         "ohlc": [
+          [
+           100,
+           100.4,
+           98.7,
+           98.8
+          ],
+          [
+           98.8,
+           99.6,
+           98.6,
+           99.4
+          ],
+          [
+           99.4,
+           99.9,
+           97.2,
+           97.6
+          ],
+          [
+           97.6,
+           98.1,
+           96.0,
+           96.1
+          ],
+          [
+           96.1,
+           97.2,
+           96.0,
+           96.9
+          ],
+          [
+           96.9,
+           97.1,
+           94.7,
+           95.0
+          ],
+          [
+           95.0,
+           95.1,
+           93.0,
+           93.2
+          ],
+          [
+           93.2,
+           94.4,
+           92.8,
+           94.0
+          ],
+          [
+           94.0,
+           94.2,
+           91.5,
+           91.9
+          ],
+          [
+           91.9,
+           92.4,
+           89.9,
+           90.0
+          ]
+         ],
+         "height": 150,
+         "axis": false,
+         "lastTag": false,
+         "ticks": 0,
+         "label": "Mini candlestick chart: prices falling"
+        }
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "say": {
+      "title": "You’ll hear traders say",
+      "rows": [
+       {
+        "term": "[[bullish|Bullish]]",
+        "text": "expecting a rise",
+        "tone": "up"
+       },
+       {
+        "term": "[[bearish|Bearish]]",
+        "text": "expecting a fall",
+        "tone": "down"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "learn",
+   "title": "Bull market vs bear market",
+   "text": "A {up}[[bull-market|bull market]]{/up} is a sustained rise of about **20% or more** from a recent low. A {down}[[bear-market|bear market]]{/down} is a sustained fall of about **20% or more** from a recent high.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "lines",
+      "layout": "stack",
+      "items": [
+       {
+        "label": "Bull market",
+        "sub": "+20% or more from the low",
+        "tone": "up",
+        "ohlc": [
+         [
+          100.0,
+          103.5,
+          98.7,
+          102.8
+         ],
+         [
+          102.8,
+          104.1,
+          99.4,
+          101.0
+         ],
+         [
+          101.0,
+          105.1,
+          100.4,
+          104.5
+         ],
+         [
+          104.5,
+          107.7,
+          103.9,
+          107.2
+         ],
+         [
+          107.2,
+          108.6,
+          104.6,
+          105.1
+         ],
+         [
+          105.1,
+          106.2,
+          103.0,
+          103.6
+         ],
+         [
+          103.6,
+          108.6,
+          102.7,
+          107.9
+         ],
+         [
+          107.9,
+          112.2,
+          106.7,
+          110.6
+         ],
+         [
+          110.6,
+          110.9,
+          107.7,
+          108.4
+         ],
+         [
+          108.4,
+          113.0,
+          106.8,
+          112.5
+         ],
+         [
+          112.5,
+          116.5,
+          111.0,
+          115.0
+         ],
+         [
+          115.0,
+          116.5,
+          110.7,
+          112.1
+         ],
+         [
+          112.1,
+          113.8,
+          108.8,
+          110.3
+         ],
+         [
+          110.3,
+          115.3,
+          108.7,
+          114.6
+         ],
+         [
+          114.6,
+          119.2,
+          113.2,
+          118.2
+         ],
+         [
+          118.2,
+          119.3,
+          115.1,
+          116.0
+         ],
+         [
+          116.0,
+          121.2,
+          115.1,
+          120.4
+         ],
+         [
+          120.4,
+          124.6,
+          120.0,
+          123.8
+         ],
+         [
+          123.8,
+          125.3,
+          120.0,
+          121.5
+         ],
+         [
+          121.5,
+          129.8,
+          120.2,
+          128.0
+         ]
+        ]
+       },
+       {
+        "label": "Bear market",
+        "sub": "−20% or more from the high",
+        "tone": "down",
+        "ohlc": [
+         [
+          100.0,
+          100.4,
+          95.7,
+          97.0
+         ],
+         [
+          97.0,
+          99.9,
+          95.3,
+          98.6
+         ],
+         [
+          98.6,
+          99.3,
+          94.1,
+          94.8
+         ],
+         [
+          94.8,
+          96.2,
+          90.2,
+          91.5
+         ],
+         [
+          91.5,
+          94.1,
+          90.2,
+          93.4
+         ],
+         [
+          93.4,
+          95.9,
+          91.9,
+          95.0
+         ],
+         [
+          95.0,
+          95.5,
+          90.0,
+          90.6
+         ],
+         [
+          90.6,
+          92.2,
+          86.4,
+          87.2
+         ],
+         [
+          87.2,
+          89.8,
+          85.7,
+          89.1
+         ],
+         [
+          89.1,
+          90.3,
+          84.5,
+          85.0
+         ],
+         [
+          85.0,
+          86.1,
+          81.0,
+          82.3
+         ],
+         [
+          82.3,
+          85.1,
+          81.0,
+          84.6
+         ],
+         [
+          84.6,
+          86.6,
+          83.8,
+          86.1
+         ],
+         [
+          86.1,
+          86.5,
+          80.8,
+          81.4
+         ],
+         [
+          81.4,
+          83.2,
+          77.1,
+          78.0
+         ],
+         [
+          78.0,
+          82.0,
+          77.1,
+          80.2
+         ],
+         [
+          80.2,
+          81.4,
+          74.5,
+          76.1
+         ],
+         [
+          76.1,
+          77.4,
+          73.1,
+          73.5
+         ],
+         [
+          73.5,
+          76.6,
+          72.3,
+          75.4
+         ],
+         [
+          75.4,
+          75.9,
+          70.6,
+          71.0
+         ]
+        ]
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "A few red days isn’t a bear market. Measure the move in percent."
+    }
+   ],
+   "deeper": {
+    "title": "Why 20%?",
+    "text": "20% is a market convention, not a law. It’s simply the line most traders and news outlets agree on, so everyone means the same thing.\n\nSome analysts use other levels, and a smaller fall of 10% from the high is usually called a **[[correction|correction]]**.",
+    "note": "From a high of 100: −10% (90) is a correction. −20% (80) is a bear market."
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "sort",
+   "title": "Bull, bear or neither?",
+   "q": "Drag each move into the right box. Work out the percent first.",
+   "idea": "bull-vs-bear",
+   "items": [
+    {
+     "text": "1,000 → 1,250",
+     "sub": "From a low · over a year"
+    },
+    {
+     "text": "$50 → $38",
+     "sub": "From a high · over 8 months"
+    }
+   ],
+   "given": [
+    {
+     "item": {
+      "text": "100 → 95",
+      "sub": "In one week"
+     },
+     "bucket": "neither"
+    }
+   ],
+   "buckets": [
+    {
+     "id": "bull",
+     "label": "Bull",
+     "sub": "up 20% or more",
+     "tone": "up",
+     "icon": "up"
+    },
+    {
+     "id": "bear",
+     "label": "Bear",
+     "sub": "down 20% or more",
+     "tone": "down",
+     "icon": "down"
+    },
+    {
+     "id": "neither",
+     "label": "Neither",
+     "sub": "less than 20%",
+     "tone": "muted",
+     "icon": "flat"
+    }
+   ],
+   "solution": {
+    "bull": [
+     "1,000 → 1,250"
+    ],
+    "bear": [
+     "$50 → $38"
+    ],
+    "neither": []
+   },
+   "itemFeedback": {
+    "1,000 → 1,250": "250 on 1,000 is a 25% rise from a low. That’s past the 20% line, so it’s a bull market.",
+    "$50 → $38": "$12 off a $50 high is a 24% fall. That’s past the 20% line, so it’s a bear market."
+   },
+   "right": "Both moves are past the 20% line: one up from a low, one down from a high.",
+   "work": "250 ÷ 1,000 = +25%. $12 ÷ $50 = −24%.",
+   "added": "Feedback written for the Academy (the canvas shows no sort feedback)"
+  },
+  {
+   "type": "check",
+   "pose": "detective",
+   "title": "Bull market already?",
+   "q": "A stock rose from **$100** to **$115** this month. Your friend says it’s a bull market. Is he right?",
+   "options": [
+    {
+     "text": "Yes: it’s up $15",
+     "feedback": "Dollars don’t decide it, the percent does. $15 on a $100 stock is 15%, short of 20%."
+    },
+    {
+     "text": "Not yet: it’s up 15%",
+     "feedback": "The percent decides it. $15 on $100 is 15%, short of the 20% a bull market needs."
+    },
+    {
+     "text": "Yes: a month of gains is enough",
+     "feedback": "Time doesn’t decide it, the size of the move does. 15% is short of the 20% line."
+    },
+    {
+     "text": "No: it’s a bear market",
+     "feedback": "A bear market is a fall of about 20% or more. This stock rose 15%."
+    }
+   ],
+   "answer": 1,
+   "idea": "measure-in-percent",
+   "work": "$15 ÷ $100 = 15%. A bull market needs about +20%: $100 → $120.",
+   "added": "Feedback for B, C and D written for the Academy"
+  },
+  {
+   "type": "keep",
+   "headline": "You can tell a bull market from a bear market.",
+   "lines": [
+    "Bullish means expecting prices to rise. Bearish means expecting them to fall.",
+    "A bull or bear market is a move of about 20% or more.",
+    "Measure moves in percent, not points or dollars."
+   ]
+  }
+ ]
+}

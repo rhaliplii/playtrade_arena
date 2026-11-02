@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-US" data-root="../../../" data-academy="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visual catalog</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../static/css/tokens.css">
+<link rel="stylesheet" href="../../static/css/base.css">
+<link rel="stylesheet" href="../../static/css/visuals.css">
+<link rel="stylesheet" href="../../static/css/player.css">
+<style>
+  /* test page only: layout of the catalog (colours come from tokens) */
+  body { margin: 0; background: var(--ac-page); color: var(--ac-text); font-family: var(--ac-font); }
+  .cat { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 28px 24px; padding: 20px 16px 60px; }
+  .cat h2 { grid-column: 1 / -1; margin: 18px 0 0; font: 800 20px var(--ac-font); }
+  .cat__item { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .cat__k { font: 700 12px/1.3 var(--ac-font); color: var(--ac-text-muted); }
+  .cat__k b { color: var(--ac-primary-ink); }
+  .cat__ex { padding: 14px; border-radius: 20px; box-shadow: inset 0 0 0 1px var(--ac-line); }
+  .cat__bar { display: flex; gap: 8px; margin-top: 4px; }
+  #out { padding: 0 16px; font: 700 13px var(--ac-font); }
+</style>
+</head>
+<body class="ac-body">
+<script type="application/json" id="ac-i18n">{}</script>
+<script src="../../static/js/core.js"></script>
+<script src="../../static/js/store.js"></script>
+<script src="../../static/js/services.js"></script>
+<script src="../../static/js/engine.js"></script>
+<script src="../../static/js/visuals.js"></script>
+<script src="../../static/js/cards.js"></script>
+<p id="out"></p>
+<div class="cat" id="cat"></div>
+<script>
+(function () {
+  function get(u) { var x = new XMLHttpRequest(); x.open("GET", u, false); x.send(); return JSON.parse(x.responseText); }
+  ["player", "shell"].forEach(function (n) { Object.assign(AC.strings, get("../../locales/en/" + n + ".json")); });
+  var D = get("visual-samples.json"), cat = document.getElementById("cat"), errors = [], kinds = {};
+  var q = location.search, only = (q.match(/[?&]only=([^&]+)/) || [])[1], explore = /[?&]explore=1/.test(q);
+  var from = +((q.match(/[?&]from=(\d+)/) || [])[1] || 0), to = +((q.match(/[?&]to=(\d+)/) || [])[1] || 1e9);
+  D.visuals.forEach(function (s, i) {
+    if (only && only.split(",").indexOf(s.v.kind) < 0) return;
+    if (i < from || i > to) return;
+    if (s.group) cat.insertAdjacentHTML("beforeend", "<h2>" + AC.esc(s.group) + "</h2>");
+    kinds[s.v.kind] = 1;
+    var el = document.createElement("div");
+    el.className = "cat__item"; el.dataset.i = i;
+    try {
+      var html = AC.visual(s.v, { explore: !!s.explore });
+      if (!html) errors.push("empty: " + s.board);
+      el.innerHTML = '<span class="cat__k"><b>' + AC.esc(s.v.kind) + "</b> · " + AC.esc(s.board) + (s.explore ? " · walk-through" : "") + "</span>" + html;
+      cat.appendChild(el);
+      if (AC.visual.interactive(s.v, !!s.explore)) AC.visual.mount(el, {});
+    } catch (e) { errors.push(s.board + ": " + e.message); console.error(e); }
+  });
+  if ((!only && to >= D.visuals.length) || only === "exercises") {
+    cat.insertAdjacentHTML("beforeend", "<h2>Exercise kinds</h2>");
+    D.exercises.forEach(function (s, i) {
+      var el = document.createElement("div"); el.className = "cat__item cat__ex";
+      try {
+        var ctl = AC.cards.render(s.card, { mode: "lesson", answer: function () { return { xp: 10 }; }, changed: function () { btn.disabled = !!ctl.cta().disabled; btn.textContent = ctl.cta().label; } });
+        el.innerHTML = '<span class="cat__k"><b>' + AC.esc(s.card.kind) + "</b> · " + AC.esc(s.board) + "</span>";
+        el.appendChild(ctl.el);
+        var bar = AC.h('<div class="cat__bar"><button type="button" class="ac-btn ac-btn--primary"></button></div>'), btn = bar.firstChild;
+        el.appendChild(bar);
+        btn.textContent = ctl.cta().label; btn.disabled = !!ctl.cta().disabled;
+        btn.addEventListener("click", function () { var r = ctl.primary(); if (ctl.sheet && !el.contains(ctl.sheet)) el.appendChild(ctl.sheet); btn.textContent = ctl.cta().label; });
+        el.ctl = ctl; el.dataset.ex = i;
+        cat.appendChild(el);
+      } catch (e) { errors.push(s.board + ": " + e.message); console.error(e); }
+    });
+  }
+  if ((!only && to >= D.visuals.length) || only === "walkthroughs") {
+    cat.insertAdjacentHTML("beforeend", "<h2>Walk-throughs (tap / drag / ▶ Play before Continue)</h2>");
+    (D.walkthroughs || []).forEach(function (s, i) {
+      var el = document.createElement("div"); el.className = "cat__item cat__ex"; el.dataset.wt = i;
+      try {
+        var cta = AC.h('<p class="cat__k" data-cta></p>');
+        var ctl = AC.cards.render(s.card, { mode: "lesson", changed: function () { var c = ctl.cta(); cta.textContent = "CTA: " + c.label + (c.disabled ? " (disabled)" : ""); } });
+        el.innerHTML = '<span class="cat__k"><b>walkthrough</b> · ' + AC.esc(s.board) + "</span>";
+        el.appendChild(ctl.el); el.appendChild(cta); var c0 = ctl.cta(); cta.textContent = "CTA: " + c0.label + (c0.disabled ? " (disabled)" : "");
+        cat.appendChild(el);
+      } catch (e) { errors.push(s.board + ": " + e.message); console.error(e); }
+    });
+  }
+  window.CAT_ERRORS = errors;
+  document.getElementById("out").textContent = (errors.length ? "FAIL " + errors.join(" | ") : "ALL RENDERED") + " · " + Object.keys(kinds).length + " kinds";
+})();
+</script>
+</body>
+</html>

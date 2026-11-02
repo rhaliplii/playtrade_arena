@@ -1,0 +1,468 @@
+{
+ "id": "double-tops-and-bottoms",
+ "chapter": "trends-patterns-indicators",
+ "n": 4,
+ "title": "Double tops and double bottoms",
+ "minutes": 5,
+ "desc": "Two failed tries at a level, and why only the break confirms it",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "detective",
+   "title": "Second try at $100",
+   "situation": "A stock rose to $100, fell to $90, rose to $100 again and failed. Now it’s at $95. Is the double top confirmed?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "middle low $90",
+      "tone": "gold",
+      "dashed": true
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       84
+      ],
+      [
+       5,
+       100
+      ],
+      [
+       9,
+       90
+      ],
+      [
+       13,
+       100
+      ],
+      [
+       16,
+       95
+      ]
+     ],
+     "seed": 11,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 90,
+       "tone": "gold"
+      }
+     ],
+     "swings": [
+      {
+       "i": 5,
+       "price": 100,
+       "label": "$100",
+       "tone": "down"
+      },
+      {
+       "i": 13,
+       "price": 100,
+       "label": "$100",
+       "tone": "down"
+      }
+     ],
+     "marks": [
+      {
+       "i": 16,
+       "price": 95,
+       "label": "now $95",
+       "tone": "blue",
+       "pos": "below"
+      }
+     ],
+     "label": "Two peaks at $100 with a $90 middle low; price now $95"
+    }
+   },
+   "options": [
+    {
+     "text": "Yes: two peaks at $100 is enough",
+     "feedback": "Two peaks show sellers defending $100. The pattern only counts when price breaks the middle low."
+    },
+    {
+     "text": "Not yet: it needs to close below $90",
+     "feedback": "Until $90 breaks, it’s a range between $90 and $100, not a confirmed top."
+    },
+    {
+     "text": "Yes: any drop from the second peak counts",
+     "feedback": "A drop from the second peak is normal inside a range. The top counts only on a close below the $90 middle low."
+    }
+   ],
+   "answer": 1,
+   "idea": "confirm-through-the-middle",
+   "work": "Peaks $100 and $100. Middle low $90. Now $95: still above $90."
+  },
+  {
+   "type": "learn",
+   "title": "Two failed attempts",
+   "text": "When price tries a level twice and fails twice, the side that failed may be running out of steam. The point between the two tries is the **middle**.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "chart-pair",
+      "items": [
+       {
+        "label": "Double top",
+        "sub": "Two tries at a high. Buyers failed twice.",
+        "tone": "down",
+        "chart": {
+         "path": [
+          [
+           0,
+           10
+          ],
+          [
+           4,
+           18
+          ],
+          [
+           7,
+           14
+          ],
+          [
+           10,
+           18
+          ],
+          [
+           14,
+           11
+          ]
+         ],
+         "seed": 3,
+         "height": 70,
+         "axis": false,
+         "lastTag": false,
+         "ticks": 0,
+         "noise": 0.3,
+         "label": "Double top: Two tries at a high. Buyers failed twice."
+        }
+       },
+       {
+        "label": "Double bottom",
+        "sub": "Two tries at a low. Sellers failed twice.",
+        "tone": "up",
+        "chart": {
+         "path": [
+          [
+           0,
+           18
+          ],
+          [
+           4,
+           10
+          ],
+          [
+           7,
+           14
+          ],
+          [
+           10,
+           10
+          ],
+          [
+           14,
+           17
+          ]
+         ],
+         "seed": 5,
+         "height": 70,
+         "axis": false,
+         "lastTag": false,
+         "ticks": 0,
+         "noise": 0.3,
+         "label": "Double bottom: Two tries at a low. Sellers failed twice."
+        }
+       }
+      ]
+     }
+    },
+    {
+     "tip": "Confirmation is a close through the middle point. Until then, it’s just a range."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "Confirm, then measure",
+   "text": "A [[double-bottom|double bottom]] at $50 with a middle high at $56. A close above $56 confirms it.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "middle $56",
+      "tone": "gold",
+      "dashed": true
+     },
+     {
+      "label": "target $62",
+      "tone": "up",
+      "dashed": true
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       58
+      ],
+      [
+       5,
+       50
+      ],
+      [
+       9,
+       56
+      ],
+      [
+       13,
+       50.2
+      ],
+      [
+       17,
+       55
+      ],
+      [
+       19,
+       57
+      ],
+      [
+       22,
+       61
+      ]
+     ],
+     "seed": 14,
+     "height": 140,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 56,
+       "tone": "gold"
+      },
+      {
+       "price": 62,
+       "tone": "up"
+      }
+     ],
+     "explore": "play",
+     "swings": [
+      {
+       "i": 5,
+       "price": 50,
+       "label": "$50",
+       "tone": "up",
+       "pos": "below"
+      },
+      {
+       "i": 13,
+       "price": 50.2,
+       "label": "$50",
+       "tone": "up",
+       "pos": "below"
+      }
+     ],
+     "marks": [
+      {
+       "i": 13,
+       "price": 50.2,
+       "tone": "up"
+      },
+      {
+       "i": 19,
+       "price": 57,
+       "tone": "gold"
+      }
+     ],
+     "label": "A double bottom at $50 breaks above the $56 middle; the rough target is $62"
+    }
+   },
+   "foot": "A rough guide: the height of the pattern added to the break. $56 − $50 = $6, so about $62. A guide, never a promise.",
+   "footTone": "gold"
+  },
+  {
+   "type": "myth",
+   "title": "Two peaks, sure fall?",
+   "myth": "Two peaks at the same price always mean a fall.",
+   "visualPos": "before",
+   "visual": {
+    "kind": "candles",
+    "title": "Never confirmed",
+    "legend": [
+     {
+      "label": "middle low",
+      "tone": "gold",
+      "dashed": true
+     }
+    ],
+    "label": "Two peaks at the same price, but price never closes below the middle low and climbs above the peaks",
+    "chart": {
+     "path": [
+      [
+       0,
+       43
+      ],
+      [
+       4,
+       52
+      ],
+      [
+       7,
+       47.3
+      ],
+      [
+       10,
+       51.8
+      ],
+      [
+       13,
+       47.4
+      ],
+      [
+       17,
+       54
+      ]
+     ],
+     "seed": 21,
+     "height": 110,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 47,
+       "tone": "gold"
+      }
+     ]
+    }
+   },
+   "reality": "Many [[double-top|double tops]] never break the middle low. Some keep ranging. Some break out above the peaks.",
+   "rule": "no break, no pattern.",
+   "added": "Board P1-Ch04-L4 card 4: the “Never confirmed” chart"
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Find the trigger",
+   "idea": "double-bottom-trigger",
+   "q": "A double bottom: lows at $30 and $30.50, with a middle high at $34. Where is it confirmed?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "path": [
+      [
+       0,
+       35
+      ],
+      [
+       4,
+       30
+      ],
+      [
+       8,
+       34
+      ],
+      [
+       12,
+       30.5
+      ],
+      [
+       16,
+       32.6
+      ]
+     ],
+     "seed": 18,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "swings": [
+      {
+       "i": 4,
+       "price": 30,
+       "label": "$30",
+       "tone": "up"
+      },
+      {
+       "i": 8,
+       "price": 34,
+       "label": "$34",
+       "tone": "gold"
+      },
+      {
+       "i": 12,
+       "price": 30.5,
+       "label": "$30.50",
+       "tone": "up"
+      }
+     ],
+     "label": "Lows at $30 and $30.50 with a middle high at $34"
+    }
+   },
+   "options": [
+    {
+     "text": "At the second low, $30.50",
+     "feedback": "At the second low, nothing has been proven yet. The close above the $34 middle high confirms it."
+    },
+    {
+     "text": "On a close above $34",
+     "feedback": "The close above the $34 middle high shows sellers failed twice. Until then, it’s a range."
+    },
+    {
+     "text": "On a close below $30",
+     "feedback": "A close below $30 breaks both lows. That cancels the double bottom instead of confirming it."
+    },
+    {
+     "text": "At $32, halfway up",
+     "feedback": "Halfway up proves nothing. The pattern counts only on a close above the $34 middle high."
+    }
+   ],
+   "answer": 1
+  },
+  {
+   "type": "check",
+   "title": "A rough target",
+   "q": "A double top: peaks at $80, middle low at $72. Price closes below $72. Where is a rough first target?",
+   "options": [
+    {
+     "text": "$64",
+     "feedback": "The pattern is $8 tall. Take that from the $72 break: about $64. A guide, never a promise."
+    },
+    {
+     "text": "$72",
+     "feedback": "$72 is where the pattern triggers. The rough target takes the pattern’s height away from that break."
+    },
+    {
+     "text": "$80",
+     "feedback": "$80 is the peak sellers defended. After a break below $72, the rough target sits below the break, not above."
+    },
+    {
+     "text": "$88",
+     "feedback": "$88 adds the height on top of the peaks. A double top points down: take the height away from the $72 break."
+    }
+   ],
+   "answer": 0,
+   "idea": "pattern-height-target",
+   "work": "$80 − $72 = $8. $72 − $8 = $64."
+  },
+  {
+   "type": "keep",
+   "headline": "You can spot a failed attempt.",
+   "lines": [
+    "Double top: two failed tries at a high. Double bottom: at a low.",
+    "It’s confirmed only on a close through the middle point.",
+    "No break, no pattern."
+   ]
+  }
+ ]
+}

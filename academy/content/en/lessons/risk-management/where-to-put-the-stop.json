@@ -1,0 +1,435 @@
+{
+ "id": "where-to-put-the-stop",
+ "chapter": "risk-management",
+ "n": 4,
+ "title": "Where to put the stop",
+ "minutes": 5,
+ "desc": "Put the stop where the chart proves you wrong, then size to fit",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Board P1-Ch05-L4 card 1",
+   "pose": "detective",
+   "title": "Where’s the stop?",
+   "situation": "The stock pulled back to a low of $47.20, then turned up. You buy at $50. Where should your stop go?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "aside": "buy at $50",
+    "chart": {
+     "ohlc": [
+      [
+       46.04,
+       47.39,
+       45.65,
+       47.2
+      ],
+      [
+       47.2,
+       49.13,
+       47.01,
+       48.94
+      ],
+      [
+       48.94,
+       51.16,
+       48.75,
+       50.87
+      ],
+      [
+       50.87,
+       51.45,
+       49.33,
+       49.71
+      ],
+      [
+       49.71,
+       49.91,
+       47.97,
+       48.36
+      ],
+      [
+       48.36,
+       48.75,
+       47.2,
+       47.97
+      ],
+      [
+       47.98,
+       49.52,
+       47.78,
+       49.33
+      ],
+      [
+       49.32,
+       50.29,
+       49.04,
+       50.0
+      ]
+     ],
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "height": 120,
+     "label": "Rally, pullback to a low of $47.20, then a turn up to $50",
+     "hlines": [
+      {
+       "price": 47.2,
+       "tone": "gold",
+       "label": "low $47.20",
+       "style": "below"
+      }
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$49: you only want to lose $1",
+     "feedback": "$49 is about comfort, not the chart. A normal wobble can hit it while your idea is still fine."
+    },
+    {
+     "text": "About $47, just below the pullback low",
+     "feedback": "Below the low is where your idea is proven wrong. That’s where the stop belongs."
+    },
+    {
+     "text": "No stop: you’ll watch it closely",
+     "feedback": "Watching isn’t a plan. Without a stop, one bad day can turn a small loss into a big one."
+    }
+   ],
+   "answer": 1,
+   "idea": "stop-below-the-low",
+   "work": "Pullback low $47.20. Stop $47. If price breaks that low, the bounce has failed."
+  },
+  {
+   "type": "learn",
+   "title": "A stop marks where you’re wrong",
+   "text": "Put the stop where the chart says the idea **has failed**: below the pullback low, or below a support zone. Not at a loss you can stomach.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "ohlc": [
+      [
+       46.04,
+       47.39,
+       45.65,
+       47.2
+      ],
+      [
+       47.2,
+       49.13,
+       47.01,
+       48.94
+      ],
+      [
+       48.94,
+       51.16,
+       48.75,
+       50.87
+      ],
+      [
+       50.87,
+       51.45,
+       49.33,
+       49.71
+      ],
+      [
+       49.71,
+       49.91,
+       47.97,
+       48.36
+      ],
+      [
+       48.36,
+       48.75,
+       47.2,
+       47.97
+      ],
+      [
+       47.98,
+       49.52,
+       47.78,
+       49.33
+      ],
+      [
+       49.32,
+       50.29,
+       49.04,
+       50.0
+      ]
+     ],
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "height": 120,
+     "label": "Entry at $50, stop at $47 just below the $47.20 pullback low",
+     "hlines": [
+      {
+       "price": 50,
+       "tone": "blue"
+      },
+      {
+       "price": 47,
+       "tone": "down",
+       "label": "stop $47",
+       "style": "below"
+      }
+     ]
+    }
+   },
+   "blocks": [
+    {
+     "tip": "Find the stop first. Then size the trade so that stop costs only 1%."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "Too tight vs. just right",
+   "text": "Same trade, two stops. Price dips to $48.30, then rallies.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "candles",
+      "title": "Stop at $49.50 · inside the noise",
+      "chart": {
+       "ohlc": [
+        [
+         50.0,
+         50.4,
+         49.2,
+         49.41
+        ],
+        [
+         49.39,
+         49.59,
+         48.3,
+         48.6
+        ],
+        [
+         48.59,
+         49.79,
+         48.4,
+         49.59
+        ],
+        [
+         49.59,
+         51.19,
+         49.39,
+         50.99
+        ],
+        [
+         50.99,
+         52.6,
+         50.8,
+         52.4
+        ],
+        [
+         52.4,
+         53.6,
+         52.0,
+         53.4
+        ]
+       ],
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "height": 70,
+       "lo": 47,
+       "hi": 53.6,
+       "label": "A dip to $48.30 hits a stop at $49.50",
+       "hlines": [
+        {
+         "price": 49.5,
+         "tone": "down",
+         "label": "stopped out",
+         "style": "below"
+        }
+       ]
+      }
+     },
+     {
+      "kind": "candles",
+      "title": "Stop at $47 · below the low",
+      "chart": {
+       "ohlc": [
+        [
+         50.0,
+         50.4,
+         49.2,
+         49.41
+        ],
+        [
+         49.39,
+         49.59,
+         48.3,
+         48.6
+        ],
+        [
+         48.59,
+         49.79,
+         48.4,
+         49.59
+        ],
+        [
+         49.59,
+         51.19,
+         49.39,
+         50.99
+        ],
+        [
+         50.99,
+         52.6,
+         50.8,
+         52.4
+        ],
+        [
+         52.4,
+         53.6,
+         52.0,
+         53.4
+        ]
+       ],
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "height": 70,
+       "lo": 47,
+       "hi": 53.6,
+       "label": "The same dip stays above a stop at $47",
+       "hlines": [
+        {
+         "price": 47,
+         "tone": "up",
+         "label": "still in",
+         "style": "below"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "Too far is wrong too: a $20 stop means tiny size and a target that’s hard to reach.",
+     "tone": "gold"
+    }
+   ],
+   "foot": "The tight stop was hit by a normal dip. The wider one, sized smaller, survived.",
+   "footTone": "green"
+  },
+  {
+   "type": "trap",
+   "title": "Never move the stop further away",
+   "text": "When price nears your stop, it’s tempting to move it lower “to give it room”. That turns a planned small loss into a big one.",
+   "visual": {
+    "kind": "table",
+    "label": "Planned stop −$100, moved once −$250, moved twice −$400",
+    "cols": [
+     {
+      "label": "Stop"
+     },
+     {
+      "label": "Loss",
+      "align": "right"
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "Planned stop",
+       {
+        "text": "−$100",
+        "tone": "gold"
+       }
+      ]
+     },
+     {
+      "cells": [
+       "Moved once",
+       {
+        "text": "−$250",
+        "tone": "amber"
+       }
+      ]
+     },
+     {
+      "cells": [
+       "Moved twice",
+       {
+        "text": "−$400",
+        "tone": "down"
+       }
+      ]
+     }
+    ]
+   },
+   "rule": "the stop can move up to lock in gains. Never down.",
+   "note": "A stop isn’t a guarantee. If price gaps past it, you can lose more than planned."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Place the stop",
+   "q": "Support runs from $79.50 to $80.50. You buy at $82 after a bounce off it. Where should your stop go?",
+   "idea": "stop-below-the-zone",
+   "options": [
+    {
+     "text": "$81.50",
+     "feedback": "$81.50 sits above the zone. A normal dip into support would stop you out."
+    },
+    {
+     "text": "$79",
+     "feedback": "Just below the whole zone. If price breaks $79.50, support has failed."
+    },
+    {
+     "text": "$65",
+     "feedback": "That’s far below the zone. It risks $17 a share, so your size would be tiny and the target hard to reach."
+    },
+    {
+     "text": "No stop",
+     "feedback": "Without a stop, a break of support can run much further. Plan the exit before you enter."
+    }
+   ],
+   "answer": 1,
+   "work": "Zone bottom $79.50. Stop $79. Risk $82 − $79 = $3 a share."
+  },
+  {
+   "type": "check",
+   "title": "Too much risk?",
+   "q": "Your logical stop at $47 means $3 risk a share. That feels like a lot. What’s the right fix?",
+   "options": [
+    {
+     "text": "Move the stop up to $49",
+     "feedback": "Moving the stop to $49 puts it inside the noise. Keep the stop where the idea fails and shrink the size."
+    },
+    {
+     "text": "Keep the stop, buy fewer shares",
+     "feedback": "The stop stays where the idea fails. Fewer shares bring the dollar risk back to 1%."
+    },
+    {
+     "text": "Skip the stop",
+     "feedback": "No stop means no limit at all. Keep the stop and make the position smaller."
+    },
+    {
+     "text": "Buy more shares to make it worth it",
+     "feedback": "More shares means more dollars at risk, not less. Shrink the size instead."
+    }
+   ],
+   "answer": 1,
+   "idea": "fewer-shares-not-tighter-stop",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can place a stop that makes sense.",
+   "lines": [
+    "Stops go where the idea is proven wrong.",
+    "Below the pullback low or the support zone.",
+    "Too much risk? Fewer shares, not a tighter stop."
+   ]
+  }
+ ]
+}

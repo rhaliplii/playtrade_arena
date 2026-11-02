@@ -1,0 +1,312 @@
+{
+ "id": "confluence-over-clutter",
+ "chapter": "trends-patterns-indicators",
+ "n": 8,
+ "title": "Confluence over clutter",
+ "minutes": 5,
+ "desc": "Combine trend, level and volume instead of stacking indicators",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "detective",
+   "title": "Five out of five",
+   "situation": "You have RSI, Stochastic, CCI, Williams %R and Ultimate Oscillator on your chart. All five say “oversold”. How strong is that evidence?",
+   "visual": {
+    "kind": "stats",
+    "cols": 2,
+    "foot": "All built from recent prices",
+    "items": [
+     {
+      "text": "RSI · oversold"
+     },
+     {
+      "text": "Stochastic · oversold"
+     },
+     {
+      "text": "CCI · oversold"
+     },
+     {
+      "text": "Williams %R · oversold"
+     },
+     {
+      "text": "Ultimate Oscillator · oversold"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Very strong: five out of five agree",
+     "feedback": "All five are momentum gauges built from the same prices. Five copies of one opinion is still one opinion."
+    },
+    {
+     "text": "About one signal: they all measure the same thing",
+     "feedback": "They all ask the same question: did price fall fast? One yes, said five times."
+    },
+    {
+     "text": "None: indicators never work",
+     "feedback": "They’re not worthless: they agree that price fell fast. But they all read the same prices, so count it as about one signal."
+    }
+   ],
+   "answer": 1,
+   "idea": "same-input-indicators",
+   "work": "5 momentum gauges, 1 input: recent prices. 5 copies of 1 view."
+  },
+  {
+   "type": "learn",
+   "title": "Different questions, not more answers",
+   "text": "**[[confluence|Confluence]]** means several different kinds of evidence agree. Each one has to answer a different question.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "list",
+      "style": "cards",
+      "items": [
+       {
+        "title": "Trend",
+        "text": "Which way? Higher lows, price above a rising 50-day.",
+        "tone": "up"
+       },
+       {
+        "title": "Level",
+        "text": "Where? Support, resistance, a trendline.",
+        "tone": "gold"
+       },
+       {
+        "title": "Volume",
+        "text": "Who’s behind it? Above-normal volume on the move.",
+        "tone": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "tip": "When trend, level and volume all agree, that’s confluence."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap each check",
+   "title": "A setup with confluence",
+   "text": "An uptrend pulls back to $58. That’s old support, and the 50-day average sits there too.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "candles",
+      "title": "Daily",
+      "legend": [
+       {
+        "label": "50-day",
+        "tone": "gold"
+       },
+       {
+        "label": "support $58",
+        "tone": "up",
+        "dashed": true
+       }
+      ],
+      "chart": {
+       "path": [
+        [
+         0,
+         52
+        ],
+        [
+         8,
+         60
+        ],
+        [
+         12,
+         64
+        ],
+        [
+         18,
+         58.2
+        ],
+        [
+         22,
+         61.5
+        ]
+       ],
+       "seed": 51,
+       "height": 120,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "hlines": [
+        {
+         "price": 58,
+         "tone": "up"
+        }
+       ],
+       "overlays": [
+        {
+         "values": [
+          51.2,
+          51.58,
+          51.96,
+          52.34,
+          52.71,
+          53.08,
+          53.44,
+          53.8,
+          54.15,
+          54.5,
+          54.84,
+          55.18,
+          55.51,
+          55.84,
+          56.17,
+          56.49,
+          56.8,
+          57.11,
+          57.42,
+          57.72,
+          58.02,
+          58.31,
+          58.6
+         ],
+         "tone": "gold"
+        }
+       ],
+       "volume": [
+        3,
+        3,
+        4,
+        3,
+        3,
+        4,
+        3,
+        3,
+        4,
+        3,
+        3,
+        3,
+        2,
+        3,
+        2,
+        3,
+        3,
+        6,
+        6,
+        6,
+        5,
+        5,
+        4
+       ],
+       "volHeight": 30,
+       "label": "An uptrend pulls back to $58 support and the rising 50-day, with 2× volume on the bounce"
+      }
+     },
+     {
+      "kind": "checklist",
+      "items": [
+       {
+        "text": "Trend: price above a rising 50-day",
+        "state": "yes"
+       },
+       {
+        "text": "Level: bounce at $58 support",
+        "state": "yes"
+       },
+       {
+        "text": "Volume: 2× normal on the bounce",
+        "state": "yes"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "rico": true,
+   "pose": "point",
+   "title": "Clean chart, clear head",
+   "text": "One tool per question. If two tools always agree, **delete one**. And even with confluence, you still use a stop.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Trend",
+      "value": "50-day average or trendline"
+     },
+     {
+      "label": "Level",
+      "value": "Support and resistance"
+     },
+     {
+      "label": "Volume",
+      "value": "Volume bars"
+     },
+     {
+      "label": "Momentum (optional)",
+      "value": "RSI or MACD, just one"
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Pick the extra check",
+   "idea": "volume-adds-information",
+   "q": "Price bounces off support in an uptrend. You already have RSI. Which check adds new information?",
+   "options": [
+    {
+     "text": "Stochastic, to go with your RSI",
+     "feedback": "Stochastic and RSI both measure momentum from the same prices. Volume answers a new question: who’s behind the bounce."
+    },
+    {
+     "text": "Volume on the bounce",
+     "feedback": "Volume answers a question RSI can’t: who’s behind the bounce. That’s new information."
+    },
+    {
+     "text": "A second RSI with other settings",
+     "feedback": "A second RSI reads the same prices the same way. It repeats what you already know."
+    },
+    {
+     "text": "A third moving average",
+     "feedback": "Another average repeats the trend question you’ve already answered. Volume answers a new one: who’s behind the bounce."
+    }
+   ],
+   "answer": 1
+  },
+  {
+   "type": "check",
+   "title": "Real confluence",
+   "q": "Which of these setups has real confluence?",
+   "options": [
+    {
+     "text": "RSI, Stochastic and CCI all oversold",
+     "feedback": "Three momentum gauges repeat one view. Trend, level and volume answer three different questions."
+    },
+    {
+     "text": "Uptrend, bounce at support, high volume",
+     "feedback": "Trend, level and volume each answer a different question. When all three agree, that’s confluence."
+    },
+    {
+     "text": "Three moving averages all rising",
+     "feedback": "Three averages all answer the same question: which way? That’s one view repeated."
+    },
+    {
+     "text": "MACD and its bars both turning up",
+     "feedback": "The bars are built from the MACD line itself. They repeat one view, so that isn’t confluence."
+    }
+   ],
+   "answer": 1,
+   "idea": "real-confluence"
+  },
+  {
+   "type": "keep",
+   "headline": "You can build a clean chart.",
+   "lines": [
+    "Indicators built from the same prices repeat each other.",
+    "Combine trend, level and volume: three different questions.",
+    "Confluence raises the odds. It never replaces the stop."
+   ]
+  }
+ ]
+}

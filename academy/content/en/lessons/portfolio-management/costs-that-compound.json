@@ -1,0 +1,296 @@
+{
+ "id": "costs-that-compound",
+ "chapter": "portfolio-management",
+ "n": 5,
+ "title": "Costs that compound",
+ "minutes": 5,
+ "desc": "How small yearly fees grow into big gaps",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "A small fee?",
+   "situation": "Two funds hold the same stocks. Fund A charges 0.1% a year, Fund B 1%. You put $10,000 in for 20 years. Roughly how big is the gap at the end?",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Fund A · yearly fee",
+      "value": "0.1%",
+      "tone": "up",
+      "strong": true
+     },
+     {
+      "label": "Fund B · yearly fee",
+      "value": "1%",
+      "tone": "down",
+      "strong": true
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "About $1,800: 0.9% a year for 20 years",
+     "feedback": "The fee is taken from a growing pot, and the money it takes stops growing too. So the gap compounds."
+    },
+    {
+     "text": "About $6,000",
+     "feedback": "Fees compound like returns do, just in the wrong direction."
+    },
+    {
+     "text": "Almost nothing: 1% is tiny",
+     "feedback": "1% a year looks tiny, but it’s taken every year from a growing pot. Over 20 years that adds up to thousands."
+    }
+   ],
+   "answer": 1,
+   "idea": "fees-compound",
+   "work": "Say 7% a year before fees. 0.1% fee: about $38,000. 1% fee: about $32,000. Gap: about $6,000.",
+   "added": "Feedback for C written for the Academy"
+  },
+  {
+   "type": "learn",
+   "title": "Costs compound",
+   "text": "Every year a fee takes a slice. Next year, that slice isn’t there to grow. Over decades, **small fees grow into big gaps**.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "series",
+      "title": "$10,000 over 20 years",
+      "label": "$10,000 grows to about $38,000 with a 0.1% fee and about $32,000 with a 1% fee",
+      "x": {
+       "labels": [
+        "Year 0",
+        "10",
+        "20"
+       ]
+      },
+      "legend": [
+       {
+        "label": "0.1% fee",
+        "tone": "up",
+        "dot": true
+       },
+       {
+        "label": "1% fee",
+        "tone": "down",
+        "dot": true
+       }
+      ],
+      "series": [
+       {
+        "end": "$38k",
+        "tone": "up",
+        "values": [
+         10000,
+         10690,
+         11430,
+         12220,
+         13060,
+         13960,
+         14930,
+         15960,
+         17060,
+         18240,
+         19500,
+         20850,
+         22290,
+         23830,
+         25480,
+         27240,
+         29120,
+         31130,
+         33280,
+         35580,
+         38000
+        ]
+       },
+       {
+        "end": "$32k",
+        "tone": "down",
+        "values": [
+         10000,
+         10600,
+         11240,
+         11910,
+         12620,
+         13380,
+         14190,
+         15040,
+         15940,
+         16900,
+         17910,
+         18990,
+         20120,
+         21330,
+         22610,
+         23970,
+         25410,
+         26930,
+         28550,
+         30260,
+         32100
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "side": true,
+     "tip": "Round illustrative numbers, assuming 7% a year before fees. Real returns vary."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap a year",
+   "title": "The gap keeps growing",
+   "text": "Same $10,000, same 7% a year before fees. Only the fee is different.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "barchart",
+      "title": "Value after fees",
+      "aside": "0.1% vs 1%",
+      "label": "Value after fees: 5 years $14.0k vs $13.4k, 10 years $19.5k vs $17.9k, 20 years $38.0k vs $32.1k",
+      "series": [
+       {
+        "tone": "up"
+       },
+       {
+        "tone": "down"
+       }
+      ],
+      "groups": [
+       {
+        "label": "5 years",
+        "values": [
+         14.0,
+         13.4
+        ],
+        "displays": [
+         "$14.0k",
+         "$13.4k"
+        ],
+        "note": "Gap after 5 years: **about $600**"
+       },
+       {
+        "label": "10 years",
+        "values": [
+         19.5,
+         17.9
+        ],
+        "displays": [
+         "$19.5k",
+         "$17.9k"
+        ],
+        "note": "Gap after 10 years: **about $1,600**"
+       },
+       {
+        "label": "20 years",
+        "values": [
+         38.0,
+         32.1
+        ],
+        "displays": [
+         "$38.0k",
+         "$32.1k"
+        ],
+        "note": "Gap after 20 years: **about $6,000**"
+       }
+      ]
+     }
+    }
+   ],
+   "added": "The board’s gap rows are the tap-to-open notes on each year"
+  },
+  {
+   "type": "myth",
+   "title": "Too small to matter?",
+   "myth": "1% a year is too small to matter.",
+   "reality": "Over 20 years, a 1% fee can take about a sixth of the final amount. Trading costs and spreads add more on top.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Yearly fund fee",
+      "value": "every year",
+      "tone": "down"
+     },
+     {
+      "label": "Trading fees and spreads",
+      "value": "every trade",
+      "tone": "down"
+     }
+    ]
+   },
+   "rule": "check the yearly fee before you buy any fund.",
+   "added": "Board P1-Ch09-L5 card 4: the fee rows (yearly fund fee: every year · trading fees and spreads: every trade)"
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Price the fee",
+   "q": "You pay a 1% yearly fee on a $50,000 portfolio. How much is the fee this year?",
+   "idea": "yearly-fee-math",
+   "options": [
+    {
+     "text": "$50",
+     "feedback": "$50 would be a 0.1% fee. 1% is ten times more."
+    },
+    {
+     "text": "$500",
+     "feedback": "1% of $50,000 is $500, and the fee grows as the pot grows."
+    },
+    {
+     "text": "$5,000",
+     "feedback": "$5,000 would be a 10% fee. 1% is a tenth of that."
+    },
+    {
+     "text": "$1,000",
+     "feedback": "$1,000 would be a 2% fee. Take 1% of $50,000."
+    }
+   ],
+   "answer": 1,
+   "work": "$50,000 × 1% = $500 this year, and more as the pot grows.",
+   "added": "Feedback for the options the board doesn’t show written for the Academy"
+  },
+  {
+   "type": "check",
+   "title": "Same index, two funds",
+   "q": "Two funds track the same index. What should you compare first?",
+   "options": [
+    {
+     "text": "Last year’s return",
+     "feedback": "Funds that track the same index earn almost the same before fees. The fee is the main real difference."
+    },
+    {
+     "text": "The yearly fee",
+     "feedback": "Funds that track the same index earn almost the same before fees, so the fee is the main real difference."
+    },
+    {
+     "text": "How popular it is",
+     "feedback": "Popularity doesn’t change what the fund holds. The yearly fee is what changes your result."
+    },
+    {
+     "text": "The price of one share",
+     "feedback": "A share’s price says nothing about cost. Same index, so compare the yearly fee."
+    }
+   ],
+   "answer": 1,
+   "idea": "compare-fees-first",
+   "added": "Feedback for the options the board doesn’t show written for the Academy",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can see what costs really cost.",
+   "lines": [
+    "Fees compound, just like returns.",
+    "0.1% vs 1% on $10,000: about $6,000 over 20 years.",
+    "Check the yearly fee before you buy a fund."
+   ]
+  }
+ ]
+}

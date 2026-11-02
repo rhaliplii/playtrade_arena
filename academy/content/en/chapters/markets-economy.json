@@ -1,0 +1,307 @@
+{
+ "id": "markets-economy",
+ "path": "learn-to-trade",
+ "n": 8,
+ "title": "Markets & the Economy",
+ "short": "Economy",
+ "promise": "Interest rates, inflation, jobs and growth: the tide that lifts or sinks every boat.",
+ "minutes": 25,
+ "pages": "53–58",
+ "unlock": [
+  "See why interest rates move every market",
+  "Work out your real return after inflation",
+  "Spot the big release days on the economic calendar",
+  "Know which sectors tend to lead in each phase of the cycle",
+  "Tell news from noise, and spot what’s already priced in"
+ ],
+ "terms": [
+  "interest-rate",
+  "central-bank",
+  "inflation",
+  "cpi",
+  "real-return",
+  "economic-calendar",
+  "sector",
+  "economic-cycle",
+  "priced-in"
+ ],
+ "lessons": [
+  "interest-rates-move-everything",
+  "inflation-and-your-money",
+  "the-economic-calendar",
+  "sectors-and-the-cycle",
+  "news-vs-noise"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "Traders expected a rate cut of 0.25 points. The central bank cuts 0.50 points. How do stocks often react?",
+    "options": [
+     "Often up: money got cheaper than expected",
+     "Often down: lower rates make cash pay more",
+     "Little move: a cut was expected anyway"
+    ],
+    "answer": 0,
+    "why": "The surprise moves prices. A cut twice the size traders expected makes money cheaper than they priced in, so stocks often rise.",
+    "work": "Expected cut 0.25 points. Actual cut 0.50 points. A 0.25-point surprise.",
+    "idea": "rate-surprise-moves-stocks"
+   },
+   {
+    "lesson": 2,
+    "q": "Your savings pay 2% a year. Inflation is 6%. What is your real return?",
+    "visual": {
+     "kind": "hbars",
+     "title": "This year",
+     "aside": "per year",
+     "label": "Your savings earn 2%, inflation is 6%",
+     "rows": [
+      {
+       "label": "Your savings",
+       "value": 2,
+       "display": "2%",
+       "tone": "up"
+      },
+      {
+       "label": "Inflation",
+       "value": 6,
+       "display": "6%",
+       "tone": "down"
+      }
+     ]
+    },
+    "options": [
+     "+8%",
+     "+2%",
+     "−4%"
+    ],
+    "answer": 2,
+    "why": "Inflation is taken away, not added. You earn 2%, but prices rise 6%.",
+    "work": "2% − 6% ≈ −4%. $10,000 earns $200, but the same goods cost $600 more.",
+    "idea": "real-return-math"
+   },
+   {
+    "lesson": 3,
+    "q": "The jobs report lands at 8:30 tomorrow. You hold your normal size, with a stop very close to price. What could happen at 8:30?",
+    "visual": {
+     "kind": "candles",
+     "title": "1-min · the morning of the report",
+     "chart": {
+      "label": "One-minute candles creep up toward 8:30 with a stop just below price",
+      "path": [
+       [
+        0,
+        100
+       ],
+       [
+        8,
+        100.2
+       ],
+       [
+        14,
+        101.2
+       ]
+      ],
+      "seed": 71,
+      "future": 2,
+      "height": 120,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 100.9,
+        "tone": "down",
+        "label": "your stop",
+        "style": "below"
+       }
+      ],
+      "vlines": [
+       {
+        "i": 15,
+        "label": "8:30",
+        "tone": "gold",
+        "anchor": "end"
+       }
+      ]
+     }
+    },
+    "options": [
+     "Price may jump past your stop, so it fills at a worse price",
+     "Your stop always fills at its exact price",
+     "Nothing: trading is calm around big releases"
+    ],
+    "answer": 0,
+    "why": "At a big release price can jump in a second. A stop becomes a market order, so it fills at the next price available, which can be worse.",
+    "idea": "news-jumps-stops"
+   },
+   {
+    "lesson": 4,
+    "q": "The economy is past its low and starting to grow again. Which sector has often led in this phase?",
+    "options": [
+     "Utilities",
+     "Tech",
+     "Consumer staples"
+    ],
+    "answer": 1,
+    "why": "In an early recovery, banks, tech and shops have often led as demand comes back. Staples and utilities tend to shine in slowdowns.",
+    "idea": "cycle-sector-leaders"
+   },
+   {
+    "lesson": 5,
+    "q": "Headline: “Company profit up 30%.” Analysts had expected +30% for weeks. The stock barely moves. Why?",
+    "options": [
+     "Traders didn’t see the news",
+     "It was already priced in",
+     "The market fell that day"
+    ],
+    "answer": 1,
+    "why": "Everyone expected +30% for weeks, so the price had already moved. With no surprise, there was little left to move.",
+    "work": "Expected +30%. Actual +30%. Surprise: zero.",
+    "idea": "priced-in"
+   }
+  ],
+  "retry": [
+   {
+    "lesson": 1,
+    "q": "Traders expected a rate cut of 0.25 points. The central bank holds rates instead. How do stocks often react?",
+    "options": [
+     "Often down: money stayed costlier than hoped",
+     "Often up: no change is good news",
+     "Little move: nothing changed"
+    ],
+    "answer": 0,
+    "why": "The cut traders priced in didn’t come, so money stays costlier than expected. Stocks often fall on the day.",
+    "work": "Expected cut 0.25 points. Actual: no cut. A 0.25-point surprise.",
+    "idea": "rate-surprise-moves-stocks",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "A bond pays 5% a year. Inflation is 2%. What is your real return?",
+    "visual": {
+     "kind": "hbars",
+     "title": "This year",
+     "aside": "per year",
+     "label": "The bond pays 5%, inflation is 2%",
+     "rows": [
+      {
+       "label": "Bond",
+       "value": 5,
+       "display": "5%",
+       "tone": "up"
+      },
+      {
+       "label": "Inflation",
+       "value": 2,
+       "display": "2%",
+       "tone": "down"
+      }
+     ]
+    },
+    "options": [
+     "+7%",
+     "+3%",
+     "−3%"
+    ],
+    "answer": 1,
+    "why": "Take inflation away from what you earn. The bond beats inflation, so your buying power grows.",
+    "work": "5% − 2% = 3%.",
+    "idea": "real-return-math",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "You hold twice your normal size. CPI comes out Wednesday at 8:30 and the jobs report Friday at 8:30. What’s the sensible plan?",
+    "visual": {
+     "kind": "calendar",
+     "title": "This week",
+     "items": [
+      {
+       "day": "Mon",
+       "time": "10:00",
+       "title": "Factory orders",
+       "impact": "low"
+      },
+      {
+       "day": "Wed",
+       "time": "8:30",
+       "title": "CPI inflation",
+       "impact": "high"
+      },
+      {
+       "day": "Fri",
+       "time": "8:30",
+       "title": "Jobs report",
+       "impact": "high"
+      }
+     ]
+    },
+    "options": [
+     "Cut size before Wednesday and Friday",
+     "Add size before each release",
+     "Remove your stops for the week"
+    ],
+    "answer": 0,
+    "why": "High-impact releases can jump price either way. A smaller size keeps a bad jump to a loss you can live with.",
+    "idea": "news-jumps-stops",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "Growth is slowing toward a recession. Which pair of sectors has often held up best?",
+    "options": [
+     "Staples and utilities",
+     "Energy and banks",
+     "Luxury and travel"
+    ],
+    "answer": 0,
+    "why": "People keep buying basics and paying for power and water, so staples and utilities often hold up in a slowdown.",
+    "idea": "cycle-sector-leaders",
+    "added": "Retry question written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Analysts expected profit up 20%. The company reports +10%. The stock falls 7%. Why?",
+    "options": [
+     "Profit grew less than expected",
+     "Profit growth always sinks prices",
+     "Traders hadn’t seen the report"
+    ],
+    "answer": 0,
+    "why": "The price had been set for +20%. Growth still disappoints when it’s less good than hoped.",
+    "work": "Expected +20%. Actual +10%. A 10-point miss.",
+    "idea": "priced-in",
+    "added": "Retry question written for the Academy"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "rate-surprise-moves-stocks",
+   "title": "Lesson 1 · Interest rates move everything",
+   "text": "Markets price in the rate they expect. The surprise moves stocks: a bigger cut than expected often lifts them, a surprise hike or a missing cut often sinks them."
+  },
+  {
+   "idea": "real-return-math",
+   "title": "Lesson 2 · Inflation and your money",
+   "text": "Real return = return − inflation. Savings at 2% with 6% inflation means about −4%: your money buys less."
+  },
+  {
+   "idea": "news-jumps-stops",
+   "title": "Lesson 3 · The economic calendar",
+   "text": "Around big releases price can jump either way in seconds, and stops can fill at worse prices. Check the calendar and size down before high-impact days."
+  },
+  {
+   "idea": "cycle-sector-leaders",
+   "title": "Lesson 4 · Sectors and the cycle",
+   "text": "Early recovery: banks, tech and shops have often led. Late expansion: energy. Slowdown and recession: staples and utilities often hold up. Tendencies, not rules."
+  },
+  {
+   "idea": "priced-in",
+   "title": "Lesson 5 · News vs noise",
+   "text": "Prices move on the surprise, not the headline. If the news was expected, it’s already priced in."
+  }
+ ],
+ "next": "portfolio-management"
+}

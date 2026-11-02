@@ -1,0 +1,3718 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "academy/visual",
+  "title": "Card visual (data, rendered by static/js/visuals.js)",
+  "description": "Every chart and diagram is data. Prices are explicit numbers; nothing is drawn by hand. Tones: up, down, gold, sky, muted, white, primary, pro, coral, amber, blue.",
+  "type": "object",
+  "required": [
+    "kind"
+  ],
+  "discriminator": {
+    "propertyName": "kind",
+    "mapping": {
+      "candles": "#/$defs/candles",
+      "chart-pair": "#/$defs/chartPair",
+      "compare": "#/$defs/compare",
+      "book": "#/$defs/book",
+      "rows": "#/$defs/rows",
+      "columns": "#/$defs/columns",
+      "tiles": "#/$defs/tiles",
+      "flow": "#/$defs/flow",
+      "bars": "#/$defs/bars",
+      "slider": "#/$defs/slider",
+      "timeline": "#/$defs/timeline",
+      "equation": "#/$defs/equation",
+      "spread": "#/$defs/spread",
+      "counter": "#/$defs/counter",
+      "ad": "#/$defs/ad",
+      "quote": "#/$defs/quote",
+      "checks": "#/$defs/checks",
+      "fields": "#/$defs/fieldsV",
+      "stack": "#/$defs/stack",
+      "line": "#/$defs/line",
+      "lines": "#/$defs/lines",
+      "ticket": "#/$defs/ticket",
+      "position": "#/$defs/position",
+      "bullbear": "#/$defs/bullbear",
+      "ladder": "#/$defs/ladder",
+      "quotes": "#/$defs/quotes",
+      "handshake": "#/$defs/handshake",
+      "series": "#/$defs/series",
+      "trades": "#/$defs/trades",
+      "barchart": "#/$defs/barchart",
+      "hbars": "#/$defs/hbars",
+      "split": "#/$defs/split",
+      "donut": "#/$defs/donut",
+      "table": "#/$defs/table",
+      "gauge": "#/$defs/gauge",
+      "cycle": "#/$defs/cycle",
+      "units": "#/$defs/units",
+      "rr": "#/$defs/rr",
+      "calendar": "#/$defs/calendar",
+      "headline": "#/$defs/headline",
+      "list": "#/$defs/list",
+      "checklist": "#/$defs/checklist",
+      "planbar": "#/$defs/planbar",
+      "stats": "#/$defs/stats",
+      "formula": "#/$defs/formula",
+      "candle": "#/$defs/candle",
+      "shapes": "#/$defs/shapes",
+      "tabs": "#/$defs/tabs",
+      "drawline": "#/$defs/drawline"
+    }
+  },
+  "$defs": {
+    "tone": {
+      "type": "string",
+      "enum": [
+        "up",
+        "down",
+        "gold",
+        "sky",
+        "muted",
+        "white",
+        "primary",
+        "pro",
+        "coral",
+        "amber",
+        "blue"
+      ]
+    },
+    "ohlc": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {
+          "type": "number"
+        }
+      },
+      "description": "[open, high, low, close] per candle"
+    },
+    "chart": {
+      "type": "object",
+      "required": [],
+      "additionalProperties": false,
+      "properties": {
+        "ohlc": {
+          "$ref": "#/$defs/ohlc"
+        },
+        "height": {
+          "type": "number",
+          "description": "viewBox height at width 330"
+        },
+        "fmt": {
+          "type": "integer",
+          "description": "decimals on the price axis"
+        },
+        "ticks": {
+          "type": "integer"
+        },
+        "axis": {
+          "type": "boolean"
+        },
+        "lastTag": {
+          "type": "boolean"
+        },
+        "lo": {
+          "type": "number"
+        },
+        "hi": {
+          "type": "number"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "from",
+              "to",
+              "tone"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "from": {
+                "type": "integer"
+              },
+              "to": {
+                "type": "integer"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "label": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "i",
+              "price",
+              "tone"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "i": {
+                "type": "number"
+              },
+              "price": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "pos": {
+                "type": "string",
+                "enum": [
+                  "above",
+                  "below"
+                ],
+                "description": "label above or below the dot (default: above, unless too close to the top)"
+              }
+            }
+          }
+        },
+        "hlines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "price",
+              "tone"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "price": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "style": {
+                "type": "string",
+                "enum": [
+                  "text",
+                  "pill",
+                  "left",
+                  "below"
+                ]
+              }
+            }
+          }
+        },
+        "forecast": {
+          "type": "object",
+          "required": [
+            "dx",
+            "to",
+            "tone"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "dx": {
+              "type": "number"
+            },
+            "to": {
+              "type": "number"
+            },
+            "tone": {
+              "$ref": "#/$defs/tone"
+            }
+          }
+        },
+        "ghost": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number"
+            }
+          },
+          "description": "dashed alternative path [[i, price], ...]"
+        },
+        "label": {
+          "type": "string",
+          "description": "accessible description of the chart"
+        },
+        "path": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "description": "waypoints [[candle index, close], …]: closes pass exactly through them; candles between get a seeded wiggle"
+        },
+        "n": {
+          "type": "integer",
+          "description": "path: number of candles (default last waypoint + 1)"
+        },
+        "seed": {
+          "type": "integer",
+          "description": "path: change it to get a different (still deterministic) wiggle"
+        },
+        "noise": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3,
+          "description": "path: wiggle size (default 0.5; 0 = straight lines)"
+        },
+        "wick": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3,
+          "description": "path: wick length (default 0.5)"
+        },
+        "future": {
+          "type": "integer",
+          "description": "empty candle slots on the right (room for a trendline to extend)"
+        },
+        "axisRoom": {
+          "type": "boolean",
+          "description": "keep a 24px column on the right even without the price axis"
+        },
+        "priceLabel": {
+          "type": "string",
+          "description": "small label above the price area (\"Price\"), used with panels"
+        },
+        "volume": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "description": "volume per candle (right-aligned to the candles); draws a volume panel under the price"
+        },
+        "volAvg": {
+          "type": "number",
+          "description": "dashed average line in the volume panel"
+        },
+        "volAvgLabel": {
+          "type": "string"
+        },
+        "volLabel": {
+          "type": "string",
+          "description": "label of the volume panel (\"Volume\")"
+        },
+        "volHeight": {
+          "type": "number",
+          "description": "volume panel height at width 330 (default 34)"
+        },
+        "overlays": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [],
+            "additionalProperties": false,
+            "properties": {
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "period": {
+                "type": "integer"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "label": {
+                "type": "string"
+              },
+              "labelPos": {
+                "type": "string",
+                "enum": [
+                  "above",
+                  "below"
+                ]
+              },
+              "dashed": {
+                "type": "boolean"
+              }
+            }
+          },
+          "description": "lines on the price scale: a moving average (`period`, computed from the closes) or explicit `values` (right-aligned, null = gap)"
+        },
+        "trendlines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "from",
+              "to"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "from": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "to": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "dashed": {
+                "type": "boolean"
+              },
+              "extend": {
+                "type": "string",
+                "enum": [
+                  "right",
+                  "left",
+                  "both",
+                  "none"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "touches": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "description": "candle indexes where the line is touched: numbered rings 1, 2, 3"
+              }
+            }
+          },
+          "description": "straight lines [index, price] → [index, price]; extend right by default"
+        },
+        "swings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "i",
+              "price"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "i": {
+                "type": "number"
+              },
+              "price": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "pos": {
+                "type": "string",
+                "enum": [
+                  "above",
+                  "below"
+                ]
+              },
+              "chip": {
+                "type": "string",
+                "description": "extra text on the walk-through button"
+              }
+            }
+          },
+          "description": "swing points (HH, HL, $45 …): a dot and a small label. In a walk-through each is a tap."
+        },
+        "zigzag": {
+          "type": [
+            "boolean",
+            "string"
+          ],
+          "description": "true (or a tone name): join the swings with a line"
+        },
+        "vlines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "i"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "i": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "anchor": {
+                "type": "string",
+                "enum": [
+                  "start",
+                  "end"
+                ]
+              }
+            }
+          },
+          "description": "vertical dashed event lines (8:30 jobs report)"
+        },
+        "dim": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "candle indexes drawn faded"
+        },
+        "extra": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "price"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "price": {
+                "type": "number"
+              }
+            }
+          },
+          "description": "prices to keep inside the scale"
+        },
+        "explore": {
+          "type": "string",
+          "enum": [
+            "zones",
+            "swings",
+            "hlines",
+            "play",
+            "none"
+          ],
+          "description": "walk-through tap mode (default: zones, else swings, else 2+ hlines, else play)"
+        },
+        "panels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "rsi",
+                  "macd",
+                  "line"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "height": {
+                "type": "number"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "period": {
+                "type": "integer"
+              },
+              "levels": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "mid": {
+                "type": "boolean"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "macd": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "signal": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "hist": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "fast": {
+                "type": "integer"
+              },
+              "slow": {
+                "type": "integer"
+              },
+              "show": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "hist",
+                    "lines"
+                  ]
+                }
+              },
+              "signalTone": {
+                "$ref": "#/$defs/tone"
+              },
+              "lo": {
+                "type": "number"
+              },
+              "hi": {
+                "type": "number"
+              },
+              "marks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "i"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "i": {
+                      "type": "integer"
+                    },
+                    "value": {
+                      "type": "number"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "tone": {
+                      "$ref": "#/$defs/tone"
+                    },
+                    "pos": {
+                      "type": "string",
+                      "enum": [
+                        "above",
+                        "below"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Indicator panel under the price: rsi (0–100, 30/70 bands; values or computed from closes with period, default 14) · macd (macd/signal/hist arrays, or computed 12/26/9) · line (any oscillator: values, levels)"
+          },
+          "maxItems": 3
+        }
+      },
+      "description": "A candlestick price chart. Give `ohlc` (explicit candles) OR `path` (waypoints → generated candles). Everything else is optional."
+    },
+    "card": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sym": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "change": {
+          "type": "string"
+        },
+        "tone": {
+          "$ref": "#/$defs/tone"
+        },
+        "badge": {
+          "type": "string"
+        }
+      }
+    },
+    "candles": {
+      "type": "object",
+      "required": [
+        "kind",
+        "chart"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "candles"
+        },
+        "chart": {
+          "$ref": "#/$defs/chart"
+        },
+        "card": {
+          "$ref": "#/$defs/card"
+        },
+        "head": {
+          "type": "string"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        }
+      }
+    },
+    "chartPair": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "chart-pair"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "chart"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "chart": {
+                "$ref": "#/$defs/chart"
+              },
+              "aside": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "compare": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "Two side-by-side outcome tiles, each with a mini chart and a result line (e.g. market vs limit).",
+      "properties": {
+        "kind": {
+          "const": "compare"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "result"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "icon": {
+                "type": "string",
+                "enum": [
+                  "ok",
+                  "wait",
+                  "no"
+                ]
+              },
+              "chart": {
+                "$ref": "#/$defs/chart"
+              },
+              "result": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        }
+      }
+    },
+    "book": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "description": "Order book / price ladder. depth 0–1 draws the size bar.",
+      "properties": {
+        "kind": {
+          "const": "book"
+        },
+        "head": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tabs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tab": {
+          "type": "integer"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "side",
+              "price"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "side": {
+                "type": "string",
+                "enum": [
+                  "ask",
+                  "bid"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "price": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "depth": {
+                "type": "number"
+              },
+              "tag": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "foot": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "rows": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "description": "A receipt / working box: label–value rows.",
+      "properties": {
+        "kind": {
+          "const": "rows"
+        },
+        "title": {
+          "type": "string"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "strong": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "foot": {
+          "type": "string"
+        },
+        "tone": {
+          "$ref": "#/$defs/tone"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string",
+          "enum": [
+            "journal"
+          ]
+        },
+        "style": {
+          "type": "string",
+          "enum": [
+            "levels"
+          ],
+          "description": "levels: one toned pill per row (Target / Entry / Stop)"
+        }
+      }
+    },
+    "columns": {
+      "type": "object",
+      "required": [
+        "kind",
+        "cols"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "columns"
+        },
+        "cols": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "rows"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "rows": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "label",
+                    "value"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "tone": {
+                      "$ref": "#/$defs/tone"
+                    }
+                  }
+                }
+              },
+              "result": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tiles": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "Tap-to-open tiles. `open` = indexes open in the rendered (end) state of a walk-through.",
+      "properties": {
+        "kind": {
+          "const": "tiles"
+        },
+        "cols": {
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "title"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "more": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "icon": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "flow": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "Boxes in a row joined by arrows (a sequence of deals, a borrow-sell-buy cycle…).",
+      "properties": {
+        "kind": {
+          "const": "flow"
+        },
+        "rows": {
+          "type": "array"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "top": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "active": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "foot": {
+          "type": "string"
+        }
+      }
+    },
+    "bars": {
+      "type": "object",
+      "required": [
+        "kind",
+        "bars"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "bars"
+        },
+        "bars": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "display": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "dashed": {
+                "type": "boolean"
+              },
+              "sub": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "bands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "from",
+              "to",
+              "label",
+              "tone"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "from": {
+                "type": "integer"
+              },
+              "to": {
+                "type": "integer"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        },
+        "baseline": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "foot": {
+          "type": "string"
+        }
+      }
+    },
+    "slider": {
+      "type": "object",
+      "required": [
+        "kind",
+        "model"
+      ],
+      "additionalProperties": false,
+      "description": "Interactive slider. model selects the formula: tug (buyers vs sellers → price), longshort (price → long/short P&L), leverage (move % → P&L on margin), size (position size → loss on a gap).",
+      "properties": {
+        "kind": {
+          "const": "slider"
+        },
+        "model": {
+          "type": "string",
+          "enum": [
+            "tug",
+            "longshort",
+            "leverage",
+            "size"
+          ]
+        },
+        "params": {
+          "type": "object"
+        },
+        "value": {
+          "type": "number"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "required": [
+        "kind",
+        "points"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "timeline"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        },
+        "badge": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "tone": {
+              "$ref": "#/$defs/tone"
+            },
+            "from": {
+              "type": "integer"
+            },
+            "to": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "equation": {
+      "type": "object",
+      "required": [
+        "kind",
+        "terms"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "equation"
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "op": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "foot": {
+          "type": "string"
+        }
+      }
+    },
+    "spread": {
+      "type": "object",
+      "required": [
+        "kind",
+        "bid",
+        "ask"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "spread"
+        },
+        "bid": {
+          "type": "string"
+        },
+        "ask": {
+          "type": "string"
+        },
+        "spread": {
+          "type": "string"
+        },
+        "bidSub": {
+          "type": "string"
+        },
+        "askSub": {
+          "type": "string"
+        }
+      }
+    },
+    "counter": {
+      "type": "object",
+      "required": [
+        "kind",
+        "count",
+        "total"
+      ],
+      "additionalProperties": false,
+      "description": "A grid of dots that fills a jar (e.g. $1 a night × 90 nights).",
+      "properties": {
+        "kind": {
+          "const": "counter"
+        },
+        "count": {
+          "type": "integer",
+          "maximum": 120
+        },
+        "total": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "jar": {
+          "type": "string"
+        },
+        "tone": {
+          "$ref": "#/$defs/tone"
+        }
+      }
+    },
+    "ad": {
+      "type": "object",
+      "required": [
+        "kind",
+        "badge",
+        "title"
+      ],
+      "additionalProperties": false,
+      "description": "An app/ad mock: a phone card with a promo badge.",
+      "properties": {
+        "kind": {
+          "const": "ad"
+        },
+        "badge": {
+          "type": "string"
+        },
+        "badgeSub": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "sub": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        }
+      }
+    },
+    "quote": {
+      "type": "object",
+      "required": [
+        "kind",
+        "sell",
+        "buy"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "quote"
+        },
+        "sell": {
+          "type": "string"
+        },
+        "buy": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "checks": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "checks"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "title"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "ok": {
+                "type": "boolean"
+              },
+              "icon": {
+                "type": "string",
+                "enum": [
+                  "ok",
+                  "no",
+                  "warn"
+                ],
+                "description": "set on every item: toned cards with ✓ / ✕ / !"
+              }
+            }
+          }
+        }
+      }
+    },
+    "fieldsV": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "fields"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        }
+      }
+    },
+    "stack": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "Two or more visuals stacked (e.g. a chart and a receipt).",
+      "properties": {
+        "kind": {
+          "const": "stack"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#"
+          }
+        },
+        "layout": {
+          "type": "string",
+          "enum": [
+            "column",
+            "row"
+          ]
+        }
+      }
+    },
+    "line": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false,
+      "description": "One line chart in a card: title + change on top, start/end labels on the line, an optional tag row (e.g. a headline). Give `ohlc` to draw real candles with a price axis (preferred); `points` draws the old line.",
+      "properties": {
+        "kind": {
+          "const": "line"
+        },
+        "title": {
+          "type": "string"
+        },
+        "change": {
+          "type": "string"
+        },
+        "tone": {
+          "$ref": "#/$defs/tone"
+        },
+        "points": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 120,
+          "items": {
+            "type": "number"
+          },
+          "description": "values left to right"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "object",
+          "required": [
+            "label",
+            "text"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            }
+          }
+        },
+        "ohlc": {
+          "$ref": "#/$defs/ohlc"
+        },
+        "height": {
+          "type": "number",
+          "description": "candles: viewBox height at width 330"
+        },
+        "fmt": {
+          "type": "integer",
+          "description": "candles: decimals on the price axis"
+        },
+        "ticks": {
+          "type": "integer"
+        },
+        "lastTag": {
+          "type": "boolean"
+        }
+      }
+    },
+    "lines": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "Two small line charts: stacked with a big label (layout stack) or side by side (layout pair). Items with `ohlc` draw candles; `lo`/`hi` give them one shared scale.",
+      "properties": {
+        "kind": {
+          "const": "lines"
+        },
+        "layout": {
+          "type": "string",
+          "enum": [
+            "stack",
+            "pair"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "points": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 120,
+                "items": {
+                  "type": "number"
+                },
+                "description": "values left to right"
+              },
+              "ohlc": {
+                "$ref": "#/$defs/ohlc",
+                "description": "candles instead of a line (preferred)"
+              }
+            }
+          }
+        },
+        "lo": {
+          "type": "number"
+        },
+        "hi": {
+          "type": "number"
+        },
+        "mid": {
+          "type": "number",
+          "description": "dashed reference line"
+        }
+      }
+    },
+    "ticket": {
+      "type": "object",
+      "required": [
+        "kind",
+        "side",
+        "title"
+      ],
+      "additionalProperties": false,
+      "description": "An order ticket: BUY · 10 shares · $50.00 · Seller ?",
+      "properties": {
+        "kind": {
+          "const": "ticket"
+        },
+        "side": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "sub": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        }
+      }
+    },
+    "position": {
+      "type": "object",
+      "required": [
+        "kind",
+        "title",
+        "value"
+      ],
+      "additionalProperties": false,
+      "description": "A position line from a trading app: label, what you bought, value now and change.",
+      "properties": {
+        "kind": {
+          "const": "position"
+        },
+        "label": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "change": {
+          "type": "string"
+        },
+        "tone": {
+          "$ref": "#/$defs/tone"
+        }
+      }
+    },
+    "bullbear": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "The two camps: a card each (a mini candlestick chart via `chart`, or an image via `img`), name, tag and one line.",
+      "properties": {
+        "kind": {
+          "const": "bullbear"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "tag",
+              "tone",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "img": {
+                "type": "string",
+                "pattern": "^(rico|art)/[a-z0-9_-]+$",
+                "description": "static/img/<img>.webp"
+              },
+              "alt": {
+                "type": "string"
+              },
+              "badge": {
+                "type": "string"
+              },
+              "tag": {
+                "type": "string"
+              },
+              "tone": {
+                "type": "string",
+                "enum": [
+                  "up",
+                  "down"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "chart": {
+                "$ref": "#/$defs/chart"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ladder": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "description": "A low-to-high scale (gradient line) and one row per tier.",
+      "properties": {
+        "kind": {
+          "const": "ladder"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        }
+      }
+    },
+    "quotes": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "Bid · Spread · Ask boxes, with an optional head (title, toll badge, sub).",
+      "properties": {
+        "kind": {
+          "const": "quotes"
+        },
+        "head": {
+          "type": "object",
+          "required": [
+            "title"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "badge": {
+              "type": "string"
+            },
+            "tone": {
+              "$ref": "#/$defs/tone"
+            },
+            "sub": {
+              "type": "string"
+            }
+          }
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        }
+      }
+    },
+    "handshake": {
+      "type": "object",
+      "required": [
+        "kind",
+        "text"
+      ],
+      "additionalProperties": false,
+      "description": "B ——— Last trade $50.00 ——— S: the last deal between a buyer and a seller.",
+      "properties": {
+        "kind": {
+          "const": "handshake"
+        },
+        "left": {
+          "type": "string"
+        },
+        "right": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "legend": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "label"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "tone": {
+            "$ref": "#/$defs/tone"
+          },
+          "dashed": {
+            "type": "boolean"
+          },
+          "dot": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "series": {
+      "type": "object",
+      "required": [
+        "kind",
+        "series"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "series"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "height": {
+          "type": "number"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "values"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 2
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "dashed": {
+                "type": "boolean"
+              },
+              "area": {
+                "type": "boolean"
+              },
+              "dots": {
+                "type": "boolean"
+              },
+              "end": {
+                "type": [
+                  "string",
+                  "boolean"
+                ]
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 4
+        },
+        "x": {
+          "type": "object",
+          "required": [],
+          "additionalProperties": false,
+          "properties": {
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "object"
+                ]
+              }
+            }
+          }
+        },
+        "y": {
+          "type": "object",
+          "required": [],
+          "additionalProperties": false,
+          "properties": {
+            "axis": {
+              "type": "boolean"
+            },
+            "ticks": {
+              "type": "integer"
+            },
+            "unit": {
+              "type": "string"
+            },
+            "digits": {
+              "type": "integer"
+            },
+            "compact": {
+              "type": "boolean"
+            }
+          }
+        },
+        "lo": {
+          "type": "number"
+        },
+        "hi": {
+          "type": "number"
+        },
+        "ends": {
+          "type": "boolean"
+        },
+        "endWidth": {
+          "type": "number"
+        },
+        "grid": {
+          "type": "boolean"
+        },
+        "hlines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "pos": {
+                "type": "string",
+                "enum": [
+                  "right",
+                  "left"
+                ]
+              }
+            }
+          }
+        },
+        "vlines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "i"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "i": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "i"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "s": {
+                "type": "integer"
+              },
+              "i": {
+                "type": "integer"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "pos": {
+                "type": "string",
+                "enum": [
+                  "above",
+                  "below"
+                ]
+              },
+              "anchor": {
+                "type": "string",
+                "enum": [
+                  "start",
+                  "middle",
+                  "end"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "description": "Line chart of non-price values (an account, a portfolio, fees over 20 years, correlation). Prices are candles, never a series."
+    },
+    "trades": {
+      "type": "object",
+      "required": [
+        "kind",
+        "values"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "trades"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1
+        },
+        "displays": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "labels": {
+          "type": "boolean"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number"
+        }
+      },
+      "description": "One bar per trade around zero: wins up (green), losses down (red)."
+    },
+    "barchart": {
+      "type": "object",
+      "required": [
+        "kind",
+        "groups"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "barchart"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          },
+          "maxItems": 4
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "values"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "subTone": {
+                "$ref": "#/$defs/tone"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 4
+              },
+              "displays": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tones": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/tone"
+                }
+              },
+              "dim": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 6
+        },
+        "height": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "digits": {
+          "type": "integer"
+        }
+      },
+      "description": "Grouped columns (negatives hang below zero). A group with a `note` is tapped to show it."
+    },
+    "hbars": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "hbars"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "display": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "labelTone": {
+                "$ref": "#/$defs/tone"
+              },
+              "value2": {
+                "type": "number"
+              },
+              "display2": {
+                "type": "string"
+              },
+              "tone2": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "layout": {
+          "type": "string",
+          "enum": [
+            "inline",
+            "stacked"
+          ]
+        },
+        "heads": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 2
+        },
+        "max": {
+          "type": "number"
+        },
+        "max2": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        }
+      },
+      "description": "Horizontal bars. layout stacked: label + value above a full-width meter. value2 on any row: two bars per row (a fall | the gain to get back)."
+    },
+    "split": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "split"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "segments"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "aside": {
+                "type": "string"
+              },
+              "asideTone": {
+                "$ref": "#/$defs/tone"
+              },
+              "segments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "type": "number"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "tone": {
+                      "$ref": "#/$defs/tone"
+                    }
+                  }
+                },
+                "minItems": 1
+              },
+              "under": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 2
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "minLabel": {
+          "type": "number"
+        }
+      },
+      "description": "100% bars: one row per bar, segments sized by value (an allocation, a portfolio by stock, costs vs profit)."
+    },
+    "donut": {
+      "type": "object",
+      "required": [
+        "kind",
+        "segments"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "donut"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "value",
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 6
+        },
+        "center": {
+          "type": "string"
+        },
+        "centerSub": {
+          "type": "string"
+        }
+      },
+      "description": "An allocation ring with a legend."
+    },
+    "table": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "table"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "cols": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "align": {
+                "type": "string",
+                "enum": [
+                  "left",
+                  "right",
+                  "center"
+                ]
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "w": {
+                "type": "number"
+              }
+            }
+          },
+          "maxItems": 5
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "cells"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "cells": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "string",
+                    "number",
+                    "object"
+                  ],
+                  "properties": {
+                    "text": {
+                      "type": [
+                        "string",
+                        "number"
+                      ]
+                    },
+                    "tone": {
+                      "$ref": "#/$defs/tone"
+                    },
+                    "badge": {
+                      "type": "boolean"
+                    },
+                    "strong": {
+                      "type": "boolean"
+                    },
+                    "sub": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "minItems": 1,
+                "maxItems": 5
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "strong": {
+                "type": "boolean"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Rows of cells under an optional header. A cell: text, or {text, tone, badge, strong, sub}. A row with `note` is tapped to show it."
+    },
+    "gauge": {
+      "type": "object",
+      "required": [
+        "kind",
+        "bands"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "gauge"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "style": {
+          "type": "string",
+          "enum": [
+            "bar",
+            "arc"
+          ]
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "value": {
+          "type": "number"
+        },
+        "valueLabel": {
+          "type": "string"
+        },
+        "bands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "to"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "to": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "on": {
+                "type": "boolean"
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "ticks": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "object"
+            ]
+          }
+        }
+      },
+      "description": "A scale with bands: bar (RSI 0–30–70–100 with a marker) or arc (a dial with a needle: fear · calm · greed)."
+    },
+    "cycle": {
+      "type": "object",
+      "required": [
+        "kind",
+        "points"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "cycle"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "curve": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "description": "wave | sentiment | [y 0–1 …]"
+        },
+        "tone": {
+          "$ref": "#/$defs/tone"
+        },
+        "height": {
+          "type": "number"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "t"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "t": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "pos": {
+                "type": "string",
+                "enum": [
+                  "above",
+                  "below",
+                  "left",
+                  "right"
+                ]
+              },
+              "big": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "callouts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "t",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "t": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "text": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "from": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "description": "A smooth curve with labelled points (the emotion cycle, the economic cycle). t = 0–1 along the curve."
+    },
+    "units": {
+      "type": "object",
+      "required": [
+        "kind",
+        "total"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "units"
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 400
+        },
+        "on": {
+          "type": "integer"
+        },
+        "cols": {
+          "type": "integer"
+        },
+        "tone": {
+          "$ref": "#/$defs/tone"
+        },
+        "tones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tone"
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "sub": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "heading": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "layout": {
+          "type": "string",
+          "enum": [
+            "side",
+            "stack"
+          ]
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "description": "A grid of small squares (100 shares, 5 of them yours; 40 markets)."
+    },
+    "rr": {
+      "type": "object",
+      "required": [
+        "kind",
+        "entry",
+        "stop",
+        "target"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "rr"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "entry": {
+          "type": "number"
+        },
+        "stop": {
+          "type": "number"
+        },
+        "target": {
+          "type": "number"
+        },
+        "reward": {
+          "type": "string"
+        },
+        "risk": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "required": [],
+          "additionalProperties": false,
+          "properties": {
+            "entry": {
+              "type": "string"
+            },
+            "stop": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          }
+        },
+        "levels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "price"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "price": {
+                "type": "number"
+              },
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        },
+        "compact": {
+          "type": "boolean"
+        },
+        "height": {
+          "type": "number"
+        },
+        "fmt": {
+          "type": "integer"
+        },
+        "labelsWidth": {
+          "type": "number"
+        }
+      },
+      "description": "Trade plan: reward box (entry → target, green) over risk box (stop → entry, red), with +$ / −$ labels. compact for two tiles side by side."
+    },
+    "calendar": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "calendar"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "title"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "day": {
+                "type": "string"
+              },
+              "time": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "impact": {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              "badge": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "on": {
+                "type": "boolean"
+              }
+            }
+          },
+          "minItems": 1
+        }
+      },
+      "description": "An economic calendar: day · time · event · impact badge."
+    },
+    "headline": {
+      "type": "object",
+      "required": [
+        "kind",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "headline"
+        },
+        "text": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "string"
+        }
+      },
+      "description": "A news headline chip."
+    },
+    "list": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "list"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "style": {
+          "type": "string",
+          "enum": [
+            "numbers",
+            "cards",
+            "chain"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "title"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "value": {
+                "type": "string"
+              },
+              "n": {
+                "type": "string"
+              }
+            }
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Numbered rules or steps: numbers (one box), cards (a box each), chain (toned boxes joined by ↓)."
+    },
+    "checklist": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "checklist"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "yes",
+                  "no",
+                  "none"
+                ]
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 8
+        }
+      },
+      "description": "Yes/no checklist. In a walk-through each answered check is tapped to show ✓ / ✕."
+    },
+    "planbar": {
+      "type": "object",
+      "required": [
+        "kind",
+        "sections",
+        "current"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "planbar"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 6
+        },
+        "current": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "description": "My Trading Plan tracker: Section n of 5."
+    },
+    "stats": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "stats"
+        },
+        "cols": {
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "arrow": {
+          "type": "boolean"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "dot": {
+                "type": "boolean"
+              },
+              "tint": {
+                "type": "boolean"
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 6
+        }
+      },
+      "description": "Tiles: label, big value, sub line (or a dot title + text). arrow: two tiles joined by →."
+    },
+    "formula": {
+      "type": "object",
+      "required": [
+        "kind",
+        "terms"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "formula"
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [],
+            "additionalProperties": false,
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "op": {
+                "type": "string"
+              }
+            }
+          },
+          "minItems": 2
+        },
+        "foot": {
+          "type": "string"
+        }
+      },
+      "description": "Formula as toned chips joined by operators."
+    },
+    "candle": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "candle"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "screen-reader description of the picture"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "ohlc"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "ohlc": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "labels": {
+                "type": [
+                  "object",
+                  "boolean"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": [
+                      "string",
+                      "boolean"
+                    ]
+                  },
+                  "high": {
+                    "type": [
+                      "string",
+                      "boolean"
+                    ]
+                  },
+                  "low": {
+                    "type": [
+                      "string",
+                      "boolean"
+                    ]
+                  },
+                  "close": {
+                    "type": [
+                      "string",
+                      "boolean"
+                    ]
+                  }
+                }
+              },
+              "caption": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "label": {
+                "type": "string"
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "axis": {
+          "type": "boolean"
+        },
+        "shared": {
+          "type": "boolean"
+        },
+        "fmt": {
+          "type": "integer"
+        }
+      },
+      "description": "One to three big candles with Open/High/Low/Close callouts. labels: text per price, \"?\" (asked, gold) or false (hidden). axis: a price grid instead of callouts."
+    },
+    "shapes": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "shapes"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "candles"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "candles": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "minItems": 1,
+                "maxItems": 3
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 4
+        }
+      },
+      "description": "Candle patterns as small glyph tiles (hammer · doji · engulfing)."
+    },
+    "tabs": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "tabs"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 6
+        },
+        "on": {
+          "type": "integer"
+        }
+      },
+      "description": "A static timeframe switcher (1m · 1H · 1D · 1W) with one tab on."
+    },
+    "drawline": {
+      "type": "object",
+      "required": [
+        "kind",
+        "chart",
+        "start",
+        "target"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "drawline"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "asideTone": {
+          "$ref": "#/$defs/tone"
+        },
+        "legend": {
+          "$ref": "#/$defs/legend"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "chart": {
+          "$ref": "#/$defs/chart"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "trend",
+            "level"
+          ]
+        },
+        "start": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "from": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "to": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "price": {
+              "type": "number"
+            },
+            "min": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            }
+          }
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "from": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "to": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "price": {
+              "type": "number"
+            },
+            "min": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            }
+          }
+        },
+        "tolerance": {
+          "type": "number"
+        },
+        "step": {
+          "type": "number"
+        },
+        "tone": {
+          "$ref": "#/$defs/tone"
+        },
+        "hint": {
+          "type": "string"
+        },
+        "done": {
+          "type": "string"
+        },
+        "handleLabel": {
+          "type": "string"
+        }
+      },
+      "description": "Candles with a line the learner drags into place. trend: handles at start.from / start.to candles, fitted when both are within tolerance of the target line. level: one horizontal line, fitted at target.price ± tolerance or inside target.min–max."
+    }
+  }
+}

@@ -1,0 +1,420 @@
+{
+ "id": "reading-an-earnings-report-in-5-minutes",
+ "chapter": "company-fundamentals",
+ "n": 5,
+ "title": "Reading an earnings report in 5 minutes",
+ "minutes": 5,
+ "desc": "Revenue, EPS and guidance against what was expected, and the earnings-day gap",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Record profit, price falls",
+   "situation": "Acme reports record sales and record profit. The share price falls 8% the next morning. Why?",
+   "visual": {
+    "kind": "table",
+    "title": "Acme · Q3",
+    "label": "Acme Q3: revenue $500M vs $520M expected, EPS $1.10 vs $1.20, both misses",
+    "cols": [
+     {
+      "label": "Line"
+     },
+     {
+      "label": "Reported"
+     },
+     {
+      "label": "Expected"
+     },
+     {
+      "label": "",
+      "w": 0.8
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "Revenue",
+       {
+        "text": "$500M",
+        "strong": true
+       },
+       {
+        "text": "$520M",
+        "tone": "muted"
+       },
+       {
+        "text": "Miss",
+        "badge": true,
+        "tone": "down"
+       }
+      ]
+     },
+     {
+      "cells": [
+       "EPS",
+       {
+        "text": "$1.10",
+        "strong": true
+       },
+       {
+        "text": "$1.20",
+        "tone": "muted"
+       },
+       {
+        "text": "Miss",
+        "badge": true,
+        "tone": "down"
+       }
+      ]
+     }
+    ],
+    "aside": "−8%",
+    "asideTone": "down"
+   },
+   "options": [
+    {
+     "text": "The market made a mistake",
+     "feedback": "The price already counted on a great quarter. It fell because the results came in below what was expected."
+    },
+    {
+     "text": "Investors expected even more",
+     "feedback": "Price reacts to surprises, not results. A record that’s below hopes is a disappointment."
+    },
+    {
+     "text": "Record profits are bad news",
+     "feedback": "Record profits are good news. The price fell because they came in below what investors expected."
+    }
+   ],
+   "answer": 1,
+   "idea": "beat-or-miss",
+   "work": "Expected EPS $1.20, reported $1.10. A record, but $0.10 short."
+  },
+  {
+   "type": "learn",
+   "title": "Three lines, in this order",
+   "text": "Every quarter, companies report results. Analysts publish forecasts first, the **[[earnings-estimate|expected]]** numbers. Check revenue and EPS against them, then the **[[guidance|guidance]]**: what the company expects next.",
+   "visual": {
+    "kind": "list",
+    "items": [
+     {
+      "title": "Revenue",
+      "value": "vs expected",
+      "tone": "blue"
+     },
+     {
+      "title": "EPS",
+      "value": "vs expected",
+      "tone": "blue"
+     },
+     {
+      "title": "Guidance",
+      "value": "what’s next",
+      "tone": "gold"
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "A beat is above expected. A miss is below. The price moves on the gap."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "added": "Tap notes written for the Academy",
+   "tag": "tap a line",
+   "title": "Read it in 5 minutes",
+   "text": "Northwind beat on revenue and on EPS. Then it lowered its sales forecast for next year.",
+   "visual": {
+    "kind": "table",
+    "title": "Northwind · Q2",
+    "label": "Northwind Q2: revenue and EPS beat, guidance $800M vs $880M expected",
+    "cols": [
+     {
+      "label": "Line"
+     },
+     {
+      "label": "Reported"
+     },
+     {
+      "label": "Expected"
+     },
+     {
+      "label": "",
+      "w": 0.8
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "Revenue",
+       {
+        "text": "$210M",
+        "strong": true
+       },
+       {
+        "text": "$200M",
+        "tone": "muted"
+       },
+       {
+        "text": "Beat",
+        "badge": true,
+        "tone": "up"
+       }
+      ],
+      "note": "Above the forecast."
+     },
+     {
+      "cells": [
+       "EPS",
+       {
+        "text": "$0.95",
+        "strong": true
+       },
+       {
+        "text": "$0.90",
+        "tone": "muted"
+       },
+       {
+        "text": "Beat",
+        "badge": true,
+        "tone": "up"
+       }
+      ],
+      "note": "Above the forecast too."
+     },
+     {
+      "cells": [
+       "Guidance",
+       {
+        "text": "$800M",
+        "strong": true
+       },
+       {
+        "text": "$880M",
+        "tone": "muted"
+       },
+       {
+        "text": "Below",
+        "badge": true,
+        "tone": "down"
+       }
+      ],
+      "note": "Next year looks weaker: that moved the price."
+     }
+    ],
+    "aside": "−6%",
+    "asideTone": "down"
+   },
+   "foot": "Two beats, one cut, price down 6%. The market cares most about the future.",
+   "footTone": "gold"
+  },
+  {
+   "type": "trap",
+   "added": "Candle shapes drawn for the Academy around the board’s $50 close, $45 open and $48 stop",
+   "title": "Earnings day can jump the gap",
+   "text": "Results often come out when the market is closed. It closed at $50, then opened near $45, down 10%. A stop-loss at $48 fills at the first price, about $45.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "aside": "−10% gap",
+    "asideTone": "down",
+    "chart": {
+     "ohlc": [
+      [
+       47.2,
+       50.9,
+       46.8,
+       50.4
+      ],
+      [
+       50.5,
+       51.2,
+       50.1,
+       50.8
+      ],
+      [
+       50.9,
+       51.3,
+       49.8,
+       50.0
+      ],
+      [
+       45.0,
+       45.4,
+       43.9,
+       44.3
+      ],
+      [
+       44.4,
+       45.6,
+       44.2,
+       45.3
+      ]
+     ],
+     "height": 110,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 48,
+       "tone": "down",
+       "label": "stop $48",
+       "style": "text"
+      }
+     ],
+     "vlines": [
+      {
+       "i": 3,
+       "label": "results",
+       "tone": "gold"
+      }
+     ],
+     "label": "Closed at $50, results overnight, opened near $45 below the $48 stop"
+    }
+   },
+   "rule": "know the earnings date. Keep the position small or wait."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Find the surprise",
+   "q": "Acme’s shares fell 12% after this report. Which line most likely caused it?",
+   "idea": "guidance-matters",
+   "visual": {
+    "kind": "table",
+    "title": "Acme · Q4",
+    "label": "Acme Q4: revenue beat, EPS in line, guidance $1.1B vs $1.3B expected",
+    "cols": [
+     {
+      "label": "Line"
+     },
+     {
+      "label": "Reported"
+     },
+     {
+      "label": "Expected"
+     },
+     {
+      "label": "",
+      "w": 0.8
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "Revenue",
+       {
+        "text": "$300M",
+        "strong": true
+       },
+       {
+        "text": "$290M",
+        "tone": "muted"
+       },
+       {
+        "text": "Beat",
+        "badge": true,
+        "tone": "up"
+       }
+      ]
+     },
+     {
+      "cells": [
+       "EPS",
+       {
+        "text": "$1.50",
+        "strong": true
+       },
+       {
+        "text": "$1.50",
+        "tone": "muted"
+       },
+       {
+        "text": "In line",
+        "badge": true,
+        "tone": "muted"
+       }
+      ]
+     },
+     {
+      "cells": [
+       "Guidance",
+       {
+        "text": "$1.1B",
+        "strong": true
+       },
+       {
+        "text": "$1.3B",
+        "tone": "muted"
+       },
+       {
+        "text": "Below",
+        "badge": true,
+        "tone": "down"
+       }
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Revenue",
+     "feedback": "Revenue beat the forecast, $300M vs $290M. A beat doesn’t usually sink a stock."
+    },
+    {
+     "text": "EPS",
+     "feedback": "EPS matched what was expected, so it was no surprise. Guidance was the shock."
+    },
+    {
+     "text": "Guidance",
+     "feedback": "The outlook for next year came in well below what was expected. That was the shock."
+    },
+    {
+     "text": "None: it’s random",
+     "feedback": "A 12% move on results day has a reason. Look for the line that missed what was expected."
+    }
+   ],
+   "answer": 2,
+   "work": "Guidance $1.1B vs $1.3B expected = $200M short."
+  },
+  {
+   "type": "check",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Record, but…",
+   "q": "Analysts expected EPS of $2.00. Acme reports $1.90, its best ever. How will the market see it?",
+   "options": [
+    {
+     "text": "A beat: it’s a record",
+     "feedback": "A record alone doesn’t move the price. Expectations do, and $1.90 is below $2.00."
+    },
+    {
+     "text": "A miss: $0.10 below expected",
+     "feedback": "Expectations set the bar. $1.90 is $0.10 short of the $2.00 expected, record or not."
+    },
+    {
+     "text": "No surprise: profit grew",
+     "feedback": "Growth isn’t the test. The market compares with what was expected, and $1.90 is below $2.00."
+    },
+    {
+     "text": "A beat: EPS is positive",
+     "feedback": "Positive isn’t the bar. A beat means above what was expected, and $1.90 is below $2.00."
+    }
+   ],
+   "answer": 1,
+   "idea": "beat-or-miss",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can read an earnings report fast.",
+   "lines": [
+    "Revenue and EPS: compare with what was expected.",
+    "Guidance about the future often matters most.",
+    "Price reacts to surprises, not results."
+   ]
+  }
+ ]
+}

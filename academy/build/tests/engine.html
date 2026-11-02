@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en-US" data-root="../../../" data-academy="../../">
+<head><meta charset="utf-8"><title>engine tests</title></head>
+<body>
+<script type="application/json" id="ac-i18n">{}</script>
+<script>try { localStorage.clear(); sessionStorage.clear(); } catch (e) {}</script>
+<script src="../../static/js/core.js"></script>
+<script src="../../static/js/store.js"></script>
+<script src="../../static/js/services.js"></script>
+<script src="../../static/js/certs.js"></script>
+<script src="../../static/js/engine.js"></script>
+<pre id="out"></pre>
+<script>
+(function () {
+  var P = AC.progress, results = [], now = new Date("2026-10-26T10:00:00"); // a Monday
+  P.clock.now = function () { return new Date(now); };
+  function next(days) { now.setDate(now.getDate() + days); }
+  // a small path index (shell.js provides AC.index on real pages)
+  var INDEX = { chapters: [
+    { id: "c1", n: 1, available: true, lessons: [{ id: "a1" }, { id: "a2" }, { id: "a3" }] },
+    { id: "c2", n: 2, available: true, lessons: [{ id: "b1" }, { id: "b2" }] },
+    { id: "c3", n: 3, available: false, lessons: [] }] };
+  AC.index = function () { return INDEX; };
+  function eq(name, got, want) { results.push((JSON.stringify(got) === JSON.stringify(want) ? "PASS " : "FAIL ") + name + "  got=" + JSON.stringify(got) + " want=" + JSON.stringify(want)); }
+
+  // defaults: privacy and the guest goal
+  eq("guest starts on the 1-lesson goal", [P.summary().goal.target, P.settings().goal], [1, "casual"]);
+  eq("privacy defaults: Top Learners on, public profile off", [P.settings().leaderboard, P.settings().publicProfile], [true, false]);
+  eq("guest: only the path's first lesson", [P.canPlay("c1", "a1"), P.lockReason("c1", "a2").reason, P.canPlay("c1", "challenge")], [true, "guest", false]);
+  eq("XP constants exposed (no chapter Bonus)", [P.XP.finish, P.XP.firstTry, P.XP.challengeQ, P.XP.challengePerfect, "levelUp" in P.XP, typeof P.completeLevelUp, typeof P.openLevelUp], [60, 10, 30, 50, false, "undefined", "undefined"]);
+
+  // levels
+  eq("level 1 at 0", P.levelOf(0).level, 1);
+  eq("level 2 at 200", P.levelOf(200).level, 2);
+  eq("Analyst at 1,000", [P.levelOf(1000).rank, P.levelOf(1000).level], ["analyst", 6]);
+  eq("level 7 at 1,730", P.levelStart(7), 1730);
+  eq("level 14 at 6,870", P.levelStart(14), 6870);
+  eq("Strategist at 12,000", [P.levelOf(12000).rank, P.levelOf(12000).level], ["strategist", 21]);
+  eq("Trader at 24,000", P.levelOf(24000).rank, "trader");
+  eq("Legend 37 at 40,000 / 38 at 45,000", [P.levelOf(40000).level, P.levelOf(45000).level], [37, 38]);
+
+  // lesson: 60 + 10 per first-try right, max 90; wrong first try → gym, no XP even if right later
+  P.settings({ goal: "casual" });
+  P.startLesson("l1", { chapter: "c1" });
+  eq("call right first try +10", P.answer("l1", "call", true, "idea-a").xp, 10);
+  eq("exercise wrong first try", P.answer("l1", "exercise", false, "idea-b").xp, 0);
+  eq("exercise right on retry earns nothing", P.answer("l1", "exercise", true, "idea-b").xp, 0);
+  P.answer("l1", "check", true, "idea-c");
+  var done = P.completeLesson("l1", { chapter: "c1", keep: ["a", "b", "c"] });
+  eq("lesson XP = 60 + 2×10", done.xp, 80);
+  eq("goal met with 1 lesson (casual)", [done.goalMet, done.streak], [true, 1]);
+  eq("notes saved", P.state().notes.length, 3);
+  eq("missed idea in gym, due tomorrow", [Object.keys(P.state().gym), P.gymQueue().length], [["idea-b"], 0]);
+
+  // replay: XP is paid once
+  var l1 = P.startLesson("l1");
+  eq("replay: first-try answers pay nothing", [l1.replay, P.answer("l1", "call", true, "idea-a").xp], [true, 0]);
+  var r = P.completeLesson("l1"); eq("replay earns no XP", r.xp, 0);
+  eq("replay keeps the first play's best", P.lesson("l1").best, 80);
+
+  // gym next day: due; leaves after 2 right answers on 2 different days
+  next(1);
+  eq("gym due next day", P.gymQueue().map(function (g) { return g.idea; }), ["idea-b"]);
+  P.gymAnswer("idea-b", true); var g = P.completeGym(1);
+  eq("gym +30 and counts toward goal", [g.xp, g.goalMet, g.streak], [30, true, 2]);
+  eq("idea stays after 1 right day", Object.keys(P.state().gym), ["idea-b"]);
+  P.gymAnswer("idea-b", true);
+  eq("same day twice doesn't count", Object.keys(P.state().gym), ["idea-b"]);
+  next(1); P.gymAnswer("idea-b", true);
+  eq("leaves after 2 different days, counted as mastered", [Object.keys(P.state().gym), P.state().mastered], [[], 1]);
+
+  // streak: freeze earned at 7, used on a missed weekday; then a second miss without freeze resets
+  P.reset(); P.settings({ goal: "casual" }); now = new Date("2026-11-02T10:00:00"); // Monday
+  for (var i = 0; i < 7; i++) { P.startLesson("s" + i); P.completeLesson("s" + i); next(1); }
+  eq("7-day streak, 1 freeze, +100 milestone", [P.summary().streak, P.summary().freezes, P.state().history.filter(function (h) { return h.src === "streak"; })[0].xp], [7, 1, 100]);
+  next(1); // missed one day
+  eq("freeze covers a missed day", [P.summary().streak, P.summary().freezes], [7, 0]);
+  next(1); // missed another
+  eq("streak lost without freeze", [P.summary().streak, P.summary().streakLost], [0, 7]);
+
+  // weekend mode: Sat/Sun never break the streak
+  P.reset(); P.settings({ goal: "casual", weekendMode: true }); now = new Date("2026-11-13T10:00:00"); // Friday
+  P.startLesson("w1"); P.completeLesson("w1");
+  next(3); // Monday
+  eq("weekend mode keeps the streak over Sat/Sun", P.summary().streak, 1);
+
+  // challenge: pass = miss ≤ 1; XP on pass only; full first pass, half after a fail; +50 if all right
+  P.reset();
+  var f = P.submitChallenge("c1", [{ correct: false, idea: "x" }, { correct: false, idea: "y" }, { correct: true }, { correct: true }, { correct: true }]);
+  eq("fail with 2 misses, no XP", [f.passed, f.xp], [false, 0]);
+  var p = P.submitChallenge("c1", [{ correct: true }, { correct: true }, { correct: true }, { correct: true }, { correct: false, idea: "z" }]);
+  eq("later pass earns half of 4×30", [p.passed, p.xp], [true, 60]);
+  var again = P.submitChallenge("c1", [{ correct: true }, { correct: true }, { correct: true }, { correct: true }, { correct: true }]);
+  eq("no XP once passed", again.xp, 0);
+  eq("challenge XP awarded is recorded across attempts", P.chapter("c1").challenge.xp, 60);
+  P.reset();
+  eq("perfect first pass 5×30+50", P.submitChallenge("c2", [{ correct: true }, { correct: true }, { correct: true }, { correct: true }, { correct: true }]).xp, 200);
+
+  // path finish needs every challenge passed
+  eq("path not finished while a chapter is open", P.finishPath("ltt", ["c2", "c3"]).ok, false);
+  P.submitChallenge("c3", [{ correct: true }, { correct: true }, { correct: true }, { correct: true }]);
+  eq("path not finished without the trading plan", P.finishPath("ltt", ["c2", "c3"]).ok, false);
+  ["style", "entry", "risk", "checklist", "review"].forEach(function (k) { P.setPlan(k, "x"); });
+  var fin = P.finishPath("ltt", ["c2", "c3"]);
+  eq("path finish +500 XP, +500 coins (on top of 2 × 50 for the Challenges), certificate", [fin.xp, fin.coins, P.state().coins, P.state().certificates.length], [500, 500, 600, 1]);
+
+  // chapterXp: what was actually paid (lessons' best + challenge.xp)
+  P.reset(); P.settings({ goal: "casual" });
+  ["a1", "a2", "a3"].forEach(function (id, i) { P.startLesson(id, { chapter: "c1" }); if (i) P.answer(id, "call", true); P.completeLesson(id, { chapter: "c1" }); });
+  P.submitChallenge("c1", [{ correct: false, idea: "q" }, { correct: false, idea: "w" }, { correct: true }]);
+  P.submitChallenge("c1", [{ correct: true }, { correct: true }, { correct: true }]);
+  eq("chapterXp = lessons + challenge (half after a fail)", P.chapterXp("c1"), { lessons: 200, challenge: 70, total: 270 });
+  eq("chapterXp total matches the XP earned", P.chapterXp("c1").total, P.summary().xp);
+  P.testOut("c2");
+  eq("tested-out chapter: lessons done at 0 XP, Challenge counts as passed with 0 XP", [P.lesson("b1").done, P.chapterXp("c2").total, P.chapter("c2").challenge.passed], [true, 0, true]);
+  P.startLesson("b1", { chapter: "c2" }); P.answer("b1", "call", true);
+  eq("playing a tested-out lesson later pays 0", P.completeLesson("b1", { chapter: "c2" }).xp, 0);
+
+  // daily goal: changing the goal re-checks today (never "0 more lessons")
+  P.reset(); P.settings({ goal: "serious" });
+  P.startLesson("a1"); var gd = P.completeLesson("a1");
+  eq("1 of 4 lessons: goal not met", [gd.goalMet, P.summary().goal.met], [undefined, false]);
+  P.settings({ goal: "casual" });
+  eq("goal lowered to 1: today is met and the streak starts", [P.summary().goal.met, P.summary().streak], [true, 1]);
+  P.setOnboarded("regular");
+  eq("goal raised later: the streak day stays earned, the ring shows the new target", [P.summary().goal.streakDay, P.summary().goal.met, P.summary().streak], [true, false, 1]);
+
+  // reset: progress wiped, settings kept
+  P.settings({ weekendMode: true }); P.reset();
+  eq("reset wipes progress and keeps settings", [P.summary().xp, Object.keys(P.state().lessons).length, P.settings().goal, P.settings().weekendMode], [0, 0, "regular", true]);
+  P.settings({ weekendMode: false });
+
+  // guest → member merge
+  P.reset(); P.startLesson("g1"); P.completeLesson("g1");
+  var user = AC.auth.signUp("Test");
+  eq("guest progress merged into the new account", [AC.auth.account() === user.id, P.state().lessons.g1 && P.state().lessons.g1.done], [true, true]);
+
+  // gating (members): lessons in order, chapter after the previous Challenge, Challenge after the lessons
+  P.reset();
+  eq("guest-free member: lesson 1 open, lesson 2 locked", [P.canPlay("c1", "a1"), P.canPlay("c1", "a2"), P.lockReason("c1", "a2")], [true, false, { reason: "lesson", chapter: "c1", lesson: "a1" }]);
+  eq("Challenge locked until every lesson is done", P.lockReason("c1", "challenge"), { reason: "lesson", chapter: "c1", lesson: "a1" });
+  eq("next chapter locked until the Challenge", P.lockReason("c2", "b1"), { reason: "chapter", chapter: "c1", lesson: "a1" });
+  ["a1", "a2", "a3"].forEach(function (id) { P.startLesson(id); P.completeLesson(id); });
+  eq("all lessons done: Challenge open", P.canPlay("c1", "challenge"), true);
+  eq("Chapter 2 still waits for the Challenge", P.lockReason("c2", "b1"), { reason: "chapter", chapter: "c1", lesson: null });
+  P.submitChallenge("c1", [{ correct: true }, { correct: true }, { correct: true }]);
+  eq("after the pass: Chapter 2 opens", [P.canPlay("c2", "b1"), P.canPlay("c2", "b2")], [true, false]);
+  eq("a chapter that isn't out yet", P.lockReason("c3", "challenge"), { reason: "soon", chapter: "c3" });
+  eq("finished lessons can always be replayed", P.canPlay("c1", "a2"), true);
+
+  // ================================================================ Chapters 3–10: the full path (a synthetic 10-chapter index, any lesson count)
+  var COUNTS = [4, 5, 5, 8, 6, 5, 5, 5, 7, 5];
+  var INDEX10 = { chapters: COUNTS.map(function (k, i) {
+    var ls = []; for (var j = 1; j <= k; j++) ls.push({ id: "p" + (i + 1) + "l" + j });
+    return { id: "ch" + (i + 1), n: i + 1, available: true, lessons: ls };
+  }) };
+  AC.index = function () { return INDEX10; };
+  function allRight(n) { var r = []; for (var i = 0; i < n; i++) r.push({ correct: true, idea: "i" + i }); return r; }
+  function withMisses(n, miss, tag) { return allRight(n).map(function (r, i) { return i < miss ? { correct: false, idea: (tag || "m") + i } : r; }); }
+  function play(id, ch, right) { P.startLesson(id, { chapter: ch }); ["call", "exercise", "check"].forEach(function (s, i) { P.answer(id, s, i < right, "idea-" + id + "-" + s); }); return P.completeLesson(id, { chapter: ch }); }
+
+  // lesson XP: 60 for finishing + 10 a first-try right (3 scored) → 60..90; a replay pays 0
+  P.reset(); P.settings({ goal: "casual" });
+  eq("lesson XP: 3 of 3 first try = 90 (the max)", play("p1l1", "ch1", 3).xp, 90);
+  eq("lesson XP: 0 of 3 first try = 60", play("p1l2", "ch1", 0).xp, 60);
+  eq("lesson XP: 1 of 3 first try = 70", play("p1l3", "ch1", 1).xp, 70);
+  eq("lesson XP: a replay pays 0 (even all right)", play("p1l1", "ch1", 3).xp, 0);
+  eq("lesson XP: the misses went to Rico's Gym", Object.keys(P.state().gym).filter(function (k) { return k.indexOf("idea-p1l2") === 0; }).length, 3);
+
+  // Chapter Challenge XP for 4–8 questions: 30 a right answer + 50 if all right; pass = at most one wrong
+  [4, 5, 6, 7, 8].forEach(function (n) {
+    P.reset();
+    var perfect = P.submitChallenge("ch" + n, allRight(n));
+    eq("Challenge " + n + " Qs: perfect first pass = " + (n * 30 + 50) + " XP, +50 coins", [perfect.passed, perfect.xp, perfect.coins, perfect.totalCoins], [true, n * 30 + 50, 50, 50]);
+    eq("Challenge " + n + " Qs: once passed, a retake pays 0 XP and 0 coins", [P.submitChallenge("ch" + n, allRight(n)).xp, P.state().coins], [0, 50]);
+    P.reset();
+    var one = P.submitChallenge("ch" + n, withMisses(n, 1));
+    eq("Challenge " + n + " Qs: one miss passes, " + (n - 1) + " × 30 = " + ((n - 1) * 30) + " XP", [one.passed, one.xp, one.coins], [true, (n - 1) * 30, 50]);
+    P.reset();
+    var fail = P.submitChallenge("ch" + n, withMisses(n, 2));
+    eq("Challenge " + n + " Qs: two misses fail with 0 XP, 0 coins", [fail.passed, fail.xp, fail.coins, P.state().coins], [false, 0, 0, 0]);
+    var later = P.submitChallenge("ch" + n, allRight(n));
+    eq("Challenge " + n + " Qs: a pass after a fail pays half (" + Math.round((n * 30 + 50) / 2) + ") and still +50 coins", [later.passed, later.xp, later.full, later.coins], [true, Math.round((n * 30 + 50) / 2), n * 30 + 50, 50]);
+    eq("Challenge " + n + " Qs: chapterXp records the half", P.chapterXp("ch" + n).challenge, Math.round((n * 30 + 50) / 2));
+  });
+  P.reset();
+  eq("Challenge: a miss in any chapter goes to Rico's Gym", [P.submitChallenge("ch7", withMisses(5, 1, "ch7-idea")).passed, !!P.state().gym["ch7-idea0"]], [true, true]);
+  P.reset(); P.testOut("ch3");
+  eq("tested-out chapter: no Challenge coins", [P.state().coins, P.submitChallenge("ch3", allRight(5)).coins], [0, 0]);
+
+  // coins: +50 per first Challenge pass across the path, then the finale +500 XP +500 coins
+  P.reset();
+  INDEX10.chapters.forEach(function (c) { P.submitChallenge(c.id, allRight(c.lessons.length)); });
+  eq("10 Challenges passed: 10 × 50 = 500 coins", P.state().coins, 500);
+  ["style", "entry", "risk", "checklist", "review"].forEach(function (k) { P.setPlan(k, "x"); });
+  var xpBeforeFin = P.summary().xp, fin10 = P.finishPath("ltt10", INDEX10.chapters.map(function (c) { return c.id; }));
+  eq("finale: +500 XP, +500 coins, certificate", [fin10.ok, fin10.xp, fin10.coins, P.summary().xp - xpBeforeFin, P.state().coins, P.state().certificates.length], [true, 500, 500, 500, 1000, 1]);
+  eq("finale pays once", [P.finishPath("ltt10", INDEX10.chapters.map(function (c) { return c.id; })).xp, P.state().coins], [0, 1000]);
+
+  // the most the whole path pays: every lesson 3 of 3 first try, every Challenge perfect on the first pass, the finale
+  P.reset(); P.settings({ goal: "casual" });
+  INDEX10.chapters.forEach(function (c) { c.lessons.forEach(function (l) { play(l.id, c.id, 3); }); P.submitChallenge(c.id, allRight(c.lessons.length)); });
+  ["style", "entry", "risk", "checklist", "review"].forEach(function (k) { P.setPlan(k, "x"); });
+  var maxFin = P.finishPath("ltt10", INDEX10.chapters.map(function (c) { return c.id; }));
+  eq("full path max: 55 lessons × 90 + 10 perfect Challenges + finale = 7,600 XP, 1,000 coins", [maxFin.ok, P.summary().xp, P.state().coins], [true, 7600, 1000]);
+
+  // a record saved while chapter Bonuses existed still loads: its XP is kept, chapterXp no longer reports a Bonus
+  var accL = AC.auth.account(), legacy = JSON.parse(JSON.stringify(P.state()));
+  legacy.chapters.ch1.levelUp = "2026-10-01"; legacy.chapters.ch1.levelUpXp = 75; legacy.chapters.ch1.levelUpOpened = "2026-10-01";
+  legacy.xp += 75; legacy.history.push({ d: "2026-10-01", xp: 75, src: "levelup" }); legacy.rev = "legacy-1";
+  AC.store.save(accL, legacy);
+  var cxL = P.chapterXp("ch1");
+  eq("legacy Bonus XP: kept in the total, not reported by chapterXp", [P.summary().xp, "levelUp" in cxL, cxL.total === cxL.lessons + cxL.challenge], [7675, false, true]);
+
+  // ================================================================ My Trading Plan: 5 sections filled by the Chapter 10 lessons
+  var DEF = ["Swing · 4 markets", "Pullback to rising 50-day", "1% a trade · 2% day · 5% week", "6 yes/no checks", "Fridays · one change at a time"];
+  INDEX10.plan = { chapter: "ch10", n: 10, sections: ["style", "entry", "risk", "checklist", "review"].map(function (k, i) {
+    return { key: k, label: ["Style", "Entry", "Risk", "Checklist", "Review"][i], value: DEF[i], lesson: "p10l" + (i + 1) }; }) };
+  P.reset(); P.settings({ goal: "casual" });
+  eq("planSection: Chapter 10 lessons → section n of 5", [P.planSection("p10l1"), P.planSection("p10l5").n, P.planSection("p10l3").title], [{ n: 1, total: 5, title: "Style", key: "style" }, 5, "Risk"]);
+  eq("planSection: any other lesson → null", [P.planSection("p9l1"), P.planSection("nope")], [null, null]);
+  eq("empty plan: 0 of 5", [P.plan().filled, P.plan().total, P.plan().complete], [0, 5, false]);
+  var pl1 = play("p10l1", "ch10", 3);
+  eq("finishing Lesson 1 fills Style with the lesson default", [P.state().plan.style, P.plan().filled, P.plan().sections[0].auto], [DEF[0], 1, true]);
+  eq("completeLesson reports the section it added", pl1.plan, { n: 1, total: 5, title: "Style", key: "style" });
+  P.setPlan("entry", "My own entry");
+  play("p10l2", "ch10", 3);
+  eq("a section the learner already wrote is kept", P.state().plan.entry, "My own entry");
+  P.setPlan("risk", "");
+  play("p10l3", "ch10", 3);
+  eq("a section the learner cleared is not refilled", [P.state().plan.risk, P.plan().sections[2].filled, P.plan().sections[2].done], ["", false, true]);
+  play("p10l4", "ch10", 3); play("p10l5", "ch10", 3);
+  eq("sections fill one by one (4 of 5: risk was cleared)", [P.plan().filled, P.plan().complete], [4, false]);
+  var saved = P.savePlan({ risk: "  1% a trade  ", style: "Swing · 3 markets" });
+  eq("savePlan: edits trimmed and saved, the plan complete, saved date set", [P.state().plan.risk, P.state().plan.style, saved.complete, saved.saved, saved.sections[0].auto], ["1% a trade", "Swing · 3 markets", true, P.day(), false]);
+  eq("replaying a lesson never overwrites an edited section", [play("p10l1", "ch10", 3).xp, P.state().plan.style], [0, "Swing · 3 markets"]);
+
+  // the finale: all 10 Challenges passed (or tested out) AND the 5 sections present (auto-filled counts)
+  var ids10 = INDEX10.chapters.map(function (c) { return c.id; });
+  P.reset(); P.settings({ goal: "casual" });
+  INDEX10.chapters.slice(0, 9).forEach(function (c, i) { if (i < 4) P.testOut(c.id); else P.submitChallenge(c.id, allRight(c.lessons.length)); });
+  INDEX10.chapters[9].lessons.forEach(function (l) { play(l.id, "ch10", 3); });
+  eq("plan auto-filled by the 5 Chapter 10 lessons", [P.plan().complete, P.state().plan.review], [true, DEF[4]]);
+  eq("finale locked while the Chapter 10 Challenge is open", [P.finishStatus(ids10).challenges, P.finishStatus(ids10).ready, P.finishPath("ltt10", ids10).ok], [9, false, false]);
+  P.submitChallenge("ch10", allRight(5));
+  var fs = P.finishStatus(ids10);
+  eq("finale ready: 10 of 10 (4 tested out) + 5 of 5 sections", [fs.challenges, fs.total, fs.plan, fs.planTotal, fs.ready], [10, 10, 5, 5, true]);
+  var coinsBefore = P.state().coins, xpB = P.summary().xp, finA = P.finishPath("ltt10", ids10);
+  eq("finale with an auto-filled plan: +500 XP, +500 coins, certificate", [finA.ok, finA.xp, finA.coins, P.summary().xp - xpB, P.state().coins - coinsBefore, P.state().certificates.length], [true, 500, 500, 500, 500, 1]);
+  P.reset();
+  INDEX10.chapters.forEach(function (c) { P.submitChallenge(c.id, allRight(c.lessons.length)); });
+  P.setPlan("style", "x"); P.setPlan("entry", "x"); P.setPlan("risk", "x"); P.setPlan("checklist", "x"); P.setPlan("review", "  ");
+  eq("finale locked when a section is blank", [P.finishStatus(ids10).plan, P.finishPath("ltt10", ids10).ok], [4, false]);
+  P.setPlan("review", "Fridays");
+  eq("…and opens once it has text", P.finishPath("ltt10", ids10).ok, true);
+  P.reset(); P.testOut("ch10");
+  eq("testOut fills the sections of the lessons it marks done", P.plan().filled, 5);
+
+  // another tab (My Trading Plan open in a second tab) saves the plan; this tab's next write must not clobber it
+  var accX = AC.auth.account(), other = AC.store.load(accX);
+  other.plan.style = "Edited in the plan tab"; other.planSaved = P.day(); other.rev = "other-tab-1";
+  AC.store.save(accX, other);
+  P.settings({ reminders: false });
+  var storedX = AC.store.load(accX);
+  eq("cross-tab: a plan saved in another tab survives this tab's next write",
+    [storedX.plan.style, storedX.planSaved, P.plan().sections[0].value, P.plan().saved, storedX.settings.reminders], ["Edited in the plan tab", P.day(), "Edited in the plan tab", P.day(), false]);
+  other = AC.store.load(accX); other.plan.entry = "Second edit"; other.rev = "other-tab-2"; AC.store.save(accX, other);
+  P.setPlan("review", "Fridays, 20 minutes");
+  eq("cross-tab: setPlan in this tab keeps the other tab's edit and adds its own", [AC.store.load(accX).plan.entry, AC.store.load(accX).plan.review], ["Second edit", "Fridays, 20 minutes"]);
+  eq("every save stamps a new revision (record and its small rev key agree)", [AC.store.rev(accX) !== "other-tab-2", AC.store.rev(accX) === AC.store.load(accX).rev], [true, true]);
+
+  // My progress "right first try" counts played lessons only (not tested-out ones); the Gym counts sessions, not days
+  P.reset(); P.settings({ goal: "casual" });
+  eq("stats before any lesson", [P.stats().played, P.stats().firstTryPct, P.stats().gymSessions], [0, null, 0]);
+  P.testOut("ch1"); play("p2l1", "ch2", 3); play("p2l2", "ch2", 1);
+  eq("right first try: tested-out lessons don't count as misses (4 of 6)", [P.stats().played, P.stats().firstTry, P.stats().firstTryPct], [2, 4, 4 / 6]);
+  P.completeGym(1); P.completeGym(1); next(1); P.completeGym(1);
+  eq("Gym sessions: 2 today + 1 tomorrow = 3 (not 2 days)", P.stats().gymSessions, 3);
+
+  // an 8-field plan saved before the 5 sections moves over (old values kept in planV1)
+  var back = AC.auth.user(), mig = AC.auth.logIn("plan-v1@example.com");
+  P.reset();
+  var old = JSON.parse(JSON.stringify(P.state()));
+  old.plan = { style: "Swing", markets: "US stocks", setup: "Pullback", stop: "Below the low", target: "2×", risk: "1%", limits: "2% a day", checklist: "7 checks" };
+  old.lessons = { p10l5: { done: true, best: 90, firstTry: {}, answered: {} } };
+  delete old.planV; delete old.planAuto; AC.store.save(mig.id, old);
+  AC.auth.logOut(); P.state(); AC.auth.logIn("plan-v1@example.com");
+  var migrated = P.state().plan;
+  eq("8-field plan migrates to the 5 sections", migrated && [migrated.style, migrated.entry, migrated.risk, migrated.checklist, migrated.review, !!P.state().planV1],
+    ["Swing · US stocks", "Pullback", "Below the low · 2× · 1% · 2% a day", "7 checks", "Fridays · one change at a time", true]);
+  AC.auth.logOut(); if (back && back.email) AC.auth.logIn(back.email); else if (back) { AC.store.set("session", { user: back }); }
+  delete INDEX10.plan;
+
+  // gating across 10 chapters: lessons in order, Challenge after the last lesson, next chapter after the pass
+  P.reset();
+  var gate = [];
+  INDEX10.chapters.forEach(function (c, i) {
+    var ls = c.lessons, nxt = INDEX10.chapters[i + 1], last = ls[ls.length - 1].id;
+    var ok = P.canPlay(c.id, ls[0].id) && (ls.length < 2 || P.lockReason(c.id, ls[1].id).lesson === ls[0].id);
+    ok = ok && P.lockReason(c.id, "challenge").reason === "lesson";
+    if (nxt) ok = ok && P.lockReason(nxt.id, nxt.lessons[0].id).reason === "chapter" && P.lockReason(nxt.id, nxt.lessons[0].id).chapter === c.id;
+    ls.forEach(function (l, j) { if (j === ls.length - 1) ok = ok && P.lockReason(c.id, "challenge").lesson === last; P.startLesson(l.id); P.completeLesson(l.id, { chapter: c.id }); });
+    ok = ok && P.canPlay(c.id, "challenge");
+    if (nxt) ok = ok && !P.canPlay(nxt.id, nxt.lessons[0].id);
+    ok = ok && !P.submitChallenge(c.id, withMisses(ls.length, 2)).passed && (!nxt || !P.canPlay(nxt.id, nxt.lessons[0].id));
+    P.submitChallenge(c.id, allRight(ls.length));
+    if (nxt) ok = ok && P.canPlay(nxt.id, nxt.lessons[0].id) && !P.canPlay(nxt.id, nxt.lessons[1].id);
+    gate.push(ok ? c.lessons.length : "chapter " + c.n + " broke");
+  });
+  eq("gating holds in all 10 chapters (lesson counts)", gate, COUNTS);
+  P.reset(); P.testOut("ch1"); P.testOut("ch2");
+  eq("placement: tested-out chapters open the next one", [P.canPlay("ch3", "p3l1"), P.lockReason("ch4", "p4l1").chapter], [true, "ch3"]);
+  INDEX10.chapters[5].available = false;
+  eq("a chapter without content is 'soon' (and doesn't block the gate logic of others)", [P.lockReason("ch6", "p6l1").reason, P.lockReason("ch6", "challenge").reason], ["soon", "soon"]);
+  INDEX10.chapters[5].available = true;
+
+  // rank-up: Analyst at Level 6 (1,000 XP), reported once by the action that crosses it
+  P.reset(); P.settings({ goal: "casual" });
+  var ids = []; INDEX10.chapters.slice(0, 3).forEach(function (c) { c.lessons.forEach(function (l) { ids.push([c.id, l.id]); }); });
+  var crossed = null, before = 0;
+  for (var k = 0; k < ids.length && !crossed; k++) { before = P.summary().xp; var rr = play(ids[k][1], ids[k][0], 3); if (rr.rankUp) crossed = rr; }
+  eq("rank-up to Analyst when the XP crosses 1,000", [crossed && crossed.rankUp, crossed && crossed.level.level, crossed && crossed.levelReached, before < 1000, crossed && crossed.totalXp >= 1000], ["analyst", 6, 6, true, true]);
+  eq("the result's numbers come from the engine (totalXp = summary XP)", crossed.totalXp, P.summary().xp);
+  eq("no second rank-up inside Analyst", play(ids[k][1], ids[k][0], 3).rankUp, undefined);
+  AC.index = function () { return INDEX; };
+
+  // ---------------------------------------------------------------- certificates (AC.certs)
+  var C = AC.certs, CAT = { "learn-to-trade": "TF", "technical-analysis-pro": "TA", "risk-management": "RM", "understanding-companies": "UC", investor: "IE",
+    "macro-news-trader": "MN", "portfolio-management": "PM", "options-playbook": "OE", "crypto-trader": "CT" };
+  INDEX.certPrefix = CAT;
+  var A = "[" + C.ALPHABET + "]";
+  eq("ID: PREFIX-XXXX-XXXX with each path's prefix", Object.keys(CAT).filter(function (p) { return !new RegExp("^" + CAT[p] + "-" + A + "{4}-" + A + "{4}$").test(C.newId(p)); }), []);
+  var many = []; for (var mi = 0; mi < 2000; mi++) many.push(C.newId("learn-to-trade"));
+  eq("alphabet: no 0, O, 1, I or L (31 characters)", [/[01OIL]/.test(C.ALPHABET), C.ALPHABET.length, many.some(function (x) { return /[01OIL]/.test(x.slice(3)); })], [false, 31, false]);
+  eq("2,000 IDs, no duplicates", new Set(many).size, 2000);
+  var realRand = window.crypto.getRandomValues, forced = 0;
+  window.crypto.getRandomValues = function (a) { if (forced < 4) { forced++; for (var j = 0; j < a.length; j++) a[j] = j; return a; } return realRand.call(window.crypto, a); };
+  var first = C.issue({ path: "learn-to-trade", userId: "u1", name: "Ann First" });
+  var second = C.issue({ path: "learn-to-trade", userId: "u2", name: "Ben Second" });   // the same code comes up again: regenerated
+  window.crypto.getRandomValues = realRand;
+  eq("unique: a colliding ID is regenerated", [first.id, second.id !== first.id, forced, C.lookup(second.id).name], ["TF-2345-2345", true, 4, "Ben Second"]);
+  var L = C.lookup;
+  eq("lookup: exact ID", L("TF-2345-2345") && L("TF-2345-2345").name, "Ann First");
+  eq("lookup: not case-sensitive, dashes and spaces optional", [L("tf-2345-2345").id, L("TF23452345").id, L("  tf 2345 2345 ").id, L("tf2345-2345").id], ["TF-2345-2345", "TF-2345-2345", "TF-2345-2345", "TF-2345-2345"]);
+  eq("lookup: exact only (one character off, prefix only, partial, longer, empty → not found)",
+    [L("TF-2345-234"), L("TF-2345-2346"), L("TF"), L("TF-2345"), L("TF-2345-23455"), L("2345-2345"), L(""), L(null)], [null, null, null, null, null, null, null, null]);
+  // finishPath issues it, with the learner's name at that moment
+  var guestRec = AC.store.load(AC.auth.account());   // sign-up moves the guest record into the account: keep it for the tests below
+  AC.auth.signUp("Dana Test", "dana@example.com");
+  P.reset(); P.testOut("c2"); P.testOut("c3");
+  ["style", "entry", "risk", "checklist", "review"].forEach(function (k) { P.setPlan(k, "x"); });
+  var fd = P.finishPath("learn-to-trade", ["c2", "c3"]);
+  var cc = P.state().certificates.filter(function (c) { return c.path === "learn-to-trade"; })[0] || {};
+  eq("finishPath issues a TF- certificate with the learner's name (record + registry)", [fd.ok, /^TF-/.test(cc.id), cc.name, L(cc.id) && L(cc.id).name, fd.certificate && fd.certificate.id === cc.id, cc.d], [true, true, "Dana Test", "Dana Test", true, P.day()]);
+  eq("finishing again issues no second certificate", [P.finishPath("learn-to-trade", ["c2", "c3"]).certificate, P.state().certificates.length], [undefined, 1]);
+  var sess = AC.store.get("session"); sess.user.name = "Dana Renamed"; AC.store.set("session", sess);
+  eq("a later rename doesn't change the issued certificate", [P.state().certificates[0].name, L(cc.id).name], ["Dana Test", "Dana Test"]);
+  // records from before per-path IDs: LTR-xxxx-xxxx is re-issued once (prefix, same date, current name)
+  var acc = AC.auth.account(), raw = AC.store.load(acc);
+  raw.certificates = [{ path: "learn-to-trade", id: "LTR-AB12-CD34", d: "2026-05-04" }]; raw.rev = "migrate-1"; AC.store.save(acc, raw);
+  var mc = P.state().certificates[0];
+  eq("LTR- certificate migrates: path prefix, date kept, current name, in the registry", [/^TF-/.test(mc.id) && new RegExp("^TF-" + A + "{4}-" + A + "{4}$").test(mc.id), mc.d, mc.name, mc.oldId, L(mc.id) && L(mc.id).issued_at], [true, "2026-05-04", "Dana Renamed", "LTR-AB12-CD34", "2026-05-04"]);
+  raw = AC.store.load(acc); raw.rev = "migrate-2"; AC.store.save(acc, raw);
+  eq("…once: a later load keeps the new ID", P.state().certificates[0].id, mc.id);
+  eq("the old LTR- ID is not a certificate", L("LTR-AB12-CD34"), null);
+  AC.auth.logOut(); AC.store.save(AC.auth.account(), guestRec);   // back to the guest record for the tests below
+
+  // previews: a sandboxed engine never saves
+  var xpBefore = P.summary().xp;
+  P.sandbox(); P.startLesson("b1"); P.completeLesson("b1");
+  eq("sandbox: the preview sees its XP, the saved record doesn't", [P.summary().xp > xpBefore, AC.store.load(AC.auth.account()).xp], [true, xpBefore]);
+
+  var fails = results.filter(function (r) { return r.indexOf("FAIL") === 0; }).length;
+  document.getElementById("out").textContent = results.join("\n") + "\n\n" + (fails ? fails + " FAILED" : "ALL PASS (" + results.length + ")");
+  document.body.setAttribute("data-result", fails ? "fail" : "pass");
+})();
+</script>
+</body>
+</html>

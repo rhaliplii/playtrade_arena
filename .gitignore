@@ -1,1 +1,13 @@
 .DS_Store
+
+# Academy: generated test screenshots, design sources (boards, source art, book PDF), the pseudo-locale build
+academy/build/.shots/
+academy/_source/
+academy/xa/
+__pycache__/
+
+# local leftovers
+academy-legacy/
+Profit.com Academy.docx
+ticker.png
+ticker-top.png

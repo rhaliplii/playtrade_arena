@@ -22,16 +22,33 @@
   const fixNode = (n) => {
     if (!ROOT || !n.getAttribute) return;
     const s = n.getAttribute("src");
-    if (s && s.startsWith("assets/")) n.setAttribute("src", ROOT + s);
+    if (s && (s.startsWith("assets/") || s.startsWith("academy/"))) n.setAttribute("src", ROOT + s);
     const h = n.getAttribute("href");
     if (h && (h.startsWith("assets/") || h.startsWith("trading_calculators/") || h.startsWith("academy/") || PAGE.test(h))) {
       n.setAttribute("href", ROOT + h);
     }
   };
+  // Shared navs that re-render themselves with innerHTML (sidebar.js on #sideNav) would make the browser fetch
+  // "assets/…" relative to this page before the observer below could fix the <img>: a 404 per icon. Their HTML is
+  // rewritten on the way in, so every URL already points at the site root when the elements are created.
+  const ROOTED = /(\s(?:src|href)=")((?:assets|trading_calculators|academy)\/|[a-z0-9-]+\.html(?=["#?]))/gi;
+  const proto = Object.getOwnPropertyDescriptor(Element.prototype, "innerHTML");
+  const guard = (el) => {
+    if (!ROOT || !proto || el.__calcRooted) return;
+    el.__calcRooted = true;
+    Object.defineProperty(el, "innerHTML", {
+      configurable: true,
+      get() { return proto.get.call(this); },
+      set(html) { proto.set.call(this, String(html).replace(ROOTED, `$1${ROOT}$2`)); },
+    });
+  };
   const fix = (root) => {
     if (!root || root.nodeType !== 1) return;
+    if (root.id === "sideNav") guard(root);
     fixNode(root);
     root.querySelectorAll("[src],[href]").forEach(fixNode);
+    const nav = root.querySelector && root.querySelector("#sideNav");
+    if (nav) guard(nav);
   };
   new MutationObserver((recs) => {
     for (const r of recs) {

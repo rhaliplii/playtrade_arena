@@ -1,0 +1,261 @@
+{
+ "id": "expectancy",
+ "chapter": "risk-management",
+ "n": 6,
+ "title": "Expectancy: does your strategy pay?",
+ "minutes": 5,
+ "desc": "Mix win rate, average win and average loss into one number",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Board P1-Ch05-L6 card 1",
+   "pose": "detective",
+   "title": "Does it pay?",
+   "situation": "Your journal shows you win 40% of trades. Your average win is $300. Your average loss is $100. Does your strategy pay?",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Win rate",
+      "value": "40%"
+     },
+     {
+      "label": "Average win",
+      "value": "$300",
+      "tone": "up"
+     },
+     {
+      "label": "Average loss",
+      "value": "$100",
+      "tone": "down"
+     },
+     {
+      "label": "Trades",
+      "value": "120"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "No: you lose most of your trades",
+     "feedback": "Losing most trades is fine when the wins are much bigger than the losses."
+    },
+    {
+     "text": "Yes: about +$60 a trade on average",
+     "feedback": "Your wins are big enough to cover your losses and more."
+    },
+    {
+     "text": "Can’t tell until you win more often",
+     "feedback": "You can tell now: 120 trades is a fair sample. Weight each result by how often it happens."
+    }
+   ],
+   "answer": 1,
+   "idea": "expectancy-pays",
+   "work": "(0.4 × $300) − (0.6 × $100) = $120 − $60 = +$60 a trade."
+  },
+  {
+   "type": "learn",
+   "title": "Expectancy",
+   "text": "[[expectancy|Expectancy]] is what a strategy makes **per trade, on average**, over many trades. It mixes [[win-rate|how often you win]] with how big the wins and losses are.",
+   "visual": {
+    "kind": "formula",
+    "terms": [
+     {
+      "text": "Win rate × Avg win",
+      "tone": "up"
+     },
+     {
+      "op": "−"
+     },
+     {
+      "text": "Loss rate × Avg loss",
+      "tone": "down"
+     }
+    ],
+    "foot": "Above zero: it pays over many trades. Below zero: it loses."
+   },
+   "blocks": [
+    {
+     "tip": "It’s an average over many trades. It says nothing sure about the next one.",
+     "tone": "gold"
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap a strategy",
+   "title": "High win rate, losing strategy",
+   "text": "Strategy A wins most of the time. Strategy B loses most of the time. Which one pays?",
+   "visual": {
+    "kind": "table",
+    "label": "A: 70% wins, $50 average win, $150 average loss, −$10. B: 40%, $200, $100, +$20",
+    "cols": [
+     {
+      "label": ""
+     },
+     {
+      "label": "A",
+      "align": "right"
+     },
+     {
+      "label": "B",
+      "align": "right"
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "Win rate",
+       "70%",
+       "40%"
+      ]
+     },
+     {
+      "cells": [
+       "Average win",
+       "$50",
+       "$200"
+      ]
+     },
+     {
+      "cells": [
+       "Average loss",
+       "$150",
+       "$100"
+      ]
+     },
+     {
+      "cells": [
+       "Expectancy",
+       {
+        "text": "−$10",
+        "tone": "down"
+       },
+       {
+        "text": "+$20",
+        "tone": "up"
+       }
+      ],
+      "strong": true
+     }
+    ]
+   },
+   "steps": [
+    {
+     "label": "Strategy A",
+     "text": "0.7 × $50 − 0.3 × $150 = −$10."
+    },
+    {
+     "label": "Strategy B",
+     "text": "0.4 × $200 − 0.6 × $100 = +$20."
+    }
+   ],
+   "foot": "A high win rate can hide a losing strategy.",
+   "footTone": "red"
+  },
+  {
+   "type": "trap",
+   "title": "Small samples lie",
+   "text": "Ten trades prove almost nothing. A lucky run can make a bad strategy look great. Take fees off every trade, wins and losses.",
+   "visual": {
+    "kind": "table",
+    "label": "10 trades: luck. 30 trades: a first hint. 100+ trades: worth trusting",
+    "cols": [
+     {
+      "label": "Sample"
+     },
+     {
+      "label": "What it tells you",
+      "align": "right"
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "10 trades",
+       "Luck"
+      ]
+     },
+     {
+      "cells": [
+       "30 trades",
+       "A first hint"
+      ]
+     },
+     {
+      "cells": [
+       "100+ trades",
+       {
+        "text": "Worth trusting",
+        "tone": "up"
+       }
+      ]
+     }
+    ]
+   },
+   "rule": "track every trade in a journal before you trust the numbers."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Work out the expectancy",
+   "q": "You win 50% of trades. Average win $150, average loss $100. What’s your expectancy per trade?",
+   "idea": "expectancy-math",
+   "options": [
+    {
+     "text": "+$50",
+     "feedback": "$150 − $100 ignores how often each one happens. Weight each by its rate."
+    },
+    {
+     "text": "+$25",
+     "feedback": "Half the time you make $150, half the time you lose $100: $75 − $50 a trade."
+    },
+    {
+     "text": "−$25",
+     "feedback": "The sign flipped. Your wins are bigger than your losses at the same rate, so it’s above zero."
+    },
+    {
+     "text": "+$75",
+     "feedback": "That’s only the winning half. Take off the losing half: 0.5 × $100."
+    }
+   ],
+   "answer": 1,
+   "work": "(0.5 × $150) − (0.5 × $100) = $75 − $50 = +$25."
+  },
+  {
+   "type": "check",
+   "title": "Reading the number",
+   "q": "Your strategy’s expectancy is +$20 a trade. What does that mean?",
+   "options": [
+    {
+     "text": "You’ll make $20 on your next trade",
+     "feedback": "The next trade can still lose. Expectancy is an average that shows up over many trades."
+    },
+    {
+     "text": "Over many trades, you average about +$20 each",
+     "feedback": "Some trades win, some lose. Over many of them, they average out near +$20."
+    },
+    {
+     "text": "You win 20% of your trades",
+     "feedback": "That’s a win rate. Expectancy is dollars per trade, on average."
+    },
+    {
+     "text": "You can’t lose money",
+     "feedback": "You can still lose, on a trade or a bad run. It only pays on average, over many trades."
+    }
+   ],
+   "answer": 1,
+   "idea": "expectancy-is-an-average",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can tell if a strategy pays.",
+   "lines": [
+    "Expectancy = (win rate × avg win) − (loss rate × avg loss).",
+    "Above zero pays over many trades.",
+    "Trust it only after a big sample of trades."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,327 @@
+{
+ "id": "candles-that-tell-a-story",
+ "chapter": "reading-charts",
+ "n": 2,
+ "title": "Candles that tell a story",
+ "minutes": 5,
+ "desc": "Hammer, doji and engulfing: the candles worth a second look",
+ "cards": [
+  {
+   "type": "call",
+   "title": "After a long fall",
+   "situation": "The price fell for four days. Then this candle: a small body near the top and a long lower wick. What might it tell you?",
+   "visual": {
+    "kind": "candles",
+    "title": "5 days",
+    "aside": "−11%",
+    "chart": {
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "ohlc": [
+      [
+       109.6,
+       110.4,
+       106.6,
+       107.2
+      ],
+      [
+       107.2,
+       107.8,
+       104.2,
+       104.8
+      ],
+      [
+       104.8,
+       105.3,
+       101.8,
+       102.3
+      ],
+      [
+       102.3,
+       102.8,
+       99.6,
+       100.2
+      ],
+      [
+       98.2,
+       98.6,
+       90,
+       97.5
+      ]
+     ],
+     "height": 120,
+     "extra": [
+      {
+       "price": 86
+      }
+     ],
+     "dim": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "marks": [
+      {
+       "i": 4,
+       "price": 90,
+       "tone": "gold",
+       "label": "today",
+       "pos": "below"
+      }
+     ],
+     "label": "Four falling days, then a candle with a small body near the top and a long lower wick down to $90"
+    }
+   },
+   "options": [
+    {
+     "text": "Sellers are getting even stronger",
+     "feedback": "Sellers pushed it down to $90, but buyers pulled it most of the way back."
+    },
+    {
+     "text": "Buyers fought back from the lows",
+     "feedback": "That long lower wick is buyers fighting back. It’s called a [[hammer|hammer]]."
+    },
+    {
+     "text": "Nothing: candles are random",
+     "feedback": "Each candle records the day’s fight. A long lower wick after a fall shows buyers pushed back hard."
+    }
+   ],
+   "answer": 1,
+   "idea": "hammer",
+   "work": "Low $90, close $97.50: buyers pushed price back up $7.50 from the low."
+  },
+  {
+   "type": "learn",
+   "title": "Three shapes worth knowing",
+   "text": "Most candles mean little on their own. These three are worth a second look.",
+   "visual": {
+    "kind": "shapes",
+    "items": [
+     {
+      "name": "Hammer",
+      "tone": "up",
+      "text": "Long lower wick after a fall. Buyers fought back.",
+      "candles": [
+       [
+        50.4,
+        50.6,
+        46,
+        50
+       ]
+      ]
+     },
+     {
+      "name": "Doji",
+      "tone": "gold",
+      "text": "Opens and closes at the same price. Nobody won.",
+      "candles": [
+       [
+        50,
+        52,
+        48,
+        50.05
+       ]
+      ]
+     },
+     {
+      "name": "Engulfing",
+      "tone": "up",
+      "text": "A big green body swallows the red one before it.",
+      "candles": [
+       [
+        51,
+        51.4,
+        49.6,
+        50
+       ],
+       [
+        49.5,
+        52.4,
+        49.3,
+        52
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "A bullish engulfing",
+   "text": "After a fall, a green candle **opens below** yesterday’s close and **closes above** yesterday’s open. Its body swallows the red one.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "ohlc": [
+      [
+       100,
+       101,
+       97,
+       97.6
+      ],
+      [
+       97.6,
+       98.2,
+       94.4,
+       95
+      ],
+      [
+       95,
+       95.6,
+       92.6,
+       93.2
+      ],
+      [
+       93.2,
+       93.8,
+       91.4,
+       92
+      ],
+      [
+       91.6,
+       96.4,
+       91.2,
+       95.8
+      ]
+     ],
+     "height": 120,
+     "extra": [
+      {
+       "price": 87.5
+      }
+     ],
+     "dim": [
+      0,
+      1,
+      2
+     ],
+     "marks": [
+      {
+       "i": 3,
+       "price": 91.4,
+       "tone": "down",
+       "label": "red",
+       "pos": "below"
+      },
+      {
+       "i": 4,
+       "price": 91.2,
+       "tone": "up",
+       "label": "green",
+       "pos": "below"
+      }
+     ],
+     "label": "Three falling days, a small red candle, then a big green candle whose body swallows it"
+    }
+   },
+   "foot": "Buyers took over the whole day. It’s a clue the fall may pause, not a promise.",
+   "footTone": "green"
+  },
+  {
+   "type": "myth",
+   "title": "One candle, big promise?",
+   "myth": "A hammer means the price will go up.",
+   "reality": "One candle is a clue, not a signal. It matters only in the right place, like after a fall or at a level, and when the next candle agrees.",
+   "rule": "wait for the next candle to confirm before you act."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Spot the doji",
+   "q": "Which candle shows that buyers and sellers ended the day even?",
+   "idea": "doji",
+   "options": [
+    {
+     "text": "Candle A",
+     "candles": [
+      [
+       50.4,
+       50.6,
+       46,
+       50
+      ]
+     ],
+     "feedback": "Candle A is a hammer: small body, long lower wick. A doji opens and closes at almost the same price."
+    },
+    {
+     "text": "Candle B",
+     "candles": [
+      [
+       50,
+       52,
+       48,
+       50.05
+      ]
+     ],
+     "feedback": "Open and close at almost the same price: neither side won the day. That’s a [[doji|doji]]."
+    },
+    {
+     "text": "Candle C",
+     "candles": [
+      [
+       46,
+       50.3,
+       45.8,
+       50
+      ]
+     ],
+     "feedback": "A long green body: buyers won that day. A doji opens and closes at almost the same price."
+    },
+    {
+     "text": "Candle D",
+     "candles": [
+      [
+       50,
+       50.4,
+       45.9,
+       46.2
+      ]
+     ],
+     "feedback": "A long red body: sellers won that day. A doji opens and closes at almost the same price."
+    }
+   ],
+   "answer": 1
+  },
+  {
+   "type": "check",
+   "title": "Wrong place",
+   "q": "A hammer shows up in the middle of a quiet, sideways week. No fall came before it. What does it tell you?",
+   "options": [
+    {
+     "text": "A strong buy signal",
+     "feedback": "A hammer means buyers fought back after a fall. With no fall before it, there was nothing to fight back from."
+    },
+    {
+     "text": "Not much: shapes matter where they appear",
+     "feedback": "A hammer means something after a fall or at a level. In a quiet sideways week, it carries little weight."
+    },
+    {
+     "text": "Sell now",
+     "feedback": "Nothing here says sell. It’s one candle in a quiet week, not a reason to act."
+    },
+    {
+     "text": "The trend just turned up",
+     "feedback": "One candle in a sideways week can’t turn a trend. There was no trend to turn."
+    }
+   ],
+   "answer": 1,
+   "idea": "pattern-context"
+  },
+  {
+   "type": "keep",
+   "headline": "You can spot the candles worth a second look.",
+   "lines": [
+    "Hammer: buyers fought back after a fall.",
+    "Doji: open and close the same, nobody won.",
+    "One candle is a clue, never a signal on its own."
+   ]
+  }
+ ]
+}

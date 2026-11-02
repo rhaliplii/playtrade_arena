@@ -1,0 +1,322 @@
+{
+ "id": "eggs-in-one-basket",
+ "chapter": "portfolio-management",
+ "n": 1,
+ "title": "Don’t put all your eggs in one basket",
+ "minutes": 5,
+ "desc": "Why spreading money limits the damage from one bad pick",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "One bad day",
+   "situation": "Ben puts $10,000 into one company. Max puts $1,000 into each of 10 companies, including Ben’s. That company falls 50%. How much does each lose?",
+   "visual": {
+    "kind": "split",
+    "label": "Ben holds one stock; Max holds ten equal stocks",
+    "rows": [
+     {
+      "label": "Ben",
+      "aside": "1 stock",
+      "segments": [
+       {
+        "value": 1,
+        "tone": "up",
+        "label": "1 stock · 100%"
+       }
+      ]
+     },
+     {
+      "label": "Max",
+      "aside": "10 stocks",
+      "segments": [
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       }
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Both lose $5,000",
+     "feedback": "The company fell 50% for both. But Max only had a tenth of his money in it."
+    },
+    {
+     "text": "Ben loses $5,000, Max loses $500",
+     "feedback": "Same crash, a tenth of the damage. That’s diversification."
+    },
+    {
+     "text": "Max loses more: he owns more stocks",
+     "feedback": "Owning more stocks doesn’t add to this loss. Only one company fell, and Max had just $1,000 in it."
+    }
+   ],
+   "answer": 1,
+   "idea": "diversify-cuts-the-hit",
+   "work": "Ben: $10,000 × 50% = $5,000. Max: $1,000 × 50% = $500, just 5% of his money.",
+   "added": "Feedback for C written for the Academy"
+  },
+  {
+   "type": "learn",
+   "title": "Spread the risk",
+   "text": "**[[diversification|Diversification]]** means spreading money across many holdings. One bad pick then hurts a little, not a lot.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "split",
+      "label": "After the drop Ben has $5,000 left; Max has $9,500",
+      "rows": [
+       {
+        "label": "Ben after the drop",
+        "aside": "−50%",
+        "segments": [
+         {
+          "value": 50,
+          "tone": "up",
+          "label": "$5,000 left"
+         },
+         {
+          "value": 50,
+          "tone": "down",
+          "label": "−$5,000"
+         }
+        ]
+       },
+       {
+        "label": "Max after the drop",
+        "aside": "−5%",
+        "segments": [
+         {
+          "value": 95,
+          "tone": "up",
+          "label": "$9,500 left"
+         },
+         {
+          "value": 5,
+          "tone": "down"
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "side": true,
+     "tip": "Single stocks can and do fall 50% or more, sometimes in a day. Spreading out limits the damage from any one."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "One bad apple",
+   "text": "One company hits trouble and its stock halves. In a 10-stock portfolio, the other nine rose about 7%, so the whole portfolio still ended about +1%.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "series",
+      "title": "One year",
+      "label": "Over one year the single stock falls 50% while the 10-stock portfolio ends about 1% higher",
+      "x": {
+       "labels": [
+        "Jan",
+        "Jun",
+        "Dec"
+       ]
+      },
+      "series": [
+       {
+        "label": "10 stock",
+        "tone": "blue",
+        "values": [
+         100,
+         100.6,
+         101,
+         101.2,
+         101.1,
+         100.9,
+         100.7,
+         100.6,
+         100.6,
+         100.8,
+         101
+        ]
+       },
+       {
+        "label": "1 stock",
+        "tone": "down",
+        "values": [
+         100,
+         103,
+         106,
+         104,
+         98,
+         90,
+         80,
+         70,
+         60,
+         55,
+         50
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "The one stock",
+        "value": "−50%",
+        "tone": "down",
+        "strong": true
+       },
+       {
+        "label": "The 10-stock portfolio",
+        "value": "about +1%",
+        "tone": "blue",
+        "strong": true
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "Diversification cuts the damage from one company. It can’t stop the whole market from falling.",
+   "footTone": "gold"
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Count the damage",
+   "q": "You own 5 stocks, $2,000 in each: $10,000 in all. One of them falls 50%. How much do you lose?",
+   "idea": "one-holding-loss",
+   "visual": {
+    "kind": "split",
+    "label": "Five equal holdings of $2,000; one falls",
+    "rows": [
+     {
+      "label": "Your 5 stocks",
+      "aside": "$2,000 each",
+      "segments": [
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "down"
+       }
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "$5,000",
+     "feedback": "Only one holding fell, and it was a fifth of your money."
+    },
+    {
+     "text": "$1,000",
+     "feedback": "One holding of $2,000 lost half. The other four didn’t move, so the damage stays small."
+    },
+    {
+     "text": "$2,000",
+     "feedback": "$2,000 is the whole holding. It fell by half, not to zero."
+    },
+    {
+     "text": "$500",
+     "feedback": "That’s too small. Take half of the $2,000 that fell."
+    }
+   ],
+   "answer": 1,
+   "work": "$2,000 × 50% = $1,000, or 10% of $10,000.",
+   "added": "Feedback for the options the board doesn’t show written for the Academy"
+  },
+  {
+   "type": "check",
+   "title": "What it protects",
+   "q": "Diversification protects you most from…",
+   "options": [
+    {
+     "text": "Bad news at one company",
+     "feedback": "Spreading out shrinks the hit from one company. Bad news there touches only a small part of your money."
+    },
+    {
+     "text": "A crash in the whole market",
+     "feedback": "When the whole market falls, most stocks fall with it. Spreading across stocks can’t stop that."
+    },
+    {
+     "text": "Every possible loss",
+     "feedback": "Spreading out shrinks the hit from one company. When the whole market falls, most stocks fall with it."
+    },
+    {
+     "text": "Paying fees",
+     "feedback": "Diversifying doesn’t cut fees. It limits how much one bad pick can hurt you."
+    }
+   ],
+   "answer": 0,
+   "idea": "diversification-protects-from",
+   "added": "Feedback for the options the board doesn’t show written for the Academy",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You know why one basket is risky.",
+   "lines": [
+    "One stock can fall 50% or more.",
+    "Spread money so one bad pick hurts a little.",
+    "Diversifying can’t stop a whole-market fall."
+   ]
+  }
+ ]
+}

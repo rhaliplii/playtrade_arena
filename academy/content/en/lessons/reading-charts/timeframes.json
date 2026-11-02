@@ -1,0 +1,332 @@
+{
+ "id": "timeframes",
+ "chapter": "reading-charts",
+ "n": 3,
+ "title": "Timeframes: same stock, different story",
+ "minutes": 5,
+ "desc": "Hourly, daily, weekly: zoom out before you decide",
+ "cards": [
+  {
+   "type": "call",
+   "title": "Up or down?",
+   "situation": "The same stock, two charts. The hourly chart is falling. The daily chart is rising. Which one is right?",
+   "visual": {
+    "kind": "chart-pair",
+    "items": [
+     {
+      "label": "Hourly",
+      "aside": "8 hours",
+      "tone": "white",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "path": [
+        [
+         0,
+         102.2
+        ],
+        [
+         2,
+         102
+        ],
+        [
+         5,
+         101
+        ],
+        [
+         8,
+         100
+        ]
+       ],
+       "seed": 7,
+       "height": 110,
+       "noise": 1.4,
+       "wick": 1,
+       "label": "Hourly: today falls from $102 to $100"
+      }
+     },
+     {
+      "label": "Daily",
+      "aside": "3 months",
+      "tone": "white",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "path": [
+        [
+         0,
+         80
+        ],
+        [
+         6,
+         86
+        ],
+        [
+         12,
+         96
+        ],
+        [
+         14,
+         102
+        ],
+        [
+         15,
+         100
+        ]
+       ],
+       "seed": 4,
+       "height": 110,
+       "noise": 1.2,
+       "wick": 1,
+       "label": "Daily: three months rising from $80 to $100"
+      }
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Down: the latest chart wins",
+     "feedback": "The hourly chart only shows today’s small dip. Zoom out and the bigger move is up."
+    },
+    {
+     "text": "Up: longer charts are always right",
+     "feedback": "Longer charts aren’t always right; they just cover more time. Both charts are true for their own time span."
+    },
+    {
+     "text": "Both: they show different time spans",
+     "feedback": "Both are true. A small dip can sit inside a bigger rise."
+    }
+   ],
+   "answer": 2,
+   "idea": "timeframes-differ",
+   "work": "Last 8 hours: −$2. Last 3 months: +$20."
+  },
+  {
+   "type": "learn",
+   "title": "Pick your zoom",
+   "text": "Every chart has a **[[timeframe|timeframe]]**: how much time one candle covers. Same stock, same prices, different story.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "1m",
+        "value": "one candle = 1 minute"
+       },
+       {
+        "label": "1H",
+        "value": "one candle = 1 hour"
+       },
+       {
+        "label": "1D",
+        "value": "one candle = 1 day"
+       },
+       {
+        "label": "1W",
+        "value": "one candle = 1 week"
+       }
+      ]
+     }
+    },
+    {
+     "tip": "Short timeframes show noise. Long ones show the trend."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "Zoom out first",
+   "text": "",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "tabs",
+      "items": [
+       "1m",
+       "1H",
+       "1D",
+       "1W"
+      ],
+      "on": 3
+     },
+     {
+      "kind": "candles",
+      "title": "Weekly · the trend",
+      "aside": "up",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "path": [
+        [
+         0,
+         40
+        ],
+        [
+         11,
+         58
+        ]
+       ],
+       "seed": 3,
+       "height": 60,
+       "noise": 0.3,
+       "label": "Weekly candles rising from $40 to $58"
+      }
+     },
+     {
+      "kind": "candles",
+      "title": "Daily · the pullback",
+      "aside": "down",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "path": [
+        [
+         0,
+         58
+        ],
+        [
+         9,
+         52.5
+        ],
+        [
+         11,
+         52.8
+        ]
+       ],
+       "seed": 5,
+       "height": 60,
+       "noise": 0.3,
+       "label": "Daily candles pulling back from $58 to $52"
+      }
+     },
+     {
+      "kind": "candles",
+      "title": "Hourly · today",
+      "aside": "bounce",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "path": [
+        [
+         0,
+         52.4
+        ],
+        [
+         11,
+         54
+        ]
+       ],
+       "seed": 9,
+       "height": 60,
+       "noise": 0.3,
+       "label": "Hourly candles bouncing from $52 to $54"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Match the chart to your hold",
+   "text": "Holding for weeks? Trade from the **daily** chart. Holding for hours? The **hourly**. Always check one chart bigger first.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Hold for hours",
+      "value": "1H · check 1D",
+      "strong": true
+     },
+     {
+      "label": "Hold for weeks",
+      "value": "1D · check 1W",
+      "strong": true
+     },
+     {
+      "label": "Hold for months",
+      "value": "1W · check 1M",
+      "strong": true
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Pick the chart",
+   "q": "You plan to hold a trade for 2 to 3 weeks. Which chart should you trade from?",
+   "idea": "match-timeframe-to-hold",
+   "visual": {
+    "kind": "tabs",
+    "items": [
+     "1m",
+     "1H",
+     "1D",
+     "1W"
+    ]
+   },
+   "options": [
+    {
+     "text": "1-minute",
+     "feedback": "1-minute candles show noise you’ll never hold through. For weeks, use daily candles and check the weekly."
+    },
+    {
+     "text": "1-hour",
+     "feedback": "Hourly candles fit trades that last hours. For a hold of weeks, the daily chart shows the moves that matter."
+    },
+    {
+     "text": "Daily",
+     "feedback": "Daily candles match a hold of weeks. Check the weekly chart first for the bigger trend."
+    },
+    {
+     "text": "Monthly",
+     "feedback": "Too zoomed out: your whole trade fits inside one monthly candle. Use the weekly for the big picture and trade from the daily."
+    }
+   ],
+   "answer": 2
+  },
+  {
+   "type": "check",
+   "title": "Big picture first",
+   "q": "The weekly chart is falling hard. The hourly chart shows a bounce. What should a beginner make of it?",
+   "options": [
+    {
+     "text": "Buy the bounce: it’s a new trend",
+     "feedback": "A few hours up doesn’t turn a weekly downtrend. The bigger chart sets the trend."
+    },
+    {
+     "text": "Treat it as a bounce inside a downtrend",
+     "feedback": "A few hours up inside a falling weekly chart is most likely a bounce. The bigger chart sets the trend."
+    },
+    {
+     "text": "Ignore the weekly chart",
+     "feedback": "The weekly chart is the big picture. Ignore it and you may buy a bounce in a downtrend."
+    },
+    {
+     "text": "The weekly chart is wrong",
+     "feedback": "Neither chart is wrong. They cover different time spans, and the longer one sets the trend."
+    }
+   ],
+   "answer": 1,
+   "idea": "bigger-chart-sets-trend"
+  },
+  {
+   "type": "keep",
+   "headline": "You can zoom out before you decide.",
+   "lines": [
+    "One candle can be a minute or a week.",
+    "Zoom out first: the bigger chart sets the trend.",
+    "Trade from the timeframe that matches your hold."
+   ]
+  }
+ ]
+}

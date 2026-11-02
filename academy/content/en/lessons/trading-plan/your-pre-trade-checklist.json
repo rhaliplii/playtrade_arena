@@ -1,0 +1,205 @@
+{
+ "id": "your-pre-trade-checklist",
+ "chapter": "trading-plan",
+ "n": 4,
+ "title": "Your pre-trade checklist",
+ "minutes": 5,
+ "desc": "Run 5 to 7 yes/no checks before every trade; one “no” means no trade",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Why a checklist?",
+   "situation": "Pilots run a checklist before every flight, even after 10,000 flights. Why should a trader use one?",
+   "options": [
+    {
+     "text": "It replaces your entry rule",
+     "feedback": "A checklist doesn’t replace your rules. It checks you follow them. Experience doesn’t stop mistakes. It makes people skip steps."
+    },
+    {
+     "text": "It catches rushed trades and missed steps",
+     "feedback": "A checklist slows you down for one minute at the moment you’re most likely to rush."
+    },
+    {
+     "text": "It makes every trade a winner",
+     "feedback": "No checklist makes every trade a winner. It stops rushed trades and skipped steps."
+    }
+   ],
+   "answer": 1,
+   "idea": "why-a-checklist",
+   "work": "6 yes/no checks take about a minute. One “no” saves a bad trade."
+  },
+  {
+   "type": "learn",
+   "title": "5 to 7 yes/no checks",
+   "text": "Before every trade you run a short **[[pre-trade-checklist|checklist]]**. Each check is a fact you can answer yes or no.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "checklist",
+      "title": "Pre-trade checklist",
+      "aside": "yes / no",
+      "items": [
+       {
+        "text": "It’s one of my markets and my style",
+        "state": "none"
+       },
+       {
+        "text": "It matches my entry rule",
+        "state": "none"
+       },
+       {
+        "text": "My stop is set before I buy",
+        "state": "none"
+       },
+       {
+        "text": "My size risks 1% or less",
+        "state": "none"
+       },
+       {
+        "text": "My target is at least 2× the risk",
+        "state": "none"
+       },
+       {
+        "text": "I’m inside my daily and weekly limits",
+        "state": "none"
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "One “no” means no trade.",
+     "tone": "gold"
+    },
+    {
+     "visual": {
+      "kind": "planbar",
+      "sections": [
+       "Style",
+       "Entry",
+       "Exit & risk",
+       "Checklist",
+       "Review"
+      ],
+      "current": 3
+     }
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap each check",
+   "title": "Run a real setup",
+   "text": "Entry $40, stop $38. Resistance sits at $42, so your target is $42: risk $2 to make $2.",
+   "visual": {
+    "kind": "checklist",
+    "title": "Setup · $40 entry",
+    "aside": "5 yes · 1 no",
+    "items": [
+     {
+      "text": "It’s one of my markets and my style",
+      "state": "yes"
+     },
+     {
+      "text": "It matches my entry rule",
+      "state": "yes"
+     },
+     {
+      "text": "My stop is set before I buy",
+      "state": "yes"
+     },
+     {
+      "text": "My size risks 1% or less",
+      "state": "yes"
+     },
+     {
+      "text": "My target is at least 2× the risk",
+      "state": "no"
+     },
+     {
+      "text": "I’m inside my daily and weekly limits",
+      "state": "yes"
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "Don’t squeeze the stop to fix the numbers. The stop goes where you’re wrong.",
+     "tone": "gold"
+    }
+   ],
+   "foot": "Target only 1× the risk. One “no”, so you skip it and wait for a better setup.",
+   "footTone": "red"
+  },
+  {
+   "type": "myth",
+   "title": "Too good for a checklist?",
+   "myth": "Experienced traders don’t need a checklist.",
+   "reality": "The checklist matters most on bad days: tired, angry or chasing a loss. That’s when people skip steps.",
+   "rule": "no checklist, no trade."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "A good check",
+   "q": "Which one belongs on your yes/no checklist?",
+   "options": [
+    {
+     "text": "Is the stock likely to go up?",
+     "feedback": "“Likely to go up” is a guess, and the answer is always yes. A check must be a fact, like whether the stop is set."
+    },
+    {
+     "text": "Is my stop set before I buy?",
+     "feedback": "It’s a fact you can answer yes or no in a second. That’s what a check should be."
+    },
+    {
+     "text": "Is it a great company?",
+     "feedback": "“Great company” is an opinion. A check must be a fact you can answer yes or no."
+    },
+    {
+     "text": "Is everyone talking about it?",
+     "feedback": "What people talk about is noise. A check must be a fact about your own plan."
+    }
+   ],
+   "answer": 1,
+   "idea": "checks-are-facts",
+   "work": null
+  },
+  {
+   "type": "check",
+   "title": "Five yes, one no",
+   "q": "Five checks say yes. One says no: the trade would take you past your weekly loss limit. What now?",
+   "options": [
+    {
+     "text": "Take it: 5 of 6 is good enough",
+     "feedback": "A checklist isn’t a score. One “no” means no trade, and a loss limit never bends."
+    },
+    {
+     "text": "Skip it: one “no” means no trade",
+     "feedback": "One “no” means no trade. Your weekly limit never bends, so you wait for next week."
+    },
+    {
+     "text": "Take it with double size",
+     "feedback": "Double size past your weekly limit makes the damage bigger. One “no” means no trade."
+    },
+    {
+     "text": "Raise your weekly limit",
+     "feedback": "A limit you raise when you hit it was never a limit. One “no” means no trade."
+    }
+   ],
+   "answer": 1,
+   "idea": "one-no-no-trade",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You check before you click.",
+   "lines": [
+    "5–7 yes/no checks before every trade.",
+    "Each check is a fact, not a feeling.",
+    "One “no” means no trade."
+   ]
+  }
+ ]
+}

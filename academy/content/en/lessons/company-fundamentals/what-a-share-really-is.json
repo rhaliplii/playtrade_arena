@@ -1,0 +1,213 @@
+{
+ "id": "what-a-share-really-is",
+ "chapter": "company-fundamentals",
+ "n": 1,
+ "title": "What a share really is",
+ "minutes": 5,
+ "desc": "Shares, market value, and why the price isn’t what the business is worth",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "What did you buy?",
+   "situation": "Northwind Bakery is split into 100 equal shares. You buy 5 of them. What do you own?",
+   "visual": {
+    "kind": "units",
+    "total": 100,
+    "on": 5,
+    "cols": 10,
+    "tone": "gold",
+    "title": "Northwind Bakery",
+    "sub": "100 shares in total",
+    "mark": "Your 5 shares",
+    "label": "100 squares, 5 of them yours"
+   },
+   "options": [
+    {
+     "text": "A loan Northwind must pay back",
+     "feedback": "A loan is a bond, and a bond gets paid back. A share is ownership: you own part of the bakery."
+    },
+    {
+     "text": "A slice of Northwind: 5% of the company",
+     "feedback": "A share is a slice of the company. Five slices out of 100 is 5%."
+    },
+    {
+     "text": "A promise the price will rise",
+     "feedback": "Nobody promises that. A share is ownership: the price can rise or fall, and you share in how the business does."
+    }
+   ],
+   "answer": 1,
+   "idea": "share-is-ownership",
+   "work": "5 shares ÷ 100 shares = 5% of the company."
+  },
+  {
+   "type": "learn",
+   "title": "A slice of a real business",
+   "text": "A company splits its ownership into **[[share|shares]]**. Buy one and you own a small slice of the business, its profits and its future. Some companies pay part of their profit to owners as **[[dividend|dividends]]**.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "A share is",
+      "value": "a slice of ownership",
+      "tone": "gold"
+     },
+     {
+      "label": "Owners share in",
+      "value": "profits, usually a vote",
+      "tone": "up"
+     },
+     {
+      "label": "Market value",
+      "value": "price × all shares",
+      "tone": "blue"
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "The **share price** is just what the last buyer paid. Price × all the shares = the company’s [[market-cap|market value]]."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "added": "Price path between $40 and $50 drawn for the Academy (board shows only the start, end and +25%)",
+   "tag": "tap",
+   "title": "Price is not worth",
+   "text": "Acme’s business didn’t change this month. Same shops, same sales. Its share price still rose 25%.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "stats",
+      "items": [
+       {
+        "label": "Acme profit",
+        "value": "$10M",
+        "sub": "this year · no change"
+       },
+       {
+        "label": "Share price",
+        "value": "$40 → $50",
+        "sub": "this month",
+        "tone": "up"
+       }
+      ]
+     },
+     {
+      "kind": "series",
+      "title": "Acme share price",
+      "aside": "1 month",
+      "height": 90,
+      "label": "Acme’s share price climbs from $40 to $50 in a month, up 25%",
+      "series": [
+       {
+        "values": [
+         40,
+         40.8,
+         39.6,
+         41.8,
+         42.6,
+         42.2,
+         43.6,
+         44.4,
+         44.1,
+         45.4,
+         47.2,
+         46.3,
+         48.4,
+         49.1,
+         50
+        ],
+        "tone": "up",
+        "end": "+25%"
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "Price moves when buyers are keener than sellers: news, mood, hype. The business can stay exactly the same.",
+   "footTone": "sky"
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Which company is bigger?",
+   "q": "Acme’s shares cost $20. Beta’s shares cost $200. Which company is worth more?",
+   "idea": "market-value",
+   "visual": {
+    "kind": "stats",
+    "items": [
+     {
+      "label": "Acme",
+      "value": "$20",
+      "sub": "a share"
+     },
+     {
+      "label": "Beta",
+      "value": "$200",
+      "sub": "a share"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Beta: its share costs more",
+     "feedback": "A pricey share doesn’t mean a big company. Market value is price times all the shares."
+    },
+    {
+     "text": "Acme: its share is cheaper",
+     "feedback": "A cheap share doesn’t make a company big or small. Market value is price times all the shares, and you don’t know the share counts."
+    },
+    {
+     "text": "You can’t tell without the share count",
+     "feedback": "Exactly. One share’s price says nothing about size. You need price × all the shares."
+    },
+    {
+     "text": "They’re the same size",
+     "feedback": "Nothing here says they’re equal. Market value is price times all the shares, and the share counts can be very different."
+    }
+   ],
+   "answer": 2,
+   "work": "Acme: 50M shares × $20 = $1B. Beta: 2M shares × $200 = $400M."
+  },
+  {
+   "type": "check",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Up 10%, same business",
+   "q": "Northwind’s shares rose 10% today. Nothing in the business changed. Why can that happen?",
+   "options": [
+    {
+     "text": "Its profit jumped 10% overnight",
+     "feedback": "Profit doesn’t change in a day. Price is what buyers pay, and today buyers were keener than sellers."
+    },
+    {
+     "text": "More eager buyers than sellers",
+     "feedback": "Price is what buyers pay. Today they were keener than sellers, so the price rose while the business stayed the same."
+    },
+    {
+     "text": "It printed more shares",
+     "feedback": "More shares cut the company into more slices. That tends to push each share’s price down, not up."
+    },
+    {
+     "text": "Its debt was paid off",
+     "feedback": "That would be a real change in the business. Here nothing changed: buyers were simply keener than sellers."
+    }
+   ],
+   "answer": 1,
+   "idea": "price-vs-worth",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You know what a share really is.",
+   "lines": [
+    "A share is a slice of ownership.",
+    "Price is what buyers pay, not what the business is worth.",
+    "Market value = price × all the shares."
+   ]
+  }
+ ]
+}

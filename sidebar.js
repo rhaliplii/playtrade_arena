@@ -6,6 +6,23 @@
   if (!nav) return;
   const active = nav.dataset.active;
 
+  // The side nav serves two sections. Playtrade is the default; Learn pages ask for
+  // their own set with data-nav="learn" — same markup, same styles, different items.
+  const LEARN_MAIN = [
+    { id: "learn-home", label: "Learn Home", icon: "ln-home.svg", href: "#" },
+    { id: "academy", label: "Academy", icon: "nav-academy.svg", href: "academy/index.html" },
+    { id: "tutorials", label: "Video Tutorials", icon: "ln-play.svg", href: "#" },
+    { id: "briefs", label: "Weekly Briefs", icon: "ln-lamp.svg", href: "#" },
+    { id: "daily", label: "AI Daily Brief", icon: "ln-flash.svg", href: "#" },
+    { id: "pulse", label: "Market Pulse", icon: "ln-heart-rate.svg", href: "#" },
+    { id: "blog", label: "Blog", icon: "ln-message-text.svg", href: "#" },
+  ];
+  const LEARN_BOTTOM = [
+    { id: "notes", label: "Release Notes", icon: "ln-note.svg", href: "#" },
+    { id: "faqs", label: "FAQs", icon: "ln-question.svg", href: "index.html#faq-title" },
+    { id: "help", label: "Help", icon: "nav-help.svg", href: "#" },
+  ];
+
   // Trading calculator pages (data-nav="calc"): the calculators only, no Pro card or bottom group.
   const CALC_MAIN = [
     { id: "hub", label: "All calculators", icon: "tl-calc-all.svg", href: "trading_calculators/index.html" },
@@ -53,8 +70,10 @@
     return `<a class="${cls}" href="${item.href}" data-label="${item.label}"${current}>${icon(item)}${badge}<span class="side-nav__label">${item.label}</span>${extra(item)}</a>`;
   };
 
+  const learn = nav.dataset.nav === "learn";
   const calc = nav.dataset.nav === "calc";
-  const mainItems = calc ? CALC_MAIN : MAIN;
+  const mainItems = calc ? CALC_MAIN : learn ? LEARN_MAIN : MAIN;
+  const bottomItems = learn ? LEARN_BOTTOM : BOTTOM;
 
   nav.innerHTML = `
     <div class="side-nav__scroll">
@@ -68,7 +87,7 @@
           </div>
           <a class="btn-brand side-nav__pro-btn" href="#">Become Pro</a>
         </div>
-        <div class="side-nav__group">${BOTTOM.map(link).join("")}</div>
+        <div class="side-nav__group">${bottomItems.map(link).join("")}</div>
       </div>`}
     </div>
     <button class="side-nav__toggle" type="button"><img src="assets/nav-toggle-arrow.svg" alt=""></button>`;

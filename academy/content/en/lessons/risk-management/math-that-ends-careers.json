@@ -1,0 +1,226 @@
+{
+ "id": "math-that-ends-careers",
+ "chapter": "risk-management",
+ "n": 1,
+ "title": "The math that ends careers",
+ "minutes": 5,
+ "desc": "Why a 50% loss needs a 100% gain to get back to even",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Board P1-Ch05-L1 card 1",
+   "pose": "worried2",
+   "title": "Half the account, gone",
+   "situation": "You start with $10,000 and lose 50%. What gain do you need just to get back to $10,000?",
+   "visual": {
+    "kind": "series",
+    "title": "Account",
+    "aside": "$10,000 → $5,000 → ?",
+    "ends": false,
+    "height": 90,
+    "label": "Account falls from $10,000 to $5,000; how far must it climb to get back?",
+    "hlines": [
+     {
+      "value": 10000,
+      "tone": "muted"
+     }
+    ],
+    "series": [
+     {
+      "values": [
+       10000,
+       5000,
+       10000
+      ],
+      "tone": "down",
+      "dots": true,
+      "end": false
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "50%: the same as you lost",
+     "feedback": "The 50% gain is on a smaller account. 50% of $5,000 is only $2,500."
+    },
+    {
+     "text": "100%: you have to double it",
+     "feedback": "A 50% loss needs a 100% gain. The hole is deeper than it looks."
+    },
+    {
+     "text": "75%",
+     "feedback": "Closer, but still short. 75% of $5,000 is $3,750, which leaves you at $8,750."
+    }
+   ],
+   "answer": 1,
+   "idea": "half-loss-double-gain",
+   "work": "$10,000 − 50% = $5,000. Back to $10,000 means +$5,000 on $5,000 = +100%."
+  },
+  {
+   "type": "learn",
+   "title": "Losses hurt more than gains help",
+   "text": "After a loss, you have less money working for you. So the gain you need to **get back to even** is always bigger than the loss.",
+   "visual": {
+    "kind": "hbars",
+    "title": "Gain needed to get back to even",
+    "label": "Lose 10% → +11%, 20% → +25%, 30% → +43%, 50% → +100%, 75% → +300%",
+    "rows": [
+     {
+      "label": "Lose 10%",
+      "value": 11,
+      "display": "+11%",
+      "tone": "gold"
+     },
+     {
+      "label": "Lose 20%",
+      "value": 25,
+      "display": "+25%",
+      "tone": "gold"
+     },
+     {
+      "label": "Lose 30%",
+      "value": 43,
+      "display": "+43%",
+      "tone": "amber"
+     },
+     {
+      "label": "Lose 50%",
+      "value": 100,
+      "display": "+100%",
+      "tone": "down"
+     },
+     {
+      "label": "Lose 75%",
+      "value": 300,
+      "display": "+300%",
+      "tone": "down"
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "Small losses are easy to fix. Big ones can end a trading career.",
+     "tone": "red"
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "Losses compound",
+   "text": "You lose 10% five trades in a row. Each loss is 10% of what’s left, so the account shrinks step by step.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "series",
+      "title": "Five 10% losses",
+      "aside": "−41%",
+      "height": 110,
+      "label": "$10,000 falls 10% five times to $5,905",
+      "hlines": [
+       {
+        "value": 10000,
+        "tone": "muted"
+       }
+      ],
+      "series": [
+       {
+        "values": [
+         10000,
+         9000,
+         8100,
+         7290,
+         6561,
+         5905
+        ],
+        "tone": "down",
+        "dots": true,
+        "end": "$5,905"
+       }
+      ]
+     },
+     {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Down",
+        "value": "−41%",
+        "strong": true
+       },
+       {
+        "label": "Gain needed to recover",
+        "value": "+69%",
+        "tone": "down"
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "$10,000 × 0.9 × 0.9 × 0.9 × 0.9 × 0.9 ≈ $5,905.",
+   "footTone": "sky"
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Up 50%, then down 50%",
+   "q": "Your $10,000 account gains 50%. Then it loses 50%. Where do you end up?",
+   "idea": "up-then-down",
+   "options": [
+    {
+     "text": "$10,000: back to even",
+     "feedback": "The 50% loss comes off a bigger account, so it takes away more than the gain added."
+    },
+    {
+     "text": "$7,500",
+     "feedback": "The gain took you to $15,000, and half of that is gone. Up 50% then down 50% leaves you 25% down."
+    },
+    {
+     "text": "$12,500",
+     "feedback": "The loss doesn’t come off the original $10,000. It comes off the $15,000 you had after the gain."
+    },
+    {
+     "text": "$5,000",
+     "feedback": "That would be two 50% losses. Here the account first grew to $15,000, then lost half."
+    }
+   ],
+   "answer": 1,
+   "work": "$10,000 × 1.5 = $15,000. $15,000 × 0.5 = $7,500."
+  },
+  {
+   "type": "check",
+   "title": "Why pros obsess over losses",
+   "q": "Why do pros care so much about keeping each loss small?",
+   "options": [
+    {
+     "text": "Big losses need even bigger gains to recover",
+     "feedback": "A 50% loss needs a 100% gain. Keep losses small and they stay easy to win back."
+    },
+    {
+     "text": "Losses are taxed more than gains",
+     "feedback": "Tax isn’t the reason. A deep loss needs a much bigger gain to climb back out."
+    },
+    {
+     "text": "Wins don’t count until you sell",
+     "feedback": "Selling isn’t the point. The math is: a deep loss needs a much bigger gain to climb back out."
+    },
+    {
+     "text": "Small losses don’t matter at all",
+     "feedback": "Small losses still count, but they’re easy to recover. It’s the big ones that end careers."
+    }
+   ],
+   "answer": 0,
+   "idea": "keep-losses-small",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You know why losses matter most.",
+   "lines": [
+    "A 50% loss needs a 100% gain to recover.",
+    "Losses compound: each one hits a smaller account.",
+    "Protect the account first. Profits come second."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,299 @@
+{
+ "id": "asset-allocation",
+ "chapter": "portfolio-management",
+ "n": 3,
+ "title": "Asset allocation",
+ "minutes": 5,
+ "desc": "Split money between stocks, bonds and cash by goal and time",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Who can take more risk?",
+   "situation": "Sam needs his money in 1 year for a house deposit. Tom won’t touch his for 25 years. Who can hold more in stocks?",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Sam · house deposit",
+      "value": "1 year",
+      "tone": "gold",
+      "strong": true
+     },
+     {
+      "label": "Tom · retirement",
+      "value": "25 years",
+      "tone": "up",
+      "strong": true
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Sam: he needs quick growth",
+     "feedback": "If stocks fall 30% next year, Sam can’t wait. He needs the money anyway."
+    },
+    {
+     "text": "Tom: he has time to recover from falls",
+     "feedback": "Time lets Tom sit through the falls. Sam’s money needs to be there next year."
+    },
+    {
+     "text": "Both the same: stocks are stocks",
+     "feedback": "The stocks are the same, but the time isn’t. Tom can wait out a bad year; Sam can’t."
+    }
+   ],
+   "answer": 1,
+   "idea": "time-horizon-risk",
+   "work": "Stocks have fallen 30–50% in bad years. A one-year goal has no time to wait for a recovery.",
+   "added": "Feedback for C written for the Academy"
+  },
+  {
+   "type": "learn",
+   "title": "Your split",
+   "text": "**[[asset-allocation|Asset allocation]]** is how you split money between stocks, bonds and cash. For most people it matters more than any single pick.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "donut",
+      "center": "60/30/10",
+      "centerSub": "example",
+      "segments": [
+       {
+        "value": 60,
+        "label": "Stocks · 60%",
+        "sub": "Growth, biggest swings",
+        "tone": "up"
+       },
+       {
+        "value": 30,
+        "label": "Bonds · 30%",
+        "sub": "Steadier, lower return",
+        "tone": "blue"
+       },
+       {
+        "value": 10,
+        "label": "Cash · 10%",
+        "sub": "Safest, lowest return",
+        "tone": "gold"
+       }
+      ]
+     }
+    },
+    {
+     "side": true,
+     "tip": "An example split to learn from, not advice. The right split depends on your goal and time."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "Goal and time set the split",
+   "text": "The sooner you need the money, the less of it sits in stocks.",
+   "visual": {
+    "kind": "split",
+    "label": "Example splits: 1–2 years 40% bonds 60% cash; 5–10 years 50% stocks 40% bonds 10% cash; 20+ years 80% stocks 15% bonds 5% cash",
+    "legend": [
+     {
+      "label": "Stocks",
+      "tone": "up"
+     },
+     {
+      "label": "Bonds",
+      "tone": "blue"
+     },
+     {
+      "label": "Cash",
+      "tone": "gold"
+     }
+    ],
+    "rows": [
+     {
+      "label": "Needed in 1–2 years",
+      "aside": "calm",
+      "segments": [
+       {
+        "value": 40,
+        "tone": "blue",
+        "label": "40%"
+       },
+       {
+        "value": 60,
+        "tone": "gold",
+        "label": "60%"
+       }
+      ]
+     },
+     {
+      "label": "Needed in 5–10 years",
+      "aside": "middle",
+      "segments": [
+       {
+        "value": 50,
+        "tone": "up",
+        "label": "50%"
+       },
+       {
+        "value": 40,
+        "tone": "blue",
+        "label": "40%"
+       },
+       {
+        "value": 10,
+        "tone": "gold"
+       }
+      ]
+     },
+     {
+      "label": "Needed in 20+ years",
+      "aside": "growth",
+      "segments": [
+       {
+        "value": 80,
+        "tone": "up",
+        "label": "80%"
+       },
+       {
+        "value": 15,
+        "tone": "blue",
+        "label": "15%"
+       },
+       {
+        "value": 5,
+        "tone": "gold"
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "Example splits for learning, not advice. More time usually means more room for stock swings.",
+   "footTone": "gold",
+   "added": "Board label “tap a goal”: built as ▶ Play (split rows aren’t tappable)"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Short-term money stays out",
+   "text": "Money you need in the next **2 to 3 years** doesn’t belong in stocks. A crash could hit right before you need it.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Emergency money",
+        "value": "Cash",
+        "tone": "gold",
+        "strong": true
+       },
+       {
+        "label": "Needed in 1–3 years",
+        "value": "Cash and bonds",
+        "tone": "blue",
+        "strong": true
+       },
+       {
+        "label": "Not needed for 10+ years",
+        "value": "More stocks",
+        "tone": "up",
+        "strong": true
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Do the split",
+   "q": "You have $10,000 and an example split of 60% stocks, 30% bonds, 10% cash. How much goes into bonds?",
+   "idea": "allocation-split-math",
+   "visual": {
+    "kind": "split",
+    "label": "$10,000 split 60% stocks, 30% bonds, 10% cash",
+    "rows": [
+     {
+      "label": "$10,000",
+      "aside": "60/30/10",
+      "segments": [
+       {
+        "value": 60,
+        "tone": "up",
+        "label": "Stocks 60%"
+       },
+       {
+        "value": 30,
+        "tone": "blue",
+        "label": "Bonds 30%"
+       },
+       {
+        "value": 10,
+        "tone": "gold"
+       }
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "$6,000",
+     "feedback": "$6,000 is the stock part. Bonds are 30%."
+    },
+    {
+     "text": "$3,000",
+     "feedback": "Bonds are 30% of the $10,000."
+    },
+    {
+     "text": "$1,000",
+     "feedback": "$1,000 is the cash part. Bonds are 30%."
+    },
+    {
+     "text": "$30",
+     "feedback": "That treats 30% as $30. Take 30% of the whole $10,000."
+    }
+   ],
+   "answer": 1,
+   "work": "$10,000 × 30% = $3,000.",
+   "added": "Feedback for the options the board doesn’t show written for the Academy"
+  },
+  {
+   "type": "check",
+   "title": "Biggest swings",
+   "q": "In a mix of stocks, bonds and cash, which part usually swings the most?",
+   "options": [
+    {
+     "text": "Stocks",
+     "feedback": "Stocks bring the most growth and the biggest swings."
+    },
+    {
+     "text": "Bonds",
+     "feedback": "Bond prices move, but usually far less than stocks. Stocks bring the most growth and the biggest swings."
+    },
+    {
+     "text": "Cash",
+     "feedback": "Cash barely moves. It’s the safest part, with the lowest return."
+    },
+    {
+     "text": "They swing the same",
+     "feedback": "They don’t. Cash barely moves, bonds move a little, and stocks swing the most."
+    }
+   ],
+   "answer": 0,
+   "idea": "stocks-swing-most",
+   "added": "Feedback for the options the board doesn’t show written for the Academy",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can split money by goal and time.",
+   "lines": [
+    "Allocation: the split between stocks, bonds and cash.",
+    "Short goals need calm money. Long goals can take swings.",
+    "Money needed within 2–3 years stays out of stocks."
+   ]
+  }
+ ]
+}

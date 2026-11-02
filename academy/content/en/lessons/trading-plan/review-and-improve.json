@@ -1,0 +1,274 @@
+{
+ "id": "review-and-improve",
+ "chapter": "trading-plan",
+ "n": 5,
+ "title": "Review and improve",
+ "minutes": 5,
+ "desc": "Read your journal every week and improve your plan one change at a time",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Fix it all at once?",
+   "situation": "After a bad week you want to change your entry, your stop and your markets, all at once. What’s the problem?",
+   "options": [
+    {
+     "text": "None: more changes fix things faster",
+     "feedback": "One bad week can be bad luck. Changing three rules at once also hides what worked."
+    },
+    {
+     "text": "You won’t know which change helped",
+     "feedback": "Change one thing, then measure it. That’s how a plan gets better."
+    },
+    {
+     "text": "You should only change your markets",
+     "feedback": "Your markets may not be the problem. One bad week can be luck: change one thing and measure it."
+    }
+   ],
+   "answer": 1,
+   "idea": "one-change-at-a-time",
+   "work": "3 changes at once. Results get better or worse: which change did it? You can’t tell."
+  },
+  {
+   "type": "learn",
+   "title": "The weekly review",
+   "text": "Once a week you read your **[[trading-journal|journal]]** and ask the same four questions.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "list",
+      "title": "Friday · 30 minutes with the journal",
+      "items": [
+       {
+        "title": "Did I follow every rule?"
+       },
+       {
+        "title": "Wins, losses, average win vs loss"
+       },
+       {
+        "title": "My biggest mistake"
+       },
+       {
+        "title": "One change, or none"
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "Judge the process, not one week’s profit."
+    },
+    {
+     "visual": {
+      "kind": "planbar",
+      "sections": [
+       "Style",
+       "Entry",
+       "Exit & risk",
+       "Checklist",
+       "Review"
+      ],
+      "current": 4
+     }
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap a row",
+   "title": "What the journal shows",
+   "text": "Last 20 trades, split by one question: did you follow your plan?",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "stack",
+      "items": [
+       {
+        "kind": "stats",
+        "items": [
+         {
+          "label": "Followed the plan",
+          "value": "+$450",
+          "sub": "15 trades",
+          "tone": "up",
+          "tint": true
+         },
+         {
+          "label": "Broke a rule",
+          "value": "−$780",
+          "sub": "5 trades",
+          "tone": "down",
+          "tint": true
+         }
+        ]
+       },
+       {
+        "kind": "table",
+        "label": "The 5 trades that broke a rule lost $780",
+        "cols": [
+         {
+          "label": "Broken rule",
+          "w": 1.6
+         },
+         {
+          "label": "Trades",
+          "w": 0.7
+         },
+         {
+          "label": "Result",
+          "align": "right"
+         }
+        ],
+        "rows": [
+         {
+          "cells": [
+           {
+            "text": "Chased a move",
+            "strong": true
+           },
+           "2",
+           {
+            "text": "−$310",
+            "tone": "down"
+           }
+          ],
+          "note": "Bought far above the setup: worse price, stop far away."
+         },
+         {
+          "cells": [
+           {
+            "text": "Moved a stop",
+            "strong": true
+           },
+           "2",
+           {
+            "text": "−$400",
+            "tone": "down"
+           }
+          ],
+          "note": "The biggest leak: two 1% losses grew to $400."
+         },
+         {
+          "cells": [
+           {
+            "text": "Skipped the checklist",
+            "strong": true
+           },
+           "1",
+           {
+            "text": "−$70",
+            "tone": "down"
+           }
+          ],
+          "note": "One rushed trade the checklist would have stopped."
+         }
+        ]
+       }
+      ]
+     },
+     "side": true
+    }
+   ],
+   "foot": "The plan made money. The exceptions lost it. The fix isn’t a new rule: it’s following the old ones.",
+   "footTone": "gold"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Change one rule at a time",
+   "text": "Change **one** thing. Keep the rest the same. Judge it on **20 trades or more**, not on the next three.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Change",
+        "value": "Target from 2× to 3× the risk"
+       },
+       {
+        "label": "Keep",
+        "value": "Entry, stop, size, markets"
+       },
+       {
+        "label": "Test for",
+        "value": "20 trades or more"
+       },
+       {
+        "label": "Then",
+        "value": "Keep it, or go back"
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "A few trades prove nothing. Luck evens out only over many.",
+     "tone": "gold"
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "One change",
+   "q": "Your review shows most losses came from trades open during earnings. Which change fits best?",
+   "options": [
+    {
+     "text": "Change your entry, stop and markets",
+     "feedback": "The journal points at one problem: earnings. One rule fixes it, and you can measure it."
+    },
+    {
+     "text": "Add one rule: no new trades in the week before earnings",
+     "feedback": "One rule aimed at the one problem the journal found. Test it, then judge it over 20 trades or more."
+    },
+    {
+     "text": "Double your size to win it back",
+     "feedback": "Bigger size makes the earnings losses bigger. Fix the one problem the journal shows."
+    },
+    {
+     "text": "Stop keeping a journal",
+     "feedback": "Without a journal you can’t see what’s going wrong. Keep it, and fix the one problem it shows."
+    }
+   ],
+   "answer": 1,
+   "idea": "fix-what-the-journal-shows",
+   "work": null
+  },
+  {
+   "type": "check",
+   "title": "Too soon to tell",
+   "q": "You changed one rule last week. After 3 trades, 2 lost. What should you do?",
+   "options": [
+    {
+     "text": "Drop it: it failed",
+     "feedback": "2 losses in 3 can happen to any good rule. Judge it after 20 trades or more."
+    },
+    {
+     "text": "Keep testing: 3 trades is too few",
+     "feedback": "3 trades is mostly luck. Keep the rule and judge it after 20 trades or more."
+    },
+    {
+     "text": "Change two more rules",
+     "feedback": "More changes at once hide what works. Keep testing the one change first."
+    },
+    {
+     "text": "Risk more to test it faster",
+     "feedback": "More risk makes the test cost more, not go faster. Same size, 20 trades or more."
+    }
+   ],
+   "answer": 1,
+   "idea": "judge-over-20-trades",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "Your plan is complete.",
+   "lines": [
+    "Review the journal every week.",
+    "Judge the process, not one week’s profit.",
+    "Change one rule at a time. Test it on 20+ trades."
+   ]
+  }
+ ]
+}

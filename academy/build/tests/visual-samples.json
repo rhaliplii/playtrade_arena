@@ -1,0 +1,4449 @@
+{
+ "note": "Every visual kind with sample data (Chapters 1–10). Rendered by visuals.html; validated against visual.schema.json by the build check of this folder (see VISUALS.md).",
+ "visuals": [
+  {
+   "group": "Chapter 3 · candles",
+   "board": "Ch3 L1 card 2",
+   "v": {
+    "kind": "candle",
+    "items": [
+     {
+      "ohlc": [
+       100,
+       108,
+       97,
+       105
+      ],
+      "caption": "Green · up"
+     },
+     {
+      "ohlc": [
+       105,
+       107,
+       96,
+       98
+      ],
+      "caption": "Red · down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch3 L1 card 1 (Call)",
+   "v": {
+    "kind": "candle",
+    "items": [
+     {
+      "ohlc": [
+       100,
+       108,
+       97,
+       105
+      ],
+      "labels": {
+       "high": "?",
+       "close": "?",
+       "open": "?",
+       "low": "?"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch3 L1 card 4 (Try it)",
+   "v": {
+    "kind": "candle",
+    "items": [
+     {
+      "ohlc": [
+       50,
+       51,
+       45,
+       46
+      ],
+      "labels": {
+       "close": "?"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch3 Challenge Q1",
+   "v": {
+    "kind": "candle",
+    "title": "Daily · one candle",
+    "axis": true,
+    "items": [
+     {
+      "ohlc": [
+       50,
+       52,
+       46,
+       47
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch3 L2 card 2",
+   "v": {
+    "kind": "shapes",
+    "items": [
+     {
+      "name": "Hammer",
+      "tone": "down",
+      "text": "Long lower wick after a fall. Buyers fought back.",
+      "candles": [
+       [
+        50,
+        50.6,
+        46,
+        50.4
+       ]
+      ]
+     },
+     {
+      "name": "Doji",
+      "tone": "up",
+      "text": "Opens and closes at the same price. Nobody won.",
+      "candles": [
+       [
+        50,
+        52,
+        48,
+        50.05
+       ]
+      ]
+     },
+     {
+      "name": "Engulfing",
+      "tone": "up",
+      "text": "A big green body swallows the red one before it.",
+      "candles": [
+       [
+        51,
+        51.4,
+        49.6,
+        50
+       ],
+       [
+        49.5,
+        52.4,
+        49.3,
+        52
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch3 L2 card 1 (Call)",
+   "v": {
+    "kind": "candles",
+    "title": "5 days",
+    "aside": "−11%",
+    "chart": {
+     "ohlc": [
+      [
+       60,
+       60.5,
+       58,
+       58.4
+      ],
+      [
+       58.2,
+       58.6,
+       56,
+       56.3
+      ],
+      [
+       56.2,
+       56.6,
+       54.2,
+       54.5
+      ],
+      [
+       54.4,
+       54.7,
+       53,
+       53.3
+      ],
+      [
+       53.2,
+       53.6,
+       49,
+       53.4
+      ]
+     ],
+     "height": 110,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "marks": [
+      {
+       "i": 4,
+       "price": 49,
+       "tone": "gold",
+       "label": "today",
+       "pos": "below"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch3 L3 card 3",
+   "v": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "tabs",
+      "items": [
+       "1m",
+       "1H",
+       "1D",
+       "1W"
+      ],
+      "on": 3
+     },
+     {
+      "kind": "candles",
+      "title": "Weekly · the trend",
+      "aside": "up",
+      "chart": {
+       "path": [
+        [
+         0,
+         40
+        ],
+        [
+         11,
+         58
+        ]
+       ],
+       "seed": 3,
+       "height": 70,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0
+      }
+     },
+     {
+      "kind": "candles",
+      "title": "Daily · the pullback",
+      "aside": "down",
+      "chart": {
+       "path": [
+        [
+         0,
+         58
+        ],
+        [
+         11,
+         52
+        ]
+       ],
+       "seed": 5,
+       "height": 70,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0
+      }
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch3 L4 card 1 (Call)",
+   "v": {
+    "kind": "chart-pair",
+    "items": [
+     {
+      "label": "Stock A",
+      "aside": "3× vol",
+      "tone": "white",
+      "chart": {
+       "path": [
+        [
+         0,
+         46
+        ],
+        [
+         6,
+         48.5
+        ],
+        [
+         7,
+         51.5
+        ]
+       ],
+       "seed": 2,
+       "height": 120,
+       "hlines": [
+        {
+         "price": 50,
+         "tone": "gold"
+        }
+       ],
+       "volume": [
+        1,
+        1.1,
+        0.9,
+        1,
+        1.2,
+        1,
+        3.2
+       ],
+       "volHeight": 30
+      }
+     },
+     {
+      "label": "Stock B",
+      "aside": "½ vol",
+      "tone": "white",
+      "chart": {
+       "path": [
+        [
+         0,
+         46
+        ],
+        [
+         6,
+         48.5
+        ],
+        [
+         7,
+         51.5
+        ]
+       ],
+       "seed": 2,
+       "height": 120,
+       "hlines": [
+        {
+         "price": 50,
+         "tone": "gold"
+        }
+       ],
+       "volume": [
+        1,
+        1.1,
+        0.9,
+        1,
+        1.2,
+        1,
+        0.5
+       ],
+       "volHeight": 30
+      }
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch3 L4 card 2",
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "aside": "price + volume",
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       5,
+       44
+      ],
+      [
+       7,
+       43
+      ],
+      [
+       10,
+       47
+      ]
+     ],
+     "seed": 11,
+     "height": 110,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "volume": [
+      3,
+      4,
+      2,
+      3,
+      5,
+      4,
+      3,
+      9,
+      3,
+      4,
+      5
+     ],
+     "volHeight": 40
+    }
+   }
+  },
+  {
+   "board": "Ch3 Challenge Q4",
+   "v": {
+    "kind": "candles",
+    "title": "Daily · 2 weeks",
+    "chart": {
+     "path": [
+      [
+       0,
+       37
+      ],
+      [
+       9,
+       39.2
+      ],
+      [
+       10,
+       40.6
+      ]
+     ],
+     "seed": 4,
+     "height": 80,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "priceLabel": "Price",
+     "hlines": [
+      {
+       "price": 40,
+       "tone": "gold",
+       "label": "$40",
+       "style": "left"
+      }
+     ],
+     "volume": [
+      1,
+      1.1,
+      0.9,
+      1.2,
+      1,
+      1.1,
+      0.9,
+      1,
+      1.2,
+      1,
+      0.5
+     ],
+     "volAvg": 1,
+     "volAvgLabel": "average 1M",
+     "volLabel": "Volume",
+     "volHeight": 34
+    }
+   }
+  },
+  {
+   "board": "Ch3 L5 card 2",
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "path": [
+      [
+       0,
+       44
+      ],
+      [
+       2,
+       40.6
+      ],
+      [
+       4,
+       47.6
+      ],
+      [
+       6,
+       40.4
+      ],
+      [
+       8,
+       47.8
+      ],
+      [
+       10,
+       41
+      ],
+      [
+       11,
+       44
+      ]
+     ],
+     "seed": 8,
+     "height": 120,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 48,
+       "tone": "down",
+       "label": "resistance"
+      },
+      {
+       "price": 40,
+       "tone": "up",
+       "label": "support",
+       "style": "below"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch3 L5 card 4 (Pro Move)",
+   "v": {
+    "kind": "rows",
+    "style": "levels",
+    "rows": [
+     {
+      "label": "Target · near resistance",
+      "value": "$48",
+      "tone": "up"
+     },
+     {
+      "label": "Entry · just above support",
+      "value": "$41",
+      "tone": "blue"
+     },
+     {
+      "label": "Stop · below the zone",
+      "value": "$38",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "group": "Chapter 4 · trends, patterns, indicators",
+   "board": "Ch4 L1 card 3 (tap the swings)",
+   "explore": true,
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "aside": "- - last higher low $49",
+    "chart": {
+     "path": [
+      [
+       0,
+       44
+      ],
+      [
+       3,
+       47
+      ],
+      [
+       5,
+       45
+      ],
+      [
+       8,
+       50
+      ],
+      [
+       10,
+       49
+      ],
+      [
+       13,
+       53
+      ],
+      [
+       15,
+       51
+      ],
+      [
+       17,
+       52
+      ],
+      [
+       19,
+       47.5
+      ]
+     ],
+     "seed": 6,
+     "height": 150,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 49,
+       "tone": "gold"
+      }
+     ],
+     "zigzag": "blue",
+     "swings": [
+      {
+       "i": 3,
+       "price": 47,
+       "label": "H",
+       "tone": "up"
+      },
+      {
+       "i": 5,
+       "price": 45,
+       "label": "HL",
+       "tone": "up"
+      },
+      {
+       "i": 8,
+       "price": 50,
+       "label": "HH",
+       "tone": "up"
+      },
+      {
+       "i": 10,
+       "price": 49,
+       "label": "HL",
+       "tone": "up"
+      },
+      {
+       "i": 13,
+       "price": 53,
+       "label": "HH",
+       "tone": "up"
+      },
+      {
+       "i": 17,
+       "price": 52,
+       "label": "LH",
+       "tone": "down"
+      },
+      {
+       "i": 19,
+       "price": 47.5,
+       "label": "LL",
+       "tone": "down"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch4 L1 card 2",
+   "v": {
+    "kind": "chart-pair",
+    "items": [
+     {
+      "label": "Uptrend",
+      "sub": "Higher highs, higher lows",
+      "tone": "up",
+      "chart": {
+       "path": [
+        [
+         0,
+         10
+        ],
+        [
+         3,
+         14
+        ],
+        [
+         5,
+         12
+        ],
+        [
+         8,
+         17
+        ],
+        [
+         10,
+         15
+        ],
+        [
+         13,
+         20
+        ]
+       ],
+       "seed": 1,
+       "height": 90
+      }
+     },
+     {
+      "label": "Sideways",
+      "sub": "No new highs or lows",
+      "tone": "gold",
+      "chart": {
+       "path": [
+        [
+         0,
+         14
+        ],
+        [
+         3,
+         18
+        ],
+        [
+         6,
+         14
+        ],
+        [
+         9,
+         18
+        ],
+        [
+         12,
+         14
+        ],
+        [
+         13,
+         15
+        ]
+       ],
+       "seed": 1,
+       "height": 90
+      }
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch4 L2 card 2",
+   "v": {
+    "kind": "candles",
+    "title": "Daily · uptrend line",
+    "aside": "3 touches",
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       2,
+       41
+      ],
+      [
+       4,
+       44
+      ],
+      [
+       6,
+       43
+      ],
+      [
+       9,
+       47
+      ],
+      [
+       11,
+       46
+      ],
+      [
+       14,
+       50
+      ],
+      [
+       16,
+       49
+      ],
+      [
+       18,
+       52
+      ]
+     ],
+     "seed": 9,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "trendlines": [
+      {
+       "from": [
+        2,
+        40.4
+       ],
+       "to": [
+        11,
+        45.2
+       ],
+       "tone": "up",
+       "touches": [
+        2,
+        6,
+        11
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch4 L2 card 3 (drag the line)",
+   "v": {
+    "kind": "drawline",
+    "title": "Daily · rising channel",
+    "mode": "trend",
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       3,
+       44
+      ],
+      [
+       5,
+       42
+      ],
+      [
+       8,
+       47
+      ],
+      [
+       10,
+       45
+      ],
+      [
+       13,
+       50
+      ],
+      [
+       15,
+       48
+      ],
+      [
+       18,
+       53
+      ]
+     ],
+     "seed": 12,
+     "height": 140,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "trendlines": [
+      {
+       "from": [
+        0,
+        39.5
+       ],
+       "to": [
+        15,
+        47.5
+       ],
+       "tone": "up"
+      }
+     ]
+    },
+    "start": {
+     "from": [
+      3,
+      47
+     ],
+     "to": [
+      15,
+      47
+     ]
+    },
+    "target": {
+     "from": [
+      3,
+      44.6
+     ],
+     "to": [
+      15,
+      51
+     ]
+    },
+    "tolerance": 1.2,
+    "tone": "down",
+    "label": "upper line",
+    "done": "That’s a channel: price travels between the two lines."
+   }
+  },
+  {
+   "board": "Ch4 L3 card 1 (Call)",
+   "v": {
+    "kind": "candles",
+    "title": "Daily · 4 months",
+    "legend": [
+     {
+      "label": "price",
+      "tone": "blue"
+     },
+     {
+      "label": "50-day",
+      "tone": "gold"
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       48
+      ],
+      [
+       10,
+       50
+      ],
+      [
+       18,
+       49
+      ],
+      [
+       30,
+       56
+      ],
+      [
+       36,
+       55
+      ],
+      [
+       45,
+       62
+      ]
+     ],
+     "seed": 21,
+     "noise": 0.5,
+     "height": 120,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "overlays": [
+      {
+       "period": 12,
+       "tone": "gold"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch4 L4 card 3 (tap Play)",
+   "explore": true,
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "middle $56",
+      "tone": "gold",
+      "dashed": true
+     },
+     {
+      "label": "target $62",
+      "tone": "up",
+      "dashed": true
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       58
+      ],
+      [
+       5,
+       50
+      ],
+      [
+       9,
+       56
+      ],
+      [
+       13,
+       50.2
+      ],
+      [
+       17,
+       55
+      ],
+      [
+       19,
+       57
+      ],
+      [
+       22,
+       61
+      ]
+     ],
+     "seed": 14,
+     "height": 140,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 56,
+       "tone": "gold"
+      },
+      {
+       "price": 62,
+       "tone": "up"
+      }
+     ],
+     "explore": "play",
+     "marks": [
+      {
+       "i": 13,
+       "price": 50.2,
+       "tone": "up",
+       "label": "$50"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch4 L5 card 2",
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "neckline",
+      "tone": "gold",
+      "dashed": true
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       4,
+       50
+      ],
+      [
+       6,
+       46
+      ],
+      [
+       10,
+       56
+      ],
+      [
+       13,
+       46.2
+      ],
+      [
+       16,
+       51
+      ],
+      [
+       19,
+       45
+      ]
+     ],
+     "seed": 15,
+     "height": 140,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 46,
+       "tone": "gold"
+      }
+     ],
+     "swings": [
+      {
+       "i": 4,
+       "price": 50,
+       "label": "left"
+      },
+      {
+       "i": 10,
+       "price": 56,
+       "label": "head"
+      },
+      {
+       "i": 16,
+       "price": 51,
+       "label": "right"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch4 L6 card 1 (Call)",
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "path": [
+      [
+       0,
+       50
+      ],
+      [
+       15,
+       52
+      ],
+      [
+       25,
+       58
+      ],
+      [
+       40,
+       66
+      ],
+      [
+       50,
+       72
+      ]
+     ],
+     "seed": 31,
+     "noise": 0.6,
+     "height": 80,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "priceLabel": "Price",
+     "panels": [
+      {
+       "type": "rsi",
+       "label": "RSI (14)",
+       "marks": [
+        {
+         "i": 49,
+         "label": "75",
+         "pos": "above"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch4 L6 card 3 (tap Play)",
+   "explore": true,
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "aside": "+24% after",
+    "chart": {
+     "path": [
+      [
+       0,
+       50
+      ],
+      [
+       15,
+       51
+      ],
+      [
+       20,
+       56
+      ],
+      [
+       35,
+       62
+      ],
+      [
+       50,
+       70
+      ]
+     ],
+     "seed": 33,
+     "noise": 0.5,
+     "height": 90,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "priceLabel": "Price",
+     "marks": [
+      {
+       "i": 20,
+       "price": 56,
+       "tone": "down",
+       "label": "first 70"
+      }
+     ],
+     "panels": [
+      {
+       "type": "rsi",
+       "label": "RSI (14)"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch4 L6 card 2",
+   "v": {
+    "kind": "gauge",
+    "bands": [
+     {
+      "to": 30,
+      "label": "Oversold",
+      "tone": "blue"
+     },
+     {
+      "to": 70,
+      "label": "Neutral",
+      "tone": "muted"
+     },
+     {
+      "to": 100,
+      "label": "Overbought",
+      "tone": "down"
+     }
+    ],
+    "ticks": [
+     0,
+     30,
+     70,
+     100
+    ]
+   }
+  },
+  {
+   "board": "Ch4 L6 card 5 (Try it)",
+   "v": {
+    "kind": "gauge",
+    "value": 25,
+    "valueLabel": "25",
+    "bands": [
+     {
+      "to": 30,
+      "label": "Oversold",
+      "tone": "blue",
+      "on": true
+     },
+     {
+      "to": 70,
+      "label": "Neutral",
+      "tone": "muted"
+     },
+     {
+      "to": 100,
+      "label": "Overbought",
+      "tone": "down"
+     }
+    ],
+    "ticks": [
+     0,
+     30,
+     70,
+     100
+    ]
+   }
+  },
+  {
+   "board": "Ch4 L7 card 1 (Call)",
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "MACD line",
+      "tone": "gold"
+     },
+     {
+      "label": "signal",
+      "tone": "down"
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       60
+      ],
+      [
+       20,
+       56
+      ],
+      [
+       30,
+       50
+      ],
+      [
+       38,
+       52.5
+      ],
+      [
+       50,
+       54
+      ]
+     ],
+     "seed": 41,
+     "height": 80,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "priceLabel": "Price",
+     "marks": [
+      {
+       "i": 30,
+       "price": 50,
+       "tone": "blue",
+       "label": "low $50",
+       "pos": "below"
+      }
+     ],
+     "panels": [
+      {
+       "type": "macd",
+       "label": "MACD",
+       "height": 64
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch4 L8 card 3",
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "50-day",
+      "tone": "gold"
+     },
+     {
+      "label": "support $58",
+      "tone": "up",
+      "dashed": true
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       52
+      ],
+      [
+       8,
+       60
+      ],
+      [
+       12,
+       64
+      ],
+      [
+       18,
+       58.2
+      ],
+      [
+       22,
+       61
+      ]
+     ],
+     "seed": 51,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 58,
+       "tone": "up"
+      }
+     ],
+     "trendlines": [
+      {
+       "from": [
+        0,
+        51.5
+       ],
+       "to": [
+        18,
+        57.8
+       ],
+       "tone": "gold",
+       "extend": "right"
+      }
+     ],
+     "volume": [
+      3,
+      3,
+      4,
+      3,
+      3,
+      4,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      2,
+      3,
+      2,
+      3,
+      3,
+      6,
+      7,
+      6,
+      5,
+      5,
+      6
+     ],
+     "volHeight": 30
+    }
+   }
+  },
+  {
+   "board": "Ch4 Challenge Q7",
+   "v": {
+    "kind": "candles",
+    "title": "Daily · 2 months sideways",
+    "legend": [
+     {
+      "label": "MACD line",
+      "tone": "gold"
+     },
+     {
+      "label": "signal",
+      "tone": "down"
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       50
+      ],
+      [
+       8,
+       52
+      ],
+      [
+       16,
+       49
+      ],
+      [
+       24,
+       52
+      ],
+      [
+       32,
+       49
+      ],
+      [
+       40,
+       51
+      ]
+     ],
+     "seed": 44,
+     "noise": 0.8,
+     "height": 60,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "priceLabel": "Price",
+     "panels": [
+      {
+       "type": "macd",
+       "label": "MACD",
+       "show": [
+        "lines"
+       ],
+       "marks": [
+        {
+         "i": 39,
+         "label": "cross",
+         "tone": "gold"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "group": "Chapter 5 · risk",
+   "board": "Ch5 L1 card 2",
+   "v": {
+    "kind": "hbars",
+    "title": "Gain needed to get back to even",
+    "rows": [
+     {
+      "label": "Lose 10%",
+      "value": 11,
+      "display": "+11%",
+      "tone": "gold"
+     },
+     {
+      "label": "Lose 20%",
+      "value": 25,
+      "display": "+25%",
+      "tone": "gold"
+     },
+     {
+      "label": "Lose 30%",
+      "value": 43,
+      "display": "+43%",
+      "tone": "amber"
+     },
+     {
+      "label": "Lose 50%",
+      "value": 100,
+      "display": "+100%",
+      "tone": "down"
+     },
+     {
+      "label": "Lose 75%",
+      "value": 300,
+      "display": "+300%",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch5 L2 card 1 (Call)",
+   "v": {
+    "kind": "series",
+    "title": "10 losses in a row",
+    "aside": "same trades",
+    "series": [
+     {
+      "label": "1% risk",
+      "tone": "up",
+      "dots": true,
+      "values": [
+       10000,
+       9900,
+       9801,
+       9703,
+       9606,
+       9510,
+       9415,
+       9321,
+       9227,
+       9135,
+       9044
+      ]
+     },
+     {
+      "label": "10% risk",
+      "tone": "down",
+      "dots": true,
+      "values": [
+       10000,
+       9000,
+       8100,
+       7290,
+       6561,
+       5905,
+       5314,
+       4783,
+       4305,
+       3874,
+       3487
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch5 L2 card 3 (tap a row)",
+   "v": {
+    "kind": "table",
+    "cols": [
+     {
+      "label": "Streak"
+     },
+     {
+      "label": "1% risk",
+      "tone": "up"
+     },
+     {
+      "label": "10% risk",
+      "tone": "down"
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "5 losses",
+       "$9,510",
+       "$5,905"
+      ],
+      "note": "Down 5% at 1%. Down 41% at 10%."
+     },
+     {
+      "cells": [
+       "10 losses",
+       "$9,044",
+       "$3,487"
+      ],
+      "note": "At 10% you need +187% to get back."
+     },
+     {
+      "cells": [
+       "20 losses",
+       "$8,179",
+       {
+        "text": "$1,216",
+        "tone": "down"
+       }
+      ],
+      "note": "At 1%, 20 losses leave you down 18%: bad, but still trading."
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch5 L3 card 1 (Call)",
+   "v": {
+    "kind": "fields",
+    "items": [
+     {
+      "label": "Account",
+      "value": "$10,000"
+     },
+     {
+      "label": "Risk",
+      "value": "1%"
+     },
+     {
+      "label": "Entry",
+      "value": "$50",
+      "tone": "blue"
+     },
+     {
+      "label": "Stop",
+      "value": "$48",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch5 L3 card 2",
+   "v": {
+    "kind": "formula",
+    "terms": [
+     {
+      "text": "Shares",
+      "tone": "up"
+     },
+     {
+      "op": "="
+     },
+     {
+      "text": "Account × Risk %",
+      "tone": "gold"
+     },
+     {
+      "op": "÷"
+     },
+     {
+      "text": "Entry − Stop",
+      "tone": "down"
+     }
+    ],
+    "foot": "Dollars you’ll risk ÷ dollars lost per share"
+   }
+  },
+  {
+   "board": "Ch5 L5 card 2",
+   "v": {
+    "kind": "rr",
+    "title": "Trade plan",
+    "aside": "2:1",
+    "entry": 50,
+    "stop": 48,
+    "target": 54
+   }
+  },
+  {
+   "board": "Ch5 L5 card 1 (Call)",
+   "v": {
+    "kind": "stack",
+    "layout": "row",
+    "items": [
+     {
+      "kind": "rr",
+      "compact": true,
+      "title": "Setup A",
+      "aside": "1:1",
+      "entry": 50,
+      "stop": 48,
+      "target": 52
+     },
+     {
+      "kind": "rr",
+      "compact": true,
+      "title": "Setup B",
+      "aside": "3:1",
+      "entry": 50,
+      "stop": 48,
+      "target": 56
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch5 L6 card 3",
+   "v": {
+    "kind": "table",
+    "cols": [
+     {
+      "label": ""
+     },
+     {
+      "label": "A"
+     },
+     {
+      "label": "B"
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "Win rate",
+       "70%",
+       "40%"
+      ]
+     },
+     {
+      "cells": [
+       "Average win",
+       "$50",
+       "$200"
+      ]
+     },
+     {
+      "cells": [
+       "Average loss",
+       "$150",
+       "$100"
+      ]
+     },
+     {
+      "cells": [
+       "Expectancy",
+       {
+        "text": "−$10",
+        "tone": "down"
+       },
+       {
+        "text": "+$20",
+        "tone": "up"
+       }
+      ],
+      "strong": true
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch5 Challenge Q1",
+   "v": {
+    "kind": "barchart",
+    "title": "Your account",
+    "groups": [
+     {
+      "label": "Before",
+      "values": [
+       20000
+      ],
+      "displays": [
+       "$20,000"
+      ],
+      "tones": [
+       "blue"
+      ]
+     },
+     {
+      "label": "Now",
+      "values": [
+       15000
+      ],
+      "displays": [
+       "$15,000"
+      ],
+      "tones": [
+       "down"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch5 L4 card 1 (Call)",
+   "v": {
+    "kind": "candles",
+    "title": "Daily",
+    "aside": "buy at $50",
+    "chart": {
+     "path": [
+      [
+       0,
+       46
+      ],
+      [
+       3,
+       51
+      ],
+      [
+       6,
+       47.2
+      ],
+      [
+       9,
+       50
+      ]
+     ],
+     "seed": 61,
+     "height": 120,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 47,
+       "tone": "gold",
+       "label": "low $47.20",
+       "style": "below"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch5 L4 card 5 as a line exercise",
+   "v": {
+    "kind": "drawline",
+    "title": "Daily",
+    "mode": "level",
+    "chart": {
+     "path": [
+      [
+       0,
+       78
+      ],
+      [
+       3,
+       83
+      ],
+      [
+       6,
+       80
+      ],
+      [
+       9,
+       82
+      ]
+     ],
+     "seed": 62,
+     "height": 120,
+     "axis": true,
+     "ticks": 4,
+     "zones": [
+      {
+       "from": 5,
+       "to": 7,
+       "tone": "up",
+       "label": "support"
+      }
+     ]
+    },
+    "start": {
+     "price": 82
+    },
+    "target": {
+     "min": 78.6,
+     "max": 79.4
+    },
+    "label": "your stop",
+    "tone": "down",
+    "done": "Just under the zone."
+   }
+  },
+  {
+   "group": "Chapter 6 · psychology",
+   "board": "Ch6 L1 card 1 (Call)",
+   "v": {
+    "kind": "trades",
+    "title": "Your last 10 trades",
+    "aside": "6 wins · 4 losses",
+    "values": [
+     50,
+     -150,
+     50,
+     50,
+     -150,
+     50,
+     -150,
+     50,
+     50,
+     -150
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L1 card 2",
+   "v": {
+    "kind": "gauge",
+    "style": "arc",
+    "value": 50,
+    "bands": [
+     {
+      "to": 33,
+      "tone": "down"
+     },
+     {
+      "to": 66,
+      "tone": "blue"
+     },
+     {
+      "to": 100,
+      "tone": "gold"
+     }
+    ],
+    "labels": [
+     "Fear",
+     "Calm",
+     "Greed"
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L1 card 3",
+   "v": {
+    "kind": "cycle",
+    "curve": "sentiment",
+    "height": 220,
+    "points": [
+     {
+      "t": 0.06,
+      "label": "Hope",
+      "tone": "up"
+     },
+     {
+      "t": 0.17,
+      "label": "Optimism",
+      "tone": "up"
+     },
+     {
+      "t": 0.29,
+      "label": "Excitement",
+      "tone": "up"
+     },
+     {
+      "t": 0.4,
+      "label": "Euphoria",
+      "tone": "gold",
+      "pos": "above",
+      "big": true
+     },
+     {
+      "t": 0.5,
+      "label": "Anxiety",
+      "tone": "gold"
+     },
+     {
+      "t": 0.59,
+      "label": "Denial",
+      "tone": "gold"
+     },
+     {
+      "t": 0.68,
+      "label": "Fear",
+      "tone": "gold"
+     },
+     {
+      "t": 0.76,
+      "label": "Panic",
+      "tone": "down"
+     },
+     {
+      "t": 0.85,
+      "label": "Capitulation",
+      "tone": "down",
+      "pos": "left"
+     },
+     {
+      "t": 0.93,
+      "label": "Despair",
+      "tone": "down",
+      "pos": "above"
+     }
+    ],
+    "callouts": [
+     {
+      "t": 0.4,
+      "y": 0.4,
+      "text": "Max risk:\nyou feel invincible",
+      "tone": "down",
+      "from": 0.4
+     },
+     {
+      "t": 0.86,
+      "y": 0.62,
+      "text": "Max opportunity:\nyou feel hopeless",
+      "tone": "up",
+      "from": 0.88
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L1 card 4",
+   "v": {
+    "kind": "series",
+    "title": "Winner · closed by fear",
+    "aside": "missed $250",
+    "ends": false,
+    "series": [
+     {
+      "values": [
+       0,
+       20,
+       15,
+       40,
+       50,
+       45,
+       80,
+       120,
+       180,
+       240,
+       300
+      ],
+      "tone": "up",
+      "area": true
+     }
+    ],
+    "hlines": [
+     {
+      "value": 300,
+      "label": "target +$300",
+      "tone": "up",
+      "pos": "left"
+     }
+    ],
+    "points": [
+     {
+      "i": 4,
+      "label": "sold +$50",
+      "tone": "gold"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L2 card 2",
+   "v": {
+    "kind": "bars",
+    "caption": "Your trade size, loss after loss",
+    "bars": [
+     {
+      "label": "trade 1",
+      "value": 1,
+      "display": "1×",
+      "tone": "sky"
+     },
+     {
+      "label": "trade 2",
+      "value": 1,
+      "display": "1×",
+      "tone": "sky"
+     },
+     {
+      "label": "trade 3",
+      "value": 2,
+      "display": "2×",
+      "tone": "gold"
+     },
+     {
+      "label": "trade 4",
+      "value": 4,
+      "display": "4×",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L2 card 4 (Pro Move)",
+   "v": {
+    "kind": "list",
+    "style": "cards",
+    "items": [
+     {
+      "title": "2 losses in a day: done",
+      "text": "Close the app. Tomorrow is a new day."
+     },
+     {
+      "title": "A daily loss limit",
+      "text": "For example 2% of the account: $200 on $10,000."
+     },
+     {
+      "title": "Never size up to win it back",
+      "text": "Same size after a loss, or smaller."
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L3 card 4",
+   "v": {
+    "kind": "checks",
+    "items": [
+     {
+      "icon": "warn",
+      "title": "Chat, headlines, “to the moon”",
+      "sub": "Noise, not a setup."
+     },
+     {
+      "icon": "ok",
+      "title": "Your setup, entry, stop and target",
+      "sub": "A plan you wrote before the move."
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L4 card 1 (Call)",
+   "v": {
+    "kind": "stats",
+    "items": [
+     {
+      "label": "Heads",
+      "value": "+$100",
+      "tone": "up"
+     },
+     {
+      "label": "Tails",
+      "value": "−$100",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L4 card 2",
+   "v": {
+    "kind": "hbars",
+    "layout": "stacked",
+    "rows": [
+     {
+      "label": "Win $100 feels like",
+      "value": 1,
+      "display": "×1",
+      "tone": "up"
+     },
+     {
+      "label": "Lose $100 feels like",
+      "value": 2,
+      "display": "×2",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L5 card 2",
+   "v": {
+    "kind": "rows",
+    "icon": "journal",
+    "title": "Journal · trade #41",
+    "aside": "Tue",
+    "rows": [
+     {
+      "label": "Setup",
+      "value": "Bounce at support $40"
+     },
+     {
+      "label": "Entry",
+      "value": "$41"
+     },
+     {
+      "label": "Stop",
+      "value": "$38",
+      "tone": "down"
+     },
+     {
+      "label": "Target",
+      "value": "$47",
+      "tone": "up"
+     },
+     {
+      "label": "Result",
+      "value": "+$6 a share · target hit",
+      "tone": "up"
+     },
+     {
+      "label": "Emotion",
+      "value": "Calm · on plan",
+      "tone": "blue"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch6 L5 card 3",
+   "v": {
+    "kind": "table",
+    "cols": [
+     {
+      "w": 0.5
+     },
+     {
+      "w": 1.8
+     },
+     {
+      "w": 0.9,
+      "align": "center"
+     },
+     {
+      "w": 0.9
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       {
+        "text": "Mon",
+        "tone": "muted"
+       },
+       "Bounce at support",
+       {
+        "text": "Calm",
+        "badge": true,
+        "tone": "up"
+       },
+       {
+        "text": "+$180",
+        "tone": "up"
+       }
+      ]
+     },
+     {
+      "cells": [
+       {
+        "text": "Tue",
+        "tone": "muted"
+       },
+       "Chased a spike",
+       {
+        "text": "FOMO",
+        "badge": true,
+        "tone": "gold"
+       },
+       {
+        "text": "−$240",
+        "tone": "down"
+       }
+      ]
+     },
+     {
+      "cells": [
+       {
+        "text": "Tue",
+        "tone": "muted"
+       },
+       "Bigger, after a loss",
+       {
+        "text": "Revenge",
+        "badge": true,
+        "tone": "down"
+       },
+       {
+        "text": "−$370",
+        "tone": "down"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "group": "Chapter 7 · company fundamentals",
+   "board": "Ch7 L1 card 1 (Call)",
+   "v": {
+    "kind": "units",
+    "total": 100,
+    "on": 5,
+    "cols": 10,
+    "title": "Northwind Bakery",
+    "sub": "100 shares in total",
+    "mark": "Your 5 shares"
+   }
+  },
+  {
+   "board": "Ch7 L2 card 2",
+   "v": {
+    "kind": "split",
+    "rows": [
+     {
+      "label": "Every $100 Acme sells",
+      "segments": [
+       {
+        "value": 80,
+        "label": "Costs $80",
+        "tone": "muted"
+       },
+       {
+        "value": 20,
+        "label": "$20",
+        "tone": "up"
+       }
+      ],
+      "under": [
+       "Wages, rent, materials",
+       "Profit"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch7 L2 card 3 (tap a year)",
+   "v": {
+    "kind": "barchart",
+    "title": "Acme · 3 years",
+    "series": [
+     {
+      "label": "Revenue",
+      "tone": "blue"
+     },
+     {
+      "label": "Profit",
+      "tone": "up"
+     }
+    ],
+    "groups": [
+     {
+      "label": "Year 1",
+      "sub": "20% margin",
+      "subTone": "up",
+      "values": [
+       100,
+       20
+      ],
+      "displays": [
+       "$100M",
+       "$20M"
+      ],
+      "note": "$20M ÷ $100M = 20%."
+     },
+     {
+      "label": "Year 2",
+      "sub": "15% margin",
+      "subTone": "gold",
+      "values": [
+       120,
+       18
+      ],
+      "displays": [
+       "$120M",
+       "$18M"
+      ],
+      "note": "$18M ÷ $120M = 15%."
+     },
+     {
+      "label": "Year 3",
+      "sub": "10% margin",
+      "subTone": "down",
+      "values": [
+       150,
+       15
+      ],
+      "displays": [
+       "$150M",
+       "$15M"
+      ],
+      "note": "$15M ÷ $150M = 10%."
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch7 L4 card 4",
+   "v": {
+    "kind": "barchart",
+    "title": "Northwind · 3 years",
+    "series": [
+     {
+      "label": "Profit",
+      "tone": "up"
+     },
+     {
+      "label": "Cash flow",
+      "tone": "down"
+     }
+    ],
+    "groups": [
+     {
+      "label": "Year 1",
+      "values": [
+       8,
+       -2
+      ],
+      "displays": [
+       "$8M",
+       "−$2M"
+      ]
+     },
+     {
+      "label": "Year 2",
+      "values": [
+       10,
+       -4
+      ],
+      "displays": [
+       "$10M",
+       "−$4M"
+      ]
+     },
+     {
+      "label": "Year 3",
+      "values": [
+       12,
+       -6
+      ],
+      "displays": [
+       "$12M",
+       "−$6M"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch7 L5 card 3 (tap a line)",
+   "v": {
+    "kind": "table",
+    "title": "Northwind · Q2",
+    "aside": "−6%",
+    "asideTone": "down",
+    "cols": [
+     {
+      "label": "Line"
+     },
+     {
+      "label": "Reported"
+     },
+     {
+      "label": "Expected"
+     },
+     {
+      "label": "",
+      "w": 0.8
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "Revenue",
+       {
+        "text": "$210M",
+        "strong": true
+       },
+       {
+        "text": "$200M",
+        "tone": "muted"
+       },
+       {
+        "text": "Beat",
+        "badge": true,
+        "tone": "up"
+       }
+      ],
+      "note": "Above the forecast."
+     },
+     {
+      "cells": [
+       "EPS",
+       {
+        "text": "$0.95",
+        "strong": true
+       },
+       {
+        "text": "$0.90",
+        "tone": "muted"
+       },
+       {
+        "text": "Beat",
+        "badge": true,
+        "tone": "up"
+       }
+      ],
+      "note": "Above the forecast too."
+     },
+     {
+      "cells": [
+       "Guidance",
+       {
+        "text": "$800M",
+        "strong": true
+       },
+       {
+        "text": "$880M",
+        "tone": "muted"
+       },
+       {
+        "text": "Below",
+        "badge": true,
+        "tone": "down"
+       }
+      ],
+      "note": "Next year looks weaker: that moved the price."
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch7 L4 card 1 (Call)",
+   "v": {
+    "kind": "stats",
+    "items": [
+     {
+      "label": "Profit",
+      "value": "+$10M",
+      "sub": "on paper",
+      "tone": "up"
+     },
+     {
+      "label": "Cash in the bank",
+      "value": "−$5M",
+      "sub": "this year",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "group": "Chapter 8 · markets and the economy",
+   "board": "Ch8 L3 card 5 (Try it)",
+   "v": {
+    "kind": "calendar",
+    "title": "This week",
+    "items": [
+     {
+      "day": "Mon",
+      "time": "10:00",
+      "title": "Factory orders",
+      "impact": "low"
+     },
+     {
+      "day": "Tue",
+      "time": "10:00",
+      "title": "Consumer confidence",
+      "impact": "medium"
+     },
+     {
+      "day": "Wed",
+      "time": "8:30",
+      "title": "CPI inflation",
+      "impact": "high"
+     },
+     {
+      "day": "Thu",
+      "time": "8:30",
+      "title": "Jobless claims",
+      "impact": "medium"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch8 L3 card 2",
+   "v": {
+    "kind": "calendar",
+    "items": [
+     {
+      "title": "US jobs report",
+      "sub": "Monthly · jobs added",
+      "impact": "high"
+     },
+     {
+      "title": "CPI inflation",
+      "sub": "Monthly · how fast prices rose",
+      "impact": "high"
+     },
+     {
+      "title": "Rate decision",
+      "sub": "About every 6 weeks · the new rate",
+      "impact": "high"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch8 Challenge Q3",
+   "v": {
+    "kind": "candles",
+    "title": "1-min · the morning of the report",
+    "chart": {
+     "path": [
+      [
+       0,
+       100
+      ],
+      [
+       8,
+       100.2
+      ],
+      [
+       14,
+       101.2
+      ]
+     ],
+     "seed": 71,
+     "future": 2,
+     "height": 120,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 100.9,
+       "tone": "down",
+       "label": "your stop",
+       "style": "below"
+      }
+     ],
+     "vlines": [
+      {
+       "i": 15,
+       "label": "8:30",
+       "tone": "gold",
+       "anchor": "end"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch8 L2 card 3",
+   "v": {
+    "kind": "list",
+    "style": "chain",
+    "items": [
+     {
+      "title": "Prices rise too fast"
+     },
+     {
+      "title": "Central bank raises rates"
+     },
+     {
+      "title": "Loans cost more, so people and firms spend less"
+     },
+     {
+      "title": "Price rises slow down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch8 L4 card 3",
+   "v": {
+    "kind": "cycle",
+    "title": "The economic cycle",
+    "aside": "simplified",
+    "points": [
+     {
+      "t": 0.25,
+      "label": "Recovery",
+      "tone": "up"
+     },
+     {
+      "t": 0.5,
+      "label": "Expansion",
+      "tone": "blue",
+      "pos": "above"
+     },
+     {
+      "t": 0.75,
+      "label": "Slowdown",
+      "tone": "gold"
+     },
+     {
+      "t": 0.98,
+      "label": "Recession",
+      "tone": "down",
+      "pos": "below"
+     }
+    ],
+    "tone": "blue"
+   }
+  },
+  {
+   "board": "Ch8 L5 card 5",
+   "v": {
+    "kind": "headline",
+    "text": "Profit up 15%"
+   }
+  },
+  {
+   "board": "Ch8 L1 card 4",
+   "v": {
+    "kind": "barchart",
+    "title": "Savings rate",
+    "groups": [
+     {
+      "label": "Before",
+      "values": [
+       1
+      ],
+      "displays": [
+       "1%"
+      ],
+      "tones": [
+       "muted"
+      ]
+     },
+     {
+      "label": "Now",
+      "values": [
+       5
+      ],
+      "displays": [
+       "5%"
+      ],
+      "tones": [
+       "up"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch8 Challenge Q2",
+   "v": {
+    "kind": "hbars",
+    "title": "This year",
+    "aside": "per year",
+    "rows": [
+     {
+      "label": "Your savings",
+      "value": 2,
+      "display": "2%",
+      "tone": "up"
+     },
+     {
+      "label": "Inflation",
+      "value": 6,
+      "display": "6%",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "group": "Chapter 9 · portfolio",
+   "board": "Ch9 L3 card 2",
+   "v": {
+    "kind": "donut",
+    "center": "60/30/10",
+    "centerSub": "example",
+    "segments": [
+     {
+      "value": 60,
+      "label": "Stocks · 60%",
+      "sub": "Growth, biggest swings",
+      "tone": "up"
+     },
+     {
+      "value": 30,
+      "label": "Bonds · 30%",
+      "sub": "Steadier, lower return",
+      "tone": "blue"
+     },
+     {
+      "value": 10,
+      "label": "Cash · 10%",
+      "sub": "Safest, lowest return",
+      "tone": "gold"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch9 L4 card 2",
+   "v": {
+    "kind": "split",
+    "rows": [
+     {
+      "label": "January",
+      "aside": "target",
+      "segments": [
+       {
+        "value": 60,
+        "label": "60%",
+        "tone": "up"
+       },
+       {
+        "value": 40,
+        "label": "40%",
+        "tone": "blue"
+       }
+      ]
+     },
+     {
+      "label": "June",
+      "aside": "drifting",
+      "segments": [
+       {
+        "value": 66,
+        "label": "66%",
+        "tone": "up"
+       },
+       {
+        "value": 34,
+        "label": "34%",
+        "tone": "blue"
+       }
+      ]
+     },
+     {
+      "label": "December",
+      "aside": "drifted",
+      "segments": [
+       {
+        "value": 73,
+        "label": "73%",
+        "tone": "up"
+       },
+       {
+        "value": 27,
+        "label": "27%",
+        "tone": "blue"
+       }
+      ]
+     }
+    ],
+    "legend": [
+     {
+      "label": "Stocks",
+      "tone": "up"
+     },
+     {
+      "label": "Bonds",
+      "tone": "blue"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch9 L1 card 1 (Call)",
+   "v": {
+    "kind": "split",
+    "rows": [
+     {
+      "label": "Ben",
+      "aside": "1 stock",
+      "segments": [
+       {
+        "value": 1,
+        "label": "1 stock · 100%",
+        "tone": "up"
+       }
+      ]
+     },
+     {
+      "label": "Max",
+      "aside": "10 stocks",
+      "segments": [
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       },
+       {
+        "value": 1,
+        "tone": "up"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch9 L2 card 3",
+   "v": {
+    "kind": "series",
+    "title": "6 weeks",
+    "series": [
+     {
+      "label": "Bonds",
+      "tone": "gold",
+      "values": [
+       100,
+       100.5,
+       101,
+       101.2,
+       101.6,
+       102,
+       102
+      ]
+     },
+     {
+      "label": "Tech A",
+      "tone": "blue",
+      "values": [
+       100,
+       97,
+       93,
+       90,
+       88,
+       86,
+       86
+      ]
+     },
+     {
+      "label": "Tech B",
+      "tone": "blue",
+      "dashed": true,
+      "values": [
+       100,
+       95,
+       90,
+       86,
+       82,
+       80,
+       80
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch9 L5 card 2",
+   "v": {
+    "kind": "series",
+    "title": "$10,000 over 20 years",
+    "x": {
+     "labels": [
+      "Year 0",
+      "10",
+      "20"
+     ]
+    },
+    "legend": [
+     {
+      "label": "0.1% fee",
+      "tone": "up",
+      "dot": true
+     },
+     {
+      "label": "1% fee",
+      "tone": "down",
+      "dot": true
+     }
+    ],
+    "series": [
+     {
+      "end": "$38k",
+      "tone": "up",
+      "values": [
+       10000,
+       10690,
+       11430,
+       12220,
+       13060,
+       13960,
+       14930,
+       15960,
+       17060,
+       18240,
+       19500,
+       20850,
+       22290,
+       23830,
+       25480,
+       27240,
+       29120,
+       31130,
+       33280,
+       35580,
+       38000
+      ]
+     },
+     {
+      "end": "$32k",
+      "tone": "down",
+      "values": [
+       10000,
+       10600,
+       11240,
+       11910,
+       12620,
+       13380,
+       14190,
+       15040,
+       15940,
+       16900,
+       17910,
+       18990,
+       20120,
+       21330,
+       22610,
+       23970,
+       25410,
+       26930,
+       28550,
+       30260,
+       32100
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch9 L7 card 2",
+   "v": {
+    "kind": "series",
+    "title": "Your portfolio",
+    "aside": "−30%",
+    "asideTone": "down",
+    "ends": false,
+    "series": [
+     {
+      "values": [
+       10000,
+       11000,
+       12000,
+       11000,
+       9800,
+       8900,
+       8400,
+       9000,
+       9900,
+       10600
+      ],
+      "tone": "blue"
+     }
+    ],
+    "hlines": [
+     {
+      "value": 12000,
+      "label": "peak",
+      "tone": "up"
+     },
+     {
+      "value": 8400,
+      "label": "low",
+      "tone": "down"
+     }
+    ],
+    "points": [
+     {
+      "i": 2,
+      "label": "$12,000",
+      "tone": "up"
+     },
+     {
+      "i": 6,
+      "label": "$8,400",
+      "tone": "down",
+      "pos": "below"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch9 L7 card 3 (tap a row)",
+   "v": {
+    "kind": "hbars",
+    "heads": [
+     "Fall",
+     "Gain to get back"
+    ],
+    "rows": [
+     {
+      "label": "−10%",
+      "value": 10,
+      "tone": "down",
+      "value2": 11,
+      "display2": "+11%"
+     },
+     {
+      "label": "−20%",
+      "value": 20,
+      "tone": "down",
+      "value2": 25,
+      "display2": "+25%"
+     },
+     {
+      "label": "−30%",
+      "value": 30,
+      "tone": "down",
+      "value2": 43,
+      "display2": "+43%"
+     },
+     {
+      "label": "−50%",
+      "value": 50,
+      "tone": "down",
+      "value2": 100,
+      "display2": "+100%"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch9 Challenge Q7",
+   "v": {
+    "kind": "barchart",
+    "title": "In a crash",
+    "aside": "on $50,000",
+    "groups": [
+     {
+      "label": "Mix A",
+      "values": [
+       -40
+      ],
+      "displays": [
+       "−40%"
+      ],
+      "tones": [
+       "down"
+      ]
+     },
+     {
+      "label": "Mix B",
+      "values": [
+       -15
+      ],
+      "displays": [
+       "−15%"
+      ],
+      "tones": [
+       "down"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "group": "Chapter 10 · trading plan",
+   "board": "Ch10 L1 card 2",
+   "v": {
+    "kind": "planbar",
+    "sections": [
+     "Style",
+     "Entry",
+     "Exit & risk",
+     "Checklist",
+     "Review"
+    ],
+    "current": 0
+   }
+  },
+  {
+   "board": "Ch10 L1 card 3",
+   "v": {
+    "kind": "stack",
+    "layout": "row",
+    "items": [
+     {
+      "kind": "units",
+      "heading": "40 markets",
+      "total": 40,
+      "cols": 8,
+      "tones": [
+       "up",
+       "blue",
+       "gold",
+       "down",
+       "up",
+       "gold",
+       "blue",
+       "down",
+       "gold"
+      ],
+      "layout": "stack",
+      "foot": "Skims them all"
+     },
+     {
+      "kind": "stats",
+      "cols": 1,
+      "items": [
+       {
+        "label": "4 markets",
+        "text": "US index fund · Big tech stock · Big bank stock · Gold",
+        "sub": "Knows them well"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch10 L4 card 3 (tap each check)",
+   "explore": true,
+   "v": {
+    "kind": "checklist",
+    "title": "Setup · $40 entry",
+    "aside": "5 yes · 1 no",
+    "items": [
+     {
+      "text": "It’s one of my markets and my style",
+      "state": "yes"
+     },
+     {
+      "text": "It matches my entry rule",
+      "state": "yes"
+     },
+     {
+      "text": "My stop is set before I buy",
+      "state": "yes"
+     },
+     {
+      "text": "My size risks 1% or less",
+      "state": "yes"
+     },
+     {
+      "text": "My target is at least 2× the risk",
+      "state": "no"
+     },
+     {
+      "text": "I’m inside my daily and weekly limits",
+      "state": "yes"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch10 L4 card 2",
+   "v": {
+    "kind": "checklist",
+    "title": "Pre-trade checklist",
+    "aside": "yes / no",
+    "items": [
+     {
+      "text": "It’s one of my markets and my style"
+     },
+     {
+      "text": "It matches my entry rule"
+     },
+     {
+      "text": "My stop is set before I buy"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch10 L5 card 2",
+   "v": {
+    "kind": "list",
+    "title": "Friday · 30 minutes with the journal",
+    "items": [
+     {
+      "title": "Did I follow every rule?"
+     },
+     {
+      "title": "Wins, losses, average win vs loss"
+     },
+     {
+      "title": "My biggest mistake"
+     },
+     {
+      "title": "One change, or none"
+     }
+    ]
+   }
+  },
+  {
+   "board": "Ch10 L2 card 3 (tap Play)",
+   "explore": true,
+   "v": {
+    "kind": "candles",
+    "title": "Daily · 50 days",
+    "aside": "trend up",
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       20,
+       46
+      ],
+      [
+       30,
+       52
+      ],
+      [
+       38,
+       48.2
+      ],
+      [
+       40,
+       49.5
+      ],
+      [
+       49,
+       54
+      ]
+     ],
+     "seed": 81,
+     "height": 140,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "overlays": [
+      {
+       "period": 10,
+       "tone": "gold",
+       "dashed": true
+      }
+     ],
+     "marks": [
+      {
+       "i": 38,
+       "price": 48.2,
+       "tone": "gold",
+       "label": "pullback",
+       "pos": "below"
+      },
+      {
+       "i": 40,
+       "price": 49.5,
+       "tone": "up",
+       "label": "entry"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "group": "Chapters 1–2 (existing kinds)",
+   "board": "Ch2 four-orders",
+   "v": {
+    "kind": "candles",
+    "card": {
+     "sym": "ACME",
+     "name": "Acme Corp · daily",
+     "price": "$80.00",
+     "change": "−7%",
+     "tone": "down"
+    },
+    "chart": {
+     "ohlc": [
+      [
+       76,
+       76.1,
+       75.9,
+       76
+      ],
+      [
+       75.8,
+       77.6,
+       75.8,
+       77
+      ],
+      [
+       77,
+       78.4,
+       77,
+       78
+      ],
+      [
+       78,
+       80,
+       77.7,
+       79.9
+      ],
+      [
+       79.8,
+       81.4,
+       79.4,
+       81.2
+      ],
+      [
+       81.1,
+       82,
+       80.9,
+       81.9
+      ],
+      [
+       82,
+       86,
+       82,
+       85.6
+      ],
+      [
+       85.5,
+       85.9,
+       83,
+       83.4
+      ],
+      [
+       83.2,
+       83.5,
+       81.5,
+       81.6
+      ],
+      [
+       81.6,
+       81.8,
+       79.9,
+       80
+      ]
+     ],
+     "height": 110,
+     "hlines": [
+      {
+       "price": 70,
+       "tone": "down",
+       "style": "left",
+       "label": "your forecast $70"
+      }
+     ],
+     "forecast": {
+      "dx": 4,
+      "to": 70,
+      "tone": "down"
+     }
+    }
+   }
+  },
+  {
+   "board": "compare",
+   "v": {
+    "kind": "compare",
+    "items": [
+     {
+      "title": "Market",
+      "icon": "ok",
+      "result": "Filled $100.20",
+      "chart": {
+       "ohlc": [
+        [
+         100,
+         101,
+         99,
+         100.5
+        ],
+        [
+         100.5,
+         101,
+         100,
+         100.2
+        ]
+       ]
+      }
+     },
+     {
+      "title": "Limit",
+      "icon": "wait",
+      "result": "Waits at $95"
+     }
+    ]
+   }
+  },
+  {
+   "board": "book",
+   "v": {
+    "kind": "book",
+    "head": [
+     "Price",
+     "Size"
+    ],
+    "rows": [
+     {
+      "side": "ask",
+      "price": "$50.05",
+      "size": "300",
+      "depth": 0.4
+     },
+     {
+      "side": "bid",
+      "price": "$50.00",
+      "size": "500",
+      "depth": 0.7
+     }
+    ]
+   }
+  },
+  {
+   "board": "rows",
+   "v": {
+    "kind": "rows",
+    "title": "Receipt",
+    "rows": [
+     {
+      "label": "Bought",
+      "value": "$1,000"
+     },
+     {
+      "label": "Fees",
+      "value": "−$10",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "columns",
+   "v": {
+    "kind": "columns",
+    "cols": [
+     {
+      "title": "LONG",
+      "tone": "up",
+      "rows": [
+       {
+        "label": "1 · buy",
+        "value": "$80"
+       },
+       {
+        "label": "2 · sell",
+        "value": "$90"
+       }
+      ],
+      "result": "+$1,000"
+     },
+     {
+      "title": "SHORT",
+      "tone": "up",
+      "rows": [
+       {
+        "label": "1 · sell",
+        "value": "$80"
+       },
+       {
+        "label": "2 · buy back",
+        "value": "$70"
+       }
+      ],
+      "result": "+$1,000"
+     }
+    ]
+   }
+  },
+  {
+   "board": "tiles",
+   "v": {
+    "kind": "tiles",
+    "cols": 2,
+    "items": [
+     {
+      "title": "Stocks",
+      "text": "Own a slice"
+     },
+     {
+      "title": "Bonds",
+      "text": "Lend money"
+     }
+    ]
+   }
+  },
+  {
+   "board": "flow",
+   "v": {
+    "kind": "flow",
+    "items": [
+     {
+      "top": "Basket · last year",
+      "value": "$100"
+     },
+     {
+      "top": "Same basket · now",
+      "value": "$104",
+      "tone": "down"
+     }
+    ],
+    "foot": "= 4% inflation"
+   }
+  },
+  {
+   "board": "bars",
+   "v": {
+    "kind": "bars",
+    "bars": [
+     {
+      "label": "Steady Power",
+      "value": 12,
+      "tone": "gold",
+      "sub": "slow, steady"
+     },
+     {
+      "label": "Acme",
+      "value": 20,
+      "tone": "gold",
+      "sub": "some growth"
+     },
+     {
+      "label": "Northwind",
+      "value": 50,
+      "tone": "gold",
+      "sub": "fast growth hoped"
+     }
+    ]
+   }
+  },
+  {
+   "board": "slider",
+   "v": {
+    "kind": "slider",
+    "model": "leverage",
+    "params": {
+     "margin": 1000,
+     "leverage": 10,
+     "min": -10,
+     "max": 10
+    }
+   }
+  },
+  {
+   "board": "timeline",
+   "v": {
+    "kind": "timeline",
+    "points": [
+     {
+      "label": "4:00 pm",
+      "sub": "close"
+     },
+     {
+      "label": "8:00 am",
+      "sub": "news"
+     },
+     {
+      "label": "9:30 am",
+      "sub": "open",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "equation",
+   "v": {
+    "kind": "equation",
+    "terms": [
+     {
+      "value": "$1,000",
+      "label": "margin"
+     },
+     {
+      "op": "×"
+     },
+     {
+      "value": "10",
+      "label": "leverage"
+     },
+     {
+      "op": "="
+     },
+     {
+      "value": "$10,000",
+      "label": "position",
+      "tone": "gold"
+     }
+    ]
+   }
+  },
+  {
+   "board": "spread",
+   "v": {
+    "kind": "spread",
+    "bid": "$50.00",
+    "ask": "$50.05",
+    "spread": "$0.05"
+   }
+  },
+  {
+   "board": "counter",
+   "v": {
+    "kind": "counter",
+    "count": 90,
+    "total": "$90",
+    "label": "in 90 nights",
+    "jar": "$1 a night"
+   }
+  },
+  {
+   "board": "ad",
+   "v": {
+    "kind": "ad",
+    "badge": "$0",
+    "badgeSub": "COMMISSION",
+    "title": "Trade free!"
+   }
+  },
+  {
+   "board": "quote",
+   "v": {
+    "kind": "quote",
+    "sell": "1.0848",
+    "buy": "1.0850"
+   }
+  },
+  {
+   "board": "checks",
+   "v": {
+    "kind": "checks",
+    "items": [
+     {
+      "title": "Stop set",
+      "ok": true
+     },
+     {
+      "title": "No plan",
+      "ok": false
+     }
+    ]
+   }
+  },
+  {
+   "board": "line",
+   "v": {
+    "kind": "line",
+    "title": "Acme",
+    "change": "−12%",
+    "points": [
+     100,
+     98,
+     95,
+     92,
+     88
+    ],
+    "from": "$100",
+    "to": "$88"
+   }
+  },
+  {
+   "board": "lines",
+   "v": {
+    "kind": "lines",
+    "layout": "pair",
+    "items": [
+     {
+      "label": "A · Index ETF",
+      "tone": "up",
+      "points": [
+       1,
+       2,
+       3,
+       4
+      ]
+     },
+     {
+      "label": "B · New coin",
+      "tone": "down",
+      "points": [
+       1,
+       4,
+       2,
+       3
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "board": "ticket",
+   "v": {
+    "kind": "ticket",
+    "side": "Buy",
+    "title": "10 shares",
+    "sub": "$50.00",
+    "aside": "Seller",
+    "mark": "?"
+   }
+  },
+  {
+   "board": "position",
+   "v": {
+    "kind": "position",
+    "label": "Your position",
+    "title": "10 Acme",
+    "value": "$450",
+    "change": "−$50",
+    "tone": "down"
+   }
+  },
+  {
+   "board": "bullbear",
+   "v": {
+    "kind": "bullbear",
+    "items": [
+     {
+      "name": "Bulls",
+      "tag": "buy",
+      "tone": "up",
+      "text": "Expect a rise",
+      "chart": {
+       "ohlc": [
+        [
+         1,
+         2,
+         0.8,
+         1.8
+        ],
+        [
+         1.8,
+         3,
+         1.7,
+         2.9
+        ]
+       ]
+      }
+     },
+     {
+      "name": "Bears",
+      "tag": "sell",
+      "tone": "down",
+      "text": "Expect a fall",
+      "chart": {
+       "ohlc": [
+        [
+         3,
+         3.1,
+         2,
+         2.1
+        ],
+        [
+         2.1,
+         2.2,
+         1,
+         1.1
+        ]
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "board": "ladder",
+   "v": {
+    "kind": "ladder",
+    "from": "Lower risk",
+    "to": "Higher",
+    "rows": [
+     {
+      "label": "Bonds",
+      "text": "Steady",
+      "tone": "sky"
+     },
+     {
+      "label": "Crypto",
+      "text": "Wild",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "quotes",
+   "v": {
+    "kind": "quotes",
+    "items": [
+     {
+      "label": "Bid",
+      "value": "$50.00",
+      "tone": "up"
+     },
+     {
+      "label": "Spread",
+      "value": "$0.05"
+     },
+     {
+      "label": "Ask",
+      "value": "$50.05",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "board": "handshake",
+   "v": {
+    "kind": "handshake",
+    "text": "Last trade $50.00"
+   }
+  }
+ ],
+ "exercises": [
+  {
+   "board": "Ch3 L2 card 5 (Spot the doji) · choice with candle glyphs",
+   "card": {
+    "type": "exercise",
+    "kind": "choice",
+    "name": "Try it",
+    "title": "Spot the doji",
+    "q": "Which candle shows that buyers and sellers ended the day even?",
+    "idea": "doji",
+    "options": [
+     {
+      "text": "Candle A",
+      "candles": [
+       [
+        50,
+        50.2,
+        46,
+        46.4
+       ]
+      ],
+      "feedback": "A long red body: sellers won that day."
+     },
+     {
+      "text": "Candle B",
+      "candles": [
+       [
+        50,
+        52,
+        48,
+        50.05
+       ]
+      ],
+      "feedback": "Open and close at almost the same price: a draw."
+     },
+     {
+      "text": "Candle C",
+      "candles": [
+       [
+        46,
+        50.3,
+        45.8,
+        50
+       ]
+      ],
+      "feedback": "A long green body: buyers won."
+     },
+     {
+      "text": "Candle D",
+      "candles": [
+       [
+        50,
+        50.4,
+        45.9,
+        46.2
+       ]
+      ],
+      "feedback": "Red body: it closed well below its open."
+     }
+    ],
+    "answer": 1
+   }
+  },
+  {
+   "board": "point · tap the candle that confirms the double bottom",
+   "card": {
+    "type": "exercise",
+    "kind": "point",
+    "name": "Try it",
+    "title": "Find the trigger",
+    "q": "Tap the first candle that confirms the double bottom.",
+    "idea": "double-bottom-trigger",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily",
+     "aside": "- - middle $34",
+     "chart": {
+      "path": [
+       [
+        0,
+        36
+       ],
+       [
+        4,
+        30
+       ],
+       [
+        8,
+        34
+       ],
+       [
+        12,
+        30.5
+       ],
+       [
+        15,
+        33.6
+       ],
+       [
+        16,
+        34.8
+       ],
+       [
+        19,
+        36
+       ]
+      ],
+      "seed": 5,
+      "height": 140,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 34,
+        "tone": "gold"
+       }
+      ]
+     }
+    },
+    "answer": 16,
+    "right": "That close above $34, the middle high, confirms it.",
+    "wrong": "Confirmation is the first close above the middle high, $34."
+   }
+  },
+  {
+   "board": "order · Three lines, in this order",
+   "card": {
+    "type": "exercise",
+    "kind": "order",
+    "name": "Try it",
+    "title": "Read it in order",
+    "q": "Put an earnings report in the order you read it.",
+    "idea": "earnings-order",
+    "items": [
+     "Revenue vs expected",
+     "EPS vs expected",
+     "Guidance: what’s next"
+    ],
+    "start": [
+     2,
+     0,
+     1
+    ],
+    "right": "Revenue, then EPS, then guidance: the future moves the price most.",
+    "wrong": "Start with sales, then profit per share, then what the company expects next."
+   }
+  },
+  {
+   "board": "line · place the stop below support",
+   "card": {
+    "type": "exercise",
+    "kind": "line",
+    "name": "Try it",
+    "title": "Place the stop",
+    "q": "Support runs from $79.50 to $80.50. Drag your stop to a sensible price.",
+    "idea": "stop-below-zone",
+    "visual": {
+     "kind": "drawline",
+     "mode": "level",
+     "title": "Daily",
+     "chart": {
+      "path": [
+       [
+        0,
+        78
+       ],
+       [
+        3,
+        83
+       ],
+       [
+        6,
+        80
+       ],
+       [
+        9,
+        82
+       ]
+      ],
+      "seed": 62,
+      "height": 130,
+      "axis": true,
+      "ticks": 4,
+      "zones": [
+       {
+        "from": 5,
+        "to": 7,
+        "tone": "up",
+        "label": "support"
+       }
+      ]
+     },
+     "start": {
+      "price": 82
+     },
+     "target": {
+      "min": 78.5,
+      "max": 79.4
+     },
+     "label": "your stop",
+     "tone": "down"
+    },
+    "right": "Just below the zone: a normal poke into support won’t stop you out.",
+    "wrong": "The stop belongs a little below the whole support zone, around $79."
+   }
+  }
+ ],
+ "walkthroughs": [
+  {
+   "board": "Ch10 L4 card 3 · tap each check",
+   "card": {
+    "type": "walkthrough",
+    "title": "Run a real setup",
+    "text": "Entry $40, stop $38. Resistance sits at $42, so your target is $42: risk $2 to make $2.",
+    "visual": {
+     "kind": "checklist",
+     "title": "Setup · $40 entry",
+     "aside": "5 yes · 1 no",
+     "items": [
+      {
+       "text": "It’s one of my markets and my style",
+       "state": "yes"
+      },
+      {
+       "text": "It matches my entry rule",
+       "state": "yes"
+      },
+      {
+       "text": "My stop is set before I buy",
+       "state": "yes"
+      },
+      {
+       "text": "My size risks 1% or less",
+       "state": "yes"
+      },
+      {
+       "text": "My target is at least 2× the risk",
+       "state": "no"
+      },
+      {
+       "text": "I’m inside my daily and weekly limits",
+       "state": "yes"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch4 L2 card 3 · drag the line",
+   "card": {
+    "type": "walkthrough",
+    "title": "Add a second line: a channel",
+    "text": "Draw a parallel line through the highs.",
+    "visual": {
+     "kind": "drawline",
+     "title": "Daily · rising channel",
+     "mode": "trend",
+     "chart": {
+      "path": [
+       [
+        0,
+        40
+       ],
+       [
+        3,
+        44
+       ],
+       [
+        5,
+        42
+       ],
+       [
+        8,
+        47
+       ],
+       [
+        10,
+        45
+       ],
+       [
+        13,
+        50
+       ],
+       [
+        15,
+        48
+       ],
+       [
+        18,
+        53
+       ]
+      ],
+      "seed": 12,
+      "height": 140,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "trendlines": [
+       {
+        "from": [
+         0,
+         39.5
+        ],
+        "to": [
+         15,
+         47.5
+        ],
+        "tone": "up"
+       }
+      ]
+     },
+     "start": {
+      "from": [
+       3,
+       47
+      ],
+      "to": [
+       15,
+       47
+      ]
+     },
+     "target": {
+      "from": [
+       3,
+       44.6
+      ],
+      "to": [
+       15,
+       51
+      ]
+     },
+     "tolerance": 1.2,
+     "tone": "down",
+     "label": "upper line",
+     "done": "That’s a channel: price travels between the two lines."
+    }
+   }
+  },
+  {
+   "board": "Ch5 L2 card 3 · tap a row",
+   "card": {
+    "type": "walkthrough",
+    "title": "Survive the losing streak",
+    "text": "Here’s what’s left of $10,000 after a run of losses.",
+    "visual": {
+     "kind": "table",
+     "cols": [
+      {
+       "label": "Streak"
+      },
+      {
+       "label": "1% risk",
+       "tone": "up"
+      },
+      {
+       "label": "10% risk",
+       "tone": "down"
+      }
+     ],
+     "rows": [
+      {
+       "cells": [
+        "5 losses",
+        "$9,510",
+        "$5,905"
+       ],
+       "note": "Down 5% at 1%. Down 41% at 10%."
+      },
+      {
+       "cells": [
+        "10 losses",
+        "$9,044",
+        "$3,487"
+       ],
+       "note": "At 10% you need +187% to get back."
+      },
+      {
+       "cells": [
+        "20 losses",
+        "$8,179",
+        {
+         "text": "$1,216",
+         "tone": "down"
+        }
+       ],
+       "note": "At 1%, 20 losses leave you down 18%: bad, but still trading."
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch9 L5 card 3 · ▶ Play on a series",
+   "card": {
+    "type": "walkthrough",
+    "title": "The gap keeps growing",
+    "text": "Same $10,000, same 7% a year before fees.",
+    "visual": {
+     "kind": "series",
+     "title": "$10,000 over 20 years",
+     "x": {
+      "labels": [
+       "Year 0",
+       "10",
+       "20"
+      ]
+     },
+     "legend": [
+      {
+       "label": "0.1% fee",
+       "tone": "up",
+       "dot": true
+      },
+      {
+       "label": "1% fee",
+       "tone": "down",
+       "dot": true
+      }
+     ],
+     "series": [
+      {
+       "end": "$38k",
+       "tone": "up",
+       "values": [
+        10000,
+        10690,
+        11430,
+        12220,
+        13060,
+        13960,
+        14930,
+        15960,
+        17060,
+        18240,
+        19500,
+        20850,
+        22290,
+        23830,
+        25480,
+        27240,
+        29120,
+        31130,
+        33280,
+        35580,
+        38000
+       ]
+      },
+      {
+       "end": "$32k",
+       "tone": "down",
+       "values": [
+        10000,
+        10600,
+        11240,
+        11910,
+        12620,
+        13380,
+        14190,
+        15040,
+        15940,
+        16900,
+        17910,
+        18990,
+        20120,
+        21330,
+        22610,
+        23970,
+        25410,
+        26930,
+        28550,
+        30260,
+        32100
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "board": "Ch8 L4 card 3 · cycle + table rows (stack)",
+   "card": {
+    "type": "walkthrough",
+    "title": "A simplified cycle",
+    "text": "Economies grow, slow, shrink and recover.",
+    "visual": {
+     "kind": "stack",
+     "items": [
+      {
+       "kind": "cycle",
+       "title": "The economic cycle",
+       "aside": "simplified",
+       "points": [
+        {
+         "t": 0.25,
+         "label": "Recovery",
+         "tone": "up"
+        },
+        {
+         "t": 0.5,
+         "label": "Expansion",
+         "tone": "blue",
+         "pos": "above"
+        },
+        {
+         "t": 0.75,
+         "label": "Slowdown",
+         "tone": "gold"
+        },
+        {
+         "t": 0.98,
+         "label": "Recession",
+         "tone": "down",
+         "pos": "below"
+        }
+       ],
+       "tone": "blue"
+      },
+      {
+       "kind": "table",
+       "rows": [
+        {
+         "cells": [
+          "Early recovery",
+          {
+           "text": "Banks, tech and shops have often led",
+           "tone": "blue"
+          }
+         ],
+         "note": "Cheap money and rising demand."
+        },
+        {
+         "cells": [
+          "Late expansion",
+          {
+           "text": "Energy has often done well",
+           "tone": "gold"
+          }
+         ],
+         "note": "Demand for oil peaks."
+        }
+       ]
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

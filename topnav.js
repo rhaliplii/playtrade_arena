@@ -106,9 +106,11 @@ const initTopnav = () => {
   themeBtn.addEventListener("click", toggleTheme);
   bar.querySelector(".topnav__lang")?.before(themeBtn);
 
-  // The landing page is always signed out (<body data-user="guest">); elsewhere `?guest=1` previews it.
+  // The landing page is always signed out (<body data-user="guest">); elsewhere `?guest=1` previews it,
+  // unless the page has already declared a signed-in member (<body data-user="member">).
   const GUEST = (() => {
     if (document.body.dataset.user === "guest") return true;
+    if (document.body.dataset.user === "member") return false; // e.g. the Academy's own preview states
     const q = new URLSearchParams(location.search).get("guest");
     try {
       if (q === "1") sessionStorage.setItem("pt_guest", "1");
@@ -122,7 +124,7 @@ const initTopnav = () => {
     bar.querySelectorAll(".icon-btn, .topnav__avatar, .topnav__upgrade, .topnav__sale").forEach((el) => el.remove());
     if (!bar.querySelector(".topnav__cta")) {
       bar.querySelector(".topnav__icons")?.insertAdjacentHTML("beforeend",
-        '<a class="topnav__login" href="#">Log in</a><a class="btn-brand topnav__cta" href="#">Get Started</a>');
+        '<a class="topnav__login" href="#" data-action="login">Log in</a><a class="btn-brand topnav__cta" href="#">Get Started</a>');
     }
   }
 
@@ -160,6 +162,11 @@ const initTopnav = () => {
         <a class="nav-dd__item nav-dd__item--parent" href="${it.href}" role="menuitem" aria-haspopup="true" aria-expanded="false" aria-controls="${id}">${icon(it)}${it.label}${it.extra || ""}${chevron}</a>
         <div class="nav-dd__flyout" id="${id}" role="menu" aria-label="${it.label}">${it.children.map(item).join("")}</div>
       </div>`;
+    }
+    if (it.desc) {
+      const lead = `<a class="nav-dd__item nav-dd__item--lead${on ? " is-active" : ""}" href="${it.href}" role="menuitem"${on ? ' aria-current="page"' : ""}>${icon(it)}<span class="nav-dd__lead"><span class="nav-dd__lead-name">${it.label}${it.extra || ""}</span><span class="nav-dd__desc">${it.desc}</span></span></a>`;
+      if (!it.subs) return lead;
+      return `<div class="nav-dd__family">${lead}<div class="nav-dd__subs">${it.subs.map(([l, h]) => `<a class="nav-dd__sub" href="${h}" role="menuitem">${l}</a>`).join("")}</div></div>`;
     }
     return `<a class="nav-dd__item${on ? " is-active" : ""}" href="${it.href}" role="menuitem"${on ? ' aria-current="page"' : ""}>${icon(it)}${it.label}${it.extra || ""}${chevron}</a>`;
   };
@@ -202,8 +209,41 @@ const initTopnav = () => {
       <span class="nav-dd__refer-avatars" aria-hidden="true">${["lp-av-2.png", "lp-av-5.png", "lp-av-3.png", "lp-av-4.png"].map((f) => `<img src="assets/${f}" alt="">`).join("")}</span>
     </a>`;
 
+  // Academy card at the top of the Learn column: one static link to the Academy home
+  const academyCard = () => `
+    <a class="nav-dd__academy" href="academy/index.html" role="menuitem">
+      <span class="nav-dd__academy-copy">
+        <span class="nav-dd__academy-title">Academy${newTag}</span>
+        <span class="nav-dd__academy-text">5-minute trading lessons with Rico</span>
+      </span>
+      <img class="nav-dd__academy-rico" src="academy/static/img/rico/point2.webp" alt="">
+    </a>`;
+  const groupHtml = (g) => `<p class="nav-dd__eyebrow nav-dd__eyebrow--group">${g.title}</p><div class="nav-dd__links">${list(g.items)}</div>`;
+  const groups = (m) => m.groups.map((g) => `<div class="nav-dd__group">${groupHtml(g)}</div>`).join("");
+
   // ---------- Menu content: one source for the desktop dropdowns and the mobile drawer ----------
   const MENUS = [
+    {
+      // Learn: the Academy leads (with its own icon and a one-line promise), then the market feeds.
+      // Release Notes and FAQs live under More; the right column is the Academy card + community.
+      key: "learn",
+      label: "Learn",
+      groups: [
+        { title: "Learn", items: [
+          { label: "How it works", icon: "ln-question.svg", href: "academy/how-it-works/index.html" },
+          { label: "Paths", icon: "ln-paths.svg", href: "academy/paths/index.html" },
+          { label: "Top Learners", icon: "ln-trophy.svg", href: "academy/leaderboard/index.html" },
+          { label: "Glossary", icon: "ln-glossary.svg", href: "academy/glossary/index.html" },
+          { label: "Free guide", icon: "ln-guide.svg", href: "academy/guide/index.html" },
+        ] },
+        { title: "Market insights", items: [
+          { label: "Market Pulse", icon: "ln-heart-rate.svg", href: "#" },
+          { label: "AI Daily Brief", icon: "ln-flash.svg", href: "#" },
+          { label: "Weekly Briefs", icon: "ln-lamp.svg", href: "#" },
+        ] },
+      ],
+      card: true,
+    },
     {
       key: "playtrade",
       label: "Playtrade",
@@ -250,22 +290,6 @@ const initTopnav = () => {
         ] },
       ],
     },
-    {
-      key: "learn",
-      label: "Learn",
-      left: [
-        { label: "Home", icon: "ln-home.svg", href: "#", extra: newTag },
-        { label: "Video Tutorials", icon: "ln-play.svg", href: "#" },
-        { label: "Weekly Briefs", icon: "ln-lamp.svg", href: "#" },
-        { label: "AI Daily Brief", icon: "ln-flash.svg", href: "#" },
-        { label: "Market Pulse", icon: "ln-heart-rate.svg", href: "#" },
-        { label: "Blog", icon: "ln-message-text.svg", href: "#" },
-      ],
-      right: [
-        { label: "Release Notes", icon: "ln-note.svg", href: "#" },
-        { label: "FAQs", icon: "ln-question.svg", href: "index.html#faq-title" },
-      ],
-    },
     { key: "plans", label: "Plans", href: "landing.html#plans" },
     {
       key: "more",
@@ -280,8 +304,14 @@ const initTopnav = () => {
         { label: "Mobile App", icon: "mr-mobile.svg", href: "#", extra: hot },
         { label: "Refer &amp; Earn", icon: "mr-gift.svg", href: "#" },
         { label: "Affiliates", icon: "mr-volume.svg", href: "#" },
-        { label: "Help Center", icon: "ln-question.svg", href: "#" },
-        { label: "Contact Us", icon: "mr-email.svg", href: "mailto:support@profit.com" },
+        { label: "Blog", icon: "ln-message-text.svg", href: "#" },
+        { label: "Help &amp; Support", icon: "ln-question.svg", href: "#", sub: true, children: [
+          { label: "FAQs", icon: "ln-question.svg", href: "index.html#faq-title" },
+          { label: "Release Notes", icon: "ln-note.svg", href: "#" },
+          { label: "Video Tutorials", icon: "ln-play.svg", href: "#" },
+          { label: "Help Center", icon: "mr-search-status.svg", href: "#" },
+          { label: "Contact Us", icon: "mr-email.svg", href: "mailto:support@profit.com" },
+        ] },
       ],
       featured: PARTNERS,
       promo: refer,
@@ -290,7 +320,13 @@ const initTopnav = () => {
 
   // Desktop panel layout for each menu
   const panelHtml = (m) =>
-    m.key === "more"
+    m.groups
+      ? `
+      <div class="nav-dd__learn">
+        <div class="nav-dd__group"><p class="nav-dd__eyebrow nav-dd__eyebrow--group">${m.groups[0].title}</p>${academyCard()}<div class="nav-dd__links">${list(m.groups[0].items)}</div></div>
+        <div class="nav-dd__group nav-dd__group--side">${groupHtml(m.groups[1])}${community}</div>
+      </div>`
+      : m.key === "more"
       ? `
       <div class="nav-dd__col nav-dd__col--wide">
         <div class="nav-dd__links">${list(m.left)}</div>
@@ -354,16 +390,16 @@ const initTopnav = () => {
     document.addEventListener("click", (e) => { if (!wrap.contains(e.target)) setOpen(false); });
     wrap.addEventListener("focusout", (e) => { if (!wrap.contains(e.relatedTarget)) setOpen(false); });
   };
-  MENUS.filter((m) => m.left).forEach((m) => makeDropdown(byLabel(m.label), m));
+  MENUS.filter((m) => m.left || m.groups).forEach((m) => makeDropdown(byLabel(m.label), m));
   byLabel("Plans")?.setAttribute("href", "landing.html#plans");
 
   // ---------- Tablet & phone: ☰ opens the full menu as a drawer ----------
   const cta = bar.querySelector(".topnav__upgrade, .topnav__cta");
   const sale = bar.querySelector(".topnav__sale");
   const section = (m) => {
-    if (!m.left) return `<a class="mnav__link" href="${m.href}">${m.label}</a>`;
+    if (!m.left && !m.groups) return `<a class="mnav__link" href="${m.href}">${m.label}</a>`;
     const open = m.key === "playtrade" && m.current;
-    const body = m.key === "more"
+    const body = m.groups ? `${academyCard()}${list(m.groups[0].items)}${groupHtml(m.groups[1])}` : m.key === "more"
       ? `${list(m.left)}${list(m.right)}
          <p class="nav-dd__eyebrow">Featured</p>
          ${m.featured.map(partner).join("")}
@@ -389,7 +425,7 @@ const initTopnav = () => {
       <div class="mnav__sections">${MENUS.map(section).join("")}</div>
       <div class="mnav__utils">
         ${GUEST
-          ? `<a class="mnav__util mnav__util--account" href="#">
+          ? `<a class="mnav__util mnav__util--account" href="#" data-action="login">
               <svg class="mnav__util-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 3.5h5.2A2.3 2.3 0 0 1 16 5.8v8.4a2.3 2.3 0 0 1-2.3 2.3H8.5M4 10h7.5M9 7.2 11.8 10 9 12.8"/></svg>
               Log in
             </a>`

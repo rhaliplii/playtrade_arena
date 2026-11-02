@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="guide" stroke="#888B96" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M11.67 1.67H5.83c-.92 0-1.66.74-1.66 1.66v13.34c0 .92.74 1.66 1.66 1.66h8.34c.92 0 1.66-.74 1.66-1.66V5.83l-4.16-4.16Z"/>
+<path d="M11.67 1.67v4.16h4.16M10 9.17v5M7.92 12.08 10 14.17l2.08-2.09"/>
+</g>
+</svg>

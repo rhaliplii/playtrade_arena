@@ -1,0 +1,250 @@
+{
+ "id": "loss-aversion",
+ "chapter": "trading-psychology",
+ "n": 4,
+ "title": "Loss aversion: why you hold losers",
+ "minutes": 5,
+ "desc": "Why a loss hurts twice as much, and how that feeling moves your stop",
+ "cards": [
+  {
+   "type": "call",
+   "title": "A fair coin flip",
+   "situation": "Heads, you win $100. Tails, you lose $100. The coin is fair. Most people say no to this bet. Why?",
+   "visual": {
+    "kind": "stats",
+    "items": [
+     {
+      "label": "Heads",
+      "value": "+$100",
+      "tone": "up"
+     },
+     {
+      "label": "Tails",
+      "value": "−$100",
+      "tone": "down"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "The odds are against them",
+     "feedback": "A fair coin gives even odds. People refuse because the loss would hurt more than the win would please."
+    },
+    {
+     "text": "Losing $100 feels worse than winning $100 feels good",
+     "feedback": "That’s loss aversion. Studies find a loss hurts about twice as much as an equal gain feels good."
+    },
+    {
+     "text": "The bet is too small to bother",
+     "feedback": "Size isn’t the reason: people turn down small fair bets too. The loss would hurt more than the win would please."
+    }
+   ],
+   "answer": 1,
+   "idea": "loss-aversion-bet",
+   "work": "50% × +$100 and 50% × −$100: on average, $0. The odds are even. The feelings are not."
+  },
+  {
+   "type": "learn",
+   "title": "Losses hurt about twice as much",
+   "text": "This is **[[loss-aversion|loss aversion]]**. To dodge the pain, you’re tempted to hold losers so you never have to “make it real”, and to sell winners early to feel the win.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "hbars",
+      "layout": "stacked",
+      "max": 2,
+      "label": "Winning $100 feels like ×1; losing $100 feels like ×2",
+      "rows": [
+       {
+        "label": "Win $100 feels like",
+        "value": 1,
+        "display": "×1",
+        "tone": "up"
+       },
+       {
+        "label": "Lose $100 feels like",
+        "value": 2,
+        "display": "×2",
+        "tone": "down"
+       }
+      ]
+     }
+    },
+    {
+     "tip": "The feeling is normal. Letting it move your stop is the mistake.",
+     "tone": "gold",
+     "side": true
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "title": "Hope is not a stop",
+   "text": "Say you buy at $50 with a stop at $47. Price hits $47. You move the stop to $45, then $42, then remove it.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "path": [
+      [
+       0,
+       50
+      ],
+      [
+       1,
+       49.4
+      ],
+      [
+       2,
+       50.6
+      ],
+      [
+       4,
+       49
+      ],
+      [
+       6,
+       47
+      ],
+      [
+       8,
+       45.5
+      ],
+      [
+       10,
+       44
+      ],
+      [
+       12,
+       42.5
+      ],
+      [
+       14,
+       41
+      ],
+      [
+       16,
+       39.5
+      ],
+      [
+       17,
+       38
+      ]
+     ],
+     "seed": 64,
+     "noise": 0.4,
+     "height": 140,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 50,
+       "tone": "blue",
+       "label": "buy $50",
+       "style": "text"
+      },
+      {
+       "price": 47,
+       "tone": "gold",
+       "label": "planned stop $47",
+       "style": "below"
+      }
+     ],
+     "marks": [
+      {
+       "i": 6,
+       "price": 47,
+       "label": "stop moved",
+       "tone": "gold",
+       "pos": "below"
+      },
+      {
+       "i": 17,
+       "price": 38,
+       "label": "$38",
+       "tone": "down",
+       "pos": "below"
+      }
+     ],
+     "label": "Bought at $50; price breaks the $47 stop and falls to $38"
+    }
+   },
+   "blocks": [
+    {
+     "tip": "You finally sell at $38. Planned loss: about $3 a share. Actual loss: $12. Four times the plan.",
+     "tone": "red"
+    }
+   ]
+  },
+  {
+   "type": "myth",
+   "title": "Is it a loss yet?",
+   "myth": "It’s not a loss until I sell.",
+   "reality": "The loss is real now. Your money is stuck in a losing trade either way. Not selling only hides it from you.",
+   "text": "Ask: “Would I buy this today, at this price?” If not, why hold it? The stop decides, not hope."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "The stop is hit",
+   "q": "You bought 100 shares at $40, stop at $37. Price hits $37. You think “it’ll come back”. What now?",
+   "idea": "let-the-stop-work",
+   "options": [
+    {
+     "text": "Move the stop down to $34",
+     "feedback": "Moving the stop is hope, not a plan. Each move makes the possible loss bigger."
+    },
+    {
+     "text": "Let the stop sell and take the loss",
+     "feedback": "That’s the plan working: a small loss, taken on purpose, as you decided before the trade."
+    },
+    {
+     "text": "Buy more to lower your average price",
+     "feedback": "Buying more makes a losing trade bigger right when your plan says it’s wrong."
+    },
+    {
+     "text": "Remove the stop and wait",
+     "feedback": "With no stop, a planned $300 loss has no limit. Hope is not a stop."
+    }
+   ],
+   "answer": 1,
+   "work": "$3 × 100 shares = about a $300 loss, as planned. A gap can make it a bit more."
+  },
+  {
+   "type": "check",
+   "title": "In one line",
+   "q": "Loss aversion means…",
+   "options": [
+    {
+     "text": "Losses don’t happen often",
+     "feedback": "Losses happen to every trader. Loss aversion is about how much they hurt, not how often they come."
+    },
+    {
+     "text": "A loss feels about twice as bad as an equal gain feels good",
+     "feedback": "Losses sting about twice as much, which tempts you to avoid taking them."
+    },
+    {
+     "text": "Good traders never take losses",
+     "feedback": "Every trader takes losses. Loss aversion is the extra pain they cause, which tempts you to avoid taking them."
+    },
+    {
+     "text": "Losers should be held until they recover",
+     "feedback": "That’s the mistake loss aversion tempts you into, not what it means."
+    }
+   ],
+   "answer": 1,
+   "idea": "loss-aversion-meaning"
+  },
+  {
+   "type": "keep",
+   "headline": "You can take a small loss on purpose.",
+   "lines": [
+    "A loss hurts about twice as much as a gain feels good.",
+    "A loss is real before you sell.",
+    "The stop decides, not hope. Never move it further away."
+   ]
+  }
+ ]
+}

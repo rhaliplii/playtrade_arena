@@ -1,0 +1,238 @@
+/* Profit.com Academy · semantic design tokens.
+   Components use these names only; no hex values outside this file.
+   Dark is the reference (the canvas). Light is derived from the light surfaces the canvas
+   already uses (plan preview, certificate) and the site's inversed tokens in styles.css. */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* surfaces */
+  --ac-page: #13161b;            /* page background */
+  --ac-surface: #16191e;         /* cards */
+  --ac-surface-raised: #1b1f26;  /* inner tiles, inputs, option rows */
+  --ac-surface-sunken: #0f1216;  /* bottom bars, wells */
+  --ac-surface-hover: #212327;
+  --ac-chip: #212327;
+  --ac-overlay: rgba(13, 15, 19, .72);
+  --ac-paper: #fbfaf6;           /* certificate / plan paper (same in both themes) */
+  --ac-paper-ink: #13161b;
+  --ac-paper-line: #e6e1d3;
+
+  /* lines */
+  --ac-line: #2d2f34;
+  --ac-line-strong: #3a3d44;
+  --ac-line-soft: #1f2227;       /* hairlines between page bands (verify page header / footer) */
+
+  /* text */
+  --ac-text: #ffffff;
+  --ac-text-soft: #d5d7de;
+  --ac-text-muted: #9a9daa;
+  --ac-text-faint: #888b96;
+  --ac-text-sub: #b4b8c2;
+  --ac-crumb: #888b96;           /* breadcrumbs: same as the platform (calculators) */
+  --ac-crumb-current: #5c5e66;        /* lesson paragraphs (canvas) */
+  --ac-text-on-primary: #ffffff;
+  --ac-text-on-inverse: #13161b;
+
+  /* brand & states */
+  --ac-primary: #13a487;         /* green CTA, white text */
+  --ac-primary-hover: #108f76;   /* darker on hover, like the Arena's .btn-brand */
+  --ac-white-hover: #e6f7f1;     /* white buttons on hover: a mint tint */
+  --ac-focus: #ffffff;           /* keyboard focus ring (the Arena's white outline) */
+  --ac-card-edge: rgba(255, 255, 255, .25);   /* hovered card: faint light edge */
+  --ac-card-glow: rgba(7, 216, 162, .14);     /* hovered card: soft mint glow */
+  --ac-primary-ink: #07d8a2;     /* mint: highlights, ticks, progress */
+  --ac-primary-soft: rgba(7, 216, 162, .14);
+  --ac-primary-ring: rgba(7, 216, 162, .45);
+  --ac-link: #3dbb9a;
+  --ac-success: #07d8a2;
+  --ac-success-soft: rgba(7, 216, 162, .10);
+  --ac-danger: #f63d68;
+  --ac-danger-ink: #ff8fa8;
+  --ac-danger-soft: rgba(246, 61, 104, .10);
+  --ac-warning: #ffb26b;         /* "Not quite" sheet */
+  --ac-warning-soft: rgba(255, 159, 67, .12);
+  --ac-warning-ring: rgba(255, 178, 107, .45);
+  --ac-streak: #ff9f43;
+  --ac-streak-soft: rgba(255, 159, 67, .14);
+  --ac-gold: #f4c763;            /* Rico's Call, "Meet Rico", podium #1 */
+  --ac-gold-soft: rgba(244, 199, 99, .14);
+  --ac-gold-ring: rgba(244, 199, 99, .35);
+  --ac-silver: #c9ced8;          /* podium #2 (guest home, phones) */
+  --ac-bronze: #d9925a;          /* podium #3 (guest home, phones) */
+  --ac-amber: #fbb517;           /* coins, challenge */
+  --ac-amber-soft: rgba(251, 181, 23, .14);
+  --ac-sky: #7cc0ff;             /* Quick check, Myth */
+  --ac-sky-soft: rgba(124, 192, 255, .14);
+  --ac-coral: #ff8a6b;           /* Bear Trap */
+  --ac-coral-soft: rgba(255, 138, 107, .10);
+  --ac-pro: #7c4ddb;             /* Pro violet */
+  --ac-pro-ink: #b9a4ff;
+  --ac-pro-soft: rgba(124, 77, 219, .16);
+
+  /* guest home, How it works examples (canvas HowItWorks-Learn-Card) */
+  --ac-mock-panel: #111316;      /* the example screen inside each step card */
+  --ac-mock-well: #0c0d0f;       /* chart well */
+  --ac-call-bubble: #1d1a12;     /* Rico's Call speech card */
+
+  /* chart */
+  --ac-chart-up: #07d8a2;
+  --ac-chart-down: #f63d68;
+  --ac-chart-grid: #23272f;
+  --ac-chart-axis: #6b6e78;
+
+  /* hero gradients (identity: colour gradients + Rico) */
+  --ac-hero: linear-gradient(120deg, #0d4f42, #13a487);
+  --ac-hero-spot: linear-gradient(120deg, #0d4f42, #13a487);  /* home hero: same gradient as the Academy card in the Learn menu */
+  --ac-hero-text: #ffffff;
+  --ac-hero-text-soft: rgba(255, 255, 255, .85);
+  --ac-hero-chip: rgba(255, 255, 255, .18);
+  --ac-hero-gold: #f4c763;       /* gold text on the green hero (both themes) */
+  --ac-hero-pro: linear-gradient(120deg, #3b1f73, #7c4ddb);
+  --ac-hero-warm: linear-gradient(135deg, #3a2414, #b8620f);  /* Challenge not passed: warm, not alarming */
+  --ac-glow: rgba(7, 216, 162, .45);
+
+  /* per-path accents */
+  --ac-path-learn: #13a487;
+  --ac-path-investor: #2a9d8f;
+  --ac-path-portfolio: #1f7a8c;
+  --ac-path-ta: #7c4ddb;
+  --ac-path-crypto: #c99a2e;
+  --ac-path-options: #3567d6;
+  --ac-path-macro: #e8743b;
+  --ac-path-risk: #c9862e;
+  --ac-path-companies: #4a6a9a;
+
+  /* rank colours */
+  --ac-rank-rookie: #7a8394;
+  --ac-rank-analyst: #4f7cf0;
+  --ac-rank-strategist: #3fae8f;
+  --ac-rank-trader: #d4a23a;
+  --ac-rank-legend: #e0559a;
+
+  --ac-white: #ffffff;           /* white buttons and text on the green hero, both themes */
+  --ac-ink: #13161b;             /* text on white buttons */
+  --ac-shadow: 0 30px 60px rgba(0, 0, 0, .35);
+  --ac-shadow-soft: 0 10px 30px rgba(0, 0, 0, .18);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --ac-page: #f6f8fd;
+  --ac-surface: #ffffff;
+  --ac-surface-raised: #f1f4f9;
+  --ac-surface-sunken: #eaeef5;
+  --ac-surface-hover: #e9edf4;
+  --ac-chip: #e9edf4;
+  --ac-overlay: rgba(19, 22, 27, .45);
+
+  --ac-line: #dfe3ea;
+  --ac-line-strong: #c9cfd9;
+  --ac-line-soft: #e6e9ef;
+
+  --ac-text: #13161b;
+  --ac-text-soft: #2f3440;
+  --ac-text-muted: #5b6170;
+  --ac-text-faint: #6b7180;
+  --ac-text-sub: #3d4350;
+  --ac-crumb: #6b7180;
+  --ac-crumb-current: #a0a5b0;
+  --ac-text-on-primary: #ffffff;
+  --ac-text-on-inverse: #ffffff;
+
+  --ac-primary: #11967b;
+  --ac-primary-hover: #0e8069;
+  --ac-white-hover: #e6f7f1;
+  --ac-focus: #13161b;
+  --ac-card-edge: rgba(19, 22, 27, .22);
+  --ac-card-glow: rgba(10, 143, 108, .16);
+  --ac-primary-ink: #0a8f6c;
+  --ac-primary-soft: rgba(10, 143, 108, .10);
+  --ac-primary-ring: rgba(10, 143, 108, .45);
+  --ac-link: #0a8f6c;
+  --ac-success: #0a8f6c;
+  --ac-success-soft: rgba(10, 143, 108, .08);
+  --ac-danger: #d92d56;
+  --ac-danger-ink: #c2214a;
+  --ac-danger-soft: rgba(217, 45, 86, .08);
+  --ac-warning: #b8620f;
+  --ac-warning-soft: rgba(255, 159, 67, .12);
+  --ac-warning-ring: rgba(184, 98, 15, .40);
+  --ac-streak: #d9730d;
+  --ac-streak-soft: rgba(255, 159, 67, .16);
+  --ac-gold: #a8780a;
+  --ac-gold-soft: rgba(244, 199, 99, .22);
+  --ac-gold-ring: rgba(168, 120, 10, .35);
+  --ac-silver: #7d8696;
+  --ac-bronze: #b0672e;
+  --ac-amber: #b07a00;
+  --ac-amber-soft: rgba(251, 181, 23, .18);
+  --ac-sky: #1f6fc0;
+  --ac-sky-soft: rgba(31, 111, 192, .10);
+  --ac-coral: #c4502f;
+  --ac-coral-soft: rgba(255, 138, 107, .14);
+  --ac-pro: #6a3cc9;
+  --ac-pro-ink: #6a3cc9;
+  --ac-pro-soft: rgba(124, 77, 219, .10);
+
+  --ac-mock-panel: #f6f8fd;
+  --ac-mock-well: #f1f4f9;
+  --ac-call-bubble: #fdf6e3;
+
+  --ac-chart-up: #0a9b75;
+  --ac-chart-down: #d92d56;
+  --ac-chart-grid: #e6e9ef;
+  --ac-chart-axis: #7a808e;
+
+  --ac-hero: linear-gradient(120deg, #0d4f42, #13a487);  /* hero banners stay green in both themes */
+  --ac-glow: rgba(10, 143, 108, .25);
+
+  --ac-shadow: 0 20px 40px rgba(19, 22, 27, .10);
+  --ac-shadow-soft: 0 8px 24px rgba(19, 22, 27, .08);
+}
+
+:root {
+  /* path art (static/img/art/path-*): the colour at each scene's left edge. Banners fade the art into it; cards show it while
+     the image loads. Same in both themes (the art is fixed). */
+  --ac-art-ltt: #012d27;
+  --ac-art-investor: #1a4d4a;
+  --ac-art-portfolio: #0a1f4a;
+  --ac-art-ta: #2a0f6a;
+  --ac-art-crypto: #2c1a01;
+  --ac-art-options: #06364a;
+  --ac-art-macro: #351202;
+  --ac-art-risk: #2d1a02;
+  --ac-art-companies: #192435;
+  /* the certificate (static/css/cert.css, js/cert.js): printed paper, the same in both themes. Free paths use the
+     logo's green, Pro paths the Pro violet; the seal and frame accents come from these (canvas Certificate-*). */
+  --ac-cert-green: #22a180;      /* free: frame, seal ring, underline (the Profit.com logo green) */
+  --ac-cert-green-ink: #0d8a6f;  /* free: path title, ACADEMY, verify line (text on paper) */
+  --ac-cert-violet: #7c4ddb;     /* Pro: frame, seal ring, PRO PATH pill */
+  --ac-cert-violet-ink: #5b34b5; /* Pro: text on paper */
+  --ac-cert-gold: #b8893a;       /* inner rule, seal ring and dots */
+  --ac-cert-muted: #5d6475;      /* small labels */
+  --ac-cert-body: #3a3f4a;       /* summary line */
+  --ac-cert-faint: #8a8f9c;      /* fine print */
+  --ac-cert-qr-bg: #ffffff;
+  --ac-cert-qr-edge: #e3dfd2;
+  --ac-cert-shadow: rgba(0, 0, 0, .45);
+  --ac-cert-sample: #c2412d;     /* SAMPLE ribbon on a specimen certificate (white paper text on it: 5:1) */
+  --ac-cert-sample-shadow: rgba(19, 22, 27, .18);
+  /* the share image (1200 × 627, drawn by js/cert.js): green for free paths, violet for Pro */
+  --ac-share-free-a: #0d4f42;
+  --ac-share-free-b: #13a487;
+  --ac-share-pro-a: #2b1760;
+  --ac-share-pro-b: #7c4ddb;
+  --ac-share-text: #ffffff;
+  --ac-share-text-soft: rgba(255, 255, 255, .85);
+  --ac-share-line: rgba(255, 255, 255, .35);
+  --ac-share-pill: rgba(0, 0, 0, .22);
+  --ac-share-rico-shadow: rgba(0, 0, 0, .35);
+  --ac-font: "Montserrat", system-ui, sans-serif;
+  --ac-r-card: 24px;
+  --ac-r-tile: 16px;
+  --ac-r-small: 12px;
+  --ac-r-pill: 32px;
+}

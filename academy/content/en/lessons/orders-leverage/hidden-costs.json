@@ -1,0 +1,229 @@
+{
+ "id": "hidden-costs",
+ "chapter": "orders-leverage",
+ "n": 4,
+ "title": "The costs nobody advertises",
+ "minutes": 5,
+ "desc": "Commission, spread, slippage and swaps",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Common-sense opener on the p.15 “free brokers may make it back” line · Visual: Phone showing a “zero commission” ad for the opener",
+   "pose": "point",
+   "name": "The ad",
+   "title": "Free trading?",
+   "situation": "An app’s ad says: “Zero commission! Trading is free.” The app has hundreds of staff to pay. Is trading there really free?",
+   "visual": {
+    "kind": "ad",
+    "badge": "ZERO",
+    "badgeSub": "COMMISSION!",
+    "title": "Trading is free.",
+    "sub": "Hundreds of staff…",
+    "mark": "?"
+   },
+   "options": [
+    {
+     "text": "Only big trades cost anything",
+     "feedback": "Costs hit every trade, big or small. Even 10 shares with a $0.05 wider spread cost $0.50 a round trip, and that adds up."
+    },
+    {
+     "text": "No: they earn from my trades another way",
+     "feedback": "Commission is only one fee. “Free” apps earn by selling your orders to market makers (payment for order flow) and through a wider spread, the bid–ask gap from Chapter 1."
+    },
+    {
+     "text": "Yes: zero commission means zero cost",
+     "feedback": "It sounds like zero cost. But the app still earns on every buy and sell, through a wider spread or by selling your orders (payment for order flow)."
+    }
+   ],
+   "answer": 1,
+   "idea": "free-isnt-free",
+   "work": "Spread $0.05 wider × 100 shares = $5 extra cost on every round trip."
+  },
+  {
+   "type": "learn",
+   "added": "$0.06 × 100 = $6 example added · Visual: Two-row order book with a $0.06 spread on 100 shares",
+   "tag": "costs",
+   "title": "Costs 1 and 2: commission and spread",
+   "text": "**[[commission|Commission]]**: a fee per trade or per share. Often zero now. **[[spread|Spread]]**: you met it in Chapter 1. You buy at the ask and sell at the bid, on every [[round-trip|round trip]] (one buy plus one sell). A $0.06 spread on 100 shares = $6 a round trip, commission or not.",
+   "visual": {
+    "kind": "book",
+    "rows": [
+     {
+      "side": "ask",
+      "label": "ASK",
+      "price": "$50.06",
+      "tag": "you buy here"
+     },
+     {
+      "side": "bid",
+      "label": "BID",
+      "price": "$50.00",
+      "tag": "you sell here"
+     }
+    ],
+    "foot": "Spread $0.06 × 100 shares = $6 a round trip"
+   }
+  },
+  {
+   "type": "walkthrough",
+   "added": "Numbers $10.00 / $10.08 added (p.15 defines slippage) · Visual: Slippage receipt drawn after the tap: expected $10.00, got $10.08, 100 shares = $8",
+   "tag": "tap Play",
+   "title": "Cost 3: slippage",
+   "text": "News breaks. You tap Buy at $10.00 with a market order. Prices are jumping, and you’re filled at $10.08. That 8-cent gap between the price you expected and the price you got is **[[slippage|slippage]]**. On 100 shares: $8. It’s biggest in fast markets and with market orders, and now and then it goes your way.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "flow",
+      "items": [
+       {
+        "top": "You tapped Buy",
+        "value": "$10.00"
+       },
+       {
+        "value": "$10.04",
+        "tone": "muted"
+       },
+       {
+        "value": "$10.08",
+        "tone": "down",
+        "active": true
+       }
+      ],
+      "foot": "prices jumping…"
+     },
+     {
+      "kind": "rows",
+      "title": "RECEIPT · 100 shares",
+      "rows": [
+       {
+        "label": "Expected",
+        "value": "$10.00"
+       },
+       {
+        "label": "Got",
+        "value": "$10.08"
+       },
+       {
+        "label": "Slippage",
+        "value": "$8",
+        "tone": "down",
+        "strong": true
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "type": "learn",
+   "added": "$1 a night × 90 nights = $90 example added (p.15 defines swaps) · Visual: Night counter drawn at night 90: $1 a night fills a $90 jar",
+   "tag": "costs",
+   "title": "Cost 4: swap",
+   "text": "Hold a leveraged position overnight and you pay interest: **overnight financing**, a **[[swap|swap]]** on forex and CFDs or **margin interest** on US stocks. A swap is charged on the full position, not just your deposit. Say it’s $1 a night. One night is nothing. Three months (90 nights) is $90, eaten from your gains even if the price never moves.",
+   "visual": {
+    "kind": "counter",
+    "count": 90,
+    "total": "$90",
+    "label": "90 nights × $1 = $90",
+    "jar": "night 90",
+    "tone": "gold"
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "added": "Two-broker comparison (the old Call, smaller numbers): A = $0.06 × 100 × 10 = $60; B = $1 × 2 × 10 + $0.01 × 100 × 10 = $30 · Visual: Two-column broker price list for the Try it",
+   "name": "Compare the bills",
+   "title": "Which broker is cheaper?",
+   "q": "You buy and sell 100 shares 10 times a month. Which broker costs less per month?",
+   "idea": "total-trading-cost",
+   "visual": {
+    "kind": "columns",
+    "cols": [
+     {
+      "title": "BROKER A",
+      "rows": [
+       {
+        "label": "Fee per trade",
+        "value": "$0"
+       },
+       {
+        "label": "Spread per share",
+        "value": "$0.06"
+       }
+      ]
+     },
+     {
+      "title": "BROKER B",
+      "rows": [
+       {
+        "label": "Fee per trade",
+        "value": "$1"
+       },
+       {
+        "label": "Spread per share",
+        "value": "$0.01"
+       }
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Broker A: zero commission is cheapest",
+     "feedback": "Zero commission looks cheapest. But A’s spread is much wider, and you pay it on every share of every trade."
+    },
+    {
+     "text": "Same cost",
+     "feedback": "The costs come in different forms, but they don’t match. Add each broker’s commission and spread before comparing."
+    },
+    {
+     "text": "Broker B: $30 vs $60",
+     "feedback": "Broker B charges a commission, but its spread is so narrow that its total cost is half of A’s."
+    },
+    {
+     "text": "Broker B: $20 vs $60",
+     "feedback": "That counts only B’s commission. B has a spread too; add it in."
+    }
+   ],
+   "answer": 2,
+   "work": "A: $0.06 spread × 100 shares × 10 trips = $60 cost. B: $1 × 2 trades × 10 trips = $20 commission + $0.01 × 100 × 10 = $10 spread = $30 cost."
+  },
+  {
+   "type": "check",
+   "title": "The overnight bill",
+   "q": "You hold a $10,000 leveraged position for 30 nights. The swap is $1 a night. What does holding it cost?",
+   "options": [
+    {
+     "text": "$0, the price didn’t move",
+     "feedback": "Swap is charged every night you hold, even if the price never moves."
+    },
+    {
+     "text": "$30",
+     "feedback": "Swap is charged for every night you hold, whatever the price does. Thirty nights means thirty charges."
+    },
+    {
+     "text": "$1",
+     "feedback": "That’s one night. You held it for 30, and the swap is charged every night."
+    },
+    {
+     "text": "$300",
+     "feedback": "Check the decimal point. It’s $1 a night, for 30 nights, not $10 a night."
+    }
+   ],
+   "answer": 1,
+   "idea": "swap-every-night",
+   "work": "$1 × 30 nights = $30, taken from your account."
+  },
+  {
+   "type": "keep",
+   "headline": "You can spot the hidden costs on any trade.",
+   "lines": [
+    "Four costs: commission, spread, slippage, swap (overnight financing).",
+    "“Zero commission” can still cost more: check the spread.",
+    "Holding leverage overnight costs swap (or margin interest) every night."
+   ]
+  }
+ ]
+}

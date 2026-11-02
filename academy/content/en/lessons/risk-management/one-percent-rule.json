@@ -1,0 +1,234 @@
+{
+ "id": "one-percent-rule",
+ "chapter": "risk-management",
+ "n": 2,
+ "title": "The 1% rule",
+ "minutes": 5,
+ "desc": "Risk a small, fixed slice so a losing streak can’t knock you out",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Board P1-Ch05-L2 card 1",
+   "pose": "worried2",
+   "title": "Ten losses in a row",
+   "situation": "Your account is $10,000. You risk 10% of whatever is left on every trade. Then you hit 10 losses in a row. Roughly what’s left?",
+   "visual": {
+    "kind": "series",
+    "title": "10 losses in a row",
+    "aside": "same trades",
+    "height": 110,
+    "label": "Ten losses: $10,000 falls to about $9,044 at 1% risk and about $3,487 at 10% risk",
+    "series": [
+     {
+      "label": "1% risk",
+      "tone": "up",
+      "dots": true,
+      "values": [
+       10000,
+       9900,
+       9801,
+       9703,
+       9606,
+       9510,
+       9415,
+       9321,
+       9227,
+       9135,
+       9044
+      ]
+     },
+     {
+      "label": "10% risk",
+      "tone": "down",
+      "dots": true,
+      "values": [
+       10000,
+       9000,
+       8100,
+       7290,
+       6561,
+       5905,
+       5314,
+       4783,
+       4305,
+       3874,
+       3487
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "$0: 10 × 10% = 100%",
+     "feedback": "Each loss is 10% of a smaller account, so you never quite hit $0. But you’ve lost about two-thirds."
+    },
+    {
+     "text": "About $3,500",
+     "feedback": "About $3,500 left. You’d need +187% just to get back to even."
+    },
+    {
+     "text": "About $9,000",
+     "feedback": "That’s what 1% risk would leave. At 10% a trade, each loss is ten times bigger."
+    }
+   ],
+   "answer": 1,
+   "idea": "losing-streak-compounds",
+   "work": "Each loss takes 10% of what’s left. $10,000 × 0.9¹⁰ ≈ $3,500. At 1% a trade: ≈ $9,040."
+  },
+  {
+   "type": "learn",
+   "title": "The 1% rule",
+   "text": "Many pros risk **1–2% of the account at most** on any one trade. Risk is what you lose if the [[stop-loss|stop]] is hit, not how much stock you buy.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Account",
+      "value": "$10,000",
+      "strong": true
+     },
+     {
+      "label": "1% risk",
+      "value": "$100",
+      "tone": "up"
+     },
+     {
+      "label": "2% risk",
+      "value": "$200",
+      "tone": "gold"
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "You can buy $2,500 of stock and still risk only about $100, if your stop is close enough."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap a row",
+   "title": "Survive the losing streak",
+   "text": "Even good strategies hit losing streaks. Here’s what’s left of $10,000 after a run of losses.",
+   "visual": {
+    "kind": "table",
+    "label": "What’s left of $10,000 after 5, 10 and 20 losses at 1% and 10% risk",
+    "cols": [
+     {
+      "label": "Streak"
+     },
+     {
+      "label": "1% risk",
+      "tone": "up",
+      "align": "right"
+     },
+     {
+      "label": "10% risk",
+      "tone": "down",
+      "align": "right"
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       "5 losses",
+       "$9,510",
+       "$5,905"
+      ],
+      "note": "Down 5% at 1%. Down 41% at 10%."
+     },
+     {
+      "cells": [
+       "10 losses",
+       "$9,044",
+       "$3,487"
+      ],
+      "note": "Down 10% at 1%. Down 65% at 10%: you’d need +187% to get back."
+     },
+     {
+      "cells": [
+       "20 losses",
+       "$8,179",
+       {
+        "text": "$1,216",
+        "tone": "down"
+       }
+      ],
+      "note": "Down 18% at 1%. Down 88% at 10%."
+     }
+    ]
+   },
+   "foot": "At 1%, 20 losses in a row leave you down 18%. Bad, but you’re still trading. At 10%, you’re almost wiped out.",
+   "footTone": "green"
+  },
+  {
+   "type": "myth",
+   "title": "Bigger bets, faster riches?",
+   "myth": "Risking more per trade gets you rich faster.",
+   "reality": "It gets you broke faster too. Losing streaks are normal. Big risk turns a normal streak into a blown account.",
+   "rule": "pick a risk you could lose 10 times in a row and still keep going."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Set your risk",
+   "q": "Your account is $25,000. Using the [[one-percent-rule|1% rule]], what’s the most you should risk on one trade?",
+   "idea": "one-percent-risk",
+   "options": [
+    {
+     "text": "$25",
+     "feedback": "That’s 0.1% of the account. Move the decimal one place: 1% of $25,000 is ten times more."
+    },
+    {
+     "text": "$250",
+     "feedback": "1% of $25,000. Lose it 10 times in a row and you’re still down only about 10%."
+    },
+    {
+     "text": "$2,500",
+     "feedback": "$2,500 is 10% of the account. Ten bad trades like that would cost you most of it."
+    },
+    {
+     "text": "$1,000",
+     "feedback": "That’s 4% of the account. A normal losing streak at that size would cut deep."
+    }
+   ],
+   "answer": 1,
+   "work": "$25,000 × 1% = $250."
+  },
+  {
+   "type": "check",
+   "title": "What “risk 1%” means",
+   "q": "You “risk 1%” on each trade. What does that mean?",
+   "options": [
+    {
+     "text": "Buy stock worth 1% of the account",
+     "feedback": "The 1% is the loss if the stop is hit, not the size of the position."
+    },
+    {
+     "text": "Lose about 1% of the account if the stop is hit",
+     "feedback": "Risk is the loss at your stop. The position itself can be much bigger."
+    },
+    {
+     "text": "Aim for a 1% gain on every trade",
+     "feedback": "The rule is about losses, not targets. It caps what one bad trade can take."
+    },
+    {
+     "text": "Trade on 1% of the days",
+     "feedback": "It’s not about how often you trade. It caps what you lose if the stop is hit."
+    }
+   ],
+   "answer": 1,
+   "idea": "risk-means-stop-loss",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can survive a losing streak.",
+   "lines": [
+    "Risk at most 1–2% of the account per trade.",
+    "Risk = what you lose if the stop is hit.",
+    "Small risk keeps you in the game through bad runs."
+   ]
+  }
+ ]
+}

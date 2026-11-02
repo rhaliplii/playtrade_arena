@@ -1,0 +1,233 @@
+{
+ "id": "inflation-and-your-money",
+ "chapter": "markets-economy",
+ "n": 2,
+ "title": "Inflation and your money",
+ "minutes": 5,
+ "desc": "Real return, CPI and why hot inflation keeps rates higher",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "think",
+   "title": "Richer or poorer?",
+   "situation": "Your savings earned 3% this year. Prices in the shops rose 5%. Did you get richer?",
+   "visual": {
+    "kind": "barchart",
+    "title": "This year",
+    "label": "Your savings grew 3%, prices rose 5%",
+    "groups": [
+     {
+      "label": "Your savings",
+      "values": [
+       3
+      ],
+      "displays": [
+       "+3%"
+      ],
+      "tones": [
+       "up"
+      ]
+     },
+     {
+      "label": "Prices",
+      "values": [
+       5
+      ],
+      "displays": [
+       "+5%"
+      ],
+      "tones": [
+       "down"
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Yes: you have 3% more money",
+     "feedback": "You have more dollars, but each one buys less. Prices rose faster than your savings."
+    },
+    {
+     "text": "No: you can buy about 2% less",
+     "feedback": "More dollars, less stuff. Your real return was about −2%."
+    },
+    {
+     "text": "No change: it evens out",
+     "feedback": "It doesn’t even out: prices rose 5% and your savings only 3%. You can buy about 2% less."
+    }
+   ],
+   "answer": 1,
+   "idea": "inflation-erodes-savings",
+   "work": "$10,000 grew to $10,300. Goods that cost $10,000 now cost $10,500. Real return ≈ 3% − 5% = −2%."
+  },
+  {
+   "type": "learn",
+   "title": "Inflation: prices going up",
+   "text": "**[[inflation|Inflation]]** is how fast prices rise. Most countries track it with the **[[cpi|CPI]]**: the cost of a basket of everyday goods.",
+   "visual": {
+    "kind": "stats",
+    "arrow": true,
+    "foot": "= 4% inflation",
+    "items": [
+     {
+      "label": "Basket · last year",
+      "value": "$100"
+     },
+     {
+      "label": "Same basket · now",
+      "value": "$104",
+      "tone": "down"
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "**[[real-return|Real return]]** = your return − inflation. It’s what your money can actually buy."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "Why central banks raise rates",
+   "text": "Most central banks aim for inflation near 2%. When it runs hot, they use rates to cool it.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "list",
+      "style": "chain",
+      "items": [
+       {
+        "title": "Prices rise too fast"
+       },
+       {
+        "title": "Central bank raises rates"
+       },
+       {
+        "title": "Loans cost more, so people and firms spend less"
+       },
+       {
+        "title": "Price rises slow down"
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "A hot inflation report can mean more hikes. That’s why markets watch CPI so closely.",
+   "footTone": "gold"
+  },
+  {
+   "type": "myth",
+   "title": "Is cash always safe?",
+   "myth": "Money in the bank is safe from inflation.",
+   "reality": "Cash keeps its number, not its buying power. At 3% inflation, $10,000 kept in cash for 10 years buys only what about $7,400 buys today.",
+   "rule": "judge every return after inflation."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Find the real return",
+   "q": "You hold a bond paying 6% a year. Inflation is 4%. What is your real return?",
+   "idea": "real-return-math",
+   "visual": {
+    "kind": "barchart",
+    "title": "This year",
+    "label": "Bond pays 6%, inflation is 4%, real return unknown",
+    "groups": [
+     {
+      "label": "Bond",
+      "values": [
+       6
+      ],
+      "displays": [
+       "+6%"
+      ],
+      "tones": [
+       "up"
+      ]
+     },
+     {
+      "label": "Inflation",
+      "values": [
+       4
+      ],
+      "displays": [
+       "+4%"
+      ],
+      "tones": [
+       "down"
+      ]
+     },
+     {
+      "label": "Real",
+      "values": [
+       0.15
+      ],
+      "displays": [
+       "?"
+      ],
+      "tones": [
+       "gold"
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "10%",
+     "feedback": "Inflation is taken away, not added. Real return is what’s left after prices rise."
+    },
+    {
+     "text": "6%",
+     "feedback": "6% is what the bond pays before inflation. Take inflation away to find what you really earn."
+    },
+    {
+     "text": "2%",
+     "feedback": "The bond pays 6% and prices rise 4%, so your buying power grows about 2% a year."
+    },
+    {
+     "text": "−2%",
+     "feedback": "That takes away the wrong way round. The bond pays more than inflation, so the real return is positive."
+    }
+   ],
+   "answer": 2,
+   "work": "6% − 4% = 2%."
+  },
+  {
+   "type": "check",
+   "title": "Hotter than expected",
+   "q": "Markets expected inflation of 3%. The CPI report shows 4%. What might traders now expect from the central bank?",
+   "options": [
+    {
+     "text": "Faster rate cuts",
+     "feedback": "Hot inflation is a reason to keep rates high, not to cut them."
+    },
+    {
+     "text": "Rates kept higher for longer",
+     "feedback": "Hot inflation gives the central bank a reason to keep rates high, so traders push back their hopes of cuts."
+    },
+    {
+     "text": "Prices to fall at once",
+     "feedback": "One hot report doesn’t make prices fall. It shows they’re still rising fast."
+    },
+    {
+     "text": "Nothing: CPI doesn’t affect rates",
+     "feedback": "CPI is one of the main numbers central banks watch when they set rates."
+    }
+   ],
+   "answer": 1,
+   "idea": "hot-cpi-higher-rates",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can see past the headline number.",
+   "lines": [
+    "Inflation is how fast prices rise, tracked by CPI.",
+    "Real return = return − inflation.",
+    "Hot inflation often means higher rates for longer."
+   ]
+  }
+ ]
+}

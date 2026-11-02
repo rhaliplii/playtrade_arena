@@ -1,0 +1,229 @@
+{
+ "id": "learn-to-trade",
+ "title": "Trading Foundations",
+ "tier": "free",
+ "level": "Beginner → Intermediate",
+ "outcome": "From your first candle to your own trading plan.",
+ "intro": "10 chapters and 55 lessons of 3 to 5 minutes, based on the guide “Learn to Trade with Rico”. Free forever, and Lesson 1 needs no account.",
+ "accent": "path-learn",
+ "art": "path-ltt.webp",
+ "hours": 4.5,
+ "xp": 7600,
+ "chapters": [
+  {
+   "id": "how-markets-work",
+   "n": 1,
+   "title": "How Markets Actually Work",
+   "short": "Markets",
+   "promise": "Why the bull and the bear never stop fighting, who you trade against, and the toll on every trade.",
+   "minutes": 16,
+   "available": true,
+   "lessons": [
+    "Bulls vs bears",
+    "Who’s on the other side",
+    "The six asset classes and their risk",
+    "Bid, ask and the spread"
+   ],
+   "tagline": "Bulls, bears and the spread",
+   "practice": {
+    "tool": "Bull Run",
+    "text": "Read the headline, call it bullish or bearish. Uses Lesson 1.",
+    "href": "index.html#games-title",
+    "art": "bullrun"
+   }
+  },
+  {
+   "id": "orders-leverage",
+   "n": 2,
+   "title": "Orders, Leverage & the Mechanics",
+   "short": "Orders",
+   "promise": "How a trade is actually placed, and the one tool that turns small mistakes into account-killers.",
+   "minutes": 24,
+   "available": true,
+   "lessons": [
+    "The four orders you’ll use 95% of the time",
+    "Long and short: profit both ways",
+    "Leverage, the double-edged sword",
+    "The costs nobody advertises",
+    "The overnight gamble"
+   ],
+   "tagline": "Orders, leverage and costs",
+   "practice": {
+    "tool": "PlayTrade",
+    "text": "Place your first virtual trade with a limit and a stop. Uses Lesson 1.",
+    "href": "index.html",
+    "art": "playtrade"
+   }
+  },
+  {
+   "id": "reading-charts",
+   "n": 3,
+   "title": "Reading Charts",
+   "short": "Charts",
+   "promise": "Candles are the language of price: a diary of fear and greed.",
+   "minutes": 25,
+   "available": true,
+   "lessons": [
+    "One candle, four prices",
+    "Candles that tell a story",
+    "Timeframes: same stock, different story",
+    "Volume: the crowd behind the move",
+    "Support and resistance: where price pauses"
+   ],
+   "tagline": "Read any price chart"
+  },
+  {
+   "id": "trends-patterns-indicators",
+   "n": 4,
+   "title": "Trends, Patterns & Indicators",
+   "short": "Trends",
+   "promise": "The map (trends, support, resistance) and the instruments (indicators) of technical analysis.",
+   "minutes": 40,
+   "available": true,
+   "lessons": [
+    "What a trend really is",
+    "Trendlines and channels",
+    "Moving averages: the smoothed trend",
+    "Double tops and double bottoms",
+    "Head and shoulders",
+    "RSI: overbought isn’t a sell signal",
+    "MACD in plain words",
+    "Confluence over clutter"
+   ],
+   "skill": "Chart Reader",
+   "tagline": "Trends, levels, indicators"
+  },
+  {
+   "id": "risk-management",
+   "n": 5,
+   "title": "Risk Management: The Real Edge",
+   "short": "Risk",
+   "promise": "The chapter that separates traders who last from traders who become cautionary tales.",
+   "minutes": 30,
+   "available": true,
+   "lessons": [
+    "The math that ends careers",
+    "The 1% rule",
+    "Position sizing in one formula",
+    "Where to put the stop",
+    "Reward-to-risk",
+    "Expectancy: does your strategy pay?"
+   ],
+   "tagline": "Size every trade safely"
+  },
+  {
+   "id": "trading-psychology",
+   "n": 6,
+   "title": "Trading Psychology",
+   "short": "Psychology",
+   "promise": "Your biggest opponent in the market isn’t a hedge fund. It’s the person staring back from your screen.",
+   "minutes": 25,
+   "available": true,
+   "lessons": [
+    "Fear and greed in your own head",
+    "Revenge trading and tilt",
+    "FOMO and chasing",
+    "Loss aversion: why you hold losers",
+    "Your trading journal"
+   ],
+   "skill": "Risk Manager",
+   "tagline": "Keep your emotions in check"
+  },
+  {
+   "id": "company-fundamentals",
+   "n": 7,
+   "title": "Company Fundamentals",
+   "short": "Companies",
+   "promise": "Charts show how a stock moves. Fundamentals tell you what the business is actually worth.",
+   "minutes": 25,
+   "available": true,
+   "lessons": [
+    "What a share really is",
+    "Revenue, profit and margins",
+    "Earnings per share and the P/E",
+    "Debt and cash flow",
+    "Reading an earnings report in 5 minutes"
+   ],
+   "tagline": "Judge what a company is worth"
+  },
+  {
+   "id": "markets-economy",
+   "n": 8,
+   "title": "Markets & the Economy",
+   "short": "Economy",
+   "promise": "Interest rates, inflation, jobs and growth: the tide that lifts or sinks every boat.",
+   "minutes": 25,
+   "available": true,
+   "lessons": [
+    "Interest rates move everything",
+    "Inflation and your money",
+    "The economic calendar",
+    "Sectors and the cycle",
+    "News vs noise"
+   ],
+   "tagline": "How the economy moves prices"
+  },
+  {
+   "id": "portfolio-management",
+   "n": 9,
+   "title": "Building a Portfolio",
+   "short": "Portfolio",
+   "promise": "Single trades are battles. Your portfolio is the war.",
+   "minutes": 35,
+   "available": true,
+   "lessons": [
+    "Don’t put all your eggs in one basket",
+    "Correlation: when everything falls together",
+    "Asset allocation",
+    "Rebalancing",
+    "Costs that compound",
+    "Measuring your results",
+    "Drawdown: staying in the game"
+   ],
+   "tagline": "Build a balanced portfolio"
+  },
+  {
+   "id": "trading-plan",
+   "n": 10,
+   "title": "Building Your Trading Plan",
+   "short": "Your plan",
+   "promise": "Everything comes together: pick your style and markets, write your entry, exit and risk rules, run a checklist and review every week.",
+   "minutes": 25,
+   "available": true,
+   "lessons": [
+    "Pick your style and markets",
+    "Your entry rules",
+    "Your exit and risk rules",
+    "Your pre-trade checklist",
+    "Review and improve"
+   ],
+   "skill": "Plan Ready",
+   "tagline": "Get your personal trading plan"
+  }
+ ],
+ "skills": [
+  {
+   "after": 4,
+   "name": "Chart Reader",
+   "text": "You passed the Chapter 4 Challenge. You read trends, trendlines and moving averages, and use one indicator per job."
+  },
+  {
+   "after": 6,
+   "name": "Risk Manager",
+   "text": "You passed the Chapter 6 Challenge. You size every trade from the stop and keep your head after a loss."
+  },
+  {
+   "after": 10,
+   "name": "Plan Ready",
+   "text": "You passed every Chapter Challenge and saved your five-section trading plan. You’re ready to test it with virtual money."
+  }
+ ],
+ "finale": {
+  "xp": 500,
+  "coins": 500,
+  "certificate": true,
+  "skill": "Plan Ready",
+  "requires": "Pass all 10 Chapter Challenges and save your five-section trading plan.",
+  "text": "Your plan, a shareable certificate, 500 Profit Coins and +500 XP."
+ }
+}

@@ -1,0 +1,366 @@
+{
+ "id": "trading-plan",
+ "path": "learn-to-trade",
+ "n": 10,
+ "title": "Building Your Trading Plan",
+ "short": "Your plan",
+ "promise": "Everything comes together: pick your style and markets, write your entry, exit and risk rules, run a checklist and review every week.",
+ "minutes": 25,
+ "pages": "66–71",
+ "unlock": [
+  "Pick a trading style that fits your time, and a short list of markets",
+  "Write an entry rule you can follow the same way every time",
+  "Set your stop, target, size and loss limits before you buy",
+  "Run a yes/no checklist before every trade",
+  "Review your plan every week and improve it one change at a time"
+ ],
+ "terms": [
+  "trading-plan",
+  "trading-style",
+  "day-trading",
+  "swing-trading",
+  "position-trading",
+  "entry-rule",
+  "loss-limit",
+  "pre-trade-checklist",
+  "trading-journal",
+  "weekly-review"
+ ],
+ "lessons": [
+  "pick-your-style-and-markets",
+  "your-entry-rules",
+  "your-exit-and-risk-rules",
+  "your-pre-trade-checklist",
+  "review-and-improve"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "You have a busy job. You can look at the market once a day, after it closes, and want to hold for a few days. Which style fits?",
+    "options": [
+     "Swing trading: days to weeks",
+     "Day trading: all closed by the bell",
+     "Position trading: months, checked weekly"
+    ],
+    "answer": 0,
+    "why": "Holding a few days with one look after the close is swing trading. Day trading needs you at the screen while markets are open. Position trades last months.",
+    "idea": "style-fits-your-clock",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "Your rule: buy when a pullback to the rising 50-day closes back above it. Today price touched it but closed below. What now?",
+    "options": [
+     "Buy now: it touched the average",
+     "Sell: the trend is over",
+     "Wait: no close above it yet"
+    ],
+    "answer": 2,
+    "why": "A touch is only the trigger. Your rule also needs a close back above the average. Until then, no setup.",
+    "work": "Trend: yes. Pullback: yes. Close above: not yet. No trade.",
+    "idea": "no-setup-no-trade",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily",
+     "legend": [
+      {
+       "label": "rising 50-day average",
+       "tone": "gold",
+       "dashed": true
+      }
+     ],
+     "chart": {
+      "path": [
+       [
+        0,
+        45
+       ],
+       [
+        4,
+        47.5
+       ],
+       [
+        7,
+        49
+       ],
+       [
+        9,
+        48.7
+       ],
+       [
+        11,
+        48.1
+       ],
+       [
+        12,
+        47.8
+       ],
+       [
+        13,
+        47.0
+       ]
+      ],
+      "n": 14,
+      "seed": 4,
+      "noise": 0.3,
+      "height": 70,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "overlays": [
+       {
+        "values": [
+         44.0,
+         44.25,
+         44.5,
+         44.75,
+         45.0,
+         45.25,
+         45.5,
+         45.75,
+         46.0,
+         46.25,
+         46.5,
+         46.75,
+         47.0,
+         47.25
+        ],
+        "tone": "gold",
+        "dashed": true
+       }
+      ],
+      "marks": [
+       {
+        "i": 13,
+        "price": 47.0,
+        "tone": "down",
+        "label": "today",
+        "pos": "below"
+       }
+      ],
+      "label": "Price pulls back to the rising 50-day average; today’s candle touches it and closes just below"
+     }
+    }
+   },
+   {
+    "lesson": 3,
+    "q": "Your account is $20,000 and you risk 1% a trade. You buy at $50 with a stop at $45. How many shares?",
+    "options": [
+     "400 shares: all you can afford",
+     "40 shares",
+     "80 shares"
+    ],
+    "answer": 1,
+    "why": "If the stop is hit you lose about $200, your 1%. 400 shares would lose about $2,000 at the stop: 10% of your account.",
+    "work": "1% of $20,000 = $200. Risk a share = $50 − $45 = $5. $200 ÷ $5 = 40 shares.",
+    "idea": "size-from-risk",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · your trade",
+     "chart": {
+      "path": [
+       [
+        0,
+        47.5
+       ],
+       [
+        3,
+        48.6
+       ],
+       [
+        6,
+        47.4
+       ],
+       [
+        9,
+        47.2
+       ],
+       [
+        11,
+        48.6
+       ],
+       [
+        14,
+        50
+       ]
+      ],
+      "n": 15,
+      "seed": 9,
+      "noise": 0.3,
+      "height": 90,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 50,
+        "tone": "gold",
+        "label": "entry $50"
+       },
+       {
+        "price": 45,
+        "tone": "down",
+        "label": "stop $45"
+       }
+      ],
+      "marks": [
+       {
+        "i": 14,
+        "price": 50,
+        "tone": "gold"
+       }
+      ],
+      "label": "Entry at $50 with the stop at $45, $5 below"
+     }
+    }
+   },
+   {
+    "lesson": 4,
+    "q": "Five checks say yes. One says no: your target is only 1.5× the risk. What should you do?",
+    "options": [
+     "Take it: close enough",
+     "Skip it and wait for a setup that passes",
+     "Move your stop closer to make it 2×"
+    ],
+    "answer": 1,
+    "why": "One “no” means no trade. Moving the stop closer only fixes the numbers: the stop goes where you’re wrong, not where the math works.",
+    "idea": "one-no-no-trade",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Your weekly review shows most losses came from moving your stop. What’s the best change?",
+    "options": [
+     "Change your entry, markets and size too",
+     "Fix that one thing, then judge it over 20+ trades",
+     "Widen all your stops so they get hit less"
+    ],
+    "answer": 1,
+    "why": "Fix the one thing the journal shows: keep stops where you set them. Then judge it over 20 trades or more. Wider stops just make each loss bigger.",
+    "idea": "one-change-at-a-time",
+    "added": "New situation written for the Academy"
+   }
+  ],
+  "retry": [
+   {
+    "lesson": 1,
+    "q": "You work night shifts and can check the market only once a week, on your day off. You want to hold for months. Which style fits?",
+    "options": [
+     "Day trading: all closed by the bell",
+     "Swing trading: days to weeks",
+     "Position trading: months, checked weekly"
+    ],
+    "answer": 2,
+    "why": "One look a week, holding for months, is position trading. Day trades need hours at the screen; swing trades often need a look every day.",
+    "idea": "style-fits-your-clock",
+    "added": "New situation written for the Academy (retry set)"
+   },
+   {
+    "lesson": 2,
+    "q": "Your rule: buy when a pullback to the rising 50-day closes back above it. The average is falling. Price rises, touches it and closes above. What now?",
+    "options": [
+     "Buy: it closed above the average",
+     "No trade: the average isn’t rising",
+     "Buy double to catch the turn"
+    ],
+    "answer": 1,
+    "why": "Every part of the rule must happen, and it starts with a rising average. This one is falling, so there’s no setup.",
+    "work": "Trend: no. Pullback: yes. Close above: yes. No trade.",
+    "idea": "no-setup-no-trade",
+    "added": "New situation written for the Academy (retry set)"
+   },
+   {
+    "lesson": 3,
+    "q": "Your account is $5,000 and you risk 1% a trade. You buy at $20 with a stop at $19. How many shares?",
+    "options": [
+     "250 shares: all you can afford",
+     "50 shares",
+     "100 shares"
+    ],
+    "answer": 1,
+    "why": "If the stop is hit you lose about $50, your 1%. 250 shares would lose about $250 at the stop: 5% of your account.",
+    "work": "1% of $5,000 = $50. Risk a share = $20 − $19 = $1. $50 ÷ $1 = 50 shares.",
+    "idea": "size-from-risk",
+    "added": "New situation written for the Academy (retry set)"
+   },
+   {
+    "lesson": 4,
+    "q": "Five checks say yes. One says no: you already lost $200 today, your daily limit. What should you do?",
+    "options": [
+     "Take it: the setup is great",
+     "Skip it: one “no” means no trade",
+     "Take it with half size"
+    ],
+    "answer": 1,
+    "why": "One “no” means no trade, and a loss limit never bends. Half size still breaks the limit. Tomorrow is a new day.",
+    "idea": "one-no-no-trade",
+    "added": "New situation written for the Academy (retry set)"
+   },
+   {
+    "lesson": 5,
+    "q": "You changed your target from 2× to 3× the risk. After 5 trades, 3 lost. What’s the best move?",
+    "options": [
+     "Go back to 2× right away",
+     "Keep testing to 20+ trades, changing nothing else",
+     "Change your entry rule too"
+    ],
+    "answer": 1,
+    "why": "5 trades is mostly luck. Keep everything else the same and judge the one change after 20 trades or more.",
+    "idea": "one-change-at-a-time",
+    "added": "New situation written for the Academy (retry set)"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "style-fits-your-clock",
+   "title": "Lesson 1 · Pick your style and markets",
+   "text": "Pick the style that fits the time you really have. Day trading needs hours at the screen while markets are open. Swing trades get a look once a day; position trades about once a week."
+  },
+  {
+   "idea": "no-setup-no-trade",
+   "title": "Lesson 2 · Your entry rules",
+   "text": "Every part of the rule must happen: trend, pullback, then a close back above. A touch alone is not a setup."
+  },
+  {
+   "idea": "size-from-risk",
+   "title": "Lesson 3 · Your exit and risk rules",
+   "text": "Risk 1% a trade: shares = risk ÷ (entry − stop). On $10,000 with a $50 entry and a $48 stop: $100 ÷ $2 = 50 shares."
+  },
+  {
+   "idea": "one-no-no-trade",
+   "title": "Lesson 4 · Your pre-trade checklist",
+   "text": "Run 5 to 7 yes/no checks before every trade. One “no” means no trade. Don’t squeeze the stop to fix the numbers: the stop goes where you’re wrong."
+  },
+  {
+   "idea": "one-change-at-a-time",
+   "title": "Lesson 5 · Review and improve",
+   "text": "Change one rule at a time and judge it over 20 trades or more. Several changes at once hide what worked."
+  }
+ ],
+ "plan": [
+  {
+   "label": "Style",
+   "value": "Swing · 4 markets"
+  },
+  {
+   "label": "Entry",
+   "value": "Pullback to rising 50-day"
+  },
+  {
+   "label": "Risk",
+   "value": "1% a trade · 2% day · 5% week"
+  },
+  {
+   "label": "Checklist",
+   "value": "6 yes/no checks"
+  },
+  {
+   "label": "Review",
+   "value": "Fridays · one change at a time"
+  }
+ ]
+}

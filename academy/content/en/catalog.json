@@ -1,0 +1,2141 @@
+{
+ "paths": [
+  {
+   "id": "learn-to-trade",
+   "title": "Trading Foundations",
+   "tier": "free",
+   "status": "live",
+   "level": "Beginner → Intermediate",
+   "certPrefix": "TF",
+   "outcome": "From your first candle to your own trading plan.",
+   "chapters": 10,
+   "lessons": 55,
+   "hours": 4.5,
+   "xp": 7600,
+   "art": "path-ltt.webp",
+   "accent": "path-learn"
+  },
+  {
+   "id": "technical-analysis-pro",
+   "title": "Technical Analysis",
+   "tier": "pro",
+   "status": "pro",
+   "level": "Intermediate → Advanced",
+   "certPrefix": "TA",
+   "certLevel": "Advanced",
+   "outcome": "Read any chart across timeframes and spot when a pattern is lying.",
+   "chapters": [
+    {
+     "title": "Market structure",
+     "desc": "Read who is in control from highs, lows and ranges.",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "Higher highs, lower lows",
+       "desc": "How a trend shows who is in control",
+       "minutes": 4
+      },
+      {
+       "title": "Breaks of structure",
+       "desc": "When control changes hands",
+       "minutes": 4
+      },
+      {
+       "title": "Ranges",
+       "desc": "When nobody is in control",
+       "minutes": 4
+      },
+      {
+       "title": "Trend or range?",
+       "desc": "Read a chart in 30 seconds",
+       "minutes": 5
+      },
+      {
+       "title": "Structure on a real chart",
+       "desc": "Put it all together",
+       "minutes": 5
+      }
+     ],
+     "practice": {
+      "tool": "Next Move",
+      "text": "Read the structure, call the next move. Free to play now.",
+      "href": "next-move.html",
+      "art": "nextmove"
+     }
+    },
+    {
+     "title": "Multi-timeframe analysis",
+     "desc": "Find the trend on the big chart, time the entry on the small one.",
+     "minutes": 24,
+     "lessons": [
+      {
+       "title": "Pick your timeframes",
+       "desc": "The big chart, the trading chart, the trigger chart",
+       "minutes": 4
+      },
+      {
+       "title": "Top-down in five minutes",
+       "desc": "From weekly trend to entry",
+       "minutes": 5
+      },
+      {
+       "title": "When timeframes disagree",
+       "desc": "Who wins, and when to stay out",
+       "minutes": 5
+      },
+      {
+       "title": "Timing the entry",
+       "desc": "Use the small chart without getting shaken out",
+       "minutes": 5
+      },
+      {
+       "title": "Multi-timeframe on a real chart",
+       "desc": "Put it all together",
+       "minutes": 5
+      }
+     ],
+     "practice": {
+      "tool": "Next Move",
+      "text": "Call the next move on two timeframes. Free to play now.",
+      "href": "next-move.html",
+      "art": "nextmove"
+     }
+    },
+    {
+     "title": "Volume and volume profile",
+     "desc": "See where the real trading happened and why price returns there.",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "What volume tells you",
+       "desc": "The effort behind a price move",
+       "minutes": 4
+      },
+      {
+       "title": "Volume profile",
+       "desc": "Volume by price, not by time",
+       "minutes": 5
+      },
+      {
+       "title": "Point of control and value area",
+       "desc": "Where most trading happened",
+       "minutes": 5
+      },
+      {
+       "title": "VWAP",
+       "desc": "The average price paid today",
+       "minutes": 4
+      },
+      {
+       "title": "Volume on a real chart",
+       "desc": "Put it all together",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Supply and demand zones",
+     "desc": "Turn support and resistance lines into zones you can plan around.",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "From lines to zones",
+       "desc": "Why levels are areas, not prices",
+       "minutes": 4
+      },
+      {
+       "title": "Finding a fresh zone",
+       "desc": "The base before a strong move",
+       "minutes": 5
+      },
+      {
+       "title": "Zone strength",
+       "desc": "Fresh, tested and broken",
+       "minutes": 4
+      },
+      {
+       "title": "Flipped zones",
+       "desc": "When support becomes resistance",
+       "minutes": 4
+      },
+      {
+       "title": "Zones on a real chart",
+       "desc": "Put it all together",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Fibonacci retracements",
+     "desc": "Measure pullbacks and extensions without treating them as magic.",
+     "minutes": 18,
+     "lessons": [
+      {
+       "title": "Drawing a retracement",
+       "desc": "Swing low to swing high, done right",
+       "minutes": 4
+      },
+      {
+       "title": "The levels traders watch",
+       "desc": "38.2%, 50% and 61.8%",
+       "minutes": 4
+      },
+      {
+       "title": "Extensions for targets",
+       "desc": "Where a move might run to",
+       "minutes": 5
+      },
+      {
+       "title": "Fibonacci on a real chart",
+       "desc": "A level needs a second reason",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Momentum and divergence",
+     "desc": "Spot when a move is running out of steam before price shows it.",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "Reading momentum",
+       "desc": "RSI and how fast price is moving",
+       "minutes": 4
+      },
+      {
+       "title": "Overbought is not a sell",
+       "desc": "Momentum in strong trends",
+       "minutes": 4
+      },
+      {
+       "title": "Regular divergence",
+       "desc": "Price and momentum disagree",
+       "minutes": 5
+      },
+      {
+       "title": "Hidden divergence",
+       "desc": "A sign the trend may continue",
+       "minutes": 5
+      },
+      {
+       "title": "Divergence on a real chart",
+       "desc": "Put it all together",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Confluence",
+     "desc": "Stack independent signals so one setup is worth taking.",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "What confluence means",
+       "desc": "Several reasons at one price",
+       "minutes": 4
+      },
+      {
+       "title": "Independent vs repeated signals",
+       "desc": "Three oscillators are one vote",
+       "minutes": 5
+      },
+      {
+       "title": "A confluence checklist",
+       "desc": "Score a setup before you take it",
+       "minutes": 5
+      },
+      {
+       "title": "When to stay out",
+       "desc": "Too few reasons, or conflicting ones",
+       "minutes": 4
+      },
+      {
+       "title": "Confluence on a real chart",
+       "desc": "Put it all together",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Entries, stops and targets",
+     "desc": "Place each order where the chart says you are wrong, not where it feels safe.",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "Where you are wrong",
+       "desc": "Stops beyond structure",
+       "minutes": 5
+      },
+      {
+       "title": "Entry types",
+       "desc": "Market, limit and stop orders",
+       "minutes": 4
+      },
+      {
+       "title": "Targets from the chart",
+       "desc": "Next zone, measured move, extension",
+       "minutes": 5
+      },
+      {
+       "title": "Risk to reward",
+       "desc": "Is the trade worth taking",
+       "minutes": 4
+      },
+      {
+       "title": "A full plan on a real chart",
+       "desc": "Entry, stop and target together",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Your technical playbook",
+     "desc": "Write down three setups you trust and the rules for each.",
+     "minutes": 18,
+     "lessons": [
+      {
+       "title": "What a setup needs",
+       "desc": "Context, trigger, stop and target",
+       "minutes": 4
+      },
+      {
+       "title": "Write your three setups",
+       "desc": "Rules you can follow every time",
+       "minutes": 5
+      },
+      {
+       "title": "Testing a setup",
+       "desc": "Backtest before real money",
+       "minutes": 5
+      },
+      {
+       "title": "Your trading journal",
+       "desc": "Review and refine each setup",
+       "minutes": 4
+      }
+     ]
+    }
+   ],
+   "hours": 3.5,
+   "art": "path-ta.webp",
+   "accent": "path-ta",
+   "topics": [
+    "Advanced patterns & harmonics",
+    "Multi-timeframe setups",
+    "Volume profile & VWAP",
+    "Indicator confluence",
+    "Building & testing a setup"
+   ],
+   "added": "Level not given in the spec or on the canvas; set by the content author; chapter outline and Chapter 1–2 lessons from the ProPath canvas boards",
+   "intro": "Multi-timeframe setups, volume profile and confluence. Read a chart the way experienced traders do.",
+   "lessons": 43,
+   "tagline": "Read a chart the way experienced traders do."
+  },
+  {
+   "id": "risk-management",
+   "title": "Risk Management",
+   "tier": "pro",
+   "status": "pro",
+   "level": "Intermediate",
+   "certPrefix": "RM",
+   "certLevel": "Intermediate",
+   "outcome": "Size every trade, survive drawdowns and keep emotions out of the call.",
+   "chapters": [
+    {
+     "title": "Risk of ruin",
+     "desc": "Why accounts blow up slowly, then all at once.",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "What risk of ruin means",
+       "desc": "The odds your account runs out",
+       "minutes": 4
+      },
+      {
+       "title": "Losing streaks are normal",
+       "desc": "How long a bad run can last",
+       "minutes": 4
+      },
+      {
+       "title": "Win rate, payoff and ruin",
+       "desc": "How three numbers decide survival",
+       "minutes": 5
+      },
+      {
+       "title": "Simulating 100 trades",
+       "desc": "See the range of outcomes before you trade",
+       "minutes": 5
+      },
+      {
+       "title": "Your survival number",
+       "desc": "The most you can risk and stay in the game",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Position sizing models",
+     "desc": "Pick the sizing method that fits your account and your edge.",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "Fixed dollars vs fixed percent",
+       "desc": "Two ways to size, compared",
+       "minutes": 4
+      },
+      {
+       "title": "Sizing by volatility",
+       "desc": "Smaller positions in wilder markets",
+       "minutes": 5
+      },
+      {
+       "title": "The Kelly criterion",
+       "desc": "The math of the best bet size, and why pros use a fraction",
+       "minutes": 5
+      },
+      {
+       "title": "Scaling in and out",
+       "desc": "Building and trimming a position in steps",
+       "minutes": 4
+      },
+      {
+       "title": "Choose your sizing model",
+       "desc": "Write it down in one line",
+       "minutes": 4
+      }
+     ],
+     "practice": {
+      "tool": "PlayTrade",
+      "text": "Size a virtual trade so the stop costs 1% of your account. Free to play now.",
+      "href": "index.html",
+      "art": "playtrade"
+     }
+    },
+    {
+     "title": "Volatility-based stops",
+     "desc": "Set stops from how the market moves, not from a round number.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "Why fixed stops fail",
+       "desc": "Same distance, very different markets",
+       "minutes": 4
+      },
+      {
+       "title": "Average True Range",
+       "desc": "How far price usually moves in a day",
+       "minutes": 5
+      },
+      {
+       "title": "ATR stops",
+       "desc": "Give the trade room to breathe",
+       "minutes": 4
+      },
+      {
+       "title": "Trailing stops",
+       "desc": "Lock in gains as price moves your way",
+       "minutes": 4
+      },
+      {
+       "title": "Gaps and slippage",
+       "desc": "When your stop fills worse than planned",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Correlation risk",
+     "desc": "Five trades can be one bet in disguise.",
+     "minutes": 20,
+     "lessons": [
+      {
+       "title": "One idea, many tickers",
+       "desc": "When your positions move together",
+       "minutes": 4
+      },
+      {
+       "title": "Reading a correlation table",
+       "desc": "From -1 to +1, in plain words",
+       "minutes": 4
+      },
+      {
+       "title": "Sector and theme clusters",
+       "desc": "Tech, oil and interest-rate bets",
+       "minutes": 4
+      },
+      {
+       "title": "A risk cap per idea",
+       "desc": "Limit each theme, not just each trade",
+       "minutes": 4
+      },
+      {
+       "title": "Add up your open risk",
+       "desc": "Check the total before the next trade",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Leverage & margin limits",
+     "desc": "Use borrowed money without letting it use you.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "How leverage magnifies losses",
+       "desc": "Same move, bigger hit",
+       "minutes": 4
+      },
+      {
+       "title": "Effective leverage",
+       "desc": "Your real exposure vs your account",
+       "minutes": 4
+      },
+      {
+       "title": "Margin calls and forced selling",
+       "desc": "What happens when equity runs low",
+       "minutes": 5
+      },
+      {
+       "title": "Overnight and weekend risk",
+       "desc": "Gaps you can't trade through",
+       "minutes": 4
+      },
+      {
+       "title": "Your leverage ceiling",
+       "desc": "A hard cap you never cross",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Drawdown rules",
+     "desc": "Decide in advance what you do when you're losing.",
+     "minutes": 20,
+     "lessons": [
+      {
+       "title": "Measuring drawdown",
+       "desc": "Peak to trough, in dollars and percent",
+       "minutes": 4
+      },
+      {
+       "title": "Daily and weekly loss limits",
+       "desc": "When to stop trading for the day",
+       "minutes": 4
+      },
+      {
+       "title": "Cutting size after losses",
+       "desc": "Trade smaller until you recover",
+       "minutes": 4
+      },
+      {
+       "title": "Stepping away",
+       "desc": "Reset before you try to win it back",
+       "minutes": 4
+      },
+      {
+       "title": "Your drawdown playbook",
+       "desc": "What you do at -5%, -10% and -20%",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Journaling & review",
+     "desc": "Find your leaks by writing down every trade.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "What to log on every trade",
+       "desc": "Entry, exit, size, reason and mood",
+       "minutes": 4
+      },
+      {
+       "title": "R-multiples",
+       "desc": "Score every trade in units of risk",
+       "minutes": 5
+      },
+      {
+       "title": "Spotting your leaks",
+       "desc": "Patterns in your losing trades",
+       "minutes": 4
+      },
+      {
+       "title": "The weekly review",
+       "desc": "Twenty minutes that sharpen your trading",
+       "minutes": 4
+      },
+      {
+       "title": "Rules you broke",
+       "desc": "Measure discipline, not just profit",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Your risk plan",
+     "desc": "Put every rule on one page and follow it under pressure.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "Your two core numbers",
+       "desc": "Risk per trade and per day",
+       "minutes": 4
+      },
+      {
+       "title": "Exposure and leverage caps",
+       "desc": "Limits across all your positions",
+       "minutes": 4
+      },
+      {
+       "title": "Before you click buy",
+       "desc": "Five questions for every order",
+       "minutes": 4
+      },
+      {
+       "title": "Updating your rules",
+       "desc": "Review the plan as your account grows",
+       "minutes": 4
+      },
+      {
+       "title": "Write your risk plan",
+       "desc": "One page you can follow on a bad day",
+       "minutes": 5
+      }
+     ]
+    }
+   ],
+   "hours": 3.0,
+   "art": "path-risk.webp",
+   "accent": "path-risk",
+   "topics": [
+    "Risk of ruin",
+    "Position sizing models",
+    "Volatility-based stops",
+    "Correlation risk",
+    "Leverage & margin limits",
+    "Drawdown rules",
+    "Journaling & review",
+    "Your risk plan"
+   ],
+   "added": "Owner-requested Pro path (design: Pro paths grid); chapter outline and lessons written by the content author (to confirm)",
+   "intro": "Size every trade, survive drawdowns and keep emotions out of the call. Build the rules that keep you in the game.",
+   "lessons": 40,
+   "tagline": "Build the rules that keep you in the game."
+  },
+  {
+   "id": "understanding-companies",
+   "title": "Understanding Companies",
+   "tier": "pro",
+   "status": "pro",
+   "level": "Beginner → Intermediate",
+   "certPrefix": "UC",
+   "certLevel": "Intermediate",
+   "outcome": "Read a business and its numbers before you buy the stock.",
+   "chapters": [
+    {
+     "title": "Business models & moats",
+     "desc": "Know how a company makes money and what protects it.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "How a business makes money",
+       "desc": "Customers, products and pricing",
+       "minutes": 4
+      },
+      {
+       "title": "Revenue streams",
+       "desc": "One-off sales, subscriptions and fees",
+       "minutes": 4
+      },
+      {
+       "title": "What a moat is",
+       "desc": "Why some profits last for decades",
+       "minutes": 4
+      },
+      {
+       "title": "Types of moats",
+       "desc": "Brands, networks, switching costs and scale",
+       "minutes": 5
+      },
+      {
+       "title": "Spotting a weak moat",
+       "desc": "Signs competitors are catching up",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "The income statement",
+     "desc": "Follow a dollar of sales down to net income.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "The top line",
+       "desc": "Revenue and where it comes from",
+       "minutes": 4
+      },
+      {
+       "title": "Gross profit",
+       "desc": "What it costs to make what you sell",
+       "minutes": 4
+      },
+      {
+       "title": "Operating expenses",
+       "desc": "Salaries, research and marketing",
+       "minutes": 4
+      },
+      {
+       "title": "Operating vs net income",
+       "desc": "Interest, taxes and one-off items",
+       "minutes": 5
+      },
+      {
+       "title": "Share count and dilution",
+       "desc": "How new shares shrink your slice",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "The balance sheet",
+     "desc": "See what a company owns, what it owes and what's left for you.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "Assets, liabilities, equity",
+       "desc": "The equation that always balances",
+       "minutes": 4
+      },
+      {
+       "title": "Current vs long-term",
+       "desc": "What turns into cash within a year",
+       "minutes": 4
+      },
+      {
+       "title": "Goodwill and intangibles",
+       "desc": "Assets you can't touch",
+       "minutes": 4
+      },
+      {
+       "title": "Book value per share",
+       "desc": "What shareholders own on paper",
+       "minutes": 4
+      },
+      {
+       "title": "Balance sheet red flags",
+       "desc": "Piling inventory and swelling receivables",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "The cash-flow statement",
+     "desc": "Profit is an opinion; cash is a fact.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "Why cash and profit differ",
+       "desc": "Accrual accounting in plain words",
+       "minutes": 4
+      },
+      {
+       "title": "Operating cash flow",
+       "desc": "Cash from running the business",
+       "minutes": 4
+      },
+      {
+       "title": "Investing and financing cash",
+       "desc": "Capex, buybacks, dividends and borrowing",
+       "minutes": 4
+      },
+      {
+       "title": "Free cash flow",
+       "desc": "The cash owners could actually take out",
+       "minutes": 5
+      },
+      {
+       "title": "When cash and earnings disagree",
+       "desc": "A warning sign worth checking",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Profitability & growth",
+     "desc": "Tell a great business from a merely busy one.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "Margin trends",
+       "desc": "Rising or shrinking over time",
+       "minutes": 4
+      },
+      {
+       "title": "Return on equity and ROIC",
+       "desc": "How well the company uses its money",
+       "minutes": 5
+      },
+      {
+       "title": "Growth that lasts",
+       "desc": "Organic growth vs buying it",
+       "minutes": 4
+      },
+      {
+       "title": "Growth vs profit",
+       "desc": "When losing money can make sense",
+       "minutes": 4
+      },
+      {
+       "title": "Comparing with peers",
+       "desc": "Measure against the right companies",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Debt & liquidity",
+     "desc": "Check whether a company can survive a bad year.",
+     "minutes": 20,
+     "lessons": [
+      {
+       "title": "Good debt, bad debt",
+       "desc": "When borrowing helps and when it hurts",
+       "minutes": 4
+      },
+      {
+       "title": "Debt-to-equity",
+       "desc": "How leveraged the company is",
+       "minutes": 4
+      },
+      {
+       "title": "Interest coverage",
+       "desc": "Can profits pay the interest?",
+       "minutes": 4
+      },
+      {
+       "title": "Current and quick ratios",
+       "desc": "Paying the bills due this year",
+       "minutes": 4
+      },
+      {
+       "title": "Debt maturities",
+       "desc": "When the loans come due",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Valuation: multiples & DCF basics",
+     "desc": "Work out what a stock is worth before you look at the price.",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "Price vs value",
+       "desc": "Why a great company can be a bad buy",
+       "minutes": 4
+      },
+      {
+       "title": "P/S and EV/EBITDA",
+       "desc": "Multiples beyond the P/E, and when to use each",
+       "minutes": 5
+      },
+      {
+       "title": "Enterprise value",
+       "desc": "Pricing the whole company, debt included",
+       "minutes": 4
+      },
+      {
+       "title": "DCF in plain words",
+       "desc": "Today's value of future cash",
+       "minutes": 5
+      },
+      {
+       "title": "Margin of safety",
+       "desc": "Leave room for being wrong",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Earnings season",
+     "desc": "Read the report, the guidance and the market's reaction.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "The earnings calendar",
+       "desc": "When companies report and what to expect",
+       "minutes": 4
+      },
+      {
+       "title": "Estimates and surprises",
+       "desc": "Beats, misses and the whisper number",
+       "minutes": 4
+      },
+      {
+       "title": "Guidance",
+       "desc": "Why the outlook can matter more than the quarter",
+       "minutes": 4
+      },
+      {
+       "title": "The earnings call",
+       "desc": "What to listen for from management",
+       "minutes": 4
+      },
+      {
+       "title": "Your company checklist",
+       "desc": "Ten questions before you buy",
+       "minutes": 5
+      }
+     ]
+    }
+   ],
+   "hours": 3.0,
+   "art": "path-companies.webp",
+   "accent": "path-companies",
+   "topics": [
+    "Business models & moats",
+    "The income statement",
+    "The balance sheet",
+    "The cash-flow statement",
+    "Profitability & growth",
+    "Debt & liquidity",
+    "Valuation: multiples & DCF basics",
+    "Earnings season"
+   ],
+   "added": "Owner-requested Pro path (design: Pro paths grid); chapter outline and lessons written by the content author (to confirm)",
+   "intro": "Read a business and its numbers before you buy the stock. From moats to cash flow to what a share is really worth.",
+   "lessons": 40,
+   "tagline": "From moats to cash flow to what a share is worth."
+  },
+  {
+   "id": "investor",
+   "title": "Investor Essentials",
+   "tier": "pro",
+   "status": "pro",
+   "level": "Beginner",
+   "certPrefix": "IE",
+   "certLevel": "Beginner",
+   "outcome": "Build a long-term plan with funds, ETFs and regular investing.",
+   "chapters": [
+    {
+     "title": "Saving vs investing",
+     "desc": "Why cash loses to inflation, and when to keep it anyway.",
+     "minutes": 20,
+     "lessons": [
+      {
+       "title": "Why cash shrinks",
+       "desc": "Inflation, in plain numbers",
+       "minutes": 4
+      },
+      {
+       "title": "Your emergency fund first",
+       "desc": "The money you never invest",
+       "minutes": 4
+      },
+      {
+       "title": "Time in the market",
+       "desc": "Why starting early beats picking well",
+       "minutes": 4
+      },
+      {
+       "title": "Risk you can sleep with",
+       "desc": "Find your comfort zone",
+       "minutes": 4
+      },
+      {
+       "title": "Your first investing goal",
+       "desc": "Put a number and a date on it",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "ETFs & index funds",
+     "desc": "Own a whole market in one trade, for a tiny fee.",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "What an ETF is",
+       "desc": "One fund, many companies",
+       "minutes": 4
+      },
+      {
+       "title": "Index funds vs active funds",
+       "desc": "Why most stock pickers trail the index",
+       "minutes": 5
+      },
+      {
+       "title": "Expense ratios",
+       "desc": "The fee you pay every year",
+       "minutes": 4
+      },
+      {
+       "title": "What your ETF holds",
+       "desc": "Broad market, sector or theme",
+       "minutes": 4
+      },
+      {
+       "title": "Choosing your first ETF",
+       "desc": "A short checklist that works",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Reading a company",
+     "desc": "What a business sells, how it makes money and what you pay for it.",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "What the business sells",
+       "desc": "Products, customers and competitors",
+       "minutes": 4
+      },
+      {
+       "title": "Revenue, profit and margins",
+       "desc": "How the company makes money",
+       "minutes": 5
+      },
+      {
+       "title": "Debt and cash",
+       "desc": "Whether it can survive a bad year",
+       "minutes": 4
+      },
+      {
+       "title": "The P/E ratio",
+       "desc": "What you pay for each dollar of profit",
+       "minutes": 5
+      },
+      {
+       "title": "Reading a company report",
+       "desc": "Put it all together",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Bonds and cash",
+     "desc": "The calm part of a portfolio and what it pays you.",
+     "minutes": 17,
+     "lessons": [
+      {
+       "title": "What a bond is",
+       "desc": "A loan that pays you interest",
+       "minutes": 4
+      },
+      {
+       "title": "Rates and bond prices",
+       "desc": "Why one rises when the other falls",
+       "minutes": 5
+      },
+      {
+       "title": "Cash, money market and T-bills",
+       "desc": "Where to park short-term money",
+       "minutes": 4
+      },
+      {
+       "title": "How much to hold in bonds",
+       "desc": "Match it to your horizon",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Your first long-term plan",
+     "desc": "How much, how often and in what.",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "How much to invest",
+       "desc": "Start with what you can keep up",
+       "minutes": 4
+      },
+      {
+       "title": "Dollar-cost averaging",
+       "desc": "The same amount on a schedule",
+       "minutes": 4
+      },
+      {
+       "title": "A simple mix",
+       "desc": "Stocks and bonds for your horizon",
+       "minutes": 5
+      },
+      {
+       "title": "Automate it",
+       "desc": "Let the plan run without you",
+       "minutes": 4
+      },
+      {
+       "title": "Write your plan",
+       "desc": "One page you can stick to",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Taxes & fees, in plain words",
+     "desc": "The quiet costs that add up over decades.",
+     "minutes": 18,
+     "lessons": [
+      {
+       "title": "Fees over decades",
+       "desc": "How 1% a year adds up",
+       "minutes": 4
+      },
+      {
+       "title": "Taxes on gains and dividends",
+       "desc": "What you owe and when",
+       "minutes": 5
+      },
+      {
+       "title": "Tax-advantaged accounts",
+       "desc": "Retirement accounts and why they help",
+       "minutes": 5
+      },
+      {
+       "title": "Keep more of what you earn",
+       "desc": "A short cost checklist",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Staying the course",
+     "desc": "What to do, and what not to do, when markets fall.",
+     "minutes": 17,
+     "lessons": [
+      {
+       "title": "Markets fall, then recover",
+       "desc": "What history shows, with no guarantees",
+       "minutes": 4
+      },
+      {
+       "title": "The cost of panic selling",
+       "desc": "Missing the best days",
+       "minutes": 4
+      },
+      {
+       "title": "Your plan for a falling market",
+       "desc": "Decide now, not during the drop",
+       "minutes": 5
+      },
+      {
+       "title": "Tune out the noise",
+       "desc": "Headlines versus your plan",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Your yearly check-up",
+     "desc": "A short review that keeps your plan on track.",
+     "minutes": 17,
+     "lessons": [
+      {
+       "title": "Check your goal",
+       "desc": "Review your number and date",
+       "minutes": 4
+      },
+      {
+       "title": "Rebalance your mix",
+       "desc": "Bring stocks and bonds back to target",
+       "minutes": 5
+      },
+      {
+       "title": "Review fees and accounts",
+       "desc": "Spot costs that crept in",
+       "minutes": 4
+      },
+      {
+       "title": "Your check-up checklist",
+       "desc": "Fifteen minutes, once a year",
+       "minutes": 4
+      }
+     ]
+    }
+   ],
+   "hours": 2.5,
+   "art": "path-investor.webp",
+   "accent": "path-investor",
+   "topics": [
+    "Saving vs investing",
+    "ETFs & index funds",
+    "Reading a company",
+    "Your first long-term plan",
+    "Taxes & fees, in plain words"
+   ],
+   "added": "Level not given in the spec or on the canvas; set by the content author; chapter outline and Chapter 1 lessons written for the merged Pro path page (content author to confirm)"
+  },
+  {
+   "id": "macro-news-trader",
+   "title": "Macro & News Trader",
+   "tier": "pro",
+   "status": "soon",
+   "level": "Intermediate → Advanced",
+   "certPrefix": "MN",
+   "certLevel": "Advanced",
+   "outcome": "See how rates, inflation and central banks move your markets.",
+   "chapters": [
+    {
+     "title": "Central banks & rates",
+     "desc": "Why one interest-rate decision moves every market.",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "What a central bank does",
+       "desc": "Inflation, jobs and the policy rate",
+       "minutes": 4
+      },
+      {
+       "title": "How rate changes travel",
+       "desc": "From the policy rate to loans and bonds",
+       "minutes": 5
+      },
+      {
+       "title": "Rates and stock prices",
+       "desc": "Why higher rates weigh on valuations",
+       "minutes": 4
+      },
+      {
+       "title": "Reading a rate decision",
+       "desc": "The statement, the vote and the outlook",
+       "minutes": 5
+      },
+      {
+       "title": "Expectations vs surprises",
+       "desc": "Markets move on what wasn’t priced in",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Trading the calendar",
+     "desc": "Plan around the scheduled releases that move prices.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "The economic calendar",
+       "desc": "Which releases matter and when",
+       "minutes": 4
+      },
+      {
+       "title": "Inflation and jobs reports",
+       "desc": "The two numbers every market watches",
+       "minutes": 5
+      },
+      {
+       "title": "Consensus and the surprise",
+       "desc": "Actual vs forecast, not good vs bad",
+       "minutes": 4
+      },
+      {
+       "title": "Spreads and gaps around news",
+       "desc": "Why fills get worse at release time",
+       "minutes": 4
+      },
+      {
+       "title": "Your news-day rules",
+       "desc": "Trade it, sit out, or cut size",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Currencies & commodities",
+     "desc": "How rates and growth show up in FX, oil and gold.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "What moves a currency",
+       "desc": "Rate gaps, growth and risk appetite",
+       "minutes": 5
+      },
+      {
+       "title": "The US dollar’s role",
+       "desc": "Why a strong dollar ripples everywhere",
+       "minutes": 4
+      },
+      {
+       "title": "Oil: supply, demand and shocks",
+       "desc": "OPEC, inventories and the business cycle",
+       "minutes": 4
+      },
+      {
+       "title": "Gold and real yields",
+       "desc": "Why gold often falls when real rates rise",
+       "minutes": 4
+      },
+      {
+       "title": "Leverage in FX and commodities",
+       "desc": "Small moves, large positions",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Risk-on / risk-off",
+     "desc": "Read the market’s mood across assets at once.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "What risk-on and risk-off mean",
+       "desc": "Money moving toward or away from risk",
+       "minutes": 4
+      },
+      {
+       "title": "Signals across markets",
+       "desc": "Stocks, bonds, the dollar and volatility",
+       "minutes": 5
+      },
+      {
+       "title": "Correlations that change",
+       "desc": "Why diversification can fail in a panic",
+       "minutes": 4
+      },
+      {
+       "title": "The volatility index",
+       "desc": "What the VIX does and doesn’t tell you",
+       "minutes": 4
+      },
+      {
+       "title": "Positioning for a shift",
+       "desc": "Adjust size before you change direction",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Building a macro view",
+     "desc": "Turn the data into a written view you can trade and test.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "From data to a thesis",
+       "desc": "One view, the reasons and what would change it",
+       "minutes": 5
+      },
+      {
+       "title": "Scenarios, not predictions",
+       "desc": "Base, bull and bear cases",
+       "minutes": 4
+      },
+      {
+       "title": "Matching trades to the view",
+       "desc": "Which market expresses your idea best",
+       "minutes": 4
+      },
+      {
+       "title": "When the view is wrong",
+       "desc": "Exits for a thesis, not just a price",
+       "minutes": 4
+      },
+      {
+       "title": "Your macro playbook",
+       "desc": "A weekly routine you can repeat",
+       "minutes": 4
+      }
+     ]
+    }
+   ],
+   "hours": 2.0,
+   "art": "path-macro.webp",
+   "accent": "path-macro",
+   "topics": [
+    "Central banks & rates",
+    "Trading the calendar",
+    "Currencies & commodities",
+    "Risk-on / risk-off",
+    "Building a macro view"
+   ],
+   "added": "Level not given in the spec or on the canvas; set by the content author; chapter outline and lessons written for the coming-soon page (content author to confirm)"
+  },
+  {
+   "id": "portfolio-management",
+   "title": "Portfolio Management",
+   "tier": "pro",
+   "status": "pro",
+   "level": "Intermediate",
+   "certPrefix": "PM",
+   "certLevel": "Intermediate",
+   "outcome": "Build, balance and measure a portfolio that survives bad years.",
+   "chapters": [
+    {
+     "title": "Your portfolio’s job: goals, horizon, risk budget",
+     "desc": "Decide what your money is for before you decide what to buy.",
+     "minutes": 20,
+     "lessons": [
+      {
+       "title": "What your portfolio is for",
+       "desc": "Goals before positions",
+       "minutes": 4
+      },
+      {
+       "title": "Your time horizon",
+       "desc": "When you will need the money",
+       "minutes": 4
+      },
+      {
+       "title": "Your risk budget",
+       "desc": "How much you can lose and stay calm",
+       "minutes": 4
+      },
+      {
+       "title": "Return per unit of risk",
+       "desc": "Why more risk isn't always more return",
+       "minutes": 4
+      },
+      {
+       "title": "Your portfolio brief",
+       "desc": "One page that guides every decision",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Asset allocation that fits you",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "What asset allocation means",
+       "desc": "The mix drives most of your risk",
+       "minutes": 4
+      },
+      {
+       "title": "What each asset class does",
+       "desc": "Stocks, bonds, cash and the rest",
+       "minutes": 5
+      },
+      {
+       "title": "Matching mix to horizon",
+       "desc": "More time, more room for stocks",
+       "minutes": 4
+      },
+      {
+       "title": "Allocation by risk budget",
+       "desc": "Size the mix to your worst year",
+       "minutes": 5
+      },
+      {
+       "title": "Your target allocation",
+       "desc": "Write down the percentages",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Diversification & correlation in practice",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "What correlation measures",
+       "desc": "How two assets move together",
+       "minutes": 4
+      },
+      {
+       "title": "Diversification that works",
+       "desc": "Own things that behave differently",
+       "minutes": 4
+      },
+      {
+       "title": "Hidden overlap",
+       "desc": "When five funds are really one bet",
+       "minutes": 5
+      },
+      {
+       "title": "Correlation in a crash",
+       "desc": "Why it rises when you need it least",
+       "minutes": 5
+      },
+      {
+       "title": "Check your own portfolio",
+       "desc": "Find the overlap and fix it",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Risk across positions: portfolio heat",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "Risk per position",
+       "desc": "Distance to the stop times size",
+       "minutes": 4
+      },
+      {
+       "title": "What portfolio heat is",
+       "desc": "Your total open risk at once",
+       "minutes": 4
+      },
+      {
+       "title": "Setting a heat limit",
+       "desc": "A cap on what you can lose together",
+       "minutes": 5
+      },
+      {
+       "title": "Correlated positions",
+       "desc": "Three trades, one risk",
+       "minutes": 5
+      },
+      {
+       "title": "Heat on your open trades",
+       "desc": "Add it up before the next entry",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Core & satellite: long-term plus active trades",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "The core",
+       "desc": "Low-cost, long-term holdings",
+       "minutes": 4
+      },
+      {
+       "title": "The satellites",
+       "desc": "Active trades with a strict budget",
+       "minutes": 4
+      },
+      {
+       "title": "Sizing core and satellites",
+       "desc": "Split capital by role",
+       "minutes": 5
+      },
+      {
+       "title": "Keeping them separate",
+       "desc": "Different rules, different accounts",
+       "minutes": 4
+      },
+      {
+       "title": "Your core and satellite plan",
+       "desc": "Put it all together",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Rebalancing: rules, bands and costs",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "Why portfolios drift",
+       "desc": "Winners grow, losers shrink",
+       "minutes": 4
+      },
+      {
+       "title": "Calendar rebalancing",
+       "desc": "Fixed dates, simple rules",
+       "minutes": 4
+      },
+      {
+       "title": "Rebalancing bands",
+       "desc": "Act only when weights drift too far",
+       "minutes": 5
+      },
+      {
+       "title": "Costs and taxes",
+       "desc": "When rebalancing costs more than it saves",
+       "minutes": 5
+      },
+      {
+       "title": "Your rebalancing rule",
+       "desc": "Choose a band and stick to it",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Measuring performance: drawdown, Sharpe, benchmarks",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "The return you actually earned",
+       "desc": "Time-weighted vs money-weighted",
+       "minutes": 5
+      },
+      {
+       "title": "Max drawdown",
+       "desc": "The worst peak-to-trough fall",
+       "minutes": 4
+      },
+      {
+       "title": "The Sharpe ratio",
+       "desc": "Excess return per unit of volatility",
+       "minutes": 5
+      },
+      {
+       "title": "Picking a benchmark",
+       "desc": "Compare against the right yardstick",
+       "minutes": 4
+      },
+      {
+       "title": "Your performance report",
+       "desc": "Read your numbers honestly",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Stress tests: your portfolio in a crash",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "What a stress test is",
+       "desc": "Ask what happens before it does",
+       "minutes": 4
+      },
+      {
+       "title": "Replaying past crashes",
+       "desc": "2008, 2020 and 2022 on your mix",
+       "minutes": 5
+      },
+      {
+       "title": "Liquidity in a crash",
+       "desc": "When you can’t sell at your price",
+       "minutes": 4
+      },
+      {
+       "title": "Your worst-case number",
+       "desc": "The loss your plan must survive",
+       "minutes": 5
+      },
+      {
+       "title": "Your crash plan",
+       "desc": "Decide what you will do in advance",
+       "minutes": 5
+      }
+     ]
+    }
+   ],
+   "hours": 3,
+   "art": "path-portfolio.webp",
+   "accent": "path-portfolio",
+   "topics": [
+    "Your portfolio’s job: goals, horizon, risk budget",
+    "Asset allocation that fits you",
+    "Diversification & correlation in practice",
+    "Risk across positions: portfolio heat",
+    "Core & satellite: long-term plus active trades",
+    "Rebalancing: rules, bands and costs",
+    "Measuring performance: drawdown, Sharpe, benchmarks",
+    "Stress tests: your portfolio in a crash"
+   ],
+   "added": "Level not given in the spec or on the canvas; set by the content author; chapter outline and Chapter 1 lessons written for the merged Pro path page (content author to confirm)"
+  },
+  {
+   "id": "options-playbook",
+   "title": "Options Essentials",
+   "tier": "pro",
+   "status": "pro",
+   "level": "Intermediate → Advanced",
+   "certPrefix": "OE",
+   "certLevel": "Advanced",
+   "outcome": "Understand calls, puts and payoffs before you risk real money.",
+   "chapters": [
+    {
+     "title": "Calls, puts & the payoff",
+     "desc": "What an option is and how it pays.",
+     "minutes": 20,
+     "lessons": [
+      {
+       "title": "What an option is",
+       "desc": "The right, not the obligation",
+       "minutes": 4
+      },
+      {
+       "title": "Calls",
+       "desc": "Betting on a rise with limited risk",
+       "minutes": 4
+      },
+      {
+       "title": "Puts",
+       "desc": "Profiting from a fall, or insuring against one",
+       "minutes": 4
+      },
+      {
+       "title": "The payoff chart",
+       "desc": "See your profit and loss at expiry",
+       "minutes": 4
+      },
+      {
+       "title": "Premium and expiry",
+       "desc": "What you pay and how time eats it",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "The Greeks without fear",
+     "desc": "Delta, theta and vega in plain words.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "Delta",
+       "desc": "How much the option moves with the stock",
+       "minutes": 4
+      },
+      {
+       "title": "Gamma",
+       "desc": "How fast delta changes",
+       "minutes": 4
+      },
+      {
+       "title": "Theta",
+       "desc": "The daily cost of time",
+       "minutes": 4
+      },
+      {
+       "title": "Vega",
+       "desc": "Sensitivity to implied volatility",
+       "minutes": 4
+      },
+      {
+       "title": "The Greeks on a real trade",
+       "desc": "Put them together",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Buying vs selling options",
+     "desc": "Two sides of the same trade, with very different risks.",
+     "minutes": 17,
+     "lessons": [
+      {
+       "title": "Buying options",
+       "desc": "Limited risk, time works against you",
+       "minutes": 4
+      },
+      {
+       "title": "Selling options",
+       "desc": "Collect premium, take on an obligation",
+       "minutes": 4
+      },
+      {
+       "title": "Odds vs payoff",
+       "desc": "Small frequent wins or rare big ones",
+       "minutes": 5
+      },
+      {
+       "title": "Assignment",
+       "desc": "What happens when you are short an option",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Spreads",
+     "desc": "Cap your risk by combining two options.",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "What a spread is",
+       "desc": "Buy one option, sell another",
+       "minutes": 4
+      },
+      {
+       "title": "Bull call spreads",
+       "desc": "A cheaper bet on a rise, with capped upside",
+       "minutes": 5
+      },
+      {
+       "title": "Bear put spreads",
+       "desc": "A defined-risk bet on a fall",
+       "minutes": 4
+      },
+      {
+       "title": "Credit spreads",
+       "desc": "Collect premium with capped risk",
+       "minutes": 5
+      },
+      {
+       "title": "Choosing strikes and expiry",
+       "desc": "Width, cost and odds",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Covered calls & cash-secured puts",
+     "desc": "Earn income from stocks you own or want to own.",
+     "minutes": 18,
+     "lessons": [
+      {
+       "title": "Covered calls",
+       "desc": "Income that caps your upside",
+       "minutes": 5
+      },
+      {
+       "title": "Cash-secured puts",
+       "desc": "Get paid to wait for a lower price",
+       "minutes": 5
+      },
+      {
+       "title": "Getting assigned",
+       "desc": "Shares bought or called away",
+       "minutes": 4
+      },
+      {
+       "title": "The wheel",
+       "desc": "Puts, shares, then calls",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Volatility & earnings plays",
+     "desc": "How implied volatility moves prices around big news.",
+     "minutes": 18,
+     "lessons": [
+      {
+       "title": "Implied volatility",
+       "desc": "The market’s expected move",
+       "minutes": 4
+      },
+      {
+       "title": "IV rank",
+       "desc": "Cheap or expensive for this stock",
+       "minutes": 4
+      },
+      {
+       "title": "IV crush",
+       "desc": "Why options lose value after earnings",
+       "minutes": 5
+      },
+      {
+       "title": "Trading around earnings",
+       "desc": "Define your risk before the news",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Options risk management",
+     "desc": "Sizing, assignment and the trades to avoid.",
+     "minutes": 17,
+     "lessons": [
+      {
+       "title": "Sizing options trades",
+       "desc": "Size by your maximum loss",
+       "minutes": 4
+      },
+      {
+       "title": "Early assignment",
+       "desc": "When short options get exercised early",
+       "minutes": 5
+      },
+      {
+       "title": "Liquidity and bid-ask spreads",
+       "desc": "Wide spreads cost you money",
+       "minutes": 4
+      },
+      {
+       "title": "Trades to avoid",
+       "desc": "Naked short options and lottery tickets",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Your options playbook",
+     "desc": "Three strategies you understand and when to use each.",
+     "minutes": 18,
+     "lessons": [
+      {
+       "title": "Pick three strategies",
+       "desc": "Ones you can explain on one page",
+       "minutes": 4
+      },
+      {
+       "title": "Match strategy to outlook",
+       "desc": "Direction, time and volatility",
+       "minutes": 5
+      },
+      {
+       "title": "Entry and exit rules",
+       "desc": "Profit targets, stops and rolls",
+       "minutes": 5
+      },
+      {
+       "title": "Write your playbook",
+       "desc": "Put it all together",
+       "minutes": 4
+      }
+     ]
+    }
+   ],
+   "hours": 2.5,
+   "art": "path-options.webp",
+   "accent": "path-options",
+   "topics": [
+    "Calls, puts & the payoff",
+    "The Greeks without fear",
+    "Spreads & covered calls",
+    "Volatility & earnings plays",
+    "Options risk management"
+   ],
+   "added": "Level not given in the spec or on the canvas; set by the content author; chapter outline and Chapter 1 lessons written for the merged Pro path page (content author to confirm)"
+  },
+  {
+   "id": "crypto-trader",
+   "title": "Crypto Trading",
+   "tier": "pro",
+   "status": "pro",
+   "level": "Intermediate",
+   "certPrefix": "CT",
+   "certLevel": "Intermediate",
+   "outcome": "Exchanges, perpetuals, funding and crypto risk.",
+   "chapters": [
+    {
+     "title": "Blockchains, coins & tokens",
+     "desc": "What you actually own when you buy crypto.",
+     "minutes": 20,
+     "lessons": [
+      {
+       "title": "What a blockchain records",
+       "desc": "A shared ledger, in plain words",
+       "minutes": 4
+      },
+      {
+       "title": "Coins vs tokens",
+       "desc": "Two kinds of crypto asset",
+       "minutes": 4
+      },
+      {
+       "title": "Stablecoins",
+       "desc": "Crypto that tries to stay at $1",
+       "minutes": 4
+      },
+      {
+       "title": "A market that never closes",
+       "desc": "Trading 24/7 and what it means for you",
+       "minutes": 4
+      },
+      {
+       "title": "Reading a crypto price page",
+       "desc": "Market cap, volume and supply",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Exchanges, wallets & custody",
+     "desc": "Where your coins live and who can lose them.",
+     "minutes": 21,
+     "lessons": [
+      {
+       "title": "Centralized exchanges",
+       "desc": "How they hold your coins",
+       "minutes": 4
+      },
+      {
+       "title": "Hot and cold wallets",
+       "desc": "Online convenience vs offline safety",
+       "minutes": 4
+      },
+      {
+       "title": "Seed phrases",
+       "desc": "The key you never share",
+       "minutes": 4
+      },
+      {
+       "title": "Custody risk",
+       "desc": "Hacks, freezes and failed exchanges",
+       "minutes": 5
+      },
+      {
+       "title": "Keeping your coins safe",
+       "desc": "A simple security checklist",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Spot vs perpetuals",
+     "desc": "Owning a coin versus trading a contract on it.",
+     "minutes": 22,
+     "lessons": [
+      {
+       "title": "Buying spot",
+       "desc": "You own the coin",
+       "minutes": 4
+      },
+      {
+       "title": "What a perpetual is",
+       "desc": "A futures contract with no expiry",
+       "minutes": 4
+      },
+      {
+       "title": "Leverage and margin",
+       "desc": "Bigger position, smaller deposit",
+       "minutes": 5
+      },
+      {
+       "title": "Liquidation",
+       "desc": "When the exchange closes you out",
+       "minutes": 5
+      },
+      {
+       "title": "Spot or perpetual?",
+       "desc": "Choose the right tool for the trade",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Funding rates",
+     "desc": "The fee that keeps perpetuals near the spot price.",
+     "minutes": 17,
+     "lessons": [
+      {
+       "title": "What funding is",
+       "desc": "Payments between longs and shorts",
+       "minutes": 4
+      },
+      {
+       "title": "Positive and negative funding",
+       "desc": "Who pays whom, and when",
+       "minutes": 4
+      },
+      {
+       "title": "Funding as a cost",
+       "desc": "What holding a perpetual really costs",
+       "minutes": 5
+      },
+      {
+       "title": "Funding as sentiment",
+       "desc": "When the crowd leans too far",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "On-chain basics",
+     "desc": "Read the blockchain for clues about supply and demand.",
+     "minutes": 17,
+     "lessons": [
+      {
+       "title": "Reading a block explorer",
+       "desc": "Follow a transaction",
+       "minutes": 4
+      },
+      {
+       "title": "Exchange flows",
+       "desc": "Coins moving onto and off exchanges",
+       "minutes": 5
+      },
+      {
+       "title": "Holder concentration",
+       "desc": "Who owns the supply",
+       "minutes": 4
+      },
+      {
+       "title": "Token unlocks",
+       "desc": "New supply coming to market",
+       "minutes": 4
+      }
+     ]
+    },
+    {
+     "title": "Crypto volatility",
+     "desc": "Why moves are bigger, and how to plan for them.",
+     "minutes": 17,
+     "lessons": [
+      {
+       "title": "Why crypto moves more",
+       "desc": "Thin liquidity, leverage and 24/7 trading",
+       "minutes": 4
+      },
+      {
+       "title": "Measuring volatility",
+       "desc": "ATR and the daily range",
+       "minutes": 4
+      },
+      {
+       "title": "Moves while you sleep",
+       "desc": "Weekend liquidity and sudden wicks",
+       "minutes": 4
+      },
+      {
+       "title": "Liquidation cascades",
+       "desc": "How leverage turns a dip into a crash",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Crypto risk & sizing",
+     "desc": "Size every trade for a market that can drop 20% overnight.",
+     "minutes": 23,
+     "lessons": [
+      {
+       "title": "Risk per trade",
+       "desc": "A fixed slice of your account",
+       "minutes": 4
+      },
+      {
+       "title": "Sizing for wider stops",
+       "desc": "Smaller size, same dollar risk",
+       "minutes": 5
+      },
+      {
+       "title": "Leverage without liquidation",
+       "desc": "Your stop comes first",
+       "minutes": 5
+      },
+      {
+       "title": "Correlated coins",
+       "desc": "Most altcoins follow bitcoin",
+       "minutes": 4
+      },
+      {
+       "title": "Size a real trade",
+       "desc": "Put it all together",
+       "minutes": 5
+      }
+     ]
+    },
+    {
+     "title": "Your crypto plan",
+     "desc": "Rules for what you trade, when, and how much.",
+     "minutes": 17,
+     "lessons": [
+      {
+       "title": "What you will trade",
+       "desc": "Your coin list and why",
+       "minutes": 4
+      },
+      {
+       "title": "When you will trade",
+       "desc": "Setups, sessions and news",
+       "minutes": 4
+      },
+      {
+       "title": "How much you will risk",
+       "desc": "Limits per trade, day and week",
+       "minutes": 4
+      },
+      {
+       "title": "Write your crypto plan",
+       "desc": "One page you can follow",
+       "minutes": 5
+      }
+     ]
+    }
+   ],
+   "hours": 2.5,
+   "art": "path-crypto.webp",
+   "accent": "path-crypto",
+   "topics": [
+    "Blockchains, coins & tokens",
+    "Exchanges, wallets, custody risk",
+    "Spot vs perpetuals, funding",
+    "On-chain basics",
+    "Crypto risk & sizing"
+   ],
+   "added": "Level not given in the spec or on the canvas; set by the content author; chapter outline and Chapter 1 lessons written for the merged Pro path page (content author to confirm)"
+  }
+ ]
+}

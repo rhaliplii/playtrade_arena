@@ -1,0 +1,325 @@
+{
+ "id": "trading-psychology",
+ "path": "learn-to-trade",
+ "n": 6,
+ "title": "Trading Psychology",
+ "short": "Psychology",
+ "promise": "Your biggest opponent in the market isn’t a hedge fund. It’s the person staring back from your screen.",
+ "minutes": 25,
+ "pages": "43–47",
+ "unlock": [
+  "Spot fear and greed in your own trades",
+  "Stop a bad day before tilt makes it worse",
+  "Let a hot move go instead of chasing it",
+  "Take a small loss on purpose, before hope makes it big",
+  "Keep a trading journal and find one pattern a week"
+ ],
+ "terms": [
+  "fear-and-greed",
+  "revenge-trading",
+  "tilt",
+  "fomo",
+  "loss-aversion",
+  "trading-journal",
+  "weekly-review"
+ ],
+ "lessons": [
+  "fear-and-greed",
+  "revenge-trading-and-tilt",
+  "fomo-and-chasing",
+  "loss-aversion",
+  "trading-journal"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "You win 7 of 10 trades. Your wins average $40, your losses $120. Are you making money?",
+    "options": [
+     "Yes: 7 of 10 is a great win rate",
+     "No: you’re down $80 overall",
+     "You’re breaking even"
+    ],
+    "answer": 1,
+    "why": "A high win rate can still lose money. Each loss is three times a win, so three losses wipe out all seven wins and more.",
+    "idea": "win-rate-vs-payoff",
+    "work": "7 wins × $40 = +$280. 3 losses × $120 = −$360. Net −$80.",
+    "visual": {
+     "kind": "trades",
+     "title": "Your last 10 trades",
+     "labels": false,
+     "legend": [
+      {
+       "label": "win",
+       "tone": "up"
+      },
+      {
+       "label": "loss",
+       "tone": "down"
+      }
+     ],
+     "label": "Seven wins of $40 and three losses of $120",
+     "values": [
+      40,
+      40,
+      -120,
+      40,
+      40,
+      40,
+      -120,
+      40,
+      40,
+      -120
+     ]
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "Two $100 losses this morning hit your $200 daily limit. You feel you must win it back before lunch. What do you do?",
+    "options": [
+     "One more trade at double size",
+     "One more trade at normal size",
+     "Stop for the day, as your rule says"
+    ],
+    "answer": 2,
+    "why": "Most people feel that urge. Doubling up to win it back is revenge trading, and your limit exists for exactly this moment.",
+    "idea": "rule-beats-setup",
+    "work": "Down $200. One doubled loss adds $200 more. That’s $400 lost, twice your limit.",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "A stock you don’t follow is up 40% this week and all over your feed. You have no plan for it. What’s the disciplined move?",
+    "options": [
+     "Buy a little, just in case",
+     "Let it go: no setup, no trade",
+     "Buy now, make a plan later"
+    ],
+    "answer": 1,
+    "why": "A move you didn’t plan, where FOMO is loudest. With no setup there’s no entry and no stop. Another setup always comes.",
+    "idea": "fomo-fix",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 2 months",
+     "aside": "not on your watchlist",
+     "chart": {
+      "path": [
+       [
+        0,
+        50
+       ],
+       [
+        6,
+        51
+       ],
+       [
+        12,
+        50.5
+       ],
+       [
+        18,
+        51.5
+       ],
+       [
+        24,
+        50.8
+       ],
+       [
+        30,
+        51
+       ],
+       [
+        33,
+        53
+       ],
+       [
+        35,
+        60
+       ],
+       [
+        37,
+        70
+       ]
+      ],
+      "seed": 61,
+      "noise": 0.5,
+      "height": 110,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "zones": [
+       {
+        "from": 33,
+        "to": 37,
+        "tone": "gold"
+       }
+      ],
+      "marks": [
+       {
+        "i": 37,
+        "price": 70,
+        "label": "+40% this week",
+        "tone": "gold",
+        "pos": "above"
+       }
+      ],
+      "label": "Two flat months near $50, then a jump to $70 in one week"
+     }
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "You’re down 20% on a stock. You tell yourself you’ll sell “once it’s back to even”. Which bias is this?",
+    "options": [
+     "FOMO",
+     "Loss aversion",
+     "Revenge trading"
+    ],
+    "answer": 1,
+    "why": "Waiting for “even” dodges the pain of making the loss real. But the loss is already real. Ask: would I buy this today, at this price?",
+    "idea": "loss-aversion-meaning",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Your journal shows 6 trades marked “bored”. 5 of them lost. What should your weekly review lead to?",
+    "options": [
+     "Nothing: it’s just bad luck",
+     "A rule: no trades when you’re bored",
+     "Trade bigger when bored to stay sharp"
+    ],
+    "answer": 1,
+    "why": "5 of 6 is a pattern, not luck. The weekly review turns one losing pattern into one rule.",
+    "idea": "weekly-review-rule",
+    "added": "New situation written for the Academy"
+   }
+  ],
+  "retry": [
+   {
+    "lesson": 1,
+    "q": "You win 8 of 10 trades at +$25 each. Your 2 losses are −$150 each. Where do you stand?",
+    "options": [
+     "Up $200: 8 wins is a lot",
+     "Breaking even",
+     "Down $100 overall"
+    ],
+    "answer": 2,
+    "why": "Count the size, not just the wins. Two big losses wipe out eight small wins and more.",
+    "idea": "win-rate-vs-payoff",
+    "work": "8 wins × $25 = +$200. 2 losses × $150 = −$300. Net −$100.",
+    "visual": {
+     "kind": "trades",
+     "title": "Your last 10 trades",
+     "labels": false,
+     "legend": [
+      {
+       "label": "win",
+       "tone": "up"
+      },
+      {
+       "label": "loss",
+       "tone": "down"
+      }
+     ],
+     "label": "Eight wins of $25 and two losses of $150",
+     "values": [
+      25,
+      25,
+      25,
+      -150,
+      25,
+      25,
+      25,
+      -150,
+      25,
+      25
+     ]
+    },
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "Your rule: stop after 2 losses a day. You’ve had 2, you’re angry, and the market is open for 3 more hours. What do you do?",
+    "options": [
+     "Close the app until tomorrow",
+     "Trade faster to catch up",
+     "Double your size on the next setup"
+    ],
+    "answer": 0,
+    "why": "Anger makes bad setups look good. The rule holds on the days it hurts: tomorrow is a new day.",
+    "idea": "rule-beats-setup",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "A coin jumps 30% in a day and your group chat is buzzing. Your plan has no entry for it. What do you do?",
+    "options": [
+     "Buy now before it runs further",
+     "Buy now and set a stop later",
+     "Skip it: no setup, no trade"
+    ],
+    "answer": 2,
+    "why": "The chat is noise, not a setup. Buying after a spike means buying high with no clear stop. Another setup always comes.",
+    "idea": "fomo-fix",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "You bought at $20 with a stop at $18. Price hits $18 and you feel sure it will bounce. What does your plan say?",
+    "options": [
+     "Take the planned loss",
+     "Move the stop to $16",
+     "Buy more at $18 to lower your average"
+    ],
+    "answer": 0,
+    "why": "The stop decides, not hope. Moving it or adding to a loser makes the loss bigger than you planned.",
+    "idea": "loss-aversion-meaning",
+    "work": "$20 − $18 = $2 a share: the loss you planned before the trade.",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Your journal shows your 4 biggest losses all came the day after a big win, marked “confident”. What should your review lead to?",
+    "options": [
+     "Nothing: big wins mean you’re good",
+     "A rule: normal size the day after a big win",
+     "Stop keeping a journal"
+    ],
+    "answer": 1,
+    "why": "Four of four is a pattern. Turn it into one rule, then check next week whether it helped.",
+    "idea": "weekly-review-rule",
+    "added": "New situation written for the Academy"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "win-rate-vs-payoff",
+   "title": "Lesson 1 · Fear and greed in your own head",
+   "text": "Winning often isn’t the same as making money. Fear closes winners early and hope lets losers run. Set the stop and target before you enter, then follow them."
+  },
+  {
+   "idea": "rule-beats-setup",
+   "title": "Lesson 2 · Revenge trading and tilt",
+   "text": "Hit your daily limit? You’re done for the day. After a loss, trade the same size or smaller, never bigger."
+  },
+  {
+   "idea": "fomo-fix",
+   "title": "Lesson 3 · FOMO and chasing",
+   "text": "FOMO makes you buy after the move, near the top, with no clear stop. Write your setup down and enter only when it shows. No setup, no trade."
+  },
+  {
+   "idea": "loss-aversion-meaning",
+   "title": "Lesson 4 · Loss aversion: why you hold losers",
+   "text": "A loss hurts about twice as much as an equal gain feels good, so you’re tempted to hold losers. The loss is real before you sell. The stop decides, not hope."
+  },
+  {
+   "idea": "weekly-review-rule",
+   "title": "Lesson 5 · Your trading journal",
+   "text": "Log setup, entry, stop, target, result and emotion. Each week, turn one losing pattern into a rule. 5 of 6 “bored” trades lost? No trading when bored."
+  }
+ ],
+ "next": "company-fundamentals"
+}

@@ -1,0 +1,433 @@
+{
+ "id": "your-entry-rules",
+ "chapter": "trading-plan",
+ "n": 2,
+ "title": "Your entry rules",
+ "minutes": 5,
+ "desc": "Write one entry rule you can see on the chart and follow every time",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Which rule can you follow?",
+   "situation": "You want a rule for when to buy. Which one could you follow the same way every time?",
+   "options": [
+    {
+     "text": "Buy when the stock feels strong",
+     "feedback": "“Feels strong” changes with your mood. A rule must point to something you can see on the chart."
+    },
+    {
+     "text": "Buy when a rising stock pulls back to its rising 50-day average",
+     "feedback": "You can check it on any chart, any day, and get the same answer."
+    },
+    {
+     "text": "Buy when people online say it’s going up",
+     "feedback": "Online opinions change by the hour. A rule must point to something you can see on the chart."
+    }
+   ],
+   "answer": 1,
+   "idea": "rule-you-can-see",
+   "work": "Test: give the rule to two people. Would both pick the same day? Only B passes."
+  },
+  {
+   "type": "learn",
+   "title": "One setup, one sentence",
+   "text": "An **[[entry-rule|entry rule]]** says exactly what must happen before you buy. If you can’t say it in one sentence, it isn’t a rule yet.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Trend",
+        "value": "the 50-day average is rising"
+       },
+       {
+        "label": "Trigger",
+        "value": "price pulls back to it"
+       },
+       {
+        "label": "Confirm",
+        "value": "a day closes back above it"
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "Same rule every time. That’s what lets you measure it later."
+    },
+    {
+     "visual": {
+      "kind": "planbar",
+      "sections": [
+       "Style",
+       "Entry",
+       "Exit & risk",
+       "Checklist",
+       "Review"
+      ],
+      "current": 1
+     }
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "The rule on a chart",
+   "text": "One sentence: “Buy when a rising stock pulls back to its rising 50-day average and closes back above it.”",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily · 50 days",
+    "aside": "trend up",
+    "legend": [
+     {
+      "label": "Price",
+      "tone": "blue"
+     },
+     {
+      "label": "50-day average",
+      "tone": "gold",
+      "dashed": true
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       43
+      ],
+      [
+       5,
+       45.5
+      ],
+      [
+       9,
+       45
+      ],
+      [
+       14,
+       47.5
+      ],
+      [
+       18,
+       47
+      ],
+      [
+       23,
+       49.5
+      ],
+      [
+       27,
+       52.5
+      ],
+      [
+       30,
+       52
+      ],
+      [
+       33,
+       49.5
+      ],
+      [
+       36,
+       47.4
+      ],
+      [
+       37,
+       48.6
+      ],
+      [
+       40,
+       50.2
+      ],
+      [
+       43,
+       52
+      ]
+     ],
+     "n": 44,
+     "seed": 7,
+     "noise": 0.4,
+     "height": 140,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "overlays": [
+      {
+       "values": [
+        40.0,
+        40.2,
+        40.4,
+        40.6,
+        40.8,
+        41.0,
+        41.2,
+        41.4,
+        41.6,
+        41.8,
+        42.0,
+        42.2,
+        42.4,
+        42.6,
+        42.8,
+        43.0,
+        43.2,
+        43.4,
+        43.6,
+        43.8,
+        44.0,
+        44.2,
+        44.4,
+        44.6,
+        44.8,
+        45.0,
+        45.2,
+        45.4,
+        45.6,
+        45.8,
+        46.0,
+        46.2,
+        46.4,
+        46.6,
+        46.8,
+        47.0,
+        47.2,
+        47.4,
+        47.6,
+        47.8,
+        48.0,
+        48.2,
+        48.4,
+        48.6
+       ],
+       "tone": "gold",
+       "dashed": true
+      }
+     ],
+     "marks": [
+      {
+       "i": 36,
+       "price": 47.2,
+       "tone": "gold",
+       "label": "pullback",
+       "pos": "below"
+      },
+      {
+       "i": 37,
+       "price": 48.6,
+       "tone": "up",
+       "label": "entry"
+      }
+     ],
+     "label": "A rising stock pulls back to its rising 50-day average near $47, then a day closes back above it: the entry"
+    }
+   },
+   "foot": "All three parts are there: the average is rising, price came back to it, and a day closed above it.",
+   "footTone": "green"
+  },
+  {
+   "type": "trap",
+   "pose": "worried",
+   "title": "Missed it? Let it go.",
+   "text": "Price bounced and ran far above the average. Buying now isn’t your setup. It’s chasing.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "candles",
+      "title": "Daily",
+      "aside": "+18% since the setup",
+      "chart": {
+       "path": [
+        [
+         0,
+         42
+        ],
+        [
+         5,
+         44
+        ],
+        [
+         9,
+         43.4
+        ],
+        [
+         13,
+         45
+        ],
+        [
+         17,
+         45.2
+        ],
+        [
+         20,
+         44.8
+        ],
+        [
+         22,
+         44.6
+        ],
+        [
+         26,
+         46.5
+        ],
+        [
+         30,
+         48.5
+        ],
+        [
+         34,
+         50.5
+        ],
+        [
+         39,
+         52.6
+        ]
+       ],
+       "n": 40,
+       "seed": 11,
+       "noise": 0.4,
+       "height": 120,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "overlays": [
+        {
+         "values": [
+          40.0,
+          40.2,
+          40.4,
+          40.6,
+          40.8,
+          41.0,
+          41.2,
+          41.4,
+          41.6,
+          41.8,
+          42.0,
+          42.2,
+          42.4,
+          42.6,
+          42.8,
+          43.0,
+          43.2,
+          43.4,
+          43.6,
+          43.8,
+          44.0,
+          44.2,
+          44.4,
+          44.6,
+          44.8,
+          45.0,
+          45.2,
+          45.4,
+          45.6,
+          45.8,
+          46.0,
+          46.2,
+          46.4,
+          46.6,
+          46.8,
+          47.0,
+          47.2,
+          47.4,
+          47.6,
+          47.8
+         ],
+         "tone": "gold",
+         "dashed": true
+        }
+       ],
+       "marks": [
+        {
+         "i": 22,
+         "price": 44.6,
+         "tone": "gold",
+         "label": "setup",
+         "pos": "below"
+        },
+        {
+         "i": 39,
+         "price": 52.6,
+         "tone": "down",
+         "label": "now"
+        }
+       ],
+       "label": "The setup at the average near $44.60 was missed; price is now $52.60, 18% higher"
+      }
+     },
+     "side": true
+    },
+    {
+     "tip": "Buying up here also puts your stop far away. Same 1% risk, far fewer shares, and a worse price.",
+     "tone": "red"
+    }
+   ],
+   "rule": "no setup, no trade. Another one always comes."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Spot the real rule",
+   "q": "Which one is a clear entry rule you could test?",
+   "options": [
+    {
+     "text": "Buy good stocks when they’re cheap",
+     "feedback": "“Good” and “cheap” mean different things to different people. Two traders would pick different days."
+    },
+    {
+     "text": "Buy when price closes above its 20-day high on twice its average volume",
+     "feedback": "A close above the 20-day high and twice the average volume: both can be checked on any chart, so you can test it."
+    },
+    {
+     "text": "Buy when the trend looks up",
+     "feedback": "“Looks up” is a feeling. A rule must name something you can measure on the chart."
+    },
+    {
+     "text": "Buy the dips",
+     "feedback": "“Buy the dips” doesn’t say which dip, how deep, or in what trend. B names exact things you can check."
+    }
+   ],
+   "answer": 1,
+   "idea": "testable-entry-rule",
+   "work": null
+  },
+  {
+   "type": "check",
+   "title": "Wrong trend",
+   "q": "A stock is falling and its 50-day average points down. Price rises to touch the average. Does your pullback rule say buy?",
+   "options": [
+    {
+     "text": "Yes: price touched the average",
+     "feedback": "A touch isn’t enough. Your rule starts with a rising average, and this one is falling. No setup, no trade."
+    },
+    {
+     "text": "No: your rule needs a rising average",
+     "feedback": "Your rule starts with a rising average. This one points down, so there’s no setup and no trade."
+    },
+    {
+     "text": "Yes, with a bigger position",
+     "feedback": "A bigger position doesn’t fix a missing setup. The average is falling, so the rule says no trade."
+    },
+    {
+     "text": "Only if the news is good",
+     "feedback": "News isn’t part of your rule. The average is falling, so the setup isn’t there."
+    }
+   ],
+   "answer": 1,
+   "idea": "no-setup-no-trade",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You have an entry rule you can follow.",
+   "lines": [
+    "A real rule fits in one sentence.",
+    "Trend, trigger, confirm: all three before you buy.",
+    "No setup, no trade. Don’t chase."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,466 @@
+{
+ "id": "trendlines-and-channels",
+ "chapter": "trends-patterns-indicators",
+ "n": 2,
+ "title": "Trendlines and channels",
+ "minutes": 5,
+ "desc": "Draw a line under the lows, add a channel, and read a break",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "detective",
+   "title": "The line breaks",
+   "situation": "You drew a trendline under three rising lows. Today price closed just below it. What does that tell you?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "path": [
+      [
+       0,
+       42.5
+      ],
+      [
+       2,
+       41.3
+      ],
+      [
+       5,
+       44.2
+      ],
+      [
+       8,
+       43.8
+      ],
+      [
+       11,
+       46.4
+      ],
+      [
+       14,
+       46.15
+      ],
+      [
+       17,
+       48.6
+      ],
+      [
+       19,
+       47.2
+      ]
+     ],
+     "seed": 8,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "trendlines": [
+      {
+       "from": [
+        2,
+        41.0
+       ],
+       "to": [
+        19,
+        47.8
+       ],
+       "tone": "gold"
+      }
+     ],
+     "marks": [
+      {
+       "i": 19,
+       "price": 47.2,
+       "label": "today",
+       "tone": "gold",
+       "pos": "below"
+      }
+     ],
+     "label": "A rising trendline under three lows; today price closes just below it"
+    }
+   },
+   "options": [
+    {
+     "text": "The uptrend is over: sell everything",
+     "feedback": "A break is a warning, not a signal. Price often dips under a line and climbs back."
+    },
+    {
+     "text": "A warning: watch for lower highs and lows",
+     "feedback": "The break says the trend is weakening. The next highs and lows tell you if it’s really over."
+    },
+    {
+     "text": "Nothing: trendlines don’t matter",
+     "feedback": "A break does matter: buyers didn’t defend the line this time. Treat it as a warning and watch the next swings."
+    }
+   ],
+   "answer": 1,
+   "idea": "trendline-break-warning",
+   "work": "Line at $47.80 today, close $47.20: about 1% below. One close isn’t a new trend."
+  },
+  {
+   "type": "learn",
+   "title": "Draw it under the lows",
+   "text": "In an uptrend, connect **at least two rising lows** with a straight line and extend it to the right. In a downtrend, connect the falling highs.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "candles",
+      "title": "Daily · uptrend line",
+      "aside": "3 touches",
+      "chart": {
+       "path": [
+        [
+         0,
+         40
+        ],
+        [
+         2,
+         41
+        ],
+        [
+         4,
+         44
+        ],
+        [
+         6,
+         43
+        ],
+        [
+         9,
+         47
+        ],
+        [
+         11,
+         46
+        ],
+        [
+         14,
+         50
+        ],
+        [
+         16,
+         49
+        ],
+        [
+         18,
+         52
+        ]
+       ],
+       "seed": 9,
+       "height": 130,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "trendlines": [
+        {
+         "from": [
+          2,
+          40.4
+         ],
+         "to": [
+          11,
+          45.2
+         ],
+         "tone": "up",
+         "touches": [
+          2,
+          6,
+          11
+         ]
+        }
+       ],
+       "label": "An uptrend line drawn under three rising lows"
+      }
+     }
+    },
+    {
+     "tip": "Two lows make a line. Each extra touch makes it more worth watching."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "drag the line",
+   "title": "Add a second line: a channel",
+   "text": "Draw a parallel line through the highs. Price often travels between the two, like a lane.",
+   "visual": {
+    "kind": "drawline",
+    "title": "Daily · rising channel",
+    "mode": "trend",
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       3,
+       44
+      ],
+      [
+       5,
+       42
+      ],
+      [
+       8,
+       47
+      ],
+      [
+       10,
+       45
+      ],
+      [
+       13,
+       50
+      ],
+      [
+       15,
+       48
+      ],
+      [
+       18,
+       53
+      ]
+     ],
+     "seed": 12,
+     "height": 140,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "trendlines": [
+      {
+       "from": [
+        0,
+        39.5
+       ],
+       "to": [
+        15,
+        47.5
+       ],
+       "tone": "up"
+      }
+     ],
+     "label": "A rising channel: a lower line under the lows, drag the upper line onto the highs"
+    },
+    "start": {
+     "from": [
+      3,
+      47
+     ],
+     "to": [
+      15,
+      47
+     ]
+    },
+    "target": {
+     "from": [
+      3,
+      44.6
+     ],
+     "to": [
+      15,
+      51
+     ]
+    },
+    "tolerance": 1.2,
+    "tone": "down",
+    "label": "upper line",
+    "done": "That’s a channel: price travels between the two lines."
+   },
+   "foot": "Near the lower line, buyers often step in. Near the upper line, sellers do. Treat both as zones, not exact prices.",
+   "footTone": "sky"
+  },
+  {
+   "type": "trap",
+   "title": "Don’t bend the line to fit",
+   "text": "If the line cuts through candles, or you redraw it every day to make it work, it isn’t a trendline. It’s a wish.",
+   "visual": {
+    "kind": "candles",
+    "title": "Forced line",
+    "aside": "cuts through bodies",
+    "chart": {
+     "path": [
+      [
+       0,
+       41
+      ],
+      [
+       1,
+       39
+      ],
+      [
+       2,
+       38.5
+      ],
+      [
+       3,
+       41.5
+      ],
+      [
+       4,
+       40.5
+      ],
+      [
+       5,
+       42.5
+      ],
+      [
+       6,
+       39.5
+      ],
+      [
+       7,
+       41
+      ],
+      [
+       8,
+       43.5
+      ],
+      [
+       9,
+       42.5
+      ],
+      [
+       10,
+       44.5
+      ]
+     ],
+     "seed": 17,
+     "height": 120,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "noise": 0.2,
+     "wick": 1.2,
+     "trendlines": [
+      {
+       "from": [
+        0,
+        40.2
+       ],
+       "to": [
+        10,
+        43.6
+       ],
+       "tone": "down",
+       "dashed": true,
+       "extend": "none"
+      }
+     ],
+     "label": "A dashed line forced through the candle bodies"
+    }
+   },
+   "rule": "use clear swing lows, the same way every time. No forcing."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "How many lows?",
+   "idea": "two-lows-make-a-line",
+   "q": "What’s the fewest swing lows you need to draw an uptrend line?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily · no line yet",
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       2,
+       39.5
+      ],
+      [
+       4,
+       42
+      ],
+      [
+       6,
+       41
+      ],
+      [
+       9,
+       44.5
+      ],
+      [
+       11,
+       43.5
+      ],
+      [
+       14,
+       47
+      ],
+      [
+       16,
+       46.5
+      ],
+      [
+       18,
+       48.5
+      ]
+     ],
+     "seed": 21,
+     "height": 110,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "label": "A rising chart with no line drawn yet"
+    }
+   },
+   "options": [
+    {
+     "text": "1",
+     "feedback": "One low can’t set a direction: any line passes through a single point. A second rising low fixes the slope."
+    },
+    {
+     "text": "2",
+     "feedback": "Two rising lows fix the line. Each extra touch makes it more worth watching, but two are enough to draw it."
+    },
+    {
+     "text": "3",
+     "feedback": "Two lows are enough to draw a line. A third touch makes it more trustworthy, but it isn’t needed to draw it."
+    },
+    {
+     "text": "5",
+     "feedback": "You never need that many. Two lows are enough to draw it; extra touches only add trust."
+    }
+   ],
+   "answer": 1
+  },
+  {
+   "type": "check",
+   "title": "At the top line",
+   "q": "A stock moves in a rising channel. It’s touching the upper line again. What often happens there?",
+   "options": [
+    {
+     "text": "It breaks out higher every time",
+     "feedback": "The upper line works like a ceiling. Price often pulls back toward the lower line, though sometimes it breaks out."
+    },
+    {
+     "text": "Sellers often step in and price pulls back",
+     "feedback": "Near the upper line, sellers often step in. Price tends to pull back toward the lower line, though sometimes it breaks out."
+    },
+    {
+     "text": "The uptrend is over for good",
+     "feedback": "A touch of the upper line is the channel doing its job. Nothing has broken; sellers just often step in there."
+    },
+    {
+     "text": "The channel stops counting",
+     "feedback": "Touching the upper line is the channel working. It counts until price clearly breaks out of it."
+    }
+   ],
+   "answer": 1,
+   "idea": "channel-upper-line"
+  },
+  {
+   "type": "keep",
+   "headline": "You can draw a trend, not just see it.",
+   "lines": [
+    "Uptrend line: under at least two rising lows.",
+    "A channel adds a parallel line through the highs.",
+    "A break is a warning, not a signal."
+   ]
+  }
+ ]
+}

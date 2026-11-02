@@ -1,0 +1,867 @@
+{
+ "id": "reading-charts",
+ "path": "learn-to-trade",
+ "n": 3,
+ "title": "Reading Charts",
+ "short": "Charts",
+ "promise": "Candles are the language of price: a diary of fear and greed.",
+ "minutes": 25,
+ "pages": "18–24",
+ "unlock": [
+  "Read any candle: open, high, low and close",
+  "Spot the hammer, the doji and the engulfing candle",
+  "Zoom out first, and trade the timeframe that matches your hold",
+  "Tell a believable breakout from a weak one with volume",
+  "Find support and resistance, and place your stop beyond them"
+ ],
+ "terms": [
+  "candlestick",
+  "ohlc",
+  "wick",
+  "hammer",
+  "doji",
+  "engulfing",
+  "timeframe",
+  "volume",
+  "breakout",
+  "support",
+  "resistance"
+ ],
+ "lessons": [
+  "one-candle-four-prices",
+  "candles-that-tell-a-story",
+  "timeframes",
+  "volume",
+  "support-and-resistance"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "A red candle: open $50, high $52, low $46, close $47. Where did it close?",
+    "visual": {
+     "kind": "candle",
+     "title": "Daily · one candle",
+     "axis": true,
+     "items": [
+      {
+       "ohlc": [
+        50,
+        52,
+        46,
+        47
+       ],
+       "label": "A red candle: open $50, high $52, low $46, close $47"
+      }
+     ]
+    },
+    "options": [
+     "$47: $3 below its open",
+     "$50: red means it closed at the open",
+     "$46: the bottom of the wick"
+    ],
+    "answer": 0,
+    "why": "A red body runs from the open at the top down to the close at the bottom: $47. The wick below reaches the low, $46.",
+    "work": "Open $50 − close $47 = $3 lower: a red candle.",
+    "idea": "candle-body-close"
+   },
+   {
+    "lesson": 2,
+    "q": "After a 10-day rise, today brings a doji at $80. What does it say?",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 11 days",
+     "aside": "today",
+     "asideTone": "gold",
+     "chart": {
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "ohlc": [
+       [
+        70,
+        70.9,
+        69.7,
+        70.8
+       ],
+       [
+        70.8,
+        71.9,
+        70.6,
+        71.7
+       ],
+       [
+        71.7,
+        72.6,
+        71.5,
+        72.4
+       ],
+       [
+        72.4,
+        73.6,
+        72.2,
+        73.4
+       ],
+       [
+        73.4,
+        74.4,
+        73.2,
+        74.2
+       ],
+       [
+        74.2,
+        75.3,
+        74,
+        75.1
+       ],
+       [
+        75.1,
+        76.4,
+        74.9,
+        76.2
+       ],
+       [
+        76.2,
+        77.2,
+        76,
+        77
+       ],
+       [
+        77,
+        78.1,
+        76.8,
+        77.9
+       ],
+       [
+        77.9,
+        79.2,
+        77.7,
+        79
+       ],
+       [
+        79.6,
+        80.5,
+        79.4,
+        79.62
+       ]
+      ],
+      "height": 80,
+      "marks": [
+       {
+        "i": 10,
+        "price": 80,
+        "tone": "gold",
+        "label": "$80",
+        "pos": "below"
+       }
+      ],
+      "label": "Ten rising days, then a doji at $80"
+     }
+    },
+    "options": [
+     "Sell now: the rise is over",
+     "Buyers are stronger than ever",
+     "Indecision: a clue to watch, not a signal"
+    ],
+    "answer": 2,
+    "why": "A doji shows a draw between buyers and sellers. After a long rise it’s a clue to watch, never a sell signal on its own.",
+    "work": "Open $80, close $80: nobody won the day. Wait for the next candles.",
+    "idea": "doji"
+   },
+   {
+    "lesson": 3,
+    "q": "You’ll hold for weeks. The daily chart is in an uptrend, but the 15-minute chart is dipping. Which should you trust?",
+    "visual": {
+     "kind": "chart-pair",
+     "items": [
+      {
+       "label": "Daily · 3 months",
+       "tone": "white",
+       "chart": {
+        "axis": false,
+        "lastTag": false,
+        "ticks": 0,
+        "path": [
+         [
+          0,
+          50
+         ],
+         [
+          6,
+          52
+         ],
+         [
+          12,
+          57
+         ],
+         [
+          17,
+          62
+         ]
+        ],
+        "seed": 21,
+        "height": 90,
+        "noise": 0.5,
+        "label": "Daily candles rising over three months"
+       }
+      },
+      {
+       "label": "15-min · today",
+       "tone": "white",
+       "chart": {
+        "axis": false,
+        "lastTag": false,
+        "ticks": 0,
+        "path": [
+         [
+          0,
+          62.8
+         ],
+         [
+          6,
+          62.1
+         ],
+         [
+          12,
+          61.4
+         ],
+         [
+          17,
+          61
+         ]
+        ],
+        "seed": 14,
+        "height": 90,
+        "noise": 0.5,
+        "label": "15-minute candles dipping today"
+       }
+      }
+     ]
+    },
+    "options": [
+     "The 15-minute chart: it’s the latest",
+     "The daily chart: it matches your hold",
+     "Neither: you wait until both agree"
+    ],
+    "answer": 1,
+    "why": "Trade from the chart that matches your hold. For weeks that’s the daily, and it’s rising. A 15-minute dip is noise inside it.",
+    "idea": "match-timeframe-to-hold"
+   },
+   {
+    "lesson": 4,
+    "q": "A stock breaks above $40 on 500,000 shares. It usually trades 1,000,000 a day. How believable is the breakout?",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 2 weeks",
+     "chart": {
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "ohlc": [
+       [
+        37,
+        37.5,
+        36.6,
+        37.3
+       ],
+       [
+        37.3,
+        37.8,
+        37,
+        37.6
+       ],
+       [
+        37.6,
+        37.9,
+        37.3,
+        37.4
+       ],
+       [
+        37.4,
+        38.1,
+        37.2,
+        37.9
+       ],
+       [
+        37.9,
+        38.6,
+        37.8,
+        38.4
+       ],
+       [
+        38.4,
+        38.6,
+        38,
+        38.2
+       ],
+       [
+        38.2,
+        38.7,
+        38,
+        38.5
+       ],
+       [
+        38.5,
+        39.1,
+        38.4,
+        38.9
+       ],
+       [
+        38.9,
+        39.2,
+        38.5,
+        38.7
+       ],
+       [
+        38.7,
+        39.4,
+        38.6,
+        39.2
+       ],
+       [
+        39.3,
+        40.9,
+        39.2,
+        40.6
+       ]
+      ],
+      "height": 80,
+      "priceLabel": "Price",
+      "hlines": [
+       {
+        "price": 40,
+        "tone": "gold",
+        "label": "$40",
+        "style": "left"
+       }
+      ],
+      "volume": [
+       1,
+       1.1,
+       0.9,
+       1.2,
+       1,
+       1.1,
+       0.9,
+       1,
+       1.2,
+       1,
+       0.5
+      ],
+      "volAvg": 1,
+      "volAvgLabel": "average 1M",
+      "volLabel": "Volume",
+      "volHeight": 34,
+      "label": "Price breaks above $40 on half the average volume"
+     }
+    },
+    "options": [
+     "Very: the price broke out, that’s enough",
+     "Weak: half the usual crowd joined",
+     "Bearish: low volume means it will fall"
+    ],
+    "answer": 1,
+    "why": "Few people backed this move, so it’s easier to reverse. Low volume shows a weak move, not which way price goes next.",
+    "work": "500,000 ÷ 1,000,000 = 0.5: half a normal day.",
+    "idea": "volume-confirms-breakout"
+   },
+   {
+    "lesson": 5,
+    "q": "You buy at $62. Support sits at $60, where buyers stepped in twice before. Where is a sensible stop?",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 3 months",
+     "chart": {
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "ohlc": [
+       [
+        66,
+        66.4,
+        64.6,
+        64.9
+       ],
+       [
+        64.9,
+        65.1,
+        62.8,
+        63.1
+       ],
+       [
+        63.1,
+        63.3,
+        60.4,
+        60.9
+       ],
+       [
+        60.9,
+        62.6,
+        60.3,
+        62.3
+       ],
+       [
+        62.3,
+        64.4,
+        62,
+        64.1
+       ],
+       [
+        64.1,
+        65.6,
+        63.8,
+        65.3
+       ],
+       [
+        65.3,
+        65.5,
+        63.2,
+        63.5
+       ],
+       [
+        63.5,
+        63.7,
+        61.2,
+        61.5
+       ],
+       [
+        61.5,
+        61.7,
+        60.2,
+        60.6
+       ],
+       [
+        60.6,
+        61.6,
+        60.4,
+        61.3
+       ],
+       [
+        61.3,
+        62.3,
+        61.1,
+        62
+       ]
+      ],
+      "height": 100,
+      "extra": [
+       {
+        "price": 59
+       }
+      ],
+      "hlines": [
+       {
+        "price": 60,
+        "tone": "gold",
+        "label": "support $60",
+        "style": "below"
+       }
+      ],
+      "marks": [
+       {
+        "i": 10,
+        "price": 62,
+        "tone": "blue",
+        "label": "buy $62"
+       }
+      ],
+      "label": "Price bounces off $60 twice; you buy at $62"
+     }
+    },
+    "options": [
+     "$60, right on support",
+     "$58, a little below the zone",
+     "$61.50, just under your entry"
+    ],
+    "answer": 1,
+    "why": "Support is a zone, and price often pokes into it before turning. A stop on $60 or at $61.50 gets hit by normal noise; a little below the zone gives the trade room.",
+    "work": "Entry $62 − stop $58 = $4 risk a share.",
+    "idea": "stop-beyond-zone"
+   }
+  ],
+  "retry": [
+   {
+    "lesson": 1,
+    "q": "A green candle: open $30, high $34, low $29, close $33. Where did it close?",
+    "visual": {
+     "kind": "candle",
+     "title": "Daily · one candle",
+     "axis": true,
+     "items": [
+      {
+       "ohlc": [
+        30,
+        34,
+        29,
+        33
+       ],
+       "label": "A green candle: open $30, high $34, low $29, close $33"
+      }
+     ]
+    },
+    "options": [
+     "$34: the top of the wick",
+     "$33: the top of the body",
+     "$30: the bottom of the body"
+    ],
+    "answer": 1,
+    "why": "On a green candle the body runs up from the open to the close, so its top is the close. The wick above reaches the high, $34.",
+    "work": "Close $33 − open $30 = $3 higher: a green candle.",
+    "idea": "candle-body-close",
+    "added": "Retry set written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "After a 6-day fall, a candle opens at $25 and closes at $25, with wicks on both sides. What does it say?",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 7 days",
+     "aside": "today",
+     "asideTone": "gold",
+     "chart": {
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "ohlc": [
+       [
+        31,
+        31.3,
+        29.9,
+        30.1
+       ],
+       [
+        30.1,
+        30.4,
+        29,
+        29.2
+       ],
+       [
+        29.2,
+        29.5,
+        28.1,
+        28.3
+       ],
+       [
+        28.3,
+        28.6,
+        27.2,
+        27.4
+       ],
+       [
+        27.4,
+        27.7,
+        26.3,
+        26.5
+       ],
+       [
+        26.5,
+        26.8,
+        25.5,
+        25.7
+       ],
+       [
+        25,
+        25.8,
+        24.2,
+        25.02
+       ]
+      ],
+      "height": 80,
+      "extra": [
+       {
+        "price": 22.6
+       }
+      ],
+      "marks": [
+       {
+        "i": 6,
+        "price": 25,
+        "tone": "gold",
+        "label": "$25",
+        "pos": "below"
+       }
+      ],
+      "label": "Six falling days, then a doji at $25"
+     }
+    },
+    "options": [
+     "Buyers have taken over",
+     "Indecision: a clue to watch, not a signal",
+     "The fall will speed up"
+    ],
+    "answer": 1,
+    "why": "Open and close at the same price: neither side won the day. After a fall it’s a clue to watch. Wait for the next candles before you act.",
+    "idea": "doji",
+    "added": "Retry set written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "You’ll hold for a few hours. The hourly chart is rising, but the 1-minute chart just dipped. Which chart do you trade from?",
+    "options": [
+     "The 1-minute: it’s the latest",
+     "The hourly: it matches your hold",
+     "The monthly: longer is always right"
+    ],
+    "answer": 1,
+    "why": "Match the chart to your hold: hours means the hourly, with a look at the daily first. A 1-minute dip is noise, and a monthly candle is longer than your whole trade.",
+    "idea": "match-timeframe-to-hold",
+    "added": "Retry set written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "A stock breaks above $25 on 2,400,000 shares. It usually trades 800,000 a day. How believable is the breakout?",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 2 weeks",
+     "chart": {
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "ohlc": [
+       [
+        22.6,
+        23,
+        22.4,
+        22.8
+       ],
+       [
+        22.8,
+        23.2,
+        22.6,
+        23.1
+       ],
+       [
+        23.1,
+        23.3,
+        22.8,
+        22.9
+       ],
+       [
+        22.9,
+        23.5,
+        22.8,
+        23.4
+       ],
+       [
+        23.4,
+        23.8,
+        23.2,
+        23.6
+       ],
+       [
+        23.6,
+        23.8,
+        23.3,
+        23.4
+       ],
+       [
+        23.4,
+        24,
+        23.3,
+        23.9
+       ],
+       [
+        23.9,
+        24.3,
+        23.7,
+        24.1
+       ],
+       [
+        24.1,
+        24.3,
+        23.8,
+        23.9
+       ],
+       [
+        23.9,
+        24.6,
+        23.8,
+        24.5
+       ],
+       [
+        24.6,
+        26.1,
+        24.5,
+        25.8
+       ]
+      ],
+      "height": 80,
+      "priceLabel": "Price",
+      "hlines": [
+       {
+        "price": 25,
+        "tone": "gold",
+        "label": "$25",
+        "style": "left"
+       }
+      ],
+      "volume": [
+       0.8,
+       0.9,
+       0.7,
+       0.8,
+       0.9,
+       0.8,
+       0.7,
+       0.8,
+       0.9,
+       0.8,
+       2.4
+      ],
+      "volAvg": 0.8,
+      "volAvgLabel": "average 800K",
+      "volLabel": "Volume",
+      "volHeight": 34,
+      "label": "Price breaks above $25 on three times the average volume"
+     }
+    },
+    "options": [
+     "Believable: three times the usual crowd joined",
+     "Weak: volume doesn’t matter",
+     "Bearish: high volume means it will fall"
+    ],
+    "answer": 0,
+    "why": "Many more people than usual backed the move, so it’s harder to reverse. Volume shows how strong a move is, not which way it goes.",
+    "work": "2,400,000 ÷ 800,000 = 3: three times a normal day.",
+    "idea": "volume-confirms-breakout",
+    "added": "Retry set written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "You buy at $103. Support sits at $100, where buyers stepped in three times. Where is a sensible stop?",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 3 months",
+     "chart": {
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "ohlc": [
+       [
+        106,
+        106.5,
+        104,
+        104.4
+       ],
+       [
+        104.4,
+        104.6,
+        100.5,
+        101
+       ],
+       [
+        101,
+        104.8,
+        100.8,
+        104.4
+       ],
+       [
+        104.4,
+        106.2,
+        104,
+        105.8
+       ],
+       [
+        105.8,
+        106,
+        100.4,
+        100.9
+       ],
+       [
+        100.9,
+        103.6,
+        100.6,
+        103.3
+       ],
+       [
+        103.3,
+        105.6,
+        103,
+        105.2
+       ],
+       [
+        105.2,
+        105.4,
+        100.6,
+        101.1
+       ],
+       [
+        101.1,
+        102.6,
+        100.9,
+        102.2
+       ],
+       [
+        102.2,
+        103.2,
+        102,
+        103
+       ]
+      ],
+      "height": 100,
+      "extra": [
+       {
+        "price": 98
+       }
+      ],
+      "hlines": [
+       {
+        "price": 100,
+        "tone": "gold",
+        "label": "support $100",
+        "style": "below"
+       }
+      ],
+      "marks": [
+       {
+        "i": 9,
+        "price": 103,
+        "tone": "blue",
+        "label": "buy $103"
+       }
+      ],
+      "label": "Price bounces off $100 three times; you buy at $103"
+     }
+    },
+    "options": [
+     "$102.50, just under your entry",
+     "$100, right on support",
+     "$98, a little below the zone"
+    ],
+    "answer": 2,
+    "why": "Price often pokes into a support zone before it turns. A stop a little below the zone survives that noise; one on the line or just under your entry doesn’t.",
+    "work": "Entry $103 − stop $98 = $5 risk a share.",
+    "idea": "stop-beyond-zone",
+    "added": "Retry set written for the Academy"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "candle-body-close",
+   "title": "Lesson 1 · One candle, four prices",
+   "text": "The body runs from open to close; the wicks reach the high and the low. Green: the close is the top of the body. Red: the close is the bottom."
+  },
+  {
+   "idea": "doji",
+   "title": "Lesson 2 · Candles that tell a story",
+   "text": "A doji means open ≈ close: indecision. One candle is a clue, never a signal on its own, and where it appears matters."
+  },
+  {
+   "idea": "match-timeframe-to-hold",
+   "title": "Lesson 3 · Timeframes: same stock, different story",
+   "text": "Trade from the chart that matches your hold: hours → hourly, weeks → daily, months → weekly. Check one chart bigger first: it sets the trend."
+  },
+  {
+   "idea": "volume-confirms-breakout",
+   "title": "Lesson 4 · Volume: the crowd behind the move",
+   "text": "Volume = shares traded. A breakout on above-normal volume has more people behind it; one on half the usual volume is easier to reverse. Volume shows strength, not direction."
+  },
+  {
+   "idea": "stop-beyond-zone",
+   "title": "Lesson 5 · Support and resistance",
+   "text": "Support is a zone, not a line. Put the stop a little beyond it, not on it. Support near $40? A stop around $38, not $40."
+  }
+ ],
+ "next": "trends-patterns-indicators"
+}

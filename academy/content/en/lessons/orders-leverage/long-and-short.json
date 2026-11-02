@@ -1,0 +1,403 @@
+{
+ "id": "long-and-short",
+ "chapter": "orders-leverage",
+ "n": 2,
+ "title": "Long and short: profit both ways",
+ "minutes": 4,
+ "desc": "Making money from rises and from falls",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Opener on the p.13 short-selling idea; $80 → $70 numbers illustrative · Visual: Illustrative chart: tops at $86, rolls over to $80, forecast fall to $70",
+   "pose": "think",
+   "name": "The situation",
+   "title": "Profit from a fall?",
+   "situation": "It’s turning down at $80 and you think it will hit $70. You own none. Can you still make money?",
+   "visual": {
+    "kind": "candles",
+    "card": {
+     "sym": "ACME",
+     "name": "Acme Corp · daily",
+     "price": "$80.00",
+     "change": "−7% from the top",
+     "tone": "down"
+    },
+    "chart": {
+     "ohlc": [
+      [
+       75.99,
+       76.1,
+       75.88,
+       76.0
+      ],
+      [
+       75.82,
+       77.62,
+       75.81,
+       77.04
+      ],
+      [
+       77.06,
+       77.12,
+       77.0,
+       77.05
+      ],
+      [
+       77.12,
+       78.45,
+       77.0,
+       78.03
+      ],
+      [
+       77.94,
+       78.79,
+       77.73,
+       78.55
+      ],
+      [
+       78.58,
+       79.99,
+       78.32,
+       79.95
+      ],
+      [
+       79.81,
+       80.61,
+       79.42,
+       80.51
+      ],
+      [
+       80.48,
+       81.38,
+       80.37,
+       81.2
+      ],
+      [
+       81.12,
+       82.05,
+       80.96,
+       81.99
+      ],
+      [
+       82.13,
+       84.1,
+       82.04,
+       83.85
+      ],
+      [
+       83.68,
+       85.27,
+       83.41,
+       84.74
+      ],
+      [
+       84.78,
+       85.91,
+       84.53,
+       85.65
+      ],
+      [
+       85.54,
+       86.27,
+       85.54,
+       86.16
+      ],
+      [
+       85.98,
+       86.25,
+       85.48,
+       85.64
+      ],
+      [
+       85.61,
+       85.92,
+       84.82,
+       85.05
+      ],
+      [
+       85.07,
+       85.25,
+       83.04,
+       83.37
+      ],
+      [
+       83.21,
+       83.56,
+       83.08,
+       83.21
+      ],
+      [
+       83.13,
+       84.08,
+       81.52,
+       81.55
+      ],
+      [
+       81.63,
+       81.81,
+       80.53,
+       80.59
+      ],
+      [
+       80.63,
+       80.88,
+       79.93,
+       80.0
+      ]
+     ],
+     "height": 96,
+     "fmt": 0,
+     "ticks": 0,
+     "axis": true,
+     "lastTag": true,
+     "hlines": [
+      {
+       "price": 70,
+       "tone": "down",
+       "style": "left",
+       "label": "your forecast $70"
+      }
+     ],
+     "forecast": {
+      "dx": 6,
+      "to": 70,
+      "tone": "down"
+     },
+     "label": "A stock tops near $86, turns down to $80, with a forecast fall to $70"
+    }
+   },
+   "options": [
+    {
+     "text": "Only if I already own the stock",
+     "feedback": "You don’t need to own it. Your broker can lend you shares to sell now and buy back later. The real catch is the risk, which this lesson shows."
+    },
+    {
+     "text": "Yes: borrow shares, sell at $80, buy back at $70",
+     "feedback": "Your broker lends you shares. You sell them first, buy them back cheaper later, and return them. The difference is yours."
+    },
+    {
+     "text": "No: you only make money when prices rise",
+     "feedback": "Most beginners think this. But you can sell first and buy later. That’s called selling short, and it profits from a fall."
+    }
+   ],
+   "answer": 1,
+   "idea": "short-selling",
+   "work": "Sell borrowed share at $80 − buy it back at $70 = $10 gain a share."
+  },
+  {
+   "type": "learn",
+   "added": "Worked long/short example: (90−80)×100 = +$1,000 and (80−70)×100 = +$1,000",
+   "tag": "the names",
+   "title": "That’s going short",
+   "text": "**[[long|Going long]]** is the normal way: buy, then sell higher. **[[short|Going short]]** flips it: borrow shares from your broker, sell them now, buy them back cheaper and return them. Either way, profit = (sell − buy) × shares.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "columns",
+      "cols": [
+       {
+        "title": "LONG",
+        "tone": "up",
+        "rows": [
+         {
+          "label": "1 · buy",
+          "value": "$80"
+         },
+         {
+          "label": "2 · sell",
+          "value": "$90"
+         }
+        ],
+        "result": "+$1,000 on 100"
+       },
+       {
+        "title": "SHORT",
+        "tone": "up",
+        "rows": [
+         {
+          "label": "1 · sell",
+          "value": "$80"
+         },
+         {
+          "label": "2 · buy back",
+          "value": "$70"
+         }
+        ],
+        "result": "+$1,000 on 100"
+       }
+      ]
+     },
+     {
+      "kind": "stats",
+      "cols": 1,
+      "items": [
+       {
+        "text": "Shorting needs a margin account. While you’re short you pay a fee to borrow the shares, margin interest, and any dividend. Many beginner apps don’t allow it.",
+        "tone": "muted"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "type": "walkthrough",
+   "added": "Mirror-image slider interaction · Visual: Price slider drawn at $90: long +$1,000, short −$1,000 on 100 shares from $80",
+   "tag": "drag",
+   "title": "Mirror images",
+   "text": "Drag the price. You’re long 100 shares at $80 and your friend is short 100 at $80. Every dollar you gain, they lose, and the other way around.",
+   "visual": {
+    "kind": "slider",
+    "model": "longshort",
+    "value": 90,
+    "label": "drag",
+    "params": {
+     "min": 60,
+     "max": 100,
+     "step": 1,
+     "ticks": [
+      60,
+      70,
+      80,
+      90,
+      100
+     ],
+     "entry": 80,
+     "shares": 100,
+     "entryLabel": "entry $80",
+     "long": "YOU · LONG 100",
+     "short": "FRIEND · SHORT 100",
+     "foot": "At $70 it flips: long −$1,000, short +$1,000."
+    }
+   }
+  },
+  {
+   "type": "trap",
+   "added": "Worked numbers $40 → $80 → $120 added to the p.14 warning · Visual: Long vs short worst case from $40 (worked numbers added)",
+   "title": "The nasty twist: no ceiling",
+   "text": "Buy at $40 and the worst case is $0: you lose $40 a share, 100%. Short at $40 and the price can rise to $80 (−⁠$40) or $120 (−⁠$80) and keep going. In a **[[squeeze|squeeze]]**, heavily shorted stocks have doubled in days.",
+   "visual": {
+    "kind": "columns",
+    "cols": [
+     {
+      "title": "LONG",
+      "tone": "down",
+      "rows": [
+       {
+        "label": "$40 entry",
+        "value": "$40"
+       },
+       {
+        "label": "$0 floor",
+        "value": "worst: −$40",
+        "tone": "down"
+       }
+      ]
+     },
+     {
+      "title": "SHORT",
+      "tone": "down",
+      "rows": [
+       {
+        "label": "$40 entry",
+        "value": "$40"
+       },
+       {
+        "label": "$80",
+        "value": "−$40",
+        "tone": "down"
+       },
+       {
+        "label": "$120",
+        "value": "−$80",
+        "tone": "down"
+       }
+      ],
+      "result": "no ceiling"
+     }
+    ]
+   },
+   "rule": "shorting is for experienced traders, with small size and tight stops.",
+   "line": "A short can lose more than you put in."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "added": "Worked short-loss example: ($40 − $46) × 50 = −$300",
+   "name": "Short squeeze",
+   "title": "The short goes wrong",
+   "q": "You short 50 shares at $40. The price rises to $46. What’s your result so far?",
+   "idea": "short-pnl",
+   "fields": [
+    {
+     "label": "Shorted",
+     "value": "50"
+    },
+    {
+     "label": "Sold at",
+     "value": "$40"
+    },
+    {
+     "label": "Now",
+     "value": "$46"
+    }
+   ],
+   "options": [
+    {
+     "text": "+$300",
+     "feedback": "The size is right, but the sign is wrong. A short wins when the price falls. Here the price rose, so the same amount is a loss."
+    },
+    {
+     "text": "−$46",
+     "feedback": "$46 is the current price, not the result. What counts is how far the price moved from where you sold, times your shares."
+    },
+    {
+     "text": "−$300",
+     "feedback": "You sold first, so you must buy back. The price is now higher than where you sold, so buying back costs more than you got."
+    },
+    {
+     "text": "$0, until I close it",
+     "feedback": "Not closing doesn’t stop the loss. If you bought back right now, you’d pay more than you sold for. That loss is real today."
+    }
+   ],
+   "answer": 2,
+   "work": "Sold at $40 − buy back at $46 = $6 loss a share. $6 loss × 50 shares = $300 loss."
+  },
+  {
+   "type": "check",
+   "title": "Why is shorting riskier?",
+   "q": "Why can shorting be riskier than buying?",
+   "options": [
+    {
+     "text": "You can’t use stop-losses on shorts",
+     "feedback": "You can, and you should. A buy stop above your short entry closes it if the price rises (Lesson 1)."
+    },
+    {
+     "text": "Shorts can only be held for one day",
+     "feedback": "There’s no such rule. You can hold a short for days or longer."
+    },
+    {
+     "text": "A short’s potential loss is unlimited",
+     "feedback": "A price can only fall to $0, but it can rise without limit. So a short’s loss has no ceiling."
+    },
+    {
+     "text": "Shorts have higher commissions",
+     "feedback": "Shorts do carry extra costs: borrow fees, margin interest and any dividends you owe. But the real danger is the price rising: $40 → $120 loses $80 a share."
+    }
+   ],
+   "answer": 2,
+   "idea": "short-unlimited-loss",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can profit from a fall, and you know the risk.",
+   "lines": [
+    "Long: buy, then sell higher.",
+    "Short: borrow and sell first, buy back lower.",
+    "A short’s loss has no ceiling. Keep the size small and set a stop."
+   ]
+  }
+ ]
+}

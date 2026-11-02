@@ -1,0 +1,318 @@
+{
+ "id": "overnight-gamble",
+ "chapter": "orders-leverage",
+ "n": 5,
+ "title": "The overnight gamble",
+ "minutes": 5,
+ "desc": "Why size, not the stop, protects you from gaps",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Common-sense opener on the p.73 gap explanation · Visual: Timeline: close $50 at 4 pm, news at 11 pm, open at 9:30 am",
+   "pose": "worried2",
+   "name": "After hours",
+   "title": "Closed for the night",
+   "situation": "You own a stock. It closes at $50 at 4 pm. At 11 pm, bad news comes out. Your broker trades regular hours only, 9:30 am to 4 pm. When can you sell?",
+   "visual": {
+    "kind": "timeline",
+    "points": [
+     {
+      "label": "4 pm",
+      "sub": "closes $50",
+      "tone": "white"
+     },
+     {
+      "label": "11 pm",
+      "sub": "bad news",
+      "tone": "down"
+     },
+     {
+      "label": "9:30 am",
+      "sub": "opens ?",
+      "tone": "gold"
+     }
+    ],
+    "badge": {
+     "text": "REGULAR HOURS CLOSED",
+     "tone": "down",
+     "from": 0,
+     "to": 2
+    }
+   },
+   "options": [
+    {
+     "text": "In the morning, at yesterday’s $50",
+     "feedback": "It feels like the last price still holds. But after bad news, buyers set a new, lower price at the open."
+    },
+    {
+     "text": "At the open, at whatever buyers pay",
+     "feedback": "Few people trade overnight, and your broker waits for the regular session. The first price you get is whatever buyers will pay at the open, often far below the close."
+    },
+    {
+     "text": "Right away at 11 pm, at $50",
+     "feedback": "It feels like you can act the moment news comes out. But your broker only trades regular hours, so you can’t sell until the open."
+    }
+   ],
+   "answer": 1,
+   "idea": "overnight-gap",
+   "work": "Closed at $50 − first trade at $45 = $5 loss a share."
+  },
+  {
+   "type": "learn",
+   "added": "Illustrative gap: close $50, stop $48, open $45 (book p.73 explains gaps jumping stops in words)",
+   "tag": "gaps",
+   "title": "The gap that jumps your stop",
+   "text": "That overnight jump is a **[[gap|gap]]**. A stop only becomes a market order once the price trades at your level. Your stop is at $48, but the first regular-hours trade is $45. So you’re filled near $45, not $48. The stop can’t stop a gap.",
+   "visual": {
+    "kind": "candles",
+    "chart": {
+     "ohlc": [
+      [
+       48.55,
+       48.75,
+       48.51,
+       48.72
+      ],
+      [
+       48.72,
+       48.81,
+       48.48,
+       48.61
+      ],
+      [
+       48.61,
+       49.0,
+       48.57,
+       48.95
+      ],
+      [
+       48.95,
+       49.16,
+       48.81,
+       49.1
+      ],
+      [
+       49.1,
+       49.15,
+       48.84,
+       48.98
+      ],
+      [
+       48.98,
+       49.45,
+       48.93,
+       49.32
+      ],
+      [
+       49.32,
+       49.66,
+       49.22,
+       49.55
+      ],
+      [
+       49.55,
+       49.64,
+       49.23,
+       49.41
+      ],
+      [
+       49.41,
+       49.74,
+       49.38,
+       49.7
+      ],
+      [
+       49.7,
+       49.87,
+       49.53,
+       49.62
+      ],
+      [
+       49.62,
+       49.87,
+       49.54,
+       49.81
+      ],
+      [
+       49.81,
+       50.08,
+       49.64,
+       50.0
+      ],
+      [
+       45.0,
+       45.6,
+       44.3,
+       44.8
+      ],
+      [
+       44.8,
+       45.9,
+       44.5,
+       45.4
+      ]
+     ],
+     "height": 180,
+     "fmt": 0,
+     "ticks": 3,
+     "axis": true,
+     "lastTag": false,
+     "marks": [
+      {
+       "i": 11,
+       "price": 50.0,
+       "tone": "white",
+       "label": "close $50"
+      },
+      {
+       "i": 12,
+       "price": 45.0,
+       "tone": "down",
+       "label": "opens $45"
+      }
+     ],
+     "hlines": [
+      {
+       "price": 48,
+       "tone": "down",
+       "style": "pill",
+       "label": "your stop $48"
+      }
+     ],
+     "label": "Closes at $50, then opens at $45 the next morning, below a stop at $48"
+    },
+    "foot": "Overnight gap: no trades between $50 and $45. Filled near {down}$45{/down}, not $48."
+   }
+  },
+  {
+   "type": "walkthrough",
+   "added": "Size slider interaction with worked numbers · Visual: Size slider drawn at $5,000 with the $500 and $50,000 stops (worked numbers added)",
+   "tag": "drag",
+   "title": "Size decides the damage",
+   "text": "Same gap, $50 → $45, a −10% move. Your account: $5,000. Drag your position size and watch what the same gap costs you.",
+   "visual": {
+    "kind": "slider",
+    "model": "size",
+    "value": 5000,
+    "label": "SAME GAP $50 → $45 (−10%) · ACCOUNT $5,000",
+    "params": {
+     "account": 5000,
+     "gapPct": -10,
+     "stops": [
+      {
+       "value": 500,
+       "label": "$500",
+       "loss": "−$50",
+       "note": "1% of account",
+       "tone": "muted"
+      },
+      {
+       "value": 5000,
+       "label": "$5,000",
+       "loss": "−$500",
+       "note": "10% of account",
+       "tone": "amber"
+      },
+      {
+       "value": 50000,
+       "label": "$50,000 at 10×",
+       "loss": "−$5,000",
+       "note": "100%: wiped out",
+       "tone": "down"
+      }
+     ],
+     "foot": "You can’t stop a gap. You can choose your size."
+    }
+   }
+  },
+  {
+   "type": "pro",
+   "added": "Worked numbers ($50, $625) added from the p.73 answer · Visual: Three-step sizing strip: budget $50 → gap 8% → size $625",
+   "title": "Think in risk, not in leverage",
+   "text": "Pros don’t ask “how much leverage?” They ask “if this goes wrong, **how much of my account do I lose?**” Pick a budget first: 1% of $5,000 = $50. Then size for a bad gap, not a normal one. Earnings gaps of 20% happen: $50 ÷ 0.20 = $250.",
+   "visual": {
+    "kind": "flow",
+    "items": [
+     {
+      "top": "Budget 1%",
+      "value": "$50",
+      "tone": "gold"
+     },
+     {
+      "top": "Bad gap",
+      "value": "20%",
+      "tone": "white"
+     },
+     {
+      "top": "Size",
+      "value": "$250",
+      "tone": "up"
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "name": "Overnight gamble",
+   "title": "Earnings tonight",
+   "q": "You have $5,000. A friend says a stock will “definitely” jump after [[earnings|earnings]] tonight (the company’s results, a big-move day). Your broker offers 20×. The stock can gap 20% on earnings day. What do you do?",
+   "idea": "size-for-the-gap",
+   "options": [
+    {
+     "text": "$5,000 position, no leverage",
+     "feedback": "No leverage helps, but a 20% gap the wrong way still costs $1,000, a fifth of your account in one night."
+    },
+    {
+     "text": "$250 position, 1% at risk if it gaps 20%",
+     "feedback": "A gap can jump past a stop, so size is your real protection: a 20% gap on $250 costs $50. A friend’s “definitely” isn’t a plan."
+    },
+    {
+     "text": "$100,000 position at 20×",
+     "feedback": "A “sure thing” makes big leverage tempting. But a 20% gap the wrong way loses far more than your account."
+    },
+    {
+     "text": "$25,000 position at 5×",
+     "feedback": "Less reckless, but a 20% gap the wrong way costs $5,000: your whole account in one night."
+    }
+   ],
+   "answer": 1,
+   "work": "20× = $100,000. A 20% gap = $20,000 loss, 4× your $5,000. Safer: $50 ÷ 20% = $250."
+  },
+  {
+   "type": "check",
+   "title": "Your real protection",
+   "q": "Why is position size, not a stop-loss, your real protection against an overnight earnings gap?",
+   "options": [
+    {
+     "text": "A stop guarantees your price",
+     "feedback": "It doesn’t. A stop becomes a market order, so after a gap it fills at the opening price, which may be far past your level."
+    },
+    {
+     "text": "Brokers cancel stops before earnings",
+     "feedback": "Brokers don’t cancel stops. The problem is the gap: the price jumps past your stop overnight."
+    },
+    {
+     "text": "A stop makes the gap bigger",
+     "feedback": "Stops don’t cause gaps. News does. A stop just can’t control the price you get after a gap."
+    },
+    {
+     "text": "A gap can jump the stop; small size limits the hit",
+     "feedback": "If the stock opens far below your stop, the stop fills at the open, not at your level. Only a small position keeps that loss small."
+    }
+   ],
+   "answer": 3,
+   "idea": "size-beats-stop-on-gaps",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can size a trade so one bad night can’t knock you out.",
+   "lines": [
+    "Overnight gaps jump straight past stops.",
+    "Size for a bad gap: risk ÷ gap size.",
+    "Small size, not a stop, is your real protection."
+   ]
+  }
+ ]
+}

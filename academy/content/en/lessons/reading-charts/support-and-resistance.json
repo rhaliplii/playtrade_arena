@@ -1,0 +1,363 @@
+{
+ "id": "support-and-resistance",
+ "chapter": "reading-charts",
+ "n": 5,
+ "title": "Support and resistance: where price pauses",
+ "minutes": 5,
+ "desc": "Floors, ceilings and where to put your stop",
+ "cards": [
+  {
+   "type": "call",
+   "title": "The third visit",
+   "situation": "This stock bounced off $40 three times this year. Now it’s falling toward $40 again. What often happens?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily · this year",
+    "chart": {
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "ohlc": [
+      [
+       44.5,
+       45.2,
+       43.8,
+       44
+      ],
+      [
+       44,
+       44.3,
+       40.4,
+       41
+      ],
+      [
+       41,
+       43.4,
+       40.8,
+       43
+      ],
+      [
+       43,
+       45.6,
+       42.8,
+       45.2
+      ],
+      [
+       45.2,
+       45.4,
+       40.3,
+       41.2
+      ],
+      [
+       41.2,
+       42,
+       40.5,
+       41.6
+      ],
+      [
+       41.6,
+       44.8,
+       41.4,
+       44.5
+      ],
+      [
+       44.5,
+       45,
+       40.6,
+       41.4
+      ],
+      [
+       41.4,
+       46.2,
+       41.2,
+       45.8
+      ],
+      [
+       45.8,
+       46,
+       43.4,
+       43.6
+      ],
+      [
+       43.6,
+       43.8,
+       42,
+       42.2
+      ]
+     ],
+     "height": 110,
+     "extra": [
+      {
+       "price": 39.5
+      }
+     ],
+     "hlines": [
+      {
+       "price": 40,
+       "tone": "up",
+       "label": "support $40",
+       "style": "text"
+      }
+     ],
+     "label": "Price bounces off $40 three times and is falling toward it again"
+    }
+   },
+   "options": [
+    {
+     "text": "It falls straight through",
+     "feedback": "It can break, but many traders remember $40 and buy there again."
+    },
+    {
+     "text": "Buyers often step in again near $40",
+     "feedback": "Buyers stepped in at $40 before, so many watch it again. That’s [[support|support]]."
+    },
+    {
+     "text": "Trading stops at $40",
+     "feedback": "Trading never stops at a price level. $40 is just where buyers stepped in before, so many watch it again."
+    }
+   ],
+   "answer": 1,
+   "idea": "support-level",
+   "work": "Bounced near $40 in March, May and July."
+  },
+  {
+   "type": "learn",
+   "title": "Floors and ceilings",
+   "text": "**[[support|Support]]** is a level where buyers stepped in before: a floor. **[[resistance|Resistance]]** is where sellers stepped in: a ceiling.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "candles",
+      "title": "Daily",
+      "chart": {
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "path": [
+        [
+         0,
+         44
+        ],
+        [
+         2,
+         40.6
+        ],
+        [
+         4,
+         47.6
+        ],
+        [
+         6,
+         40.4
+        ],
+        [
+         8,
+         47.8
+        ],
+        [
+         10,
+         41
+        ],
+        [
+         11,
+         44
+        ]
+       ],
+       "seed": 8,
+       "height": 110,
+       "hlines": [
+        {
+         "price": 48,
+         "tone": "down",
+         "label": "resistance"
+        },
+        {
+         "price": 40,
+         "tone": "up",
+         "label": "support",
+         "style": "below"
+        }
+       ],
+       "label": "Price swings between support at $40 and resistance at $48"
+      }
+     }
+    },
+    {
+     "tip": "They’re zones, not exact lines. Price often pokes a little through before turning."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "When a floor breaks",
+   "text": "Support at $40 breaks and price falls to $35. Later it climbs back to $40, and stalls there.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "chart": {
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "ohlc": [
+      [
+       43.4,
+       44.6,
+       42.6,
+       42.9
+      ],
+      [
+       42.9,
+       43.1,
+       40.6,
+       41
+      ],
+      [
+       41,
+       41.4,
+       36.6,
+       37.2
+      ],
+      [
+       37.2,
+       37.6,
+       35,
+       35.6
+      ],
+      [
+       35.6,
+       37.8,
+       35.3,
+       37.5
+      ],
+      [
+       37.5,
+       40.2,
+       37.2,
+       39.8
+      ],
+      [
+       39.8,
+       40.3,
+       38.6,
+       39
+      ]
+     ],
+     "height": 110,
+     "hlines": [
+      {
+       "price": 40,
+       "tone": "gold",
+       "label": "old floor = new ceiling",
+       "style": "text"
+      }
+     ],
+     "marks": [
+      {
+       "i": 3,
+       "price": 35,
+       "tone": "down"
+      }
+     ],
+     "label": "Support at $40 breaks, price falls to $35, climbs back to $40 and stalls"
+    }
+   },
+   "foot": "Broken support often turns into resistance. The buyers who got trapped at $40 sell to get out even.",
+   "footTone": "gold"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "title": "Plan with levels",
+   "text": "Levels don’t predict. They help you plan: where you’re wrong, and where you might take profit.",
+   "visual": {
+    "kind": "rows",
+    "style": "levels",
+    "rows": [
+     {
+      "label": "Target · near resistance",
+      "value": "$48",
+      "tone": "up"
+     },
+     {
+      "label": "Entry · just above support",
+      "value": "$41",
+      "tone": "blue"
+     },
+     {
+      "label": "Stop · below the zone",
+      "value": "$38",
+      "tone": "down"
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "Risk $3 a share to make $7. Decide it before you buy.",
+     "tone": "green"
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Place the stop",
+   "q": "You buy at $41, just above support at $40. Where should your stop-loss go?",
+   "idea": "stop-beyond-zone",
+   "options": [
+    {
+     "text": "$40.90, right on the line",
+     "feedback": "Price often dips into a zone before it turns. A stop right on the line gets hit by normal noise."
+    },
+    {
+     "text": "$38, a little below the zone",
+     "feedback": "A little below the whole zone, a normal dip into support won’t stop you out, and you know your risk."
+    },
+    {
+     "text": "$45, above the entry",
+     "feedback": "A stop above your entry would sell as soon as you buy. A stop-loss for a buy goes below the price."
+    },
+    {
+     "text": "No stop: support will hold",
+     "feedback": "Support can break. Without a stop, one bad break can cost far more than $3 a share."
+    }
+   ],
+   "answer": 1,
+   "work": "Entry $41 − stop $38 = $3 risk a share."
+  },
+  {
+   "type": "check",
+   "title": "Old floor",
+   "q": "Support at $40 broke and price fell to $35. Now it’s rising back to $40. What might $40 act as now?",
+   "options": [
+    {
+     "text": "Support",
+     "feedback": "Once a floor breaks, it often becomes a ceiling. Sellers wait there."
+    },
+    {
+     "text": "Resistance",
+     "feedback": "Broken support often turns into resistance: buyers trapped at $40 sell there to get out even."
+    },
+    {
+     "text": "Nothing",
+     "feedback": "$40 still matters: many traders remember it. Once a floor breaks, it often becomes a ceiling."
+    },
+    {
+     "text": "A buy signal",
+     "feedback": "Price rising into an old floor is no buy signal. Traders trapped at $40 often wait there to sell."
+    }
+   ],
+   "answer": 1,
+   "idea": "broken-support-resistance"
+  },
+  {
+   "type": "keep",
+   "headline": "You can find where price might pause.",
+   "lines": [
+    "Support is a floor, resistance a ceiling. Both are zones.",
+    "Broken support often becomes resistance.",
+    "Stops go a little beyond the zone, not on it."
+   ]
+  }
+ ]
+}

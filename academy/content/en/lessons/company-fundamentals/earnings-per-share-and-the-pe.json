@@ -1,0 +1,255 @@
+{
+ "id": "earnings-per-share-and-the-pe",
+ "chapter": "company-fundamentals",
+ "n": 3,
+ "title": "Earnings per share and the P/E",
+ "minutes": 5,
+ "desc": "EPS, the P/E, and what a high P/E says about buyers’ hopes",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Same price, different bet",
+   "situation": "Acme and Northwind both trade at $50 a share. Acme earns $5 a share each year. Northwind earns $1. Which one are buyers expecting more growth from?",
+   "visual": {
+    "kind": "stats",
+    "items": [
+     {
+      "label": "Acme",
+      "value": "$50",
+      "sub": "earns $5 a share"
+     },
+     {
+      "label": "Northwind",
+      "value": "$50",
+      "sub": "earns $1 a share"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Acme: it earns more per share",
+     "feedback": "Acme earns more today, so buyers pay only 10 years of its profit. High hopes show up as a high price for each $1 of profit."
+    },
+    {
+     "text": "Northwind: they pay $50 for $1 of profit",
+     "feedback": "Buyers pay 50 years of today’s profit for Northwind. They expect big growth."
+    },
+    {
+     "text": "Neither: same price, same hopes",
+     "feedback": "Same price, very different profit. Paying $50 for $1 of profit only makes sense if buyers expect it to grow a lot."
+    }
+   ],
+   "answer": 1,
+   "idea": "pe-ratio",
+   "work": "Acme: $50 ÷ $5 = P/E 10. Northwind: $50 ÷ $1 = P/E 50."
+  },
+  {
+   "type": "learn",
+   "title": "Two numbers, two divisions",
+   "text": "**[[eps|EPS]]**, earnings per share, is profit ÷ shares. The **[[pe-ratio|P/E]]** is price ÷ EPS: how many dollars buyers pay for $1 of yearly profit.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Acme profit",
+      "value": "$10M"
+     },
+     {
+      "label": "÷ shares",
+      "value": "2M"
+     },
+     {
+      "label": "= EPS",
+      "value": "$5 a share",
+      "tone": "up"
+     },
+     {
+      "label": "Share price",
+      "value": "$50"
+     },
+     {
+      "label": "P/E = $50 ÷ $5",
+      "value": "10",
+      "tone": "gold",
+      "strong": true
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "P/E 10 means buyers pay $10 for each $1 the company earns in a year."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "added": "Tap notes written for the Academy (what each P/E means)",
+   "tag": "tap a bar",
+   "title": "High P/E = high hopes",
+   "text": "A high P/E isn’t “expensive” by itself. It tells you how much growth buyers already expect.",
+   "visual": {
+    "kind": "barchart",
+    "title": "P/E · three companies",
+    "aside": "price ÷ EPS",
+    "label": "P/E 12 for Steady Power, 20 for Acme, 50 for Northwind",
+    "groups": [
+     {
+      "label": "Steady Power",
+      "sub": "slow, steady",
+      "values": [
+       12
+      ],
+      "displays": [
+       "12"
+      ],
+      "tones": [
+       "gold"
+      ],
+      "note": "Buyers pay $12 for each $1 of profit: they expect slow, steady growth."
+     },
+     {
+      "label": "Acme",
+      "sub": "some growth",
+      "values": [
+       20
+      ],
+      "displays": [
+       "20"
+      ],
+      "tones": [
+       "gold"
+      ],
+      "note": "$20 for each $1 of profit: buyers expect some growth."
+     },
+     {
+      "label": "Northwind",
+      "sub": "fast growth hoped",
+      "values": [
+       50
+      ],
+      "displays": [
+       "50"
+      ],
+      "tones": [
+       "gold"
+      ],
+      "note": "$50 for each $1 of profit: buyers hope for fast growth."
+     }
+    ]
+   },
+   "foot": "If Northwind’s growth slows, buyers may pay less for each $1 of profit. A high-P/E stock can fall hard on small disappointments.",
+   "footTone": "gold"
+  },
+  {
+   "type": "pro",
+   "tag": "Rico’s rule",
+   "rico": true,
+   "title": "Compare like with like",
+   "text": "A P/E means little alone. Compare it with **similar companies** and with the company’s **own past**.",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Northwind today",
+      "value": "P/E 50"
+     },
+     {
+      "label": "Similar firms, average",
+      "value": "P/E 40"
+     },
+     {
+      "label": "Northwind, 5-year average",
+      "value": "P/E 55"
+     },
+     {
+      "label": "No profit, a loss",
+      "value": "No P/E",
+      "tone": "down"
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Find the P/E",
+   "q": "Acme made $20M profit and has 10M shares. The share price is $40. What’s its P/E?",
+   "idea": "eps-and-pe",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Profit",
+      "value": "$20M"
+     },
+     {
+      "label": "Shares",
+      "value": "10M"
+     },
+     {
+      "label": "Price",
+      "value": "$40"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "2",
+     "feedback": "2 is the EPS, $2 a share. The P/E divides the price by it."
+    },
+    {
+     "text": "20",
+     "feedback": "First EPS: $2 a share. Then the price ÷ EPS: buyers pay $20 for each $1 of yearly profit."
+    },
+    {
+     "text": "0.5",
+     "feedback": "That divides the wrong numbers. First EPS = profit ÷ shares, then P/E = price ÷ EPS."
+    },
+    {
+     "text": "800",
+     "feedback": "That multiplies the price by the profit. First EPS = profit ÷ shares, then P/E = price ÷ EPS."
+    }
+   ],
+   "answer": 1,
+   "work": "$20M ÷ 10M = $2 EPS. $40 ÷ $2 = P/E 20."
+  },
+  {
+   "type": "check",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "A P/E of 80",
+   "q": "Beta’s P/E is 80. Similar firms sit near 20. What does that tell you?",
+   "options": [
+    {
+     "text": "It’s overpriced: avoid it",
+     "feedback": "A high P/E isn’t a verdict. It shows big expectations, which is also a risk if growth disappoints."
+    },
+    {
+     "text": "Buyers expect much faster profit growth",
+     "feedback": "Buyers pay $80 for each $1 of profit, four times what similar firms get. That’s big hopes, and a risk if growth disappoints."
+    },
+    {
+     "text": "It keeps 80% of its sales",
+     "feedback": "That would be a margin. The P/E is price ÷ EPS: dollars paid for $1 of yearly profit."
+    },
+    {
+     "text": "It will rise 80% this year",
+     "feedback": "A P/E doesn’t forecast the price. It shows how much buyers pay for $1 of profit today."
+    }
+   ],
+   "answer": 1,
+   "idea": "high-pe-expectations",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can read EPS and the P/E.",
+   "lines": [
+    "EPS = profit ÷ shares.",
+    "P/E = price ÷ EPS.",
+    "A high P/E means high expectations, not “expensive” by itself."
+   ]
+  }
+ ]
+}

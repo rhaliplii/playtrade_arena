@@ -1,0 +1,323 @@
+{
+ "id": "company-fundamentals",
+ "path": "learn-to-trade",
+ "n": 7,
+ "title": "Company Fundamentals",
+ "short": "Companies",
+ "promise": "Charts show how a stock moves. Fundamentals tell you what the business is actually worth.",
+ "minutes": 25,
+ "pages": "48–52",
+ "unlock": [
+  "Know what you really own when you buy a share",
+  "Tell sales from profit, and read a margin",
+  "Work out EPS and the P/E, and what a high P/E expects",
+  "Check that profit turns into cash, and what debt does in a bad year",
+  "Read an earnings report in five minutes"
+ ],
+ "terms": [
+  "share",
+  "dividend",
+  "market-cap",
+  "revenue",
+  "profit",
+  "profit-margin",
+  "eps",
+  "pe-ratio",
+  "cash-flow",
+  "earnings",
+  "earnings-estimate",
+  "guidance",
+  "gap"
+ ],
+ "lessons": [
+  "what-a-share-really-is",
+  "revenue-profit-and-margins",
+  "earnings-per-share-and-the-pe",
+  "debt-and-cash-flow",
+  "reading-an-earnings-report-in-5-minutes"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "A company is split into 10,000,000 shares. You own 100,000 of them. What do you own?",
+    "options": [
+     "1% of the company",
+     "A loan you get back with interest",
+     "10% of the company"
+    ],
+    "answer": 0,
+    "why": "A share is a slice of ownership, not a loan. 100,000 slices out of 10,000,000 is one slice in every 100.",
+    "work": "100,000 ÷ 10,000,000 = 1% of the company.",
+    "idea": "share-is-ownership",
+    "added": "New situation written for the Academy · Feedback line written for the Academy (the board shows only Q2’s)"
+   },
+   {
+    "lesson": 2,
+    "q": "Acme’s revenue grew from $80M to $100M. Profit stayed at $8M. What happened to its margin?",
+    "options": [
+     "It rose: sales grew",
+     "It stayed at 10%",
+     "It fell from 10% to 8%"
+    ],
+    "answer": 2,
+    "why": "Margin is profit ÷ revenue. The same profit on more sales means each dollar keeps less.",
+    "work": "Before: $8M ÷ $80M = 10%. Now: $8M ÷ $100M = 8%.",
+    "idea": "profit-margin",
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "barchart",
+     "title": "Acme · yearly",
+     "label": "Revenue $80M then $100M; profit $8M both years",
+     "series": [
+      {
+       "label": "Revenue",
+       "tone": "blue"
+      },
+      {
+       "label": "Profit",
+       "tone": "gold"
+      }
+     ],
+     "groups": [
+      {
+       "label": "Last year",
+       "values": [
+        80,
+        8
+       ],
+       "displays": [
+        "$80M",
+        "$8M"
+       ]
+      },
+      {
+       "label": "This year",
+       "values": [
+        100,
+        8
+       ],
+       "displays": [
+        "$100M",
+        "$8M"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "lesson": 3,
+    "q": "Northwind trades at $60 a share. Its EPS is $3. What is its P/E, and what does it mean?",
+    "options": [
+     "180: it’s far too expensive",
+     "20: buyers pay $20 for each $1 of yearly profit",
+     "3: it keeps 3% of its sales"
+    ],
+    "answer": 1,
+    "why": "P/E is price ÷ EPS: how many dollars buyers pay for $1 of yearly profit. It isn’t a verdict and it isn’t a margin.",
+    "work": "$60 ÷ $3 = P/E 20.",
+    "idea": "pe-ratio",
+    "added": "New situation written for the Academy · Feedback line written for the Academy (the board shows only Q2’s)"
+   },
+   {
+    "lesson": 4,
+    "q": "Both firms earn $10M before interest. Acme has no debt. Northwind pays $9M interest a year. Next year both earn only $5M before interest. Who is in trouble?",
+    "options": [
+     "Acme: it has no loan to fall back on",
+     "Northwind: its interest is bigger than its earnings",
+     "Neither: both still earn $5M"
+    ],
+    "answer": 1,
+    "why": "Interest costs the same in a bad year. Northwind’s $9M bill is bigger than its $5M of earnings. Acme keeps all of its $5M.",
+    "work": "Northwind: $5M − $9M = −$4M. Acme: $5M − $0 = $5M.",
+    "idea": "debt-in-bad-year",
+    "added": "New situation written for the Academy · Feedback line written for the Academy (the board shows only Q2’s)"
+   },
+   {
+    "lesson": 5,
+    "q": "Analysts expected EPS of $0.80. Acme reports $0.90, but cuts its guidance for next year. The price falls. Why?",
+    "options": [
+     "The EPS beat was too small",
+     "The market weighs the future: the guidance cut",
+     "Prices always fall after earnings"
+    ],
+    "answer": 1,
+    "why": "EPS beat what was expected, but the price moves most on what’s next. A guidance cut says next year looks weaker.",
+    "work": "Reported $0.90 − expected $0.80 = a $0.10 beat. Guidance: cut.",
+    "idea": "guidance-matters",
+    "added": "New situation written for the Academy · Feedback line written for the Academy (the board shows only Q2’s)",
+    "visual": {
+     "kind": "barchart",
+     "title": "Acme · quarterly EPS",
+     "aside": "Guidance ↓",
+     "asideTone": "down",
+     "label": "Expected EPS $0.80, reported $0.90; guidance cut",
+     "groups": [
+      {
+       "label": "Expected",
+       "values": [
+        0.8
+       ],
+       "displays": [
+        "$0.80"
+       ],
+       "tones": [
+        "muted"
+       ]
+      },
+      {
+       "label": "Reported",
+       "values": [
+        0.9
+       ],
+       "displays": [
+        "$0.90"
+       ],
+       "tones": [
+        "up"
+       ]
+      }
+     ]
+    }
+   }
+  ],
+  "retry": [
+   {
+    "lesson": 1,
+    "q": "A company has 1,000 shares. You own 50 of them. What do you own?",
+    "options": [
+     "5% of the company",
+     "A loan the company pays back",
+     "50% of the company"
+    ],
+    "answer": 0,
+    "why": "A share is a slice of ownership, not a loan. 50 slices out of 1,000 is 5 in every 100.",
+    "work": "50 ÷ 1,000 = 5% of the company.",
+    "idea": "share-is-ownership",
+    "added": "Retry question written for the Academy (the boards show only “Retry with new questions”)"
+   },
+   {
+    "lesson": 2,
+    "q": "Northwind’s revenue fell from $200M to $160M. Profit stayed at $16M. What happened to its margin?",
+    "options": [
+     "It fell: sales fell",
+     "It rose from 8% to 10%",
+     "It stayed at 8%"
+    ],
+    "answer": 1,
+    "why": "Margin is profit ÷ revenue. The same profit on fewer sales means each dollar keeps more.",
+    "work": "Before: $16M ÷ $200M = 8%. Now: $16M ÷ $160M = 10%.",
+    "idea": "profit-margin",
+    "added": "Retry question written for the Academy (the boards show only “Retry with new questions”)",
+    "visual": {
+     "kind": "barchart",
+     "title": "Northwind · yearly",
+     "label": "Revenue $200M then $160M; profit $16M both years",
+     "series": [
+      {
+       "label": "Revenue",
+       "tone": "blue"
+      },
+      {
+       "label": "Profit",
+       "tone": "gold"
+      }
+     ],
+     "groups": [
+      {
+       "label": "Last year",
+       "values": [
+        200,
+        16
+       ],
+       "displays": [
+        "$200M",
+        "$16M"
+       ]
+      },
+      {
+       "label": "This year",
+       "values": [
+        160,
+        16
+       ],
+       "displays": [
+        "$160M",
+        "$16M"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "lesson": 3,
+    "q": "Acme trades at $45 a share. Its EPS is $1.50. What is its P/E, and what does it mean?",
+    "options": [
+     "30: buyers pay $30 for each $1 of yearly profit",
+     "67.5: it’s far too expensive",
+     "1.5: it keeps 1.5% of its sales"
+    ],
+    "answer": 0,
+    "why": "P/E is price ÷ EPS: how many dollars buyers pay for $1 of yearly profit. It isn’t a verdict and it isn’t a margin.",
+    "work": "$45 ÷ $1.50 = P/E 30.",
+    "idea": "pe-ratio",
+    "added": "Retry question written for the Academy (the boards show only “Retry with new questions”)"
+   },
+   {
+    "lesson": 4,
+    "q": "Northwind earns $12M before interest and pays $10M interest a year. Next year it earns only $7M before interest. What’s left?",
+    "options": [
+     "A $2M profit",
+     "A $3M loss",
+     "$7M: interest falls in bad years"
+    ],
+    "answer": 1,
+    "why": "Interest costs the same in a bad year. $7M of earnings can’t cover a $10M interest bill.",
+    "work": "$7M − $10M interest = −$3M. A normal year: $12M − $10M = $2M.",
+    "idea": "debt-in-bad-year",
+    "added": "Retry question written for the Academy (the boards show only “Retry with new questions”)"
+   },
+   {
+    "lesson": 5,
+    "q": "Northwind beats on revenue and on EPS, then cuts its sales forecast for next year. The price falls 7%. Which line moved it?",
+    "options": [
+     "Revenue",
+     "EPS",
+     "Guidance"
+    ],
+    "answer": 2,
+    "why": "Revenue and EPS both beat what was expected. The forecast cut was the bad surprise, and the market weighs the future most.",
+    "idea": "guidance-matters",
+    "added": "Retry question written for the Academy (the boards show only “Retry with new questions”)"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "share-is-ownership",
+   "title": "Lesson 1 · What a share really is",
+   "text": "A share is a slice of ownership, not a loan. Your shares ÷ all the shares = your slice: 5 of 100 is 5%. Price × all the shares = the company’s market value."
+  },
+  {
+   "idea": "profit-margin",
+   "title": "Lesson 2 · Revenue, profit and margins",
+   "text": "Margin = profit ÷ revenue. Sales can grow while each dollar keeps less. $8M profit on $100M of sales is an 8% margin, not 10%."
+  },
+  {
+   "idea": "pe-ratio",
+   "title": "Lesson 3 · Earnings per share and the P/E",
+   "text": "EPS = profit ÷ shares. P/E = price ÷ EPS: $50 ÷ $5 = 10, so buyers pay $10 for each $1 of yearly profit. A high P/E means high expectations."
+  },
+  {
+   "idea": "debt-in-bad-year",
+   "title": "Lesson 4 · Debt and cash flow",
+   "text": "Interest costs the same in good and bad years. Earn $9M with $12M of interest to pay and you make a $3M loss. And check that profit turns into cash."
+  },
+  {
+   "idea": "guidance-matters",
+   "title": "Lesson 5 · Reading an earnings report in 5 minutes",
+   "text": "Check revenue and EPS against what was expected, then the guidance. Price reacts to surprises, and the outlook for next year often matters most."
+  }
+ ],
+ "next": "markets-economy"
+}

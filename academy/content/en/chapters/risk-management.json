@@ -1,0 +1,500 @@
+{
+ "id": "risk-management",
+ "path": "learn-to-trade",
+ "n": 5,
+ "title": "Risk Management: The Real Edge",
+ "short": "Risk",
+ "promise": "The chapter that separates traders who last from traders who become cautionary tales.",
+ "minutes": 30,
+ "pages": "36–42",
+ "unlock": [
+  "Work out the gain you need to win back any loss",
+  "Use the 1% rule to survive a losing streak",
+  "Size any trade from your account, risk and stop",
+  "Put the stop where the chart proves you wrong",
+  "Pick trades with 2:1 reward-to-risk or better",
+  "Check if a strategy pays with expectancy"
+ ],
+ "terms": [
+  "one-percent-rule",
+  "position-size",
+  "stop-loss",
+  "reward-to-risk",
+  "win-rate",
+  "expectancy"
+ ],
+ "lessons": [
+  "math-that-ends-careers",
+  "one-percent-rule",
+  "position-sizing",
+  "where-to-put-the-stop",
+  "reward-to-risk",
+  "expectancy"
+ ],
+ "challenge": {
+  "questions": [
+   {
+    "lesson": 1,
+    "q": "Your account fell from $20,000 to $15,000, a 25% loss. What gain gets you back to $20,000?",
+    "visual": {
+     "kind": "barchart",
+     "title": "Your account",
+     "label": "Account before $20,000, now $15,000",
+     "groups": [
+      {
+       "label": "Before",
+       "values": [
+        20000
+       ],
+       "displays": [
+        "$20,000"
+       ],
+       "tones": [
+        "blue"
+       ]
+      },
+      {
+       "label": "Now",
+       "values": [
+        15000
+       ],
+       "displays": [
+        "$15,000"
+       ],
+       "tones": [
+        "down"
+       ]
+      }
+     ]
+    },
+    "options": [
+     "25%: the same as the loss",
+     "33%",
+     "50%"
+    ],
+    "answer": 1,
+    "why": "The gain works on the smaller $15,000. Winning back $5,000 on $15,000 takes about a third, more than the 25% you lost.",
+    "work": "$20,000 − $15,000 = $5,000. $5,000 ÷ $15,000 ≈ 33%.",
+    "idea": "half-loss-double-gain",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "Your account is $8,000 and you follow the 1% rule. What’s the most you should lose on one trade?",
+    "options": [
+     "$800",
+     "$8",
+     "$80"
+    ],
+    "answer": 2,
+    "why": "$800 is 10% of the account. A short losing streak at that size would wipe out most of it.",
+    "work": "$8,000 × 1% = $80 at most per trade.",
+    "idea": "one-percent-risk",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "$15,000 account, 1% risk. You buy at $25 with a stop at $22. How many shares should you buy?",
+    "visual": {
+     "kind": "candles",
+     "title": "Your trade plan",
+     "aside": "$15,000 · 1% risk",
+     "chart": {
+      "path": [
+       [
+        0,
+        23.1
+       ],
+       [
+        1,
+        23.6
+       ],
+       [
+        2,
+        23.3
+       ],
+       [
+        3,
+        24.0
+       ],
+       [
+        4,
+        23.8
+       ],
+       [
+        5,
+        24.5
+       ],
+       [
+        6,
+        24.3
+       ],
+       [
+        7,
+        25
+       ]
+      ],
+      "noise": 0.25,
+      "wick": 0.4,
+      "seed": 55,
+      "future": 6,
+      "height": 90,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 25,
+        "tone": "blue",
+        "label": "Entry $25",
+        "style": "text"
+       },
+       {
+        "price": 22,
+        "tone": "down",
+        "label": "Stop $22",
+        "style": "text"
+       }
+      ],
+      "label": "Price rises to an entry at $25, with a stop at $22"
+     }
+    },
+    "options": [
+     "600: all you can afford",
+     "50 shares",
+     "6 shares"
+    ],
+    "answer": 1,
+    "why": "Your risk is $150 and each share loses $3 at the stop. 600 shares would put $1,800 at risk: 12% of the account.",
+    "work": "$15,000 × 1% = $150. $25 − $22 = $3. $150 ÷ $3 = 50 shares.",
+    "idea": "position-size-formula",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "You buy at $120 after a pullback. The pullback low was $114. Where does your stop belong?",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily · 2 weeks",
+     "chart": {
+      "ohlc": [
+       [
+        106.0,
+        108.4,
+        105.4,
+        108.0
+       ],
+       [
+        108.0,
+        111.2,
+        107.6,
+        110.8
+       ],
+       [
+        110.8,
+        114.6,
+        110.4,
+        114.2
+       ],
+       [
+        114.2,
+        118.2,
+        113.8,
+        117.8
+       ],
+       [
+        117.8,
+        122.4,
+        117.4,
+        122.0
+       ],
+       [
+        122.0,
+        125.6,
+        121.6,
+        125.2
+       ],
+       [
+        125.2,
+        125.8,
+        121.4,
+        121.8
+       ],
+       [
+        121.8,
+        122.2,
+        117.6,
+        118.0
+       ],
+       [
+        118.0,
+        118.6,
+        114.0,
+        115.2
+       ],
+       [
+        115.2,
+        117.6,
+        114.6,
+        117.2
+       ],
+       [
+        117.2,
+        120.4,
+        116.8,
+        120.0
+       ]
+      ],
+      "height": 110,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 120,
+        "tone": "blue",
+        "label": "Buy $120",
+        "style": "text"
+       },
+       {
+        "price": 114,
+        "tone": "gold",
+        "label": "Low $114",
+        "style": "below"
+       }
+      ],
+      "label": "Rally to $125, pullback to a $114 low, then a turn up to $120"
+     }
+    },
+    "options": [
+     "$119: you hate big losses",
+     "A little below $114",
+     "$90: far away to be safe"
+    ],
+    "answer": 1,
+    "why": "The idea is proven wrong only if price breaks the pullback low. A stop $1 under the entry sits in the noise; one $30 away makes the size tiny.",
+    "idea": "stop-below-the-low",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Entry $40, stop $38. Which target gives a reward-to-risk of at least 2:1?",
+    "visual": {
+     "kind": "candles",
+     "title": "Your trade plan",
+     "chart": {
+      "path": [
+       [
+        0,
+        38.9
+       ],
+       [
+        1,
+        39.3
+       ],
+       [
+        2,
+        39.1
+       ],
+       [
+        3,
+        39.6
+       ],
+       [
+        4,
+        39.4
+       ],
+       [
+        5,
+        40
+       ]
+      ],
+      "noise": 0.25,
+      "wick": 0.4,
+      "seed": 55,
+      "future": 6,
+      "height": 170,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 44,
+        "tone": "muted",
+        "label": "$44",
+        "style": "text"
+       },
+       {
+        "price": 42,
+        "tone": "muted",
+        "label": "$42",
+        "style": "text"
+       },
+       {
+        "price": 41,
+        "tone": "muted",
+        "label": "$41",
+        "style": "text"
+       },
+       {
+        "price": 40,
+        "tone": "blue",
+        "label": "Entry $40",
+        "style": "text"
+       },
+       {
+        "price": 38,
+        "tone": "down",
+        "label": "Stop $38",
+        "style": "text"
+       }
+      ],
+      "label": "Entry $40, stop $38, possible targets $41, $42 and $44"
+     }
+    },
+    "options": [
+     "$41",
+     "$42",
+     "$44"
+    ],
+    "answer": 2,
+    "why": "You risk $2 a share, so 2:1 needs $4 of reward above the $40 entry. The lower targets pay only $1 or $2.",
+    "work": "$44 − $40 = $4. $40 − $38 = $2. $4 ÷ $2 = 2:1.",
+    "idea": "reward-to-risk-ratio",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 6,
+    "q": "You win 30% of trades. Average win $200, average loss $100. Does your strategy pay?",
+    "options": [
+     "Yes: about +$30 a trade",
+     "No: about −$10 a trade",
+     "Yes: the wins are twice the losses"
+    ],
+    "answer": 1,
+    "why": "Weight each result by how often it happens. You lose 7 trades in 10, and those losses outweigh the bigger wins.",
+    "work": "(0.3 × $200) − (0.7 × $100) = $60 − $70 = −$10 a trade.",
+    "idea": "expectancy-math",
+    "added": "New situation written for the Academy"
+   }
+  ],
+  "retry": [
+   {
+    "lesson": 1,
+    "q": "Your account drops from $40,000 to $30,000, a 25% loss. What gain gets you back to $40,000?",
+    "options": [
+     "25%: the same as the loss",
+     "10%",
+     "33%"
+    ],
+    "answer": 2,
+    "why": "The gain works on the smaller $30,000. Winning back $10,000 on $30,000 takes about a third.",
+    "work": "$40,000 − $30,000 = $10,000. $10,000 ÷ $30,000 ≈ 33%.",
+    "idea": "half-loss-double-gain",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 2,
+    "q": "Your account is $50,000 and you follow the 1% rule. What’s the most you should lose on one trade?",
+    "options": [
+     "$500",
+     "$5,000",
+     "$50"
+    ],
+    "answer": 0,
+    "why": "1% of $50,000. $5,000 would be 10% a trade, and $50 is only 0.1%.",
+    "work": "$50,000 × 1% = $500 at most per trade.",
+    "idea": "one-percent-risk",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 3,
+    "q": "$30,000 account, 1% risk. You buy at $60 with a stop at $57. How many shares should you buy?",
+    "options": [
+     "500: all you can afford",
+     "3 shares",
+     "100 shares"
+    ],
+    "answer": 2,
+    "why": "Your risk is $300 and each share loses $3 at the stop. 500 shares would put $1,500 at risk: 5% of the account.",
+    "work": "$30,000 × 1% = $300. $60 − $57 = $3. $300 ÷ $3 = 100 shares.",
+    "idea": "position-size-formula",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 4,
+    "q": "Support runs from $44 to $45. You buy at $47 after a bounce off it. Where does your stop belong?",
+    "options": [
+     "$46: close to your entry",
+     "A little below $44",
+     "$30: far away to be safe"
+    ],
+    "answer": 1,
+    "why": "Support fails only if price breaks the bottom of the zone. A stop above the zone gets hit by a normal dip; one far away makes the size tiny.",
+    "idea": "stop-below-the-low",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 5,
+    "q": "Entry $100, stop $96. Which target gives a reward-to-risk of at least 2:1?",
+    "options": [
+     "$104",
+     "$108",
+     "$102"
+    ],
+    "answer": 1,
+    "why": "You risk $4 a share, so 2:1 needs $8 of reward above the $100 entry.",
+    "work": "$108 − $100 = $8. $100 − $96 = $4. $8 ÷ $4 = 2:1.",
+    "idea": "reward-to-risk-ratio",
+    "added": "New situation written for the Academy"
+   },
+   {
+    "lesson": 6,
+    "q": "You win 60% of trades. Average win $100, average loss $200. Does your strategy pay?",
+    "options": [
+     "Yes: you win most of your trades",
+     "No: about −$20 a trade",
+     "Yes: about +$20 a trade"
+    ],
+    "answer": 1,
+    "why": "A high win rate can hide a losing strategy. Each loss is twice a win, and 4 losses in 10 outweigh 6 wins.",
+    "work": "(0.6 × $100) − (0.4 × $200) = $60 − $80 = −$20 a trade.",
+    "idea": "expectancy-math",
+    "added": "New situation written for the Academy"
+   }
+  ]
+ },
+ "refresher": [
+  {
+   "idea": "half-loss-double-gain",
+   "title": "Lesson 1 · The math that ends careers",
+   "text": "A loss leaves less money working for you, so the gain back is bigger: −25% needs +33%, −50% needs +100%. Work it out on the smaller account."
+  },
+  {
+   "idea": "one-percent-risk",
+   "title": "Lesson 2 · The 1% rule",
+   "text": "Risk at most 1–2% of the account on one trade. On $8,000 that’s $80 to $160, never $800."
+  },
+  {
+   "idea": "position-size-formula",
+   "title": "Lesson 3 · Position sizing in one formula",
+   "text": "Shares = (account × risk %) ÷ (entry − stop). $10,000 × 1% = $100. $50 − $48 = $2. $100 ÷ $2 = 50 shares."
+  },
+  {
+   "idea": "stop-below-the-low",
+   "title": "Lesson 4 · Where to put the stop",
+   "text": "Put the stop where the idea is proven wrong: just below the pullback low or the support zone. Too much risk? Buy fewer shares, don’t tighten the stop."
+  },
+  {
+   "idea": "reward-to-risk-ratio",
+   "title": "Lesson 5 · Reward-to-risk",
+   "text": "Reward-to-risk = (target − entry) ÷ (entry − stop). Risk $2 a share? A 2:1 target sits $4 above your entry."
+  },
+  {
+   "idea": "expectancy-math",
+   "title": "Lesson 6 · Expectancy: does your strategy pay?",
+   "text": "Weight each result by how often it happens. 0.3 × $200 − 0.7 × $100 = −$10: it loses over time."
+  }
+ ],
+ "next": "trading-psychology"
+}

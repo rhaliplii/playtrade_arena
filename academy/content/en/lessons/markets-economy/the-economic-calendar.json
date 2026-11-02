@@ -1,0 +1,255 @@
+{
+ "id": "the-economic-calendar",
+ "chapter": "markets-economy",
+ "n": 3,
+ "title": "The economic calendar",
+ "minutes": 5,
+ "desc": "The releases that move markets, and how to size around them",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "worried",
+   "title": "Big trade, big day",
+   "situation": "You hold a trade four times your normal size. The monthly jobs report comes out tomorrow at 8:30. What’s the risk?",
+   "visual": {
+    "kind": "calendar",
+    "items": [
+     {
+      "day": "Fri",
+      "time": "8:30",
+      "title": "Jobs report",
+      "impact": "high",
+      "on": true
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Little: one report rarely moves much",
+     "feedback": "Big reports often move markets within seconds, and nobody knows which way."
+    },
+    {
+     "text": "Price can jump sharply either way at 8:30",
+     "feedback": "Nobody knows the number in advance, so price can jump either way. Your size decides how much it hurts."
+    },
+    {
+     "text": "None: trading pauses until it’s out",
+     "feedback": "Trading doesn’t pause. Price can jump the second the number lands, and your size decides how much it hurts."
+    }
+   ],
+   "answer": 1,
+   "idea": "event-risk-size",
+   "work": "If the market jumps 1% against you, you lose four times what you would on your normal size."
+  },
+  {
+   "type": "learn",
+   "title": "Three dates that move markets",
+   "text": "An **[[economic-calendar|economic calendar]]** lists when key data comes out. Three releases matter most.",
+   "visual": {
+    "kind": "calendar",
+    "items": [
+     {
+      "title": "US jobs report",
+      "sub": "Monthly · jobs added. More than expected can mean rates stay higher",
+      "impact": "high"
+     },
+     {
+      "title": "CPI inflation",
+      "sub": "Monthly · how fast prices rose",
+      "impact": "high"
+     },
+     {
+      "title": "Rate decision",
+      "sub": "About every 6 weeks · the new rate",
+      "impact": "high"
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "Price often jumps when the number lands, then swings both ways."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "A release, minute by minute",
+   "text": "These are index futures on CPI day. The report lands at 8:30.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "series",
+      "title": "CPI day · 8:00 to 9:00",
+      "ends": false,
+      "height": 110,
+      "label": "Index futures flat until 8:30, then a jump, a reversal and a settle",
+      "series": [
+       {
+        "values": [
+         100,
+         100.05,
+         100,
+         100.03,
+         100.02,
+         100.04,
+         100.9,
+         99.6,
+         100.5,
+         99.9,
+         100.3,
+         100.2,
+         100.4
+        ],
+        "tone": "blue"
+       }
+      ],
+      "vlines": [
+       {
+        "i": 5,
+        "label": "8:30",
+        "tone": "gold"
+       }
+      ]
+     },
+     {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Before",
+        "value": "quiet: traders wait",
+        "strong": true
+       },
+       {
+        "label": "8:30",
+        "value": "a jump, then a reversal",
+        "tone": "gold",
+        "strong": true
+       },
+       {
+        "label": "After",
+        "value": "price finds its level",
+        "strong": true
+       }
+      ]
+     }
+    ]
+   },
+   "foot": "In those first minutes, spreads widen and stops can fill at worse prices.",
+   "footTone": "red"
+  },
+  {
+   "type": "trap",
+   "title": "Don’t carry big size into big news",
+   "text": "A release can move price more in a minute than in a normal day. If you’re wrong, an oversized trade turns a small loss into a big one.",
+   "visual": {
+    "kind": "list",
+    "items": [
+     {
+      "title": "Check the calendar every Monday"
+     },
+     {
+      "title": "Mark the high-impact days"
+     },
+     {
+      "title": "Cut size or stay out before them"
+     }
+    ]
+   },
+   "rule": "No oversized positions into big releases."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Spot the risky day",
+   "q": "You trade short-term. Which day this week carries the most event risk?",
+   "idea": "high-impact-releases",
+   "visual": {
+    "kind": "calendar",
+    "title": "This week",
+    "items": [
+     {
+      "day": "Mon",
+      "time": "10:00",
+      "title": "Factory orders",
+      "impact": "low"
+     },
+     {
+      "day": "Tue",
+      "time": "10:00",
+      "title": "Consumer confidence",
+      "impact": "medium"
+     },
+     {
+      "day": "Wed",
+      "time": "8:30",
+      "title": "CPI inflation",
+      "impact": "high"
+     },
+     {
+      "day": "Thu",
+      "time": "8:30",
+      "title": "Jobless claims",
+      "impact": "medium"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Monday",
+     "feedback": "Factory orders is a low-impact release. Look for the release marked high."
+    },
+    {
+     "text": "Tuesday",
+     "feedback": "Consumer confidence is medium impact. Another day has a high-impact release that can move the whole market."
+    },
+    {
+     "text": "Wednesday",
+     "feedback": "CPI is a high-impact release that can move the whole market, so Wednesday at 8:30 carries the most event risk."
+    },
+    {
+     "text": "Thursday",
+     "feedback": "Weekly jobless claims matter, but CPI is a high-impact release that can move the whole market."
+    }
+   ],
+   "answer": 2,
+   "work": null
+  },
+  {
+   "type": "check",
+   "title": "Before the decision",
+   "q": "The rate decision is at 2 pm. You hold a large position with a stop. What’s the sensible move?",
+   "options": [
+    {
+     "text": "Add more to catch the move",
+     "feedback": "More size makes a jump against you hurt more. Nobody knows which way the decision will move price."
+    },
+    {
+     "text": "Cut it to a size you can live with",
+     "feedback": "A smaller size keeps a jump either way to a loss you can live with, and your stop stays in place."
+    },
+    {
+     "text": "Remove the stop so a spike can’t hit it",
+     "feedback": "The stop is your protection, and you need it most when price jumps. Cut the size instead."
+    },
+    {
+     "text": "Nothing: decisions are always expected",
+     "feedback": "Decisions can surprise, and price can swing hard even on an expected one. Cut the size beforehand."
+    }
+   ],
+   "answer": 1,
+   "idea": "size-down-before-news",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You know the market’s big days.",
+   "lines": [
+    "Jobs, CPI and rate decisions move markets most.",
+    "Price can jump both ways around a release.",
+    "Check the calendar weekly. Size down before big news."
+   ]
+  }
+ ]
+}

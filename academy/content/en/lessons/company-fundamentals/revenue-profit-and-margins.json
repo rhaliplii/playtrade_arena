@@ -1,0 +1,260 @@
+{
+ "id": "revenue-profit-and-margins",
+ "chapter": "company-fundamentals",
+ "n": 2,
+ "title": "Revenue, profit and margins",
+ "minutes": 5,
+ "desc": "Sales, what’s left after costs, and the margin that tells them apart",
+ "cards": [
+  {
+   "type": "call",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Who keeps more?",
+   "situation": "Acme sells $100M a year and keeps $20M as profit. Northwind sells $500M and keeps $25M. Which one keeps more of each dollar it sells?",
+   "visual": {
+    "kind": "barchart",
+    "title": "Revenue and profit",
+    "label": "Acme: $100M revenue, $20M profit. Northwind: $500M revenue, $25M profit",
+    "series": [
+     {
+      "label": "Revenue",
+      "tone": "blue"
+     },
+     {
+      "label": "Profit",
+      "tone": "up"
+     }
+    ],
+    "groups": [
+     {
+      "label": "Acme",
+      "values": [
+       100,
+       20
+      ],
+      "displays": [
+       "$100M",
+       "$20M"
+      ]
+     },
+     {
+      "label": "Northwind",
+      "values": [
+       500,
+       25
+      ],
+      "displays": [
+       "$500M",
+       "$25M"
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Northwind: it sells five times more",
+     "feedback": "Northwind sells more, but it keeps only 5 cents of each dollar. Acme keeps 20."
+    },
+    {
+     "text": "Acme: 20 cents of every dollar",
+     "feedback": "Acme keeps four times more of each sale. That share is called the margin."
+    },
+    {
+     "text": "The same: both make a profit",
+     "feedback": "Both make a profit, but not the same share of each sale. Acme keeps 20 cents a dollar, Northwind only 5."
+    }
+   ],
+   "answer": 1,
+   "idea": "profit-margin",
+   "work": "Acme: $20M ÷ $100M = 20%. Northwind: $25M ÷ $500M = 5%."
+  },
+  {
+   "type": "learn",
+   "title": "Sales, profit, margin",
+   "text": "**[[revenue|Revenue]]** is all the money from sales. **[[profit|Profit]]** is what’s left after every cost. **[[profit-margin|Margin]]** is profit ÷ revenue: how much of each dollar the company keeps.",
+   "visual": {
+    "kind": "split",
+    "rows": [
+     {
+      "label": "Every $100 Acme sells",
+      "segments": [
+       {
+        "value": 80,
+        "label": "Costs $80",
+        "tone": "muted"
+       },
+       {
+        "value": 20,
+        "label": "$20",
+        "tone": "up"
+       }
+      ],
+      "under": [
+       "Wages, rent, materials",
+       "Profit"
+      ]
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "$20 profit ÷ $100 revenue = a 20% margin."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "added": "Tap notes written for the Academy (the working for each year’s margin)",
+   "tag": "tap a year",
+   "title": "Sales up, margin down",
+   "text": "Acme’s sales grew every year. Look at what it kept.",
+   "visual": {
+    "kind": "barchart",
+    "title": "Acme · 3 years",
+    "label": "Revenue $100M, $120M, $150M; profit $20M, $18M, $15M",
+    "series": [
+     {
+      "label": "Revenue",
+      "tone": "blue"
+     },
+     {
+      "label": "Profit",
+      "tone": "up"
+     }
+    ],
+    "groups": [
+     {
+      "label": "Year 1",
+      "sub": "20% margin",
+      "subTone": "up",
+      "values": [
+       100,
+       20
+      ],
+      "displays": [
+       "$100M",
+       "$20M"
+      ],
+      "note": "$20M ÷ $100M = 20%."
+     },
+     {
+      "label": "Year 2",
+      "sub": "15% margin",
+      "subTone": "gold",
+      "values": [
+       120,
+       18
+      ],
+      "displays": [
+       "$120M",
+       "$18M"
+      ],
+      "note": "$18M ÷ $120M = 15%."
+     },
+     {
+      "label": "Year 3",
+      "sub": "10% margin",
+      "subTone": "down",
+      "values": [
+       150,
+       15
+      ],
+      "displays": [
+       "$150M",
+       "$15M"
+      ],
+      "note": "$15M ÷ $150M = 10%."
+     }
+    ]
+   },
+   "foot": "Sales +50%, profit −25%. Each sale earns less, maybe from price cuts or rising costs. That’s a warning sign.",
+   "footTone": "red"
+  },
+  {
+   "type": "myth",
+   "title": "Bigger is better?",
+   "myth": "More sales means a better company.",
+   "reality": "Sales are only the start. What counts is how much the company keeps, and whether that is growing or shrinking.",
+   "rule": "check revenue, profit and margin together, over a few years."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Work out the margin",
+   "q": "Northwind sold $200M last year and made $30M profit. What’s its margin?",
+   "idea": "profit-margin",
+   "visual": {
+    "kind": "fields",
+    "items": [
+     {
+      "label": "Revenue",
+      "value": "$200M",
+      "tone": "blue"
+     },
+     {
+      "label": "Profit",
+      "value": "$30M",
+      "tone": "up"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "15%",
+     "feedback": "Profit ÷ revenue: Northwind keeps 15 cents of every dollar it sells."
+    },
+    {
+     "text": "30%",
+     "feedback": "$30M is the profit, not the margin. Divide it by the revenue."
+    },
+    {
+     "text": "6.7%",
+     "feedback": "That’s revenue ÷ profit, upside down. Margin is profit ÷ revenue."
+    },
+    {
+     "text": "85%",
+     "feedback": "85% is the part of each dollar that went on costs. The margin is the part the company keeps."
+    }
+   ],
+   "answer": 0,
+   "work": "$30M ÷ $200M = 0.15 = 15%."
+  },
+  {
+   "type": "check",
+   "added": "Feedback for options the board doesn’t show written for the Academy",
+   "title": "Fast growth, thin margin",
+   "q": "Acme’s sales grew 30% this year, but its margin fell from 18% to 9%. What should you think?",
+   "options": [
+    {
+     "text": "Great year: sales are what count",
+     "feedback": "Sales grew, but the margin halved. Each dollar of sales now keeps half as much profit."
+    },
+    {
+     "text": "A warning: each sale earns much less",
+     "feedback": "The margin halved, so each dollar of sales keeps half as much profit. Growth like that is worth a closer look."
+    },
+    {
+     "text": "Margins don’t matter for big firms",
+     "feedback": "Margins matter for every company. A falling margin means each sale earns less, whatever the size."
+    },
+    {
+     "text": "The company is about to go bust",
+     "feedback": "One weaker year doesn’t mean bust. It’s a warning to watch, not a verdict."
+    }
+   ],
+   "answer": 1,
+   "idea": "shrinking-margin",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You can tell sales from profit.",
+   "lines": [
+    "Revenue is sales, profit is what’s left.",
+    "Margin = profit ÷ revenue.",
+    "Growing sales with shrinking margins is a warning."
+   ]
+  }
+ ]
+}

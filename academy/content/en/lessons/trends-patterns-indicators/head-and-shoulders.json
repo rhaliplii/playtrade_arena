@@ -1,0 +1,402 @@
+{
+ "id": "head-and-shoulders",
+ "chapter": "trends-patterns-indicators",
+ "n": 5,
+ "title": "Head and shoulders",
+ "minutes": 5,
+ "desc": "Three peaks and a neckline: wait for the close through it",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "detective",
+   "title": "Three peaks",
+   "situation": "After a long rise, price makes three peaks: $50, $56, then $51. The lows between them both sit near $46. What’s forming?",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "$46",
+      "tone": "gold",
+      "dashed": true
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       4,
+       50
+      ],
+      [
+       7,
+       46
+      ],
+      [
+       10,
+       56
+      ],
+      [
+       13,
+       46.2
+      ],
+      [
+       16,
+       51
+      ],
+      [
+       19,
+       48
+      ]
+     ],
+     "seed": 15,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 46,
+       "tone": "gold"
+      }
+     ],
+     "swings": [
+      {
+       "i": 4,
+       "price": 50,
+       "label": "$50"
+      },
+      {
+       "i": 10,
+       "price": 56,
+       "label": "$56"
+      },
+      {
+       "i": 16,
+       "price": 51,
+       "label": "$51"
+      }
+     ],
+     "label": "Three peaks at $50, $56 and $51 above lows near $46"
+    }
+   },
+   "options": [
+    {
+     "text": "A head and shoulders: watch $46",
+     "feedback": "A right shoulder below the head shows buyers getting weaker. The $46 neckline decides it."
+    },
+    {
+     "text": "A new uptrend: the middle peak is highest",
+     "feedback": "The last peak failed below the middle one. That’s a head and shoulders forming, and $46 is the line to watch."
+    },
+    {
+     "text": "A double bottom",
+     "feedback": "A double bottom is two lows at the same level after a fall. Here, after a long rise, three peaks sit above a $46 floor."
+    }
+   ],
+   "answer": 0,
+   "idea": "head-and-shoulders-shape",
+   "work": "Shoulders $50 and $51, head $56, neckline $46."
+  },
+  {
+   "type": "learn",
+   "title": "Head, shoulders, neckline",
+   "text": "Three peaks: a **left shoulder**, a higher **head**, and a lower **right shoulder**. The **[[neckline|neckline]]** joins the two lows between them.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "candles",
+      "title": "Daily",
+      "legend": [
+       {
+        "label": "neckline",
+        "tone": "gold",
+        "dashed": true
+       }
+      ],
+      "chart": {
+       "path": [
+        [
+         0,
+         40
+        ],
+        [
+         4,
+         50
+        ],
+        [
+         6,
+         46
+        ],
+        [
+         10,
+         56
+        ],
+        [
+         13,
+         46.2
+        ],
+        [
+         16,
+         51
+        ],
+        [
+         19,
+         45
+        ]
+       ],
+       "seed": 15,
+       "height": 140,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "hlines": [
+        {
+         "price": 46,
+         "tone": "gold"
+        }
+       ],
+       "swings": [
+        {
+         "i": 4,
+         "price": 50,
+         "label": "left"
+        },
+        {
+         "i": 10,
+         "price": 56,
+         "label": "head"
+        },
+        {
+         "i": 16,
+         "price": 51,
+         "label": "right"
+        }
+       ],
+       "label": "Left shoulder, higher head, lower right shoulder, and the neckline under them"
+      }
+     }
+    },
+    {
+     "tip": "Flip it upside down at the end of a fall and it’s an inverse head and shoulders: a possible turn up."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap Play",
+   "title": "Wait for the break",
+   "text": "The pattern counts only when price closes below the neckline. Sometimes it climbs back to test it from below.",
+   "visual": {
+    "kind": "candles",
+    "title": "Daily",
+    "legend": [
+     {
+      "label": "neckline",
+      "tone": "gold",
+      "dashed": true
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       4,
+       50
+      ],
+      [
+       6,
+       46
+      ],
+      [
+       10,
+       56
+      ],
+      [
+       13,
+       46.2
+      ],
+      [
+       16,
+       51
+      ],
+      [
+       19,
+       44.8
+      ],
+      [
+       21,
+       45.9
+      ],
+      [
+       24,
+       42.5
+      ]
+     ],
+     "seed": 16,
+     "height": 140,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 46,
+       "tone": "gold"
+      }
+     ],
+     "explore": "play",
+     "marks": [
+      {
+       "i": 19,
+       "price": 44.8,
+       "label": "break",
+       "tone": "down",
+       "pos": "below"
+      },
+      {
+       "i": 21,
+       "price": 45.9,
+       "label": "retest",
+       "tone": "gold",
+       "pos": "above"
+      }
+     ],
+     "label": "Price closes below the neckline, climbs back to test it from below, then falls"
+    }
+   },
+   "foot": "Old floor, new ceiling: the same idea as [[support|support]] turning into [[resistance|resistance]].",
+   "footTone": "gold"
+  },
+  {
+   "type": "trap",
+   "title": "Patterns fail often",
+   "text": "Many head and shoulders never break the neckline. Some break, then snap back. Selling on the shape alone gets beginners hurt.",
+   "visual": {
+    "kind": "candles",
+    "title": "Failed pattern",
+    "legend": [
+     {
+      "label": "neckline · never broke",
+      "tone": "gold",
+      "dashed": true
+     }
+    ],
+    "chart": {
+     "path": [
+      [
+       0,
+       40
+      ],
+      [
+       4,
+       48
+      ],
+      [
+       6,
+       44.6
+      ],
+      [
+       10,
+       52
+      ],
+      [
+       13,
+       44.5
+      ],
+      [
+       16,
+       48.5
+      ],
+      [
+       18,
+       45.2
+      ],
+      [
+       22,
+       54
+      ]
+     ],
+     "seed": 19,
+     "height": 130,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "hlines": [
+      {
+       "price": 44,
+       "tone": "gold"
+      }
+     ],
+     "label": "A head and shoulders shape that never breaks the neckline and rises instead"
+    }
+   },
+   "rule": "wait for a close below the neckline, and always use a stop."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Where’s the trigger?",
+   "idea": "neckline-trigger",
+   "q": "Left shoulder $30, head $35, right shoulder $31. The neckline sits at $27. When is the pattern confirmed?",
+   "options": [
+    {
+     "text": "When the right shoulder forms at $31",
+     "feedback": "A right shoulder is only a hint. Until price closes below the $27 neckline, nothing is confirmed."
+    },
+    {
+     "text": "On a close below $27",
+     "feedback": "The close below the $27 neckline confirms it. Until then, the three peaks are only a shape."
+    },
+    {
+     "text": "When price returns to $35",
+     "feedback": "A return to the $35 head would mean buyers are back. That cancels the pattern; it doesn’t confirm it."
+    },
+    {
+     "text": "Right after the head",
+     "feedback": "Right after the head, the right shoulder hasn’t even formed. Nothing counts until a close below the $27 neckline."
+    }
+   ],
+   "answer": 1
+  },
+  {
+   "type": "check",
+   "title": "It bounced",
+   "q": "A head and shoulders formed. Price touched the neckline, bounced, and rose above the right shoulder. What now?",
+   "options": [
+    {
+     "text": "Sell anyway: the shape is there",
+     "feedback": "The shape was there, but the neckline held. No break means the pattern failed, so there’s nothing to act on."
+    },
+    {
+     "text": "The pattern failed: no break, no signal",
+     "feedback": "The neckline held and price climbed back over the right shoulder. No break, no signal: the pattern failed."
+    },
+    {
+     "text": "A rise is now guaranteed",
+     "feedback": "Nothing is guaranteed. A failed top only means this pattern gave no signal."
+    },
+    {
+     "text": "Draw a new neckline lower",
+     "feedback": "Moving the neckline to fit is forcing it. The neckline held, so the pattern failed."
+    }
+   ],
+   "answer": 1,
+   "idea": "failed-pattern"
+  },
+  {
+   "type": "keep",
+   "headline": "You can wait for the break.",
+   "lines": [
+    "Three peaks: shoulder, higher head, lower shoulder.",
+    "The neckline joins the lows. Wait for a close through it.",
+    "Patterns fail often: always keep a stop."
+   ]
+  }
+ ]
+}

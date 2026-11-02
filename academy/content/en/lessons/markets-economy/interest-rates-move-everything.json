@@ -1,0 +1,306 @@
+{
+ "id": "interest-rates-move-everything",
+ "chapter": "markets-economy",
+ "n": 1,
+ "title": "Interest rates move everything",
+ "minutes": 5,
+ "desc": "Why rates move stocks, and why the surprise matters most",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "A surprise hike",
+   "situation": "Traders expected the central bank to hold rates at 4%. It raised them to 4.5%. What do stocks often do that day?",
+   "visual": {
+    "kind": "rows",
+    "rows": [
+     {
+      "label": "Expected",
+      "value": "Hold at 4.00%"
+     },
+     {
+      "label": "Actual",
+      "value": "Raise to 4.50%",
+      "tone": "gold",
+      "strong": true
+     },
+     {
+      "label": "Surprise",
+      "value": "+0.50 points",
+      "tone": "down",
+      "strong": true
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Rise: higher rates mean a strong economy",
+     "feedback": "A strong economy helps, but a surprise hike makes loans dearer and cash more attractive. Stocks often fall on the day."
+    },
+    {
+     "text": "Fall: money just got costlier than expected",
+     "feedback": "A surprise hike makes borrowing costlier and cash more attractive. Many investors pay less for stocks."
+    },
+    {
+     "text": "Nothing: rates only matter to banks",
+     "feedback": "Rates reach everyone: loans, savings and what investors will pay for stocks. A surprise hike often hits stocks on the day."
+    }
+   ],
+   "answer": 1,
+   "idea": "rate-surprise-moves-stocks",
+   "work": "Expected 4.00%. Actual 4.50%. A 0.50-point surprise."
+  },
+  {
+   "type": "learn",
+   "title": "Rates: the price of money",
+   "text": "The **[[interest-rate|interest rate]]** set by the [[central-bank|central bank]] is the price of borrowing. When it rises, three things change.",
+   "visual": {
+    "kind": "table",
+    "label": "Three effects of higher rates",
+    "cols": [
+     {
+      "w": 0.7
+     },
+     {
+      "align": "right",
+      "w": 2
+     }
+    ],
+    "rows": [
+     {
+      "cells": [
+       {
+        "text": "Loans",
+        "tone": "muted"
+       },
+       {
+        "text": "cost more for firms and home buyers",
+        "strong": true
+       }
+      ]
+     },
+     {
+      "cells": [
+       {
+        "text": "Cash",
+        "tone": "muted"
+       },
+       {
+        "text": "pays more, so stocks must compete",
+        "strong": true
+       }
+      ]
+     },
+     {
+      "cells": [
+       {
+        "text": "Future profits",
+        "tone": "muted"
+       },
+       {
+        "text": "are worth less in today’s money",
+        "strong": true
+       }
+      ]
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "That’s why stocks often fall when rates rise, and rise when rates fall."
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "tag": "tap",
+   "title": "It’s the surprise that moves",
+   "text": "Markets price in what they expect. The move comes from the gap between expected and actual.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "table",
+      "label": "Expected versus actual rate decisions and how stocks often react",
+      "cols": [
+       {
+        "label": "Expected"
+       },
+       {
+        "label": "Actual",
+        "align": "right"
+       },
+       {
+        "label": "Stocks",
+        "align": "right"
+       }
+      ],
+      "rows": [
+       {
+        "cells": [
+         "Cut 0.25 pts",
+         "Cut 0.25 pts",
+         {
+          "text": "Little move",
+          "tone": "muted",
+          "strong": true
+         }
+        ]
+       },
+       {
+        "cells": [
+         "Cut 0.25 pts",
+         "No cut",
+         {
+          "text": "Often fall",
+          "tone": "down",
+          "strong": true
+         }
+        ]
+       },
+       {
+        "cells": [
+         "Cut 0.25 pts",
+         "Cut 0.50 pts",
+         {
+          "text": "Often rise",
+          "tone": "up",
+          "strong": true
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "series",
+      "title": "Rate day · no cut",
+      "aside": "−1.7%",
+      "ends": false,
+      "height": 110,
+      "label": "Stocks drift flat, then fall 1.7% after the decision: no cut",
+      "series": [
+       {
+        "values": [
+         100,
+         100.1,
+         99.9,
+         100,
+         100.05,
+         100,
+         100.02,
+         98.9,
+         98.6,
+         98.9,
+         98.4,
+         98.3
+        ],
+        "tone": "down",
+        "area": true
+       }
+      ],
+      "vlines": [
+       {
+        "i": 6,
+        "label": "decision",
+        "tone": "gold"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "Cash fights back",
+   "q": "Your savings account paid 1% a year. After rate rises it pays 5%, with no stock risk. Why might some money leave stocks?",
+   "idea": "cash-competes-with-stocks",
+   "visual": {
+    "kind": "barchart",
+    "title": "Savings rate",
+    "label": "Savings rate: 1% before, 5% now",
+    "groups": [
+     {
+      "label": "Before",
+      "values": [
+       1
+      ],
+      "displays": [
+       "1%"
+      ],
+      "tones": [
+       "muted"
+      ]
+     },
+     {
+      "label": "Now",
+      "values": [
+       5
+      ],
+      "displays": [
+       "5%"
+      ],
+      "tones": [
+       "up"
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Cash pays well, with less risk",
+     "feedback": "At 5% with no stock risk, safe cash now competes with stocks. Some investors move money across."
+    },
+    {
+     "text": "Stocks stop paying dividends",
+     "feedback": "Companies don’t stop paying dividends because rates rose. What changed is that cash now pays more, with less risk."
+    },
+    {
+     "text": "Cash beats stocks every year",
+     "feedback": "Stocks can earn more over time, but with risk. At 5%, safe cash is a fair choice."
+    },
+    {
+     "text": "Banks force savers to sell",
+     "feedback": "Nobody forces savers to sell. They choose to, because cash now pays well with less risk."
+    }
+   ],
+   "answer": 0,
+   "work": "$10,000: $100 a year, now $500."
+  },
+  {
+   "type": "check",
+   "title": "Who feels it most?",
+   "q": "Rates rise. Why do fast-growing tech stocks often fall the most?",
+   "options": [
+    {
+     "text": "Much of their value rests on profits years away",
+     "feedback": "Fast growers’ value rests on profits years away, and higher rates shrink what those far-off profits are worth today."
+    },
+    {
+     "text": "They pay the biggest dividends",
+     "feedback": "Fast growers usually pay small dividends or none. Their value rests on profits years away."
+    },
+    {
+     "text": "Higher rates cut their sales the same day",
+     "feedback": "Sales don’t change overnight. Higher rates shrink what far-off profits are worth today, and fast growers rely on those most."
+    },
+    {
+     "text": "Tech companies can’t borrow at all",
+     "feedback": "Tech companies can still borrow; it just costs more. The bigger hit is to what far-off profits are worth today."
+    }
+   ],
+   "answer": 0,
+   "idea": "rates-hit-growth-stocks",
+   "work": null
+  },
+  {
+   "type": "keep",
+   "headline": "You know why rates move markets.",
+   "lines": [
+    "Higher rates make borrowing costlier and cash more attractive.",
+    "Stocks often fall when rates rise, and rise when they fall.",
+    "Markets move on the surprise, not the decision itself."
+   ]
+  }
+ ]
+}

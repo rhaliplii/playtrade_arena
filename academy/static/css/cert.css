@@ -1,0 +1,104 @@
+/* Profit.com Academy · the certificate (js/cert.js; canvas Certificate-Design / Certificate-Pro).
+   One template for every path. The page is a 1200 × 848 design canvas that scales to the width of its container:
+   .ac-cert is an inline-size container and --u = 1 design pixel (100cqw / 1200), so every size below is N × --u.
+   Paper colours are the same in both themes. Free = green accent, Pro = violet + "PRO PATH". */
+
+.ac-cert {
+  --cert-accent: var(--ac-cert-green);
+  --cert-ink: var(--ac-cert-green-ink);
+  --cert-glow: color-mix(in srgb, var(--ac-cert-green) 6%, transparent);
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1200 / 848;
+  margin: 0;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+.ac-cert--pro {
+  --cert-accent: var(--ac-cert-violet);
+  --cert-ink: var(--ac-cert-violet-ink);
+  --cert-glow: color-mix(in srgb, var(--ac-cert-violet) 7%, transparent);
+}
+.ac-cert__page {
+  --u: calc(100cqw / 1200);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: calc(4 * var(--u));
+  background: radial-gradient(60% 60% at 100% 100%, var(--cert-glow), transparent 70%), var(--ac-paper);
+  color: var(--ac-paper-ink);
+  font-family: var(--ac-font);
+  text-align: center;
+  line-height: 1.3;
+}
+.ac-cert__wm { position: absolute; right: calc(-60 * var(--u)); bottom: calc(-70 * var(--u)); width: calc(420 * var(--u)); height: calc(452 * var(--u)); opacity: .035; fill: var(--cert-ink); }
+.ac-cert__frame { position: absolute; inset: calc(18 * var(--u)); border: calc(2 * var(--u)) solid var(--cert-accent); }
+.ac-cert__rule { position: absolute; inset: calc(26 * var(--u)); border: max(1px, calc(1 * var(--u))) solid var(--ac-cert-gold); }
+
+/* seal: identical on every path, coloured by the accent */
+.ac-cert__seal { position: absolute; right: calc(64 * var(--u)); top: calc(56 * var(--u)); width: calc(150 * var(--u)); height: calc(150 * var(--u)); overflow: visible; }
+.ac-cert__sealFace { fill: var(--ac-paper); stroke: var(--cert-accent); stroke-width: 3; }
+.ac-cert__sealGold { fill: none; stroke: var(--ac-cert-gold); stroke-width: .8; }
+.ac-cert__sealDash { fill: none; stroke: var(--ac-cert-gold); stroke-width: .8; stroke-dasharray: 2 3; }
+.ac-cert__sealDot { fill: var(--ac-cert-gold); }
+.ac-cert__sealText { font: 700 9px var(--ac-font); letter-spacing: 2.4px; text-transform: uppercase; fill: var(--cert-ink); }
+.ac-cert__sealMark { fill: var(--cert-accent); }
+
+.ac-cert__body {
+  position: absolute;
+  inset: calc(26 * var(--u));
+  padding: calc(50 * var(--u)) calc(80 * var(--u)) calc(30 * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ac-cert__logo { display: block; flex: none; height: calc(34 * var(--u)); width: calc(189.4 * var(--u)); margin-left: calc(40 * var(--u)); }
+.ac-logo__mark, .ac-logo__com { fill: var(--ac-cert-green); }
+.ac-logo__word { fill: var(--ac-paper-ink); }
+.ac-cert__academy { display: flex; align-items: center; gap: calc(14 * var(--u)); margin-top: calc(12 * var(--u)); font: 700 calc(13 * var(--u))/1 var(--ac-font); letter-spacing: calc(6 * var(--u)); text-transform: uppercase; color: var(--cert-ink); }
+.ac-cert__academy i { display: block; width: calc(56 * var(--u)); height: max(1px, calc(1 * var(--u))); background: var(--ac-cert-gold); opacity: .7; }
+.ac-cert__kind { margin-top: calc(52 * var(--u)); font: 600 calc(28 * var(--u))/1.1 var(--ac-font); letter-spacing: calc(10 * var(--u)); text-transform: uppercase; }
+.ac-cert__small { font: 500 calc(18 * var(--u))/1.3 var(--ac-font); color: var(--ac-cert-muted); }
+.ac-cert__small--to { margin-top: calc(18 * var(--u)); }
+.ac-cert__small--for { margin-top: calc(24 * var(--u)); }
+.ac-cert__name { margin-top: calc(18 * var(--u)); max-width: 100%; font: 800 calc(72 * var(--u))/1.05 var(--ac-font); letter-spacing: calc(-1.5 * var(--u)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ac-cert__name--m { font-size: calc(60 * var(--u)); line-height: calc(75.6 * var(--u)); }
+.ac-cert__name--s { font-size: calc(50 * var(--u)); line-height: calc(75.6 * var(--u)); }
+.ac-cert__name--xs { font-size: calc(42 * var(--u)); line-height: calc(75.6 * var(--u)); }
+.ac-cert__line { display: block; margin-top: calc(16 * var(--u)); width: calc(90 * var(--u)); height: calc(2 * var(--u)); background: var(--cert-accent); }
+.ac-cert__pro { display: inline-flex; align-items: center; margin-top: calc(22 * var(--u)); height: calc(24 * var(--u)); padding: 0 calc(12 * var(--u)); border-radius: 999px; background: var(--cert-accent); color: var(--ac-paper); font: 800 calc(11 * var(--u))/1 var(--ac-font); letter-spacing: calc(1.6 * var(--u)); text-transform: uppercase; }
+.ac-cert__path { margin-top: calc(8 * var(--u)); font: 800 calc(42 * var(--u))/1.1 var(--ac-font); letter-spacing: calc(-.5 * var(--u)); color: var(--cert-ink); }
+.ac-cert__sum { margin-top: calc(16 * var(--u)); font: 600 calc(16 * var(--u))/1.3 var(--ac-font); letter-spacing: calc(.3 * var(--u)); color: var(--ac-cert-body); }
+.ac-cert__foot { margin-top: auto; width: 100%; display: grid; grid-template-columns: 1fr 1.3fr 1fr calc(74 * var(--u)); gap: calc(28 * var(--u)); align-items: start; text-align: left; }
+.ac-cert__cell { display: flex; flex-direction: column; align-items: flex-start; gap: calc(6 * var(--u)); min-width: 0; }
+.ac-cert__cell > span:first-child { font: 700 calc(10 * var(--u))/1.2 var(--ac-font); letter-spacing: calc(2 * var(--u)); text-transform: uppercase; color: var(--ac-cert-muted); }
+.ac-cert__cell b { font: 700 calc(16 * var(--u))/1.3 var(--ac-font); }
+.ac-cert__cell--mid { align-items: center; text-align: center; }
+.ac-cert__cell--end { align-items: flex-end; text-align: right; }
+.ac-cert__verify { font: 600 calc(13 * var(--u))/1.3 var(--ac-font); color: var(--cert-ink); }
+.ac-cert__qr { display: block; width: calc(73 * var(--u)); height: calc(73 * var(--u)); padding: calc(5 * var(--u)); background: var(--ac-cert-qr-bg); box-shadow: inset 0 0 0 max(1px, calc(1 * var(--u))) var(--ac-cert-qr-edge); line-height: 0; }
+.ac-cert__qrcode { display: block; width: 100%; height: 100%; fill: var(--ac-paper-ink); }
+.ac-cert__fine { margin-top: calc(18 * var(--u)); font: 500 calc(11 * var(--u))/1.2 var(--ac-font); color: var(--ac-cert-faint); }
+/* not earned yet: the date and ID say so and the QR waits for the verify link */
+.ac-cert.is-preview .ac-cert__qr { background: transparent; box-shadow: inset 0 0 0 max(1px, calc(1.5 * var(--u))) var(--ac-cert-qr-edge); }
+.ac-cert.is-preview .ac-cert__cell b, .ac-cert.is-sample .ac-cert__id { color: var(--ac-cert-muted); }
+/* a specimen (sample: true): a corner ribbon across the top-left corner, clear of the seal; the ID is a placeholder
+   and the QR box stays empty */
+.ac-cert__sample { position: absolute; z-index: 1; top: calc(58 * var(--u)); left: calc(-78 * var(--u)); width: calc(340 * var(--u)); padding: calc(10 * var(--u)) 0; transform: rotate(-45deg); background: var(--ac-cert-sample); color: var(--ac-paper); font: 800 calc(18 * var(--u))/1 var(--ac-font); letter-spacing: calc(6 * var(--u)); text-indent: calc(6 * var(--u)); text-transform: uppercase; text-align: center; box-shadow: 0 calc(4 * var(--u)) calc(12 * var(--u)) var(--ac-cert-sample-shadow); }
+
+/* the certificate on a page: paper on a dark stage gets the board's drop shadow */
+.ac-cert--lift .ac-cert__page { box-shadow: 0 30px 60px var(--ac-cert-shadow); }
+
+/* ---------------------------------------------------------------- PDF: print only the certificate, one A4 landscape page */
+.ac-cert-print { display: none; }
+@media print {
+  /* a named page: only the certificate print view is A4 landscape; printing any other page keeps the default */
+  @page cert { size: A4 landscape; margin: 0; }
+  html.ac-printing .ac-cert-print { page: cert; }
+  html.ac-printing, html.ac-printing body { margin: 0 !important; padding: 0 !important; background: var(--ac-paper) !important; width: 297mm; height: 210mm; overflow: hidden; }
+  html.ac-printing body > *:not(.ac-cert-print) { display: none !important; }
+  html.ac-printing .ac-cert-print { display: block; width: 297mm; height: 209.5mm; overflow: hidden; }
+  html.ac-printing .ac-cert-print .ac-cert { width: 297mm; aspect-ratio: auto; height: 209.5mm; }
+  html.ac-printing .ac-cert-print .ac-cert__page { border-radius: 0; box-shadow: none; }
+}

@@ -1,0 +1,186 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "academy/path",
+  "title": "Academy path",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "tier",
+    "outcome",
+    "chapters"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "free",
+        "pro"
+      ]
+    },
+    "level": {
+      "type": "string"
+    },
+    "outcome": {
+      "type": "string"
+    },
+    "intro": {
+      "type": "string"
+    },
+    "accent": {
+      "type": "string",
+      "description": "token name, e.g. path-learn"
+    },
+    "art": {
+      "type": "string"
+    },
+    "hours": {
+      "type": "number"
+    },
+    "xp": {
+      "type": "integer"
+    },
+    "chapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "n",
+          "title",
+          "short",
+          "minutes",
+          "lessons"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "n": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "short": {
+            "type": "string"
+          },
+          "promise": {
+            "type": "string"
+          },
+          "minutes": {
+            "type": "integer"
+          },
+          "available": {
+            "type": "boolean",
+            "description": "content exists in content/<locale>/chapters (false: shown as coming soon)"
+          },
+          "lessons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "lesson titles (for chapters not yet authored)"
+          },
+          "skill": {
+            "type": "string"
+          },
+          "tagline": {
+            "type": "string",
+            "maxLength": 32,
+            "description": "one line for the home path map"
+          },
+          "practice": {
+            "type": "object",
+            "description": "the practice tool for this chapter (side card 'Practice this chapter')",
+            "required": [
+              "tool",
+              "text",
+              "href"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "href": {
+                "type": "string",
+                "description": "site-relative link, e.g. index.html#games-title"
+              },
+              "art": {
+                "type": "string",
+                "enum": [
+                  "bullrun",
+                  "playtrade",
+                  "nextmove"
+                ],
+                "description": "card art: bullrun = assets/mg-bullrun-cover.jpg; playtrade / nextmove = drawn mock"
+              }
+            }
+          },
+          "added": {
+            "type": "string",
+            "description": "note for content authors: lessons added or merged to match the spec counts"
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "after",
+          "name",
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "after": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "finale": {
+      "type": "object"
+    },
+    "faq": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "q",
+          "a"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "q": {
+            "type": "string"
+          },
+          "a": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

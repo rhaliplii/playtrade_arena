@@ -1,0 +1,475 @@
+{
+ "id": "asset-classes",
+ "chapter": "how-markets-work",
+ "n": 3,
+ "title": "The six asset classes and their risk",
+ "minutes": 4,
+ "desc": "What you can trade, from lower to higher risk",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "point",
+   "title": "Where does a bad day cost less?",
+   "situation": "You’re new and have $1,000 to practice with. You will make mistakes. Where does one bad day cost you less?",
+   "visual": {
+    "kind": "lines",
+    "layout": "pair",
+    "lo": 75,
+    "hi": 114,
+    "mid": 100,
+    "items": [
+     {
+      "label": "A · Broad index ETF",
+      "sub": "Moves about 1% on a normal day",
+      "tone": "sky",
+      "ohlc": [
+       [
+        100.0,
+        100.9,
+        99.74,
+        100.8
+       ],
+       [
+        100.8,
+        101.04,
+        99.9,
+        100.1
+       ],
+       [
+        100.1,
+        101.12,
+        99.81,
+        101.0
+       ],
+       [
+        101.0,
+        101.29,
+        100.1,
+        100.3
+       ],
+       [
+        100.3,
+        100.5,
+        99.38,
+        99.5
+       ],
+       [
+        99.5,
+        100.45,
+        99.34,
+        100.4
+       ],
+       [
+        100.4,
+        101.43,
+        100.33,
+        101.2
+       ],
+       [
+        101.2,
+        101.49,
+        100.48,
+        100.6
+       ],
+       [
+        100.6,
+        100.72,
+        99.73,
+        99.8
+       ],
+       [
+        99.8,
+        101.05,
+        99.53,
+        100.7
+       ],
+       [
+        100.7,
+        101.81,
+        100.46,
+        101.5
+       ],
+       [
+        101.5,
+        101.56,
+        100.75,
+        100.9
+       ],
+       [
+        100.9,
+        101.1,
+        100.11,
+        100.2
+       ],
+       [
+        100.2,
+        101.44,
+        100.04,
+        101.1
+       ],
+       [
+        101.1,
+        101.2,
+        100.2,
+        100.5
+       ],
+       [
+        100.5,
+        101.49,
+        100.17,
+        101.4
+       ],
+       [
+        101.4,
+        101.59,
+        100.58,
+        100.8
+       ],
+       [
+        100.8,
+        101.75,
+        100.6,
+        101.6
+       ],
+       [
+        101.6,
+        101.71,
+        100.94,
+        101.0
+       ],
+       [
+        101.0,
+        101.61,
+        100.88,
+        101.3
+       ]
+      ]
+     },
+     {
+      "label": "B · New crypto coin",
+      "sub": "Can swing 10% in a day",
+      "tone": "gold",
+      "ohlc": [
+       [
+        100.0,
+        111.9,
+        99.2,
+        109.0
+       ],
+       [
+        109.0,
+        109.5,
+        94.5,
+        97.5
+       ],
+       [
+        97.5,
+        106.9,
+        96.7,
+        106.0
+       ],
+       [
+        106.0,
+        108.1,
+        92.7,
+        94.0
+       ],
+       [
+        94.0,
+        96.7,
+        83.5,
+        84.5
+       ],
+       [
+        84.5,
+        95.9,
+        83.2,
+        93.0
+       ],
+       [
+        93.0,
+        103.5,
+        90.2,
+        101.5
+       ],
+       [
+        101.5,
+        103.7,
+        88.2,
+        91.0
+       ],
+       [
+        91.0,
+        101.8,
+        90.4,
+        99.5
+       ],
+       [
+        99.5,
+        112.7,
+        97.5,
+        110.0
+       ],
+       [
+        110.0,
+        111.2,
+        97.1,
+        98.0
+       ],
+       [
+        98.0,
+        100.6,
+        86.1,
+        88.0
+       ],
+       [
+        88.0,
+        99.3,
+        85.6,
+        96.5
+       ],
+       [
+        96.5,
+        99.4,
+        84.1,
+        86.0
+       ],
+       [
+        86.0,
+        88.2,
+        77.0,
+        79.0
+       ],
+       [
+        79.0,
+        88.1,
+        76.1,
+        87.0
+       ],
+       [
+        87.0,
+        96.7,
+        84.6,
+        95.5
+       ],
+       [
+        95.5,
+        98.4,
+        83.4,
+        85.5
+       ],
+       [
+        85.5,
+        93.8,
+        82.9,
+        93.0
+       ],
+       [
+        93.0,
+        95.2,
+        90.1,
+        91.0
+       ]
+      ]
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "The broad index ETF",
+     "feedback": "Smaller swings make each beginner mistake cheaper, so you can afford to learn."
+    },
+    {
+     "text": "The new crypto coin",
+     "feedback": "Big swings cut both ways, and beginners make more mistakes."
+    },
+    {
+     "text": "No real difference",
+     "feedback": "A 1% day and a 10% day are very different on the same $1,000. Bigger swings mean bigger bad days."
+    }
+   ],
+   "answer": 0,
+   "idea": "learn-on-calm-markets",
+   "work": "Bad day on A: 1% of $1,000 = $10. On B: 10% = $100.",
+   "added": "Feedback for C written for the Academy"
+  },
+  {
+   "type": "walkthrough",
+   "title": "What do you actually own?",
+   "text": "Tap each tile to see what you own in each [[asset-class|asset class]].",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "tiles",
+      "cols": 2,
+      "items": [
+       {
+        "title": "Bonds",
+        "text": "A loan to a government or company. Pays interest."
+       },
+       {
+        "title": "Broad index ETFs",
+        "text": "A basket of many companies in one ticker. An ETF is only as calm as what it holds."
+       },
+       {
+        "title": "Stocks",
+        "text": "A slice of one company."
+       },
+       {
+        "title": "Commodities",
+        "text": "Oil, gold, wheat, copper."
+       },
+       {
+        "title": "Forex",
+        "text": "One currency against another, like EUR/USD."
+       },
+       {
+        "title": "Crypto",
+        "text": "Digital tokens like BTC and ETH. Trades 24/7."
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "learn",
+   "title": "Lower risk to higher risk",
+   "text": "**[[volatility|Volatility]]** is how much a price swings. Higher possible reward usually comes with **higher risk**.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "ladder",
+      "from": "Lower risk",
+      "to": "Higher risk",
+      "rows": [
+       {
+        "label": "Lower risk",
+        "text": "Bonds · Broad index ETFs",
+        "tone": "sky"
+       },
+       {
+        "label": "Middle",
+        "text": "Stocks · Commodities · Forex",
+        "tone": "gold"
+       },
+       {
+        "label": "Higher risk",
+        "text": "Crypto",
+        "tone": "down"
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "Forex prices usually move slowly, but most people trade it with borrowed money (leverage). That makes it risky. More in Chapter 2."
+    }
+   ]
+  },
+  {
+   "type": "myth",
+   "title": "The fast lane?",
+   "myth": "Crypto and forex with leverage are the fastest way to get rich.",
+   "reality": "They’re the riskiest. Big swings, or borrowed money, make mistakes as big as wins, and beginners make more mistakes. Most professionals learn on lower-risk, liquid assets first."
+  },
+  {
+   "type": "exercise",
+   "kind": "sort",
+   "title": "Sort by risk",
+   "q": "Drag each asset class into the right box.",
+   "idea": "asset-class-risk-ladder",
+   "items": [
+    "Crypto",
+    "Stocks",
+    "Broad index ETFs",
+    "Forex",
+    "Commodities"
+   ],
+   "given": [
+    {
+     "item": "Bonds",
+     "bucket": "lower"
+    }
+   ],
+   "buckets": [
+    {
+     "id": "lower",
+     "label": "Lower risk",
+     "sub": "smaller swings",
+     "tone": "sky"
+    },
+    {
+     "id": "middle",
+     "label": "Middle",
+     "tone": "gold"
+    },
+    {
+     "id": "higher",
+     "label": "Higher risk",
+     "sub": "biggest swings",
+     "tone": "down"
+    }
+   ],
+   "solution": {
+    "lower": [
+     "Broad index ETFs"
+    ],
+    "middle": [
+     "Stocks",
+     "Forex",
+     "Commodities"
+    ],
+    "higher": [
+     "Crypto"
+    ]
+   },
+   "itemFeedback": {
+    "Forex": "Forex prices move slowly, so on its own it sits in the middle. Leverage is what makes it risky.",
+    "Crypto": "Crypto swings the most: young, very volatile, and it never sleeps.",
+    "Stocks": "One company can move a lot more than a bond or a basket, but less than crypto: the middle.",
+    "Commodities": "Oil and gold swing more than bonds, less than crypto: the middle.",
+    "Broad index ETFs": "A broad index ETF holds hundreds of companies, so one bad company hurts less. That’s why it sits with bonds. A leveraged or crypto ETF would not."
+   },
+   "right": "Bonds and broad index ETFs are lower risk, stocks, commodities and forex sit in the middle, and crypto is the riskiest.",
+   "added": "Feedback written for the Academy"
+  },
+  {
+   "type": "check",
+   "pose": "detective",
+   "title": "Which is the riskiest?",
+   "q": "Your friend wants to practice with his first $500. Which of these usually carries the most risk?",
+   "options": [
+    {
+     "text": "A government bond",
+     "feedback": "A government bond is a loan that pays interest. It’s one of the calmest choices, not the riskiest."
+    },
+    {
+     "text": "A broad index ETF",
+     "feedback": "An index ETF spreads your money over many companies, so it swings less than any one of them."
+    },
+    {
+     "text": "Shares of a large company",
+     "feedback": "Large company shares do move. A brand-new coin can swing far more, and few people trade it, so getting out can be hard."
+    },
+    {
+     "text": "A brand-new crypto coin",
+     "feedback": "A brand-new coin can swing far more than the others, and few people trade it, so getting out can be hard."
+    }
+   ],
+   "answer": 3,
+   "idea": "new-coins-riskiest",
+   "added": "Feedback for A, B and D written for the Academy"
+  },
+  {
+   "type": "keep",
+   "headline": "You can rank what you trade by risk.",
+   "lines": [
+    "From calmer to wilder: bonds and broad index ETFs, then stocks, commodities and forex, then crypto.",
+    "More possible reward usually means more risk.",
+    "Practice on lower-risk, liquid assets first."
+   ]
+  }
+ ]
+}

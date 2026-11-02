@@ -1,0 +1,29 @@
+{
+ "note": "Demo certificate registry (no backend in this build). The verify page finds these for everyone; certificates issued on this device are added from AC.store (cert_registry). Production: the certificates table (backend/001_certificates.sql).",
+ "certificates": [
+  {
+   "id": "TF-7K2Q-9D4M",
+   "name": "Jordan Ellis",
+   "path": "learn-to-trade",
+   "issued_at": "2027-03-12"
+  },
+  {
+   "id": "TA-3M8V-6P7X",
+   "name": "Jordan Ellis",
+   "path": "technical-analysis-pro",
+   "issued_at": "2027-06-08"
+  },
+  {
+   "id": "TF-M7RA-Q4ZN",
+   "name": "Mira O.",
+   "path": "learn-to-trade",
+   "issued_at": "2026-09-14"
+  },
+  {
+   "id": "TF-J4KP-8W2C",
+   "name": "Jak P.",
+   "path": "learn-to-trade",
+   "issued_at": "2026-10-02"
+  }
+ ]
+}

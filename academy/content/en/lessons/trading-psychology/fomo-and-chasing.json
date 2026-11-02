@@ -1,0 +1,449 @@
+{
+ "id": "fomo-and-chasing",
+ "chapter": "trading-psychology",
+ "n": 3,
+ "title": "FOMO and chasing",
+ "minutes": 5,
+ "desc": "Why buying the spike costs you, and what to do instead",
+ "cards": [
+  {
+   "type": "call",
+   "title": "Everyone’s buying",
+   "situation": "A stock jumps 15% in an hour on one big green candle. Everyone online is buying. You have no setup. What’s the main risk of buying now?",
+   "visual": {
+    "kind": "candles",
+    "title": "Hourly",
+    "aside": "+15%",
+    "asideTone": "up",
+    "chart": {
+     "ohlc": [
+      [
+       100,
+       100.6,
+       99.5,
+       100.2
+      ],
+      [
+       100.2,
+       100.7,
+       99.4,
+       99.8
+      ],
+      [
+       99.8,
+       100.5,
+       99.3,
+       100.1
+      ],
+      [
+       100.1,
+       100.6,
+       99.5,
+       99.7
+      ],
+      [
+       99.7,
+       100.4,
+       99.2,
+       100
+      ],
+      [
+       100,
+       115.6,
+       99.8,
+       115
+      ]
+     ],
+     "height": 110,
+     "axis": false,
+     "lastTag": false,
+     "ticks": 0,
+     "marks": [
+      {
+       "i": 5,
+       "price": 99.2,
+       "label": "now",
+       "tone": "gold",
+       "pos": "below"
+      }
+     ],
+     "label": "Five flat hourly candles near $100, then one big green candle to $115"
+    }
+   },
+   "options": [
+    {
+     "text": "None: the move will keep going",
+     "feedback": "Big moves often pull back. At the top of a spike, there’s nowhere sensible for a stop."
+    },
+    {
+     "text": "You buy high, with no clear stop",
+     "feedback": "Late buyers pay the highest price and carry the most risk."
+    },
+    {
+     "text": "You’re too late to make anything",
+     "feedback": "It might keep going, so “too late” isn’t the problem. Buying at the top of a spike leaves nowhere sensible for a stop."
+    }
+   ],
+   "answer": 1,
+   "idea": "chasing-risk",
+   "work": "Bought at $115 after a run from $100. A dip to $107 = −$8 a share, over half the move."
+  },
+  {
+   "type": "learn",
+   "title": "FOMO: fear of missing out",
+   "text": "**[[fomo|FOMO]]** is the itch to jump in because a price is flying and everyone else is in. It makes you buy **after** the move, not before it.",
+   "blocks": [
+    {
+     "side": true,
+     "visual": {
+      "kind": "candles",
+      "title": "Hourly",
+      "aside": "after the spike",
+      "chart": {
+       "ohlc": [
+        [
+         100,
+         100.6,
+         99.5,
+         100.2
+        ],
+        [
+         100.2,
+         100.7,
+         99.4,
+         99.8
+        ],
+        [
+         99.8,
+         100.5,
+         99.3,
+         100.1
+        ],
+        [
+         100.1,
+         100.6,
+         99.5,
+         99.7
+        ],
+        [
+         99.7,
+         100.4,
+         99.2,
+         100
+        ],
+        [
+         100,
+         115.6,
+         99.8,
+         115
+        ],
+        [
+         115,
+         115.4,
+         111.8,
+         112.2
+        ],
+        [
+         112.2,
+         112.6,
+         108.6,
+         109
+        ],
+        [
+         109,
+         110,
+         108.4,
+         109.2
+        ]
+       ],
+       "height": 120,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "marks": [
+        {
+         "i": 5,
+         "price": 99.2,
+         "label": "FOMO buy",
+         "tone": "gold",
+         "pos": "below"
+        }
+       ],
+       "label": "A spike to $115, then red candles back toward $109"
+      }
+     }
+    },
+    {
+     "tip": "If you missed it, you missed it. Another setup always comes.",
+     "side": true
+    }
+   ]
+  },
+  {
+   "type": "walkthrough",
+   "title": "Chase or wait?",
+   "text": "Two traders see the same spike.",
+   "visual": {
+    "kind": "stack",
+    "items": [
+     {
+      "kind": "candles",
+      "title": "Chase · buys the spike",
+      "aside": "−$8 now",
+      "asideTone": "down",
+      "chart": {
+       "ohlc": [
+        [
+         100,
+         100.6,
+         99.5,
+         100.2
+        ],
+        [
+         100.2,
+         100.7,
+         99.4,
+         99.8
+        ],
+        [
+         99.8,
+         100.5,
+         99.3,
+         100.1
+        ],
+        [
+         100.1,
+         100.6,
+         99.5,
+         99.7
+        ],
+        [
+         99.7,
+         100.4,
+         99.2,
+         100
+        ],
+        [
+         100,
+         115.6,
+         99.8,
+         115
+        ],
+        [
+         114.6,
+         115,
+         111.8,
+         112.2
+        ],
+        [
+         111.4,
+         111.8,
+         108.2,
+         108.6
+        ],
+        [
+         107.6,
+         108.4,
+         106.8,
+         107.4
+        ]
+       ],
+       "height": 90,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "lo": 98,
+       "hi": 117,
+       "hlines": [
+        {
+         "price": 115,
+         "tone": "down",
+         "label": "buy $115",
+         "style": "text"
+        }
+       ],
+       "label": "Bought at $115 on the spike; price falls back to about $107"
+      }
+     },
+     {
+      "kind": "candles",
+      "title": "Wait · buys his setup",
+      "aside": "risk $3",
+      "foot": "{up}**Buy $108**{/up} once the pullback holds. {down}**Stop $105.**{/down}",
+      "chart": {
+       "ohlc": [
+        [
+         100,
+         100.6,
+         99.5,
+         100.2
+        ],
+        [
+         100.2,
+         100.7,
+         99.4,
+         99.8
+        ],
+        [
+         99.8,
+         100.5,
+         99.3,
+         100.1
+        ],
+        [
+         100.1,
+         100.6,
+         99.5,
+         99.7
+        ],
+        [
+         99.7,
+         100.4,
+         99.2,
+         100
+        ],
+        [
+         100,
+         115.6,
+         99.8,
+         115
+        ],
+        [
+         114.6,
+         115,
+         111.8,
+         112.2
+        ],
+        [
+         111.4,
+         111.8,
+         108.2,
+         108.6
+        ],
+        [
+         107.6,
+         108.8,
+         106.6,
+         108.2
+        ]
+       ],
+       "height": 90,
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "lo": 98,
+       "hi": 117,
+       "dim": [
+        5,
+        6
+       ],
+       "hlines": [
+        {
+         "price": 108,
+         "tone": "up",
+         "label": "buy $108",
+         "style": "text"
+        },
+        {
+         "price": 105,
+         "tone": "down",
+         "label": "stop $105",
+         "style": "below"
+        }
+       ],
+       "label": "Waits for the pullback: buy at $108 with a stop at $105"
+      }
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "tip": "The waiter knows where he’s wrong. The chaser is just hoping.",
+     "tone": "green"
+    }
+   ]
+  },
+  {
+   "type": "trap",
+   "title": "Popular isn’t a plan",
+   "text": "By the time a stock is all over social media, much of the move has usually happened. The crowd tends to arrive last.",
+   "visual": {
+    "kind": "checks",
+    "items": [
+     {
+      "icon": "warn",
+      "title": "Chat, headlines, “to the moon”",
+      "sub": "Noise, not a setup."
+     },
+     {
+      "icon": "ok",
+      "title": "Your setup, entry, stop and target",
+      "sub": "A plan you wrote before the move."
+     }
+    ]
+   },
+   "rule": "no setup, no trade."
+  },
+  {
+   "type": "exercise",
+   "kind": "choice",
+   "title": "You missed the breakout",
+   "q": "Your plan: buy at $50, stop at $48. You missed it. Now it’s $56 and rising. What should you do?",
+   "idea": "chase-raises-risk",
+   "options": [
+    {
+     "text": "Buy now: it’s still rising",
+     "feedback": "Most people feel that urge. Chasing changes the trade: same stop, four times the risk."
+    },
+    {
+     "text": "Skip it, or wait for a pullback",
+     "feedback": "Your plan only worked near $50. Letting it go, or waiting for a pullback, keeps the risk you planned."
+    },
+    {
+     "text": "Buy double to make up for missing it",
+     "feedback": "Double size at a worse price is FOMO and revenge at once: eight times the risk you planned."
+    },
+    {
+     "text": "Sell short: it’s too high",
+     "feedback": "“Too high” isn’t a setup. Shorting a rising stock with no plan is just a different chase."
+    }
+   ],
+   "answer": 1,
+   "work": "Planned: $50 − $48 = $2 a share. Now: $56 − $48 = $8 a share."
+  },
+  {
+   "type": "check",
+   "title": "Beat the FOMO",
+   "q": "What’s the best fix for FOMO?",
+   "options": [
+    {
+     "text": "Trade every big move so you never miss out",
+     "feedback": "Chasing every big move means buying late, again and again. That’s FOMO as a strategy."
+    },
+    {
+     "text": "Write your setup down and enter only when it shows",
+     "feedback": "A written setup tells you when to act, and when to sit out."
+    },
+    {
+     "text": "Follow what’s trending online",
+     "feedback": "Easy to fall for: trending stocks are where FOMO is loudest. A written setup tells you when to act, and when to sit out."
+    },
+    {
+     "text": "Use bigger size on hot stocks",
+     "feedback": "Bigger size on a hot stock makes the chase more expensive when it pulls back."
+    }
+   ],
+   "answer": 1,
+   "idea": "fomo-fix"
+  },
+  {
+   "type": "keep",
+   "headline": "You can let a move go without chasing it.",
+   "lines": [
+    "FOMO makes you buy after the move, near the top.",
+    "Chasing raises your risk with the same stop.",
+    "No setup, no trade. Another one always comes."
+   ]
+  }
+ ]
+}

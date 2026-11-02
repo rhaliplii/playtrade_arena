@@ -1,0 +1,1087 @@
+{
+ "terms": {
+  "bid": {
+   "term": "Bid",
+   "category": "Markets",
+   "short": "The highest price a buyer will pay right now. When you sell straight away, you sell at the bid.",
+   "example": "Bid $49.95, ask $50.05: sell now and you get $49.95.",
+   "related": [
+    "ask",
+    "spread"
+   ]
+  },
+  "ask": {
+   "term": "Ask",
+   "category": "Markets",
+   "short": "The lowest price a seller will accept right now. When you buy straight away, you buy at the ask.",
+   "example": "Bid $49.95, ask $50.05: buy now and you pay $50.05.",
+   "related": [
+    "bid",
+    "spread"
+   ]
+  },
+  "spread": {
+   "term": "Spread",
+   "category": "Costs",
+   "short": "The gap between the bid and the ask. You pay it on every round trip, even if the price never moves.",
+   "long": "Buy at the ask, sell at the bid, and the spread is gone. It works like a toll booth on every buy-and-sell. Busy markets have tight spreads; thin ones have wide spreads.",
+   "example": "Ask $50.05 − bid $49.95 = $0.10. On 100 shares a round trip costs $10.",
+   "related": [
+    "bid",
+    "ask",
+    "round-trip",
+    "liquidity"
+   ]
+  },
+  "liquidity": {
+   "term": "Liquidity",
+   "category": "Markets",
+   "short": "How easily you can buy or sell without moving the price. Liquid markets have many orders and tight spreads.",
+   "example": "A busy stock: bid $99.99, ask $100.01. A thin new coin: bid $0.095, ask $0.105, about a 10% toll.",
+   "related": [
+    "spread",
+    "slippage"
+   ]
+  },
+  "bull-market": {
+   "term": "Bull market",
+   "category": "Markets",
+   "short": "A sustained rise, often defined as about 20% or more up from a recent low. A bull expects prices to rise.",
+   "long": "Bulls toss their horns up: a bullish trader expects a rise. Measure in percent from the last low, not in points.",
+   "example": "An index rises from a low of 100 to 124: +24%, a bull market.",
+   "related": [
+    "bear-market",
+    "bullish"
+   ]
+  },
+  "bear-market": {
+   "term": "Bear market",
+   "category": "Markets",
+   "short": "A sustained fall, often defined as about 20% or more down from a recent high. A bear expects prices to fall.",
+   "long": "Bears swipe their paws down. One red week isn’t a bear market: measure the fall in percent from the last high.",
+   "example": "An index falls from a high of 4,000 to 3,400: −15%, not a bear market yet. It would need to reach about 3,200.",
+   "related": [
+    "bull-market",
+    "bearish"
+   ]
+  },
+  "bullish": {
+   "term": "Bullish",
+   "category": "Markets",
+   "short": "Expecting prices to rise. Like a bull tossing its horns up.",
+   "related": [
+    "bull-market",
+    "bearish"
+   ],
+   "added": "Not in the book; written for the Academy"
+  },
+  "bearish": {
+   "term": "Bearish",
+   "category": "Markets",
+   "short": "Expecting prices to fall. Like a bear swiping its paws down.",
+   "related": [
+    "bear-market",
+    "bullish"
+   ],
+   "added": "Not in the book; written for the Academy"
+  },
+  "market-maker": {
+   "term": "Market maker",
+   "category": "Markets",
+   "short": "A firm that is always ready to buy and sell, quoting both a bid and an ask. It earns the spread between them.",
+   "long": "Market makers keep markets moving. Your move against them: pay as little of the spread as you can.",
+   "related": [
+    "spread",
+    "bid",
+    "ask"
+   ],
+   "added": "Definition written for the Academy (the book explains the idea in Chapter 1 but has no glossary entry)"
+  },
+  "asset-class": {
+   "term": "Asset class",
+   "category": "Markets",
+   "short": "A family of things you can trade that behave alike: bonds, stocks, commodities, forex and crypto. Broad index ETFs count as a sixth group here: a basket that can hold any of them.",
+   "long": "From calmer to wilder: bonds and broad index ETFs, then stocks, commodities and forex, then crypto. Leverage makes any of them wilder. More possible reward usually means a wilder ride.",
+   "related": [
+    "volatility",
+    "bond",
+    "etf"
+   ],
+   "added": "Definition written for the Academy (the book explains the idea in Chapter 1 but has no glossary entry)"
+  },
+  "volatility": {
+   "term": "Volatility",
+   "category": "Risk",
+   "short": "How much and how fast a price swings. Higher volatility means bigger moves, both up and down.",
+   "example": "A calm market might move 1% a day; a wild one up to 15%. On $1,000 that’s $10 versus $150.",
+   "related": [
+    "asset-class",
+    "liquidity"
+   ]
+  },
+  "round-trip": {
+   "term": "Round trip",
+   "category": "Costs",
+   "short": "One buy plus one sell of the same position. Costs like the spread and commission are counted per round trip.",
+   "example": "$0.10 spread × 100 shares = $10 a round trip.",
+   "related": [
+    "spread",
+    "commission"
+   ],
+   "added": "Not in the book; written for the Academy"
+  },
+  "etf": {
+   "term": "ETF",
+   "category": "Markets",
+   "short": "Exchange-traded fund: a basket of many assets that trades like a single stock. It’s as risky as what it holds; a broad index ETF is a calm place to start.",
+   "related": [
+    "asset-class",
+    "index"
+   ]
+  },
+  "bond": {
+   "term": "Bond",
+   "category": "Markets",
+   "short": "A loan to a government or company. It pays interest and sits at the calm end of the risk ladder.",
+   "related": [
+    "asset-class"
+   ],
+   "added": "Definition written for the Academy (the book explains the idea in Chapter 1 but has no glossary entry)"
+  },
+  "index": {
+   "term": "Index",
+   "category": "Markets",
+   "short": "A number that tracks a group of stocks, like the S&P 500. It shows how the whole group is doing.",
+   "related": [
+    "etf"
+   ],
+   "added": "Not in the book; written for the Academy"
+  },
+  "hft": {
+   "term": "High-frequency trading (HFT)",
+   "category": "Markets",
+   "short": "Robots that trade in millionths of a second. Their edge is speed, so don’t race them on tiny moves.",
+   "related": [
+    "market-maker"
+   ],
+   "added": "Definition written for the Academy (the book explains the idea in Chapter 1 but has no glossary entry)"
+  },
+  "market-order": {
+   "term": "Market order",
+   "category": "Orders",
+   "short": "An order to trade right now at the best available price. You get speed, not a set price.",
+   "example": "Price falling fast from $50, now $49.60: a market sell gets you out at about $49.60.",
+   "related": [
+    "limit-order",
+    "slippage"
+   ]
+  },
+  "limit-order": {
+   "term": "Limit order",
+   "category": "Orders",
+   "short": "An order to trade only at your price or better. You get your price, but it may never fill.",
+   "example": "Stock at $100, buy limit at $95: you buy only if it dips to $95 or lower.",
+   "related": [
+    "market-order",
+    "stop-order"
+   ]
+  },
+  "stop-order": {
+   "term": "Stop order",
+   "category": "Orders",
+   "short": "An order that waits for a trigger price, then becomes a market order. A buy stop sits above the price, a sell stop below.",
+   "example": "Stock at $30, buy stop at $32: it fires only if $32 trades.",
+   "related": [
+    "stop-loss",
+    "stop-limit",
+    "gap"
+   ],
+   "added": "Definition written for the Academy (the book explains the idea in Chapter 2 but has no glossary entry)"
+  },
+  "stop-loss": {
+   "term": "Stop-loss",
+   "category": "Orders",
+   "short": "An order that closes a trade at a pre-set loss level. Set it the moment you open the trade.",
+   "example": "Own at $100, sell stop at $92: your loss is about $8 a share, unless the price gaps past your stop.",
+   "related": [
+    "stop-order",
+    "gap"
+   ]
+  },
+  "stop-limit": {
+   "term": "Stop-limit",
+   "category": "Orders",
+   "short": "“When the price hits X, place a limit order at Y.” It controls your price, but in a crash it may not fill at all.",
+   "related": [
+    "stop-order",
+    "limit-order"
+   ],
+   "added": "Definition written for the Academy (the book explains the idea in Chapter 2 but has no glossary entry)"
+  },
+  "long": {
+   "term": "Long",
+   "category": "Orders",
+   "short": "Buying to profit from a rise: buy first, sell later. Result = (sell price − buy price) × shares.",
+   "example": "Buy 100 at $80, sell at $90: +$1,000.",
+   "related": [
+    "short"
+   ]
+  },
+  "short": {
+   "term": "Short",
+   "category": "Orders",
+   "short": "Selling borrowed shares to profit from a fall, then buying them back. A short’s loss has no ceiling.",
+   "example": "Sell 100 at $80, buy back at $70: +$1,000. If it rises to $90 instead: −$1,000.",
+   "related": [
+    "long",
+    "squeeze",
+    "margin"
+   ]
+  },
+  "squeeze": {
+   "term": "Short squeeze",
+   "category": "Risk",
+   "short": "A fast rise in a heavily shorted stock as short sellers rush to buy back. Prices have doubled in days.",
+   "related": [
+    "short"
+   ],
+   "added": "Definition written for the Academy (the book explains the idea in Chapter 2 but has no glossary entry)"
+  },
+  "leverage": {
+   "term": "Leverage",
+   "category": "Risk",
+   "short": "Controlling a bigger position than your money, using borrowed funds. It multiplies gains, losses and stress.",
+   "long": "Position = margin × leverage. The move that wipes out your margin = 100% ÷ leverage: 10% at 10×, 5% at 20×, 1% at 100×.",
+   "example": "$1,000 at 10× controls $10,000. A 10% fall takes all $1,000. US stock accounts allow about 2×; 10× and more is for forex, CFDs, futures and crypto.",
+   "related": [
+    "margin",
+    "margin-call"
+   ]
+  },
+  "margin": {
+   "term": "Margin",
+   "category": "Risk",
+   "short": "The deposit needed to open a leveraged position. Position = margin × leverage.",
+   "example": "$1,000 margin × 10 = a $10,000 position.",
+   "related": [
+    "leverage",
+    "margin-call"
+   ]
+  },
+  "margin-call": {
+   "term": "Margin call",
+   "category": "Risk",
+   "short": "A demand from your broker to add money when losses eat into your margin. It comes before your margin is gone, and the broker may close your trade.",
+   "related": [
+    "margin",
+    "leverage"
+   ],
+   "example": "$10,000 stock position, $5,000 of your own, 25% maintenance: the call comes near $66.67, a 33% fall. At 10× it comes far sooner."
+  },
+  "commission": {
+   "term": "Commission",
+   "category": "Costs",
+   "short": "A broker’s fee per trade or per share. Often zero now, but “free” brokers may earn it back through wider spreads.",
+   "related": [
+    "spread",
+    "round-trip"
+   ],
+   "added": "Definition written for the Academy (the book explains the idea in Chapter 2 but has no glossary entry)"
+  },
+  "slippage": {
+   "term": "Slippage",
+   "category": "Costs",
+   "short": "The gap between the price you expected and the price you got. Biggest in fast markets and with market orders. Now and then it goes your way.",
+   "example": "You tap Buy at $10.00 and fill at $10.08: $0.08 × 100 shares = $8.",
+   "related": [
+    "market-order",
+    "liquidity"
+   ]
+  },
+  "swap": {
+   "term": "Swap",
+   "category": "Costs",
+   "short": "Overnight financing on a leveraged forex or CFD position, usually a cost, sometimes a small credit. On US stock margin it’s called margin interest.",
+   "example": "$1 a night × 90 nights = $90.",
+   "related": [
+    "leverage"
+   ],
+   "added": "Definition written for the Academy (the book explains the idea in Chapter 2 but has no glossary entry)"
+  },
+  "gap": {
+   "term": "Gap",
+   "category": "Risk",
+   "short": "When a price opens far from the previous close, with no trades in between. A gap can jump straight past your stop.",
+   "example": "Close $50, stop $48, open $45: the stop fills near $45, not $48.",
+   "related": [
+    "stop-loss",
+    "position-size"
+   ]
+  },
+  "position-size": {
+   "term": "Position size",
+   "category": "Risk",
+   "short": "How much you buy. Size it so a stop-out or a normal gap costs a small, fixed share of your account.",
+   "example": "Risk 1% of $5,000 = $50. A normal gap is 8%: $50 ÷ 8% = $625.",
+   "related": [
+    "gap",
+    "leverage"
+   ]
+  },
+  "earnings": {
+   "term": "Earnings",
+   "category": "Fundamentals",
+   "short": "A company’s profit, reported every quarter. Earnings day often brings big price moves and overnight gaps.",
+   "related": [
+    "gap"
+   ],
+   "added": "Not in the book; written for the Academy"
+  },
+  "correction": {
+   "term": "Correction",
+   "category": "Markets",
+   "short": "A fall of about 10% from a recent high. Smaller than a bear market, which is about 20% or more.",
+   "example": "From a high of 100: 90 is a correction, 80 is a bear market.",
+   "related": [
+    "bear-market",
+    "bull-market"
+   ],
+   "added": "Definition written for the Academy (Chapter 1 v2, Go deeper “Why 20%?”)"
+  },
+  "trading-plan": {
+   "term": "Trading plan",
+   "category": "Risk",
+   "short": "Your written rules for trading: your style and markets, when you enter, where you exit, how much you risk, your checklist and your weekly review.",
+   "example": "Swing trading 4 markets, 1% risk a trade, a 6-check checklist, a review every Friday.",
+   "related": [
+    "trading-style",
+    "entry-rule",
+    "pre-trade-checklist"
+   ]
+  },
+  "trading-style": {
+   "term": "Trading style",
+   "category": "Markets",
+   "short": "How long you hold a trade: day trading (minutes to hours), swing trading (days to weeks) or position trading (weeks to months).",
+   "example": "You work 9 to 5 and have 30 minutes each evening: swing trading fits your time.",
+   "related": [
+    "day-trading",
+    "swing-trading",
+    "position-trading"
+   ]
+  },
+  "day-trading": {
+   "term": "Day trading",
+   "category": "Markets",
+   "short": "Trades held for minutes to hours and all closed by the bell. It needs hours at the screen while the market is open.",
+   "related": [
+    "trading-style",
+    "swing-trading"
+   ]
+  },
+  "swing-trading": {
+   "term": "Swing trading",
+   "category": "Markets",
+   "short": "Trades held for days to weeks. You check them about once a day, often after the close.",
+   "related": [
+    "trading-style",
+    "day-trading",
+    "position-trading"
+   ]
+  },
+  "position-trading": {
+   "term": "Position trading",
+   "category": "Markets",
+   "short": "Trades held for weeks to months. You check them about once a week.",
+   "related": [
+    "trading-style",
+    "swing-trading"
+   ]
+  },
+  "entry-rule": {
+   "term": "Entry rule",
+   "category": "Charts",
+   "short": "One sentence that says exactly what must happen before you buy, so you can follow it the same way every time.",
+   "example": "Buy when a rising stock pulls back to its rising 50-day average and closes back above it.",
+   "related": [
+    "trading-plan",
+    "pre-trade-checklist"
+   ]
+  },
+  "loss-limit": {
+   "term": "Loss limit",
+   "category": "Risk",
+   "short": "A circuit breaker: once you lose this much in a day or a week, you stop trading until the next day or week.",
+   "example": "On $10,000: stop for the day at −2% ($200), for the week at −5% ($500).",
+   "related": [
+    "trading-plan",
+    "stop-loss"
+   ]
+  },
+  "pre-trade-checklist": {
+   "term": "Pre-trade checklist",
+   "category": "Risk",
+   "short": "5 to 7 yes/no checks you run before every trade. Each check is a fact. One “no” means no trade.",
+   "example": "My stop is set before I buy: yes. My target is at least 2× the risk: no. Skip it.",
+   "related": [
+    "trading-plan",
+    "entry-rule",
+    "loss-limit"
+   ]
+  },
+  "trading-journal": {
+   "term": "Trading journal",
+   "category": "Psychology",
+   "short": "A record of every trade: the setup, entry, stop, target, result and how you felt. You read it in your weekly review.",
+   "related": [
+    "weekly-review",
+    "trading-plan"
+   ]
+  },
+  "weekly-review": {
+   "term": "Weekly review",
+   "category": "Psychology",
+   "short": "Once a week you read your journal: did you follow every rule, your wins and losses, your biggest mistake, and one change or none.",
+   "example": "Friday, 30 minutes with the journal: one change, then test it over 20 trades or more.",
+   "related": [
+    "trading-journal",
+    "trading-plan"
+   ]
+  },
+  "interest-rate": {
+   "term": "Interest rate",
+   "category": "Economy",
+   "short": "The price of borrowing money. The central bank sets the key rate; when it rises, loans cost more and cash pays more.",
+   "example": "Rates go from 4% to 4.5%: loans get dearer, savings pay more, and stocks often fall.",
+   "related": [
+    "central-bank",
+    "inflation",
+    "priced-in"
+   ]
+  },
+  "central-bank": {
+   "term": "Central bank",
+   "category": "Economy",
+   "short": "The bank that sets a country’s key interest rate, like the Federal Reserve in the US. It raises rates to cool inflation and cuts them to support growth.",
+   "example": "Inflation runs hot, so the central bank raises rates to slow spending.",
+   "related": [
+    "interest-rate",
+    "inflation"
+   ]
+  },
+  "inflation": {
+   "term": "Inflation",
+   "category": "Economy",
+   "short": "How fast prices rise. Most countries track it with the CPI.",
+   "example": "A basket that cost $100 last year costs $104 now: 4% inflation.",
+   "related": [
+    "cpi",
+    "real-return",
+    "interest-rate"
+   ]
+  },
+  "cpi": {
+   "term": "CPI",
+   "category": "Economy",
+   "short": "The Consumer Price Index: the cost of a basket of everyday goods, used to measure inflation. A monthly, high-impact release.",
+   "example": "Markets expected 3%, CPI showed 4%: hotter than expected, so rates may stay higher for longer.",
+   "related": [
+    "inflation",
+    "economic-calendar"
+   ]
+  },
+  "real-return": {
+   "term": "Real return",
+   "category": "Economy",
+   "short": "Your return minus inflation: what your money can actually buy.",
+   "example": "A bond pays 6%, inflation is 4%: real return 6% − 4% = 2%.",
+   "related": [
+    "inflation"
+   ]
+  },
+  "economic-calendar": {
+   "term": "Economic calendar",
+   "category": "Economy",
+   "short": "A list of when key economic data comes out, such as the jobs report, CPI and rate decisions, with each release’s expected impact.",
+   "example": "Wed 8:30 · CPI inflation · High: a day to cut size if you trade short-term.",
+   "related": [
+    "cpi",
+    "interest-rate"
+   ]
+  },
+  "sector": {
+   "term": "Sector",
+   "category": "Economy",
+   "short": "A group of companies in the same line of business, such as tech, energy, utilities or consumer staples.",
+   "example": "Oil rises 20%: the energy sector feels it most directly.",
+   "related": [
+    "economic-cycle",
+    "etf"
+   ]
+  },
+  "economic-cycle": {
+   "term": "Economic cycle",
+   "category": "Economy",
+   "short": "The way economies grow, slow, shrink and recover. Some sectors have tended to do better in certain phases, but every cycle is different.",
+   "example": "In a slowdown, staples and utilities often hold up.",
+   "related": [
+    "sector"
+   ]
+  },
+  "priced-in": {
+   "term": "Priced in",
+   "category": "Economy",
+   "short": "Already reflected in the price. If everyone expected the news, the price has likely moved already, so the news itself barely moves it.",
+   "example": "A rate cut expected for weeks arrives; stocks rise just 0.1%.",
+   "related": [
+    "interest-rate"
+   ]
+  },
+  "share": {
+   "term": "Share",
+   "category": "Fundamentals",
+   "short": "A slice of ownership in a company. Owners share in its profits and usually get a vote.",
+   "example": "100 shares in total and you own 5: you own 5% of the company.",
+   "related": [
+    "dividend",
+    "market-cap"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "dividend": {
+   "term": "Dividend",
+   "category": "Fundamentals",
+   "short": "Part of a company’s profit paid out to its owners, the shareholders. Not every company pays one.",
+   "related": [
+    "share",
+    "profit"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "market-cap": {
+   "term": "Market value",
+   "category": "Fundamentals",
+   "short": "What the market says a whole company is worth: share price × all the shares. Also called market cap.",
+   "example": "50M shares × $20 = $1B.",
+   "related": [
+    "share"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "revenue": {
+   "term": "Revenue",
+   "category": "Fundamentals",
+   "short": "All the money a company takes in from sales, before any costs.",
+   "example": "Acme sells $100M a year: its revenue is $100M.",
+   "related": [
+    "profit",
+    "profit-margin"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "profit": {
+   "term": "Profit",
+   "category": "Fundamentals",
+   "short": "What’s left of revenue after every cost is paid.",
+   "example": "$100M of sales − $80M of costs = $20M profit.",
+   "related": [
+    "revenue",
+    "profit-margin",
+    "cash-flow"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "profit-margin": {
+   "term": "Profit margin",
+   "category": "Fundamentals",
+   "short": "Profit ÷ revenue: how much of each dollar of sales the company keeps.",
+   "example": "$20M profit ÷ $100M revenue = a 20% margin.",
+   "related": [
+    "revenue",
+    "profit"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "eps": {
+   "term": "EPS (earnings per share)",
+   "category": "Fundamentals",
+   "short": "A company’s profit ÷ its number of shares.",
+   "example": "$10M profit ÷ 2M shares = EPS $5 a share.",
+   "related": [
+    "pe-ratio",
+    "earnings"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "pe-ratio": {
+   "term": "P/E ratio",
+   "category": "Fundamentals",
+   "short": "Share price ÷ EPS: how many dollars buyers pay for $1 of yearly profit. A high P/E means high expectations.",
+   "example": "$50 price ÷ $5 EPS = P/E 10.",
+   "related": [
+    "eps"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "cash-flow": {
+   "term": "Cash flow",
+   "category": "Fundamentals",
+   "short": "The money that really came in, minus what really went out. Bills are paid in cash, not in profit.",
+   "example": "+$50M in − $40M wages and suppliers − $4M interest = +$6M.",
+   "related": [
+    "profit"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "earnings-estimate": {
+   "term": "Analyst estimate",
+   "category": "Fundamentals",
+   "short": "The expected numbers analysts publish before results. Above it is a beat, below it a miss; the price moves on the gap.",
+   "example": "Expected EPS $1.20, reported $1.10: a miss.",
+   "related": [
+    "earnings",
+    "guidance",
+    "eps"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "guidance": {
+   "term": "Guidance",
+   "category": "Fundamentals",
+   "short": "What a company says it expects next, such as next year’s sales. It often moves the price more than the results.",
+   "example": "Revenue and EPS beat, guidance cut: the price fell 6%.",
+   "related": [
+    "earnings",
+    "earnings-estimate"
+   ],
+   "added": "Definition written for the Academy from the Chapter 7 lessons"
+  },
+  "diversification": {
+   "term": "Diversification",
+   "category": "Portfolio",
+   "short": "Spreading money across many holdings, so one bad pick hurts a little, not a lot.",
+   "example": "$1,000 in each of 10 stocks: if one falls 50%, you lose $500, just 5% of your money.",
+   "related": [
+    "correlation",
+    "asset-allocation"
+   ]
+  },
+  "correlation": {
+   "term": "Correlation",
+   "category": "Portfolio",
+   "short": "How two assets move together, from −1 (opposite) to +1 (in lockstep). Assets that rise and fall as one don’t protect each other.",
+   "example": "Five big tech stocks tend to fall together in a tech sell-off: high correlation, little protection.",
+   "related": [
+    "diversification"
+   ]
+  },
+  "asset-allocation": {
+   "term": "Asset allocation",
+   "category": "Portfolio",
+   "short": "How you split money between stocks, bonds and cash. For most people it matters more than any single pick.",
+   "example": "An example split: 60% stocks, 30% bonds, 10% cash. The right split depends on your goal and time.",
+   "related": [
+    "rebalancing",
+    "diversification",
+    "bond"
+   ]
+  },
+  "rebalancing": {
+   "term": "Rebalancing",
+   "category": "Portfolio",
+   "short": "Bringing your split back to its target: trim what grew, top up what lagged. Once or twice a year is enough for most people.",
+   "example": "Target 60/40, now $8,000 stocks and $3,000 bonds: sell $1,400 of stocks, buy $1,400 of bonds.",
+   "related": [
+    "asset-allocation"
+   ]
+  },
+  "benchmark": {
+   "term": "Benchmark",
+   "category": "Portfolio",
+   "short": "An index that matches what you hold. It’s the bar your results must clear, after all costs.",
+   "example": "You made 8%, a broad stock index made 15%: you lagged your benchmark by 7 points.",
+   "related": [
+    "index"
+   ]
+  },
+  "drawdown": {
+   "term": "Drawdown",
+   "category": "Portfolio",
+   "short": "The fall from a peak in your account or portfolio to the lowest point after it.",
+   "example": "$12,000 down to $8,400 is a 30% drawdown. A 50% drawdown needs a 100% gain to get back.",
+   "related": [
+    "diversification"
+   ]
+  },
+  "one-percent-rule": {
+   "term": "1% rule",
+   "category": "Risk",
+   "short": "Risk at most about 1% (up to 2%) of your account on any one trade: the loss if your stop is hit, not the size of the position.",
+   "long": "Losing streaks are normal, even for good strategies. At 1% a trade, 10 losses in a row leave you down about 10%. At 10% a trade, the same streak takes about two-thirds of the account.",
+   "example": "Account $25,000 × 1% = $250 at most lost on one trade.",
+   "related": [
+    "position-size",
+    "stop-loss"
+   ]
+  },
+  "reward-to-risk": {
+   "term": "Reward-to-risk",
+   "category": "Risk",
+   "short": "What a trade could make compared with what it could lose: (target − entry) ÷ (entry − stop). Pros aim for 2:1 or more.",
+   "long": "The better the reward-to-risk, the fewer trades you need to win to break even: 50% at 1:1, 33% at 2:1, 25% at 3:1. The target must sit before resistance, or the ratio is only on paper.",
+   "example": "Entry $30, stop $28, target $36: $6 ÷ $2 = 3:1.",
+   "related": [
+    "stop-loss",
+    "expectancy",
+    "win-rate"
+   ]
+  },
+  "expectancy": {
+   "term": "Expectancy",
+   "category": "Risk",
+   "short": "What a strategy makes per trade, on average, over many trades: (win rate × average win) − (loss rate × average loss).",
+   "long": "Above zero, the strategy pays over many trades; below zero, it loses. It says nothing sure about the next trade, and it needs a big sample (100+ trades, after fees) before you trust it.",
+   "example": "Win 40%, average win $300, average loss $100: (0.4 × $300) − (0.6 × $100) = +$60 a trade.",
+   "related": [
+    "win-rate",
+    "reward-to-risk"
+   ]
+  },
+  "win-rate": {
+   "term": "Win rate",
+   "category": "Risk",
+   "short": "The share of your trades that make money. On its own it says little: a high win rate can hide a losing strategy.",
+   "example": "Win 70% of trades at $50 but lose $150 on the rest: 0.7 × $50 − 0.3 × $150 = −$10 a trade.",
+   "related": [
+    "expectancy",
+    "reward-to-risk"
+   ]
+  },
+  "fear-and-greed": {
+   "term": "Fear and greed",
+   "category": "Psychology",
+   "short": "The two feelings behind most trading mistakes. Fear closes winners early and skips good setups; greed trades too big and holds past the target.",
+   "long": "Every trader feels them. The problem is letting them make the decisions. The defense is a plan made while you’re calm: entry, stop and target set before you trade.",
+   "example": "Closing a winner at +$50 when the plan’s target was +$300 is fear. Holding a loser to −$150 past a −$50 stop is hope.",
+   "related": [
+    "loss-aversion",
+    "fomo",
+    "stop-loss"
+   ]
+  },
+  "revenge-trading": {
+   "term": "Revenge trading",
+   "category": "Psychology",
+   "short": "Rushing into a bigger trade to win back a loss. It usually turns one bad trade into a bad day.",
+   "example": "Down $300, you double your size on a so-so setup. One more loss costs $600, and the day ends at −$900.",
+   "related": [
+    "tilt"
+   ]
+  },
+  "tilt": {
+   "term": "Tilt",
+   "category": "Psychology",
+   "short": "The angry state after a loss that drives revenge trading: bigger size, faster trades, setups you’d normally skip. Poker players named it.",
+   "example": "Rule against tilt: 2 losses in a day and you’re done. Close the app; tomorrow is a new day.",
+   "related": [
+    "revenge-trading"
+   ]
+  },
+  "fomo": {
+   "term": "FOMO",
+   "category": "Psychology",
+   "short": "Fear of missing out: the itch to jump in because a price is flying and everyone else is in. It makes you buy after the move, not before it.",
+   "example": "Plan: buy $50, stop $48. Chasing at $56 with the same stop risks $8 a share instead of $2, four times the plan.",
+   "related": [
+    "fear-and-greed"
+   ]
+  },
+  "loss-aversion": {
+   "term": "Loss aversion",
+   "category": "Psychology",
+   "short": "A loss hurts about twice as much as an equal gain feels good. It tempts you to hold losers and sell winners early.",
+   "example": "Most people turn down a fair coin flip: heads +$100, tails −$100. The odds are even; the feelings are not.",
+   "related": [
+    "stop-loss",
+    "fear-and-greed"
+   ]
+  },
+  "candlestick": {
+   "term": "Candlestick",
+   "category": "Charts",
+   "short": "One bar on a price chart that shows four prices for its period: open, high, low and close. Green closed above its open, red below.",
+   "example": "A green daily candle: open $100, high $108, low $97, close $105.",
+   "related": [
+    "ohlc",
+    "wick",
+    "timeframe"
+   ]
+  },
+  "ohlc": {
+   "term": "Open, high, low, close",
+   "category": "Charts",
+   "short": "The four prices in every candle: where the period started, its highest and lowest price, and where it ended.",
+   "example": "Open $50, high $51, low $45, close $46: a red candle.",
+   "related": [
+    "candlestick",
+    "wick"
+   ]
+  },
+  "wick": {
+   "term": "Wick",
+   "category": "Charts",
+   "short": "The thin line above or below a candle’s body. It reaches the high or the low: how far price went before it was pushed back.",
+   "example": "Body tops out at $105, upper wick reaches $108: price touched $108 but closed at $105.",
+   "related": [
+    "candlestick",
+    "ohlc",
+    "hammer"
+   ]
+  },
+  "hammer": {
+   "term": "Hammer",
+   "category": "Charts",
+   "short": "A candle with a small body near the top and a long lower wick, after a fall. Buyers fought back from the lows.",
+   "example": "Low $90, close $97.50 after four down days: buyers pushed price back up $7.50.",
+   "related": [
+    "wick",
+    "doji",
+    "engulfing"
+   ]
+  },
+  "doji": {
+   "term": "Doji",
+   "category": "Charts",
+   "short": "A candle that opens and closes at almost the same price. Neither buyers nor sellers won: indecision.",
+   "example": "Open $80, close $80 after a 10-day rise: a clue to watch, not a sell signal.",
+   "related": [
+    "hammer",
+    "engulfing",
+    "candlestick"
+   ]
+  },
+  "engulfing": {
+   "term": "Engulfing candle",
+   "category": "Charts",
+   "short": "A candle whose body swallows the whole body of the one before it. Bullish engulfing: after a fall, a big green body swallows a red one.",
+   "example": "Red candle $93.20 → $92, then green opens at $91.60 and closes at $95.80.",
+   "related": [
+    "hammer",
+    "doji",
+    "candlestick"
+   ]
+  },
+  "timeframe": {
+   "term": "Timeframe",
+   "category": "Charts",
+   "short": "How much time one candle covers: 1 minute, 1 hour, 1 day or 1 week. Same stock, same prices, different story.",
+   "example": "Holding for weeks? Trade from the daily chart and check the weekly first.",
+   "related": [
+    "candlestick"
+   ]
+  },
+  "volume": {
+   "term": "Volume",
+   "category": "Charts",
+   "short": "How many shares changed hands in a period. Moves on high volume have more people behind them; volume shows strength, not direction.",
+   "example": "Normal day 1M shares; a breakout on 3M is more believable than one on 0.5M.",
+   "related": [
+    "breakout",
+    "liquidity"
+   ]
+  },
+  "support": {
+   "term": "Support",
+   "category": "Charts",
+   "short": "A price zone where buyers stepped in before: a floor. It’s a zone, not an exact line, and broken support often turns into resistance.",
+   "example": "Price bounced near $40 three times: $40 is support. A stop goes a little below, near $38.",
+   "related": [
+    "resistance",
+    "breakout",
+    "stop-loss"
+   ]
+  },
+  "resistance": {
+   "term": "Resistance",
+   "category": "Charts",
+   "short": "A price zone where sellers stepped in before: a ceiling. Once it breaks, it often turns into support.",
+   "example": "Price stalled near $48 twice: $48 is resistance, a place to plan a target.",
+   "related": [
+    "support",
+    "breakout"
+   ]
+  },
+  "breakout": {
+   "term": "Breakout",
+   "category": "Charts",
+   "short": "When price moves through a level it couldn’t pass before, such as above resistance. More believable on high volume.",
+   "example": "A break above $50 on 3× normal volume beats one on half the usual volume.",
+   "related": [
+    "resistance",
+    "volume",
+    "support"
+   ]
+  },
+  "uptrend": {
+   "term": "Uptrend",
+   "category": "Charts",
+   "short": "A market making higher highs and higher lows. It lasts until that pattern breaks.",
+   "example": "Lows $40, $43, $46 and highs $45, $48, $51: an uptrend.",
+   "related": [
+    "downtrend",
+    "sideways",
+    "swing"
+   ]
+  },
+  "downtrend": {
+   "term": "Downtrend",
+   "category": "Charts",
+   "short": "A market making lower highs and lower lows.",
+   "example": "Highs $80, $76, $71 and lows $72, $68, $63: a downtrend.",
+   "related": [
+    "uptrend",
+    "sideways",
+    "swing"
+   ]
+  },
+  "sideways": {
+   "term": "Sideways market (range)",
+   "category": "Charts",
+   "short": "A market with no new highs or lows: price bounces between a floor and a ceiling.",
+   "example": "Three months between $20 and $24 without breaking out: a range.",
+   "related": [
+    "uptrend",
+    "downtrend"
+   ]
+  },
+  "swing": {
+   "term": "Swing",
+   "category": "Charts",
+   "short": "A peak or a dip on a chart. Compare each swing with the last to read the trend.",
+   "example": "Higher high (HH), higher low (HL), lower high (LH), lower low (LL).",
+   "related": [
+    "uptrend",
+    "downtrend",
+    "trendline"
+   ]
+  },
+  "trendline": {
+   "term": "Trendline",
+   "category": "Charts",
+   "short": "A straight line under at least two rising lows (or over two falling highs), extended to the right. A break is a warning, not a signal.",
+   "example": "Line at $47.80, close $47.20: about 1% below. Watch the next highs and lows.",
+   "related": [
+    "channel",
+    "swing"
+   ]
+  },
+  "channel": {
+   "term": "Channel",
+   "category": "Charts",
+   "short": "A trendline plus a parallel line through the highs. Price often travels between the two, like a lane.",
+   "example": "Near the lower line buyers often step in; near the upper line sellers do.",
+   "related": [
+    "trendline"
+   ]
+  },
+  "moving-average": {
+   "term": "Moving average",
+   "category": "Charts",
+   "short": "The average close of the last N days, redrawn each day. It smooths price into one line and lags: it turns after price does.",
+   "example": "Closes $10, $11, $12, $13, $14: the 5-day average is $60 ÷ 5 = $12.",
+   "related": [
+    "macd",
+    "uptrend"
+   ]
+  },
+  "double-top": {
+   "term": "Double top",
+   "category": "Charts",
+   "short": "Two failed tries at the same high. Confirmed only on a close below the middle low between them.",
+   "example": "Peaks $80 and $80, middle low $72: a close below $72 confirms it; rough target $64.",
+   "related": [
+    "double-bottom",
+    "head-and-shoulders"
+   ]
+  },
+  "double-bottom": {
+   "term": "Double bottom",
+   "category": "Charts",
+   "short": "Two failed tries at the same low. Confirmed only on a close above the middle high between them.",
+   "example": "Lows $50 and $50, middle high $56: a close above $56 confirms it; rough target $62.",
+   "related": [
+    "double-top"
+   ]
+  },
+  "head-and-shoulders": {
+   "term": "Head and shoulders",
+   "category": "Charts",
+   "short": "Three peaks: a left shoulder, a higher head and a lower right shoulder. It counts only on a close through the neckline.",
+   "example": "Shoulders $50 and $51, head $56, neckline $46.",
+   "related": [
+    "neckline",
+    "double-top"
+   ]
+  },
+  "neckline": {
+   "term": "Neckline",
+   "category": "Charts",
+   "short": "The line joining the lows between the peaks of a head and shoulders. A close through it confirms the pattern.",
+   "example": "Neckline $27: the pattern is confirmed on a close below $27.",
+   "related": [
+    "head-and-shoulders"
+   ]
+  },
+  "rsi": {
+   "term": "RSI (Relative Strength Index)",
+   "category": "Charts",
+   "short": "A 0–100 speed gauge comparing recent up days with recent down days, usually over 14 days. It measures speed, not value.",
+   "example": "RSI 75: price rose fast. In a strong uptrend it can stay above 70 for weeks.",
+   "related": [
+    "overbought",
+    "oversold",
+    "macd"
+   ]
+  },
+  "overbought": {
+   "term": "Overbought",
+   "category": "Charts",
+   "short": "RSI above 70: price rose fast. Fast isn’t finished, so it isn’t a sell signal on its own.",
+   "example": "Selling the first time RSI hit 70 meant missing the next 24%.",
+   "related": [
+    "rsi",
+    "oversold"
+   ]
+  },
+  "oversold": {
+   "term": "Oversold",
+   "category": "Charts",
+   "short": "RSI below 30: price fell fast. It can keep falling, so it isn’t a buy signal on its own.",
+   "example": "RSI 25: price has fallen fast lately.",
+   "related": [
+    "rsi",
+    "overbought"
+   ]
+  },
+  "macd": {
+   "term": "MACD",
+   "category": "Charts",
+   "short": "The gap between a fast (12-day) and a slow (26-day) exponential average. A 9-day signal line and bars show momentum building or fading.",
+   "example": "Fast average $52 − slow average $50 = +2: above zero.",
+   "related": [
+    "moving-average",
+    "rsi"
+   ]
+  },
+  "confluence": {
+   "term": "Confluence",
+   "category": "Charts",
+   "short": "Several different kinds of evidence agreeing, like trend, level and volume. Indicators built from the same prices don’t count twice.",
+   "example": "Uptrend, a bounce at $58 support, 2× normal volume: confluence.",
+   "related": [
+    "rsi",
+    "moving-average"
+   ]
+  }
+ }
+}
