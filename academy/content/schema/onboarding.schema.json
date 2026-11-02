@@ -1,0 +1,305 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Guest onboarding: the 5-question onboarding quiz (/academy/start)",
+ "type": "object",
+ "required": [
+  "id",
+  "path",
+  "minutes",
+  "questions"
+ ],
+ "additionalProperties": false,
+ "properties": {
+  "id": {
+   "type": "string"
+  },
+  "path": {
+   "type": "string",
+   "description": "the path whose chapters the questions point to"
+  },
+  "minutes": {
+   "type": "integer",
+   "description": "shown on the home hero (\"2 minutes\")"
+  },
+  "questions": {
+   "type": "array",
+   "minItems": 5,
+   "maxItems": 5,
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "area",
+     "chapter",
+     "topic",
+     "q",
+     "options",
+     "answer",
+     "why"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "area": {
+      "type": "string",
+      "description": "eyebrow on the question (Markets, Charts…)"
+     },
+     "chapter": {
+      "type": "integer",
+      "description": "chapter number on the path that teaches it"
+     },
+     "topic": {
+      "type": "string",
+      "description": "the topic row on the result screen"
+     },
+     "q": {
+      "type": "string"
+     },
+     "options": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+       "type": "string"
+      }
+     },
+     "answer": {
+      "type": "integer"
+     },
+     "why": {
+      "type": "string",
+      "description": "feedback, at most 40 words, never names the right option"
+     },
+     "chart": {
+      "type": "object",
+      "required": [
+       "label",
+       "d",
+       "m"
+      ],
+      "additionalProperties": false,
+      "description": "the question's chart as drawn on canvas boards 02a (d: desktop, 560 wide) and 02b (m: phones, 330 wide); colours are tones, mapped to site tokens",
+      "properties": {
+       "label": {
+        "type": "string",
+        "description": "screen-reader description"
+       },
+       "d": {
+        "type": "object",
+        "required": [
+         "view"
+        ],
+        "additionalProperties": false,
+        "properties": {
+         "view": {
+          "type": "array",
+          "items": {
+           "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "viewBox width, height"
+         },
+         "candles": {
+          "type": "object",
+          "required": [
+           "x0",
+           "step",
+           "body",
+           "wick",
+           "ohlc"
+          ],
+          "additionalProperties": false,
+          "properties": {
+           "x0": {
+            "type": "number"
+           },
+           "step": {
+            "type": "number"
+           },
+           "body": {
+            "type": "number"
+           },
+           "wick": {
+            "type": "number"
+           },
+           "rx": {
+            "type": "number"
+           },
+           "ohlc": {
+            "type": "array",
+            "items": {
+             "type": "array",
+             "items": {
+              "type": "number"
+             },
+             "minItems": 4,
+             "maxItems": 4
+            },
+            "description": "[open, high, low, close] in viewBox units, measured up from the bottom"
+           }
+          }
+         },
+         "marks": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "required": [
+            "t"
+           ],
+           "properties": {
+            "t": {
+             "enum": [
+              "text",
+              "line",
+              "rect",
+              "units"
+             ]
+            },
+            "tone": {
+             "enum": [
+              "up",
+              "down",
+              "muted",
+              "sub",
+              "text",
+              "rule",
+              "gold",
+              "chip",
+              "well"
+             ]
+            },
+            "role": {
+             "enum": [
+              "title",
+              "label",
+              "caption",
+              "mark",
+              "big",
+              "ask"
+             ],
+             "description": "text style, the site's chart type scale (onboarding.css): title 11/800 caps, label 12/600, caption 15/600, mark 14/800, big 20/800, ask 28/800 (the \"?\")"
+            },
+            "under": {
+             "type": "boolean",
+             "description": "drawn behind the candles (guide lines)"
+            }
+           }
+          }
+         }
+        }
+       },
+       "m": {
+        "type": "object",
+        "required": [
+         "view"
+        ],
+        "additionalProperties": false,
+        "properties": {
+         "view": {
+          "type": "array",
+          "items": {
+           "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "viewBox width, height"
+         },
+         "candles": {
+          "type": "object",
+          "required": [
+           "x0",
+           "step",
+           "body",
+           "wick",
+           "ohlc"
+          ],
+          "additionalProperties": false,
+          "properties": {
+           "x0": {
+            "type": "number"
+           },
+           "step": {
+            "type": "number"
+           },
+           "body": {
+            "type": "number"
+           },
+           "wick": {
+            "type": "number"
+           },
+           "rx": {
+            "type": "number"
+           },
+           "ohlc": {
+            "type": "array",
+            "items": {
+             "type": "array",
+             "items": {
+              "type": "number"
+             },
+             "minItems": 4,
+             "maxItems": 4
+            },
+            "description": "[open, high, low, close] in viewBox units, measured up from the bottom"
+           }
+          }
+         },
+         "marks": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "required": [
+            "t"
+           ],
+           "properties": {
+            "t": {
+             "enum": [
+              "text",
+              "line",
+              "rect",
+              "units"
+             ]
+            },
+            "tone": {
+             "enum": [
+              "up",
+              "down",
+              "muted",
+              "sub",
+              "text",
+              "rule",
+              "gold",
+              "chip",
+              "well"
+             ]
+            },
+            "role": {
+             "enum": [
+              "title",
+              "label",
+              "caption",
+              "mark",
+              "big",
+              "ask"
+             ],
+             "description": "text style, the site's chart type scale (onboarding.css): title 11/800 caps, label 12/600, caption 15/600, mark 14/800, big 20/800, ask 28/800 (the \"?\")"
+            },
+            "under": {
+             "type": "boolean",
+             "description": "drawn behind the candles (guide lines)"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

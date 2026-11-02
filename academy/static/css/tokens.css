@@ -38,7 +38,7 @@
   /* brand & states */
   --ac-primary: #13a487;         /* green CTA, white text */
   --ac-primary-hover: #108f76;   /* darker on hover, like the Arena's .btn-brand */
-  --ac-white-hover: #e6f7f1;     /* white buttons on hover: a mint tint */
+  --ac-white-hover: #e9ebef;     /* white buttons on hover: a neutral light grey (text stays --ac-ink) */
   --ac-focus: #ffffff;           /* keyboard focus ring (the Arena's white outline) */
   --ac-card-edge: rgba(255, 255, 255, .25);   /* hovered card: faint light edge */
   --ac-card-glow: rgba(7, 216, 162, .14);     /* hovered card: soft mint glow */
@@ -112,6 +112,7 @@
   --ac-rank-legend: #e0559a;
 
   --ac-white: #ffffff;           /* white buttons and text on the green hero, both themes */
+  --ac-hero-btn-ink: #0d4f42;    /* dark green text on a white pill on the green hero (the gradient's dark end), both themes */
   --ac-ink: #13161b;             /* text on white buttons */
   --ac-shadow: 0 30px 60px rgba(0, 0, 0, .35);
   --ac-shadow-soft: 0 10px 30px rgba(0, 0, 0, .18);
@@ -144,7 +145,7 @@
 
   --ac-primary: #11967b;
   --ac-primary-hover: #0e8069;
-  --ac-white-hover: #e6f7f1;
+  --ac-white-hover: #e9ebef;
   --ac-focus: #13161b;
   --ac-card-edge: rgba(19, 22, 27, .22);
   --ac-card-glow: rgba(10, 143, 108, .16);
@@ -236,3 +237,18 @@
   --ac-r-small: 12px;
   --ac-r-pill: 32px;
 }
+
+/* Sign in with Google / Apple (guest onboarding): their own brand styles, the same in both themes. */
+:root {
+  --ac-google-bg: #ffffff;
+  --ac-google-ink: #1f1f1f;
+  --ac-google-line: #dadce0;
+  --ac-google-yellow: #ffc107;
+  --ac-google-red: #ff3d00;
+  --ac-google-green: #4caf50;
+  --ac-google-blue: #1976d2;
+  --ac-apple-bg: #000000;
+  --ac-apple-ink: #ffffff;
+  --ac-apple-line: rgba(255, 255, 255, .28);
+}
+:root[data-theme="light"] { --ac-apple-line: transparent; }

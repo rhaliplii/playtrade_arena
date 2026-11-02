@@ -148,6 +148,22 @@ def validate_all(locale):
         used |= {q["idea"] for q in load_json(f)["challenge"]["questions"]}
     for i in sorted(used - set(named)):
         errors.append(f"idea '{i}' has no name in ideas.json")
+    # guest onboarding: the 5-question quick challenge (/academy/start)
+    ofile = content_path(locale, "onboarding.json")
+    if ofile.exists():
+        onb = load_json(ofile)
+        errors += V.validate(onb, "onboarding.schema.json", "onboarding")
+        n_ch = len(path["chapters"])
+        for i, q in enumerate(onb.get("questions", [])):
+            where = f"onboarding question {i + 1}"
+            if not 0 <= q.get("answer", -1) < len(q.get("options", [])):
+                errors.append(f"{where}: answer out of range")
+            if V.words(q.get("why", "")) > 40:
+                errors.append(f"{where}: feedback over 40 words")
+            if not 1 <= q.get("chapter", 0) <= n_ch:
+                errors.append(f"{where}: chapter {q.get('chapter')} not on the path")
+            for k, v in enumerate(V.visuals_in(q)):
+                errors += V.visual_gates(v, f"{where} visual {k + 1} ({v['kind']})")
     return errors, warnings
 
 

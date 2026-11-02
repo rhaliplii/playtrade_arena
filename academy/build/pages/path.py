@@ -140,7 +140,7 @@ def ltt(ctx):
     total_xp = sum(c["xp"] for c in chapters) + PATH_XP
     total_min = sum(c["minutes"] for c in chapters)
     first = next((c for c in chapters if c["available"] and c["lessons"]), None)
-    return {"id": p["id"], "title": p["title"], "chapters": chapters, "lessons": total_lessons, "ready": ready_lessons, "xp": total_xp,
+    return {"id": p["id"], "title": p["title"], "outcome": p.get("outcome", ""), "chapters": chapters, "lessons": total_lessons, "ready": ready_lessons, "xp": total_xp,
             "minutes": total_min, "hours": round(total_min / 30.0) / 2.0 if total_min else p.get("hours"),
             "skills": p.get("skills", []), "first": first,
             "first_lesson": (first["id"], first["lessons"][0]["id"]) if first else None}
@@ -404,7 +404,7 @@ def pm_save(t):
     return (f'<section class="ac-pmcard ac-pmcard--save" data-show="guest" aria-labelledby="pm-save-t"><span class="ac-pmcard__eb ac-pmcard__eb--mint">{esc(t("pm.save.eb"))}</span>'
             f'<h2 class="ac-pmcard__title" id="pm-save-t">{esc(t("pm.save.title"))}</h2><ul class="ac-pmchecks">{items}</ul>'
             f'<button type="button" class="ac-btn ac-btn--primary ac-btn--block ac-pmbtn" data-action="signup">{esc(t("pm.save.cta"))}</button>'
-            f'<span class="ac-pmcard__note">{esc(t("pm.save.note"))}</span></section>')
+            '</section>')
 
 
 def pm_upnext(t, base, pro):
@@ -430,24 +430,27 @@ def pm_mstats(t):
     return '<div class="ac-pm-mstats" data-pm-mstats data-show="member" hidden></div>'
 
 
-def pm_hero(t, base, L, first_href, h1=True):
-    tag = "h1" if h1 else "p"
-    lead = (f'<span class="ac-pmhero__lead-o">{esc(L["outcome"])} </span>'
-            f'{esc(t("pm.leadRest", chapters=len(L["chapters"]), lessons=L["lessons"]))}')
+def pm_hero(t, base, L, first_href, h1=True, path_map=False, attrs=""):
+    """The path card: one component wherever Trading Foundations appears (its path page, All paths, the home page).
+    SSR = the guest / not started state; learn-pages.js pmHero() fills the learner's state (progress, next step,
+    finished). path_map: adds the "Path map" button (everywhere but the path page itself)."""
+    tag = "h1" if h1 else "h2"
     facts = t("pm.facts", chapters=len(L["chapters"]), lessons=L["lessons"], ready=L["ready"], h=fmt_h(L["hours"] or 4))
     segs_html = segs(t, L)
-    return f'''<section class="ac-pmhero ac-pmhero--ltt has-art" style="{art_style(base, L["id"])}" data-pm-hero aria-labelledby="path-title">
+    pmap = (f'<a class="ac-pmbtn ac-pmbtn--ghost ac-pmbtn--lg" href="{href(base, L["id"])}" data-pm-map>{esc(t("home.pathMap"))}</a>'
+            if path_map else "")
+    return f'''<section class="ac-pmhero ac-pmhero--ltt has-art" style="{art_style(base, L["id"])}" data-pm-hero{attrs}>
     <div class="ac-pmhero__main">
       <div class="ac-pmhero__head">
         <span class="ac-pmhero__eb" data-pm-eb>{esc(t("pm.eb.free", n=PATH_N))}</span>
-        <{tag} id="path-title" class="ac-pmhero__title" data-pm-title>{esc(L["title"])}</{tag}>
-        <p class="ac-pmhero__lead" data-pm-lead>{lead}</p>
+        <{tag} class="ac-pmhero__title" data-pm-title>{esc(L["title"])}</{tag}>
+        <p class="ac-pmhero__lead" data-pm-lead>{esc(L["outcome"])}</p>
       </div>
       <p class="ac-pmhero__facts" data-pm-facts>{esc(facts)}</p>
       <div class="ac-pmhero__prog" data-pm-prog hidden><span class="ac-pmhero__count" data-pm-count></span>{segs_html}</div>
       <div class="ac-pmhero__ctas">
         <a class="ac-pmbtn ac-pmbtn--white ac-pmbtn--lg" href="{first_href}" data-pm-cta><span data-pm-cta-label>{esc(t("pm.cta.start", l=1))}</span>{icon("arrow", 18, 2.4)}</a>
-        <a class="ac-pmbtn ac-pmbtn--ghost ac-pmbtn--lg" href="{href(base, "paths")}" data-pm-cta2 hidden>{esc(t("pm.cta.explore"))}</a>
+        {pmap}<a class="ac-pmbtn ac-pmbtn--ghost ac-pmbtn--lg" href="{href(base, "paths")}" data-pm-cta2 hidden>{esc(t("pm.cta.explore"))}</a>
         <span class="ac-pmhero__note" data-pm-note>{esc(t("pm.note.guest"))}</span>
       </div>
     </div>
@@ -492,7 +495,6 @@ def merged_body(ctx, L, base, open_id=None):
 def routes(ctx):
     t = ctx.t
     L = ltt(ctx)
-    L["outcome"] = ctx.path["outcome"]
     route = L["id"]
     base = base_of(route, ctx.locale)
     p = ctx.path

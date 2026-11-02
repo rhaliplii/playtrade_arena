@@ -165,21 +165,41 @@
 .ac-guide-book__cover { display: block; width: 100%; height: auto; aspect-ratio: 595 / 842; }
 .ac-guide-copy, .ac-guide-copy__head { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
 .ac-guide-copy__head { gap: 8px; }
-.ac-guide-stats { display: flex; flex-wrap: wrap; gap: 16px 32px; }
+.ac-guide-stats { display: flex; flex-wrap: wrap; gap: 12px 28px; }
 .ac-guide-stat { display: flex; flex-direction: column; }
-.ac-guide-stat b { font: 800 24px/32px var(--ac-font); color: var(--ac-hero-text); }
-.ac-guide-stat span { font: 500 13px/18px var(--ac-font); color: var(--ac-hero-text-soft); }
-.ac-guide-form { display: flex; flex-direction: column; gap: 12px; max-width: 580px; padding: 20px; border-radius: var(--ac-r-tile); background: color-mix(in srgb, var(--ac-ink) 45%, transparent); box-shadow: inset 0 0 0 1px var(--ac-hero-chip); }
-.ac-guide-form:focus { outline: none; }
-.ac-guide-form__label { font: 700 14px/20px var(--ac-font); color: var(--ac-hero-text); }
-.ac-guide-form__row { display: flex; flex-wrap: wrap; gap: 12px; }
-.ac-guide-form__row input { flex: 1 1 220px; min-width: 0; height: 46px; padding: 0 20px; border: 0; border-radius: var(--ac-r-pill); background: var(--ac-ink); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); color: var(--ac-white); font: 500 15px var(--ac-font); color-scheme: dark; }
-.ac-guide-form__row input::placeholder { color: rgba(255,255,255,.55); }
-.ac-guide-form__row input:focus { outline: 2px solid var(--ac-white); outline-offset: 2px; }
-.ac-guide-form__row input[aria-invalid="true"] { box-shadow: inset 0 0 0 1.5px var(--ac-danger-ink); }
-.ac-guide-form__err { margin: -4px 0 0; font: 600 13px/18px var(--ac-font); color: var(--ac-white); }
-.ac-guide-form__free { display: inline-flex; align-items: center; gap: 6px; font: 600 13px/18px var(--ac-font); color: var(--ac-hero-text); }
-.ac-guide-done__text { font: 500 14px/20px var(--ac-font); color: var(--ac-hero-text-soft); }
+.ac-guide-stat b { font: 800 20px/26px var(--ac-font); color: var(--ac-hero-text); }
+.ac-guide-stat span { font: 500 12px/16px var(--ac-font); color: var(--ac-hero-text-soft); }
+.ac-guide-m { display: none; }
+/* the download: one white pill on the green hero (like the home hero's button); the guests' follow-up opens under it */
+.ac-guide-dl { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.ac-guide-dl__get { display: flex; }
+.ac-main .ac-guide-dl a.ac-guide-dl__btn { background: var(--ac-white); color: var(--ac-hero-btn-ink); font-weight: 600; white-space: nowrap; box-shadow: var(--ac-shadow-soft); }
+@media (hover: hover) { .ac-main .ac-guide-dl a.ac-guide-dl__btn:hover { background: color-mix(in srgb, var(--ac-white) 92%, var(--ac-hero-btn-ink)); } }
+.ac-guide-dl__btn:focus-visible { outline: 2px solid var(--ac-white); outline-offset: 3px; }
+.ac-guide-dl__short { display: none; }
+/* the copy column gets narrow between the phone layout and ~1000px (side nav + book): a smaller book, and the short
+   label when the column can't fit the long one, so the pill stays on one line and inside the hero */
+.ac-guide-copy { container-type: inline-size; }
+@media (min-width: 861px) and (max-width: 1000px) {
+  .ac-guide-hero { grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 28px; }
+  .ac-guide-book__body { width: 160px; }
+  .ac-guide-book__shadow { width: 150px; }
+}
+@container (max-width: 300px) {
+  .ac-main .ac-guide-dl a.ac-guide-dl__btn { padding-inline: 16px; font-size: 15px; }
+  .ac-guide-dl__long { display: none; }
+  .ac-guide-dl__short { display: inline; }
+}
+.ac-guide-next { display: flex; flex-direction: column; gap: 6px; max-width: 520px; margin-top: 20px; padding: 20px; border-radius: var(--ac-r-tile); background: color-mix(in srgb, var(--ac-ink) 45%, transparent); box-shadow: inset 0 0 0 1px var(--ac-hero-chip); animation: ac-guide-next .24s ease-out; }
+.ac-guide-next[hidden] { display: none; }
+.ac-guide-next__eb { font: 700 12px/16px var(--ac-font); letter-spacing: .08em; text-transform: uppercase; color: var(--ac-hero-text-soft); }
+.ac-guide-next__title { margin: 0; font: 700 18px/24px var(--ac-font); color: var(--ac-hero-text); }
+.ac-guide-next__text { margin: 0 0 8px; font: 500 14px/20px var(--ac-font); color: var(--ac-hero-text-soft); }
+.ac-guide-next__row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+.ac-main .ac-guide-next a.ac-guide-next__back { display: inline-flex; align-items: center; min-height: 44px; color: var(--ac-hero-text); font: 600 14px var(--ac-font); text-decoration: underline; text-underline-offset: 3px; }
+.ac-guide-next__back:focus-visible { outline: 2px solid var(--ac-white); outline-offset: 2px; border-radius: 4px; }
+@keyframes ac-guide-next { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ac-guide-next { animation: none; } }
 .ac-guide-inside { gap: 16px; }
 .ac-guide-chs { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
 .ac-guide-ch { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--ac-line); }
@@ -360,8 +380,30 @@ a.ac-search-item:hover { text-decoration: none !important; box-shadow: inset 0 0
   .ac-page-glossary .ac-gl-main { order: 0; }
   .ac-gl-banner, .ac-guide-doing { padding: 0 16px 0 20px; }
   .ac-gl-banner__rico, .ac-guide-doing__rico { height: 120px; }
-  .ac-guide-hero { grid-template-columns: minmax(0, 1fr); padding: 24px 20px; gap: 24px; }
-  .ac-guide-book__body { width: 190px; }
+  /* phones: a small tilted cover beside the eyebrow / title / short lead, compact stats, the pill above the fold */
+  .ac-guide-hero { grid-template-columns: 84px minmax(0, 1fr); align-items: start; gap: 16px; padding: 20px; }
+  .ac-guide-copy { display: contents; }
+  .ac-guide-book { padding: 4px 0 0; }
+  .ac-guide-book__shadow { display: none; }
+  .ac-guide-book__body { width: 84px; border-radius: 3px 6px 6px 3px; transform: perspective(600px) rotateY(-10deg); box-shadow: 6px 10px 18px rgba(0,0,0,.4); }
+  .ac-guide-book__spine { width: 6px; }
+  .ac-guide-copy__head { gap: 6px; }
+  .ac-guide-hero .ac-h1 { font-size: 24px; line-height: 30px; }
+  .ac-guide-hero .ac-lead { font-size: 14px; line-height: 20px; }
+  .ac-guide-stats, .ac-guide-dl { grid-column: 1 / -1; }
+  .ac-guide-stats { flex-wrap: nowrap; gap: 16px; }
+  .ac-guide-stat { flex-direction: row; align-items: baseline; gap: 4px; }
+  .ac-guide-stat b { font-size: 18px; line-height: 24px; }
+  .ac-guide-stat span { font-size: 13px; line-height: 18px; }
+  .ac-guide-d { display: none; }
+  .ac-guide-m { display: inline; }
+  .ac-guide-dl { align-items: stretch; }
+  .ac-guide-dl__get { flex-direction: column; }
+  .ac-main .ac-guide-dl a.ac-guide-dl__btn, .ac-guide-next__row .ac-btn { width: 100%; }
+  .ac-guide-dl__long { display: none; }
+  .ac-guide-dl__short { display: inline; }
+  .ac-guide-next { padding: 16px; }
+  .ac-guide-next__row { justify-content: center; }
   .ac-guide-doing { flex-wrap: wrap; }
   .ac-guide-doing__copy { flex-basis: 100%; padding-bottom: 0; }
   .ac-guide-doing__cta { align-self: center; margin-bottom: 20px; }
@@ -408,11 +450,6 @@ body:not([data-pro="1"]) .ac-pro-for-member { display: none !important; }
 .ac-pro-incl.ac-pro-for-free, .ac-pro-incl.ac-pro-for-member { flex-direction: row; }
 @media (max-width: 860px) { .ac-pro-incl.ac-pro-for-free, .ac-pro-incl.ac-pro-for-member { flex-wrap: wrap; } }
 
-/* ---------- Guide · send to another email */
-.ac-guide-again { align-self: flex-start; min-height: 44px; padding: 0; border: 0; background: none; color: var(--ac-hero-text); font: 600 14px var(--ac-font); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-.ac-guide-again:focus-visible { outline: 2px solid var(--ac-white); outline-offset: 2px; border-radius: 4px; }
-/* guide, signed in: no email gate (the head script marks the body before paint, so the form never flashes) */
-body[data-user="member"] .ac-guide-gate { display: none; }
 /* Pro path cards: the path's scene (design rico-path-art), Rico kept in frame */
 /* anchors (e.g. home "Rise from Rookie" → #how-ranks) land below the sticky top bar */
 .ac-page-how [id] { scroll-margin-top: 80px; }

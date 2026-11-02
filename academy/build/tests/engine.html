@@ -26,7 +26,7 @@
   // defaults: privacy and the guest goal
   eq("guest starts on the 1-lesson goal", [P.summary().goal.target, P.settings().goal], [1, "casual"]);
   eq("privacy defaults: Top Learners on, public profile off", [P.settings().leaderboard, P.settings().publicProfile], [true, false]);
-  eq("guest: only the path's first lesson", [P.canPlay("c1", "a1"), P.lockReason("c1", "a2").reason, P.canPlay("c1", "challenge")], [true, "guest", false]);
+  eq("guest: no lesson without an account (the quiz is the free taste)", [P.canPlay("c1", "a1"), P.lockReason("c1", "a1").reason, P.lockReason("c1", "a1").lesson, P.canPlay("c1", "challenge")], [false, "guest", "a1", false]);
   eq("XP constants exposed (no chapter Bonus)", [P.XP.finish, P.XP.firstTry, P.XP.challengeQ, P.XP.challengePerfect, "levelUp" in P.XP, typeof P.completeLevelUp, typeof P.openLevelUp], [60, 10, 30, 50, false, "undefined", "undefined"]);
 
   // levels
@@ -364,6 +364,40 @@
   eq("…once: a later load keeps the new ID", P.state().certificates[0].id, mc.id);
   eq("the old LTR- ID is not a certificate", L("LTR-AB12-CD34"), null);
   AC.auth.logOut(); AC.store.save(AC.auth.account(), guestRec);   // back to the guest record for the tests below
+
+  // guest onboarding: the 5-question quick challenge (waiting XP → credited on sign-up, once; skip to Chapter 2)
+  var keepGuest = AC.store.load("guest");
+  AC.store.clear("guest"); P.state();
+  eq("onboarding: a fresh guest has not taken it", [P.onboarding().state, P.onboarding().next, P.ONB.perRight, P.ONB.welcome], ["none", 0, 10, 20]);
+  var a0 = P.onbAnswer(0, 1, true), a0b = P.onbAnswer(0, 0, false);
+  eq("onboarding: an answer is final (a second answer to the same question is ignored)", [a0, a0b, P.onboarding().answers[0].correct, P.onboarding().state, P.onboarding().next], [{ xp: 10, first: true }, { xp: 0, first: false }, true, "progress", 1]);
+  eq("onboarding: finishing before all five are answered does nothing", P.onbFinish().state, "progress");
+  P.onbAnswer(1, 0, true); P.onbAnswer(2, 0, false); P.onbAnswer(3, 0, true); P.onbAnswer(4, 0, false);
+  var fin = P.onbFinish();
+  eq("onboarding: 3 of 5 → waiting 30 XP + 20 bonus, dated", [fin.state, fin.right, fin.xp, fin.bonus, fin.d], ["waiting", 3, 30, 20, P.day()]);
+  eq("onboarding: a guest is never credited (XP waits, no history, no streak)", [P.onbCredit().xp, P.summary().xp, P.summary().started, P.summary().streak], [0, 0, false, 0]);
+  eq("onboarding: once only — answers after the finish are ignored", [P.onbAnswer(1, 2, false).first, P.onboarding().right], [false, 3]);
+  var onbUser = AC.auth.signUp("Onb One", "onb1@example.com");
+  var os = P.onboarding(), hist = P.state().history.map(function (h) { return h.src + ":" + h.xp; });
+  eq("onboarding: sign-up merges and credits 30 + 20 once, Day 1 streak", [AC.auth.account() === onbUser.id, os.state, os.creditedXp, P.summary().xp, hist, P.summary().streak], [true, "credited", 50, 50, ["onboarding:30", "welcome:20"], 1]);
+  eq("onboarding: crediting again pays nothing", [P.onbCredit().xp, P.summary().xp], [0, 50]);
+  eq("onboarding XP is not lesson or Chapter XP", [P.chapterXp("c1").total, P.summary().lessonsDone], [0, 0]);
+  P.startLesson("a1"); P.answer("a1", "call", true); var cl = P.completeLesson("a1", { chapter: "c1" });
+  eq("onboarding: the first lesson the same day keeps Day 1 (no double count)", [cl.xp, P.summary().streak], [70, 1]);
+  eq("onboarding: the account keeps its result through a progress reset", (P.reset(), P.onboarding().state), "credited");
+  eq("onboarding: Chapter 2 still waits for the Chapter 1 Challenge (no skipping)", P.lockReason("c2", "b1").reason, "chapter");
+  AC.auth.logOut(); AC.store.clear("guest");
+  AC.auth.logIn("nob@example.com"); P.startLesson("a1"); P.completeLesson("a1", { chapter: "c1" });   // an account with progress, no challenge
+  var nobXp = P.summary().xp;
+  AC.auth.logOut(); AC.store.clear("guest"); P.state();
+  [0, 1, 2, 3, 4].forEach(function (i) { P.onbAnswer(i, 0, true); }); P.onbFinish();
+  AC.auth.logIn("nob@example.com");
+  eq("onboarding: logging in to an account that never took it brings the result over (5/5 → 70)", [P.onboarding().state, P.onboarding().right, P.summary().xp - nobXp, !!(AC.store.load("guest") || {}).onboarding], ["credited", 5, 70, false]);
+  AC.auth.logOut(); AC.store.clear("guest"); P.state();
+  [0, 1, 2, 3, 4].forEach(function (i) { P.onbAnswer(i, 0, false); }); P.onbFinish();
+  AC.auth.logIn("onb1@example.com");
+  eq("onboarding: an account that already took it keeps its own result", [P.onboarding().right, P.onboarding().creditedXp], [3, 50]);
+  AC.auth.logOut(); AC.store.clear("guest"); if (keepGuest) AC.store.save("guest", keepGuest); P.state();
 
   // previews: a sandboxed engine never saves
   var xpBefore = P.summary().xp;

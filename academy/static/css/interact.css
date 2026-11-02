@@ -8,7 +8,7 @@
 /* ---- keyboard focus */
 .ac-body :focus-visible { outline: 2px solid var(--ac-focus); outline-offset: 2px; }
 .ac-body :is(.ac-pcard, .ac-pro-path, .me-nextpath, .me-link, .ac-side--link, .ac-rankmini, .ac-gl-card, .ac-gl-lesson, a.ac-search-item,
-  .ac-search-term, .ac-how-you, .ac-mh__chcard, .ac-pmtool, .ac-pmup, .ac-podium, .ac-guidepromo__cover, .ac-opt, .ac-pl__opt, .ac-step):focus-visible { outline-offset: 3px; }
+  .ac-search-term, .ac-how-you, .ac-pmtool, .ac-pmup, .ac-podium, .ac-guidepromo__cover, .ac-opt, .ac-pl__opt, .ac-step):focus-visible { outline-offset: 3px; }
 
 /* ---- buttons */
 .ac-btn, .ac-pmbtn, .ac-chipbtn, .ac-filter, .ac-search-tab, .ac-gl-cat, .ac-set-goal, .ac-ref-chip, .ac-pmterm, .ac-v__reveal,
@@ -21,6 +21,10 @@
 .ac-btn--ghost:not([disabled]):hover { background: var(--ac-surface-hover); box-shadow: inset 0 0 0 1.5px var(--ac-line-strong); }
 .ac-btn--pro:hover, .ac-pmbtn--pro:hover { background: color-mix(in srgb, var(--ac-pro) 86%, black); }
 .ac-btn--soft:hover { background: color-mix(in srgb, var(--ac-primary-ink) 22%, transparent); }
+/* every button lifts 1px on hover (same as the path buttons, .ac-pmbtn) and presses down when clicked */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.ac-reduce-motion) .ac-btn:not([disabled]):not([aria-disabled="true"]):hover { transform: translateY(-1px); }
+}
 .ac-btn:not([disabled]):not([aria-disabled="true"]):active { transform: translateY(1px); }
 
 /* ---- chips, tabs, choices (selected ones keep their look) */
@@ -36,7 +40,7 @@
 /* ---- list rows and icon buttons */
 .ac-deep__btn:hover, .ac-player__btn:hover { background: var(--ac-surface-hover); }
 .ac-share__x:hover { background: var(--ac-surface-hover); color: var(--ac-text); }
-.ac-mh__all:hover, .ac-pm-mback:hover { color: var(--ac-text) !important; }
+.ac-pm-mback:hover { color: var(--ac-text) !important; }
 .ac-titlelink:hover { color: var(--ac-primary-ink) !important; }
 /* home section titles are links (title + chevron): the title turns green with the chevron */
 .ac-titlelink h2 { transition: color .15s ease; }
@@ -50,7 +54,7 @@ html.ac-reduce-motion .ac-titlelink svg { transition: none; transform: none !imp
 
 /* ---- link cards: lift, glow, light edge, artwork zoom */
 .ac-pcard, .ac-pro-path, .me-nextpath, .me-link, .ac-side--link, .ac-rankmini, .ac-gl-card, .ac-gl-lesson, a.ac-search-item,
-.ac-search-term, .ac-how-you, .ac-mh__chcard, .ac-pmtool, .ac-pmup {
+.ac-search-term, .ac-how-you, .ac-pmtool, .ac-pmup {
   transition: transform .2s ease, box-shadow .25s ease, background-color .15s ease;
 }
 .ac-pcard__cover img, .ac-pro-path__rico, .me-nextpath__cover img { transition: transform .4s ease; transform-origin: 75% 100%; }
@@ -66,24 +70,24 @@ html.ac-reduce-motion .ac-titlelink svg { transition: none; transform: none !imp
   .ac-pcard:hover .ac-pcard__cover img, .ac-pro-path:hover .ac-pro-path__rico, .me-nextpath:hover .me-nextpath__cover img { transform: scale(1.04); }
   .ac-guidepromo__cover:hover { transform: rotate(-6deg) translateY(-4px); }
 }
-.ac-mh__chcard:active, .ac-pmup:active { transform: scale(.99); }
+.ac-pmup:active { transform: scale(.99); }
 
 @media (prefers-reduced-motion: reduce) {
   .ac-btn, .ac-pmbtn, .ac-pcard, .ac-pro-path, .me-nextpath, .me-link, .ac-side--link, .ac-rankmini, .ac-gl-card, .ac-gl-lesson, a.ac-search-item,
-  .ac-search-term, .ac-how-you, .ac-mh__chcard, .ac-pmtool, .ac-pmup, .ac-guidepromo__cover,
+  .ac-search-term, .ac-how-you, .ac-pmtool, .ac-pmup, .ac-guidepromo__cover,
   .ac-pcard__cover img, .ac-pro-path__rico, .me-nextpath__cover img { transition: none !important; }
   .ac-body :is(.ac-pcard, .ac-pro-path, .me-nextpath, .me-link, .ac-side--link, .ac-rankmini, .ac-gl-card, .ac-gl-lesson, a.ac-search-item,
-    .ac-search-term, .ac-how-you, .ac-pmtool, .ac-pmup, .ac-btn):is(:hover, :active) { transform: none; }
+    .ac-search-term, .ac-how-you, .ac-pmtool, .ac-pmup, .ac-btn, .ac-pmbtn):is(:hover, :active) { transform: none; }
   .ac-pcard:hover .ac-pcard__cover img, .ac-pro-path:hover .ac-pro-path__rico, .me-nextpath:hover .me-nextpath__cover img { transform: none; }
   .ac-guidepromo__cover:hover { transform: rotate(-6deg); }
 }
 
 /* the same, when the learner turns on Settings › Reduce motion (html.ac-reduce-motion) */
 html.ac-reduce-motion :is(.ac-btn, .ac-pmbtn, .ac-pcard, .ac-pro-path, .me-nextpath, .me-link, .ac-side--link, .ac-rankmini, .ac-gl-card, .ac-gl-lesson, a.ac-search-item,
-  .ac-search-term, .ac-how-you, .ac-mh__chcard, .ac-pmtool, .ac-pmup, .ac-guidepromo__cover,
+  .ac-search-term, .ac-how-you, .ac-pmtool, .ac-pmup, .ac-guidepromo__cover,
   .ac-pcard__cover img, .ac-pro-path__rico, .me-nextpath__cover img) { transition: none !important; }
 html.ac-reduce-motion .ac-body :is(.ac-pcard, .ac-pro-path, .me-nextpath, .me-link, .ac-side--link, .ac-rankmini, .ac-gl-card, .ac-gl-lesson, a.ac-search-item,
-  .ac-search-term, .ac-how-you, .ac-pmtool, .ac-pmup, .ac-btn):is(:hover, :active) { transform: none; }
+  .ac-search-term, .ac-how-you, .ac-pmtool, .ac-pmup, .ac-btn, .ac-pmbtn):is(:hover, :active) { transform: none; }
 html.ac-reduce-motion :is(.ac-pcard:hover .ac-pcard__cover img, .ac-pro-path:hover .ac-pro-path__rico, .me-nextpath:hover .me-nextpath__cover img) { transform: none; }
 html.ac-reduce-motion .ac-guidepromo__cover:hover { transform: rotate(-6deg); }
 

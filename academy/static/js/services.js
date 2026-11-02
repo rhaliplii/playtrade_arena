@@ -52,6 +52,10 @@
     clearPreview();
     // a new account (or one without progress yet) keeps what the learner did as a guest
     if (AC.progress && !AC.store.load(user.id)) AC.progress.mergeGuestInto(user.id, from);
+    // an account that already has progress takes over only the guest's quick-challenge result (if it never took it)
+    else if (AC.progress && AC.progress.onbAdopt) AC.progress.onbAdopt(from);
+    // the quick challenge's waiting XP + welcome bonus are credited now (once per account; nothing to do without one)
+    if (AC.progress && AC.progress.onbCredit) AC.progress.onbCredit();
   }
 
   AC.auth = {

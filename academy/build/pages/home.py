@@ -1,15 +1,18 @@
 """Academy home (/academy). One page, three states:
    guest    — SSR in full (the SEO page): hero, how it works, the path map, Pro paths, ranks, Top Learners, Go further with Pro, Ready when you are + guide.
-   new      — [data-show="new"]: signed in, nothing played yet (start hero naming the path, the chapter list).
-   learning — [data-show="learning"]: continue hero, path progress, where to go next.
-   phones   — signed-in learners get the chapter view (Home-Mobile-Path-v3) instead of new / learning.
+   new      — [data-show="new"]: signed in, nothing played yet.
+   learning — [data-show="learning"]: mid-path (+ the Pro paths under the grid).
+   Signed in, one layout at every width (phones stack the two columns): greeting, path card, what's ahead, then Today,
+   rank, Rico's Gym, Top Learners (the side column).
+   The path card (path.py pm_hero, filled by learn-pages.js pmHero) is the same component as on the path page and All
+   paths, on desktop and phones.
 The "Your day" aside, greetings and every learner number are filled by learn-pages.js from AC.progress."""
 import json
 
 import lib
 from lib import esc
-from pages.path import (art_picture, art_key, fmt_h, base_of, CSS, JS, RANKS, LESSON_XP, PATH_COINS, ltt, learn_data, icon, rico_src, href, lesson_route, challenge_xp, chips, disclaimer,
-                        pm_sheet)
+from pages.path import (art_picture, art_key, fmt_h, base_of, CSS, JS, RANKS, LESSON_XP, ltt, learn_data, icon, rico_src, href, lesson_route, challenge_xp, chips, disclaimer,
+                        pm_hero)
 from pages.certificates import cert_paths, CERT_CSS
 
 POSE_BY_KEY = [("investor", "thumbs"), ("portfolio", "front"), ("technical", "detective"), ("crypto", "point"), ("option", "think"), ("macro", "point2"), ("risk", "think"), ("compan", "hero")]
@@ -342,6 +345,14 @@ def routes(ctx):
     n_ch = len(L["chapters"])
     pros = [p for p in pro_paths(ctx) if p.get("status") != "soon"][:3]
     pro_grid = "".join(pro_card(t, base, p, lazy=False) for p in pros)   # eager: phones show them in a swipe row
+
+    def pro_section(key):
+        """The Pro paths section, one component (the landing page and the signed-in home): a grid on desktop, a swipe
+        row with dots on phones. key keeps its ids unique (both copies are in the page)."""
+        return (f'<section class="ac-prosec ac-prosec--row" aria-labelledby="{key}-title">'
+                f'<div class="ac-section-head">{title_link(base, "paths", key + "-title", t("home.pro.title"), "ac-h1")}<p class="ac-lead ac-m-only">{esc(t("home.pro.soon"))}</p></div>'
+                f'<div class="ac-pgrid" data-swipe="{key}-dots">{pro_grid}</div>'
+                f'<div class="ac-dots ac-m-only" id="{key}-dots" aria-hidden="true"></div></section>')
     hero_chips = [t("home.chip.free"), t("home.chip.chapters", n=n_ch), t("home.chip.lessons", n=L["lessons"], ready=L["ready"]), t("home.chip.cert")]
 
     # ---------------------------------------------------------------- guest (SSR, SEO)
@@ -351,10 +362,10 @@ def routes(ctx):
       <img class="ac-ghero__rico-m" src="{rico_src(base, "present")}" alt="" width="230" height="230">
       <span class="ac-ghero__eb" data-gh-eb hidden></span>
       <h1 id="hero-title" class="ac-ghero__title"><span>{esc(t("home.hero.title1"))}</span><br><span>{esc(t("home.hero.title2"))}</span></h1>
-      <p class="ac-ghero__lead">{esc(t("home.hero.lead"))}</p>
+      <p class="ac-ghero__lead">{esc(t("onb.hero.lead"))}</p>
       <div class="ac-ghero__ctas">
-        <a class="ac-btn ac-btn--white ac-btn--lg ac-ghero__start" href="{href(base, first_r)}" data-gh-cta><span data-gh-cta-label>{esc(t("home.hero.cta"))}</span>{icon("chev", 16, 2.5)}</a>
-        <a class="ac-btn ac-btn--outline-light ac-btn--lg ac-ghero__paths" href="{href(base, "paths")}">{esc(t("home.hero.paths"))}</a>
+        <a class="ac-btn ac-btn--white ac-btn--lg ac-ghero__start" href="{href(base, "start")}" data-gh-cta><span data-gh-cta-label>{esc(t("onb.hero.cta"))}</span>{icon("chev", 16, 2.5)}</a>
+        <a class="ac-btn ac-btn--outline-light ac-btn--lg ac-ghero__paths" href="{href(base, L["id"])}">{esc(t("home.hero.learn"))}</a>
       </div>
       <ul class="ac-ghero__chips">{"".join(f"<li>{esc(c)}</li>" for c in hero_chips)}</ul>
     </div>
@@ -373,11 +384,7 @@ def routes(ctx):
     {learn_list(t, base, L)}
     {cert_card(t, base, L)}
   </section>
-  <section class="ac-prosec" aria-labelledby="pro-title">
-    <div class="ac-section-head">{title_link(base, "paths", "pro-title", t("home.pro.title"), "ac-h1")}<p class="ac-lead ac-m-only">{esc(t("home.pro.soon"))}</p></div>
-    <div class="ac-pgrid" data-swipe="pro-dots">{pro_grid}</div>
-    <div class="ac-dots ac-m-only" id="pro-dots" aria-hidden="true"></div>
-  </section>
+  {pro_section("pro")}
   <section class="ac-top" aria-labelledby="tl-title" data-top-board>
     <div class="ac-section-head">{title_link(base, "leaderboard", "tl-title", t("home.top.title"), "ac-h1")}
       <p class="ac-lead">{esc(t("home.top.lead"))}</p></div>
@@ -404,41 +411,18 @@ def routes(ctx):
   <div class="ac-ghsticky" data-gh-sticky inert><a class="ac-btn ac-btn--primary ac-btn--lg" href="{href(base, first_r)}" data-gh-sticky-cta><span data-gh-cta-label>{esc(t("home.hero.cta"))}</span></a></div>
 </div>'''
 
-    # ---------------------------------------------------------------- new (signed in, not started)
-    def ch_item(c, i):
-        sub = t("path.lessons", n=c["count"])
-        if i == 0:
-            return (f'<li><a class="ac-chlist__item is-first" href="{href(base, first_r)}"><span class="ac-chlist__n">{c["n"]}</span>'
-                    f'<span class="ac-chlist__text"><b>{esc(c["title"])}</b><span>{esc(t("home.new.startHere", lessons=sub))}</span></span>{icon("chev", 16, 2.5)}</a></li>')
-        soon = not c["available"]
-        return (f'<li><a class="ac-chlist__item{" is-soon" if soon else ""}" href="{href(base, L["id"] + "/" + c["id"])}"><span class="ac-chlist__n">{c["n"]}</span>'
-                f'<span class="ac-chlist__text"><span class="ac-chlist__title">{esc(c["title"])}</span><span>{esc(t("home.new.soon", lessons=sub) if soon else sub)}</span></span></a></li>')
-    half = (n_ch + 1) // 2
-    cl = L["chapters"]
-    chlist = (f'<ol class="ac-chlist__col">{"".join(ch_item(c, i) for i, c in enumerate(cl[:half]))}</ol>'
-              f'<ol class="ac-chlist__col" start="{half + 1}">{"".join(ch_item(c, i + half) for i, c in enumerate(cl[half:]))}</ol>')
-    first_meta = t("home.new.meta", n=first_c["n"], chapter=first_c["title"], min=first_l["minutes"], xp=LESSON_XP) if first_l else ""
+    # ---------------------------------------------------------------- signed in: new (nothing played yet) and learning
+    # the path card (one component: path page, All paths, here); filled with the learner's state by learn-pages.js pmHero
+    path_card = pm_hero(t, base, L, href(base, first_r), h1=False, path_map=True)
+    # what's ahead on the path: this chapter's Challenge, the next skill, the certificate (learn-pages.js pathProgress)
+    miles_card = (f'<section class="ac-card ac-pathprog"><h2 class="ac-side__title">{esc(t("home.miles.title"))}</h2>'
+                  f'<div class="ac-miles" data-pp-miles></div></section>')
     new = f'''<div class="ac-home ac-home--member" data-show="new" hidden>
   <header class="ac-sechead"><h1 class="ac-h1" data-greet-new>{esc(t("home.new.title", name=""))}</h1><p class="ac-lead">{esc(t("home.new.sub", min=first_l["minutes"] if first_l else 4))}</p></header>
   <div class="ac-homegrid">
     <div class="ac-homegrid__main">
-      <section class="ac-chero" aria-labelledby="start-title">
-        <div class="ac-chero__main">
-          <span class="ac-chero__eyebrow">{esc(t("home.new.eyebrow", path=L["title"]))}</span>
-          <h2 id="start-title" class="ac-chero__title">{esc(first_l["title"] if first_l else "")}</h2>
-          <span class="ac-chero__meta">{esc(first_meta)}</span>
-          <div class="ac-chero__ctas"><a class="ac-btn ac-btn--white ac-btn--lg" href="{href(base, first_r)}">{esc(t("home.new.start"))}{icon("chev", 16, 2.5)}</a>
-            <a class="ac-btn ac-btn--outline-light ac-btn--lg" href="{href(base, "placement")}">{esc(t("home.new.placement"))}</a></div>
-          <span class="ac-chero__tip" data-new-tip hidden>{esc(t("home.new.placementTip"))}</span>
-        </div>
-        <img class="ac-chero__rico" src="{rico_src(base, "present")}" alt="{esc(t("home.new.ricoAlt"))}" width="224" height="224">
-      </section>
-      <section class="ac-card ac-firstpath" aria-labelledby="fp-title">
-        <div class="ac-section-head"><div class="ac-sechead"><div class="ac-row ac-row--tight">{title_link(base, L["id"], "fp-title", t("home.new.path", title=L["title"]))}<span class="ac-chip ac-chip--mint ac-chip--xs">{esc(t("path.free"))}</span></div>
-          <span class="ac-small ac-muted">{esc(t("home.new.pathSub", n=n_ch, lessons=L["lessons"], ready=L["ready"], h=fmt_h(L["hours"] or 4)))}</span></div></div>
-        <div class="ac-chlist">{chlist}</div>
-        <div class="ac-finishbar"><span class="ac-iconbox ac-iconbox--gold">{icon("award", 18, 2)}</span><span>{lib.rich(t("home.new.finish", coins=lib.fmt_num(PATH_COINS)))}</span></div>
-      </section>
+      {path_card}
+      {miles_card}
     </div>
     <aside class="ac-homegrid__aside" aria-label="{esc(t("home.aside"))}" data-home-aside></aside>
   </div>
@@ -449,37 +433,15 @@ def routes(ctx):
   <header class="ac-sechead"><h1 class="ac-h1" data-greet></h1><p class="ac-lead" data-greet-sub></p></header>
   <div class="ac-homegrid">
     <div class="ac-homegrid__main">
-      <section class="ac-chero" aria-labelledby="continue-title" data-continue>
-        <div class="ac-chero__main">
-          <span class="ac-chero__eyebrow" data-c-eyebrow></span>
-          <h2 id="continue-title" class="ac-chero__title" data-c-title></h2>
-          <div class="ac-chero__prog" data-c-prog><div class="ac-chero__progmeta"><span data-c-meta></span><span data-c-left></span></div><div class="ac-cardbar ac-cardbar--hero" data-c-bar aria-hidden="true"></div></div>
-          <span class="ac-chero__meta" data-c-meta2 hidden></span>
-          <div class="ac-chero__ctas"><a class="ac-btn ac-btn--white ac-btn--lg" data-c-cta href="{href(base, first_r)}"><span data-c-cta-label></span>{icon("chev", 16, 2.5)}</a>
-            <a class="ac-btn ac-btn--outline-light ac-btn--lg ac-chero__second" data-c-ch href="{href(base, L["id"])}">{esc(t("home.learn.overview"))}</a></div>
-        </div>
-        <img class="ac-chero__rico" src="{rico_src(base, "point2")}" alt="{esc(t("home.learn.ricoAlt"))}" width="224" height="224">
-      </section>
-      <section class="ac-card ac-pathprog" aria-labelledby="pp-title">
-        <div class="ac-section-head"><div class="ac-sechead"><div class="ac-row ac-row--tight">{title_link(base, L["id"], "pp-title", L["title"])}<span class="ac-chip ac-chip--mint ac-chip--xs">{esc(t("path.free"))}</span></div>
-          <span class="ac-small ac-muted" data-pp-count></span></div></div>
-        <ol class="ac-seg ac-seg--dark" aria-label="{esc(t("path.segAria"))}">{"".join(f'<li class="ac-seg__item{" ac-seg__item--plan" if c is cl[-1] else ""}" data-seg="{esc(c["id"])}"><span class="ac-seg__bar"><span style="width:0%"></span></span><span class="ac-seg__label">{esc(c["short"])}</span></li>' for c in cl)}</ol>
-        <div class="ac-miles" data-pp-miles></div>
-      </section>
-      <section class="ac-prosec" aria-labelledby="more-title">
-        <div class="ac-section-head">{title_link(base, "paths", "more-title", t("home.pro.title"), "ac-h1")}</div>
-        <div class="ac-pgrid">{pro_grid}</div>
-      </section>
+      {path_card}
+      {miles_card}
     </div>
     <aside class="ac-homegrid__aside" aria-label="{esc(t("home.aside"))}" data-home-aside></aside>
   </div>
+  {pro_section("more")}
 </div>'''
 
-    # ---------------------------------------------------------------- phones, signed in: the current chapter (canvas Home-Mobile-Path-v3)
-    # Filled by learn-pages.js from AC.progress; hidden on desktop. the path title opens the full path page.
-    mobile = f'<section class="ac-mh" data-mh data-show="new learning" aria-label="{esc(t("home.mtrail.aria"))}" hidden></section>{pm_sheet(t)}'
-
-    body = f'<div class="ac-wrap ac-lp ac-home-wrap" data-home>{guest}{mobile}{new}{learning}{disclaimer(t)}</div>'
+    body = f'<div class="ac-wrap ac-lp ac-home-wrap" data-home>{guest}{new}{learning}{disclaimer(t)}</div>'
     ld = [{"@context": "https://schema.org", "@type": "WebPage", "name": t("home.meta.title"), "description": t("home.meta.desc"),
            "url": f"{lib.ORIGIN}/academy/", "isPartOf": {"@type": "WebSite", "name": "Profit.com", "url": lib.ORIGIN}},
           {"@context": "https://schema.org", "@type": "Course", "name": L["title"], "description": ctx.path["outcome"],

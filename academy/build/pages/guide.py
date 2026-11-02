@@ -1,14 +1,13 @@
-"""The free guide (/academy/guide): "Learn to Trade with Rico" PDF behind an email gate. SSR; ref-pages.js
-checks the email, shows the download and remembers that this browser already got the guide."""
+"""The free guide (/academy/guide): "Learn to Trade with Rico" PDF, a direct download for everyone (no email, no
+sign-up: the Academy sells the platform, not the PDF). The link is a plain link that opens the PDF in a new tab, so it works without JS;
+ref-pages.js adds the guests-only "practice what's inside" follow-up after the click."""
 import lib
 from lib import esc
 from pages.how import base_of, faq_grid, faq_jsonld, img
 
 PDF = "static/guide/learn-to-trade-with-rico.pdf"   # relative to academy/
-PAGES = 80                                         # pages in that PDF (v69)
 
-CHECK = ('<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" '
-         'stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>')
+
 CHEVRON = ('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" '
            'stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>')
 DOWNLOAD = ('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" '
@@ -22,17 +21,21 @@ def routes(ctx):
     chapters = ctx.path["chapters"]
     n = len(chapters)
 
-    stats = [(lib.fmt_num(PAGES), t("guide.stat.pages")), (lib.fmt_num(n), t("guide.stat.chapters")),
-             (t("guide.stat.free"), t("guide.stat.freeNote"))]
-    stats_html = "".join(f'<div class="ac-guide-stat"><b class="ac-num">{esc(a)}</b><span>{esc(b)}</span></div>' for a, b in stats)
+    stats = [(lib.fmt_num(n), t("guide.stat.chapters")), (t("guide.stat.free"), t("guide.stat.freeNote"))]
+    # phones: one compact row ("10 chapters · Free"); the Free stat's note is desktop-only (.ac-guide-d)
+    note_cls = ["", ' class="ac-guide-d"']
+    stats_html = "".join(f'<div class="ac-guide-stat"><b class="ac-num">{esc(a)}</b><span{note_cls[i]}>{esc(b)}</span></div>'
+                         for i, (a, b) in enumerate(stats))
 
     inside = "".join(f'''<li class="ac-guide-ch"><span class="ac-guide-ch__n ac-num">{c["n"]}</span>
   <span class="ac-guide-ch__text"><b>{esc(c["title"])}</b><span>{esc(c.get("promise") or c["short"])}</span></span></li>''' for c in chapters)
 
     first = next((c for c in chapters if c.get("available")), None)
-    start = f'{base}{ctx.path["id"]}/index.html'
+    start, first_id, mins = f'{base}{ctx.path["id"]}/index.html', "", 4
     if first and ctx.chapters.get(first["id"], {}).get("lessons"):
-        start = f'{base}{ctx.path["id"]}/{first["id"]}/{ctx.chapters[first["id"]]["lessons"][0]}/index.html'
+        first_id = ctx.chapters[first["id"]]["lessons"][0]
+        start = f'{base}{ctx.path["id"]}/{first["id"]}/{first_id}/index.html'   # = the home hero's "Start learning free"
+        mins = ctx.lessons[first_id].get("minutes") or mins                      # Lesson 1's own minutes, as on the home Ready card
 
     body = f'''<div class="ac-wrap ac-ref">
   <section class="ac-guide-hero" aria-labelledby="guide-title">
@@ -44,32 +47,25 @@ def routes(ctx):
     <div class="ac-guide-copy">
       <div class="ac-guide-copy__head">
         <span class="ac-eyebrow">{esc(t("guide.eyebrow"))}</span>
-        <h1 id="guide-title" class="ac-h1">{esc(t("guide.title.1"))}<br>{esc(t("guide.title.2"))}</h1>
-        <p class="ac-lead">{esc(t("guide.lead"))}</p>
+        <h1 id="guide-title" class="ac-h1"><span class="ac-guide-d">{esc(t("guide.title.1"))}<br>{esc(t("guide.title.2"))}</span><span class="ac-guide-m">{esc(t("guide.title.short"))}</span></h1>
+        <p class="ac-lead"><span class="ac-guide-d">{esc(t("guide.lead"))}</span><span class="ac-guide-m">{esc(t("guide.leadShort"))}</span></p>
       </div>
       <div class="ac-guide-stats">{stats_html}</div>
-      <div class="ac-guide-gate" data-show="guest">
-      <form class="ac-guide-form" aria-label="{esc(t("guide.form.aria"))}" data-guide-form novalidate>
-        <label class="ac-guide-form__label" for="guide-email">{esc(t("guide.form.label"))}</label>
-        <div class="ac-guide-form__row">
-          <input id="guide-email" name="email" type="email" placeholder="{esc(t("guide.form.placeholder"))}" autocomplete="email" required aria-describedby="guide-err">
-          <button type="submit" class="ac-btn ac-btn--white">{esc(t("guide.form.cta"))}</button>
+      <div class="ac-guide-dl">
+        <div class="ac-guide-dl__get">
+          <a class="ac-btn ac-btn--lg ac-guide-dl__btn" href="{base}{PDF}" target="_blank" rel="noopener" data-guide-dl>{DOWNLOAD}<span class="ac-guide-dl__long">{esc(t("guide.dl.cta"))}</span><span class="ac-guide-dl__short">{esc(t("guide.dl.ctaShort"))}</span></a>
         </div>
-        <p class="ac-guide-form__err" id="guide-err" role="alert" hidden>{esc(t("guide.form.invalid"))}</p>
-        <span class="ac-guide-form__free">{CHECK}{esc(t("guide.form.free"))}</span>
-      </form>
-      <div class="ac-guide-form ac-guide-done" data-guide-done hidden tabindex="-1" aria-live="polite">
-        <b class="ac-guide-form__label">{esc(t("guide.done.title"))}</b>
-        <span class="ac-guide-done__text" data-guide-sent hidden></span>
-        <div class="ac-row"><a class="ac-btn ac-btn--white" href="{base}{PDF}" download>{DOWNLOAD}{esc(t("guide.done.cta"))}</a>
-          <span class="ac-guide-done__text">{esc(t("guide.done.size", n=PAGES))}</span></div>
-        <button type="button" class="ac-guide-again" data-guide-again>{esc(t("guide.done.again"))}</button>
-      </div>
-      </div>
-      <div class="ac-guide-form ac-guide-member" data-show="member" hidden aria-live="polite">
-        <b class="ac-guide-form__label">{esc(t("guide.member.title"))}</b>
-        <div class="ac-row"><a class="ac-btn ac-btn--white" href="{base}{PDF}" download data-guide-dl>{DOWNLOAD}{esc(t("guide.done.cta"))}</a></div>
-        <span class="ac-guide-done__text">{esc(t("guide.done.size", n=PAGES))}</span>
+        <div class="ac-guide-next-live" aria-live="polite" data-guide-next-live>
+          <div class="ac-guide-next" data-guide-next data-first="{esc(first_id)}" hidden>
+            <span class="ac-guide-next__eb">{esc(t("guide.next.eyebrow"))}</span>
+            <h2 class="ac-guide-next__title">{esc(t("guide.next.title"))}</h2>
+            <p class="ac-guide-next__text" data-guide-next-text>{esc(t("guide.next.text", n=mins))}</p>
+            <div class="ac-guide-next__row">
+              <a class="ac-btn ac-btn--primary" href="{start}" data-guide-next-cta>{esc(t("home.hero.cta"))}{CHEVRON}</a>
+              <a class="ac-guide-next__back" href="{base}index.html">{esc(t("guide.next.back"))}</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -94,7 +90,7 @@ def routes(ctx):
 
     ld = [faq_jsonld(t, "guide.faq", 3, n=n),
           {"@context": "https://schema.org", "@type": "Book", "name": "Learn to Trade with Rico", "bookFormat": "https://schema.org/EBook",
-           "numberOfPages": PAGES, "inLanguage": "en", "isAccessibleForFree": True,
+           "inLanguage": "en", "isAccessibleForFree": True,
            "publisher": {"@type": "Organization", "name": "Profit.com"}, "description": t("guide.lead")}]
     yield route, lib.page(t, route=route, title=t("guide.meta.title"), description=t("guide.meta.description", n=n), body=body,
                           active="none", index=True, css=("ref-pages.css",), js=("ref-pages.js",), body_class="ac-page-guide",

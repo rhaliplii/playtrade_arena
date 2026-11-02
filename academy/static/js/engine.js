@@ -30,6 +30,10 @@
   var COINS = { challenge: 50, path: 500 };
   var COINS_PATH = COINS.path;
   var GOALS = { casual: 1, regular: 2, serious: 4 };
+  // Guest onboarding (the 5-question quick challenge, /academy/start): 10 XP per right answer plus a one-time welcome
+  // bonus. Held as "waiting" on the guest record and credited only after sign-up, once per account. Separate from the
+  // path: it is never part of a lesson, a chapter or the path's 7,600 XP maximum (history src "onboarding" / "welcome").
+  var ONB = { perRight: 10, welcome: 20, questions: 5 };
   var MILESTONES = { 7: 100, 30: 250, 100: 500, 365: 1000 };
   var GYM_MAX = 5, FREEZE_MAX = 2;
   var PLAN_KEYS = ["style", "entry", "risk", "checklist", "review"];
@@ -242,7 +246,7 @@
     state: function () { load(); rollStreak(); return rec; },
     onChange: function (fn) { listeners.push(fn); },
     /** Wipe the learner's Academy progress (XP, lessons, chapters, Gym, notes, plan, streak). Keeps the account and settings. */
-    reset: function () { load(); var keep = rec.settings, onb = rec.onboarded; rec = blank(isGuestAcc(account)); rec.settings = keep; rec.onboarded = onb; rec.wiped = day(); save(); },
+    reset: function () { load(); var keep = rec.settings, onb = rec.onboarded, quick = rec.onboarding; rec = blank(isGuestAcc(account)); rec.settings = keep; rec.onboarded = onb; if (quick) rec.onboarding = quick; rec.wiped = day(); save(); },
     /** Design previews: from now on work on an in-memory copy; nothing is saved. */
     sandbox: function () { load(); rec = JSON.parse(JSON.stringify(rec)); sandboxed = true; },
 
@@ -331,7 +335,8 @@
     },
     /** The one gate for lessons and Challenges. what: a lesson id | "challenge". */
     canPlay: function (chapterId, what) { return !P.lockReason(chapterId, what); },
-    /** null when playable, else {reason, chapter, lesson}: reason "guest" (sign up first), "chapter" (pass the Challenge of
+    /** null when playable, else {reason, chapter, lesson}: reason "guest" (sign up first: guests play no lesson, the
+        onboarding quiz is their free taste), "chapter" (pass the Challenge of
         `chapter` first), "lesson" (finish `lesson` first), "soon" (not out yet).
         `lesson` is always the lesson to play next, when there is one. */
     lockReason: function (chapterId, what) {
@@ -343,7 +348,7 @@
       var ch = chs[ci], lessons = ch.lessons || [];
       var guest = AC.auth && AC.auth.isGuest();
       var first = chs[0] && chs[0].lessons && chs[0].lessons[0] ? chs[0].lessons[0].id : null;
-      if (guest && what !== first) return { reason: "guest", chapter: chapterId, lesson: first };
+      if (guest) return { reason: "guest", chapter: chapterId, lesson: first };
       if (!ch.available) return { reason: "soon", chapter: chapterId };
       function passed(c) { var r = rec.chapters[c] || {}; return !!(r.testedOut || (r.challenge && r.challenge.passed)); }
       function done(id) { return !!(rec.lessons[id] && rec.lessons[id].done); }
@@ -568,6 +573,75 @@
       rec.notes = [{ lesson: lessonIds[0], chapter: chapterIds[0], text: "A price is the last deal between a buyer and a seller.", d: ago(12) }];
       fillPlan();
       save();
+    },
+
+    // ----- guest onboarding: the 5-question quick challenge (/academy/start) and the welcome (/academy/welcome)
+    ONB: ONB,
+    /** {state: "none" | "progress" | "waiting" (done, not credited: a guest) | "credited", answers:[{pick, correct}],
+        next (index of the next question), right, total, xp (10 per right), bonus, d (the day it was finished),
+        credited (day)} */
+    onboarding: function () {
+      load();
+      var o = rec.onboarding;
+      if (!o) return { state: "none", answers: [], next: 0, right: 0, total: ONB.questions, xp: 0, bonus: ONB.welcome };
+      var right = o.answers.filter(function (a) { return a && a.correct; }).length, next = 0;
+      while (next < ONB.questions && o.answers[next]) next++;
+      return { state: o.credited ? "credited" : o.done ? "waiting" : "progress", answers: o.answers.slice(), next: next, right: right,
+        total: ONB.questions, xp: right * ONB.perRight, bonus: ONB.welcome, d: o.d || null, credited: o.credited || null,
+        creditedXp: o.creditedXp || 0 };
+    },
+    /** Answer question i (once: a second answer to the same question is ignored). Returns {xp (shown now, credited at sign-up), first}. */
+    onbAnswer: function (i, pick, correct) {
+      load();
+      var o = rec.onboarding || (rec.onboarding = { v: 1, answers: [], started: day() });
+      if (o.done || i < 0 || i >= ONB.questions || o.answers[i]) return { xp: 0, first: false };
+      o.answers[i] = { pick: pick, correct: !!correct };
+      save();
+      AC.analytics.track("onboarding_answer", { q: i + 1, correct: !!correct });
+      return { xp: correct ? ONB.perRight : 0, first: true };
+    },
+    /** All five answered: the result is saved (once). */
+    onbFinish: function () {
+      load();
+      var o = rec.onboarding;
+      if (!o || o.done) return P.onboarding();
+      for (var i = 0; i < ONB.questions; i++) if (!o.answers[i]) return P.onboarding();
+      o.done = true; o.d = day();
+      save();
+      var st = P.onboarding();
+      AC.analytics.track("onboarding_complete", { right: st.right });
+      return st;
+    },
+    /** After sign-up: credit the challenge XP and the welcome bonus (once per account) and start the streak (Day 1:
+        the challenge counts as today's activity). Guests are never credited. Returns {xp, …summary} (xp 0 when nothing to do). */
+    onbCredit: function () {
+      load();
+      var o = rec.onboarding, out = { xp: 0 };
+      if (!o || !o.done || o.credited || isGuestAcc(account)) return withSummary(out);
+      var right = o.answers.filter(function (a) { return a && a.correct; }).length;
+      gain(right * ONB.perRight, "onboarding", out);
+      gain(ONB.welcome, "welcome", out);
+      o.credited = day(); o.creditedXp = out.xp;
+      rollStreak();
+      var t = today(), s = rec.streak;
+      if (!t.met) {
+        t.met = true; t.onboarding = true;
+        s.current += 1; s.last = day(); s.best = Math.max(s.best, s.current); s.lostFrom = 0;
+      }
+      save();
+      AC.analytics.track("onboarding_credit", { right: right, xp: out.xp });
+      return withSummary(out);
+    },
+    /** Log in to an account that already has progress (no merge): bring the guest's challenge result over when this
+        account never took the challenge. The guest copy is removed, so it is never offered twice. */
+    onbAdopt: function (from) {
+      load();
+      var g = AC.store.load(from || "guest");
+      if (!g || !g.onboarding || rec.onboarding) return false;
+      rec.onboarding = g.onboarding;
+      delete g.onboarding; AC.store.save(from || "guest", g);
+      save();
+      return true;
     },
 
     // ----- guest → member

@@ -1,0 +1,82 @@
+{
+ "id": "quick-challenge",
+ "path": "learn-to-trade",
+ "minutes": 2,
+ "questions": [
+  {
+   "id": "markets",
+   "area": "Markets",
+   "chapter": 1,
+   "topic": "Bear market",
+   "q": "The market fell 5% this week. A headline shouts “Bear market!” Is it right?",
+   "options": ["Yes, it’s a bear market", "Not yet: it needs a bigger fall", "Markets can’t fall 5% in a week"],
+   "answer": 1,
+   "why": "A bad week is normal. Traders only call it a bear market after a much deeper, longer fall. Headlines love dramatic words.",
+   "chart": {
+    "label": "Five daily candles, Monday to Friday: price opens at 100 on Monday and closes at 95 on Friday, a 5% fall",
+    "d": {"view": [636, 227], "candles": {"x0": 70, "step": 92, "body": 40, "wick": 2, "rx": 2, "ohlc": [[165.1, 204.3, 152, 191.2], [191.2, 202.1, 141.1, 152], [152, 173.8, 141.1, 162.9], [162.9, 176, 91, 104.1], [104.1, 115, 45.3, 56.1]]}, "marks": [{"t": "line", "x1": 50, "y1": 61.9, "x2": 520, "y2": 61.9, "tone": "sub", "w": 1.5, "dash": "4 4", "under": true}, {"t": "line", "x1": 458, "y1": 170.9, "x2": 520, "y2": 170.9, "tone": "down", "w": 1.5, "dash": "4 4", "under": true}, {"t": "line", "x1": 520, "y1": 61.9, "x2": 520, "y2": 169.9, "tone": "down", "w": 2}, {"t": "line", "x1": 515, "y1": 163.9, "x2": 520, "y2": 169.9, "tone": "down", "w": 2}, {"t": "line", "x1": 525, "y1": 163.9, "x2": 520, "y2": 169.9, "tone": "down", "w": 2}, {"t": "text", "x": 530, "y": 121.4, "text": "−5%", "tone": "down", "role": "mark"}, {"t": "text", "x": 70, "y": 219, "text": "Mon", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 162, "y": 219, "text": "Tue", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 254, "y": 219, "text": "Wed", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 346, "y": 219, "text": "Thu", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 438, "y": 219, "text": "Fri", "tone": "muted", "role": "label", "anchor": "middle"}]},
+    "m": {"view": [330, 190], "candles": {"x0": 30, "step": 48, "body": 24, "wick": 2, "rx": 2, "ohlc": [[137.8, 169, 127.3, 158.6], [158.6, 167.3, 118.6, 127.3], [127.3, 144.7, 118.6, 136], [136, 146.5, 78.7, 89.1], [89.1, 97.8, 42.2, 50.9]]}, "marks": [{"t": "line", "x1": 18, "y1": 52.2, "x2": 262, "y2": 52.2, "tone": "sub", "w": 1.5, "dash": "4 4", "under": true}, {"t": "line", "x1": 234, "y1": 139.1, "x2": 262, "y2": 139.1, "tone": "down", "w": 1.5, "dash": "4 4", "under": true}, {"t": "line", "x1": 262, "y1": 52.2, "x2": 262, "y2": 138.1, "tone": "down", "w": 2}, {"t": "line", "x1": 257, "y1": 132.1, "x2": 262, "y2": 138.1, "tone": "down", "w": 2}, {"t": "line", "x1": 267, "y1": 132.1, "x2": 262, "y2": 138.1, "tone": "down", "w": 2}, {"t": "text", "x": 272, "y": 100.7, "text": "−5%", "tone": "down", "role": "mark"}, {"t": "text", "x": 30, "y": 182, "text": "Mon", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 78, "y": 182, "text": "Tue", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 126, "y": 182, "text": "Wed", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 174, "y": 182, "text": "Thu", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 222, "y": 182, "text": "Fri", "tone": "muted", "role": "label", "anchor": "middle"}]}
+   }
+  },
+  {
+   "id": "charts",
+   "area": "Charts",
+   "chapter": 3,
+   "topic": "Reading a candle",
+   "q": "This candle shows one day of trading. Did buyers or sellers win the day?",
+   "options": ["Buyers", "Sellers", "Nobody"],
+   "answer": 0,
+   "why": "Price was pushed far down during the day, then climbed all the way back to close near the top. Whoever had the last word won the day.",
+   "chart": {
+    "label": "One green candle: it opened, fell far to the day’s lowest price, then closed just above where it opened",
+    "d": {"view": [636, 249.9], "candles": {"x0": 190.8, "step": 0, "body": 59.1, "wick": 4, "rx": 4, "ohlc": [[172.6, 222.6, 25, 211.2]]}, "marks": [{"t": "line", "x1": 229.4, "y1": 42, "x2": 256.7, "y2": 42, "tone": "rule"}, {"t": "text", "x": 263.5, "y": 46.6, "text": "Closed here", "tone": "muted", "role": "label"}, {"t": "line", "x1": 229.4, "y1": 73.8, "x2": 256.7, "y2": 73.8, "tone": "rule"}, {"t": "text", "x": 263.5, "y": 78.4, "text": "Opened here", "tone": "muted", "role": "label"}, {"t": "line", "x1": 202.2, "y1": 224.9, "x2": 256.7, "y2": 224.9, "tone": "rule"}, {"t": "text", "x": 263.5, "y": 229.4, "text": "Day’s lowest price", "tone": "muted", "role": "label"}]},
+    "m": {"view": [330, 190], "candles": {"x0": 99, "step": 0, "body": 52, "wick": 4, "rx": 4, "ohlc": [[122, 166, 22, 156]]}, "marks": [{"t": "line", "x1": 133, "y1": 37, "x2": 157, "y2": 37, "tone": "rule"}, {"t": "text", "x": 163, "y": 41, "text": "Closed here", "tone": "muted", "role": "label"}, {"t": "line", "x1": 133, "y1": 65, "x2": 157, "y2": 65, "tone": "rule"}, {"t": "text", "x": 163, "y": 69, "text": "Opened here", "tone": "muted", "role": "label"}, {"t": "line", "x1": 109, "y1": 168, "x2": 157, "y2": 168, "tone": "rule"}, {"t": "text", "x": 163, "y": 172, "text": "Day’s lowest price", "tone": "muted", "role": "label"}]}
+   }
+  },
+  {
+   "id": "patterns",
+   "area": "Patterns",
+   "chapter": 4,
+   "topic": "Head and shoulders",
+   "q": "This pattern is called “head and shoulders.” Which way does price usually go next?",
+   "options": ["Up", "Down", "Sideways"],
+   "answer": 1,
+   "why": "The last bounce failed to reach the head: buyers are running out of steam. When price drops through the neckline, that weakness usually shows.",
+   "chart": {
+    "label": "Three peaks, the middle one highest, above a flat neckline; price is back at the neckline",
+    "d": {"view": [636, 250], "candles": {"x0": 40, "step": 34, "body": 20, "wick": 2, "rx": 2, "ohlc": [[27.2, 59.7, 21, 53.5], [53.5, 94.8, 47.4, 88.7], [88.7, 138.7, 82.5, 132.6], [132.6, 138.7, 108.9, 115], [115, 121.1, 102.7, 108.9], [108.9, 147.5, 102.7, 141.3], [141.3, 182.6, 135.2, 176.5], [176.5, 209, 170.3, 202.8], [202.8, 209, 161.5, 167.7], [167.7, 173.8, 126.4, 132.6], [132.6, 138.7, 103.6, 109.7], [109.7, 138.7, 103.6, 132.6], [132.6, 160.7, 126.4, 154.5], [154.5, 160.7, 126.4, 132.6], [132.6, 138.7, 101.8, 108]]}, "marks": [{"t": "line", "x1": 20, "y1": 143.8, "x2": 536, "y2": 143.8, "tone": "sub", "w": 1.5, "dash": "6 5", "under": true}, {"t": "text", "x": 278, "y": 163.8, "text": "neckline", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 562, "y": 153.8, "text": "?", "tone": "gold", "role": "ask", "anchor": "middle"}, {"t": "text", "x": 108, "y": 102.3, "text": "shoulder", "tone": "sub", "role": "label", "anchor": "middle"}, {"t": "text", "x": 278, "y": 32, "text": "head", "tone": "sub", "role": "label", "anchor": "middle"}, {"t": "text", "x": 448, "y": 80.3, "text": "shoulder", "tone": "sub", "role": "label", "anchor": "middle"}]},
+    "m": {"view": [330, 190], "candles": {"x0": 18, "step": 18.5, "body": 10, "wick": 2, "rx": 2, "ohlc": [[23.3, 46.1, 18.9, 41.8], [41.8, 70.8, 37.5, 66.5], [66.5, 101.7, 62.2, 97.3], [97.3, 101.7, 80.7, 85], [85, 89.3, 76.4, 80.7], [80.7, 107.8, 76.4, 103.5], [103.5, 132.5, 99.2, 128.2], [128.2, 151.1, 123.9, 146.7], [146.7, 151.1, 117.7, 122], [122, 126.4, 93, 97.3], [97.3, 101.7, 77, 81.3], [81.3, 101.7, 77, 97.3], [97.3, 117.1, 93, 112.8], [112.8, 117.1, 93, 97.3], [97.3, 101.7, 75.7, 80.1]]}, "marks": [{"t": "line", "x1": 8, "y1": 111.2, "x2": 287, "y2": 111.2, "tone": "sub", "w": 1.5, "dash": "6 5", "under": true}, {"t": "text", "x": 147.5, "y": 131.2, "text": "neckline", "tone": "muted", "role": "label", "anchor": "middle"}, {"t": "text", "x": 313, "y": 121.2, "text": "?", "tone": "gold", "role": "ask", "anchor": "middle"}, {"t": "text", "x": 55, "y": 79.3, "text": "shoulder", "tone": "sub", "role": "label", "anchor": "middle"}, {"t": "text", "x": 147.5, "y": 29.9, "text": "head", "tone": "sub", "role": "label", "anchor": "middle"}, {"t": "text", "x": 240, "y": 63.9, "text": "shoulder", "tone": "sub", "role": "label", "anchor": "middle"}]}
+   }
+  },
+  {
+   "id": "risk",
+   "area": "Risk",
+   "chapter": 5,
+   "topic": "How much to risk",
+   "q": "You have $10,000. How much should you risk on one trade?",
+   "options": ["1–2%", "20%", "All of it, if you’re sure"],
+   "answer": 0,
+   "why": "Even good traders lose often. Risking a small slice on each trade means a losing streak stings, but never knocks you out of the game.",
+   "chart": {
+    "label": "Your account: $10,000",
+    "d": {"view": [636, 204.4], "marks": [{"t": "text", "x": 0, "y": 25, "text": "YOUR ACCOUNT", "tone": "muted", "role": "title"}, {"t": "rect", "x": 0, "y": 40.9, "w": 636, "h": 63.6, "rx": 13.6, "tone": "well"}, {"t": "units", "x0": 6.8, "step": 12.5, "y": 50, "w": 9.1, "h": 45.4, "n": 50, "tone": "up"}, {"t": "text", "x": 318, "y": 140.8, "text": "$10,000", "tone": "text", "anchor": "middle", "role": "big"}, {"t": "text", "x": 318, "y": 170.1, "text": "How much of this goes on the line in one trade?", "tone": "sub", "anchor": "middle", "role": "caption"}]},
+    "m": {"view": [330, 196], "marks": [{"t": "text", "x": 0, "y": 22, "text": "YOUR ACCOUNT", "tone": "muted", "role": "title"}, {"t": "rect", "x": 0, "y": 36, "w": 330, "h": 56, "rx": 12, "tone": "well"}, {"t": "units", "x0": 6, "step": 6.4, "y": 44, "w": 3.4, "h": 40, "n": 50, "tone": "up"}, {"t": "text", "x": 165, "y": 124, "text": "$10,000", "tone": "text", "anchor": "middle", "role": "big"}, {"t": "text", "x": 165, "y": 150, "text": "How much of this goes", "tone": "sub", "role": "caption", "anchor": "middle"}, {"t": "text", "x": 165, "y": 170, "text": "on the line in one trade?", "tone": "sub", "role": "caption", "anchor": "middle"}]}
+   }
+  },
+  {
+   "id": "psychology",
+   "area": "Psychology",
+   "chapter": 6,
+   "topic": "Fear of missing out",
+   "q": "A stock jumped 40% this week and everyone is talking about it. What’s the smartest move?",
+   "options": ["Buy now before it goes higher", "Wait and check the plan first", "Sell everything you own"],
+   "answer": 1,
+   "why": "That rush to jump in has a name: fear of missing out. Late buyers often pay the top. A plan made before the hype keeps you calm.",
+   "chart": {
+    "label": "A quiet stock, then candles that shoot up 40% in a week",
+    "d": {"view": [636, 227], "candles": {"x0": 40, "step": 36, "body": 22, "wick": 2, "rx": 2, "ohlc": [[30.2, 40, 25.3, 35.1], [35.1, 40, 26.9, 31.8], [31.8, 41.6, 26.9, 36.7], [36.7, 41.6, 28.6, 33.4], [33.4, 43.2, 28.6, 38.3], [38.3, 57.8, 31, 50.5], [50.5, 82.2, 43.2, 74.9], [74.9, 114.8, 67.6, 107.4], [107.4, 151.3, 100.1, 144], [144, 200.1, 136.7, 192.8]]}, "marks": [{"t": "text", "x": 343, "y": 38.2, "text": "+40%", "tone": "up", "role": "mark", "anchor": "end"}, {"t": "rect", "x": 500, "y": 30, "w": 128, "h": 28, "rx": 14, "tone": "chip"}, {"t": "text", "x": 512, "y": 48.5, "text": "To the moon 🚀", "tone": "text", "role": "label"}, {"t": "rect", "x": 478, "y": 70, "w": 150, "h": 28, "rx": 14, "tone": "chip"}, {"t": "text", "x": 490, "y": 88.5, "text": "Still not too late?", "tone": "text", "role": "label"}, {"t": "rect", "x": 498, "y": 110, "w": 112, "h": 28, "rx": 14, "tone": "chip"}, {"t": "text", "x": 510, "y": 128.5, "text": "Everyone’s in", "tone": "text", "role": "label"}]},
+    "m": {"view": [330, 190], "candles": {"x0": 16, "step": 15.5, "body": 9, "wick": 2, "rx": 2, "ohlc": [[27.8, 35.6, 23.9, 31.7], [31.7, 35.6, 25.2, 29.1], [29.1, 36.9, 25.2, 33], [33, 36.9, 26.5, 30.4], [30.4, 38.2, 26.5, 34.3], [34.3, 50, 28.4, 44.1], [44.1, 69.5, 38.2, 63.7], [63.7, 95.6, 57.8, 89.7], [89.7, 125, 83.9, 119.1], [119.1, 164.1, 113.2, 158.2]]}, "marks": [{"t": "text", "x": 141, "y": 35.8, "text": "+40%", "tone": "up", "role": "mark", "anchor": "end"}, {"t": "rect", "x": 198, "y": 30, "w": 124, "h": 28, "rx": 14, "tone": "chip"}, {"t": "text", "x": 210, "y": 48.5, "text": "To the moon 🚀", "tone": "text", "role": "label"}, {"t": "rect", "x": 176, "y": 66, "w": 146, "h": 28, "rx": 14, "tone": "chip"}, {"t": "text", "x": 188, "y": 84.5, "text": "Still not too late?", "tone": "text", "role": "label"}, {"t": "rect", "x": 196, "y": 102, "w": 108, "h": 28, "rx": 14, "tone": "chip"}, {"t": "text", "x": 208, "y": 120.5, "text": "Everyone’s in", "tone": "text", "role": "label"}]}
+   }
+  }
+ ]
+}

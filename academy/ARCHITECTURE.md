@@ -17,6 +17,7 @@ python3 academy/build/build.py --pseudo   # also build the en-XA pseudo-locale (
 | `academy/content/<locale>/chapters/<chapter>.json` | Chapter: meta, lesson order, Challenge (+ `retry` set), refresher (+ `plan` rows on the last chapter) |
 | `academy/content/<locale>/lessons/<chapter>/<lesson>.json` | Lesson: list of typed cards |
 | `academy/content/<locale>/glossary.json` | Terms |
+| `academy/content/<locale>/onboarding.json` | Guest onboarding: the 5-question onboarding quiz (one per area: question, 3 options, answer, feedback ≤ 40 words, chapter, topic, visual) |
 | `academy/content/schema/*.json` | JSON Schema for the files above (validated at build time) |
 | `academy/locales/<locale>.json` | Every UI string. Components never hard-code text |
 | `academy/build/` | `build.py` (entry), `lib.py` (shell, i18n, html helpers), `validate.py`, `pages/*.py` (one module per route) |
@@ -43,6 +44,7 @@ reported by the build (never rendered as a raw key).
 | `/academy/learn-to-trade/finish` | no | JS |
 | `/academy/gym`, `/academy/gym/today` | no | JS |
 | `/academy/placement`, `/academy/setup` | no | JS |
+| `/academy/start` (onboarding quiz + its result), `/academy/welcome` | no | JS (guest onboarding, see below) |
 | `/academy/how-it-works`, `/academy/glossary`, `/academy/glossary/<term>`, `/academy/guide`, `/academy/pro` | yes | SSR |
 | `/academy/me`, `/me/rewards`, `/me/notes`, `/me/certificates`, `/academy/my-plan`, `/academy/leaderboard`, `/academy/settings`, `/academy/search` | no | JS |
 | `/academy/u/<handle>` | no | JS (static host: `/academy/u/?h=<handle>`) |
@@ -95,6 +97,31 @@ Analytics events: `lesson_start`, `card_answer`, `lesson_complete`, `challenge_s
   + the 500 XP finale) and 1,000 Profit Coins. Records saved earlier may still carry `levelUp` / `levelUpXp` /
   `levelUpOpened` on a chapter and `src: "levelup"` history rows: they load as before and the XP already earned stays
   in the total, but nothing reads or awards them any more.
+
+## Guest onboarding (canvas Onb-01…06)
+
+`build/pages/start.py`, `js/onboarding.js`, `css/onboarding.css`, strings `locales/en/onboarding.json`, questions
+`content/en/onboarding.json` (schema `onboarding.schema.json`).
+
+- **Guest home hero:** always "Take the quiz" → `/academy/start` + "Start learning free" → the Trading Foundations path page (the sticky phone bar and the
+  "Ready when you are" button mirror the first). The quiz page opens where the guest is: question 1, the next
+  question, or the saved result with the sign-up buttons. Members never see the guest hero or the quiz.
+- **`/academy/start`:** 5 questions, one per screen (the shared player frame), tapping an option answers it; feedback
+  right away (right: "Good call · +10 XP"; not right: the idea + "You'll learn this in Chapter N"; only the learner's pick
+  is marked, the right option is never shown). Exit asks first; answers are kept and the next visit resumes. Finished →
+  the result (a state of the same route: a finished quiz always reopens on it): score, 5 topics with their chapter,
+  XP "waiting", Continue with Google / Apple (prototype: an instant demo sign-in, no OAuth), Use email instead (the
+  sign-up sheet), Not now.
+- **Data:** `rec.onboarding = {answers:[{pick, correct}], done, d, credited, creditedXp}` on the
+  progress record (guests: the `guest` / `preview-guest` record; once per device as a guest, once per account).
+  `AC.auth` `startSession` merges the guest record into a new account (or, for an account that already has progress and
+  never took the quiz, `onbAdopt` moves just this result over) and calls `onbCredit`: 10 XP per right answer +
+  the one-time welcome bonus (`ONB.welcome`, 20), history `src: "onboarding" / "welcome"`, Day 1 streak (today counts
+  as met). This XP is never lesson, Chapter or path XP (the path maximum stays 7,600). `reset()` keeps the result.
+- **`/academy/welcome`:** after sign-up only: greeting (first name; none → "Welcome! You're in."), the saved result and
+  bonus, level, Day 1 streak, the 10 chapters with the five the questions came from highlighted, Start Lesson 1 (the
+  path's first lesson, its own unchanged "Hi, I'm Rico" intro) and See the full path, whatever the score: Chapter 1
+  can't be skipped.
 
 ## Path page and chapter routes (one merged page)
 
@@ -156,6 +183,7 @@ Visuals are data: `{"kind": "<visual kind>", ...}` rendered by `js/visuals.js`.
 | `finishPath(path, chapterIds)` | when `finishStatus().ready`: +500 XP, +500 Profit Coins, certificate (once, through `AC.certs.issue`, with the learner's name now); `{ok, xp, coins, certificate: {path, id, d, name}, rankUp?, …}` |
 | `levelOf(xp)`, `levelStart(lv)`, `RANKS`, `XP`, `COINS` | rank maths for How it works / My progress; `COINS = {challenge: 50, path: 500}` |
 | `seedDemo(lessonIds, chapterIds)` | a mid-path learner for `?as=member` previews |
+| `onboarding()`, `onbAnswer(i, pick, correct)`, `onbFinish()`, `onbCredit()`, `onbAdopt(from)`, `ONB` | guest onboarding (see Guest onboarding) |
 
 Several tabs can hold the same record (e.g. My Trading Plan open next to a lesson). Every save stamps the
 record with a new `rev` (also kept under a small `rev_<account>` key, `AC.store.rev`); the engine re-reads storage

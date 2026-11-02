@@ -5,7 +5,8 @@ Catalog: content/<locale>/catalog.json ({"paths": [...]}). Filters (All / Free /
 import lib
 from lib import esc, ORIGIN
 from pages.path import (art_style, art_picture, fmt_h, CSS, JS, LESSON_XP, ltt, learn_data, icon, rico_src, base_of, href, lesson_route, crumbs,
-                        crumbs_ld, chips, disclaimer, segs, challenge_xp, pm_earn, pm_practice, pm_rank, pm_sheet, pm_mstats, pm_min)
+                        crumbs_ld, chips, disclaimer, segs, challenge_xp, pm_earn, pm_practice, pm_rank, pm_sheet, pm_mstats, pm_min,
+                        pm_hero)
 from pages.home import pro_paths, pro_card, POSE_BY_KEY, _by_key, accent_var
 
 
@@ -14,7 +15,6 @@ def routes(ctx):
     L = ltt(ctx)
     pros = pro_paths(ctx)
     data = {"ac-learn": learn_data(ctx, L)}
-    free_entry = next((p for p in ctx.catalog.get("paths", []) if p.get("id") == L["id"]), {})
     first_r = lesson_route(L["id"], *L["first_lesson"]) if L["first_lesson"] else L["id"]
 
     # ------------------------------------------------------------------ /paths
@@ -22,21 +22,7 @@ def routes(ctx):
     base = base_of(route, ctx.locale)
     filters = "".join(f'<button type="button" class="ac-filter" aria-pressed="{"true" if k == "all" else "false"}" aria-controls="paths-list" data-filter="{k}">{esc(t("paths.filter." + k))}</button>'
                       for k in ("all", "free", "pro", "progress"))
-    blurb = free_entry.get("outcome") or ctx.path.get("outcome", "")
-    featured = f'''<section class="ac-lphero ac-feat has-art" style="{art_style(base, L["id"])}" aria-labelledby="ltt-title" data-tier="free" data-feat>
-    <div class="ac-lphero__main">
-      <div class="ac-lphero__head">
-        <div class="ac-row ac-row--tight">{chips([t("path.free")], "ac-tag")}<span class="ac-tag ac-tag--white" data-path-status hidden></span></div>
-        <h2 id="ltt-title" class="ac-feat__title">{esc(L["title"])}</h2>
-        <p class="ac-lphero__lead">{esc(t("paths.feat.lead", outcome=blurb, n=len(L["chapters"]), lessons=L["lessons"], ready=L["ready"]))}</p>
-      </div>
-      <div class="ac-lphero__progress" data-path-prog hidden>{segs(t, L, "ac-seg--sm")}<span class="ac-lphero__meta" data-path-count></span></div>
-      <div class="ac-lphero__ctas">
-        <a class="ac-btn ac-btn--white ac-btn--lg" href="{href(base, first_r)}" data-path-cta><span data-path-cta-label>{esc(t("pm.cta.start", l=1))}</span>{icon("chev", 16, 2.5)}</a>
-        <a class="ac-btn ac-btn--outline-light ac-btn--lg ac-feat__map" href="{href(base, L["id"])}">{esc(t("home.pathMap"))}</a>
-      </div>
-    </div>
-  </section>'''
+    featured = pm_hero(t, base, L, href(base, first_r), h1=False, path_map=True, attrs=' data-tier="free" data-feat')
     body = f'''<div class="ac-wrap ac-lp" data-paths-page>
   <header class="ac-pathshead">
     <div class="ac-sechead"><h1 class="ac-h1">{esc(t("paths.title"))}</h1><p class="ac-lead">{esc(t("paths.sub"))}</p></div>

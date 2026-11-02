@@ -40,13 +40,13 @@
     host.innerHTML = "";
     host.appendChild(F.el);
 
-    // ---------------------------------------------------------------- guests: only the path's first lesson (previews may look at any)
-    if (AC.auth.isGuest() && L.id !== D.first && !preview) {
+    // ---------------------------------------------------------------- guests: no lesson without an account (previews may look at any)
+    if (AC.auth.isGuest() && !preview) {
       // no gate screen: the sign-up sheet opens over the lesson; closing it goes back to the chapter
       F.layout("gate");
       F.main.innerHTML = "";
       F.cta.hidden = true;
-      AC.signupSheet(AC.t("player.gate.text", { lesson: L.title }), { onCancel: function () { location.href = chapterUrl; } });
+      AC.signupSheet(AC.t("player.gate.text", { lesson: L.title }), { next: location.href, onCancel: function () { location.href = chapterUrl; } });
       return;
     }
     // ---------------------------------------------------------------- lessons open in order, a chapter after the previous Challenge

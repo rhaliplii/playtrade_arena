@@ -106,7 +106,7 @@
     return best || last;
   }
   /** Guests play only the path's first lesson. */
-  function playable(m, l) { return !isGuest() || (m.first && m.first.l.id === l.id); }
+  function playable(m, l) { return !isGuest(); }   // guests sign up before any lesson (the onboarding quiz is the free taste)
   function setLink(a, href, guestLocked) {
     if (!a) return;
     a.setAttribute("href", href);
@@ -167,12 +167,12 @@
     var s = AC.progress.summary();
     if (aud === "guest") { guestHome(m, s); guestSticky(); swipeDots(); learnMore(); certThumb(); proSwap(root); return; }
     $$("[data-home-aside]").forEach(function (el) { el.innerHTML = aside(m, s, aud); });
-    mobileHome(m, s);
+    $$("[data-pm-hero]", root).forEach(function (h) { pmHero(h, m); });
+    pathProgress(m);
+    swipeDots();   // the Pro paths row (phones)
     if (aud === "new") {
       var nm = firstName();
       $("[data-greet-new]").textContent = nm ? t("home.new.title", { name: nm }) : t("home.new.titleNoName");
-      var exp = AC.progress.settings().experience;
-      showEl($("[data-new-tip]"), !!exp && exp !== "never");
       return;
     }
     // ---- learning
@@ -184,8 +184,6 @@
     // never "0 more lessons": a goal that is reached (even before the engine marks it) reads as met
     $("[data-greet-sub]").textContent = s.goal.met && s.streak ? t("home.learn.sub.met", { n: s.streak }) : s.goal.met || !left ? t("home.goal.met")
       : s.streak > 0 ? t("home.learn.sub.more", { n: left, streak: AC.fmt.num(s.streak) }) : t("home.learn.sub.start", { n: left });
-    continueHero(m);
-    pathProgress(m);
   }
 
   /** Guest home. First visit: the SSR marketing hero. A guest who has played (Lesson 1, or the placement quiz): what
@@ -345,62 +343,10 @@
     });
   }
 
-  function continueHero(m) {
-    var a = m.action, box = $("[data-continue]");
-    if (!box) return;
-    var link = actionLink(m);
-    var cta = $("[data-c-cta]", box), second = $("[data-c-ch]", box), prog = $("[data-c-prog]", box), meta2 = $("[data-c-meta2]", box);
-    setLink(cta, link.href, link.locked);
-    prog.hidden = true; meta2.hidden = false;
-    if (a.kind === "lesson") {
-      var c = a.c, l = a.l;
-      $("[data-c-eyebrow]", box).textContent = t(l.started ? "home.learn.eyebrow" : "home.learn.eyebrowNext", { n: c.n, title: c.title });
-      $("[data-c-title]", box).textContent = l.title;
-      if (l.started && l.cards) {
-        prog.hidden = false; meta2.hidden = true;
-        $("[data-c-meta]", box).textContent = t("home.learn.meta", { i: l.n, total: c.count, c: Math.min(l.cards, l.card + 1), cards: l.cards });
-        $("[data-c-left]", box).textContent = t("home.learn.left", { n: minutesLeft(l) });
-        var bar = $("[data-c-bar]", box);
-        bar.innerHTML = "";
-        for (var i = 0; i < l.cards; i++) bar.appendChild(AC.h('<span class="' + (i < l.card ? "is-on" : "") + '"><span></span></span>'));
-        $("[data-c-cta-label]", box).textContent = t("home.learn.resume");
-      } else {
-        meta2.textContent = t("home.learn.meta2", { i: l.n, total: c.count, min: l.minutes, xp: XP.lesson });
-        $("[data-c-cta-label]", box).textContent = t("home.learn.start", { n: l.n });
-      }
-      second.textContent = t("home.learn.overview");
-      second.setAttribute("href", chapterUrl(c));
-    } else if (a.kind === "challenge") {
-      $("[data-c-eyebrow]", box).textContent = t("home.learn.eyebrowNext", { n: a.c.n, title: a.c.title });
-      $("[data-c-title]", box).textContent = t("home.learn.challengeTitle", { n: a.c.n });
-      meta2.textContent = t("home.learn.challengeMeta", { n: a.c.questions });
-      $("[data-c-cta-label]", box).textContent = t("home.learn.challengeCta");
-      second.textContent = t("home.learn.overview");
-      second.setAttribute("href", chapterUrl(a.c));
-    } else if (a.kind === "finished" || a.kind === "finish") {
-      // the path is done: the certificate (claim it, or view it), then what's next (Pro paths)
-      var fin = a.kind === "finished";
-      $("[data-c-eyebrow]", box).textContent = t(fin ? "home.learn.finishedEyebrow" : "home.learn.claimEyebrow", { path: data().title });
-      $("[data-c-title]", box).textContent = fin ? t("pm.done.title", { title: data().title }) : t("home.learn.claimTitle");
-      meta2.textContent = fin ? t("home.learn.finishedMeta") : t("home.learn.claimMeta", { xp: AC.fmt.num(AC.progress.XP.path), coins: AC.fmt.num(AC.progress.COINS.path) });
-      $("[data-c-cta-label]", box).textContent = t(fin ? "pm.cta.viewCert" : "pm.cta.claim");
-      second.textContent = fin ? t("home.learn.nextPaths") : t("home.pathMap");
-      second.setAttribute("href", fin ? AC.url("paths") : AC.url(data().path));
-    } else {
-      $("[data-c-eyebrow]", box).textContent = t("home.learn.doneEyebrow", { path: data().title });
-      $("[data-c-title]", box).textContent = t("home.learn.doneTitle");
-      meta2.textContent = t("home.learn.doneMeta");
-      $("[data-c-cta-label]", box).textContent = t("home.learn.doneCta");
-      second.textContent = t("home.pathMap");
-      second.setAttribute("href", AC.url(data().path));
-    }
-  }
-
+  /** "What's ahead" (home): this chapter's Challenge, the next skill, the certificate. Progress itself is on the path card. */
   function pathProgress(m) {
-    var card = $(".ac-pathprog");
-    if (!card) return;
-    $("[data-pp-count]", card).textContent = t("home.pp.count", { ch: m.passed, total: m.chapters.length, l: m.lessonsDone, lt: m.lessonsTotal });
-    fillSegs(card, m);
+    var cards = $$(".ac-pathprog");
+    if (!cards.length) return;
     var c = m.current || m.chapters[m.chapters.length - 1];
     var ready = c.available && c.done === c.count;
     var nextSkill = (m.skills || []).filter(function (sk) { var ch = m.chapters[sk.after - 1]; return !(ch && ch.passed); })[0];
@@ -412,10 +358,11 @@
     miles.push(m.finished ? { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("home.miles.certEarned"), href: AC.url("me/certificates") }
       : m.allPassed ? { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("pm.earn.ready"), href: AC.url(data().path + "/finish") }
       : { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("home.miles.certText", { n: m.chapters.length }) });
-    $("[data-pp-miles]", card).innerHTML = miles.map(function (x) {
+    var html = miles.map(function (x) {
       var tag = x.href ? 'a href="' + esc(x.href) + '"' : "div";
       return "<" + tag + ' class="ac-mile' + (x.href ? " ac-mile--link" : "") + '"><span class="ac-iconbox' + x.box + '">' + svg(x.ic, 18) + "</span><span><b>" + esc(x.b) + "</b><span>" + esc(x.s) + "</span></span></" + (x.href ? "a" : "div") + ">";
     }).join("");
+    cards.forEach(function (card) { var box = $("[data-pp-miles]", card); if (box) box.innerHTML = html; });
   }
 
   function weekDots() {
@@ -770,10 +717,10 @@
     if (list) list.style.setProperty("--fill", (rows.length ? Math.min(100, (filled / rows.length) * 100) : 0) + "%");
     }
 
-  function pmHero(root, m, all, place) {
-    var hero = $("[data-pm-hero]", root);
+  /** Fill one path card (path.py pm_hero: the path page, All paths, the home page) with the learner's state. */
+  function pmHero(hero, m) {
     if (!hero) return;
-    var d = data(), started = isStarted(m);
+    var d = data(), started = isStarted(m), all = m.chapters.length > 0 && m.passed === m.chapters.length, place = placeOf(m);
     var cta = $("[data-pm-cta]", hero), lbl = $("[data-pm-cta-label]", hero), cta2 = $("[data-pm-cta2]", hero), note = $("[data-pm-note]", hero);
     var prog = $("[data-pm-prog]", hero), facts = $("[data-pm-facts]", hero), count = $("[data-pm-count]", hero);
     var act = heroAction(m);
@@ -892,7 +839,7 @@
     var place = placeOf(m);
     var openC = openId ? byId(m, openId) : all ? null : place;
     m.chapters.forEach(function (c, i) { pmChapter(root, m, c, i, c === openC, place); });
-    pmHero(root, m, all, place);
+    pmHero($("[data-pm-hero]", root), m);
     if (!isGuest()) pmRank($("[data-pm-rank]", root), s, all);
     var earnT = $("[data-earn-title]", root);
     if (all && earnT && heroAction(m).kind === "claim") earnT.textContent = t("pm.earn.ready");
@@ -967,140 +914,15 @@
     });
   }
 
-  // ---------------------------------------------------------------- phones: Learn home for signed-in learners
-  // canvas Home-Mobile-Path-v3: chips, chapter hero with progress, Chapter details, the lesson trail with the current
-  // lesson card, the Challenge and the next chapter. the path title opens the full path page.
-  function mobileHome(m, s) {
-    var box = $("[data-mh]");
-    if (!box) return;
-    var c = placeOf(m) || m.chapters.filter(function (x) { return x.available; }).slice(-1)[0];
-    if (!c) return;
-    var d = data(), idx = m.chapters.indexOf(c), nx = m.chapters[idx + 1];
-    var nowL = m.action.kind === "lesson" && m.action.c === c ? m.action.l : null;
-    var pct = c.count ? Math.round((c.done / c.count) * 100) : 0;
-    var cta = nextCta(m);
-    var detailsOpen = false;
-    try { detailsOpen = sessionStorage.getItem("ac_mh_details") === "1"; } catch (e) {}
-    var unlock = (c.unlock || []).map(function (u, i) {
-      var on = c.lessons[i] && c.lessons[i].done;
-      return '<li class="' + (on ? "is-on" : "") + '">' + svg("check", 16, 2.6) + "<span>" + esc(u) + "</span></li>";
-    }).join("");
-    var terms = (c.terms || []).map(function (x) { return '<li><a class="ac-pmterm ac-pmterm--sm" href="' + AC.url("glossary/" + x.id) + '">' + esc(x.term) + "</a></li>"; }).join("");
-    var rows = c.lessons.map(function (l) {
-      var st = l.done ? "done" : l === nowL ? "now" : "later";
-      var href = l.id ? lessonUrl(c, l) : AC.url(d.path + "/" + c.id);
-      var lock = !playable(m, l) ? ' data-action="signup" data-reason="' + esc(t("chapter.signupReason")) + '"' : "";
-      if (st === "now") {
-        return '<li class="ac-mh__step is-now"><a class="ac-mh__node" href="' + href + '"' + lock + ' aria-label="' + esc(t("home.mtrail.next", { title: l.title })) + '">' + l.n + "</a>" +
-          '<div class="ac-mh__card"><span class="ac-mh__eb">' + esc(t("pm.l.ebNext", { n: l.n })) + "</span><b>" + esc(l.title) + "</b>" +
-          (l.desc ? '<span class="ac-mh__desc">' + esc(l.desc) + ".</span>" : "") +
-          '<span class="ac-mh__meta">' + esc(l.started ? t("pm.l.metaLeft", { min: mins(minutesLeft(l)), xp: XP.lesson }) : t("pm.l.meta", { min: l.minutes, xp: XP.lesson })) + "</span>" +
-          '<a class="ac-btn ac-btn--primary ac-pmbtn ac-pmbtn--block ac-mh__go" href="' + href + '"' + lock + ">" + esc(t(l.started ? "pm.l.continueLesson" : "pm.l.startLesson")) + svg("arrow", 16, 2.4) + "</a></div></li>";
-      }
-      if (st === "done") {
-        return '<li class="ac-mh__step is-done"><a class="ac-mh__node" href="' + href + '" aria-label="' + esc(t("pm.reviewAria", { title: l.title })) + '">' + checkSvg(20) + "</a>" +
-          '<a class="ac-mh__text" href="' + href + '"><b>' + esc(l.title) + '</b><span class="ac-mh__ok">' + esc(t("pm.mh.completed", { min: mins(l.minutes) })) + "</span></a></li>";
-      }
-      return '<li class="ac-mh__step is-later" data-mh-n="' + l.n + '"><button type="button" class="ac-mh__node" data-mh-hint aria-label="' + esc(l.title) + '">' + l.n + "</button>" +
-        '<button type="button" class="ac-mh__text" data-mh-hint><b>' + esc(l.title) + "</b><span>" + esc(t("pm.l.meta", { min: l.minutes, xp: XP.lesson })) + "</span></button></li>";
-    }).join("");
-    var chReady = c.unlocked && c.done === c.count && !c.passed;
-    var chSub = c.passed ? t("pm.ch.challengePassedPlain") : chReady ? t("pm.ch.challengeReady", { n: c.questions }) : t("pm.ch.challengeSub", { n: c.questions, last: c.count });
-    // the Challenge row: a link once it's ready or passed (review), otherwise a button that explains why it's closed
-    var chOpen = chReady || c.passed, chHref = chapterUrl(c, "challenge"), chLock = chOpen && isGuest() ? ' data-action="signup"' : "";
-    var chNode = svg("shield", 20, 2), chText = '<b class="ac-mh__gold">' + esc(t("pm.ch.challenge")) + "</b><span>" + esc(chSub) + "</span>";
-    rows += '<li class="ac-mh__step ac-mh__step--ch' + (chReady ? " is-now" : c.passed ? " is-done" : "") + '">' + (chOpen
-      ? '<a class="ac-mh__node" href="' + chHref + '"' + chLock + ' aria-label="' + esc(t("pm.ch.challenge")) + '">' + chNode + '</a><a class="ac-mh__text" href="' + chHref + '"' + chLock + ">" + chText + "</a>"
-      : '<button type="button" class="ac-mh__node" data-mh-hint aria-label="' + esc(t("pm.ch.challenge")) + '">' + chNode + '</button><button type="button" class="ac-mh__text" data-mh-hint>' + chText + "</button>") + "</li>";
-    var next = "";
-    if (nx) {
-      var nmeta = !nx.available ? t("pm.mh.nextSoon", { lessons: t("path.lessons", { n: nx.count }) }) : nx.unlocked ? t("pm.mh.nextOpen", { lessons: t("path.lessons", { n: nx.count }) }) : t("pm.mh.nextMeta", { lessons: t("path.lessons", { n: nx.count }), p: c.n });
-      next = '<a class="ac-mh__next" href="' + AC.url(d.path + "/" + nx.id) + '"><span class="ac-mh__eb ac-mh__eb--muted">' + esc(t("pm.mh.next", { n: nx.n })) + "</span><b>" + esc(nx.title) + "</b><span>" + esc(nmeta) + "</span></a>";
-    }
-    // path hero (design: Home · mobile v3): path name, progress across the 10 chapters, the next step
-    var lessonsDone = 0, lessonsAll = 0;
-    m.chapters.forEach(function (x) { lessonsAll += x.count; lessonsDone += x.passed ? x.count : x.done; });
-    var heroSegs = m.chapters.map(function (x) {
-      var w = x.passed ? 100 : x.count ? Math.round((x.done / x.count) * 100) : 0;
-      return '<span class="ac-mh__seg"><span style="width:' + w + '%"></span></span>';
-    }).join("");
-    var ha = heroAction(m);
-    var heroCta = '<a class="ac-pmbtn ac-pmbtn--white ac-pmbtn--lg ac-pmbtn--block ac-mh__heroCta" href="' + ha.href + '"' + (ha.locked ? ' data-action="signup"' : "") +
-      (ha.short && ha.short !== ha.label ? ' aria-label="' + esc(ha.label) + '"' : "") + ">" + esc(ha.short || ha.label) + svg("arrow", 18, 2.4) + "</a>";
-    // the following chapters, each with its lessons (dimmed until they open) and its Challenge
-    var later = m.chapters.slice(idx + 1).map(function (x) {
-      var prev = m.chapters[x.n - 2];
-      var eb = !x.available ? t("pm.mh.laterSoon", { n: x.n }) : x.unlocked ? t("pm.mh.laterOpen", { n: x.n }) : t("pm.mh.laterEb", { n: x.n, p: prev ? prev.n : x.n - 1 });
-      var ls = x.lessons.map(function (l, i) {
-        return '<li class="ac-mh__step is-later is-dim" data-mh-later><button type="button" class="ac-mh__node" data-mh-hint aria-label="' + esc(l.title) + '">' + (i + 1) + "</button>" +
-          '<button type="button" class="ac-mh__text" data-mh-hint><b>' + esc(l.title) + "</b><span>" + esc(t("pm.l.meta", { min: l.minutes || Math.round(x.minutes / x.count), xp: XP.lesson })) + "</span></button></li>";
-      }).join("") + '<li class="ac-mh__step ac-mh__step--ch is-dim"><button type="button" class="ac-mh__node" data-mh-hint aria-label="' + esc(t("pm.ch.challenge")) + '">' + svg("shield", 20, 2) + "</button>" +
-        '<button type="button" class="ac-mh__text" data-mh-hint><b class="ac-mh__gold">' + esc(t("pm.ch.challenge")) + "</b><span>" + esc(t("pm.ch.challengeSub", { n: x.questions, last: x.count })) + "</span></button></li>";
-      return '<section class="ac-mh__later"' + (x.available ? "" : " data-mh-soon") + '><a class="ac-mh__chcard ac-mh__chcard--later" href="' + AC.url(d.path + "/" + x.id) + '"><span class="ac-mh__eb ac-mh__eb--muted">' + esc(eb) + "</span><b>" + esc(x.title) + "</b><span>" + esc(t("pm.mh.meta", { lessons: t("path.lessons", { n: x.count }), min: x.minutes })) + "</span></a>" +
-        '<ol class="ac-mh__trail ac-mh__trail--later">' + ls + "</ol></section>";
-    }).join("");
-    box.innerHTML = '<div class="ac-pm-mstats" data-pm-mstats></div>' +
-      '<a class="ac-mh__all" href="' + AC.url("paths") + '">' + svg("chev", 14, 2.6, ' style="transform:scaleX(-1)"') + esc(t("pm.mh.allPaths")) + "</a>" +
-      '<section class="ac-mh__phero"><img class="ac-mh__prico" src="' + AC.rico("present") + '" alt="" width="96" height="104">' +
-      // finished: "Complete", what was earned and what's next (the certificate, then the Pro paths)
-      '<span class="ac-mh__peb">' + esc(m.finished ? t("pm.eb.complete", { n: 1 }) : t("pm.eb.free", { n: 1 })) + '</span><a class="ac-mh__ptitle" href="' + AC.url(d.path) + '">' + esc(d.title) + "</a>" +
-      '<p class="ac-mh__plead">' + esc(m.finished ? t("home.learn.finishedMeta") : t("pm.leadRest", { chapters: m.chapters.length, lessons: lessonsAll })) + "</p>" +
-      '<span class="ac-mh__pcount">' + esc(t("pm.count", { n: c.n, total: m.chapters.length, l: lessonsDone, lt: lessonsAll })) + "</span>" +
-      '<div class="ac-mh__segs" aria-hidden="true">' + heroSegs + "</div>" + heroCta +
-      (m.finished ? '<a class="ac-mh__pnext" href="' + AC.url("paths") + '">' + esc(t("home.learn.nextPaths")) + svg("chev", 14, 2.6) + "</a>" : "") + "</section>" +
-      '<h2 class="ac-mh__h2">' + esc(t("pm.mh.yourPath")) + "</h2>" +
-      '<a class="ac-mh__chcard" href="' + AC.url(d.path + "/" + c.id) + '"><span class="ac-mh__eb">' + esc(t(c.passed ? "pm.mh.chPassed" : c.done || c.lessons.some(function (l) { return l.started; }) ? "pm.mh.chNow" : "pm.mh.chStart", { n: c.n })) + "</span><b>" + esc(c.title) + "</b>" +
-      "<span>" + esc(t("pm.mh.chMeta", { lessons: t("path.lessons", { n: c.count }), min: c.minutes, done: c.done, total: c.count })) + "</span>" +
-      '<span class="ac-mh__bar" aria-hidden="true"><span style="width:' + pct + '%"></span></span></a>' +
-      '<details class="ac-mh__details"' + (detailsOpen ? " open" : "") + '><summary>' + esc(t("pm.mh.details")) + svg("chev", 18, 2.4, ' class="ac-mh__chev"') + "</summary>" +
-      '<div class="ac-mh__dbody">' + (c.promise ? "<p>" + esc(c.promise) + "</p>" : "") +
-      (unlock ? '<h2 class="ac-mh__h3">' + esc(t("pm.mh.unlock")) + '</h2><ul class="ac-mh__checks">' + unlock + "</ul>" : "") +
-      (terms ? '<h2 class="ac-mh__h3">' + esc(t("pm.mh.terms")) + '</h2><ul class="ac-pmterms">' + terms + "</ul>" : "") +
-      (c.pages ? '<a class="ac-pmcard__foot" href="' + AC.url("guide") + '">' + svg("bookmark", 16, 2) + esc(t("pm.mh.guide", { pages: c.pages })) + "</a>" : "") + "</div></details>" +
-      '<ol class="ac-mh__trail" style="--fill:' + Math.round((c.lessons.filter(function (l) { return l.done; }).length / (c.lessons.length + 1)) * 100) + '%">' + rows + "</ol>" + later;
-    box.hidden = false;
-    var wrap = box.closest("[data-home]");
-    if (wrap) wrap.classList.add("has-mh");
-    pmStats($("[data-pm-mstats]", box), s);
-    var det = $(".ac-mh__details", box);
-    det.addEventListener("toggle", function () { try { sessionStorage.setItem("ac_mh_details", det.open ? "1" : "0"); } catch (e) {} });
-    box.addEventListener("click", function (e) {
-      var h = e.target.closest("[data-mh-hint]");
-      if (!h) return;
-      e.preventDefault();
-      var step = h.closest(".ac-mh__step"), isCh = step.classList.contains("ac-mh__step--ch");
-      if (step.classList.contains("is-dim")) {
-        var soon = !!step.closest("[data-mh-soon]");
-        sheet(document, { eb: "", title: step.querySelector("b").textContent, text: soon ? t("pm.l.hint.soon") : t("pm.mh.laterHint", { n: c.n }), cta: soon ? null : cta });
-        return;
-      }
-      var n = step.getAttribute("data-mh-n"), l = n ? c.lessons[n - 1] : null;
-      var text = !nowL || isCh ? t("pm.l.hint.challengeLessons") : lessonHint(m, nowL);
-      sheet(document, { eb: isCh ? t("pm.sheet.ebCh", { n: c.n }) : t("pm.sheet.eb", { c: c.n, n: n, xp: XP.lesson }), title: isCh ? t("pm.ch.challenge") : l.title, text: text, cta: cta });
-    });
-  }
-
   // ------------------------------------------------------------------ paths catalog
   function pathsPage() {
     var root = $("[data-paths-page]");
     if (!root) return;
     proSwap(root);
-    // the featured Trading Foundations card: real progress and the same next step as the path page
+    // the featured Trading Foundations card is the path card (pm_hero): the same states as on the path page
     var m = model(), started = isStarted(m), all = m.chapters.length > 0 && m.passed === m.chapters.length;
-    var feat = $("[data-feat]", root), act = heroAction(m);
-    var status = $("[data-path-status]", feat);
-    setText(status, all ? t("paths.done") : t("paths.inProgress"));
-    showEl(status, started);
-    showEl($("[data-path-prog]", feat), started);
-    if (started) {
-      fillSegs(feat, m);
-      var place = placeOf(m);
-      setText($("[data-path-count]", feat), all ? t("path.count", { ch: m.passed, total: m.chapters.length, l: m.lessonsTotal, lt: m.lessonsTotal })
-        : t("pm.count", { n: place ? place.n : 1, total: m.chapters.length, l: m.lessonsDone, lt: m.lessonsTotal }));
-    }
-    setText($("[data-path-cta-label]", feat), phone() && act.short ? act.short : act.label);
-    if (act.short && act.short !== act.label) $("[data-path-cta]", feat).setAttribute("aria-label", act.label);
-    setLink($("[data-path-cta]", feat), act.href, act.locked);
+    var feat = $("[data-feat]", root);
+    pmHero(feat, m);
     // a Pro path is in progress once it has a started chapter (records keyed "<path>/<chapter>")
     var rec = AC.progress.state();
     var proStarted = $$('.ac-pcard[data-path]', root).filter(function (card) {

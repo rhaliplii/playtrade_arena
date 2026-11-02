@@ -100,11 +100,12 @@
       dlg.addEventListener("close", function () {
         if (dlg.returnValue === "ok") {
           AC.auth.signUp(dlg.querySelector("[name=name]").value.trim(), dlg.querySelector("[name=email]").value.trim());
-          location.href = AC.url("setup");
+          location.href = dlg._next || AC.url("setup");
         } else if (dlg._onCancel && dlg.returnValue !== "swap") dlg._onCancel();
       });
     }
     dlg._onCancel = opts && opts.onCancel;   // e.g. a guest who opened a locked lesson goes back to the chapter
+    dlg._next = opts && opts.next;           // where to go once signed up (default: /setup; the quick challenge: /welcome)
     dlg.returnValue = "";
     dlg.querySelector("[data-reason]").textContent = reason || AC.t("signup.text");
     open(dlg);
@@ -131,6 +132,20 @@
     dlg._onCancel = opts && opts.onCancel;
     dlg.returnValue = "";
     open(dlg);
+  };
+
+  /** A small confirm sheet: {title, text, ok, cancel, onOk}. Keyboard: Escape (or the backdrop) cancels. */
+  AC.confirmSheet = function (o) {
+    var old = document.getElementById("acConfirm");
+    if (old) old.remove();
+    var dlg = sheet("acConfirm", head("acConfirm", o.title) + (o.text ? '<p class="ac-muted ac-acct__lead">' + AC.esc(o.text) + "</p>" : "") +
+      '<div class="ac-acct__btns"><button class="ac-btn ac-btn--primary" value="ok">' + AC.esc(o.ok) + "</button>" +
+      '<button type="button" class="ac-btn ac-btn--ghost" data-keep>' + AC.esc(o.cancel) + "</button></div>");
+    AC.$("[data-keep]", dlg).addEventListener("click", function () { dlg.close("cancel"); });
+    dlg.addEventListener("close", function () { if (dlg.returnValue === "ok" && o.onOk) o.onOk(); });
+    dlg.returnValue = "";
+    open(dlg);
+    var keep = AC.$("[data-keep]", dlg); if (keep) keep.focus();
   };
 
   /** Confirm, then delete the account and its progress from this device. */
@@ -307,7 +322,11 @@
       var a = e.target.closest("[data-action], .topnav__login, .topnav__cta, .is-guest .mnav__util--account");
       if (!a) return;
       var act = a.getAttribute("data-action") || (a.matches(".topnav__cta") ? "signup" : "login");
-      if (act === "signup") { e.preventDefault(); AC.signupSheet(a.getAttribute("data-reason")); }
+      if (act === "signup") {
+        e.preventDefault();
+        var to = a.tagName === "A" && a.getAttribute("href") && a.getAttribute("href") !== "#" ? a.href : null;
+        AC.signupSheet(a.getAttribute("data-reason"), to ? { next: to } : null);
+      }
       else if (act === "login") { e.preventDefault(); AC.loginSheet(); }
       else if (act === "logout") { e.preventDefault(); AC.auth.logOut(); location.href = AC.url(""); }
       else if (act === "delete-account") { e.preventDefault(); AC.deleteAccountSheet(); }

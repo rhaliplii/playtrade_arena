@@ -98,42 +98,23 @@
     if (m) { input.value = decodeURIComponent(m[1].replace(/\+/g, " ")); (onIndex ? filterIndex : filterAside)(); }
   }
 
-  // ---------------------------------------------------------------- Guide (email gate)
+  // ---------------------------------------------------------------- Guide (direct download)
+  /* The PDF link is a plain <a download> for everyone (works without JS). After a guest's click, a soft follow-up
+     appears under it in a polite live region: practice it in the Academy. Its button is the home hero's
+     "Start learning free": Lesson 1, or (Lesson 1 already played) the sign-up sheet, as guestHome does. Focus stays put. */
   function guide() {
-    var form = AC.$("[data-guide-form]"), done = AC.$("[data-guide-done]");
-    if (!form) return;
-    // signed in: no email form; we know who they are. Just the download.
-    if (!AC.auth.isGuest()) {
-      var dl = AC.$("[data-guide-dl]");
-      if (dl) dl.addEventListener("click", function () { AC.analytics.track("guide_download", { member: true }); });
-      return;
-    }
-    var KEY = "guide_sent";
-    function show(email, focus) {
-      form.hidden = true; done.hidden = false;
-      var sent = AC.$("[data-guide-sent]");
-      if (email) { sent.textContent = AC.t("guide.done.text", { email: email }); sent.hidden = false; }
-      if (focus) done.focus();
-    }
-    var again = AC.$("[data-guide-again]");
-    if (again) again.addEventListener("click", function () {
-      AC.store.remove(KEY);
-      done.hidden = true; form.hidden = false;
-      var input = form.querySelector("[name=email]");
-      input.value = ""; input.focus();
-    });
-    var prev = AC.store.get(KEY);
-    if (prev && prev.email) show(prev.email, false);
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var input = form.querySelector("[name=email]"), err = AC.$("#guide-err");
-      var email = input.value.trim();
-      var ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-      err.hidden = ok;
-      input.setAttribute("aria-invalid", ok ? "false" : "true");
-      if (!ok) { input.focus(); return; }
-      AC.store.set(KEY, { email: email, d: AC.progress.day() });
-      show(email, true);
+    var dl = AC.$("[data-guide-dl]"), next = AC.$("[data-guide-next]");
+    if (!dl) return;
+    dl.addEventListener("click", function () {
+      var guest = AC.auth.isGuest();
+      AC.analytics.track("guide_download", { member: !guest });
+      if (!guest || !next || !next.hidden) return;
+      var l1 = next.dataset.first && AC.progress.lesson(next.dataset.first);
+      if (l1 && l1.done) {
+        AC.$("[data-guide-next-text]", next).textContent = AC.t("guide.next.textStarted");
+        AC.$("[data-guide-next-cta]", next).setAttribute("data-action", "signup");
+      }
+      next.hidden = false;
     });
   }
 
