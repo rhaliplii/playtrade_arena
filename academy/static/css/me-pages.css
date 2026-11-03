@@ -554,7 +554,7 @@
 
 /* Top Learners · stacked layout (legacy): centred podium, then every place in one list; your row sticks while scrolling */
 .me-board--stack { display: flex; flex-direction: column; gap: 16px; }
-.me-board--stack .me-podium { align-items: center; padding-bottom: 0; background: radial-gradient(70% 80% at 50% 100%, var(--ac-amber-soft), transparent 70%), var(--ac-surface); }
+.me-board--stack .me-podium { align-items: center; padding-bottom: 0; background: radial-gradient(70% 80% at 50% 100%, var(--ac-podium-glow), transparent 70%), var(--ac-surface); }
 .me-card-head--center { flex-direction: column; align-items: center; gap: 4px; text-align: center; }
 .me-board--stack .me-podium__note { max-width: 520px; margin: 0 auto; text-align: center; }
 .me-board--stack .me-podium__stage { width: 100%; max-width: 600px; margin: 8px auto 0; }
@@ -567,19 +567,21 @@
 
 /* legacy podium columns: smooth tinted gradients, medal on the top edge */
 .me-board--stack .me-podium__stage { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: end; max-width: 600px; margin: 28px auto 0; }
-.me-podcol { --m: var(--ac-text-soft); position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; height: 196px; padding: 26px 10px 16px; border-radius: 18px 18px 0 0; text-align: center;
+.me-podcol { --m: var(--ac-text-soft); position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; min-height: 196px; padding: 26px 10px 16px; border-radius: 18px 18px 0 0; text-align: center;
   background: linear-gradient(180deg, color-mix(in srgb, var(--m) 16%, transparent), color-mix(in srgb, var(--m) 3%, transparent)); }
-.me-podcol--1 { --m: var(--ac-amber); height: 232px; padding-top: 30px; }
-.me-podcol--3 { --m: var(--ac-coral); height: 172px; }
+.me-podcol--1 { --m: var(--ac-amber); --md: var(--ac-medal-1); min-height: 232px; padding-top: 30px; }
+.me-podcol--3 { --m: var(--ac-coral); --md: var(--ac-medal-3); min-height: 172px; }
 .me-podcol.is-you { box-shadow: inset 0 0 0 1.5px var(--ac-primary-ring); }
-.me-podcol__medal { position: absolute; top: -13px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--m); color: var(--ac-ink); font: 800 13px var(--ac-font); }
+.me-podcol__medal { position: absolute; top: -13px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--md, var(--ac-medal-2)); color: var(--ac-ink); font: 800 13px var(--ac-font); }
 .me-podcol__ava { display: grid; place-items: center; margin-bottom: 6px; border-radius: 50%; box-shadow: 0 0 0 3px var(--m); }
 .me-podcol__ava .me-ava { display: grid; }
 .me-podcol--1 .me-podcol__ava { box-shadow: 0 0 0 3px var(--m), 0 0 24px color-mix(in srgb, var(--m) 35%, transparent); }
 .me-podcol__name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 800 14.5px/20px var(--ac-font); }
 .me-podcol__rank { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 12px/16px var(--ac-font); color: var(--ac-text-faint); }
 .me-podcol__xp { margin-top: 6px; padding: 3px 10px; border-radius: 999px; background: var(--ac-chip); font: 800 12.5px var(--ac-font); font-variant-numeric: tabular-nums; }
-.me-podcol--1 .me-podcol__xp { color: var(--ac-amber); }
+.me-podcol--1 .me-podcol__xp { color: var(--ac-amber-ink); }
+/* the column heights are minimums: a fixed height squeezed #3's name until it was clipped */
+.me-podcol > * { flex-shrink: 0; }
 .me-podcol__ava .me-ava { width: 56px; height: 56px; font-size: 18px; }
 .me-podcol--1 .me-podcol__ava .me-ava { width: 68px; height: 68px; font-size: 22px; }
 

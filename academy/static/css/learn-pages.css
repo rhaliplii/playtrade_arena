@@ -94,7 +94,7 @@
 /* how it works */
 .ac-how { display: flex; flex-direction: column; gap: 16px; }
 .ac-how__grid { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.ac-how__card { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 20px 22px; border-radius: var(--ac-r-card); background: radial-gradient(120% 90% at 0% 0%, var(--ac-primary-soft), transparent 55%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); overflow: hidden; }
+.ac-how__card { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 20px 22px; border-radius: var(--ac-r-card); background: radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--ac-mint-wash) 14%, transparent), transparent 55%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); overflow: hidden; }
 .ac-how__head { display: flex; align-items: center; gap: 14px; }
 .ac-how__name { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .ac-how__n { flex: none; width: 40px; text-align: center; font: 800 44px/1 var(--ac-font); letter-spacing: -1px; background: linear-gradient(160deg, var(--ac-primary-ink), var(--ac-primary) 70%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 6px 18px var(--ac-glow)); }
@@ -155,6 +155,10 @@
 .ac-snake.is-drawn:not(.is-static) .ac-snake__rico img { animation: ac-bob 3.2s ease-in-out 2.3s infinite; }
 .ac-snake__rico--end img { width: 80px; }
 .ac-snake__bubble--gold { background: var(--ac-gold); color: var(--ac-ink); }
+/* light theme: --ac-gold is a deep gold there (gold text on white), too dark under ink: the badge takes the pale medal gold,
+   and the plan node's number and title the dark amber ink */
+:root[data-theme="light"] .ac-snake__bubble--gold { background: var(--ac-medal-1); }
+:root[data-theme="light"] .ac-snake__node--plan .ac-snake__dot, :root[data-theme="light"] .ac-snake__node--plan .ac-snake__text b { color: var(--ac-amber-ink); }
 .ac-snake.is-drawn .ac-snake__rico--end { transition-delay: 1.4s; }
 /* at Chapter 1 (a guest, or nothing passed yet) there is no trail to wait for: Rico shows with the first node, not
    after the whole path has drawn */
@@ -168,7 +172,7 @@
 /* path cards (Pro) */
 .ac-prosec { display: flex; flex-direction: column; gap: 16px; }
 .ac-pgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.ac-pcard { display: flex; flex-direction: column; border-radius: var(--ac-r-card); background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); overflow: hidden; color: var(--ac-text) !important; text-decoration: none !important; }
+.ac-pcard { display: flex; flex-direction: column; border-radius: var(--ac-r-card); background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-card-line), var(--ac-lift); overflow: hidden; color: var(--ac-text) !important; text-decoration: none !important; }
 .ac-pcard:hover { box-shadow: inset 0 0 0 1px var(--ac-line-strong), var(--ac-shadow-soft); }
 .ac-pcard__cover { display: flex; align-items: flex-end; justify-content: flex-end; height: 150px; padding-right: 20px; overflow: hidden; background: linear-gradient(135deg, var(--accent, var(--ac-path-learn)), color-mix(in srgb, var(--accent, var(--ac-path-learn)) 20%, black) 150%); }
 .ac-pcard__cover img { display: block; height: 140px; width: auto; margin-bottom: -10px; }
@@ -195,16 +199,16 @@
 .ac-top > .ac-section-head { flex-direction: column; align-items: flex-start; gap: 4px; }
 .ac-titlelink { display: inline-flex; align-items: center; gap: 10px; color: var(--ac-text) !important; text-decoration: none !important; }
 .ac-top__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 20px; align-items: stretch; }
-.ac-top__podium-card, .ac-top__list-card { border-radius: var(--ac-r-card); background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); overflow: hidden; }
-.ac-top__podium-card { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: 24px 20px 0; background: radial-gradient(90% 70% at 50% 100%, var(--ac-amber-soft), transparent 70%), var(--ac-surface); }
+.ac-top__podium-card, .ac-top__list-card { border-radius: var(--ac-r-card); background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-card-line), var(--ac-lift); overflow: hidden; }
+.ac-top__podium-card { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: 24px 20px 0; background: radial-gradient(90% 70% at 50% 100%, var(--ac-podium-glow), transparent 70%), var(--ac-surface); }
 .ac-top__intro { display: flex; flex-direction: column; gap: 6px; padding: 0 8px; font: 500 14px/20px var(--ac-font); color: var(--ac-text-muted); }
 .ac-top__eyebrow { font: 700 12px/16px var(--ac-font); letter-spacing: .12em; text-transform: uppercase; }
 .ac-top__podium { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: end; padding-top: 12px; }
 .ac-podium { --pc: var(--ac-text-soft); position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 256px; padding: 26px 10px 20px; border-radius: 18px 18px 0 0; background: linear-gradient(180deg, color-mix(in srgb, var(--pc) 16%, transparent), color-mix(in srgb, var(--pc) 4%, transparent)); text-align: center; min-width: 0; color: var(--ac-text) !important; text-decoration: none !important; }
 .ac-podium:hover { background: linear-gradient(180deg, color-mix(in srgb, var(--pc) 24%, transparent), color-mix(in srgb, var(--pc) 6%, transparent)); }
-.ac-podium--1 { --pc: var(--ac-gold); height: 304px; padding-top: 30px; }
-.ac-podium--3 { --pc: var(--ac-coral); height: 216px; }
-.ac-podium__place { position: absolute; top: -12px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--pc); color: var(--ac-ink); font: 800 13px var(--ac-font); }
+.ac-podium--1 { --pc: var(--ac-gold); --md: var(--ac-medal-1); height: 304px; padding-top: 30px; }
+.ac-podium--3 { --pc: var(--ac-coral); --md: var(--ac-medal-3); height: 216px; }
+.ac-podium__place { position: absolute; top: -12px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--md, var(--ac-medal-2)); color: var(--ac-ink); font: 800 13px var(--ac-font); }
 .ac-podium .ac-ava { width: 56px; height: 56px; margin-bottom: 6px; font-size: 18px; box-shadow: 0 0 0 3px var(--pc); }
 .ac-podium--1 .ac-ava { width: 68px; height: 68px; box-shadow: 0 0 0 3px var(--pc), 0 0 24px var(--ac-gold-soft); }
 .ac-podium b { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 800 14.5px/20px var(--ac-font); }
@@ -550,10 +554,10 @@
 .ac-pm-side { min-width: 0; display: flex; flex-direction: column; gap: 14px; padding-top: 44px; }
 
 /* ---- a chapter */
-.ac-pmc { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 16px 20px; border-radius: 18px; background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); transition: background-color .2s ease, box-shadow .2s ease; }
+.ac-pmc { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 16px 20px; border-radius: 18px; background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-card-line), var(--ac-lift); transition: background-color .2s ease, box-shadow .2s ease; }
 .ac-pmc:not(.is-open):hover { background: var(--ac-surface-raised); }
 .ac-pmc.is-open { gap: 14px; padding: 20px 20px 16px; border-radius: 22px; }
-.ac-pmc.is-now.is-open { background: linear-gradient(180deg, color-mix(in srgb, var(--ac-primary-ink) 8%, transparent), transparent 140px), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--pm-mint-a); }
+.ac-pmc.is-now.is-open { background: linear-gradient(180deg, color-mix(in srgb, var(--ac-mint-wash) 8%, transparent), transparent 140px), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--pm-mint-a); }
 .ac-pmc.is-passed { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ac-primary-ink) 25%, transparent); }
 .ac-pmc__head { position: relative; display: flex; align-items: center; gap: 14px; }
 .ac-pmc__badge { position: relative; z-index: 1; display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--ac-surface-raised); color: var(--ac-text-faint); font: 800 15px var(--ac-font); font-variant-numeric: tabular-nums; }
@@ -632,7 +636,7 @@
 .ac-pml.is-later .ac-pml__hit:focus-visible ~ .ac-pml__tip { opacity: 1; transform: none; }
 
 /* ---- side column cards */
-.ac-pmcard { display: flex; flex-direction: column; gap: 12px; padding: 18px; border-radius: 20px; background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); }
+.ac-pmcard { display: flex; flex-direction: column; gap: 12px; padding: 18px; border-radius: 20px; background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-card-line), var(--ac-lift); }
 .ac-pmcard__eb { margin: 0; font: 800 11px/14px var(--ac-font); letter-spacing: .1em; text-transform: uppercase; color: var(--ac-text-muted); }
 .ac-pmcard__eb--mint { color: var(--ac-primary-ink); }
 .ac-pmcard__title { margin: 0; font: 800 19px/1.25 var(--ac-font); color: var(--ac-text); }
@@ -644,8 +648,9 @@
 .ac-pmcard__foot:hover { text-decoration: underline !important; text-underline-offset: 3px; }
 .ac-pmcard__foot svg { flex: none; }
 .ac-pmcard__foot--chev { justify-content: space-between; }
-.ac-pmcard--save { background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-primary-ink) 18%, transparent), transparent 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--pm-mint-a); }
+.ac-pmcard--save { background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-mint-wash) 18%, transparent), transparent 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--pm-mint-a); }
 .ac-pmcard--pro { gap: 14px; padding: 20px; background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-pro) 28%, transparent), transparent 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ac-pro) 45%, transparent); }
+:root[data-theme="light"] .ac-pmcard--pro { background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-pro) 12%, transparent), transparent 60%), var(--ac-surface); }
 .ac-pmchecks { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
 .ac-pmchecks li { display: flex; gap: 10px; font: 600 14px/1.45 var(--ac-font); color: var(--ac-text); }
 .ac-pmchecks svg { flex: none; margin-top: 3px; color: var(--ac-primary-ink); }
@@ -678,7 +683,7 @@
 .ac-pmart { position: relative; display: block; height: 138px; border-radius: 14px; overflow: hidden; background: var(--ac-surface-sunken); }
 .ac-pmart--img img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; transition: transform .4s ease; }
 .ac-pmtool:hover .ac-pmart--img img { transform: scale(1.04); }
-.ac-pmart--pt { background: radial-gradient(80% 90% at 90% 100%, color-mix(in srgb, var(--ac-primary-ink) 28%, transparent), transparent 60%), var(--ac-surface-sunken); }
+.ac-pmart--pt { background: radial-gradient(80% 90% at 90% 100%, color-mix(in srgb, var(--ac-mint-wash) 28%, transparent), transparent 60%), var(--ac-surface-sunken); }
 .ac-pmart__line { position: absolute; left: 0; right: 0; bottom: 8px; width: 100%; height: 80%; fill: none; stroke: var(--ac-primary-ink); stroke-width: 2; vector-effect: non-scaling-stroke; opacity: .9; }
 .ac-pmart__ticket { position: absolute; left: 12px; top: 12px; width: 150px; display: flex; flex-direction: column; gap: 6px; padding: 10px; border-radius: 12px; background: color-mix(in srgb, var(--ac-surface) 92%, transparent); box-shadow: inset 0 0 0 1px var(--ac-line); }
 .ac-pmart__row { display: flex; justify-content: space-between; align-items: center; font: 600 11.5px var(--ac-font); color: var(--ac-text-muted); }
@@ -791,7 +796,7 @@
   /* free path: one long scroll, every chapter open, its banner sticks while you scroll it */
   .ac-pm--free .ac-pmc { gap: 4px; padding: 0; border-radius: 0; background: none !important; box-shadow: none !important; }
   .ac-pm--free .ac-pmc__head { position: sticky; top: var(--pm-stick); z-index: 3; margin: 6px 0 4px; padding: 14px 16px; border-radius: 18px; background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line), 0 8px 18px color-mix(in srgb, var(--ac-page) 60%, transparent); }
-  .ac-pm--free .ac-pmc.is-now .ac-pmc__head { background: linear-gradient(135deg, color-mix(in srgb, var(--ac-primary-ink) 16%, transparent), color-mix(in srgb, var(--ac-primary-ink) 3%, transparent) 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--pm-mint-a), 0 8px 18px color-mix(in srgb, var(--ac-page) 60%, transparent); }
+  .ac-pm--free .ac-pmc.is-now .ac-pmc__head { background: linear-gradient(135deg, color-mix(in srgb, var(--ac-mint-wash) 16%, transparent), color-mix(in srgb, var(--ac-mint-wash) 3%, transparent) 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--pm-mint-a), 0 8px 18px color-mix(in srgb, var(--ac-page) 60%, transparent); }
   .ac-pm--free .ac-pmc__badge, .ac-pm--free .ac-pmc__chev, .ac-pm--free .ac-pmc__end, .ac-pm--free .ac-pmc__mx, .ac-pm--free .ac-pmc__bar { display: none !important; }
   .ac-pm--free .ac-pmc__text { gap: 3px; }
   .ac-pm--free .ac-pmc .ac-pmc__eb { display: block !important; font-size: 11px; line-height: 14px; letter-spacing: .1em; color: var(--ac-text-muted); }
@@ -826,7 +831,7 @@
   .ac-pm .ac-pml.is-done .ac-pml__go, .ac-pm .ac-pml.is-open .ac-pml__go { min-height: 44px; padding: 0 2px; box-shadow: none; background: none; color: var(--ac-link) !important; font: 600 13px var(--ac-font); }
   .ac-pm .ac-pml.is-done .ac-pml__go svg { display: none; }
   /* the current lesson becomes a card with its Start button */
-  .ac-pm .ac-pml.is-now .ac-pml__text { gap: 6px; padding: 14px 16px; border-radius: 18px; background: linear-gradient(160deg, color-mix(in srgb, var(--ac-primary-ink) 14%, transparent), color-mix(in srgb, var(--ac-primary-ink) 4%, transparent)), var(--ac-surface); box-shadow: inset 0 0 0 1.5px var(--ac-primary-ink); }
+  .ac-pm .ac-pml.is-now .ac-pml__text { gap: 6px; padding: 14px 16px; border-radius: 18px; background: linear-gradient(160deg, color-mix(in srgb, var(--ac-mint-wash) 14%, transparent), color-mix(in srgb, var(--ac-mint-wash) 4%, transparent)), var(--ac-surface); box-shadow: inset 0 0 0 1.5px var(--ac-primary-ink); }
   .ac-pm .ac-pml.is-now .ac-pml__eb { display: block; font: 800 11px/14px var(--ac-font); letter-spacing: .1em; text-transform: uppercase; color: var(--ac-primary-ink); }
   .ac-pm .ac-pml.is-now .ac-pml__title { font: 800 17px/1.25 var(--ac-font); }
   .ac-pm .ac-pml.is-now .ac-pml__sub { display: block; font: 500 13px/1.45 var(--ac-font); color: var(--ac-text-soft); }
@@ -891,7 +896,11 @@ html:has(.ac-certsheet[open]) { overflow: hidden; }
 @keyframes pm-ring { 0% { box-shadow: 0 6px 0 color-mix(in srgb, var(--ac-primary) 50%, black), 0 0 0 0 var(--ac-primary-ring); } 70% { box-shadow: 0 6px 0 color-mix(in srgb, var(--ac-primary) 50%, black), 0 0 0 14px transparent; } 100% { box-shadow: 0 6px 0 color-mix(in srgb, var(--ac-primary) 50%, black), 0 0 0 0 transparent; } }
 
 /* light theme: heroes stay green / purple; quieter shadows */
-:root[data-theme="light"] .ac-pm--free .ac-pmc__head { box-shadow: inset 0 0 0 1px var(--ac-line), 0 6px 14px color-mix(in srgb, var(--ac-ink) 6%, transparent); }
+/* (phones only, like the sticky chapter banner it softens; on desktop the head has no frame) */
+@media (max-width: 860px) {
+  :root[data-theme="light"] .ac-pm--free .ac-pmc__head { box-shadow: inset 0 0 0 1px var(--ac-line), 0 6px 14px color-mix(in srgb, var(--ac-ink) 6%, transparent); }
+  :root[data-theme="light"] .ac-pm--free .ac-pmc.is-now .ac-pmc__head { box-shadow: inset 0 0 0 1px var(--pm-mint-a), 0 6px 14px color-mix(in srgb, var(--ac-ink) 6%, transparent); }
+}
 :root[data-theme="light"] .ac-pm-back { box-shadow: 0 10px 24px color-mix(in srgb, var(--ac-ink) 18%, transparent), inset 0 0 0 1px var(--ac-line); }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1024,6 +1033,10 @@ html:has(.ac-certsheet[open]) { overflow: hidden; }
   background: var(--art) right center / cover no-repeat;
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 42%); mask-image: linear-gradient(90deg, transparent 0%, black 42%); }
 .has-art > * { position: relative; z-index: 1; }
+/* Trading Foundations: the scene is a dark-to-light gradient whose near-black left side made the text side heavy. A
+   light layer screened over the whole banner lifts the dark side (most on the left, none at Rico): the banner reads as
+   one even dark-to-light sweep, and the scene's faint candlesticks stay visible because screen keeps lighter shapes lighter */
+.ac-pmhero--ltt.has-art::after { content: ""; position: absolute; inset: 0; z-index: 0; border-radius: inherit; pointer-events: none; background: var(--ac-art-ltt-lift); mix-blend-mode: screen; }
 .has-art .ac-pmhero__rico { display: none !important; }
 @media (max-width: 860px) {
   /* phones: the scene sits on top (Rico in view), fading down into the text area */
@@ -1036,6 +1049,9 @@ html:has(.ac-certsheet[open]) { overflow: hidden; }
 .ac-mile--link { color: inherit; text-decoration: none; border-radius: 12px; }
 button.ac-mile--link { padding: 0; border: 0; background: none; font: inherit; text-align: left; cursor: pointer; }
 .ac-mile--link:hover b, .ac-mile--link:focus-visible b { text-decoration: underline; }
+/* the sample milestone: "See a sample" is the link text, so it takes the underline (not the title) */
+.ac-mile--link:has(.ac-mile__see):hover b, .ac-mile--link:has(.ac-mile__see):focus-visible b { text-decoration: none; }
+.ac-mile--link:hover .ac-mile__see, .ac-mile--link:focus-visible .ac-mile__see { text-decoration: underline; text-underline-offset: 3px; }
 .ac-mile > span:last-child > .ac-mile__see { display: inline-flex; align-items: center; gap: 2px; margin-top: 2px; font: 600 13px var(--ac-font); color: var(--ac-primary-ink); }
 /* a finished lesson row opens the lesson anywhere on the row (learn-pages.js pmWire) */
 .ac-pml[data-pml].is-done { cursor: pointer; }
@@ -1174,7 +1190,7 @@ html.ac-reduce-motion .ac-home--guest .ac-ghsticky, html.ac-reduce-motion .ac-do
   .ac-hws__row { list-style: none; }
   .ac-home--guest .ac-hws__row { align-items: stretch; }
   .ac-home--guest .ac-hws__row > .ac-hws__card { width: min(342px, calc(100% - 16px)); }
-  .ac-hws__card { display: flex; flex-direction: column; gap: 6px; padding: 20px 18px 18px; border-radius: var(--ac-r-card); background: radial-gradient(90% 50% at 0% 0%, var(--ac-primary-soft), transparent 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); }
+  .ac-hws__card { display: flex; flex-direction: column; gap: 6px; padding: 20px 18px 18px; border-radius: var(--ac-r-card); background: radial-gradient(90% 50% at 0% 0%, color-mix(in srgb, var(--ac-mint-wash) 14%, transparent), transparent 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); }
   .ac-hws__card:focus-visible { outline: 2px solid var(--ac-primary-ink); outline-offset: -2px; }
   .ac-hws__step { font: 700 12px/1.35 var(--ac-font); letter-spacing: .1em; text-transform: uppercase; color: var(--ac-primary-ink); }
   .ac-hws__title { font: 800 22px/1.2 var(--ac-font); }

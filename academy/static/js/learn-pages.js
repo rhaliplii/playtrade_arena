@@ -568,7 +568,7 @@
       var left = a.l.started ? minutesLeft(a.l) : 0;
       var label = !started ? t("pm.cta.start", { l: a.l.n }) : a.c.n === 1 ? t("pm.cta.continue", { l: a.l.n }) : t("pm.cta.continueCh", { n: a.c.n, l: a.l.n });
       return { kind: "lesson", label: label, short: a.c.n === 1 || !started ? label : t("pm.cta.continueChShort", { n: a.c.n, l: a.l.n }), href: link.href, locked: link.locked,
-        note: isGuest() && !started ? t("pm.note.guest") : link.locked ? t("pm.note.signup")
+        note: isGuest() && !started ? "" : link.locked ? t("pm.note.signup")   // guests: no note (the button opens the sign-up)
           : left ? t("pm.note.lessonLeft", { title: a.l.title, min: mins(left) }) : t("pm.note.lesson", { title: a.l.title, min: mins(a.l.minutes) }) };
     }
     if (a.kind === "challenge") {
@@ -767,6 +767,7 @@
     if (act.short && act.short !== act.label) cta.setAttribute("aria-label", act.label);
     setLink(cta, act.href, act.locked);
     setText(note, act.note || "");
+    if (note) note.hidden = !act.note;
   }
 
   function pmRank(card, s, all) {

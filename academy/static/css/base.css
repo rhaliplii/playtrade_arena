@@ -66,7 +66,7 @@
 .ac-link { font: 600 14px var(--ac-font); color: var(--ac-link); }
 
 /* ---------- surfaces */
-.ac-card { display: flex; flex-direction: column; gap: 16px; padding: 24px; border-radius: var(--ac-r-card); background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); }
+.ac-card { display: flex; flex-direction: column; gap: 16px; padding: 24px; border-radius: var(--ac-r-card); background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-card-line), var(--ac-lift); }
 .ac-hero { position: relative; display: flex; align-items: stretch; gap: 24px; border-radius: var(--ac-r-card); background: var(--ac-hero); color: var(--ac-hero-text); overflow: hidden; }
 .ac-hero .ac-h1, .ac-hero .ac-h2 { color: var(--ac-hero-text); }
 .ac-hero .ac-lead, .ac-hero .ac-eyebrow { color: var(--ac-hero-text-soft); }
@@ -132,6 +132,14 @@
 :root[data-theme="light"] .ac-body .topnav { background: var(--ac-surface); border-bottom: 1px solid var(--ac-line); }
 :root[data-theme="light"] .ac-body .topnav__item, :root[data-theme="light"] .ac-body .topnav a { color: var(--ac-text); }
 :root[data-theme="light"] .ac-body .topnav img.icon, :root[data-theme="light"] .ac-body .topnav__logo { filter: invert(1) hue-rotate(180deg); }
+/* the platform footer: its colours from the Academy's light tokens; the white wordmark, Apple logo and hover marks in ink */
+:root[data-theme="light"] .ac-body .pf-footer { --fg-primary: var(--ac-text); --fg-secondary: var(--ac-text-muted); --border-primary: var(--ac-line); --bg-1: var(--ac-surface-raised); }
+:root[data-theme="light"] .ac-body .pf-footer .footer__logo .word { filter: brightness(0); opacity: .9; }
+:root[data-theme="light"] .ac-body .pf-footer .pf-app__ico--apple { filter: none; }
+:root[data-theme="light"] .ac-body .pf-footer .pf-app__btn { box-shadow: inset 0 0 0 1px var(--ac-line-strong); }
+:root[data-theme="light"] .ac-body .pf-footer .pf-app__btn:hover, :root[data-theme="light"] .ac-body .pf-footer .social:hover { background: var(--ac-surface-raised); box-shadow: inset 0 0 0 1px var(--ac-line-strong); border-color: var(--ac-line-strong); }
+:root[data-theme="light"] .ac-body .pf-footer .social .ico img { filter: brightness(0); opacity: .55; }
+:root[data-theme="light"] .ac-body .pf-footer .social:hover .ico img { opacity: 1; }
 
 /* ---------- responsive */
 @media (max-width: 860px) {

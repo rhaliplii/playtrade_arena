@@ -22,7 +22,9 @@
   /* lines */
   --ac-line: #2d2f34;
   --ac-line-strong: #3a3d44;
-  --ac-line-soft: #1f2227;       /* hairlines between page bands (verify page header / footer) */
+  --ac-line-soft: #1f2227;
+  --ac-card-line: var(--ac-line);  /* main cards' 1px edge */
+  --ac-lift: 0 0 0 transparent;    /* main cards' shadow: none on dark (the page is darker than the cards) */       /* hairlines between page bands (verify page header / footer) */
 
   /* text */
   --ac-text: #ffffff;
@@ -62,8 +64,13 @@
   --ac-gold-ring: rgba(244, 199, 99, .35);
   --ac-silver: #c9ced8;          /* podium #2 (guest home, phones) */
   --ac-bronze: #d9925a;          /* podium #3 (guest home, phones) */
+  --ac-medal-1: #fbb517;         /* podium place medals (1, 2, 3): light metals under ink numbers in both themes */
+  --ac-medal-2: #d5d7de;
+  --ac-medal-3: #ff8a6b;
   --ac-amber: #fbb517;           /* coins, challenge */
   --ac-amber-soft: rgba(251, 181, 23, .14);
+  --ac-amber-ink: #fbb517;       /* amber as text on chips */
+  --ac-podium-glow: rgba(251, 181, 23, .14);  /* the warm glow behind the Top Learners podium */
   --ac-sky: #7cc0ff;             /* Quick check, Myth */
   --ac-sky-soft: rgba(124, 192, 255, .14);
   --ac-coral: #ff8a6b;           /* Bear Trap */
@@ -93,6 +100,7 @@
   --ac-hero-pro: linear-gradient(120deg, #3b1f73, #7c4ddb);
   --ac-hero-warm: linear-gradient(135deg, #3a2414, #b8620f);  /* Challenge not passed: warm, not alarming */
   --ac-glow: rgba(7, 216, 162, .45);
+  --ac-mint-wash: #07d8a2;       /* the colour of the cards' soft glows (bright mint in both themes; dark green reads grey on white) */
 
   /* per-path accents */
   --ac-path-learn: #13a487;
@@ -122,7 +130,7 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --ac-page: #f6f8fd;
+  --ac-page: #ffffff;           /* white, as Profit.com and its top bar in light theme; cards keep their 1px lines */
   --ac-surface: #ffffff;
   --ac-surface-raised: #f1f4f9;
   --ac-surface-sunken: #eaeef5;
@@ -133,6 +141,8 @@
   --ac-line: #dfe3ea;
   --ac-line-strong: #c9cfd9;
   --ac-line-soft: #e6e9ef;
+  --ac-card-line: #e6e9ef;         /* lighter edge: the shadow does the separating on a white page */
+  --ac-lift: 0 1px 2px rgba(19, 22, 27, .04), 0 8px 24px -8px rgba(19, 22, 27, .10);
 
   --ac-text: #13161b;
   --ac-text-soft: #2f3440;
@@ -170,8 +180,13 @@
   --ac-gold-ring: rgba(168, 120, 10, .35);
   --ac-silver: #7d8696;
   --ac-bronze: #b0672e;
+  --ac-medal-1: #f4c763;
+  --ac-medal-2: #c9ced8;
+  --ac-medal-3: #eba384;
   --ac-amber: #b07a00;
   --ac-amber-soft: rgba(251, 181, 23, .18);
+  --ac-amber-ink: #7d5600;       /* 4.5:1+ on the light chips */
+  --ac-podium-glow: rgba(251, 181, 23, .07);  /* faint on white, or it reads as a smudge */
   --ac-sky: #1f6fc0;
   --ac-sky-soft: rgba(31, 111, 192, .10);
   --ac-coral: #c4502f;
@@ -191,6 +206,7 @@
 
   --ac-hero: linear-gradient(120deg, #0d4f42, #13a487);  /* hero banners stay green in both themes */
   --ac-glow: rgba(10, 143, 108, .25);
+  --ac-mint-wash: #07d8a2;
 
   --ac-shadow: 0 20px 40px rgba(19, 22, 27, .10);
   --ac-shadow-soft: 0 8px 24px rgba(19, 22, 27, .08);
@@ -200,6 +216,7 @@
   /* path art (static/img/art/path-*): the colour at each scene's left edge. Banners fade the art into it; cards show it while
      the image loads. Same in both themes (the art is fixed). */
   --ac-art-ltt: #012d27;
+  --ac-art-ltt-lift: linear-gradient(90deg, rgb(4, 14, 10) 0%, rgb(13, 38, 29) 55%, rgb(13, 38, 29) 65%, rgba(13, 38, 29, 0) 95%);  /* screened over the banner: lifts the scene's near-black side, keeps its candlesticks */
   --ac-art-investor: #1a4d4a;
   --ac-art-portfolio: #0a1f4a;
   --ac-art-ta: #2a0f6a;

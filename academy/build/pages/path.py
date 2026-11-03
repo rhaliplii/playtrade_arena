@@ -451,7 +451,7 @@ def pm_hero(t, base, L, first_href, h1=True, path_map=False, attrs=""):
       <div class="ac-pmhero__ctas">
         <a class="ac-pmbtn ac-pmbtn--white ac-pmbtn--lg" href="{first_href}" data-pm-cta><span data-pm-cta-label>{esc(t("pm.cta.start", l=1))}</span>{icon("arrow", 18, 2.4)}</a>
         {pmap}<a class="ac-pmbtn ac-pmbtn--ghost ac-pmbtn--lg" href="{href(base, "paths")}" data-pm-cta2 hidden>{esc(t("pm.cta.explore"))}</a>
-        <span class="ac-pmhero__note" data-pm-note>{esc(t("pm.note.guest"))}</span>
+        <span class="ac-pmhero__note" data-pm-note hidden></span>
       </div>
     </div>
     <img class="ac-pmhero__rico" src="{rico_src(base, "present")}" alt="{esc(t("chapter.ricoAlt"))}" width="200" height="220" data-pm-rico>
