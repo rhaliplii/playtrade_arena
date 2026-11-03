@@ -1,5 +1,7 @@
 """Search (/academy/search?q=): client-side search over lessons, chapters, glossary terms and paths.
 The page ships a small index (#ac-ref); ref-pages.js ranks, groups and renders results with the learner's state."""
+import json
+
 import lib
 from lib import esc
 from pages.glossary import usage, chapter_numbers
@@ -48,6 +50,13 @@ def _index(ctx):
     suggest = [ctx.glossary[k]["term"] for k in list(ctx.glossary)[:4]]
     return {"page": "search", "path": {"id": ctx.path["id"], "t": path_title}, "chapters": chapters, "lessons": lessons,
             "terms": terms, "paths": paths, "suggest": suggest}
+
+
+def index_json(ctx):
+    """The same index as a file (static/data/search-index.js) for the top bar's search panel, on every page."""
+    d = _index(ctx)
+    d.pop("page", None)
+    return json.dumps(d, ensure_ascii=False, separators=(",", ":"))
 
 
 def routes(ctx):

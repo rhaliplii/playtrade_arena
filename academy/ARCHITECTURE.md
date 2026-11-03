@@ -72,6 +72,7 @@ source of truth. XP is **computed by the engine from answers**, never sent by th
 |---|---|---|
 | `AC.store` | `js/store.js` | Profit.com API |
 | `AC.auth` | `js/services.js` | Profit.com auth (guest ↔ member, sign-up merges guest progress) |
+| `AC.gsearch` | `js/gsearch.js` | The top bar's search panel (Figma "Global search"): platform tabs plus an Academy tab, selected first; Academy results from `static/data/search-index.js` (written by the build from the `/search` index; `window.AC_SEARCH_INDEX`), loaded as a script on first open so it works on file:// too; Enter or "See all" opens `/academy/search` |
 | `AC.certs` | `js/certs.js` | Certificates API (`backend/API.md`): issued by the server on path finish, public lookup |
 | `AC.wallet` | `js/services.js` | Profit Coins wallet |
 | `AC.analytics` | `js/services.js` | Profit.com analytics (`dataLayer`) |

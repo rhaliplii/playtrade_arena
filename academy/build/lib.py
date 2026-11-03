@@ -14,7 +14,7 @@ LOCALES = {"en": {"prefix": "", "intl": "en-US", "name": "English"}}   # add a l
 PSEUDO = "xa"                          # en-XA pseudo-locale for the 35% text-growth check (built with --pseudo)
 
 # Scripts every page loads, in order (plain scripts, no modules, so file:// works)
-CORE_JS = ["core.js", "store.js", "services.js", "certs.js", "engine.js", "shell.js"]
+CORE_JS = ["core.js", "store.js", "services.js", "certs.js", "engine.js", "gsearch.js", "shell.js"]
 
 REPORT = {"missing_strings": set(), "fallback_content": []}
 INDEX = {}   # path index inlined on every page as #ac-index (set by build.py per locale)
@@ -239,14 +239,17 @@ def rebase(markup, root):
     return markup
 
 
-def topnav(root, base=None):
+def topnav(root, base=None, section=""):
     """The platform top nav, read live from index.html so it never drifts. topnav.js adds theme, language, guest state.
-    On Academy pages "Upgrade" opens the Academy's Pro page (the phone drawer copies this link)."""
+    On Academy pages "Upgrade" opens the Academy's Pro page (the phone drawer copies this link), and `section`
+    ("Academy") follows the logo: phones only (base.css), where the side nav and its breadcrumb are in the drawer."""
     src = (SITE / "index.html").read_text()
     m = re.search(r'(<header class="topnav">.*?</header>)', src, re.S)
     markup = rebase(m.group(1), root)
     if base is not None:
         markup = re.sub(r'(<a class="btn-brand topnav__upgrade" href=")#(")', rf'\1{base}pro/index.html\2', markup)
+        if section:
+            markup = re.sub(r'(<img class="topnav__logo"[^>]*></a>)', lambda m: m.group(1) + f'\n    <a class="topnav__section" href="{base}index.html">{esc(section)}</a>', markup, count=1)
     return markup
 
 
@@ -375,11 +378,11 @@ def page(t, *, route, title, description, body, active="home", index=True, css=(
     url = f"{ORIGIN}/{prefix}academy/{route.strip('/') + '/' if route.strip('/') else ''}"
     title = title.replace(" | ", " · ")       # one title separator everywhere
     robots = "" if index else '\n  <meta name="robots" content="noindex, nofollow">'
-    css_links = "".join(f'\n  <link rel="stylesheet" href="{base}static/css/{c}">' for c in ("tokens.css", "base.css") + tuple(css) + ("interact.css",))
+    css_links = "".join(f'\n  <link rel="stylesheet" href="{base}static/css/{c}">' for c in ("tokens.css", "base.css", "gsearch.css") + tuple(css) + ("interact.css",))
     js_tags = "".join(f'\n  <script defer src="{base}static/js/{j}"></script>' for j in tuple(CORE_JS) + tuple(js))
     datas = "".join(f'\n<script type="application/json" id="{k}">{json_script(v)}</script>' for k, v in (data or {}).items())
     ld = "".join(f'\n  <script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in (jsonld or []))
-    shell_top = (topnav(root, base) + '\n<script>' + GUEST_FLAG + '</script>' + f'\n<script src="{root}topnav.js"></script>\n<div class="shell ac-shell">\n' + side_nav(t, active, base) + '\n<main class="ac-main" id="main">') if shell else ('<main class="ac-main ac-main--bare" id="main">' if main else "")
+    shell_top = (topnav(root, base, t("nav.crumb.academy")) + '\n<script>' + GUEST_FLAG + '</script>' + f'\n<script src="{root}topnav.js"></script>\n<div class="shell ac-shell">\n' + side_nav(t, active, base) + '\n<main class="ac-main" id="main">') if shell else ('<main class="ac-main ac-main--bare" id="main">' if main else "")
     # the platform footer (read live from index.html) closes every page with the shell; full-screen players have none
     shell_end = ("<div class=\"ac-footer\">" + footer(root) + f"\n</div>\n<script src=\"{root}footer.js\"></script>\n</main>\n</div>\n" + tab_bar(t, active, base)) if shell else ("</main>" if main else "")
     # inline only the strings this page can use: shell + the locale files its scripts and markup refer to

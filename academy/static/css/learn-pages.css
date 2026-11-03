@@ -335,6 +335,12 @@
 .ac-gymcard__head span span { font: 500 13px var(--ac-font); color: var(--ac-text-muted); }
 .ac-gymcard__xp { margin-left: auto; font: 700 12px var(--ac-font); color: var(--ac-primary-ink); font-variant-numeric: tabular-nums; }
 .ac-gymcard--empty .ac-gymcard__head { align-items: flex-start; }
+/* in the home main column the Gym card is a row: head left, Practice button right */
+.ac-homegrid__main .ac-gymcard { flex-direction: row; align-items: center; justify-content: space-between; }
+.ac-homegrid__main .ac-gymcard__head { flex: 1; min-width: 0; }
+.ac-homegrid__main .ac-gymcard--empty .ac-gymcard__head { align-items: center; }
+.ac-homegrid__main .ac-gymcard__xp { margin-left: auto; }
+@media (max-width: 560px) { .ac-homegrid__main .ac-gymcard:not(.ac-gymcard--empty) { flex-direction: column; align-items: stretch; } }
 .ac-topmini { gap: 12px; }
 .ac-topmini__head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .ac-topmini__head b { font: 600 15px var(--ac-font); }
@@ -868,6 +874,8 @@
 .ac-certsheet__list { display: flex; flex-direction: column; gap: 10px; margin: 2px 0 4px; padding: 0; list-style: none; }
 .ac-certsheet__list li { display: flex; align-items: center; gap: 12px; font: 600 14.5px/1.35 var(--ac-font); color: var(--ac-text); }
 .ac-certsheet__ic { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ac-primary-soft); color: var(--ac-primary-ink); }
+.ac-certsheet__link { display: inline-flex; align-items: center; gap: 4px; color: var(--ac-link) !important; text-decoration: none; }
+.ac-certsheet__link:hover, .ac-certsheet__link:focus-visible { text-decoration: underline; }
 .ac-certsheet .ac-pmsheet__close { margin-top: -6px; }
 html:has(.ac-certsheet[open]) { overflow: hidden; }
 @media (max-width: 860px) {
@@ -1025,8 +1033,10 @@ html:has(.ac-certsheet[open]) { overflow: hidden; }
 }
 
 /* home milestones: the certificate opens (earned → the certificate, ready → the finale) */
-a.ac-mile--link { color: inherit; text-decoration: none; border-radius: 12px; }
-a.ac-mile--link:hover b, a.ac-mile--link:focus-visible b { text-decoration: underline; }
+.ac-mile--link { color: inherit; text-decoration: none; border-radius: 12px; }
+button.ac-mile--link { padding: 0; border: 0; background: none; font: inherit; text-align: left; cursor: pointer; }
+.ac-mile--link:hover b, .ac-mile--link:focus-visible b { text-decoration: underline; }
+.ac-mile > span:last-child > .ac-mile__see { display: inline-flex; align-items: center; gap: 2px; margin-top: 2px; font: 600 13px var(--ac-font); color: var(--ac-primary-ink); }
 /* a finished lesson row opens the lesson anywhere on the row (learn-pages.js pmWire) */
 .ac-pml[data-pml].is-done { cursor: pointer; }
 
@@ -1425,6 +1435,21 @@ html.ac-reduce-motion .ac-home--guest .ac-ghsticky, html.ac-reduce-motion .ac-do
   .ac-hwm__lessonbar .ac-hwm__segs { flex: 1; gap: 4px; }
   .ac-hwm__lessonbar .ac-hwm__segs i { height: 5px; }
   .ac-hwm__lessonbar .ac-hwm__meta { flex: none; font: 700 12px/1 var(--ac-font); color: var(--ac-text-muted); font-variant-numeric: tabular-nums; }
+}
+
+/* "Get your certificate", desktop: a banner under the path map; the same certificate thumbnail, larger, and a button */
+@media (min-width: 861px) {
+  .ac-wylcert { display: flex; align-items: center; gap: 20px; width: 100%; padding: 12px 20px 12px 24px; border: 0; border-radius: 18px; font: inherit; text-align: left; cursor: pointer; background: linear-gradient(90deg, var(--ac-gold-soft), transparent 75%), var(--ac-surface-raised); box-shadow: inset 0 0 0 1px var(--ac-line); color: var(--ac-text) !important; text-decoration: none !important; }
+  .ac-wylcert:hover { box-shadow: inset 0 0 0 1px var(--ac-line-strong); }
+  .ac-wylcert__thumb { position: relative; flex: none; display: block; width: 96px; aspect-ratio: 1200 / 848; transform: rotate(-5deg); border-radius: 3px; overflow: hidden; box-shadow: 0 10px 24px rgba(0, 0, 0, .45); }
+  .ac-wylcert__thumb:empty { background: var(--ac-paper); }
+  .ac-wylcert__thumb > .ac-cert { position: absolute; top: 0; left: 0; width: 1200px; transform: scale(.08); transform-origin: 0 0; }
+  .ac-wylcert__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .ac-wylcert__eb { font: 700 10.5px var(--ac-font); letter-spacing: .1em; text-transform: uppercase; color: var(--ac-gold); }
+  .ac-wylcert__text b { font: 700 15px/1.3 var(--ac-font); }
+  .ac-wylcert__text > span:last-child { font: 500 13px/18px var(--ac-font); color: var(--ac-text-muted); }
+  .ac-wylcert__go { flex: none; gap: 4px; }
+  .ac-wylcert:hover .ac-wylcert__go { box-shadow: inset 0 0 0 1.5px var(--ac-line-strong); }
 }
 
 /* Ready when you are + guide, desktop: one type scale for both cards (title 700 22px, text 14px), and the guide card

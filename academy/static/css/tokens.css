@@ -45,6 +45,7 @@
   --ac-primary-ink: #07d8a2;     /* mint: highlights, ticks, progress */
   --ac-primary-soft: rgba(7, 216, 162, .14);
   --ac-primary-ring: rgba(7, 216, 162, .45);
+  --ac-glass-overlay: rgba(19, 22, 27, .64);  /* behind a modal panel, over a 4px blur (Global search) */
   --ac-link: #3dbb9a;
   --ac-success: #07d8a2;
   --ac-success-soft: rgba(7, 216, 162, .10);
@@ -152,6 +153,7 @@
   --ac-primary-ink: #0a8f6c;
   --ac-primary-soft: rgba(10, 143, 108, .10);
   --ac-primary-ring: rgba(10, 143, 108, .45);
+  --ac-glass-overlay: rgba(255, 255, 255, .64);
   --ac-link: #0a8f6c;
   --ac-success: #0a8f6c;
   --ac-success-soft: rgba(10, 143, 108, .08);

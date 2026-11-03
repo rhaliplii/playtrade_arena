@@ -290,13 +290,16 @@
     return '<span class="' + c + '" aria-hidden="true">' + AC.esc(AC.initials(u.name)) + "</span>";
   };
 
-  /** Platform top bar on Academy pages: search opens the Academy search; a new account shows no sample
+  /** Platform top bar on Academy pages: search opens the global search panel (gsearch.js, Academy tab first); a new account shows no sample
       alerts and gets an initials avatar (the bell / messages counts and the stock photo are platform demo data). */
   function topbar() {
     var bar = document.querySelector(".topnav");
     if (!bar) return;
     var search = bar.querySelector('.topnav__right > button[aria-label="Search"]');
-    if (search) search.addEventListener("click", function () { location.href = AC.url("search"); });
+    if (search) {
+      search.setAttribute("aria-haspopup", "dialog");
+      search.addEventListener("click", function () { AC.gsearch.open(search); });
+    }
     var u = AC.auth.user();
     var fresh = AC.auth.preview === "new" || (u && !u.preview);
     if (!u || !fresh) return;

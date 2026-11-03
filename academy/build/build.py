@@ -214,7 +214,14 @@ def main():
 
     old = set(MANIFEST.read_text().split()) if MANIFEST.exists() else set()
     written = []
-    write_routes(Ctx("en"), ACADEMY, written)
+    ctx = Ctx("en")
+    write_routes(ctx, ACADEMY, written)
+    # the top bar's search panel (static/js/gsearch.js, Academy tab) loads the search index on first open, as a
+    # script (not fetch) so it also works from file://
+    from pages.search import index_json
+    (ACADEMY / "static" / "data").mkdir(exist_ok=True)
+    (ACADEMY / "static" / "data" / "search-index.json").unlink(missing_ok=True)
+    (ACADEMY / "static" / "data" / "search-index.js").write_text("window.AC_SEARCH_INDEX=" + index_json(ctx) + ";\n")
     if "--pseudo" in args:
         write_routes(Ctx(lib.PSEUDO), ACADEMY / "xa", written)
     # remove generated pages that no longer exist

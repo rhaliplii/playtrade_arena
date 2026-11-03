@@ -204,6 +204,43 @@ body[data-pro="1"] .topnav__upgrade, body[data-pro="1"] .topnav__sale { display:
 /* share sheet: the platform's social icons are grey artwork; draw them white (dark) / ink (light) like WhatsApp and Email */
 .ac-share__ic img { filter: brightness(0) invert(1); }
 :root[data-theme="light"] .ac-share__ic img { filter: brightness(0); }
+/* "ACADEMY" after the logo (lib.topnav): phones only, where the side nav and its "Learn › Academy" crumb are in the
+   drawer. The burger and logo keep the platform's size and place; the label takes the bar's free space (margin-right:
+   auto) and pulls left over the logo file's empty right edge (the drawing ends at 123 of its 156 units: ~33px at
+   156px, ~26px at the phone's 124px), leaving ~6px from ".com" to the divider. Nothing may shrink (the logo would squash): small iPhones get a compact label and right side, and
+   where a guest's Get Started still leaves no room (under 375px) the label gives way. */
+.ac-body .topnav__section { display: none; }
+@media (max-width: 860px) {
+  .ac-body .topnav > a:first-of-type { margin-right: 0; }
+  .ac-body .topnav > *, .ac-body .topnav__right > * { flex-shrink: 0; }
+  .ac-body .topnav a.topnav__section { display: flex; align-items: center; align-self: center; height: 18px; margin: 0 auto 0 -33px; padding-left: 8px; border-left: 1px solid var(--ac-line-strong); font: 800 11px/1 var(--ac-font); letter-spacing: .12em; text-transform: uppercase; color: var(--ac-primary-ink) !important; text-decoration: none; white-space: nowrap; }
+}
+@media (max-width: 600px) {
+  .ac-body .topnav a.topnav__section { margin-left: -28px; }
+}
+@media (max-width: 440px) {
+  .ac-body .topnav__right { gap: 4px; }
+  .ac-body .topnav__right > button { width: 36px; }
+  .ac-body .topnav a.topnav__section { height: 16px; padding-left: 6px; font-size: 10px; letter-spacing: .06em; }
+  .ac-body .topnav__cta { padding: 7px 10px; font-size: 13px; }
+}
+@media (max-width: 389px) {
+  .ac-body .topnav { padding-right: 8px; }
+  .ac-body .topnav a.topnav__section { margin-left: -28px; padding-left: 6px; letter-spacing: .02em; }
+  .ac-body .topnav__cta { padding: 7px 9px; font-size: 12.5px; }
+}
+@media (max-width: 374px) {
+  .ac-body .topnav:has(.topnav__cta) > a:first-of-type { margin-right: auto; }
+  .ac-body .topnav:has(.topnav__cta) a.topnav__section { display: none; }
+}
+@media (max-width: 360px) {
+  .ac-body .topnav a.topnav__section { margin-left: -25px; }   /* the platform's 104px logo: ~22px of empty edge */
+}
+@media (max-width: 359px) {
+  .ac-body .topnav > a:first-of-type { margin-right: auto; }
+  .ac-body .topnav a.topnav__section { display: none; }
+}
+
 /* offline pill: sit under the topnav, not over bottom buttons and the phone tab bar */
 .ac-offline { top: 76px; bottom: auto; }
 /* phones: the footer uses the same 16px side gutter as the page content */

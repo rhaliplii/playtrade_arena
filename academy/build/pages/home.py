@@ -199,22 +199,28 @@ def learn_list(t, base, L):
 
 
 def cert_card(t, base, L):
-    """Phones, guests: "When you finish the path · Get your certificate". The thumbnail is the real certificate
-    (learn-pages.js certThumb) with a blank name line; the card opens the sample certificate sheet (cert_sheet), never
-    a verify page (the demo certificates belong to the verify page's demo)."""
+    """Guests: "When you finish the path · Get your certificate" (phones: a compact row; desktop: a banner under the path
+    map with a "See a sample" button). The thumbnail is the real certificate (learn-pages.js certThumb) with a blank name
+    line; the card opens the sample certificate sheet (cert_sheet), never a verify page (the demo certificates belong to
+    the verify page's demo)."""
     data = {"path": L["id"]}
-    return (f'<button type="button" class="ac-wylcert ac-m-only" data-cert-thumb="{esc(json.dumps(data))}" aria-haspopup="dialog" aria-label="{esc(t("home.cert.aria"))}">'
+    return (f'<button type="button" class="ac-wylcert" data-cert-thumb="{esc(json.dumps(data))}" aria-haspopup="dialog" aria-label="{esc(t("home.cert.aria"))}">'
             f'<span class="ac-wylcert__thumb" aria-hidden="true" data-cert-slot></span>'
             f'<span class="ac-wylcert__text"><span class="ac-wylcert__eb">{esc(t("home.cert.eyebrow"))}</span><b>{esc(t("home.cert.title"))}</b>'
-            f'<span>{esc(t("home.cert.text"))}</span></span></button>')
+            f'<span>{esc(t("home.cert.text"))}</span></span>'
+            f'<span class="ac-btn ac-btn--ghost ac-btn--sm ac-wylcert__go ac-d-only" aria-hidden="true">{esc(t("home.cert.see"))}{icon("chev", 14, 2.5)}</span></button>')
 
 
 def cert_sheet(t, base, L, first_r):
     """The sample certificate (bottom sheet on phones, dialog on wider screens; the .ac-pmsheet shell): the real
-    certificate template with "Your name", today's date, a placeholder ID and a SAMPLE ribbon (filled by
-    learn-pages.js certSheet), what it takes, and the hero's "Start learning free" (mirrored, sign-up gate included)."""
+    certificate template with the learner's name ("Your name" for guests), today's date, a placeholder ID and a SAMPLE
+    ribbon (filled by learn-pages.js certSheet), what it takes, and a button: the hero's for guests (sign-up gate
+    included), the path card's next step when signed in. Opened by the guest card and the home's Certificate milestone."""
     rows = [("check", t("home.certSheet.challenges", n=len(L["chapters"]))), ("book", t("home.certSheet.plan")), ("shield", t("home.certSheet.verify"))]
-    items = "".join(f'<li><span class="ac-certsheet__ic">{icon(i, 16, 2.2)}</span><span>{esc(x)}</span></li>' for i, x in rows)
+    verify = href(base, "verify")
+    items = "".join(f'<li><span class="ac-certsheet__ic">{icon(i, 16, 2.2)}</span>'
+                    + (f'<a class="ac-certsheet__link" href="{verify}">{esc(x)}{icon("chev", 14, 2.5)}</a>' if i == "shield" else f'<span>{esc(x)}</span>')
+                    + '</li>' for i, x in rows)
     return (f'<dialog class="ac-pmsheet ac-certsheet" data-cert-sheet role="dialog" aria-modal="true" aria-labelledby="cert-sheet-t">'
             f'<div class="ac-certsheet__box"><span class="ac-pmsheet__grip" aria-hidden="true"></span>'
             f'<div class="ac-certsheet__head"><h2 class="ac-pmsheet__title" id="cert-sheet-t" tabindex="-1">{esc(t("home.certSheet.title"))}</h2>'
@@ -349,7 +355,7 @@ def routes(ctx):
 
     def pro_section(key):
         """The Pro paths section, one component (the landing page and the signed-in home): a grid on desktop, a swipe
-        row with dots on phones. key keeps its ids unique (both copies are in the page)."""
+        row with dots on phones. key keeps its ids unique (every copy is in the page)."""
         return (f'<section class="ac-prosec ac-prosec--row" aria-labelledby="{key}-title">'
                 f'<div class="ac-section-head">{title_link(base, "paths", key + "-title", t("home.pro.title"), "ac-h1")}<p class="ac-lead ac-m-only">{esc(t("home.pro.soon"))}</p></div>'
                 f'<div class="ac-pgrid" data-swipe="{key}-dots">{pro_grid}</div>'
@@ -408,7 +414,6 @@ def routes(ctx):
         <a class="ac-guidepromo__link ac-m-only" href="{href(base, "guide")}">{esc(t("home.guide.cta"))}{icon("chev", 16, 2.5)}</a></div>
     </section>
   </div>
-  {cert_sheet(t, base, L, first_r)}
   <div class="ac-ghsticky" data-gh-sticky inert><a class="ac-btn ac-btn--primary ac-btn--lg" href="{href(base, first_r)}" data-gh-sticky-cta><span data-gh-cta-label>{esc(t("home.hero.cta"))}</span></a></div>
 </div>'''
 
@@ -424,9 +429,11 @@ def routes(ctx):
     <div class="ac-homegrid__main">
       {path_card}
       {miles_card}
+      <div data-home-gym></div>
     </div>
     <aside class="ac-homegrid__aside" aria-label="{esc(t("home.aside"))}" data-home-aside></aside>
   </div>
+  {pro_section("new")}
 </div>'''
 
     # ---------------------------------------------------------------- learning (mid-path)
@@ -436,13 +443,14 @@ def routes(ctx):
     <div class="ac-homegrid__main">
       {path_card}
       {miles_card}
+      <div data-home-gym></div>
     </div>
     <aside class="ac-homegrid__aside" aria-label="{esc(t("home.aside"))}" data-home-aside></aside>
   </div>
   {pro_section("more")}
 </div>'''
 
-    body = f'<div class="ac-wrap ac-lp ac-home-wrap" data-home>{guest}{new}{learning}{disclaimer(t)}</div>'
+    body = f'<div class="ac-wrap ac-lp ac-home-wrap" data-home>{guest}{new}{learning}{cert_sheet(t, base, L, first_r)}{disclaimer(t)}</div>'
     ld = [{"@context": "https://schema.org", "@type": "WebPage", "name": t("home.meta.title"), "description": t("home.meta.desc"),
            "url": f"{lib.ORIGIN}/academy/", "isPartOf": {"@type": "WebSite", "name": "Profit.com", "url": lib.ORIGIN}},
           {"@context": "https://schema.org", "@type": "Course", "name": L["title"], "description": ctx.path["outcome"],

@@ -204,6 +204,7 @@ def routes(ctx):
         <span>{esc(t("how.finish.howText"))}</span>
         <span class="ac-small">{esc(t("how.finish.coinsNote"))}</span>
       </div>
+      <a class="ac-link ac-how-verify" href="{base}verify/index.html">{esc(t("how.finish.verify"))}<span aria-hidden="true">›</span></a>
     </section>
   </div>
 

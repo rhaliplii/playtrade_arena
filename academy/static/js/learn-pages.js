@@ -167,6 +167,7 @@
     var s = AC.progress.summary();
     if (aud === "guest") { guestHome(m, s); guestSticky(); swipeDots(); learnMore(); certThumb(); proSwap(root); return; }
     $$("[data-home-aside]").forEach(function (el) { el.innerHTML = aside(m, s, aud); });
+    $$("[data-home-gym]").forEach(function (el) { el.outerHTML = gymCard(s); });
     $$("[data-pm-hero]", root).forEach(function (h) { pmHero(h, m); });
     pathProgress(m);
     swipeDots();   // the Pro paths row (phones)
@@ -221,6 +222,14 @@
     });
     return hero;
   }
+  /** The sample certificate sheet's button, signed in: the path card's own next step (Start · Lesson 1, Continue …). */
+  function mirrorPathCta(cta) {
+    var src = $$("[data-pm-hero] [data-pm-cta]").filter(function (a) { return a.offsetParent; })[0];
+    if (!cta || !src) return;
+    setText($("[data-gh-cta-label]", cta), $("[data-pm-cta-label]", src).textContent);
+    cta.setAttribute("href", src.getAttribute("href"));
+    cta.removeAttribute("data-action"); cta.removeAttribute("data-reason");
+  }
   /** Phones, guests: a sticky copy of the hero's main button once the hero has scrolled out of view (canvas
       Home-Guest-C-Mobile). Hidden on desktop by CSS. (The "Ready when you are" card has its own button: Sign up free.) */
   function guestSticky() {
@@ -252,7 +261,7 @@
     });
   }
 
-  /** The finish-line card (phones, guests): its thumbnail is the real certificate (AC.cert) with a blank name line;
+  /** The finish-line card (guests): its thumbnail is the real certificate (AC.cert) with a blank name line;
       the card opens the sample certificate sheet (never a verify page). */
   function sampleCert(path, name) {
     var d = now(), p2 = function (n) { return (n < 10 ? "0" : "") + n; };
@@ -275,10 +284,10 @@
       <dialog>: Esc and the backdrop close it, Tab stays inside, the page doesn't scroll behind it (CSS :has), and focus
       returns to the card. Its button is the hero's "Start learning free" (mirrorHeroCta: label, link, sign-up gate). */
   function certSheet(dlg, opener, path) {
-    var slot = $("[data-cert-sheet-slot]", dlg);
-    if (!slot.firstChild) slot.innerHTML = AC.cert.html(sampleCert(path, t("home.certSheet.name")));
+    var slot = $("[data-cert-sheet-slot]", dlg), u = !isGuest() && AC.auth.user();
+    if (!slot.firstChild) slot.innerHTML = AC.cert.html(sampleCert(path, (u && u.name) || t("home.certSheet.name")));
     var cta = $("[data-cert-sheet-cta]", dlg);
-    mirrorHeroCta(cta);
+    if (u) mirrorPathCta(cta); else mirrorHeroCta(cta);
     if (!dlg.dataset.wired) {
       dlg.dataset.wired = "1";
       var shut = function () { if (dlg.open) { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); } };
@@ -356,12 +365,16 @@
     // the certificate: earned (opens it), ready to claim (opens the finale), or what it takes
     miles.push(m.finished ? { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("home.miles.certEarned"), href: AC.url("me/certificates") }
       : m.allPassed ? { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("pm.earn.ready"), href: AC.url(data().path + "/finish") }
-      : { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("home.miles.certText", { n: m.chapters.length }) });
+      : { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("home.miles.certText", { n: m.chapters.length }), sample: true });
     var html = miles.map(function (x) {
-      var tag = x.href ? 'a href="' + esc(x.href) + '"' : "div";
-      return "<" + tag + ' class="ac-mile' + (x.href ? " ac-mile--link" : "") + '"><span class="ac-iconbox' + x.box + '">' + svg(x.ic, 18) + "</span><span><b>" + esc(x.b) + "</b><span>" + esc(x.s) + "</span></span></" + (x.href ? "a" : "div") + ">";
+      var tag = x.href ? 'a href="' + esc(x.href) + '"' : x.sample ? 'button type="button" aria-haspopup="dialog" data-cert-open' : "div";
+      var end = x.href ? "a" : x.sample ? "button" : "div";
+      var see = x.sample ? '<span class="ac-mile__see">' + esc(t("home.miles.certSee")) + svg("chev", 14) + "</span>" : "";
+      return "<" + tag + ' class="ac-mile' + (x.href || x.sample ? " ac-mile--link" : "") + '"><span class="ac-iconbox' + x.box + '">' + svg(x.ic, 18) + "</span><span><b>" + esc(x.b) + "</b><span>" + esc(x.s) + "</span>" + see + "</span></" + end + ">";
     }).join("");
     cards.forEach(function (card) { var box = $("[data-pp-miles]", card); if (box) box.innerHTML = html; });
+    var dlg = $("[data-cert-sheet]");
+    if (dlg && AC.cert) $$("[data-cert-open]").forEach(function (b) { b.addEventListener("click", function () { certSheet(dlg, b, data().path); }); });
   }
 
   function weekDots() {
@@ -403,6 +416,11 @@
       '<span class="ac-rankmini__look"><img src="' + AC.rankLook(lv.rank) + '" alt=""></span><span class="ac-rankmini__text"><b>' + esc(t("home.rank.line", { rank: rankName, n: lv.level })) + "</b>" +
       '<span class="ac-rankmini__bar"><span style="width:' + Math.round(lv.progress * 100) + '%"></span></span>' +
       '<span class="ac-rankmini__xp"><b>' + esc(t("common.xp", { n: s.xp })) + "</b> · " + esc(t("home.rank.toGo", { n: AC.fmt.num(lv.levelTo - s.xp), lv: lv.level + 1 })) + "</span></span></a>";
+    return today + rank + topMini(s);
+  }
+
+  // Rico's Gym sits in the main column, under What's ahead: it's something to do, not a stat
+  function gymCard(s) {
     var gym;
     if (s.gymDue) {
       gym = '<section class="ac-card ac-gymcard" aria-labelledby="gym-title"><div class="ac-gymcard__head"><span class="ac-iconbox ac-iconbox--mint">' + svg("gym", 20) + "</span>" +
@@ -414,7 +432,7 @@
       gym = '<a class="ac-card ac-gymcard ac-gymcard--empty ac-side--link" href="' + AC.url("gym") + '"><span class="ac-gymcard__head"><span class="ac-iconbox">' + svg("gym", 18) + "</span>" +
         "<span><b>" + esc(t("nav.gym")) + "</b><span>" + esc(any ? t("home.gym.clear") : t("home.gym.empty")) + "</span></span></span></a>";
     }
-    return today + rank + gym + topMini(s);
+    return gym;
   }
 
   function board(s) {
