@@ -22,6 +22,9 @@
     lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>', replay: '<path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/>',
     bookmark: '<path d="M6 3h12v18l-6-4-6 4z"/>',
+    route: '<circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8.5 19H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5"/>',
+    rank: '<path d="M7 21h10M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>',
+    share: '<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/>',
   };
   function svg(name, size, sw, extra) {
     return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (sw || 2) +
@@ -184,6 +187,7 @@
     var left = Math.max(0, s.goal.target - s.goal.done);
     // never "0 more lessons": a goal that is reached (even before the engine marks it) reads as met
     $("[data-greet-sub]").textContent = s.goal.met && s.streak ? t("home.learn.sub.met", { n: s.streak }) : s.goal.met || !left ? t("home.goal.met")
+      : m.finished ? t(s.streak > 0 ? "home.learn.sub.gym" : "home.learn.sub.gymStart", { n: left, streak: AC.fmt.num(s.streak) })   // no lessons left
       : s.streak > 0 ? t("home.learn.sub.more", { n: left, streak: AC.fmt.num(s.streak) }) : t("home.learn.sub.start", { n: left });
   }
 
@@ -285,7 +289,8 @@
       returns to the card. Its button is the hero's "Start learning free" (mirrorHeroCta: label, link, sign-up gate). */
   function certSheet(dlg, opener, path) {
     var slot = $("[data-cert-sheet-slot]", dlg), u = !isGuest() && AC.auth.user();
-    if (!slot.firstChild) slot.innerHTML = AC.cert.html(sampleCert(path, (u && u.name) || t("home.certSheet.name")));
+    // always "Your name": a sample, never a learner's name on a certificate they haven't earned
+    if (!slot.firstChild) slot.innerHTML = AC.cert.html(sampleCert(path, t("home.certSheet.name")));
     var cta = $("[data-cert-sheet-cta]", dlg);
     if (u) mirrorPathCta(cta); else mirrorHeroCta(cta);
     if (!dlg.dataset.wired) {
@@ -361,16 +366,25 @@
     var miles = [
       { ic: "shield", box: "", b: t("home.miles.challenge", { n: c.n }), s: c.passed ? t("home.miles.challengePassed") : ready ? t("home.miles.challengeReady") : t("home.miles.challengeOpens", { n: c.count }) },
     ];
-    if (nextSkill) miles.push({ ic: "diamond", box: "", b: t("home.miles.skill", { name: nextSkill.name }), s: t("home.miles.skillAfter", { n: nextSkill.after }) });
+    // path finished: what's ahead is beyond it (the next path, the next rank), never items already done; the certificate
+    // itself lives in the My certificates card
+    if (m.finished) {
+      var pc = $("[data-show]:not([hidden]) .ac-pcard[data-tier=pro], .ac-pcard[data-tier=pro]"), pt = pc && $(".ac-pcard__title", pc);
+      var lv = AC.progress.summary().level, xpNow = AC.progress.summary().xp;
+      miles = [];
+      if (pt) miles.push({ ic: "route", box: "", b: t("home.miles.nextPath", { path: pt.textContent.trim() }), s: t(AC.auth.isPro() ? "home.miles.nextPathPro" : "home.miles.nextPathFree"), href: pt.getAttribute("href") });
+      if (lv.nextRank) miles.push({ ic: "rank", box: "", b: t("home.miles.nextRank", { rank: t("rank." + lv.nextRank) }), s: t("home.miles.nextRankText", { n: AC.fmt.num(Math.max(0, lv.nextRankAt - xpNow)) }), href: AC.url("how-it-works") });
+    }
+    if (nextSkill && !m.finished) miles.push({ ic: "diamond", box: "", b: t("home.miles.skill", { name: nextSkill.name }), s: t("home.miles.skillAfter", { n: nextSkill.after }) });
     // the certificate: earned (opens it), ready to claim (opens the finale), or what it takes
-    miles.push(m.finished ? { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("home.miles.certEarned"), href: AC.url("me/certificates") }
-      : m.allPassed ? { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("pm.earn.ready"), href: AC.url(data().path + "/finish") }
-      : { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert"), s: t("home.miles.certText", { n: m.chapters.length }), sample: true });
+    if (!m.finished) miles.push(m.allPassed ? { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert", { path: data().title }), s: t("pm.earn.ready"), href: AC.url(data().path + "/finish") }
+      : { ic: "award", box: " ac-iconbox--gold", b: t("home.miles.cert", { path: data().title }), s: t("home.miles.certText", { n: m.chapters.length }), sample: true });
     var html = miles.map(function (x) {
       var tag = x.href ? 'a href="' + esc(x.href) + '"' : x.sample ? 'button type="button" aria-haspopup="dialog" data-cert-open' : "div";
       var end = x.href ? "a" : x.sample ? "button" : "div";
       var see = x.sample ? '<span class="ac-mile__see">' + esc(t("home.miles.certSee")) + svg("chev", 14) + "</span>" : "";
-      return "<" + tag + ' class="ac-mile' + (x.href || x.sample ? " ac-mile--link" : "") + '"><span class="ac-iconbox' + x.box + '">' + svg(x.ic, 18) + "</span><span><b>" + esc(x.b) + "</b><span>" + esc(x.s) + "</span>" + see + "</span></" + end + ">";
+      return "<" + tag + ' class="ac-mile' + (x.href || x.sample ? " ac-mile--link" : "") + '"><span class="ac-iconbox' + x.box + '">' + svg(x.ic, 18) + '</span><span class="ac-mile__text"><b>' + esc(x.b) + "</b><span>" + esc(x.s) + "</span>" + see + "</span>" +
+        (x.href ? '<span class="ac-mile__chev" aria-hidden="true">' + svg("chev", 16) + "</span>" : "") + "</" + end + ">";
     }).join("");
     cards.forEach(function (card) { var box = $("[data-pp-miles]", card); if (box) box.innerHTML = html; });
     var dlg = $("[data-cert-sheet]");
@@ -403,20 +417,35 @@
     var lessonMin = (m.action.l && m.action.l.minutes) || 4;
     var goalLine = aud === "new"
       ? "<b>" + esc(t("home.goal.titleN", { n: g.target })) + "</b><span>" + esc(t("home.goal.about", { n: g.target * 5 })) + "</span>"
-      : "<b>" + esc(t("home.goal.title")) + "</b><span>" + esc(g.met || g.done >= g.target ? t("home.goal.met") : t("home.goal.more", { n: g.target - g.done, min: (g.target - g.done) * lessonMin })) + "</span>";
+      : "<b>" + esc(t("home.goal.title")) + "</b><span>" + esc(g.met || g.done >= g.target ? t("home.goal.met")
+        : m.finished ? t("home.goal.moreGym", { n: g.target - g.done, min: (g.target - g.done) * 2 })   // no lessons left: the Gym meets it
+        : t("home.goal.more", { n: g.target - g.done, min: (g.target - g.done) * lessonMin })) + "</span>";
     var streakHead = s.streak > 0
       ? '<div class="ac-day__streakhead is-on">' + svg("flame", 18) + "<b>" + esc(t("home.streak.days", { n: s.streak })) + "</b><span>" + esc(t("home.streak.best", { n: s.bestStreak })) + "</span></div>"
       : '<div class="ac-day__streakhead">' + svg("flame", 18) + "<b>" + esc(s.streakLost ? t("home.streak.lost", { n: s.streakLost }) : t("home.streak.start")) + "</b></div>";
     var today = '<section class="ac-card ac-day" aria-labelledby="today-title"><div class="ac-day__head"><h2 id="today-title" class="ac-side__title">' + esc(t("home.today")) + "</h2>" +
       '<a class="ac-link ac-small" href="' + AC.url("settings") + '">' + esc(t("home.changeGoal")) + "</a></div>" +
       '<div class="ac-day__goal">' + ring(g.done, g.target) + "<span>" + goalLine + "</span></div>" +
-      '<div class="ac-day__streak">' + streakHead + weekDots() + "</div></section>";
+      '<div class="ac-day__streak">' + streakHead + weekDots() + "</div>" +
+      '<a class="ac-day__more" href="' + AC.url("me") + '">' + esc(t("home.today.progress")) + svg("chev", 14) + "</a></section>";
     var rankName = t("rank." + lv.rank);
     var rank = '<a class="ac-card ac-rankmini" style="--rk:var(--ac-rank-' + lv.rank + ')" href="' + AC.url(aud === "new" ? "how-it-works" : "me") + '" aria-label="' + esc(t("home.rank.aria", { rank: rankName, n: lv.level })) + '">' +
       '<span class="ac-rankmini__look"><img src="' + AC.rankLook(lv.rank) + '" alt=""></span><span class="ac-rankmini__text"><b>' + esc(t("home.rank.line", { rank: rankName, n: lv.level })) + "</b>" +
       '<span class="ac-rankmini__bar"><span style="width:' + Math.round(lv.progress * 100) + '%"></span></span>' +
       '<span class="ac-rankmini__xp"><b>' + esc(t("common.xp", { n: s.xp })) + "</b> · " + esc(t("home.rank.toGo", { n: AC.fmt.num(lv.levelTo - s.xp), lv: lv.level + 1 })) + "</span></span></a>";
-    return today + rank + topMini(s);
+    return today + rank + certMini() + topMini(s);
+  }
+
+  /** "My certificates" (home, signed in): the earned ones (a thumbnail of the latest) or, none yet, the first to earn.
+      Opens My certificates either way. */
+  function certMini() {
+    var list = AC.progress.state().certificates || [], n = list.length, last = list[n - 1];
+    var look = n && AC.cert ? '<span class="ac-certmini__thumb" aria-hidden="true">' + AC.cert.html(AC.cert.model(last)) + "</span>"
+      : '<span class="ac-iconbox ac-iconbox--gold" aria-hidden="true">' + svg("award", 20) + "</span>";
+    var paths = list.map(function (c) { var p = (AC.data("ac-certpaths") || {})[c.path]; return p ? p.title : ""; }).filter(Boolean);
+    return '<a class="ac-card ac-certmini ac-side--link" href="' + AC.url("me/certificates") + '">' + look +
+      '<span class="ac-certmini__text"><b>' + esc(t("home.certs.title")) + "</b><span>" +
+      esc(n ? t("home.certs.earned", { n: n, list: paths.join(", ") }) : t("home.certs.none", { path: data().title })) + "</span></span>" + svg("chev", 16) + "</a>";
   }
 
   // Rico's Gym sits in the main column, under What's ahead: it's something to do, not a stat

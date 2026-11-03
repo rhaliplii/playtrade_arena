@@ -148,11 +148,14 @@
       '<div class="me-rank__next"><span class="me-eyebrow-light">' + esc(t("me.next.eyebrow")) + "</span><b>" + esc(nr.title) + "</b><span>" + esc(nr.text) + "</span>" +
       '<a href="' + AC.url("how-it-works") + '">' + esc(t("me.next.how")) + "</a></div></section>";
     // stats
+    // the record, beyond what home shows: best streak, time spent, accuracy, ideas the Gym has made stick
+    var mins = Object.keys(m.st.lessons || {}).reduce(function (a, id) { var l = m.st.lessons[id]; return a + (l && l.done ? ((PATH.minutes || {})[id] || 0) : 0); }, 0);
+    var time = mins >= 60 ? t("me.stat.hours", { h: Math.floor(mins / 60), m: mins % 60 }) : t("me.stat.mins", { n: mins });
     var stats = [
-      ["flame", "streak", num(s.streak), t("me.stat.streak", { n: s.bestStreak })],
-      ["book", "mint", num(m.lessonsDone), t("me.stat.lessons", { n: m.lessonsDone })],
+      ["flame", "streak", num(s.bestStreak), t("me.stat.best", { n: s.streak })],
+      ["clock", "mint", time, t("me.stat.time", { n: m.lessonsDone })],
       ["target", "sky", m.firstPct == null ? "–" : AC.fmt.pct(m.firstPct), t("me.stat.first")],
-      ["shield", "amber", num(m.passed) + "/" + num(m.total), t("me.stat.challenges")],
+      ["bolt", "amber", num(m.st.mastered || 0), t("me.stat.mastered")],
     ];
     html += '<div class="me-stats">' + stats.map(function (x) {
       return '<div class="me-stat"><span class="me-icon-dot me-tone-' + x[1] + '">' + icon(x[0], 20) + '</span><span class="me-stat__text"><b class="ac-num">' + esc(x[2]) + "</b><span>" + esc(x[3]) + "</span></span></div>";
@@ -185,7 +188,9 @@
       '<section class="ac-card me-certcard" aria-labelledby="meCertTitle"><div class="me-card-head me-card-head--base"><h2 class="ac-h2" id="meCertTitle">' + esc(t("me.cert.title")) + '</h2><a class="ac-link" href="' + AC.url("me/certificates") + '">' + esc(t("me.seeAll")) + "</a></div>" +
       '<div class="me-certcard__row"><span>' + esc(PATH.title) + '</span><span class="ac-num me-meta">' + esc(t("me.frac", { a: num(m.passed), b: num(m.total) })) + "</span></div>" + bar(m.passed / m.total) +
       '<span class="me-meta">' + esc(m.finished ? t("me.cert.earned", { date: fmtDate(m.cert ? m.cert.d : m.st.paths[PATH.id].finished) }) : t("me.cert.how")) + "</span>" +
-      '<div class="me-perks"><span class="ac-eyebrow">' + esc(t("me.cert.when")) + "</span>" +
+      // earned: the certificate itself (opens My certificates), and the perks read as what it brought
+      (m.finished && m.cert && AC.cert ? '<a class="me-certcard__thumb" href="' + AC.url("me/certificates") + '" aria-label="' + esc(t("me.cert.open")) + '">' + AC.cert.html(AC.cert.model(m.cert)) + "</a>" : "") +
+      '<div class="me-perks"><span class="ac-eyebrow">' + esc(t(m.finished ? "me.cert.gotTitle" : "me.cert.when")) + "</span>" +
       '<span class="me-perks__row"><span>' + esc(t("me.cert.xp")) + '</span><b class="me-up ac-num">' + esc(t("me.plusXp", { n: PATH.finale.xp })) + "</b></span>" +
       '<span class="me-perks__row"><span>' + esc(t("me.cert.coins")) + '</span><b class="me-amber ac-num">+' + num(PATH.finale.coins) + "</b></span>" +
       '<span class="me-perks__row"><span>' + esc(t("me.cert.skill")) + "</span><b>" + esc((PATH.skills[PATH.skills.length - 1] || {}).name || "") + "</b></span></div></section>" +
@@ -193,32 +198,77 @@
     // week
     var today = AC.progress.day();
     var d0 = dateOf(today); var dow = (d0.getDay() + 6) % 7;
-    var week = [];
-    for (var i = 0; i < 7; i++) {
-      var d = new Date(d0); d.setDate(d0.getDate() - dow + i);
+    // the last 4 weeks, Monday first (home shows this week's dots; here: the longer record, a day per cell)
+    var byDay = {}, bySrc = {};
+    m.st.history.forEach(function (h) {
+      byDay[h.d] = (byDay[h.d] || 0) + h.xp;
+      var b = bySrc[h.d] = bySrc[h.d] || {};
+      b[h.src] = (b[h.src] || 0) + 1;
+    });
+    var days = [];
+    for (var i = 0; i < 28; i++) {
+      var d = new Date(d0); d.setDate(d0.getDate() - dow - 21 + i);
       var key = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-      var xp = m.st.history.filter(function (h) { return h.d === key; }).reduce(function (a, h) { return a + h.xp; }, 0);
-      week.push({ key: key, xp: xp, today: key === today, future: key > today, label: AC.fmt.date(d, { weekday: "short" }) });
+      days.push({ key: key, xp: byDay[key] || 0, src: bySrc[key] || {}, today: key === today, future: key > today, d: d });
     }
-    var max = Math.max.apply(null, week.map(function (w) { return w.xp; }).concat([90]));
-    var wtotal = week.reduce(function (a, w) { return a + w.xp; }, 0);
+    var wtotal = days.reduce(function (a, w) { return a + w.xp; }, 0);
+    var active = days.filter(function (w) { return w.xp > 0; }).length;
+    var dmax = Math.max.apply(null, days.map(function (w) { return w.xp; }).concat([60]));
+    function dayText(w) {
+      var parts = [];
+      if (w.src.lesson) parts.push(t("me.act.lessons", { n: w.src.lesson }));
+      if (w.src.challenge) parts.push(t("me.act.challenges", { n: w.src.challenge }));
+      if (w.src.gym) parts.push(t("me.act.gym", { n: w.src.gym }));
+      if (w.src.path) parts.push(t("me.act.path"));
+      if (w.src.placement) parts.push(t("me.act.placement"));
+      return AC.fmt.date(w.d, { weekday: "short", month: "short", day: "numeric" }) + " · " + t("common.xp", { n: w.xp }) + (parts.length ? " · " + parts.join(", ") : "");
+    }
     var goalLeft = Math.max(0, s.goal.target - s.goal.done);
     html += '<div class="me-split">' +
-      '<section class="ac-card me-week" aria-labelledby="meWkTitle"><div class="me-card-head me-card-head--base"><h2 class="ac-h2" id="meWkTitle">' + esc(t("me.week.title")) + '</h2><b class="me-week__total ac-num">' + esc(t("common.xp", { n: wtotal })) + "</b></div>" +
-      '<div class="me-week__bars" role="img" aria-label="' + esc(t("me.week.aria", { n: wtotal })) + '">' + week.map(function (w) {
-        var h = w.xp ? Math.max(8, Math.round(w.xp / max * 96)) : (w.today ? 24 : 4);
-        var cls = w.xp ? "is-xp" : w.today ? "is-today" : "is-empty";
-        return '<div class="me-week__day' + (w.today ? " is-now" : "") + '"><span class="me-week__val ac-num">' + (w.xp ? num(w.xp) : w.today ? esc(t("me.week.today")) : "") + "</span>" +
-          '<span class="me-week__bar ' + cls + '" style="height:' + h + 'px"></span><span class="me-week__lbl">' + esc(w.label) + "</span></div>";
-      }).join("") + "</div>" +
-      '<span class="me-meta">' + esc(s.goal.met ? t("me.week.met") : t("me.week.goal", { n: goalLeft, done: s.goal.done, target: s.goal.target })) + "</span></section>" +
+      '<section class="ac-card me-week" aria-labelledby="meWkTitle"><div class="me-card-head me-card-head--base"><h2 class="ac-h2" id="meWkTitle">' + esc(t("me.weeks.title")) + '</h2><b class="me-week__total ac-num">' + esc(t("common.xp", { n: wtotal })) + "</b></div>" +
+      '<div class="me-act" data-act>' +
+        '<div class="me-act__bars">' + days.map(function (w, i) {
+          var h = w.future ? 0 : w.xp ? Math.max(6, Math.round(w.xp / dmax * 100)) : 3;
+          return '<button type="button" class="me-act__day' + (w.today ? " is-today" : "") + (w.future ? " is-future" : "") + (w.xp ? "" : " is-zero") + '" data-i="' + i + '"' + (w.future ? ' tabindex="-1" disabled' : "") +
+            ' aria-label="' + esc(dayText(w)) + '"><span style="height:' + h + '%"></span></button>';
+        }).join("") + "</div>" +
+        '<div class="me-act__axis" aria-hidden="true">' + [0, 7, 14, 21].map(function (i) { return "<span>" + esc(i === 21 ? t("me.weeks.now") : AC.fmt.date(days[i].d, { month: "short", day: "numeric" })) + "</span>"; }).join("") + "</div>" +
+        '<div class="me-act__tip" data-act-tip hidden></div></div>' +
+      '<span class="me-meta">' + esc(s.goal.met ? t("me.week.met") : t(m.finished ? "me.week.goalGym" : "me.week.goal", { n: goalLeft, done: s.goal.done, target: s.goal.target })) + "</span></section>" +
       '<nav class="me-links" aria-label="' + esc(t("me.links.aria")) + '">' +
       linkCard(AC.url("my-plan"), "doc", t("me.links.plan"), t("me.links.planText", { n: m.planFilled, total: m.planTotal })) +
       linkCard(AC.url("me/notes"), "bookmark", t("me.links.notes"), t("me.links.notesText", { n: m.st.notes.length })) +
       linkCard(AC.url("me/rewards"), "gift", t("me.links.rewards"), t("me.links.rewardsText")) +
-      linkCard(AC.url("me/certificates"), "medal", t("me.links.certs"), t("me.links.certsText")) +
+      linkCard(AC.url("gym"), "bolt", t("me.links.gym"), m.gymIdeas ? t("me.links.gymText", { n: m.gymIdeas }) : t("me.links.gymNone")) +
       "</nav></div>";
     root().innerHTML = html;
+    actTips(days, dayText);
+  }
+
+  /** Last 4 weeks chart: hover, focus or tap a day for its tooltip (date, XP, what earned it). Nothing selected at first. */
+  function actTips(days, dayText) {
+    var box = AC.$("[data-act]"), tip = box && AC.$("[data-act-tip]", box);
+    if (!tip) return;
+    var cur = null;
+    function show(btn) {
+      var w = days[+btn.getAttribute("data-i")];
+      var bits = dayText(w).split(" · ");
+      tip.innerHTML = "<b>" + esc(bits[1]) + "</b><span>" + esc(bits[0]) + "</span>" + (bits[2] ? "<span>" + esc(bits[2]) + "</span>" : "");
+      tip.hidden = false;
+      var br = btn.getBoundingClientRect(), r = box.getBoundingClientRect(), tw = tip.offsetWidth;
+      var x = br.left - r.left + br.width / 2 - tw / 2;
+      tip.style.left = Math.max(0, Math.min(r.width - tw, x)) + "px";
+      if (cur) cur.classList.remove("is-on");
+      btn.classList.add("is-on"); cur = btn;
+    }
+    function hide() { tip.hidden = true; if (cur) { cur.classList.remove("is-on"); cur = null; } }
+    AC.$$(".me-act__day:not([disabled])", box).forEach(function (b) {
+      b.addEventListener("mouseenter", function () { show(b); });
+      b.addEventListener("focus", function () { show(b); });
+      b.addEventListener("click", function () { show(b); });
+    });
+    box.addEventListener("mouseleave", hide);
+    box.addEventListener("focusout", function (e) { if (!box.contains(e.relatedTarget)) hide(); });
   }
 
   // ================================================================= My rewards
@@ -264,7 +314,8 @@
       a preview with their name, no date, ID or QR. */
   function certModel(m) {
     var earned = m.finished && m.cert;
-    return AC.cert.model(earned ? { id: m.cert.id, name: m.cert.name || m.user.name, path: PATH.id, d: m.cert.d } : { name: m.user.name, path: PATH.id, preview: true });
+    // not earned yet: "Your name", never the learner's name on a certificate they don't have
+    return AC.cert.model(earned ? { id: m.cert.id, name: m.cert.name || m.user.name, path: PATH.id, d: m.cert.d } : { name: t("certs.yourName"), path: PATH.id, preview: true });
   }
   /** The certificate's actions: PDF, share image, verify page, LinkedIn, share sheet (wired by AC.cert.bind). */
   function certButtons(cm, size) {
@@ -277,9 +328,11 @@
   }
   function renderCerts() {
     var m = model();
+    var nCerts = (m.st.certificates || []).length;
     var html = '<header class="me-hero me-hero--green"><div class="me-hero__text"><nav class="me-crumb me-crumb--light" aria-label="' + esc(t("me.crumb.aria")) + '"><a href="' + AC.url("me") + '">' + esc(t("me.title")) +
       '</a><span aria-hidden="true">/</span><span aria-current="page">' + esc(t("certs.title")) + "</span></nav>" +
-      '<h1 class="ac-h1">' + esc(t("certs.title")) + '</h1><p class="ac-lead">' + esc(t("certs.lead")) + "</p></div>" +
+      '<h1 class="ac-h1">' + esc(t("certs.title")) + "</h1>" +
+      '<p class="ac-lead">' + esc(nCerts ? t("certs.leadCount", { n: nCerts }) : t("certs.leadNone", { path: PATH.title })) + " " + esc(t("certs.lead")) + "</p></div>" +
       '<img class="me-hero__rico" src="' + AC.rico("star") + '" alt="' + esc(t("certs.ricoAlt")) + '"></header>';
     var earned = m.finished && m.cert;
     var cm = certModel(m);
@@ -329,7 +382,7 @@
         return '<div class="me-tilebox me-share__item"><span class="me-icon-sq me-tone-mint">' + icon(x[0], 18) + "</span><b>" + esc(t("certs.share." + x[1])) + '</b><span class="me-meta">' + esc(t("certs.share." + x[1] + ".text")) + '</span><span class="me-share__detail">' + esc(t("certs.share." + x[1] + ".detail")) + "</span></div>";
       }).join("") + "</div></div>" +
       '<figure class="me-sample"><div class="me-sample__head"><figcaption class="ac-eyebrow">' + esc(earned ? t("certs.yours") : t("certs.example")) + "</figcaption>" + (earned ? "" : '<span class="me-sample__chip">' + esc(t("certs.sample")) + "</span>") + "</div>" +
-      AC.cert.html(earned ? cm : AC.cert.model({ name: m.user.name, path: PATH.id, preview: true })) + '<span class="me-meta">' + esc(earned ? t("certs.yoursNote") : t("certs.exampleNote")) + "</span></figure></section>";
+      AC.cert.html(earned ? cm : AC.cert.model({ name: t("certs.yourName"), path: PATH.id, preview: true })) + '<span class="me-meta">' + esc(earned ? t("certs.yoursNote") : t("certs.exampleNote")) + "</span></figure></section>";
     html += '<p class="ac-fine">' + esc(t("certs.disclaimer")) + "</p>";
     root().innerHTML = html;
     AC.cert.bind(root(), cm);
@@ -659,11 +712,15 @@
       var d = Math.round((dateOf(g.due) - dateOf(today)) / 864e5);
       return d <= 0 ? t("gym.when.today") : d === 1 ? t("gym.when.tomorrow") : t("gym.when.days", { n: d });
     }
+    // every row practises just that card in the Gym player, then comes back here (a due one, or a coming-up one early)
     function row(g, kind) {
       var r = (g.rights || []).length;
-      return '<div class="me-idea me-idea--' + kind + '"><span class="me-idea__text"><b>' + esc(title(g.idea)) + "</b><span>" + esc(from(g.idea)) + "</span></span>" +
+      var href = AC.url("gym/today?idea=" + encodeURIComponent(g.idea));
+      var tag = "a";
+      return "<" + tag + ' class="me-idea me-idea--' + kind + ' me-idea--link" href="' + esc(href) + '"><span class="me-idea__text"><b>' + esc(title(g.idea)) + "</b><span>" + esc(from(g.idea)) + "</span></span>" +
         '<span class="me-idea__pips" aria-label="' + esc(t("gym.right", { n: r })) + '"><i class="' + (r >= 1 ? "on" : "") + '"></i><i class="' + (r >= 2 ? "on" : "") + '"></i>' + esc(t("gym.right", { n: r })) + "</span>" +
-        '<span class="me-idea__when">' + esc(when(g)) + "</span></div>";
+        '<span class="me-idea__when">' + esc(when(g)) + "</span>" +
+        '<span class="me-idea__go">' + esc(t(kind === "due" ? "gym.rowPractice" : "gym.rowEarly")) + icon("chevron", 16, 2.4) + "</span></" + tag + ">";
     }
     var n = due.length;
     var html;
@@ -690,7 +747,9 @@
     var srcKeys = Object.keys(src).sort(function (a, b) { return src[b] - src[a]; });
     var srcMax = Math.max.apply(null, srcKeys.map(function (k) { return src[k]; }).concat([1]));
     var revCh = m.current && m.current.available ? m.current : m.chapters.filter(function (c) { return c.available; }).pop();
-    html += '<div class="me-split me-split--gym"><section class="ac-card me-due" aria-labelledby="meDue"><div class="me-card-head me-card-head--base"><h2 class="ac-h2" id="meDue">' + esc(t("gym.due")) + '</h2><span class="me-meta me-meta--600">' + esc(t("gym.dueMeta", { n: n })) + "</span></div>" +
+    html += '<div class="me-split me-split--gym"><section class="ac-card me-due" aria-labelledby="meDue"><div class="me-card-head me-card-head--base"><h2 class="ac-h2" id="meDue">' + esc(t("gym.due")) + "</h2>" +
+      (n ? '<span class="me-due__head"><span class="me-meta me-meta--600">' + esc(t("gym.dueMeta", { n: n })) + '</span><a class="ac-btn ac-btn--primary ac-btn--sm" href="' + AC.url("gym/today") + '">' + esc(t("gym.start")) + icon("chevron", 16, 2.4) + "</a></span>"
+         : '<span class="me-meta me-meta--600">' + esc(t("gym.dueMeta", { n: n })) + "</span>") + "</div>" +
       (n ? '<div class="me-stack-8">' + due.map(function (g) { return row(g, "due"); }).join("") + "</div>" : '<div class="me-empty"><b>' + esc(t("gym.dueNone")) + "</b><span>" + esc(t("gym.dueNoneText")) + "</span></div>") +
       (later.length ? '<h3 class="ac-eyebrow me-due__later">' + esc(t("gym.later")) + '</h3><div class="me-stack-8">' + later.slice(0, 5).map(function (g) { return row(g, "later"); }).join("") + "</div>" +
         (later.length > 5 ? '<p class="me-meta me-due__more">' + esc(t("gym.laterMore", { n: later.length - 5 })) + "</p>" : "") : "") + "</section>" +

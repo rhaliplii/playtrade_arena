@@ -29,6 +29,8 @@ def path_data(ctx):
         "lessons": sum(c["count"] for c in chapters),
         "skills": [{"after": s["after"], "name": s["name"]} for s in p.get("skills", [])],
         "finale": {"xp": p.get("finale", {}).get("xp", 500), "coins": p.get("finale", {}).get("coins", 500)},
+        # lesson id → minutes (My progress: time learned)
+        "minutes": {lid: ctx.lessons[lid].get("minutes", 4) for lid in ctx.lesson_order if lid in ctx.lessons},
     }
 
 
@@ -126,7 +128,8 @@ def page(ctx, route, area, inner, active, data=None, wrap_head=True, crumb=None,
 
 
 def routes(ctx):
-    yield "me", page(ctx, "me", "me", '<div id="meRoot" class="me-root" aria-live="polite"></div>', "progress",
+    from pages.certificates import cert_data, CERT_CSS, CERT_JS   # (certificates imports this module)
+    yield "me", page(ctx, "me", "me", '<div id="meRoot" class="me-root" aria-live="polite"></div>', "progress", data=cert_data(ctx, seed=False), css=CERT_CSS, js=CERT_JS,
                      aside=f'<a class="me-head__link" href="../u/index.html" id="meProfileLink" data-show="member">{esc(ctx.t("me.profile"))}'
                            f'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
                            f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>')

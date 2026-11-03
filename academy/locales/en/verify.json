@@ -17,6 +17,7 @@
   "verify.hint": "Not case-sensitive. Dashes are optional.",
   "verify.where": "Where to find it:",
   "verify.whereText": "bottom right of the certificate, next to the QR code.",
+  "verify.sampleName": "Your name",
   "verify.sampleAlt": "A sample certificate with the certificate ID highlighted at the bottom right",
   "verify.ok.title": "Verified certificate",
   "verify.ok.text": "This certificate is genuine and was issued by Profit.com Academy.",

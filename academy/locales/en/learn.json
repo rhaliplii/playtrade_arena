@@ -80,6 +80,14 @@
     "one": "One more lesson meets today's goal and keeps your {streak}-day streak going.",
     "other": "{n} more lessons meet today's goal and keep your {streak}-day streak going."
   },
+  "home.learn.sub.gym": {
+    "one": "One Rico's Gym session meets today's goal and keeps your {streak}-day streak going.",
+    "other": "{n} Rico's Gym sessions meet today's goal and keep your {streak}-day streak going."
+  },
+  "home.learn.sub.gymStart": {
+    "one": "One Rico's Gym session meets today's goal and starts your streak.",
+    "other": "{n} Rico's Gym sessions meet today's goal and start your streak."
+  },
   "home.learn.sub.start": {
     "one": "One more lesson meets today's goal and starts your streak.",
     "other": "{n} more lessons meet today's goal and start your streak."
@@ -94,10 +102,22 @@
   "home.miles.challengePassed": "Passed",
   "home.miles.skill": "{name} skill",
   "home.miles.skillAfter": "After Chapter {n}",
-  "home.miles.cert": "Certificate",
+  "home.miles.cert": "{path} certificate",
   "home.miles.certText": "Finish all {n} chapters",
   "home.miles.certSee": "See a sample",
   "home.miles.certEarned": "Earned · View certificate",
+  "home.today.progress": "See your progress",
+  "home.certs.title": "My certificates",
+  "home.certs.earned": {
+    "one": "1 earned · {list}",
+    "other": "{n} earned · {list}"
+  },
+  "home.certs.none": "None yet · {path} is your first",
+  "home.miles.nextPath": "Next: {path}",
+  "home.miles.nextPathPro": "Included in your plan · coming soon",
+  "home.miles.nextPathFree": "Pro path · coming soon",
+  "home.miles.nextRank": "{rank} rank",
+  "home.miles.nextRankText": "{n} XP to go",
   "home.today": "Today",
   "home.changeGoal": "Change goal",
   "home.goal.title": "Daily goal",
@@ -109,6 +129,10 @@
   "home.goal.more": {
     "one": "1 more lesson · about {min} min",
     "other": "{n} more lessons · about {min} min"
+  },
+  "home.goal.moreGym": {
+    "one": "1 Rico's Gym session · about {min} min",
+    "other": "{n} Rico's Gym sessions · about {min} min"
   },
   "home.goal.met": "Goal met. See you tomorrow.",
   "home.goal.aria": "{done} of {target} lessons done today",

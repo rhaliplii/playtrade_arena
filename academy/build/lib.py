@@ -335,12 +335,12 @@ def tab_bar(t, active, base):
 # Tell the platform top nav (topnav.js) whether the Academy learner is signed in, before it renders:
 # signed out → Log in / Get Started instead of the avatar, alerts and Upgrade. Mirrors AC.auth (services.js).
 # Pro members (AC.auth.isPro(): ?as=pro or a Pro account) get data-pro="1": the side nav drops its "Upgrade to Pro" card.
-GUEST_FLAG = ("try{var q=(location.search.match(/[?&]as=(guest|new|member|pro|real|me)\\b/)||[])[1]||null,u=null;"
+GUEST_FLAG = ("try{var q=(location.search.match(/[?&]as=(guest|new|member|pro|certified|real|me)\\b/)||[])[1]||null,u=null;"
               "if(q==='real'||q==='me')q=null;else if(!q)q=localStorage.getItem('ac_preview');"
               "if(/[?&]logout=1/.test(location.search))localStorage.setItem('ac_v1_session',JSON.stringify({user:null}));"
               "else{var x=JSON.parse(localStorage.getItem('ac_v1_session')||'null');u=x&&x.user}"
               "document.body.dataset.user=(q?q!=='guest':!!u)?'member':'guest';"
-              "if(q==='pro'||(q!=='guest'&&u&&u.pro))document.body.dataset.pro='1'}catch(e){document.body.dataset.user='guest'}")
+              "if(q==='pro'||q==='certified'||(q!=='guest'&&u&&u.pro))document.body.dataset.pro='1'}catch(e){document.body.dataset.user='guest'}")
 
 
 # Settings › Reduce motion: html.ac-reduce-motion before first paint, from the current account's saved settings

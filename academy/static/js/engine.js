@@ -570,8 +570,56 @@
       rec.streak = { current: 12, best: 12, last: ago(1), freezes: 1, lostFrom: 0, rolled: ago(1) };
       rec.settings.goal = "regular"; rec.onboarded = true;
       rec.gym = { "spread-is-a-toll": { added: ago(3), rights: [], misses: 1, due: ago(0) }, "bear-market-20-percent": { added: ago(5), rights: [ago(2)], misses: 1, due: ago(0) }, "short-pnl": { added: ago(1), rights: [], misses: 1, due: ago(-1) } };
+      rec.mastered = 4;   // ideas already made to stick in the Gym
       rec.notes = [{ lesson: lessonIds[0], chapter: chapterIds[0], text: "A price is the last deal between a buyer and a seller.", d: ago(12) }];
       fillPlan();
+      save();
+    },
+    /** The "Pro · certified" preview: the whole free path played over ~two months (every lesson, every Chapter Challenge
+        passed first try, the trading plan filled from its lessons), then finished through finishPath, so the certificate,
+        XP and coins come from the real flow (a preview's certificate is never registered). Finished 6 days ago. */
+    seedGraduate: function (lessonIds, chapterIds, pathId) {
+      load();
+      if (rec.history.length || rec.wiped) return;
+      var d0 = clock.now();
+      function ago(n) { var d = new Date(d0); d.setDate(d.getDate() - n); return day(d); }
+      var chs = ((AC.index ? AC.index() : { chapters: [] }).chapters || []).filter(function (c) { return chapterIds.indexOf(c.id) >= 0; });
+      var total = chs.reduce(function (a, c) { return a + (c.lessons || []).length; }, 0), i = 0, START = 64, END = 7;
+      chs.forEach(function (c) {
+        (c.lessons || []).forEach(function (l) {
+          var right = i % 4 === 2 ? 2 : 3, d = ago(START - Math.round(i * (START - END) / Math.max(1, total - 1)));
+          rec.lessons[l.id] = { done: true, best: 60 + right * 10, firstTry: { call: true, exercise: right === 3, check: true }, card: 0, answered: {}, at: d, chapter: c.id };
+          rec.history.push({ d: d, xp: 60 + right * 10, src: "lesson" });
+          rec.days[d] = { lessons: ((rec.days[d] || {}).lessons || 0) + 1, gym: 0, met: true };
+          i++;
+        });
+        var last = (c.lessons || []).length ? rec.lessons[c.lessons[c.lessons.length - 1].id].at : ago(END);
+        var qs = (c.lessons || []).length || 4, chXp = qs * XP.challengeQ + XP.challengePerfect;
+        rec.chapters[c.id] = { challenge: { passed: true, attempts: 1, at: last, xp: chXp, last: (c.lessons || []).map(function (l) { return { lesson: l.id, correct: true }; }), passedWith: { right: qs, total: qs } } };
+        rec.history.push({ d: last, xp: chXp, src: "challenge" });
+      });
+      // Rico's Gym most days, and a 21-day streak (best 34)
+      for (var k = 1; k <= START; k++) {
+        if (k % 3 === 0) continue;
+        var dk = ago(k);
+        rec.days[dk] = { lessons: rec.days[dk] ? rec.days[dk].lessons : 0, gym: 1, met: true, gymXp: true };
+        rec.history.push({ d: dk, xp: XP.gym, src: "gym" });
+      }
+      rec.history.sort(function (a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : 0; });
+      rec.xp = rec.history.reduce(function (a, h) { return a + h.xp; }, 0);
+      rec.streak = { current: 21, best: 34, last: ago(1), freezes: 2, lostFrom: 0, rolled: ago(1) };
+      rec.settings.goal = "regular"; rec.onboarded = true;
+      rec.notes = [{ lesson: lessonIds[0], chapter: chapterIds[0], text: "A price is the last deal between a buyer and a seller.", d: ago(START) }];
+      rec.gym = { "spread-is-a-toll": { added: ago(9), rights: [ago(4)], misses: 1, due: ago(0) }, "short-pnl": { added: ago(12), rights: [], misses: 1, due: ago(0) } };
+      rec.mastered = 23;
+      fillPlan();
+      rec.planSaved = ago(8);
+      P.finishPath(pathId, chapterIds);
+      // finished 6 days ago, not today
+      var fin = ago(6);
+      if (rec.paths[pathId]) rec.paths[pathId].finished = fin;
+      rec.certificates.forEach(function (c) { if (c.path === pathId) c.d = fin; });
+      rec.history.forEach(function (h) { if (h.src === "path") h.d = fin; });
       save();
     },
 

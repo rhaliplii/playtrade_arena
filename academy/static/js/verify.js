@@ -7,7 +7,6 @@
   var AC = window.AC;
   var t = function (k, v) { return AC.t(k, v); };
   var esc = AC.esc;
-  var DEMO = "TF-7K2Q-9D4M";   // the sample certificate in the search state's picture (content/demo/certificates.json)
 
   function check(size) {
     return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
@@ -36,12 +35,15 @@
   }
 
   // ---------------------------------------------------------------- states
+  // the search state's picture: a specimen ("Your name", SAMPLE ribbon, placeholder ID), never a real learner's
+  // certificate, so nobody mistakes it for their own (the demo account's name is close to the demo registry's)
   function sample(root) {
     var box = AC.$("[data-vf-sample]", root);
     if (!box) return;
-    var row = AC.certs.lookup(DEMO);
-    if (!row) return;
-    box.insertAdjacentHTML("afterbegin", AC.cert.html(AC.cert.model(row)));
+    var d = new Date(), p2 = function (n) { return (n < 10 ? "0" : "") + n; };
+    var m = AC.cert.model({ path: "learn-to-trade", sample: true, d: d.getFullYear() + "-" + p2(d.getMonth() + 1) + "-" + p2(d.getDate()) });
+    m.name = t("verify.sampleName");
+    box.insertAdjacentHTML("afterbegin", AC.cert.html(m));
     var fig = AC.$(".ac-cert", box);
     if (fig) { fig.setAttribute("aria-hidden", "true"); fig.removeAttribute("aria-label"); }
   }

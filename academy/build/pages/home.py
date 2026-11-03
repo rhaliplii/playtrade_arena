@@ -213,7 +213,7 @@ def cert_card(t, base, L):
 
 def cert_sheet(t, base, L, first_r):
     """The sample certificate (bottom sheet on phones, dialog on wider screens; the .ac-pmsheet shell): the real
-    certificate template with the learner's name ("Your name" for guests), today's date, a placeholder ID and a SAMPLE
+    certificate template with "Your name" (for everyone: never a name on a certificate not yet earned), today's date, a placeholder ID and a SAMPLE
     ribbon (filled by learn-pages.js certSheet), what it takes, and a button: the hero's for guests (sign-up gate
     included), the path card's next step when signed in. Opened by the guest card and the home's Certificate milestone."""
     rows = [("check", t("home.certSheet.challenges", n=len(L["chapters"]))), ("book", t("home.certSheet.plan")), ("shield", t("home.certSheet.verify"))]

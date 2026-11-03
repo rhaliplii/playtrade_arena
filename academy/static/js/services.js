@@ -24,7 +24,7 @@
   function session() { return AC.store.get(SESSION) || { user: null }; }
   // Prototype switcher (bottom-left): the chosen view is remembered across pages; ?as= sets it too; "real" (alias "me") clears it.
   var PREVIEW_KEY = "ac_preview";
-  var asParam = (location.search.match(/[?&]as=(guest|new|member|pro|real|me)\b/) || [])[1] || null;
+  var asParam = (location.search.match(/[?&]as=(guest|new|member|pro|certified|real|me)\b/) || [])[1] || null;
   if (asParam === "me") asParam = "real";
   try {
     if (asParam === "real") localStorage.removeItem(PREVIEW_KEY);
@@ -74,7 +74,7 @@
     },
     isGuest: function () { return !AC.auth.user(); },
     /** Profit.com Pro subscription (production: from the platform account). `?as=pro` previews it. */
-    isPro: function () { return preview === "pro" || !!(session().user && session().user.pro); },
+    isPro: function () { return preview === "pro" || preview === "certified" || !!(session().user && session().user.pro); },
     /** The progress record in use: a member id, "guest" (a real guest), or "preview-guest" (the View as › Guest preview,
         kept apart so previewing never touches the real guest's progress). */
     account: function () { var u = AC.auth.user(); return u ? u.id : preview === "guest" ? "preview-guest" : "guest"; },

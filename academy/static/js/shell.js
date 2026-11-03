@@ -11,7 +11,7 @@
     var s = AC.progress.summary();
     var state = guest ? "guest" : (s.started ? "learning" : "new");
     if (AC.auth.preview === "new") state = "new";
-    if (AC.auth.preview === "member" || AC.auth.preview === "pro") state = "learning";
+    if (AC.auth.preview === "member" || AC.auth.preview === "pro" || AC.auth.preview === "certified") state = "learning";
     document.body.dataset.audience = state;
     AC.$$("[data-show]").forEach(function (el) {
       var want = el.getAttribute("data-show").split(/\s+/);
@@ -256,8 +256,8 @@
   function viewSwitcher() {
     if (document.body.classList.contains("ac-public")) return;   // public pages (certificate verify) are the same for everyone
     var cur = AC.auth.preview || "real";
-    var opts = [["guest", "switch.guest"], ["new", "switch.new"], ["member", "switch.member"], ["pro", "switch.pro"], ["real", "switch.real"]];
-    var curLabel = AC.t((opts.filter(function (o) { return o[0] === cur; })[0] || opts[4])[1]);
+    var opts = [["guest", "switch.guest"], ["new", "switch.new"], ["member", "switch.member"], ["pro", "switch.pro"], ["certified", "switch.certified"], ["real", "switch.real"]];
+    var curLabel = AC.t((opts.filter(function (o) { return o[0] === cur; })[0] || opts[opts.length - 1])[1]);
     var el = AC.h('<div class="ac-viewas">' +
       '<button type="button" class="ac-viewas__chip" aria-expanded="false" aria-controls="acViewasOpts" aria-label="' + AC.esc(AC.t("switch.open", { view: curLabel })) + '">' +
       '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>' +
@@ -313,9 +313,11 @@
 
   AC.ready(function () {
     viewSwitcher();
-    if (AC.auth.preview === "member" || AC.auth.preview === "pro") {
-      AC.progress.seedDemo(AC.allLessons().map(function (l) { return l.id; }), AC.index().chapters.filter(function (c) { return c.available; }).map(function (c) { return c.id; }));
-    }
+    var demoLessons = function () { return AC.allLessons().map(function (l) { return l.id; }); };
+    var demoChapters = function () { return AC.index().chapters.filter(function (c) { return c.available; }).map(function (c) { return c.id; }); };
+    if (AC.auth.preview === "member" || AC.auth.preview === "pro") AC.progress.seedDemo(demoLessons(), demoChapters());
+    // Pro · certified: Trading Foundations finished, its certificate earned
+    if (AC.auth.preview === "certified") AC.progress.seedGraduate(demoLessons(), demoChapters(), AC.index().path);
     sideNav();
     AC.applyAudience();
     AC.bind();

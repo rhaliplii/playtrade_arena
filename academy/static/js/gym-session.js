@@ -2,6 +2,7 @@
    Up to 5 due ideas from AC.progress.gymQueue(), each shown as one of its questions (inlined idea index), with the
    same option rows and feedback sheet as lessons. gymAnswer per card; finish → completeGym (+30 XP once a day).
    ?chapter=<id> (Gym page "Chapter review"): that chapter's ideas, up to 5, even if not due.
+   ?idea=<idea> (a row on the Gym page, due or coming up): just that idea's card, then back to the Gym.
    Preview: ?state=right|wrong (first card) · ?state=done · ?state=empty (on a throwaway copy of progress, never saved) */
 (function () {
   "use strict";
@@ -14,7 +15,7 @@
     var host = document.getElementById("acPlayer");
     if (!D || !host) return;
     var gymUrl = AC.url("gym");
-    var st = AC.cards.param("state"), only = AC.cards.param("chapter");
+    var st = AC.cards.param("state"), only = AC.cards.param("chapter"), one = AC.cards.param("idea");
     if (st) AC.progress.sandbox();
 
     // ---------------------------------------------------------------- which ideas, which question
@@ -32,6 +33,8 @@
       var due = AC.progress.gymIdeas().map(function (g) { return g.idea; });
       queue.sort(function (a, b) { return (due.indexOf(b) >= 0) - (due.indexOf(a) >= 0); });
       queue = queue.slice(0, MAX);
+    } else if (one && D.ideas[one]) {
+      queue = [one];
     } else {
       queue = AC.progress.gymQueue().map(function (g) { return g.idea; });
     }
