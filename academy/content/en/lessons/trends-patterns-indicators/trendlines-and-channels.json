@@ -50,7 +50,7 @@
       ]
      ],
      "seed": 8,
-     "height": 130,
+     "height": 225,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -77,7 +77,9 @@
       }
      ],
      "label": "A rising trendline under three lows; today price closes just below it",
-     "n": 39
+     "n": 39,
+     "noise": 1.3,
+     "wick": 0.9
     }
    },
    "options": [
@@ -148,7 +150,7 @@
         ]
        ],
        "seed": 9,
-       "height": 130,
+       "height": 180,
        "axis": false,
        "lastTag": false,
        "ticks": 0,
@@ -171,7 +173,9 @@
         }
        ],
        "label": "An uptrend line drawn under three rising lows",
-       "n": 37
+       "n": 37,
+       "noise": 1.3,
+       "wick": 0.9
       }
      }
     },
@@ -225,7 +229,7 @@
       ]
      ],
      "seed": 12,
-     "height": 210,
+     "height": 230,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -243,7 +247,9 @@
       }
      ],
      "label": "A rising channel: a lower line under the lows, drag the upper line onto the highs",
-     "n": 37
+     "n": 37,
+     "noise": 1.3,
+     "wick": 0.9
     },
     "start": {
      "from": [
@@ -329,7 +335,7 @@
       ]
      ],
      "seed": 17,
-     "height": 120,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -405,12 +411,14 @@
       ]
      ],
      "seed": 21,
-     "height": 110,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
      "label": "A rising chart with no line drawn yet",
-     "n": 37
+     "n": 37,
+     "noise": 1.3,
+     "wick": 0.9
     }
    },
    "options": [
