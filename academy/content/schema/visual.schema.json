@@ -1204,6 +1204,10 @@
             "columns",
             "rows"
           ]
+        },
+        "open": {
+          "type": "integer",
+          "description": "rows layout: the bar shown selected at first"
         }
       }
     },

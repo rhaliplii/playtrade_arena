@@ -819,3 +819,4 @@ button.ac-v__brow2 { cursor: pointer; }
 .ac-v__eq .ac-v__term b { font-size: clamp(16px, 5vw, 22px); }
 .ac-v__coltile { align-items: center; text-align: center; }
 .ac-v__colarrow { display: block; width: 100%; height: auto; margin: 2px 0; }
+.ac-v__box--brows:has([aria-expanded="true"]) .ac-v__brow2:not([aria-expanded="true"]) .ac-v__brbar { opacity: .5; }

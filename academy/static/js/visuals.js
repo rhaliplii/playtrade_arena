@@ -718,9 +718,9 @@
     // layout "rows" (design P1-Ch02 L3 "wipe-out rule"): a horizontal bar a row, its value beside it, tap for the working
     if (v.layout === "rows") {
       return '<div class="ac-v__box ac-v__box--brows"' + (tap ? ' data-interactive="bars"' : "") + ">" + (v.caption ? '<span class="ac-v__title">' + esc(v.caption) + "</span>" : "") +
-        bars.map(function (b) {
+        bars.map(function (b, bi) {
           var tag = tap && b.sub ? "button" : "div", pct = Math.max(1.5, Math.abs(b.value) / max * 100);
-          return "<" + tag + (tag === "button" ? ' type="button" aria-expanded="false" data-bar' : "") + ' class="ac-v__brow2 ' + tone(b.tone || "primary") + '"><b class="ac-v__brlab">' + esc(b.label) + "</b>" +
+          return "<" + tag + (tag === "button" ? ' type="button" aria-expanded="' + (bi === v.open ? "true" : "false") + '" data-bar' : "") + ' class="ac-v__brow2 ' + tone(b.tone || "primary") + '"><b class="ac-v__brlab">' + esc(b.label) + "</b>" +
             '<span class="ac-v__brtrack"><span class="ac-v__brbar" style="width:' + r1(pct) + '%"></span><span class="ac-v__brval ac-num">' + esc(b.display != null ? b.display : num(b.value)) + "</span>" +
             (b.sub ? '<span class="ac-v__bsub ac-v__brsub">' + esc(b.sub) + "</span>" : "") + "</span></" + tag + ">";
         }).join("") + "</div>";
