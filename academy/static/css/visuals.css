@@ -417,6 +417,7 @@ button.ac-v__bcol.is-seen .ac-v__bplus { display: none; }
 .ac-v__vbar { fill: var(--tone); fill-opacity: .8; transform-box: fill-box; transform-origin: 50% 100%; animation: acvGy .3s cubic-bezier(.3, .7, .3, 1) both; }
 /* ▶ Play (walk-throughs): idle = not drawn yet; played = draws in */
 .ac-v__playwrap.is-idle .ac-v__drawq { stroke-dasharray: 1; stroke-dashoffset: 1; animation: none; }
+.ac-v__t--halo { paint-order: stroke; stroke: var(--ac-surface); stroke-width: 3px; stroke-linejoin: round; }
 .ac-v__vbar--dim { fill-opacity: .45; }
 .ac-v__playwrap.is-idle :is(.ac-v__gy, .ac-v__vbar) { transform: scaleY(0); animation: none; }
 .ac-v__playwrap.is-idle .ac-v__gx { transform: scaleX(0); animation: none; }

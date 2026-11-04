@@ -333,15 +333,10 @@
     if (hasVol) {
       var vol = align(c.volume, n), vh = Math.round((c.volHeight || 34) * sc), vtop = H + (c.volLabel ? 16 : 6);
       var vmax = c.volMax || Math.max.apply(null, vol.filter(function (x) { return x != null; }).concat([c.volAvg || 0, 1e-9]));
+      if (c.volAvgLabel && !c.volMax) vmax = Math.max(vmax, c.volAvg * 1.5);   // room above the average line for its label
       // volMark: one bar called out (the breakout day) in its own tone with a tag above it; the other bars go grey
       var vmk = c.volMark, vmi = vmk ? (vmk.i == null || vmk.i < 0 ? n + (vmk.i == null ? -1 : vmk.i) : vmk.i) : -1;
       var vs = '<line x1="8" x2="' + R + '" y1="' + r1(H + 1) + '" y2="' + r1(H + 1) + '" class="ac-v__grid"/>' + (c.volLabel ? T(8, H + 12, c.volLabel, { fs: 10, w: 800, cls: "ac-v__t--muted" }) : "");
-      // the average's label sits in the panel's header row (right), with a dashed key: on the line itself a tall bar covers it
-      function volKey() {
-        var ty = c.volLabel ? H + 12 : vtop + 8, tw = c.volAvgLabel.length * 5.4;
-        return '<line x1="' + r1(R - 2 - tw - 22) + '" x2="' + r1(R - 2 - tw - 6) + '" y1="' + r1(ty - 3.5) + '" y2="' + r1(ty - 3.5) + '" class="ac-tone--muted ac-v__hline ac-v__hline--thin"/>' +
-          T(R - 2, ty, c.volAvgLabel, { fs: 9.5, w: 700, anchor: "end", cls: "ac-v__t--muted" });
-      }
       vol.forEach(function (v, i) {
         if (v == null || !data[i]) return;
         var bh = Math.max(1, v / vmax * vh);
@@ -350,7 +345,7 @@
         if (vmk && i === vmi && vmk.label) bar += T(X(i), Math.min(vtop + vh - bh, c.volAvg ? vtop + vh - c.volAvg / vmax * vh : 1e9) - 4, vmk.label, { fs: 11, w: 800, anchor: "middle", cls: tone(vmk.tone || "gold") + " ac-v__t--tone" });
         vs += isLate(i) ? '<g class="ac-v__later" style="--i:' + laterOf[i] + '">' + bar + "</g>" : bar;
       });
-      if (c.volAvg) { var ay = vtop + vh - c.volAvg / vmax * vh; vs += '<line x1="8" x2="' + R + '" y1="' + r1(ay) + '" y2="' + r1(ay) + '" class="ac-tone--muted ac-v__hline ac-v__hline--thin"/>' + (c.volAvgLabel ? volKey() : ""); }
+      if (c.volAvg) { var ay = vtop + vh - c.volAvg / vmax * vh; vs += '<line x1="8" x2="' + R + '" y1="' + r1(ay) + '" y2="' + r1(ay) + '" class="ac-tone--muted ac-v__hline ac-v__hline--thin"/>' + (c.volAvgLabel ? T(X(n - 1) - cw / 2 - 5, ay - 4, c.volAvgLabel, { fs: 9.5, w: 700, anchor: "end", cls: "ac-v__t--muted ac-v__t--halo" }) : ""); }   // just above the line, ending before the last bar (often the tall one); a halo keeps it readable over the others
       s += vs; H = vtop + vh + 4;
     }
     panels.forEach(function (p) {
