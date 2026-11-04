@@ -326,6 +326,27 @@
           "type": "number",
           "description": "volume panel height at width 330 (default 34)"
         },
+        "volMax": {
+          "type": "number",
+          "description": "fixed top of the volume scale, so two charts side by side share one scale"
+        },
+        "volMark": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "i": {
+              "type": "integer",
+              "description": "bar index; negative counts from the end (default: the last bar)"
+            },
+            "label": {
+              "type": "string"
+            },
+            "tone": {
+              "type": "string"
+            }
+          },
+          "description": "one volume bar called out in a tone with a tag above it; the other bars turn grey"
+        },
         "overlays": {
           "type": "array",
           "items": {

@@ -330,12 +330,16 @@
     function isLate(i) { return laterOf[i] != null; }
     if (hasVol) {
       var vol = align(c.volume, n), vh = Math.round((c.volHeight || 34) * sc), vtop = H + (c.volLabel ? 16 : 6);
-      var vmax = Math.max.apply(null, vol.filter(function (x) { return x != null; }).concat([c.volAvg || 0, 1e-9]));
+      var vmax = c.volMax || Math.max.apply(null, vol.filter(function (x) { return x != null; }).concat([c.volAvg || 0, 1e-9]));
+      // volMark: one bar called out (the breakout day) in its own tone with a tag above it; the other bars go grey
+      var vmk = c.volMark, vmi = vmk ? (vmk.i == null || vmk.i < 0 ? n + (vmk.i == null ? -1 : vmk.i) : vmk.i) : -1;
       var vs = '<line x1="8" x2="' + R + '" y1="' + r1(H + 1) + '" y2="' + r1(H + 1) + '" class="ac-v__grid"/>' + (c.volLabel ? T(8, H + 12, c.volLabel, { fs: 10, w: 800, cls: "ac-v__t--muted" }) : "");
       vol.forEach(function (v, i) {
         if (v == null || !data[i]) return;
         var bh = Math.max(1, v / vmax * vh), up = data[i][3] >= data[i][0];
-        var bar = '<rect x="' + r1(X(i) - cw / 2) + '" y="' + r1(vtop + vh - bh) + '" width="' + r1(cw) + '" height="' + r1(bh) + '" rx="1" class="' + (up ? "ac-tone--up" : "ac-tone--down") + ' ac-v__vbar"/>';
+        var vtone = vmk ? (i === vmi ? tone(vmk.tone || "gold") : "ac-tone--muted ac-v__vbar--dim") : (up ? "ac-tone--up" : "ac-tone--down");
+        var bar = '<rect x="' + r1(X(i) - cw / 2) + '" y="' + r1(vtop + vh - bh) + '" width="' + r1(cw) + '" height="' + r1(bh) + '" rx="1" class="' + vtone + ' ac-v__vbar"/>';
+        if (vmk && i === vmi && vmk.label) bar += T(X(i), Math.min(vtop + vh - bh, c.volAvg ? vtop + vh - c.volAvg / vmax * vh : 1e9) - 4, vmk.label, { fs: 11, w: 800, anchor: "middle", cls: tone(vmk.tone || "gold") + " ac-v__t--tone" });
         vs += isLate(i) ? '<g class="ac-v__later" style="--i:' + laterOf[i] + '">' + bar + "</g>" : bar;
       });
       if (c.volAvg) { var ay = vtop + vh - c.volAvg / vmax * vh; vs += '<line x1="8" x2="' + R + '" y1="' + r1(ay) + '" y2="' + r1(ay) + '" class="ac-tone--muted ac-v__hline ac-v__hline--thin"/>' + (c.volAvgLabel ? T(R - 2, ay - 4, c.volAvgLabel, { fs: 9.5, w: 700, anchor: "end", cls: "ac-v__t--muted" }) : ""); }

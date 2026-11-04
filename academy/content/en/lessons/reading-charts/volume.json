@@ -74,15 +74,21 @@
        ],
        "volume": [
         1,
-        1.1,
-        0.9,
+        1.05,
+        0.95,
         1,
         1.05,
         1,
         3
        ],
-       "volHeight": 30,
-       "label": "Stock A breaks above $50 on three times its normal volume"
+       "volHeight": 88,
+       "label": "Stock A breaks above $50 on three times its normal volume",
+       "volMax": 3.4,
+       "volAvg": 1,
+       "volMark": {
+        "label": "3×",
+        "tone": "up"
+       }
       }
      },
      {
@@ -146,15 +152,21 @@
        ],
        "volume": [
         1,
-        1.1,
-        0.9,
+        1.05,
+        0.95,
         1,
         1.05,
         1,
         0.5
        ],
-       "volHeight": 30,
-       "label": "Stock B breaks above $50 on half its normal volume"
+       "volHeight": 88,
+       "label": "Stock B breaks above $50 on half its normal volume",
+       "volMax": 3.4,
+       "volAvg": 1,
+       "volMark": {
+        "label": "½×",
+        "tone": "down"
+       }
       }
      }
     ]
