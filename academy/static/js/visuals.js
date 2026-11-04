@@ -338,8 +338,8 @@
       var vs = '<line x1="8" x2="' + R + '" y1="' + r1(H + 1) + '" y2="' + r1(H + 1) + '" class="ac-v__grid"/>' + (c.volLabel ? T(8, H + 12, c.volLabel, { fs: 10, w: 800, cls: "ac-v__t--muted" }) : "");
       vol.forEach(function (v, i) {
         if (v == null || !data[i]) return;
-        var bh = Math.max(1, v / vmax * vh), up = data[i][3] >= data[i][0];
-        var vtone = vmk ? (i === vmi ? tone(vmk.tone || "gold") : vmk.dim === false ? tone(c.volTone || "up") : "ac-tone--muted ac-v__vbar--dim") : c.volTone ? tone(c.volTone) : (up ? "ac-tone--up" : "ac-tone--down");
+        var bh = Math.max(1, v / vmax * vh);
+        var vtone = vmk ? (i === vmi ? tone(vmk.tone || "gold") : vmk.dim === false ? tone(c.volTone || "up") : "ac-tone--muted ac-v__vbar--dim") : tone(c.volTone || "up");   // volume has no side: one colour for every bar
         var bar = '<rect x="' + r1(X(i) - cw / 2) + '" y="' + r1(vtop + vh - bh) + '" width="' + r1(cw) + '" height="' + r1(bh) + '" rx="1" class="' + vtone + ' ac-v__vbar"/>';
         if (vmk && i === vmi && vmk.label) bar += T(X(i), Math.min(vtop + vh - bh, c.volAvg ? vtop + vh - c.volAvg / vmax * vh : 1e9) - 4, vmk.label, { fs: 11, w: 800, anchor: "middle", cls: tone(vmk.tone || "gold") + " ac-v__t--tone" });
         vs += isLate(i) ? '<g class="ac-v__later" style="--i:' + laterOf[i] + '">' + bar + "</g>" : bar;

@@ -365,7 +365,9 @@
         3.4
        ],
        "volHeight": 40,
-       "label": "Ten daily candles rising from $40 to $45, with a volume bar under each"
+       "label": "Ten daily candles rising from $40 to $45, with a volume bar under each",
+       "priceLabel": "Price",
+       "volLabel": "Volume"
       }
      }
     },
@@ -867,38 +869,118 @@
      "ohlc": [
       [
        50,
-       50.3,
-       49.8,
-       50.1
+       50.21,
+       49.76,
+       49.98
       ],
       [
-       50.1,
-       50.4,
-       49.9,
-       50.2
+       49.98,
+       50.03,
+       49.52,
+       49.66
       ],
       [
-       50.2,
-       50.3,
-       49.9,
-       50
+       49.66,
+       49.91,
+       49.24,
+       49.46
       ],
       [
-       50,
-       50.1,
-       44.6,
-       45
+       49.46,
+       49.74,
+       49.24,
+       49.55
+      ],
+      [
+       49.55,
+       49.71,
+       49.14,
+       49.23
+      ],
+      [
+       49.23,
+       49.66,
+       48.98,
+       49.6
+      ],
+      [
+       49.6,
+       49.82,
+       49.09,
+       49.22
+      ],
+      [
+       49.22,
+       49.48,
+       49.08,
+       49.13
+      ],
+      [
+       49.13,
+       49.41,
+       48.55,
+       48.73
+      ],
+      [
+       48.73,
+       49.03,
+       48.07,
+       48.36
+      ],
+      [
+       48.36,
+       48.52,
+       47.93,
+       48.01
+      ],
+      [
+       48.01,
+       48.22,
+       47.75,
+       47.84
+      ],
+      [
+       47.84,
+       48.08,
+       47.75,
+       48.02
+      ],
+      [
+       48.02,
+       48.17,
+       42.5,
+       43.22
       ]
      ],
-     "height": 90,
+     "height": 110,
      "volume": [
-      1,
-      1,
-      1,
+      1.13,
+      0.96,
+      0.97,
+      1.04,
+      0.99,
+      0.95,
+      0.81,
+      1.09,
+      1.19,
+      1.19,
+      1.07,
+      0.94,
+      0.95,
       4
      ],
-     "volHeight": 36,
-     "label": "Three quiet days, then a red candle down 10% on four times the volume"
+     "volHeight": 48,
+     "label": "Quiet days, then a red candle down 10% on four times the normal volume",
+     "volMax": 4.6,
+     "volTone": "up",
+     "volAvg": 1,
+     "priceLabel": "Price",
+     "volLabel": "Volume",
+     "volMark": {
+      "label": "4×",
+      "tone": "up",
+      "dim": false
+     }
     }
    },
    "rule": "Check the color and the volume together."
@@ -957,7 +1039,9 @@
       1.6
      ],
      "volHeight": 36,
-     "label": "Five rising candles while volume shrinks every day"
+     "label": "Five rising candles while volume shrinks every day",
+     "priceLabel": "Price",
+     "volLabel": "Volume"
     }
    },
    "options": [

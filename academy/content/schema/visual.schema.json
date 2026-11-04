@@ -335,7 +335,7 @@
         },
         "volTone": {
           "type": "string",
-          "description": "one tone for every volume bar (default: the candle's colour)"
+          "description": "one tone for every volume bar (default: up)"
         },
         "volMax": {
           "type": "number",
