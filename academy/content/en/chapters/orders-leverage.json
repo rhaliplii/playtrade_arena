@@ -233,7 +233,7 @@
    },
    {
     "lesson": 4,
-    "q": "You buy and sell 100 shares once. Broker A: $0 commission, $0.05 spread. Broker B: $1 per trade, $0.01 spread. Which is cheaper?",
+    "q": "You buy and sell 100 shares once. Which broker is cheaper?",
     "options": [
      "Broker A: $0 vs $2",
      "Same cost",
@@ -242,7 +242,42 @@
     "answer": 2,
     "why": "Add both costs. A: $0.05 spread × 100 shares = $5. B: $1 × 2 trades = $2 commission + $0.01 × 100 = $1 spread, $3 total.",
     "idea": "total-trading-cost",
-    "added": "New situation written for the Academy"
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "columns",
+     "cols": [
+      {
+       "title": "BROKER A",
+       "tone": "sky",
+       "tint": true,
+       "rows": [
+        {
+         "label": "Fee per trade",
+         "value": "$0"
+        },
+        {
+         "label": "Spread per share",
+         "value": "$0.05"
+        }
+       ]
+      },
+      {
+       "title": "BROKER B",
+       "tone": "pro",
+       "tint": true,
+       "rows": [
+        {
+         "label": "Fee per trade",
+         "value": "$1"
+        },
+        {
+         "label": "Spread per share",
+         "value": "$0.01"
+        }
+       ]
+      }
+     ]
+    }
    },
    {
     "lesson": 5,
@@ -530,7 +565,7 @@
    },
    {
     "lesson": 4,
-    "q": "You buy and sell 200 shares once. Broker A: $0 commission, $0.04 spread. Broker B: $2 per trade, $0.01 spread. Which is cheaper?",
+    "q": "You buy and sell 200 shares once. Which broker is cheaper?",
     "options": [
      "Broker A: $0 vs $4",
      "Broker B: $6 vs $8",
@@ -540,7 +575,42 @@
     "why": "Add both costs: commission on each trade plus the spread on every share. A’s wider spread costs more than B’s fees.",
     "work": "A: $0.04 × 200 shares = $8. B: $2 × 2 trades = $4 commission + $0.01 × 200 = $2 spread, $6 total.",
     "idea": "total-trading-cost",
-    "added": "New situation written for the Academy"
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "columns",
+     "cols": [
+      {
+       "title": "BROKER A",
+       "tone": "sky",
+       "tint": true,
+       "rows": [
+        {
+         "label": "Fee per trade",
+         "value": "$0"
+        },
+        {
+         "label": "Spread per share",
+         "value": "$0.04"
+        }
+       ]
+      },
+      {
+       "title": "BROKER B",
+       "tone": "pro",
+       "tint": true,
+       "rows": [
+        {
+         "label": "Fee per trade",
+         "value": "$2"
+        },
+        {
+         "label": "Spread per share",
+         "value": "$0.01"
+        }
+       ]
+      }
+     ]
+    }
    },
    {
     "lesson": 5,
