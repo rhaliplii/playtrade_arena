@@ -168,14 +168,39 @@
          40
         ],
         [
+         4,
+         45
+        ],
+        [
+         6,
+         43.5
+        ],
+        [
          11,
+         50
+        ],
+        [
+         14,
+         48
+        ],
+        [
+         19,
+         55
+        ],
+        [
+         21,
+         54
+        ],
+        [
+         23,
          58
         ]
        ],
        "seed": 3,
-       "height": 60,
-       "noise": 0.3,
-       "label": "Weekly candles rising from $40 to $58"
+       "height": 100,
+       "noise": 1.6,
+       "label": "Weekly candles rising from $40 to $58",
+       "wick": 1.6
       }
      },
      {
@@ -192,18 +217,39 @@
          58
         ],
         [
-         9,
-         52.5
+         3,
+         56.8
         ],
         [
-         11,
+         5,
+         57.6
+        ],
+        [
+         10,
+         54.4
+        ],
+        [
+         12,
+         55.3
+        ],
+        [
+         17,
+         52.4
+        ],
+        [
+         20,
+         53.2
+        ],
+        [
+         23,
          52.8
         ]
        ],
        "seed": 5,
-       "height": 60,
-       "noise": 0.3,
-       "label": "Daily candles pulling back from $58 to $52"
+       "height": 100,
+       "noise": 1.6,
+       "label": "Daily candles pulling back from $58 to $52",
+       "wick": 1.6
       }
      },
      {
@@ -220,14 +266,35 @@
          52.4
         ],
         [
-         11,
+         3,
+         52.0
+        ],
+        [
+         6,
+         52.9
+        ],
+        [
+         9,
+         52.6
+        ],
+        [
+         14,
+         53.4
+        ],
+        [
+         17,
+         53.1
+        ],
+        [
+         23,
          54
         ]
        ],
        "seed": 9,
-       "height": 60,
-       "noise": 0.3,
-       "label": "Hourly candles bouncing from $52 to $54"
+       "height": 100,
+       "noise": 1.6,
+       "label": "Hourly candles bouncing from $52 to $54",
+       "wick": 1.6
       }
      }
     ]
