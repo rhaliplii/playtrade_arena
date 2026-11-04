@@ -38,7 +38,7 @@
   "questions": [
    {
     "lesson": 1,
-    "q": "A red candle: open $50, high $52, low $46, close $47. Where did it close?",
+    "q": "This red candle opened at $50. Read it: where did it close?",
     "visual": {
      "kind": "candle",
      "title": "Daily · one candle",
@@ -51,7 +51,7 @@
         46,
         47
        ],
-       "label": "A red candle: open $50, high $52, low $46, close $47"
+       "label": "A red candle: body from $50 down to $47, wicks up to $52 and down to $46"
       }
      ]
     },
@@ -482,7 +482,7 @@
   "retry": [
    {
     "lesson": 1,
-    "q": "A green candle: open $30, high $34, low $29, close $33. Where did it close?",
+    "q": "This green candle opened at $30. Read it: where did it close?",
     "visual": {
      "kind": "candle",
      "title": "Daily · one candle",
@@ -495,7 +495,7 @@
         29,
         33
        ],
-       "label": "A green candle: open $30, high $34, low $29, close $33"
+       "label": "A green candle: body from $30 up to $33, wicks up to $34 and down to $29"
       }
      ]
     },
