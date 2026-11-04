@@ -187,21 +187,39 @@
           50
          ],
          [
-          6,
-          52
+          5,
+          51.6
          ],
          [
-          12,
-          57
+          8,
+          50.8
+         ],
+         [
+          14,
+          55
          ],
          [
           17,
+          54
+         ],
+         [
+          23,
+          59
+         ],
+         [
+          25,
+          58.2
+         ],
+         [
+          29,
           62
          ]
         ],
+        "n": 30,
         "seed": 21,
         "height": 90,
-        "noise": 0.5,
+        "noise": 0.9,
+        "wick": 0.7,
         "label": "Daily candles rising over three months"
        }
       },
@@ -218,21 +236,39 @@
           62.8
          ],
          [
-          6,
-          62.1
+          4,
+          63.1
+         ],
+         [
+          9,
+          62
          ],
          [
           12,
-          61.4
+          62.3
          ],
          [
-          17,
+          18,
+          61.2
+         ],
+         [
+          21,
+          61.5
+         ],
+         [
+          25,
+          60.8
+         ],
+         [
+          29,
           61
          ]
         ],
+        "n": 30,
         "seed": 14,
         "height": 90,
-        "noise": 0.5,
+        "noise": 0.9,
+        "wick": 0.7,
         "label": "15-minute candles dipping today"
        }
       }
@@ -587,7 +623,110 @@
     "answer": 1,
     "why": "Match the chart to your hold: hours means the hourly, with a look at the daily first. A 1-minute dip is noise, and a monthly candle is longer than your whole trade.",
     "idea": "match-timeframe-to-hold",
-    "added": "Retry set written for the Academy"
+    "added": "Retry set written for the Academy",
+    "visual": {
+     "kind": "chart-pair",
+     "items": [
+      {
+       "label": "Hourly · 3 days",
+       "tone": "white",
+       "chart": {
+        "axis": false,
+        "lastTag": false,
+        "ticks": 0,
+        "path": [
+         [
+          0,
+          80
+         ],
+         [
+          5,
+          81.4
+         ],
+         [
+          8,
+          80.9
+         ],
+         [
+          14,
+          83.2
+         ],
+         [
+          17,
+          82.5
+         ],
+         [
+          23,
+          85.4
+         ],
+         [
+          25,
+          84.8
+         ],
+         [
+          29,
+          86.6
+         ]
+        ],
+        "n": 30,
+        "seed": 33,
+        "height": 90,
+        "noise": 0.9,
+        "wick": 0.7,
+        "label": "Hourly candles rising over three days"
+       }
+      },
+      {
+       "label": "1-min · now",
+       "tone": "white",
+       "chart": {
+        "axis": false,
+        "lastTag": false,
+        "ticks": 0,
+        "path": [
+         [
+          0,
+          86.9
+         ],
+         [
+          5,
+          87.1
+         ],
+         [
+          10,
+          86.8
+         ],
+         [
+          16,
+          86.9
+         ],
+         [
+          20,
+          86.7
+         ],
+         [
+          24,
+          86.2
+         ],
+         [
+          27,
+          86.3
+         ],
+         [
+          29,
+          86.0
+         ]
+        ],
+        "n": 30,
+        "seed": 41,
+        "height": 90,
+        "noise": 0.9,
+        "wick": 0.7,
+        "label": "1-minute candles dipping in the last few minutes"
+       }
+      }
+     ]
+    }
    },
    {
     "lesson": 4,
