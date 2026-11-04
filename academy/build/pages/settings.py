@@ -55,7 +55,8 @@ def routes(ctx):
 
     <section class="ac-card ac-set-card ac-set-card--list" aria-labelledby="set-sm">
       <h2 id="set-sm" class="ac-h3">{esc(t("settings.sm.title"))}</h2>
-      {switch(t, "reduceMotion", t("settings.motion.title"), t("settings.motion.text"), False, first=True)}
+      {switch(t, "sound", t("settings.sound.title"), t("settings.sound.text"), True, first=True)}
+      {switch(t, "reduceMotion", t("settings.motion.title"), t("settings.motion.text"), False)}
     </section>
 
     <section class="ac-card ac-set-card ac-set-card--list" aria-labelledby="set-pv" data-show="member">

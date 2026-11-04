@@ -106,6 +106,7 @@
     // ---------------------------------------------------------------- session done
     function finish() {
       var res = AC.progress.completeGym(cards.length);
+      if (!res.rankUp) AC.sound.play(res.goalMet ? "goal" : "done");
       F.clear(); F.layout("done");
       AC.$$(".ac-pl__prog span", F.el).forEach(function (s) { s.className = "is-done"; });
       F.setAside("");

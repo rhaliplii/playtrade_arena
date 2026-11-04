@@ -73,7 +73,7 @@
     return {
       v: 1, created: day(),
       // privacy: Top Learners on by default, the public profile off until the learner turns it on
-      settings: { goal: guest ? "casual" : "regular", weekendMode: false, reminders: true, motion: true, leaderboard: true, publicProfile: false },
+      settings: { goal: guest ? "casual" : "regular", weekendMode: false, reminders: true, motion: true, sound: true, leaderboard: true, publicProfile: false },
       xp: 0, coins: 0, history: [],               // history: [{d, xp, src}]
       lessons: {},                                  // id → {done, best, firstTry:{call,exercise,check}, card, answered:{}}
       chapters: {},                                 // id → {challenge:{passed, attempts, last:[...], xp (awarded)}, testedOut}

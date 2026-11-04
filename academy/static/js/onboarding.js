@@ -126,6 +126,7 @@
         if (answered) return;
         answered = true; keyCtl.answered = true;
         var ok = pick === q.answer, res = P().onbAnswer(i, pick, ok);
+        AC.sound.play(ok ? "correct" : "wrong");
         // only the learner's pick is marked (green when right, amber when not); the right option is never shown
         group.classList.add("is-locked");
         AC.$$(".ac-opt", group).forEach(function (b) {

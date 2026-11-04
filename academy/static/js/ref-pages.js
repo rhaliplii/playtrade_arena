@@ -324,7 +324,8 @@
     }
     function value(key) {
       if (key === "reduceMotion") return s.motion === false;
-      if (key === "publicProfile") return s.publicProfile === true;   // off by default; Top Learners is on by default
+      if (key === "publicProfile") return s.publicProfile === true;
+      if (key === "sound") return s.sound !== false;   // on by default   // off by default; Top Learners is on by default
       return !!s[key];
     }
     function remFields() { AC.$$("[data-rem-fields] input, [data-rem-fields] select").forEach(function (el) { el.disabled = !value("reminders"); }); }
@@ -356,6 +357,7 @@
         var patch = {};
         if (key === "reduceMotion") patch.motion = !on; else patch[key] = on;
         save(patch); s = AC.progress.settings();
+        if (key === "sound" && on && AC.sound) AC.sound.play("toggle");   // (after saving: muted until then)
         if (key === "reminders") remFields();
         if (key === "reduceMotion") document.documentElement.classList.toggle("ac-reduce-motion", on);
       });

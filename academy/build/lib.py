@@ -14,7 +14,7 @@ LOCALES = {"en": {"prefix": "", "intl": "en-US", "name": "English"}}   # add a l
 PSEUDO = "xa"                          # en-XA pseudo-locale for the 35% text-growth check (built with --pseudo)
 
 # Scripts every page loads, in order (plain scripts, no modules, so file:// works)
-CORE_JS = ["core.js", "store.js", "services.js", "certs.js", "engine.js", "gsearch.js", "shell.js"]
+CORE_JS = ["core.js", "store.js", "services.js", "certs.js", "engine.js", "sound.js", "gsearch.js", "shell.js"]
 
 REPORT = {"missing_strings": set(), "fallback_content": []}
 INDEX = {}   # path index inlined on every page as #ac-index (set by build.py per locale)

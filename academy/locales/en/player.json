@@ -4,6 +4,8 @@
   "player.kicker": "Chapter {ch} · Lesson {n} of {total}",
   "player.close": "Close the lesson and go back to the chapter",
   "player.progress": "Lesson progress",
+  "player.sound.mute": "Mute sound",
+  "player.sound.unmute": "Turn sound on",
   "player.streak": "day streak",
   "player.backChapter": "Back to chapter",
   "player.cta.check": "Check",

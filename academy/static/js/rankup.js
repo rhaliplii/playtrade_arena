@@ -43,6 +43,7 @@
 
   /** Rank-up overlay (canvas Rank-Up / Rank-Up-Desktop). */
   AC.rankUp = function (res, onDone) {
+    AC.sound.play("rankup");
     var ranks = AC.progress.RANKS.map(function (r) { return r.id; });
     var now = res.rankUp, prev = ranks[Math.max(0, ranks.indexOf(now) - 1)], lv = res.level || {};
     var name = AC.t("rank." + now), line = AC.t("player.rank.line", { n: lv.level || 1, xp: AC.fmt.num(res.totalXp || 0) });

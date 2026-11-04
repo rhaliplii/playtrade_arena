@@ -155,6 +155,8 @@
         ["call", "exercise", "check"].slice(0, +param("right")).forEach(function (s) { AC.progress.answer(L.id, s, true); });
       }
       var res = AC.progress.completeLesson(L.id, { chapter: CH.id, keep: card.lines });
+      AC.sound.play(res.rankUp ? "" : "done");
+      if (res.goalMet && !res.rankUp) setTimeout(function () { AC.sound.play("goal"); }, 450);
       var guest = AC.auth.isGuest(), XP = AC.progress.XP;
       var right = res.firstTryRight || 0, xp = res.xp || 0;
       // every row comes from the engine result and the rows add up to res.xp: finishing + first tries, and whatever

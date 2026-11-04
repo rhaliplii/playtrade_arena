@@ -188,6 +188,7 @@
       cta({ label: first[0], arrow: ok && !!((D.next && D.next.available) || D.last) }, typeof first[1] === "string" ? function () { F.go(first[1]); } : first[1]);
       btns.slice(1).forEach(function (b) { F.extra.appendChild(typeof b[1] === "string" ? AC.cards.ghost(b[0], b[1]) : AC.cards.ghost(b[0], null, b[1])); });
       AC.countUp(AC.$("[data-xp]", F.main), res.xp || 0, function (v) { return AC.t("cards.sheet.xp", { n: v }); });
+      if (!(ok && res.rankUp)) AC.sound.play(ok ? "pass" : "done");
       if (ok && res.firstPass && AC.celebrate) AC.celebrate(AC.$(".ac-res__hero", F.main), { coins: res.coins ? 6 : 0 });
       if (ok && res.rankUp) AC.rankUp(res);
       focusTitle();

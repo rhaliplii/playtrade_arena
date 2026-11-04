@@ -844,6 +844,7 @@
       draw();
       window.scrollTo({ top: 0, behavior: AC.reducedMotion() ? "auto" : "smooth" });
       // +500 XP can cross a rank: show the rank-up (static/js/rankup.js) on top of the finale
+      if (res.ok && !res.rankUp) AC.sound.play("pass");
       if (res.ok && res.rankUp && typeof AC.rankUp === "function") AC.rankUp(res);
       // coin + confetti burst from the finale card (static/js/celebrate.js; nothing under reduced motion)
       if (res.ok && res.xp && typeof AC.celebrate === "function") AC.celebrate(AC.$(".me-finale", el) || el, { coins: 8, pieces: 36 });

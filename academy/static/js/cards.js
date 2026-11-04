@@ -211,6 +211,7 @@
       pick = p;
       var ok = pick === spec.answer;
       var res = (ctx.answer && ctx.answer(spec.slot, ok, spec.idea, pick)) || {};
+      AC.sound.play(ok ? "correct" : "wrong");
       revealOptions(ctl.el, spec.answer, pick, spec.dim ? true : false);
       ctl.el.classList.add("is-revealed", ok ? "is-right" : "is-wrong");
       ctl.answered = true;
@@ -286,6 +287,7 @@
   }
   function finishEx(ctl, card, ctx, ok, text) {
     var res = (ctx.answer && ctx.answer("exercise", ok, card.idea)) || {};
+    AC.sound.play(ok ? "correct" : "wrong");
     ctl.el.classList.add("is-revealed", ok ? "is-right" : "is-wrong");
     ctl.sheet = sheet({ ok: ok, text: text, work: card.work, xp: res.xp, gym: ctx.mode === "lesson" && !ok });
     ctl.answered = true;
@@ -701,6 +703,8 @@
   // ------------------------------------------------------------------ the full-screen frame (lesson, Challenge, Level Up, Gym)
   var CLOSE_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
   var BACK_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>';
+  var SND_ON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  var SND_OFF = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>';
   var FLAME = '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path class="ac-flame" d="M12 22c4 0 7-3 7-7 0-4-3-6-4-10-2 2-3 4-3 6-1-1-2-2-2-4-2 2-5 5-5 8 0 4 3 7 7 7z"/></svg>';
   var ARROW = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   var POSES = ["thumbs", "worried", "star", "celebrate", "think"];   // feedback sheet, completion and result screens
@@ -722,6 +726,7 @@
         (o.segments ? '<div class="ac-pl__prog" role="progressbar" aria-label="' + esc(AC.t("player.progress")) + '" aria-valuemin="0" aria-valuemax="' + o.segments + '">' + segs + "</div>" : (o.heading ? "" : '<span class="ac-pl__spacer"></span>')) +
         (o.aside != null ? '<span class="ac-pl__aside" data-aside>' + esc(o.aside) + "</span>" : "") +
         (o.count ? '<span class="ac-pl__count ac-num" data-count></span>' : "") +
+        '<button type="button" class="ac-iconbtn ac-pl__snd" data-snd aria-pressed="false"></button>' +
         (o.streak ? '<span class="ac-pl__streak" title="' + esc(AC.t("player.streak")) + '">' + FLAME + '<b data-streak class="ac-num"></b><span class="ac-visually-hidden"> ' + esc(AC.t("player.streak")) + "</span></span>" : "") +
       "</header>" +
       '<div class="ac-pl__stage"><div class="ac-pl__grid"><div class="ac-pl__main"></div><aside class="ac-pl__side" hidden></aside></div></div>' +
@@ -731,6 +736,17 @@
       cta: AC.$(".ac-pl__cta", el), stage: AC.$(".ac-pl__stage", el), grid: AC.$(".ac-pl__grid", el), foot: AC.$(".ac-pl__foot", el),
       isDesktop: function () { return mq.matches; },
     };
+    // the speaker button: sound on / off, saved with the learner's settings
+    var snd = AC.$("[data-snd]", el);
+    function sndSync() {
+      var on = AC.sound.enabled();
+      snd.innerHTML = on ? SND_ON : SND_OFF;
+      snd.setAttribute("aria-pressed", on ? "false" : "true");
+      snd.setAttribute("aria-label", AC.t(on ? "player.sound.mute" : "player.sound.unmute"));
+      snd.title = AC.t(on ? "player.sound.mute" : "player.sound.unmute");
+    }
+    snd.addEventListener("click", function () { AC.sound.set(!AC.sound.enabled()); sndSync(); });
+    sndSync();
     f.streak = function () { var s = AC.$("[data-streak]", el); if (s) s.textContent = AC.fmt.num(AC.progress.summary().streak); };
     f.setProgress = function (i, done) {
       AC.$$(".ac-pl__prog span", el).forEach(function (s, k) {
