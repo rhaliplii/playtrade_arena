@@ -326,6 +326,17 @@
           "type": "number",
           "description": "volume panel height at width 330 (default 34)"
         },
+        "asLine": {
+          "type": "boolean",
+          "description": "draw the price as a line of closes instead of candles"
+        },
+        "lineTone": {
+          "type": "string"
+        },
+        "volTone": {
+          "type": "string",
+          "description": "one tone for every volume bar (default: the candle's colour)"
+        },
         "volMax": {
           "type": "number",
           "description": "fixed top of the volume scale, so two charts side by side share one scale"
@@ -343,6 +354,10 @@
             },
             "tone": {
               "type": "string"
+            },
+            "dim": {
+              "type": "boolean",
+              "description": "false keeps the other bars in their colour (default: grey)"
             }
           },
           "description": "one volume bar called out in a tone with a tag above it; the other bars turn grey"

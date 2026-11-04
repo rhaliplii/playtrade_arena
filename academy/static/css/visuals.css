@@ -455,6 +455,7 @@ html.ac-reduce-motion .ac-v__layer { transition: none; }
 .ac-v__tline.is-dashed { stroke-dasharray: 5 4; }
 .ac-v__ring { fill: none; stroke: var(--tone); stroke-width: 2; }
 .ac-v__ovl, .ac-v__iline, .ac-v__sline { fill: none; stroke: var(--tone); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.ac-v__pline { stroke-width: 2.5; }
 .ac-v__ovl.is-dashed, .ac-v__sline.is-dashed { stroke-dasharray: 5 4; }
 .ac-v__iline { stroke-width: 1.6; }
 .ac-v__zz { fill: none; stroke: var(--tone); stroke-width: 2; stroke-linejoin: round; opacity: .9; }
