@@ -28,24 +28,24 @@
        84
       ],
       [
-       5,
+       10,
        100
       ],
       [
-       9,
+       18,
        90
       ],
       [
-       13,
+       26,
        100
       ],
       [
-       16,
+       32,
        95
       ]
      ],
      "seed": 11,
-     "height": 130,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -57,13 +57,13 @@
      ],
      "swings": [
       {
-       "i": 5,
+       "i": 10,
        "price": 100,
        "label": "$100",
        "tone": "down"
       },
       {
-       "i": 13,
+       "i": 26,
        "price": 100,
        "label": "$100",
        "tone": "down"
@@ -71,14 +71,17 @@
      ],
      "marks": [
       {
-       "i": 16,
+       "i": 32,
        "price": 95,
        "label": "now $95",
        "tone": "blue",
        "pos": "below"
       }
      ],
-     "label": "Two peaks at $100 with a $90 middle low; price now $95"
+     "label": "Two peaks at $100 with a $90 middle low; price now $95",
+     "n": 33,
+     "noise": 0.6,
+     "wick": 0.8
     }
    },
    "options": [
@@ -197,32 +200,32 @@
        58
       ],
       [
-       5,
+       10,
        50
       ],
       [
-       9,
+       18,
        56
       ],
       [
-       13,
+       26,
        50.2
       ],
       [
-       17,
+       34,
        55
       ],
       [
-       19,
+       38,
        57
       ],
       [
-       22,
+       44,
        61
       ]
      ],
      "seed": 14,
-     "height": 140,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -239,14 +242,14 @@
      "explore": "play",
      "swings": [
       {
-       "i": 5,
+       "i": 10,
        "price": 50,
        "label": "$50",
        "tone": "up",
        "pos": "below"
       },
       {
-       "i": 13,
+       "i": 26,
        "price": 50.2,
        "label": "$50",
        "tone": "up",
@@ -255,17 +258,20 @@
      ],
      "marks": [
       {
-       "i": 13,
+       "i": 26,
        "price": 50.2,
        "tone": "up"
       },
       {
-       "i": 19,
+       "i": 38,
        "price": 57,
        "tone": "gold"
       }
      ],
-     "label": "A double bottom at $50 breaks above the $56 middle; the rough target is $62"
+     "label": "A double bottom at $50 breaks above the $56 middle; the rough target is $62",
+     "n": 45,
+     "noise": 0.6,
+     "wick": 0.8
     }
    },
    "foot": "A rough guide: the height of the pattern added to the break. $56 − $50 = $6, so about $62. A guide, never a promise.",
@@ -294,28 +300,28 @@
        43
       ],
       [
-       4,
+       8,
        52
       ],
       [
-       7,
+       14,
        47.3
       ],
       [
-       10,
+       20,
        51.8
       ],
       [
-       13,
+       26,
        47.4
       ],
       [
-       17,
+       34,
        54
       ]
      ],
      "seed": 21,
-     "height": 110,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -324,7 +330,10 @@
        "price": 47,
        "tone": "gold"
       }
-     ]
+     ],
+     "n": 35,
+     "noise": 0.6,
+     "wick": 0.8
     }
    },
    "reality": "Many [[double-top|double tops]] never break the middle low. Some keep ranging. Some break out above the peaks.",
@@ -347,48 +356,51 @@
        35
       ],
       [
-       4,
+       8,
        30
       ],
       [
-       8,
+       16,
        34
       ],
       [
-       12,
+       24,
        30.5
       ],
       [
-       16,
+       32,
        32.6
       ]
      ],
      "seed": 18,
-     "height": 130,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
      "swings": [
       {
-       "i": 4,
+       "i": 8,
        "price": 30,
        "label": "$30",
        "tone": "up"
       },
       {
-       "i": 8,
+       "i": 16,
        "price": 34,
        "label": "$34",
        "tone": "gold"
       },
       {
-       "i": 12,
+       "i": 24,
        "price": 30.5,
        "label": "$30.50",
        "tone": "up"
       }
      ],
-     "label": "Lows at $30 and $30.50 with a middle high at $34"
+     "label": "Lows at $30 and $30.50 with a middle high at $34",
+     "n": 33,
+     "noise": 0.6,
+     "wick": 0.8
     }
    },
    "options": [

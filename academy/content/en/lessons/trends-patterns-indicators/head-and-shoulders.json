@@ -158,32 +158,32 @@
          40
         ],
         [
-         4,
+         8,
          50
         ],
         [
-         6,
+         12,
          46
         ],
         [
-         10,
+         20,
          56
         ],
         [
-         13,
+         26,
          46.2
         ],
         [
-         16,
+         32,
          51
         ],
         [
-         19,
+         38,
          45
         ]
        ],
        "seed": 15,
-       "height": 140,
+       "height": 170,
        "axis": false,
        "lastTag": false,
        "ticks": 0,
@@ -195,22 +195,28 @@
        ],
        "swings": [
         {
-         "i": 4,
+         "i": 8,
          "price": 50,
-         "label": "left"
+         "label": "left",
+         "pos": "above"
         },
         {
-         "i": 10,
+         "i": 20,
          "price": 56,
-         "label": "head"
+         "label": "head",
+         "pos": "above"
         },
         {
-         "i": 16,
+         "i": 32,
          "price": 51,
-         "label": "right"
+         "label": "right",
+         "pos": "above"
         }
        ],
-       "label": "Left shoulder, higher head, lower right shoulder, and the neckline under them"
+       "label": "Left shoulder, higher head, lower right shoulder, and the neckline under them",
+       "n": 39,
+       "noise": 0.6,
+       "wick": 0.8
       }
      }
     },
@@ -241,40 +247,40 @@
        40
       ],
       [
-       4,
+       8,
        50
       ],
       [
-       6,
+       12,
        46
       ],
       [
-       10,
+       20,
        56
       ],
       [
-       13,
+       26,
        46.2
       ],
       [
-       16,
+       32,
        51
       ],
       [
-       19,
+       38,
        44.8
       ],
       [
-       21,
+       42,
        45.9
       ],
       [
-       24,
+       48,
        42.5
       ]
      ],
      "seed": 16,
-     "height": 140,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -287,21 +293,24 @@
      "explore": "play",
      "marks": [
       {
-       "i": 19,
+       "i": 38,
        "price": 44.8,
        "label": "break",
        "tone": "down",
        "pos": "below"
       },
       {
-       "i": 21,
+       "i": 42,
        "price": 45.9,
        "label": "retest",
        "tone": "gold",
        "pos": "above"
       }
      ],
-     "label": "Price closes below the neckline, climbs back to test it from below, then falls"
+     "label": "Price closes below the neckline, climbs back to test it from below, then falls",
+     "n": 49,
+     "noise": 0.6,
+     "wick": 0.8
     }
    },
    "foot": "Old floor, new ceiling: the same idea as [[support|support]] turning into [[resistance|resistance]].",
@@ -328,36 +337,36 @@
        40
       ],
       [
-       4,
+       8,
        48
       ],
       [
-       6,
+       12,
        44.6
       ],
       [
-       10,
+       20,
        52
       ],
       [
-       13,
+       26,
        44.5
       ],
       [
-       16,
+       32,
        48.5
       ],
       [
-       18,
+       36,
        45.2
       ],
       [
-       22,
+       44,
        54
       ]
      ],
      "seed": 19,
-     "height": 130,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -367,7 +376,10 @@
        "tone": "gold"
       }
      ],
-     "label": "A head and shoulders shape that never breaks the neckline and rises instead"
+     "label": "A head and shoulders shape that never breaks the neckline and rises instead",
+     "n": 45,
+     "noise": 0.6,
+     "wick": 0.8
     }
    },
    "rule": "wait for a close below the neckline, and always use a stop."

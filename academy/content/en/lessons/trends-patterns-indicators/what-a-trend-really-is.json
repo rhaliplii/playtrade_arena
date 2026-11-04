@@ -21,69 +21,72 @@
        42
       ],
       [
-       2,
+       4,
        40
       ],
       [
-       5,
+       10,
        45
       ],
       [
-       8,
+       16,
        43
       ],
       [
-       11,
+       22,
        48
       ],
       [
-       14,
+       28,
        46
       ],
       [
-       17,
+       34,
        51
       ]
      ],
      "seed": 3,
-     "height": 130,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
      "zigzag": "blue",
      "swings": [
       {
-       "i": 2,
+       "i": 4,
        "price": 40,
        "label": "$40"
       },
       {
-       "i": 5,
+       "i": 10,
        "price": 45,
        "label": "$45"
       },
       {
-       "i": 8,
+       "i": 16,
        "price": 43,
        "label": "$43"
       },
       {
-       "i": 11,
+       "i": 22,
        "price": 48,
        "label": "$48"
       },
       {
-       "i": 14,
+       "i": 28,
        "price": 46,
        "label": "$46"
       },
       {
-       "i": 17,
+       "i": 34,
        "price": 51,
        "label": "$51"
       }
      ],
-     "label": "Lows at $40, $43, $46 and highs at $45, $48, $51: each one higher than the last"
+     "label": "Lows at $40, $43, $46 and highs at $45, $48, $51: each one higher than the last",
+     "n": 35,
+     "noise": 0.6,
+     "wick": 0.8
     }
    },
    "options": [
@@ -231,40 +234,40 @@
        44
       ],
       [
-       3,
+       6,
        47
       ],
       [
-       5,
+       10,
        45
       ],
       [
-       8,
+       16,
        50
       ],
       [
-       10,
+       20,
        48
       ],
       [
-       13,
+       26,
        53
       ],
       [
-       15,
+       30,
        49
       ],
       [
-       17,
+       34,
        52
       ],
       [
-       19,
+       38,
        47.5
       ]
      ],
      "seed": 6,
-     "height": 150,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -277,55 +280,58 @@
      "zigzag": "blue",
      "swings": [
       {
-       "i": 3,
+       "i": 6,
        "price": 47,
        "label": "H",
        "tone": "up"
       },
       {
-       "i": 5,
+       "i": 10,
        "price": 45,
        "label": "HL",
        "tone": "up"
       },
       {
-       "i": 8,
+       "i": 16,
        "price": 50,
        "label": "HH",
        "tone": "up"
       },
       {
-       "i": 10,
+       "i": 20,
        "price": 48,
        "label": "HL",
        "tone": "up"
       },
       {
-       "i": 13,
+       "i": 26,
        "price": 53,
        "label": "HH",
        "tone": "up"
       },
       {
-       "i": 15,
+       "i": 30,
        "price": 49,
        "label": "HL",
        "tone": "up"
       },
       {
-       "i": 17,
+       "i": 34,
        "price": 52,
        "label": "LH",
        "tone": "down"
       },
       {
-       "i": 19,
+       "i": 38,
        "price": 47.5,
        "label": "LL",
        "tone": "down"
       }
      ],
-     "label": "Higher highs and higher lows, then a lower high at $52 and a lower low under $49"
+     "label": "Higher highs and higher lows, then a lower high at $52 and a lower low under $49",
+     "n": 39,
+     "noise": 0.6,
+     "wick": 0.8
     }
    },
    "foot": "First a {down}lower high{/down} at $52, then a {down}lower low{/down} under $49. The uptrend is broken. That’s a warning, not a promise of a fall.",
@@ -347,69 +353,72 @@
        77
       ],
       [
-       2,
+       4,
        80
       ],
       [
-       5,
+       10,
        72
       ],
       [
-       8,
+       16,
        76
       ],
       [
-       11,
+       22,
        68
       ],
       [
-       14,
+       28,
        71
       ],
       [
-       17,
+       34,
        63
       ]
      ],
      "seed": 5,
-     "height": 130,
+     "height": 170,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
      "zigzag": "blue",
      "swings": [
       {
-       "i": 2,
+       "i": 4,
        "price": 80,
        "label": "$80"
       },
       {
-       "i": 5,
+       "i": 10,
        "price": 72,
        "label": "$72"
       },
       {
-       "i": 8,
+       "i": 16,
        "price": 76,
        "label": "$76"
       },
       {
-       "i": 11,
+       "i": 22,
        "price": 68,
        "label": "$68"
       },
       {
-       "i": 14,
+       "i": 28,
        "price": 71,
        "label": "$71"
       },
       {
-       "i": 17,
+       "i": 34,
        "price": 63,
        "label": "$63"
       }
      ],
-     "label": "Highs at $80, $76, $71 and lows at $72, $68, $63"
+     "label": "Highs at $80, $76, $71 and lows at $72, $68, $63",
+     "n": 35,
+     "noise": 0.6,
+     "wick": 0.8
     }
    },
    "options": [
