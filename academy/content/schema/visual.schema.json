@@ -1007,6 +1007,15 @@
               },
               "result": {
                 "type": "string"
+              },
+              "arrow": {
+                "enum": [
+                  "up",
+                  "down"
+                ]
+              },
+              "arrowTone": {
+                "$ref": "#/$defs/tone"
               }
             }
           }

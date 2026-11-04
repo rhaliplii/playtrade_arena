@@ -209,7 +209,8 @@
           "value": "$90"
          }
         ],
-        "result": "+$1,000 on 100"
+        "result": "+$1,000 on 100",
+        "arrow": "up"
        },
        {
         "title": "SHORT",
@@ -224,7 +225,8 @@
           "value": "$70"
          }
         ],
-        "result": "+$1,000 on 100"
+        "result": "+$1,000 on 100",
+        "arrow": "down"
        }
       ]
      },

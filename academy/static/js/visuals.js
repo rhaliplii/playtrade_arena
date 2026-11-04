@@ -671,6 +671,18 @@
   };
   R.columns = function (v) {
     return '<div class="ac-v__cols ac-v__cols--' + v.cols.length + '">' + v.cols.map(function (c) {
+      // arrow: "up" | "down" (design P1-Ch02 L2 long / short): the two rows become an arrow from step 1 to step 2
+      if (c.arrow && c.rows.length === 2) {
+        var up = c.arrow === "up", a = c.rows[0], b = c.rows[1], id = "acAr" + (++uid);
+        var x1 = 36, x2 = 132, y1 = up ? 84 : 30, y2 = up ? 30 : 84;
+        var svg = '<svg class="ac-v__colarrow" viewBox="0 0 168 112" role="img" aria-label="' + esc(a.label + " " + a.value + ", then " + b.label + " " + b.value) + '">' +
+          '<defs><marker id="' + id + '" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" class="' + tone(c.arrowTone || c.tone || "up") + ' ac-v__fill"/></marker></defs>' +
+          '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" class="' + tone(c.arrowTone || c.tone || "up") + ' ac-v__stroke" stroke-width="3" stroke-linecap="round" marker-end="url(#' + id + ')"/>' +
+          T(up ? 8 : 8, up ? 104 : 16, a.label + " " + a.value, { fs: 11.5, w: 700, cls: "ac-v__t--sub" }) +
+          T(160, up ? 16 : 104, b.label + " " + b.value, { fs: 11.5, w: 700, anchor: "end", cls: "ac-v__t--sub" }) + "</svg>";
+        return '<div class="ac-v__tile ac-v__coltile ' + tone(c.tone || "white") + '"><b class="ac-v__ink ac-v__coltitle">' + esc(c.title) + "</b>" + svg +
+          (c.result ? '<b class="ac-v__colres ac-v__ink">' + AC.rich(c.result) + "</b>" : "") + "</div>";
+      }
       return '<div class="ac-v__tile ' + tone(c.tone || "white") + '"><b class="ac-v__ink ac-v__coltitle">' + esc(c.title) + "</b>" + c.rows.map(function (r) {
         return '<div class="ac-v__row ac-v__row--sm"><span>' + esc(r.label) + '</span><b class="ac-num ' + (r.tone ? tone(r.tone) + " ac-v__ink" : "") + '">' + esc(r.value) + "</b></div>";
       }).join("") + (c.result ? '<b class="ac-v__colres ac-v__ink">' + AC.rich(c.result) + "</b>" : "") + "</div>";
