@@ -1,7 +1,7 @@
 {
  "id": "other-side",
  "chapter": "how-markets-work",
- "n": 2,
+ "n": 3,
  "title": "Who’s on the other side",
  "minutes": 4,
  "desc": "The players you trade against, and your real edge",
@@ -50,7 +50,7 @@
      "label": "Market makers",
      "sub": "Always quote a buy and a sell price.",
      "edge": "Earn the spread, see order flow.",
-     "move": "Pay as little spread as you can (Lesson 4)."
+     "move": "Pay as little spread as you can (Lesson 5)."
     },
     {
      "label": "Institutions (funds, banks)",
@@ -96,7 +96,8 @@
      "tip": "A small trader can sit in cash for a month. A **$10B fund usually can’t**: it’s paid to stay invested.",
      "tone": "plain"
     }
-   ]
+   ],
+   "rico": true
   },
   {
    "type": "exercise",

@@ -303,7 +303,8 @@
    ],
    "answer": 3,
    "idea": "size-beats-stop-on-gaps",
-   "work": null
+   "work": null,
+   "pose": "none"
   },
   {
    "type": "keep",

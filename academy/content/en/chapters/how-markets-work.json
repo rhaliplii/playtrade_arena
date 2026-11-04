@@ -5,10 +5,11 @@
  "title": "How Markets Actually Work",
  "short": "Markets",
  "promise": "Why the bull and the bear never stop fighting, who you trade against, and the toll on every trade.",
- "minutes": 16,
+ "minutes": 20,
  "pages": "6–11",
  "guest": true,
  "unlock": [
+  "Explain where a price comes from, and why it moves",
   "Tell a bull market from a bear market",
   "Know who is on the other side of your trade",
   "Rank the six asset classes by risk",
@@ -26,6 +27,7 @@
  ],
  "lessons": [
   "bulls-vs-bears",
+  "why-prices-move",
   "other-side",
   "asset-classes",
   "bid-ask-spread"
@@ -42,10 +44,88 @@
     ],
     "answer": 0,
     "why": "Use percent, not dollars: the $50 fall ÷ the $200 high = 25% down. That’s past the 20% line, so it’s a bear market. Time doesn’t decide it.",
-    "idea": "bear-market-20-percent"
+    "idea": "bear-market-20-percent",
+    "visual": {
+     "kind": "series",
+     "title": "Daily · 4 months",
+     "height": 118,
+     "series": [
+      {
+       "values": [
+        182.0,
+        183.1,
+        184.8,
+        188.3,
+        191.0,
+        191.7,
+        193.6,
+        197.3,
+        200.0,
+        198.8,
+        195.3,
+        192.2,
+        188.0,
+        188.0,
+        190.7,
+        190.7,
+        193.0,
+        187.3,
+        182.8,
+        179.0,
+        176.0,
+        178.9,
+        179.4,
+        180.3,
+        180.0,
+        177.1,
+        170.2,
+        166.5,
+        163.0,
+        164.8,
+        166.5,
+        168.3,
+        168.0,
+        165.2,
+        157.2,
+        155.0,
+        150.0
+       ],
+       "tone": "blue"
+      }
+     ],
+     "points": [
+      {
+       "i": 8,
+       "label": "high $200",
+       "tone": "gold",
+       "pos": "above",
+       "anchor": "middle"
+      },
+      {
+       "i": 36,
+       "label": "$150",
+       "tone": "down",
+       "pos": "below",
+       "anchor": "end"
+      }
+     ],
+     "label": "A stock falls from a high of $200 to $150 over four months"
+    }
    },
    {
     "lesson": 2,
+    "q": "A company reports record profits, and its stock jumps 8%. What best explains the jump?",
+    "options": [
+     "Record profits always push a stock up",
+     "The results beat what investors had expected",
+     "Market makers decided to raise the price"
+    ],
+    "answer": 1,
+    "why": "Prices move on surprises, not headlines. The stock rose because the results beat expectations. The same record could have fallen if investors had hoped for more.",
+    "idea": "expectations-move-prices"
+   },
+   {
+    "lesson": 3,
     "q": "Big news hits. Robots trade on it in 0.001 seconds. What’s your smartest move?",
     "options": [
      "Race to buy in the first second",
@@ -57,7 +137,7 @@
     "idea": "your-edge-patience"
    },
    {
-    "lesson": 3,
+    "lesson": 4,
     "q": "A friend wants his first investment to be steady and to pay him interest. Which class fits best?",
     "options": [
      "Bonds",
@@ -69,7 +149,7 @@
     "idea": "asset-class-risk-ladder"
    },
    {
-    "lesson": 4,
+    "lesson": 5,
     "q": "You want to put $1,000 into a new token. Bid $0.095, ask $0.105, and only a few thousand dollars of orders on each side. What do you do?",
     "options": [
      "The spread doesn’t matter if I hold for years",
@@ -78,7 +158,54 @@
     ],
     "answer": 1,
     "why": "You buy at $0.105 but can only sell at $0.095, so about $95 of your $1,000 is gone at once. Holding doesn’t avoid it, and few orders make the exit worse.",
-    "idea": "spread-round-trip-cost"
+    "idea": "spread-round-trip-cost",
+    "visual": {
+     "kind": "depth",
+     "title": "Order book · new token",
+     "aside": "$ of orders",
+     "max": 5000,
+     "label": "Order book: asks $0.105 to $0.115 with $600 to $1,200 each; bids $0.085 to $0.095 with $500 to $1,300 each",
+     "rows": [
+      {
+       "side": "ask",
+       "price": "$0.115",
+       "size": "$600",
+       "value": 600
+      },
+      {
+       "side": "ask",
+       "price": "$0.110",
+       "size": "$900",
+       "value": 900
+      },
+      {
+       "side": "ask",
+       "price": "$0.105",
+       "size": "$1,200",
+       "value": 1200,
+       "best": true
+      },
+      {
+       "side": "bid",
+       "price": "$0.095",
+       "size": "$1,300",
+       "value": 1300,
+       "best": true
+      },
+      {
+       "side": "bid",
+       "price": "$0.090",
+       "size": "$800",
+       "value": 800
+      },
+      {
+       "side": "bid",
+       "price": "$0.085",
+       "size": "$500",
+       "value": 500
+      }
+     ]
+    }
    }
   ]
  },
@@ -89,18 +216,23 @@
    "text": "A bear market is a fall of about 20% or more from a recent high. Use percent: fall ÷ high. A $100 stock that drops to $78 is down $22 ÷ $100 = 22%."
   },
   {
+   "idea": "expectations-move-prices",
+   "title": "Lesson 2 · Why prices move",
+   "text": "Prices move on surprises: results versus what people expected. A record that misses hopes still falls; a small win that beats them rises."
+  },
+  {
    "idea": "your-edge-patience",
-   "title": "Lesson 2 · Who’s on the other side",
+   "title": "Lesson 3 · Who’s on the other side",
    "text": "You can’t beat robots on speed or funds on research. Your edge is patience: let the rush pass and trade only your plan’s setups."
   },
   {
    "idea": "asset-class-risk-ladder",
-   "title": "Lesson 3 · The six asset classes and their risk",
+   "title": "Lesson 4 · The six asset classes and their risk",
    "text": "From lower to higher risk: bonds and broad index ETFs, then stocks, commodities and forex, then crypto. Bonds pay interest and swing the least."
   },
   {
    "idea": "spread-round-trip-cost",
-   "title": "Lesson 4 · Bid, ask and the spread",
+   "title": "Lesson 5 · Bid, ask and the spread",
    "text": "You buy at the ask and sell at the bid. The gap × shares is what a round trip costs: $0.10 × 100 = $10."
   }
  ],

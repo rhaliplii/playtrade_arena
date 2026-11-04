@@ -106,7 +106,7 @@
       F.placeSheet(ctl.sheet);
       F.setProgress(idx, true);
       if (!restored && ctl.snapshot) AC.progress.saveCard(L.id, idx, { answer: ctl.snapshot(), xp: (lastAnswer && lastAnswer.xp) || 0 });
-      if (!restored && !F.isDesktop()) setTimeout(function () { ctl && ctl.sheet && ctl.sheet.scrollIntoView({ block: "nearest", behavior: AC.reducedMotion() ? "auto" : "smooth" }); }, 40);
+      if (!restored) F.showAnswer();
     }
 
     // ---------------------------------------------------------------- first visit: Rico says hi (once per learner)

@@ -95,7 +95,7 @@
       onCta = function () {
         var r = ctl.primary();
         if (r === "next") { i++; return i < cards.length ? show() : finish(); }
-        if (ctl.sheet && !ctl.sheetPlaced) { ctl.sheetPlaced = true; F.placeSheet(ctl.sheet); F.setProgress(i, true); }
+        if (ctl.sheet && !ctl.sheetPlaced) { ctl.sheetPlaced = true; F.placeSheet(ctl.sheet); F.setProgress(i, true); F.showAnswer(); }
         var c2 = ctl.cta();
         if (ctl.answered) c2 = { label: i + 1 < cards.length ? AC.t("gym.session.next") : AC.t("gym.session.finish") };
         F.setCta(c2);

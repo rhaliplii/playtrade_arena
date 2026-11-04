@@ -214,7 +214,8 @@
    ],
    "answer": 1,
    "idea": "swap-every-night",
-   "work": "$1 × 30 nights = $30, taken from your account."
+   "work": "$1 × 30 nights = $30, taken from your account.",
+   "pose": "none"
   },
   {
    "type": "keep",

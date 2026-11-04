@@ -1089,7 +1089,8 @@
    ],
    "answer": 1,
    "idea": "limit-vs-stop",
-   "work": null
+   "work": null,
+   "pose": "none"
   },
   {
    "type": "keep",

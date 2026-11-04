@@ -261,7 +261,8 @@
      "tip": "Each sale can cost fees, and in some accounts taxes. Rebalancing too often eats returns.",
      "tone": "red"
     }
-   ]
+   ],
+   "rico": true
   },
   {
    "type": "exercise",

@@ -388,7 +388,8 @@
    ],
    "answer": 2,
    "idea": "short-unlimited-loss",
-   "work": null
+   "work": null,
+   "pose": "none"
   },
   {
    "type": "keep",

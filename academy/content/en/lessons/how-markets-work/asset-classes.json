@@ -1,9 +1,9 @@
 {
  "id": "asset-classes",
  "chapter": "how-markets-work",
- "n": 3,
+ "n": 4,
  "title": "The six asset classes and their risk",
- "minutes": 4,
+ "minutes": 5,
  "desc": "What you can trade, from lower to higher risk",
  "cards": [
   {
@@ -14,262 +14,82 @@
    "visual": {
     "kind": "lines",
     "layout": "pair",
-    "lo": 75,
-    "hi": 114,
-    "mid": 100,
+    "lo": 0,
+    "hi": 80,
+    "mid": 40,
     "items": [
      {
       "label": "A · Broad index ETF",
       "sub": "Moves about 1% on a normal day",
       "tone": "sky",
-      "ohlc": [
-       [
-        100.0,
-        100.9,
-        99.74,
-        100.8
-       ],
-       [
-        100.8,
-        101.04,
-        99.9,
-        100.1
-       ],
-       [
-        100.1,
-        101.12,
-        99.81,
-        101.0
-       ],
-       [
-        101.0,
-        101.29,
-        100.1,
-        100.3
-       ],
-       [
-        100.3,
-        100.5,
-        99.38,
-        99.5
-       ],
-       [
-        99.5,
-        100.45,
-        99.34,
-        100.4
-       ],
-       [
-        100.4,
-        101.43,
-        100.33,
-        101.2
-       ],
-       [
-        101.2,
-        101.49,
-        100.48,
-        100.6
-       ],
-       [
-        100.6,
-        100.72,
-        99.73,
-        99.8
-       ],
-       [
-        99.8,
-        101.05,
-        99.53,
-        100.7
-       ],
-       [
-        100.7,
-        101.81,
-        100.46,
-        101.5
-       ],
-       [
-        101.5,
-        101.56,
-        100.75,
-        100.9
-       ],
-       [
-        100.9,
-        101.1,
-        100.11,
-        100.2
-       ],
-       [
-        100.2,
-        101.44,
-        100.04,
-        101.1
-       ],
-       [
-        101.1,
-        101.2,
-        100.2,
-        100.5
-       ],
-       [
-        100.5,
-        101.49,
-        100.17,
-        101.4
-       ],
-       [
-        101.4,
-        101.59,
-        100.58,
-        100.8
-       ],
-       [
-        100.8,
-        101.75,
-        100.6,
-        101.6
-       ],
-       [
-        101.6,
-        101.71,
-        100.94,
-        101.0
-       ],
-       [
-        101.0,
-        101.61,
-        100.88,
-        101.3
-       ]
+      "points": [
+       38,
+       36,
+       38,
+       40,
+       38,
+       38,
+       37,
+       38,
+       37,
+       37,
+       36,
+       38,
+       38,
+       39,
+       38,
+       36,
+       34,
+       34,
+       34,
+       35,
+       37,
+       39,
+       39,
+       39,
+       40,
+       38,
+       38,
+       38,
+       39,
+       41
       ]
      },
      {
       "label": "B · New crypto coin",
       "sub": "Can swing 10% in a day",
       "tone": "gold",
-      "ohlc": [
-       [
-        100.0,
-        111.9,
-        99.2,
-        109.0
-       ],
-       [
-        109.0,
-        109.5,
-        94.5,
-        97.5
-       ],
-       [
-        97.5,
-        106.9,
-        96.7,
-        106.0
-       ],
-       [
-        106.0,
-        108.1,
-        92.7,
-        94.0
-       ],
-       [
-        94.0,
-        96.7,
-        83.5,
-        84.5
-       ],
-       [
-        84.5,
-        95.9,
-        83.2,
-        93.0
-       ],
-       [
-        93.0,
-        103.5,
-        90.2,
-        101.5
-       ],
-       [
-        101.5,
-        103.7,
-        88.2,
-        91.0
-       ],
-       [
-        91.0,
-        101.8,
-        90.4,
-        99.5
-       ],
-       [
-        99.5,
-        112.7,
-        97.5,
-        110.0
-       ],
-       [
-        110.0,
-        111.2,
-        97.1,
-        98.0
-       ],
-       [
-        98.0,
-        100.6,
-        86.1,
-        88.0
-       ],
-       [
-        88.0,
-        99.3,
-        85.6,
-        96.5
-       ],
-       [
-        96.5,
-        99.4,
-        84.1,
-        86.0
-       ],
-       [
-        86.0,
-        88.2,
-        77.0,
-        79.0
-       ],
-       [
-        79.0,
-        88.1,
-        76.1,
-        87.0
-       ],
-       [
-        87.0,
-        96.7,
-        84.6,
-        95.5
-       ],
-       [
-        95.5,
-        98.4,
-        83.4,
-        85.5
-       ],
-       [
-        85.5,
-        93.8,
-        82.9,
-        93.0
-       ],
-       [
-        93.0,
-        95.2,
-        90.1,
-        91.0
-       ]
+      "points": [
+       37,
+       30,
+       22,
+       9,
+       8,
+       8,
+       21,
+       22,
+       10,
+       8,
+       8,
+       19,
+       20,
+       27,
+       26,
+       23,
+       37,
+       45,
+       51,
+       40,
+       32,
+       42,
+       33,
+       43,
+       40,
+       51,
+       65,
+       54,
+       62,
+       70
       ]
      }
     ]
@@ -306,30 +126,163 @@
       "items": [
        {
         "title": "Bonds",
-        "text": "A loan to a government or company. Pays interest."
+        "text": "A loan to a government or company. Pays interest.",
+        "icon": "bond",
+        "tone": "sky"
        },
        {
         "title": "Broad index ETFs",
-        "text": "A basket of many companies in one ticker. An ETF is only as calm as what it holds."
+        "text": "A basket of many companies in one ticker. An ETF is only as calm as what it holds.",
+        "icon": "basket",
+        "tone": "primary"
        },
        {
         "title": "Stocks",
-        "text": "A slice of one company."
+        "text": "A slice of one company.",
+        "icon": "stock",
+        "tone": "blue"
        },
        {
         "title": "Commodities",
-        "text": "Oil, gold, wheat, copper."
+        "text": "Oil, gold, wheat, copper.",
+        "icon": "commodity",
+        "tone": "amber"
        },
        {
         "title": "Forex",
-        "text": "One currency against another, like EUR/USD."
+        "text": "One currency against another, like EUR/USD.",
+        "icon": "forex",
+        "tone": "pro"
        },
        {
         "title": "Crypto",
-        "text": "Digital tokens like BTC and ETH. Trades 24/7."
+        "text": "Digital tokens like BTC and ETH. Trades 24/7.",
+        "icon": "crypto",
+        "tone": "gold"
        }
       ]
      }
+    }
+   ]
+  },
+  {
+   "type": "learn",
+   "title": "When can you trade it?",
+   "added": "Book p.9–10 (v72 “When markets are open”): same rows, hours and UTC axis as the book",
+   "text": "Markets follow the sun: as one city closes, another opens, so something is always trading somewhere.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "sessions",
+      "title": "The trading day around the world",
+      "zone": "UTC, winter",
+      "label": "Forex passes from Sydney (10pm to 7am UTC) to Tokyo (midnight to 9am) to London (8am to 5pm) to New York (1pm to 10pm). Busiest from 1pm to 5pm, when London and New York overlap. US stocks open 2:30pm to 9pm UTC, with pre-market from 9am and after-hours to 1am. Crypto never closes.",
+      "ticks": [
+       0,
+       6,
+       12,
+       18,
+       24
+      ],
+      "busy": {
+       "from": 13,
+       "to": 17,
+       "label": "Busiest",
+       "note": "London and New York both open: more traders, tighter spreads, bigger moves."
+      },
+      "rows": [
+       {
+        "label": "Sydney",
+        "tone": "sky",
+        "bands": [
+         {
+          "from": 0,
+          "to": 7
+         },
+         {
+          "from": 22,
+          "to": 24
+         }
+        ]
+       },
+       {
+        "label": "Tokyo",
+        "tone": "blue",
+        "bands": [
+         {
+          "from": 0,
+          "to": 9
+         }
+        ]
+       },
+       {
+        "label": "London",
+        "tone": "pro",
+        "bands": [
+         {
+          "from": 8,
+          "to": 17
+         }
+        ]
+       },
+       {
+        "label": "New York",
+        "tone": "up",
+        "bands": [
+         {
+          "from": 13,
+          "to": 22
+         }
+        ]
+       },
+       {
+        "label": "US stocks",
+        "tone": "coral",
+        "note": "open 9:30am–4pm New York time. Pre-market and after-hours (pale): fewer traders, wider spreads.",
+        "bands": [
+         {
+          "from": 0,
+          "to": 1,
+          "soft": true
+         },
+         {
+          "from": 9,
+          "to": 14.5,
+          "soft": true
+         },
+         {
+          "from": 14.5,
+          "to": 21,
+          "text": "Open"
+         },
+         {
+          "from": 21,
+          "to": 24,
+          "soft": true
+         }
+        ]
+       },
+       {
+        "label": "Crypto",
+        "tone": "gold",
+        "note": "never closes, weekends included.",
+        "bands": [
+         {
+          "from": 0,
+          "to": 24,
+          "text": "24/7"
+         }
+        ]
+       }
+      ],
+      "foot": "Forex passes from Sydney to Tokyo to London to New York, 24 hours on weekdays. Add 1 hour in summer. Times are approximate."
+     },
+     "side": true
+    },
+    {
+     "tip": "Trade when the market is **busy**: more traders, tighter spreads.",
+     "side": true,
+     "tone": "plain"
     }
    ]
   },

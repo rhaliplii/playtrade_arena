@@ -365,8 +365,8 @@ button.ac-v__bcol.is-seen .ac-v__bplus { display: none; }
 
 /* last trade handshake */
 .ac-v__shake { flex-direction: row; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 16px; }
-.ac-v__shk { display: grid; place-items: center; flex: none; width: 30px; height: 30px; border-radius: 50%; background: color-mix(in srgb, var(--tone) 16%, transparent); color: var(--tone-ink); font: 800 12px var(--ac-font); }
-.ac-v__shline { flex: 1; min-width: 12px; height: 2px; background: linear-gradient(90deg, var(--ac-primary-ink), var(--ac-danger-ink)); }
+.ac-v__shk { flex: none; padding: 5px 10px; border-radius: 999px; background: color-mix(in srgb, var(--tone) 14%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 40%, transparent); color: var(--tone-ink); font: 700 12.5px var(--ac-font); }
+.ac-v__shline { flex: 1; min-width: 10px; height: 2px; border-radius: 2px; background: var(--ac-line-strong); }
 .ac-v__shake b { font: 800 15px var(--ac-font); text-align: center; }
 
 /* toned receipt (Bear Trap "The working") */
@@ -715,3 +715,87 @@ button.ac-v__trw.is-open { box-shadow: inset 3px 0 0 var(--ac-primary-ink); back
 /* a big candle in a question (Quick check, Try it, Call) scales with the screen height, so the answers stay in view */
 .ac-c__visual--q .ac-v__box--candle .ac-v__svg { width: auto; max-width: 100%; max-height: max(96px, 17vh); margin: 0 auto; display: block; }
 .ac-nb { white-space: nowrap; }   /* a glossary term and the punctuation after it (visuals.js wraps AC.rich) */
+
+/* line shapes (design P1-Ch04-L1 / L4): a tile per shape, a 2.6px line, its name in the line's colour */
+.ac-v__lshapes { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 8px; }
+.ac-v__lshape { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; padding: 10px 6px 12px; border-radius: 16px; background: var(--ac-surface); box-shadow: inset 0 0 0 1px var(--ac-line); text-align: center; }
+.ac-v__lshape svg { display: block; width: 100%; height: auto; }
+.ac-v__lsline { fill: none; stroke: var(--tone); stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
+.ac-v__lshape b { font: 800 13.5px var(--ac-font); }
+.ac-v__lshape > span { font: 600 11.5px/1.35 var(--ac-font); color: var(--ac-text-muted); }
+
+/* line area charts: a gradient under the line (tone → transparent); the drawn drop (dashed start level, bracket, label) */
+.ac-v__gstop { stop-color: var(--tone); }
+.ac-v__ldash { stroke: var(--ac-text-faint); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.ac-v__lbracket { fill: none; stroke: var(--tone); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ac-v__t--tone { fill: var(--tone-ink); }
+.ac-v__line .ac-v__lhead > b:first-child { font: 800 15px/1.3 var(--ac-font); color: var(--ac-text); }
+
+/* tiles as cards (asset classes): the icon in a toned square, "Tap to see" until opened; open = tinted, toned edge */
+.ac-v__tiles--cards .ac-v__tbtn { position: relative; gap: 8px; padding: 14px; border-radius: 16px; overflow: hidden; background: radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--tone) 10%, transparent), transparent 60%), var(--ac-surface); transition: background-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+.ac-v__tiles--cards .ac-v__icon { box-sizing: content-box; width: 22px; height: 22px; padding: 8px; border-radius: 12px; background: color-mix(in srgb, var(--tone) 16%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 35%, transparent); }
+.ac-v__tiles--cards .ac-v__ttitle { font: 800 15px/1.25 var(--ac-font); }
+.ac-v__tiles--cards .ac-v__tick { position: absolute; top: 12px; right: 12px; }
+.ac-v__thint { font: 600 12px var(--ac-font); color: var(--ac-text-faint); }
+.ac-v__tiles--cards .ac-v__tbtn.is-open .ac-v__thint { display: none; }
+.ac-v__tiles--cards .ac-v__tbtn.is-open { background: linear-gradient(160deg, color-mix(in srgb, var(--tone) 18%, transparent), color-mix(in srgb, var(--tone) 4%, transparent) 70%), var(--ac-surface); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--tone) 60%, transparent); }
+.ac-v__tiles--cards .ac-v__tbtn.is-seen:not(.is-open) { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 35%, transparent); }
+.ac-v__tiles--cards .ac-v__ttext { font: 500 13px/1.45 var(--ac-font); color: var(--ac-text-soft); }
+@media (prefers-reduced-motion: no-preference) { html:not(.ac-reduce-motion) .ac-v__tiles--cards .ac-v__tbtn:hover { transform: translateY(-1px); } }
+
+/* depth (compact order book, design P1-Ch01 Challenge Q4) */
+.ac-v__depthbox { gap: 4px; padding: 12px 14px; }
+.ac-v__dhead { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.ac-v__dhead b { font: 800 13px var(--ac-font); color: var(--ac-text); }
+.ac-v__dhead span { font: 700 12px var(--ac-font); color: var(--ac-text-muted); }
+.ac-v__drow { display: grid; grid-template-columns: 56px 46px minmax(0, 1fr) 30px; align-items: center; gap: 8px; min-height: 20px; }
+.ac-v__dprice { font: 800 12px var(--ac-font); text-align: right; }
+.ac-v__dsize { font: 700 11.5px var(--ac-font); color: var(--ac-text-muted); text-align: right; }
+.ac-v__dbar { display: block; height: 10px; border-radius: 2px; background: var(--ac-surface-raised); overflow: hidden; }
+.ac-v__dbar i { display: block; height: 100%; border-radius: 2px; background: var(--tone); opacity: .8; }
+.ac-v__dside { font: 800 11.5px var(--ac-font); text-align: right; }
+.ac-v__dsep { display: block; height: 0; margin: 3px 0; border-top: 1px dashed var(--ac-line-strong); }
+
+/* sessions: one 24-hour day (book p.9). A label column, then the day as a track; the busy window and "now" overlay every row */
+.ac-v__sessions { gap: 6px; padding: 14px 14px 12px; }
+.ac-v__sgrid { --slab: 74px; position: relative; display: flex; flex-direction: column; gap: 10px; padding-top: 20px; }
+.ac-v__sover { position: absolute; top: 14px; bottom: 18px; left: calc(var(--slab) + 10px); right: 0; pointer-events: none; }
+.ac-v__sbusy { position: absolute; top: 0; bottom: 0; border-radius: 8px; background: color-mix(in srgb, var(--ac-primary-ink) 12%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ac-primary-ink) 30%, transparent); }
+.ac-v__snow { position: absolute; top: 4px; bottom: -2px; width: 0; border-left: 2px solid var(--ac-text); z-index: 2; }
+.ac-v__snow > span { position: absolute; bottom: 100%; left: 50%; transform: translate(-50%, -2px); padding: 1px 6px; border-radius: 999px; background: var(--ac-text); color: var(--ac-surface); font: 800 9.5px/1.4 var(--ac-font); letter-spacing: .04em; text-transform: uppercase; }
+.ac-v__srow { display: grid; grid-template-columns: var(--slab) minmax(0, 1fr); column-gap: 10px; row-gap: 4px; align-items: center; }
+.ac-v__slabel { display: flex; flex-direction: column; min-width: 0; }
+.ac-v__slabel b { font: 800 13px/1.2 var(--ac-font); color: var(--ac-text); }
+.ac-v__slabel span { font: 600 11px/1.3 var(--ac-font); color: var(--ac-text-muted); }
+.ac-v__strack { position: relative; height: 26px; border-radius: 8px; background: color-mix(in srgb, var(--ac-surface-raised) 70%, transparent); }
+.ac-v__sband { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px; background: var(--tone); }
+.ac-v__sband.is-soft { background: color-mix(in srgb, var(--tone) 32%, transparent); }
+.ac-v__sband i { font: 800 11px var(--ac-font); font-style: normal; white-space: nowrap; color: var(--ac-ink); }
+.ac-v__slist { display: flex; flex-direction: column; gap: 7px; margin: 6px 0 0; padding: 10px 0 0; border-top: 1px solid var(--ac-line); list-style: none; }
+.ac-v__slist li { display: flex; gap: 8px; align-items: flex-start; font: 500 12.5px/1.4 var(--ac-font); color: var(--ac-text-soft); }
+.ac-v__slist b { color: var(--ac-text); }
+.ac-v__skey { flex: none; width: 10px; height: 10px; margin-top: 3px; border-radius: 3px; background: var(--tone); }
+.ac-v__skey--busy { background: color-mix(in srgb, var(--ac-primary-ink) 22%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ac-primary-ink) 50%, transparent); }
+.ac-v__saxis { position: relative; height: 14px; margin-left: calc(var(--slab) + 10px); font: 600 10.5px var(--ac-font); color: var(--ac-text-faint); }
+.ac-v__saxis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.ac-v__saxis span:first-child { transform: none; }
+.ac-v__saxis span:last-child { transform: translateX(-100%); }
+.ac-v__sfoot { margin: 2px 0 0; font: 500 11px/1.4 var(--ac-font); color: var(--ac-text-faint); }
+:root[data-theme="light"] .ac-v__sband:not(.is-soft) i { color: var(--ac-white); }
+.ac-v__srow.is-slim .ac-v__strack { height: 20px; }
+.ac-v__sover { top: 0; }
+.ac-v__sbusy > span { position: absolute; top: 3px; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 800 10.5px var(--ac-font); color: var(--ac-primary-ink); }
+.ac-v__sgrid { gap: 8px; }
+
+/* crowd: buyers vs sellers at one price, as people */
+.ac-v__crowd { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: stretch; gap: 10px; padding: 14px; }
+.ac-v__cside { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-width: 0; padding: 12px 8px; border-radius: 14px; background: color-mix(in srgb, var(--tone) 10%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 30%, transparent); }
+.ac-v__chead { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ac-v__chead b { font: 800 26px/1 var(--ac-font); }
+.ac-v__chead span { font: 700 13px var(--ac-font); color: var(--ac-text); }
+.ac-v__cpeople { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; max-width: 120px; }
+.ac-v__cpeople svg { fill: currentColor; }
+.ac-v__ctag { font: 800 11px var(--ac-font); letter-spacing: .06em; text-transform: uppercase; }
+.ac-v__cmid { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-align: center; }
+.ac-v__cmid span { font: 700 11px/1.3 var(--ac-font); color: var(--ac-text-muted); }
+.ac-v__cmid b { font: 800 16px var(--ac-font); color: var(--ac-text); }

@@ -106,79 +106,61 @@
    "blocks": [
     {
      "visual": {
-      "kind": "chart-pair",
+      "kind": "lineshapes",
       "items": [
        {
         "label": "Double top",
         "sub": "Two tries at a high. Buyers failed twice.",
         "tone": "down",
-        "chart": {
-         "path": [
-          [
-           0,
-           10
-          ],
-          [
-           4,
-           18
-          ],
-          [
-           7,
-           14
-          ],
-          [
-           10,
-           18
-          ],
-          [
-           14,
-           11
-          ]
+        "path": [
+         [
+          0,
+          10
          ],
-         "seed": 3,
-         "height": 70,
-         "axis": false,
-         "lastTag": false,
-         "ticks": 0,
-         "noise": 0.3,
-         "label": "Double top: Two tries at a high. Buyers failed twice."
-        }
+         [
+          4,
+          18
+         ],
+         [
+          7,
+          14
+         ],
+         [
+          10,
+          18
+         ],
+         [
+          14,
+          11
+         ]
+        ]
        },
        {
         "label": "Double bottom",
         "sub": "Two tries at a low. Sellers failed twice.",
         "tone": "up",
-        "chart": {
-         "path": [
-          [
-           0,
-           18
-          ],
-          [
-           4,
-           10
-          ],
-          [
-           7,
-           14
-          ],
-          [
-           10,
-           10
-          ],
-          [
-           14,
-           17
-          ]
+        "path": [
+         [
+          0,
+          18
          ],
-         "seed": 5,
-         "height": 70,
-         "axis": false,
-         "lastTag": false,
-         "ticks": 0,
-         "noise": 0.3,
-         "label": "Double bottom: Two tries at a low. Sellers failed twice."
-        }
+         [
+          4,
+          10
+         ],
+         [
+          7,
+          14
+         ],
+         [
+          10,
+          10
+         ],
+         [
+          14,
+          17
+         ]
+        ]
        }
       ]
      }

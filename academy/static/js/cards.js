@@ -128,7 +128,7 @@
 
   // ------------------------------------------------------------------ feedback sheet
   /** {ok, text (rich), work, xp, gym, title, rico} → Element. Rico + "Good call" (+XP chip) / "Not quite".
-      rico: false when Rico already stands on the card (Rico's Call keeps him next to the question: one Rico a screen). */
+      rico: false for a box without Rico (every lesson feedback box has him: the design boards draw one there). */
   function sheet(o) {
     var ok = !!o.ok;
     var h = '<section class="ac-sheet ac-sheet--' + (ok ? "ok" : "miss") + (o.rico === false ? " ac-sheet--plain" : "") + '" role="status" aria-live="polite" tabindex="-1">' + (o.rico === false ? "" : rico(ok ? "thumbs" : "worried", "ac-sheet__rico " + (ok ? "ac-react--cheer" : "ac-react--wobble"))) +
@@ -248,16 +248,16 @@
     var head = callHead(card.pose || "point", title(card.title) + para(card.situation));
     return mcq(card, {
       eyebrow: label("call", card.name), tone: "gold", chip: chipFirstTry(ctx), head: head,
-      visual: card.visual ? AC.visual(card.visual) : "", keepVisual: keepVisual(card.visual),
+      visual: card.visual ? AC.visual(card.visual, { question: true }) : "", keepVisual: keepVisual(card.visual),
       options: card.options, answer: card.answer, work: card.work, slot: "call", idea: card.idea, ctaLabel: AC.t("player.cta.lock"), gym: ctx.mode === "lesson",
-      stepAside: true, sheetRico: false,   // boards: Rico stays next to the question, the feedback box has none
+      stepAside: true,   // the feedback box has its own Rico too (design board P1-Ch01-L1: pointing at the question, reacting in the feedback)
     }, ctx);
   }
   function check(card, ctx) {
-    var head = callHead(null, title(card.title) + para(card.q));   // no Rico on a Quick check: he shows in the feedback
+    var head = callHead(card.pose === "none" ? null : (card.pose || "detective"), title(card.title) + para(card.q));   // design boards: the detective next to the question (pose "none": a board without him), Rico again in the feedback
     return mcq(card, {
       eyebrow: label("check"), tone: "sky", chip: chipFirstTry(ctx), head: head,
-      visual: card.visual ? AC.visual(card.visual) : "", keepVisual: keepVisual(card.visual),
+      visual: card.visual ? AC.visual(card.visual, { question: true }) : "", keepVisual: keepVisual(card.visual),
       options: card.options, answer: card.answer, work: card.work, slot: "check", idea: card.idea, gym: ctx.mode === "lesson", stepAside: true,
     }, ctx);
   }
@@ -275,7 +275,7 @@
       var q = card.scale ? '<p class="ac-c__text" data-fill="' + esc(card.q || "") + '">' + AC.rich(fill(card.q, { n: AC.fmt.num(card.scale.value) })) + "</p>" : (card.q ? (card.blocks || card.scale ? para(card.q) : '<p class="ac-c__ask">' + AC.rich(card.q) + "</p>") : "");
       return mcq(card, {
         eyebrow: eb, tone: "primary", chip: chip, head: title(card.title) + fieldsHtml(card.fields) + q,
-        visual: card.visual ? AC.visual(card.visual) : "", keepVisual: keepVisual(card.visual), scale: card.scale,
+        visual: card.visual ? AC.visual(card.visual, { question: true }) : "", keepVisual: keepVisual(card.visual), scale: card.scale,
         options: card.options, answer: card.answer, work: card.work, slot: "exercise", idea: card.idea, gym: ctx.mode === "lesson", stepAside: true,
       }, ctx);
     }
@@ -786,6 +786,21 @@
     }
     f.place = place;
     f.placeSheet = function (s) { sheetEl = s; place(); };
+    /** Phones, after an answer: scroll so the option you picked and the start of the feedback are both in view (the
+        feedback refers to them). Feedback longer than the screen: its first lines, never past its top. */
+    f.showAnswer = function () {
+      if (!sheetEl || mq.matches) return;
+      setTimeout(function () {
+        var opt = AC.$(".ac-opt.is-wrong", f.main) || AC.$(".ac-opt.is-right", f.main);
+        var topH = AC.$(".ac-pl__top", el).getBoundingClientRect().height, footH = f.foot.getBoundingClientRect().height;
+        var y = window.scrollY, s = sheetEl.getBoundingClientRect();
+        var sheetTop = y + s.top - topH - 12;
+        var target = opt ? y + opt.getBoundingClientRect().top - topH - 12 : sheetTop;
+        target = Math.max(target, y + s.top - (window.innerHeight - footH - 160));   // at least ~160px of the feedback showing
+        target = Math.min(target, sheetTop);
+        window.scrollTo({ top: Math.max(0, target), behavior: AC.reducedMotion() ? "auto" : "smooth" });
+      }, 40);
+    };
     /** Call after the card is in f.main: picks up its [data-side] parts and Rico's line (bubble: phones dock, side: desktop column). */
     f.setRico = function (bubble, side) {
       bubbleEl = bubble || null; sideEl = side || null;

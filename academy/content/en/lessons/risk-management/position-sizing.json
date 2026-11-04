@@ -166,7 +166,8 @@
      "tip": "If the share count costs more than your account, the stop is too tight or the trade is too small.",
      "tone": "gold"
     }
-   ]
+   ],
+   "rico": true
   },
   {
    "type": "exercise",

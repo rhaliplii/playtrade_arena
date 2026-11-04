@@ -43,6 +43,13 @@
     fund: '<path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/>',
     robot: '<rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/>',
     phone: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>',
+    // asset classes (Ch1 L3)
+    bond: '<path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4M10 17l5-6"/><circle cx="10.5" cy="11.5" r=".9"/><circle cx="14.5" cy="16.5" r=".9"/>',
+    basket: '<path d="M4 14h16M4 9.5h16M4 19h16"/><circle cx="7" cy="5" r="1.4"/><circle cx="12" cy="5" r="1.4"/><circle cx="17" cy="5" r="1.4"/>',
+    stock: '<path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/>',
+    commodity: '<path d="M4 18h16l-2.5-6h-11z"/><path d="M8 12l1.5-5h5L16 12"/>',
+    forex: '<path d="M4 8h13l-3-3M20 16H7l3 3"/>',
+    crypto: '<circle cx="12" cy="12" r="9"/><path d="M10 7.5v9M10 8h3.2a2 2 0 0 1 0 4H10h3.6a2 2 0 0 1 0 4.3H10M11.5 6v2M11.5 16.3v1.7"/>',
   };
   function icon(name) {
     return ICONS[name] ? '<svg class="ac-v__icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + "</svg>" : "";
@@ -149,12 +156,15 @@
   function drawLine(d, cls, dashed) { return d ? '<path d="' + d + '" class="' + cls + (dashed ? " is-dashed" : " ac-v__drawq") + '"' + (dashed ? "" : ' pathLength="1"') + "/>" : ""; }
 
   // ------------------------------------------------------------------ candles (port of p1/charts.py candles())
-  /** c: chart spec. opt: {w, noAxis, explore: "zones" | "hlines" | "swings" | "play", revealFrom, geo(fn)}
-      chart.height is in a 330-wide viewBox; other widths scale it. Volume and indicator panels add height below. */
+  /** c: chart spec. opt: {w, h, noAxis, explore: "zones" | "hlines" | "swings" | "play", revealFrom, geo(fn)}
+      chart.height is in a 330-wide viewBox; other widths scale it, unless opt.h fixes the height (a tile's own
+      canvas, so a chart in a half- or third-width tile keeps its height). Volume and indicator panels add height below. */
   function candles(c, opt) {
     opt = opt || {};
     var data = c.ohlc || (c.path ? genPath(c) : []);
-    var w = opt.w || 330, h = Math.round((c.height || 150) * w / 330), sc = w / 330;
+    var w = opt.w || 330, h = opt.h || Math.round((c.height || 150) * w / 330), sc = w / 330;
+    // a question's chart on a phone gets the height the tighter answer options free (about +45px), full-width charts only
+    if (questionChart && !opt.h && w === 330 && window.matchMedia && matchMedia("(max-width: 860px)").matches) h = Math.round(h + Math.min(48, h * 0.3));
     var panels = c.panels || [], hasVol = !!(c.volume && c.volume.length);
     var axis = c.axis !== false && !opt.noAxis;
     var ticks = c.ticks != null ? c.ticks : (axis ? 4 : 2);
@@ -381,7 +391,7 @@
       else if (mode === "hlines" && (c.hlines || []).length) { ex = "hlines"; btns = c.hlines.map(function (l, i) { return revealBtn("h" + i, l.label || num(l.price), tone(l.tone)); }).join(""); }
       else { ex = "play"; btns = playBtn(); }
     }
-    var svg = candles(c, { explore: ex });
+    var svg = candles(c, o.tile ? { explore: ex, w: 150, h: TILE_H } : { explore: ex });
     var plot = '<div class="ac-v__plot">' + svg + "</div>" + (btns ? '<div class="ac-v__reveals">' + btns + "</div>" : "");
     var wrapA = ex ? ' data-explore="' + ex + '"' : "";
     if (v.card) {
@@ -396,17 +406,78 @@
   R["chart-pair"] = function (v) {
     return '<div class="ac-v__pair">' + v.items.map(function (it) {
       return '<div class="ac-v__tile ' + tone(it.tone || "muted") + '">' + (it.aside ? '<div class="ac-v__tlrow"><b class="ac-v__ink ac-v__tlabel">' + esc(it.label) + '</b><span class="ac-v__tlaside">' + esc(it.aside) + "</span></div>" : '<b class="ac-v__ink ac-v__tlabel">' + esc(it.label) + "</b>") + (it.sub ? '<span class="ac-v__sub">' + esc(it.sub) + "</span>" : "") +
-        candles(it.chart, { w: 160, noAxis: it.chart.axis !== true }) + "</div>";
+        candles(it.chart, { w: 150, h: TILE_H, noAxis: it.chart.axis !== true }) + "</div>";
     }).join("") + "</div>";
   };
+  var TILE_H = 90;   // a tile's chart canvas: 150 × 90, as the design boards draw them
   var CICON = { ok: "✓", wait: "…", no: "✕" }, CTONE = { ok: "up", wait: "gold", no: "down" };
   R.compare = function (v) {
     return '<div class="ac-v__pair ac-v__pair--' + v.items.length + '">' + v.items.map(function (it) {
       return '<div class="ac-v__tile ac-v__cmp">' +
         '<div class="ac-v__cmp-h">' + (it.icon ? '<span class="ac-v__ico ' + tone(CTONE[it.icon]) + '" aria-hidden="true">' + CICON[it.icon] + "</span>" : "") + "<b>" + esc(it.title) + "</b></div>" +
-        (it.chart ? candles(it.chart, { w: 160, noAxis: it.chart.axis !== true }) : "") +
+        (it.chart ? candles(it.chart, { w: 150, h: TILE_H, noAxis: it.chart.axis !== true }) : "") +
         '<b class="ac-v__result ' + tone(it.tone || "white") + ' ac-v__ink">' + AC.rich(it.result) + "</b>" + (it.sub ? '<span class="ac-v__sub">' + AC.rich(it.sub) + "</span>" : "") + "</div>";
     }).join("") + "</div>";
+  };
+  /** crowd: buyers against sellers at one price, counted as people (Ch1 "Ten buyers, one seller"). sides: [{label, n,
+      tone, tag (e.g. "you")}]; price: the last trade, shown between them. */
+  R.crowd = function (v) {
+    var PERSON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0z"/></svg>';
+    var side = function (s) {
+      var people = "";
+      for (var i = 0; i < s.n; i++) people += PERSON;
+      return '<div class="ac-v__cside ' + tone(s.tone || "up") + '"><span class="ac-v__chead"><b class="ac-v__ink ac-num">' + s.n + "</b><span>" + esc(s.label) + "</span></span>" +
+        '<span class="ac-v__cpeople ac-v__ink">' + people + "</span>" + (s.tag ? '<span class="ac-v__ctag ac-v__ink">' + esc(s.tag) + "</span>" : "") + "</div>";
+    };
+    return '<div class="ac-v__box ac-v__crowd" role="img" aria-label="' + esc(v.label || "") + '">' + side(v.sides[0]) +
+      '<div class="ac-v__cmid"><span>' + esc(v.priceLabel || "") + '</span><b class="ac-num">' + esc(v.price || "") + "</b></div>" + side(v.sides[1]) + "</div>";
+  };
+  /** sessions: when markets trade, on one 24-hour day (book p.9 "When markets are open"). rows: [{label, days, tone,
+      note, bands: [{from, to (hours 0–24), soft, text}]}]; busy: {from, to, label} shaded across every row; now: true
+      draws the current time (in v.tz, an IANA zone) as a line. Times are approximate, as in the book. */
+  R.sessions = function (v) {
+    var pct = function (h) { return (h / 24 * 100).toFixed(2) + "%"; };
+    var busy = v.busy ? '<span class="ac-v__sbusy" style="left:' + pct(v.busy.from) + ";width:" + pct(v.busy.to - v.busy.from) + '">' + (v.now ? "" : "<span>" + esc(v.busy.label) + "</span>") + "</span>" : "";
+    var rows = v.rows.map(function (r) {
+      return '<div class="ac-v__srow ' + tone(r.tone || "sky") + (r.days ? "" : " is-slim") + '"><span class="ac-v__slabel"><b>' + esc(r.label) + "</b>" + (r.days ? "<span>" + esc(r.days) + "</span>" : "") + "</span>" +
+        '<span class="ac-v__strack">' + r.bands.map(function (b) {
+          return '<span class="ac-v__sband' + (b.soft ? " is-soft" : "") + '" style="left:' + pct(b.from) + ";width:" + pct(b.to - b.from) + '">' + (b.text ? "<i>" + esc(b.text) + "</i>" : "") + "</span>";
+        }).join("") + "</span></div>";
+    }).join("");
+    // the key under the chart: each market's line, then the busy window
+    var key = v.rows.filter(function (r) { return r.note; }).map(function (r) {
+      return '<li class="' + tone(r.tone || "sky") + '"><i class="ac-v__skey"></i><span><b>' + esc(r.label) + "</b> " + AC.rich(r.note) + "</span></li>";
+    }).join("") + (v.busy ? '<li><i class="ac-v__skey ac-v__skey--busy"></i><span><b>' + esc(v.busy.label) + "</b> " + AC.rich(v.busy.note || "") + "</span></li>" : "");
+    var ticks = (v.ticks || [0, 6, 12, 18, 24]).map(function (h) {
+      var t = v.clock24 !== false && !v.tz ? (h < 10 ? "0" : "") + h + ":00" : h % 12 === 0 ? (h % 24 === 0 ? "12am" : "12pm") : (h % 12) + (h < 12 ? "am" : "pm");   // a UTC day reads 00:00…24:00, as in the book
+      return '<span style="left:' + pct(h) + '">' + t + "</span>";
+    }).join("");
+    var now = "";
+    if (v.now && v.tz) {
+      try {
+        var parts = new Intl.DateTimeFormat("en-US", { timeZone: v.tz, hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
+        var hh = +parts.filter(function (p) { return p.type === "hour"; })[0].value, mm = +parts.filter(function (p) { return p.type === "minute"; })[0].value;
+        now = '<span class="ac-v__snow" style="left:' + pct(hh + mm / 60) + '"><span>' + esc(AC.t("cards.v.now")) + "</span></span>";
+      } catch (e) { now = ""; }
+    }
+    return '<div class="ac-v__box ac-v__sessions" role="img" aria-label="' + esc(v.label || v.title || "") + '">' +
+      (v.title || v.tz ? '<div class="ac-v__dhead"><b>' + esc(v.title || "") + "</b><span>" + esc(v.zone || "") + "</span></div>" : "") +
+      '<div class="ac-v__sgrid"><div class="ac-v__sover">' + busy + now + "</div>" + rows + '<div class="ac-v__saxis">' + ticks + "</div></div>" +
+      (key ? '<ul class="ac-v__slist">' + key + "</ul>" : "") +
+      (v.foot ? '<p class="ac-v__sfoot">' + esc(v.foot) + "</p>" : "") + "</div>";
+  };
+  /** depth: a compact order book as on the design board (P1-Ch01 Challenge Q4): title + aside, then a row per price
+      (price · $ of orders · a bar · ask / bid on the best levels), a dashed line between the asks and the bids.
+      rows: [{side: "ask"|"bid", price, size (display), value (number for the bar), best}] asks first, top-down. */
+  R.depth = function (v) {
+    var max = Math.max.apply(null, v.rows.map(function (r) { return r.value || 0; }).concat([1]));
+    var scale = v.max || max * 1.25;
+    var rows = v.rows.map(function (r, i) {
+      var sep = i > 0 && v.rows[i - 1].side === "ask" && r.side === "bid" ? '<span class="ac-v__dsep" aria-hidden="true"></span>' : "";
+      return sep + '<div class="ac-v__drow ' + tone(r.side === "ask" ? "down" : "up") + '"><b class="ac-v__dprice ac-v__ink ac-num">' + esc(r.price) + '</b><span class="ac-v__dsize ac-num">' + esc(r.size) + "</span>" +
+        '<span class="ac-v__dbar"><i style="width:' + Math.round(Math.min(1, (r.value || 0) / scale) * 100) + '%"></i></span><span class="ac-v__dside ac-v__ink">' + (r.best ? esc(AC.t("cards.v.side." + r.side)) : "") + "</span></div>";
+    }).join("");
+    return '<div class="ac-v__box ac-v__depthbox" role="img" aria-label="' + esc(v.label || v.title || "") + '"><div class="ac-v__dhead"><b>' + esc(v.title || "") + "</b><span>" + esc(v.aside || "") + "</span></div>" + rows + "</div>";
   };
   R.book = function (v, o) {
     var ex = o.explore;
@@ -460,15 +531,27 @@
         (v.from || v.to ? '<div class="ac-v__lends"><span>' + esc(v.from || "") + "</span><span>" + esc(v.to || "") + "</span></div>" : "") +
         (v.tag ? '<div class="ac-v__ltag"><span class="ac-v__ltag-k">' + esc(v.tag.label) + "</span><b>" + esc(v.tag.text) + "</b></div>" : "") + "</div>";
     }
-    var W = 340, top = 40, bot = 92, p = linePath(v.points, { x0: 20, x1: 320, top: top, bot: bot });
-    var a = p.xy[0], b = p.xy[p.xy.length - 1];
-    var svg = '<svg class="ac-v__svg ac-v__lsvg" viewBox="0 0 ' + W + ' 120" role="img"' + (v.label ? ' aria-label="' + esc(v.label) + '"' : ' aria-hidden="true"') + ">" +
+    // drop: the move drawn on the chart (a dashed line at the start level and a bracket down to the end, labelled);
+    // days: labels under the points (the first point is the open, the rest one a day)
+    var W = 340, top = 34, bot = v.drop ? 150 : 96, H = (v.drop ? 180 : 120) + (v.days ? 26 : 0), x1 = v.drop ? 268 : 320;
+    var p = linePath(v.points, { x0: 20, x1: x1, top: top, bot: bot });
+    var a = p.xy[0], b = p.xy[p.xy.length - 1], gid = "acLg" + (++uid);
+    var drop = "";
+    if (v.drop) {
+      var bx = x1 + 22;
+      drop = '<line x1="' + r1(a[0]) + '" x2="' + bx + '" y1="' + r1(a[1]) + '" y2="' + r1(a[1]) + '" class="ac-v__ldash"/>' +
+        '<path d="M' + (bx - 5) + "," + r1(a[1]) + " H" + bx + " V" + r1(b[1]) + " H" + (bx - 5) + '" class="ac-v__lbracket"/>' +
+        T(bx + 8, (a[1] + b[1]) / 2 + 5, v.drop, { fs: 15, w: 800, cls: "ac-v__t--tone" });
+    }
+    var days = v.days ? v.days.map(function (dname, i) { var q = p.xy[i + 1] || p.xy[i]; return T(q[0], H - 4, dname, { fs: 11, w: 600, anchor: "middle", cls: "ac-v__t--sub" }); }).join("") : "";
+    var svg = '<svg class="ac-v__svg ac-v__lsvg" viewBox="0 0 ' + W + " " + H + '" role="img"' + (v.label ? ' aria-label="' + esc(v.label) + '"' : ' aria-hidden="true"') + ">" +
+      '<defs><linearGradient id="' + gid + '" x1="0" x2="0" y1="0" y2="1"><stop offset="0" class="ac-v__gstop" stop-opacity=".32"/><stop offset="1" class="ac-v__gstop" stop-opacity="0"/></linearGradient></defs>' +
       '<line x1="10" x2="330" y1="' + top + '" y2="' + top + '" class="ac-v__grid"/><line x1="10" x2="330" y1="' + bot + '" y2="' + bot + '" class="ac-v__grid"/>' +
-      '<path d="' + p.d + " L" + r1(b[0]) + ",110 L" + r1(a[0]) + ',110 Z" class="ac-v__larea"/>' +
+      '<path d="' + p.d + " L" + r1(b[0]) + "," + (bot + 14) + " L" + r1(a[0]) + "," + (bot + 14) + ' Z" fill="url(#' + gid + ')"/>' + drop +
       '<path d="' + p.d + '" class="ac-v__lline ac-v__draw" pathLength="1"/>' +
       '<circle cx="' + r1(a[0]) + '" cy="' + r1(a[1]) + '" r="4.5" class="ac-v__lstart"/><circle cx="' + r1(b[0]) + '" cy="' + r1(b[1]) + '" r="4.5" class="ac-v__fill ac-v__lend"/>' +
       (v.from ? T(a[0] + 4, a[1] - 10, v.from, { fs: 12, w: 700, cls: "ac-v__t--sub" }) : "") +
-      (v.to ? T(b[0] - 8, b[1] - 12, v.to, { fs: 12, w: 800, anchor: "end" }) : "") + "</svg>";
+      (v.to ? T(b[0] - (v.drop ? 0 : 8), b[1] + (v.drop ? 20 : -12), v.to, { fs: 12, w: 800, anchor: v.drop ? "middle" : "end" }) : "") + days + "</svg>";
     return '<div class="ac-v__box ac-v__line ' + tone(v.tone || "down") + '">' +
       (v.title || v.change ? '<div class="ac-v__lhead"><b>' + esc(v.title || "") + '</b><b class="ac-v__ink">' + esc(v.change || "") + "</b></div>" : "") + svg +
       (v.tag ? '<div class="ac-v__ltag"><span class="ac-v__ltag-k">' + esc(v.tag.label) + "</span><b>" + esc(v.tag.text) + "</b></div>" : "") + "</div>";
@@ -477,7 +560,8 @@
   R.lines = function (v) {
     var pair = v.layout === "pair";
     var lo = v.lo, hi = v.hi;
-    if ((lo == null || hi == null) && v.items.every(function (it) { return it.points; })) {
+    // scale "own": each item fills its own box (the shape matters, not comparing levels); else one shared scale
+    if (v.scale !== "own" && (lo == null || hi == null) && v.items.every(function (it) { return it.points; })) {
       var all = [].concat.apply([], v.items.map(function (it) { return it.points; }));
       lo = lo != null ? lo : Math.min.apply(null, all); hi = hi != null ? hi : Math.max.apply(null, all);
     }
@@ -497,10 +581,12 @@
           '<svg class="ac-v__lmini" viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true">' + (v.mid != null ? '<line x1="0" x2="300" y1="' + r1(80 - (v.mid - lo) / ((hi - lo) || 1) * 80) + '" y2="' + r1(80 - (v.mid - lo) / ((hi - lo) || 1) * 80) + '" class="ac-v__lmid"/>' : "") +
           '<path d="' + p.d + '" class="ac-v__lline ac-v__draw" pathLength="1"/></svg></div>';
       }
-      var q = linePath(it.points, { x0: 8, x1: 322, top: 0, bot: 120, lo: lo, hi: hi }), e = q.xy[q.xy.length - 1], s0 = q.xy[0];
+      var own = v.scale === "own";
+      var q = linePath(it.points, { x0: 8, x1: 322, top: own ? 10 : 0, bot: own ? 104 : 120, lo: own ? null : lo, hi: own ? null : hi }), e = q.xy[q.xy.length - 1], s0 = q.xy[0];
       return '<div class="ac-v__box ac-v__lcard ' + t + '"><div class="ac-v__lcard-h"><b class="ac-v__ink">' + esc(it.label) + "</b>" + (it.sub ? "<span>" + esc(it.sub) + "</span>" : "") + "</div>" +
         '<svg class="ac-v__lstack" viewBox="0 0 330 120" preserveAspectRatio="none" role="img" aria-label="' + esc(it.label + (it.sub ? ": " + it.sub : "")) + '">' +
-        '<path d="' + q.d + " L" + r1(e[0]) + ",120 L" + r1(s0[0]) + ',120 Z" class="ac-v__larea"/><path d="' + q.d + '" class="ac-v__lline ac-v__draw" pathLength="1"/></svg></div>';
+        '<defs><linearGradient id="acLg' + (++uid) + '" x1="0" x2="0" y1="0" y2="1"><stop offset="0" class="ac-v__gstop" stop-opacity=".3"/><stop offset="1" class="ac-v__gstop" stop-opacity="0"/></linearGradient></defs>' +
+        '<path d="' + q.d + " L" + r1(e[0]) + ",120 L" + r1(s0[0]) + ',120 Z" fill="url(#acLg' + uid + ')"/><path d="' + q.d + '" class="ac-v__lline ac-v__draw" pathLength="1"/></svg></div>';
     }).join("") + "</div>";
   };
   /** An order ticket (L2 Call): BUY · what · when · Seller ? */
@@ -541,8 +627,11 @@
       (h.sub ? '<span class="ac-v__sub">' + esc(h.sub) + "</span>" : "") + row + "</div>";
   };
   /** B —— Last trade —— S (L4). */
+  /** The last trade: a buyer (green, left, like the bid below) and a seller (red, right, like the ask) meeting at one
+      price, the two sides named in words. */
   R.handshake = function (v) {
-    return '<div class="ac-v__box ac-v__shake"><span class="ac-v__shk ac-tone--up">' + esc(v.left || "B") + '</span><span class="ac-v__shline" aria-hidden="true"></span><b>' + esc(v.text) + '</b><span class="ac-v__shline" aria-hidden="true"></span><span class="ac-v__shk ac-tone--down">' + esc(v.right || "S") + "</span></div>";
+    return '<div class="ac-v__box ac-v__shake"><span class="ac-v__shk ac-tone--up">' + esc(v.left || AC.t("cards.v.buyer")) + '</span><span class="ac-v__shline" aria-hidden="true"></span><b>' + esc(v.text) +
+      '</b><span class="ac-v__shline" aria-hidden="true"></span><span class="ac-v__shk ac-tone--down">' + esc(v.right || AC.t("cards.v.seller")) + "</span></div>";
   };
   R.columns = function (v) {
     return '<div class="ac-v__cols ac-v__cols--' + v.cols.length + '">' + v.cols.map(function (c) {
@@ -553,12 +642,15 @@
   };
   R.tiles = function (v) {
     var cols = v.cols || 1;
-    return '<div class="ac-v__tiles' + (cols >= 3 ? " ac-v__tiles--icons" : "") + '" data-interactive="tiles" style="--cols:' + cols + '">' +
+    // 1–2 columns with icons: "cards" (icon in a toned square, a "Tap to see" hint until opened, the open card tinted)
+    var cards = cols < 3 && v.items.some(function (it) { return it.icon; });
+    return '<div class="ac-v__tiles' + (cols >= 3 ? " ac-v__tiles--icons" : cards ? " ac-v__tiles--cards" : "") + '" data-interactive="tiles" style="--cols:' + cols + '">' +
       (v.prompt ? '<p class="ac-v__prompt">' + esc(v.prompt) + "</p>" : "") +
       '<div class="ac-v__tgrid">' + v.items.map(function (it, i) {
         var body = (it.text ? '<span class="ac-v__ttext">' + AC.rich(it.text) + "</span>" : "") + (it.more ? '<span class="ac-v__tmore ac-v__ink">' + AC.rich(it.more) + "</span>" : "");
         return '<button type="button" class="ac-v__tbtn ' + tone(it.tone || "primary") + '" aria-expanded="false" data-i="' + i + '">' + icon(it.icon) +
           '<span class="ac-v__tline"><span class="ac-v__ttitle">' + esc(it.title) + '</span><span class="ac-v__tick" aria-hidden="true">✓</span></span>' +
+          (cards ? '<span class="ac-v__thint">' + esc(AC.t("cards.v.tapSee")) + "</span>" : "") +
           (body ? '<span class="ac-v__tbody">' + body + "</span>" : "") + "</button>";
       }).join("") + "</div></div>";
   };
@@ -640,7 +732,7 @@
     var cls = "ac-v__stack" + (v.layout === "row" ? " ac-v__stack--row" : "");
     // a stack with something to tap passes explore on to its parts; otherwise ▶ Play reveals it
     if (o.explore && (v.items || []).some(tappable)) return '<div class="' + cls + '">' + v.items.map(function (x) { return render(x, { explore: x.kind === "checklist" }); }).join("") + "</div>";
-    var inner = v.items.map(function (x) { return render(x, {}); }).join("");
+    var inner = v.items.map(function (x) { return render(x, { tile: v.layout === "row" }); }).join("");
     // ▶ Play sits under the stack (a row stack keeps its items in a row of their own, never the button as a column)
     if (o.explore) return '<div class="ac-v__stack ac-v__playwrap is-idle" data-explore="play">' + (v.layout === "row" ? '<div class="' + cls + '">' + inner + "</div>" : inner) + '<div class="ac-v__reveals">' + playBtn() + "</div></div>";
     return '<div class="' + cls + '">' + inner + "</div>";
@@ -668,8 +760,9 @@
   }
 
   /** series: line chart of money, %, a portfolio or an account (not prices: prices are candles). */
-  R.series = function (v) {
-    var W = 330, H = v.height || 140, ss = v.series || [], y = v.y || {};
+  R.series = function (v, o) {
+    // in a row tile: the tile's own 150 × 90 canvas (as the design draws it), not a 330-wide one shrunk to fit
+    var tl = !!(o && o.tile), W = tl ? 150 : 330, H = tl ? TILE_H : (v.height || 140), ss = v.series || [], y = v.y || {};
     var n = Math.max.apply(null, ss.map(function (s) { return s.values.length; }).concat([2]));
     var ends = ss.some(function (s) { return s.end !== false && (s.end || s.label); }) && v.ends !== false;
     var xl = v.x && v.x.labels, yAxis = !!y.axis;
@@ -1034,6 +1127,19 @@
     }).join("") + "</svg>";
   }
   /** shapes: candle patterns side by side (hammer · doji · engulfing). */
+  /** lineshapes: price shapes drawn as one simple line per tile, its name in the line's colour below (design boards
+      P1-Ch04-L1 "Three kinds of market", P1-Ch04-L4 "Two failed attempts"). items: [{label, sub, tone, path: [[x, y]…]}].
+      Each line fills its own tile (the shape is the point, not the scale). */
+  R.lineshapes = function (v) {
+    var n = v.items.length, W = n > 2 ? 90 : 110, H = n > 2 ? 54 : 60;
+    return '<div class="ac-v__lshapes" style="--n:' + n + '">' + v.items.map(function (it) {
+      var xs = it.path.map(function (p) { return p[0]; }), ys = it.path.map(function (p) { return p[1]; });
+      var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+      var pts = it.path.map(function (p) { return r1(10 + (p[0] - x0) / ((x1 - x0) || 1) * (W - 20)) + "," + r1(H - 10 - (p[1] - y0) / ((y1 - y0) || 1) * (H - 20)); }).join(" ");
+      return '<div class="ac-v__lshape ' + tone(it.tone || "up") + '"><svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(it.label + (it.sub ? ": " + it.sub : "")) + '">' +
+        '<polyline points="' + pts + '" class="ac-v__lsline ac-v__draw" pathLength="1"/></svg><b class="ac-v__ink">' + esc(it.label) + "</b>" + (it.sub ? "<span>" + esc(it.sub) + "</span>" : "") + "</div>";
+    }).join("") + "</div>";
+  };
   R.shapes = function (v) {
     return '<div class="ac-v__shapes" style="--n:' + v.items.length + '">' + v.items.map(function (it) {
       return '<div class="ac-v__shape ' + tone(it.tone || "white") + '">' + glyph(it.candles, it.candles.length > 1 ? 44 : 30, 64) + '<b class="ac-v__ink">' + esc(it.name) + "</b>" + (it.text ? "<span>" + esc(it.text) + "</span>" : "") + "</div>";
@@ -1237,14 +1343,17 @@
   }
   /** Explore mode applies to walk-throughs whose visual is not interactive on its own. */
   function explorable(spec) { return !!spec && (["candles", "book", "stack", "checklist"].indexOf(spec.kind) >= 0 || playable(spec)); }
+  var questionChart = false;
   AC.visual = function (spec, opts) {
     opts = opts || {};
+    questionChart = !!opts.question;   // read by candles() while this visual renders
     if (opts.explore && !explorable(spec)) opts = Object.assign({}, opts, { explore: false });
     if (opts.explore && playable(spec)) {
       var inner0 = render(spec, {});
       return '<div class="ac-v ac-v--' + esc(spec.kind) + '"><div class="ac-v__playwrap is-idle" data-explore="play">' + inner0 + '<div class="ac-v__reveals">' + playBtn() + "</div></div></div>";
     }
     var inner = render(spec, opts);
+    questionChart = false;
     return inner ? '<div class="ac-v ac-v--' + esc(spec.kind) + '">' + inner + "</div>" : "";
   };
   AC.visual.el = function (spec, opts) { var h = AC.visual(spec, opts); return h ? AC.h(h) : null; };

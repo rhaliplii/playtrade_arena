@@ -147,7 +147,8 @@
      "side",
      "side_r",
      "back",
-     "head"
+     "head",
+     "none"
     ]
    }
   },

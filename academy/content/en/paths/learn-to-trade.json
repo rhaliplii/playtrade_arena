@@ -16,10 +16,11 @@
    "title": "How Markets Actually Work",
    "short": "Markets",
    "promise": "Why the bull and the bear never stop fighting, who you trade against, and the toll on every trade.",
-   "minutes": 16,
+   "minutes": 20,
    "available": true,
    "lessons": [
     "Bulls vs bears",
+    "Why prices move",
     "Who’s on the other side",
     "The six asset classes and their risk",
     "Bid, ask and the spread"

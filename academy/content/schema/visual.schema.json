@@ -58,7 +58,11 @@
       "candle": "#/$defs/candle",
       "shapes": "#/$defs/shapes",
       "tabs": "#/$defs/tabs",
-      "drawline": "#/$defs/drawline"
+      "drawline": "#/$defs/drawline",
+      "lineshapes": "#/$defs/lineshapes",
+      "depth": "#/$defs/depth",
+      "sessions": "#/$defs/sessions",
+      "crowd": "#/$defs/crowd"
     }
   },
   "$defs": {
@@ -1596,6 +1600,17 @@
         },
         "lastTag": {
           "type": "boolean"
+        },
+        "drop": {
+          "type": "string",
+          "description": "The move drawn on the chart: a dashed line at the start level, a bracket to the end and this label (e.g. −5%)."
+        },
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Labels under the points after the first (the open)."
         }
       }
     },
@@ -1663,6 +1678,13 @@
         "mid": {
           "type": "number",
           "description": "dashed reference line"
+        },
+        "scale": {
+          "enum": [
+            "shared",
+            "own"
+          ],
+          "description": "own: each item's line fills its own box (the shape matters); shared (default): one scale for all items."
         }
       }
     },
@@ -3713,6 +3735,280 @@
         }
       },
       "description": "Candles with a line the learner drags into place. trend: handles at start.from / start.to candles, fitted when both are within tolerance of the target line. level: one horizontal line, fitted at target.price ± tolerance or inside target.min–max."
+    },
+    "lineshapes": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "Price shapes as one simple line per tile, the name in the line's colour (design P1-Ch04-L1, L4).",
+      "properties": {
+        "kind": {
+          "const": "lineshapes"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "path"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "sub": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "path": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "depth": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "description": "Compact order book: price, $ of orders, a bar, ask/bid on the best levels; asks first.",
+      "properties": {
+        "kind": {
+          "const": "depth"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aside": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "max": {
+          "type": "number"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "side",
+              "price"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "side": {
+                "enum": [
+                  "ask",
+                  "bid"
+                ]
+              },
+              "price": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "best": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "sessions": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "description": "When markets trade on one 24-hour day: a row per market, bands for its hours, a shaded busy window, an optional live now line.",
+      "properties": {
+        "kind": {
+          "const": "sessions"
+        },
+        "title": {
+          "type": "string"
+        },
+        "zone": {
+          "type": "string"
+        },
+        "tz": {
+          "type": "string"
+        },
+        "now": {
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        },
+        "foot": {
+          "type": "string"
+        },
+        "ticks": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "busy": {
+          "type": "object",
+          "required": [
+            "from",
+            "to",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "from": {
+              "type": "number"
+            },
+            "to": {
+              "type": "number"
+            },
+            "label": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "bands"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "days": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "note": {
+                "type": "string"
+              },
+              "bands": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "from",
+                    "to"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "from": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 24
+                    },
+                    "to": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 24
+                    },
+                    "soft": {
+                      "type": "boolean"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "crowd": {
+      "type": "object",
+      "required": [
+        "kind",
+        "sides"
+      ],
+      "additionalProperties": false,
+      "description": "Buyers against sellers at one price, counted as people.",
+      "properties": {
+        "kind": {
+          "const": "crowd"
+        },
+        "label": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "priceLabel": {
+          "type": "string"
+        },
+        "sides": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "n"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 20
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              },
+              "tag": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

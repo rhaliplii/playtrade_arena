@@ -140,6 +140,12 @@
 .ac-opt.is-dim .ac-opt__key { width: 24px; height: 24px; font-size: 12px; }
 .ac-opt.is-dim .ac-opt__label { overflow-wrap: anywhere; }
 .ac-opts.is-locked .ac-opt { cursor: default; }
+/* phones: tighter answer options so the question's chart can be taller. Each stays a 50px-tall target with an 8px gap
+   between (above the 44px tap minimum, and the gap keeps neighbours from being hit by mistake); long text still wraps */
+@media (max-width: 860px) {
+  .ac-opts { gap: 8px; }
+  .ac-opt { min-height: 50px; }
+}
 .ac-popin { display: inline-block; animation: acPop .45s cubic-bezier(.3, 1.4, .5, 1) both; }
 @keyframes acPop { 0% { transform: scale(.4); opacity: 0; } 60% { transform: scale(1.25); opacity: 1; } 100% { transform: none; } }
 @keyframes acNudge { 20% { transform: translateX(-4px); } 50% { transform: translateX(4px); } 80% { transform: translateX(-2px); } }

@@ -1,7 +1,7 @@
 {
  "id": "bid-ask-spread",
  "chapter": "how-markets-work",
- "n": 4,
+ "n": 5,
  "title": "Bid, ask and the spread",
  "minutes": 5,
  "desc": "The toll you pay on every trade",
@@ -41,13 +41,11 @@
   {
    "type": "learn",
    "title": "Two prices, not one",
-   "text": "The price on your screen is the **last handshake**: the latest deal.",
+   "text": "The price on your screen is the **last handshake** between a buyer and a seller: the latest deal.",
    "blocks": [
     {
      "visual": {
       "kind": "handshake",
-      "left": "B",
-      "right": "S",
       "text": "Last trade $50.00"
      },
      "side": true

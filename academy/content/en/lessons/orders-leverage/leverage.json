@@ -283,7 +283,8 @@
    ],
    "answer": 1,
    "idea": "wipe-out-move",
-   "work": "100% of your margin ÷ 10× leverage = a 10% move against you wipes it out."
+   "work": "100% of your margin ÷ 10× leverage = a 10% move against you wipes it out.",
+   "pose": "none"
   },
   {
    "type": "keep",

@@ -309,7 +309,8 @@
      "tip": "Before costs. Fees and slippage eat into this, so the target must be worth the trip.",
      "tone": "gold"
     }
-   ]
+   ],
+   "rico": true
   },
   {
    "type": "exercise",

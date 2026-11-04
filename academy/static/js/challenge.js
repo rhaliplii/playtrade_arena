@@ -106,6 +106,7 @@
           F.setRico(null, null); F.placeSheet(ctl.sheet); F.setProgress(qi, true);
           F.el.classList.add("is-sheetcta");
           F.setAside(missed() ? AC.t("challenge.aside.missed", { n: missed() }) : AC.t("challenge.aside.rule"));
+          F.showAnswer();
         }
         F.setCta(ctl.cta());
       };

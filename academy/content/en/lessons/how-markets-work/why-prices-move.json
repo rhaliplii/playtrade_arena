@@ -1,0 +1,262 @@
+{
+ "id": "why-prices-move",
+ "chapter": "how-markets-work",
+ "n": 2,
+ "title": "Why prices move",
+ "minutes": 4,
+ "desc": "A market is a non-stop auction, and prices move on surprises",
+ "cards": [
+  {
+   "type": "call",
+   "pose": "present",
+   "title": "Ten buyers, one seller",
+   "situation": "You own 1 share. The last trade was $50. Ten people want to buy it right now, and nobody else is selling. What do you do?",
+   "added": "Scene written for the app; idea from p.7 (design board OLD Ch1 L1, the auction lesson)",
+   "visual": {
+    "kind": "crowd",
+    "price": "$50",
+    "priceLabel": "Last trade",
+    "label": "Ten buyers want your one share. The last trade was $50",
+    "sides": [
+     {
+      "label": "buyers",
+      "n": 10,
+      "tone": "up"
+     },
+     {
+      "label": "seller",
+      "n": 1,
+      "tone": "down",
+      "tag": "You"
+     }
+    ]
+   },
+   "options": [
+    {
+     "text": "Ask for more than $50",
+     "feedback": "Ten buyers, one share: they have to outbid each other. If the deal happens at $52, your app now shows $52. That’s how a price rises."
+    },
+    {
+     "text": "Sell at $50 to the first person",
+     "feedback": "Ten buyers want one share, so someone will pay $51 or $52. Selling at $50 leaves that money with the buyer."
+    },
+    {
+     "text": "Wait for the exchange to set a new price",
+     "feedback": "Nobody sets prices from above. The exchange only records where a buyer and a seller agree. That deal becomes the price."
+    }
+   ],
+   "answer": 0,
+   "idea": "more-buyers-higher-price",
+   "work": "10 buyers, 1 share: offers climb $50 → $51 → $52. The deal at $52 becomes the price."
+  },
+  {
+   "type": "learn",
+   "title": "A market is a non-stop auction",
+   "text": "When you buy a share, someone else sold it to you. Every trade has two sides, and the price on your screen is just **the most recent deal** they agreed on. No magic, no secret room.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "series",
+      "title": "Three deals in a row",
+      "height": 120,
+      "label": "Three deals: $50, then $51, then $52. Each one becomes the price on the screen",
+      "series": [
+       {
+        "values": [
+         50,
+         50.3,
+         51,
+         51.2,
+         51,
+         51.6,
+         52
+        ],
+        "tone": "up",
+        "area": true
+       }
+      ],
+      "points": [
+       {
+        "i": 0,
+        "label": "deal $50",
+        "tone": "muted",
+        "pos": "below",
+        "anchor": "start"
+       },
+       {
+        "i": 2,
+        "label": "deal $51",
+        "tone": "muted",
+        "pos": "above",
+        "anchor": "middle"
+       },
+       {
+        "i": 6,
+        "label": "deal $52",
+        "tone": "up",
+        "pos": "above",
+        "anchor": "end"
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "More buyers than sellers? Buyers offer more and the price **rises**. Sellers in a hurry? They accept less and it **falls**.",
+     "side": true,
+     "tone": "plain"
+    }
+   ]
+  },
+  {
+   "type": "learn",
+   "title": "Record profits, falling price?",
+   "added": "$10M / $8M numbers (book gives the idea only, p.7)",
+   "text": "Everyone expects a company to earn $10 million. It earns $8 million: a record, but less than hoped. The stock **falls**. Prices don’t move on good or bad news. They move on news that is **better or worse than people expected**.",
+   "blocks": [
+    {
+     "visual": {
+      "kind": "barchart",
+      "title": "Company profit this year",
+      "aside": "Stock −6%",
+      "asideTone": "down",
+      "label": "Investors expected $10 million profit; the company earned $8 million, a record, and the stock fell 6%",
+      "groups": [
+       {
+        "label": "Expected",
+        "values": [
+         10
+        ],
+        "displays": [
+         "$10M"
+        ],
+        "tones": [
+         "muted"
+        ]
+       },
+       {
+        "label": "Actual",
+        "sub": "a record",
+        "subTone": "up",
+        "values": [
+         8
+        ],
+        "displays": [
+         "$8M"
+        ],
+        "tones": [
+         "down"
+        ]
+       }
+      ]
+     },
+     "side": true
+    },
+    {
+     "tip": "A great company can fall on great news if everyone expected amazing news.",
+     "side": true,
+     "tone": "plain"
+    }
+   ]
+  },
+  {
+   "type": "exercise",
+   "kind": "sort",
+   "title": "Which way does the price go?",
+   "q": "Drag each situation into the right box.",
+   "idea": "expectations-move-prices",
+   "added": "Sort built from p.7 ideas; numbers added",
+   "items": [
+    {
+     "text": "Expected profit $5M, actual $6M",
+     "sub": "Results day"
+    },
+    {
+     "text": "Expected profit $10M, actual $8M",
+     "sub": "A record, but below hopes"
+    },
+    {
+     "text": "Sellers rush to get out",
+     "sub": "Bad mood all day"
+    }
+   ],
+   "given": [
+    {
+     "item": {
+      "text": "500 buyers, 100 sellers",
+      "sub": "At today’s price"
+     },
+     "bucket": "up"
+    }
+   ],
+   "buckets": [
+    {
+     "id": "up",
+     "label": "Price up",
+     "sub": "more buyers",
+     "tone": "up",
+     "icon": "up"
+    },
+    {
+     "id": "down",
+     "label": "Price down",
+     "sub": "more sellers",
+     "tone": "down",
+     "icon": "down"
+    }
+   ],
+   "solution": {
+    "up": [
+     "Expected profit $5M, actual $6M"
+    ],
+    "down": [
+     "Expected profit $10M, actual $8M",
+     "Sellers rush to get out"
+    ]
+   },
+   "itemFeedback": {
+    "Expected profit $5M, actual $6M": "$6M beat the $5M people expected. A good surprise pushes the price up.",
+    "Expected profit $10M, actual $8M": "A record that misses expectations is a letdown. The price falls.",
+    "Sellers rush to get out": "Sellers in a hurry accept less, so each new deal prints lower."
+   },
+   "right": "Beat the forecast: up. Missed it, even with a record: down. Sellers in a hurry: down.",
+   "work": "$6M vs $5M expected: beat, up. $8M vs $10M expected: miss, down."
+  },
+  {
+   "type": "check",
+   "pose": "detective",
+   "title": "Record profits, falling stock",
+   "q": "A company reports record profits. Its stock falls 6% the same day. What best explains it?",
+   "options": [
+    {
+     "text": "Investors expected even better results",
+     "feedback": "Prices move on the gap between results and expectations. If people hoped for more, a record is still a letdown."
+    },
+    {
+     "text": "Market makers decided to lower the price",
+     "feedback": "Nobody decides the price. It’s the last deal between a buyer and a seller, and here sellers outnumbered buyers."
+    },
+    {
+     "text": "Too many people wanted to buy",
+     "feedback": "More buyers would push the price up, not down. A 6% fall means sellers outnumbered buyers."
+    },
+    {
+     "text": "The company created more shares that day",
+     "feedback": "Nothing in the story says new shares. Look for the surprise: results versus what was expected."
+    }
+   ],
+   "answer": 0,
+   "idea": "expectations-move-prices",
+   "work": "Expected more than the record → a letdown → more sellers → price −6%."
+  },
+  {
+   "type": "keep",
+   "headline": "You know where every price comes from.",
+   "lines": [
+    "A price is the last deal between a buyer and a seller.",
+    "More buyers push prices up; sellers in a hurry push them down.",
+    "Prices move on surprises versus expectations, not on good or bad headlines."
+   ]
+  }
+ ]
+}
