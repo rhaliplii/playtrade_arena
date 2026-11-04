@@ -927,7 +927,10 @@
       if (pair) return '<div class="ac-v__hbr ac-v__hbr--pair"><b class="ac-v__hbl ' + tone(r.labelTone || t) + ' ac-v__ink ac-num">' + esc(r.label) + "</b>" + bar(r.value, mx, t) + bar(r.value2, mx2, r.tone2 || "up") +
         '<b class="ac-num ' + tone(r.tone2 || "up") + ' ac-v__ink">' + esc(r.display2 != null ? r.display2 : fmtV(r.value2, { unit: v.unit })) + "</b></div>";
       if (st) return '<div class="ac-v__hbr ac-v__hbr--st"><span class="ac-v__hbl">' + AC.rich(r.label) + '</span><b class="ac-num ' + tone(t) + ' ac-v__ink">' + esc(disp) + "</b>" + bar(r.value, mx, t) + "</div>";
-      return '<div class="ac-v__hbr"><span class="ac-v__hbl">' + AC.rich(r.label) + "</span>" + bar(r.value, mx, t) + '<b class="ac-num ' + tone(t) + ' ac-v__ink">' + esc(disp) + "</b></div>";
+      // inner: a part drawn at the start of the bar (design P1-Ch02 Challenge: your margin inside the position)
+      var bb = bar(r.value, mx, t);
+      if (r.inner) bb = bb.replace("</span>", '<i class="' + tone(r.inner.tone || "gold") + ' ac-v__hbin" style="width:' + r1(Math.max(1.5, Math.abs(r.inner.value) / mx * 100)) + '%"></i></span>');
+      return '<div class="ac-v__hbr"><span class="ac-v__hbl' + (r.labelTone ? " " + tone(r.labelTone) + " ac-v__ink" : "") + '">' + AC.rich(r.label) + "</span>" + bb + (disp ? '<b class="ac-num ' + tone(t) + ' ac-v__ink">' + esc(disp) + "</b>" : "") + "</div>";
     }).join("");
     var heads = v.heads ? '<div class="ac-v__hbh"><span>' + esc(v.heads[0] || "") + "</span><span>" + esc(v.heads[1] || "") + "</span></div>" : "";
     return '<div class="ac-v__box ac-v__box--hbars">' + hdr(v) + heads + '<div class="ac-v__hb' + (pair ? " ac-v__hb--pair" : st ? " ac-v__hb--st" : "") + '">' + body + "</div>" + foot(v.foot) + "</div>";

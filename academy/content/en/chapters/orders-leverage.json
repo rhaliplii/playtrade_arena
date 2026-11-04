@@ -214,13 +214,19 @@
        "label": "your $500",
        "value": 500,
        "display": "",
-       "tone": "gold"
+       "tone": "gold",
+       "labelTone": "gold"
       },
       {
        "label": "position",
        "value": 10000,
        "display": "",
-       "tone": "blue"
+       "tone": "blue",
+       "labelTone": "blue",
+       "inner": {
+        "value": 500,
+        "tone": "gold"
+       }
       }
      ]
     }
@@ -505,13 +511,19 @@
        "label": "your $2,000",
        "value": 2000,
        "display": "",
-       "tone": "gold"
+       "tone": "gold",
+       "labelTone": "gold"
       },
       {
        "label": "position",
        "value": 100000,
        "display": "",
-       "tone": "blue"
+       "tone": "blue",
+       "labelTone": "blue",
+       "inner": {
+        "value": 2000,
+        "tone": "gold"
+       }
       }
      ]
     }

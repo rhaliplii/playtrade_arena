@@ -2437,6 +2437,21 @@
               },
               "tone2": {
                 "$ref": "#/$defs/tone"
+              },
+              "inner": {
+                "type": "object",
+                "required": [
+                  "value"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "value": {
+                    "type": "number"
+                  },
+                  "tone": {
+                    "$ref": "#/$defs/tone"
+                  }
+                }
               }
             }
           },
