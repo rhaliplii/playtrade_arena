@@ -283,7 +283,12 @@
     if (c.ghost && c.ghost.length) s += add(ex ? "end" : null, '<polyline points="' + c.ghost.map(function (g) { return r1(X(g[0])) + "," + r1(Y(g[1])); }).join(" ") + '" class="ac-v__ghost"/>');
     var later = 0, laterOf = {};
     // asLine: the price as a plain line of closes (for newcomers who don't read candles yet)
-    if (c.asLine) s += drawLine(pathOf(data.map(function (d, i) { return [X(i), Y(d[3])]; })), tone(c.lineTone || "up") + " ac-v__ovl ac-v__pline");
+    if (c.asLine) {
+      var lcls = tone(c.lineTone || "up") + " ac-v__ovl ac-v__pline", la = [], lb = [];
+      data.forEach(function (d, i) { var q = [X(i), Y(d[3])]; if (ex === "play" && i > firstMark) { if (!lb.length && la.length) lb.push(la[la.length - 1]); lb.push(q); } else la.push(q); });
+      s += drawLine(pathOf(la), lcls);
+      if (lb.length) s += '<g class="ac-v__later" style="--i:' + Math.max(0, n - firstMark - 2) + '">' + drawLine(pathOf(lb), lcls) + "</g>";
+    }
     if (!c.asLine) data.forEach(function (d, i) {
       var up = d[3] >= d[0], x = X(i), cls = up ? "ac-tone--up" : "ac-tone--down";
       if (c.dim && c.dim.indexOf(i) >= 0) cls += " ac-v__dim";

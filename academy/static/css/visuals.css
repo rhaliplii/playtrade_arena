@@ -443,6 +443,7 @@ html.ac-reduce-motion .ac-v__layer { transition: none; }
 .ac-v__legend { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 10px; font: 700 12px/1.3 var(--ac-font); }
 .ac-v__lg { display: inline-flex; align-items: center; gap: 5px; }
 .ac-v__lg i { display: none; }
+.ac-v__lg + .ac-v__lg::before { content: ""; align-self: stretch; width: 1px; margin: 2px 5px 2px 0; background: var(--ac-line-strong, var(--ac-line)); }   /* a separator between legend items */
 .ac-v__lg.is-dot i { display: block; width: 8px; height: 8px; border-radius: 2px; background: var(--tone); }
 .ac-v__lg.is-dashed i { display: block; width: 12px; height: 0; border-top: 2px dashed var(--tone); }
 .ac-v__legend--foot { justify-content: flex-start; padding-top: 2px; }

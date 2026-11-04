@@ -21,31 +21,31 @@
        42.5
       ],
       [
-       2,
+       4,
        41.3
       ],
       [
-       5,
+       10,
        44.2
       ],
       [
-       8,
+       16,
        43.8
       ],
       [
-       11,
+       22,
        46.4
       ],
       [
-       14,
+       28,
        46.15
       ],
       [
-       17,
+       34,
        48.6
       ],
       [
-       19,
+       38,
        47.2
       ]
      ],
@@ -57,11 +57,11 @@
      "trendlines": [
       {
        "from": [
-        2,
+        4,
         41.0
        ],
        "to": [
-        19,
+        38,
         47.8
        ],
        "tone": "gold"
@@ -69,14 +69,15 @@
      ],
      "marks": [
       {
-       "i": 19,
+       "i": 38,
        "price": 47.2,
        "label": "today",
        "tone": "gold",
        "pos": "below"
       }
      ],
-     "label": "A rising trendline under three lows; today price closes just below it"
+     "label": "A rising trendline under three lows; today price closes just below it",
+     "n": 39
     }
    },
    "options": [
@@ -114,35 +115,35 @@
          40
         ],
         [
-         2,
+         4,
          41
         ],
         [
-         4,
+         8,
          44
         ],
         [
-         6,
+         12,
          43
         ],
         [
-         9,
+         18,
          47
         ],
         [
-         11,
+         22,
          46
         ],
         [
-         14,
+         28,
          50
         ],
         [
-         16,
+         32,
          49
         ],
         [
-         18,
+         36,
          52
         ]
        ],
@@ -154,22 +155,23 @@
        "trendlines": [
         {
          "from": [
-          2,
+          4,
           40.4
          ],
          "to": [
-          11,
+          22,
           45.2
          ],
          "tone": "up",
          "touches": [
-          2,
-          6,
-          11
+          4,
+          12,
+          22
          ]
         }
        ],
-       "label": "An uptrend line drawn under three rising lows"
+       "label": "An uptrend line drawn under three rising lows",
+       "n": 37
       }
      }
     },
@@ -194,31 +196,31 @@
        40
       ],
       [
-       3,
+       6,
        44
       ],
       [
-       5,
+       10,
        42
       ],
       [
-       8,
+       16,
        47
       ],
       [
-       10,
+       20,
        45
       ],
       [
-       13,
+       26,
        50
       ],
       [
-       15,
+       30,
        48
       ],
       [
-       18,
+       36,
        53
       ]
      ],
@@ -234,31 +236,32 @@
         39.5
        ],
        "to": [
-        15,
+        30,
         47.5
        ],
        "tone": "up"
       }
      ],
-     "label": "A rising channel: a lower line under the lows, drag the upper line onto the highs"
+     "label": "A rising channel: a lower line under the lows, drag the upper line onto the highs",
+     "n": 37
     },
     "start": {
      "from": [
-      3,
+      6,
       47
      ],
      "to": [
-      15,
+      30,
       47
      ]
     },
     "target": {
      "from": [
-      3,
+      6,
       44.6
      ],
      "to": [
-      15,
+      30,
       51
      ]
     },
@@ -285,43 +288,43 @@
        41
       ],
       [
-       1,
+       2,
        39
       ],
       [
-       2,
+       4,
        38.5
       ],
       [
-       3,
+       6,
        41.5
       ],
       [
-       4,
+       8,
        40.5
       ],
       [
-       5,
+       10,
        42.5
       ],
       [
-       6,
+       12,
        39.5
       ],
       [
-       7,
+       14,
        41
       ],
       [
-       8,
+       16,
        43.5
       ],
       [
-       9,
+       18,
        42.5
       ],
       [
-       10,
+       20,
        44.5
       ]
      ],
@@ -339,7 +342,7 @@
         40.2
        ],
        "to": [
-        10,
+        20,
         43.6
        ],
        "tone": "down",
@@ -347,7 +350,8 @@
        "extend": "none"
       }
      ],
-     "label": "A dashed line forced through the candle bodies"
+     "label": "A dashed line forced through the candle bodies",
+     "n": 21
     }
    },
    "rule": "use clear swing lows, the same way every time. No forcing."
@@ -368,35 +372,35 @@
        40
       ],
       [
-       2,
+       4,
        39.5
       ],
       [
-       4,
+       8,
        42
       ],
       [
-       6,
+       12,
        41
       ],
       [
-       9,
+       18,
        44.5
       ],
       [
-       11,
+       22,
        43.5
       ],
       [
-       14,
+       28,
        47
       ],
       [
-       16,
+       32,
        46.5
       ],
       [
-       18,
+       36,
        48.5
       ]
      ],
@@ -405,7 +409,8 @@
      "axis": false,
      "lastTag": false,
      "ticks": 0,
-     "label": "A rising chart with no line drawn yet"
+     "label": "A rising chart with no line drawn yet",
+     "n": 37
     }
    },
    "options": [
