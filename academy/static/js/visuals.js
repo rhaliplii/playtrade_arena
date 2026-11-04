@@ -127,8 +127,20 @@
   /** indicator panel series → {lines:[{v, tone, dashed}], hist, lo, hi, levels} */
   function panelSeries(p, data) {
     var n = data.length, closes = data.map(function (d) { return d[3]; });
+    // computed indicators need a warm-up; extend the trend backwards (illustrative history) so their lines start at the left
+    var lead = 0;
+    if (!p.values && !p.macd && (p.type === "rsi" || p.type === "macd") && n > 3) {
+      lead = p.type === "rsi" ? (p.period || 14) + 2 : (p.slow || 26) + (p.period || 9);
+      var m0 = Math.min(10, n - 1), slope = (closes[m0] - closes[0]) / m0, sd = Math.abs(slope) * 0.6 + Math.abs(closes[0]) * 0.002;
+      var pre = []; for (var k = lead; k > 0; k--) pre.push(closes[0] - slope * k + (k % 2 ? sd : -sd));
+      closes = pre.concat(closes);
+    }
+    var cut = function (arr) { return lead ? arr.slice(lead) : arr; };
     if (p.type === "rsi") {
-      var v = p.values ? align(p.values, n) : rsiOf(closes, p.period || 14);
+      // authored values shorter than the chart: mirror their start leftwards so the line spans the whole panel
+      var pv = p.values && p.values.length < n ? p.values.slice(0, n - p.values.length).reverse().concat(p.values) : p.values;
+      while (pv && pv.length < n) pv = [pv[0]].concat(pv);
+      var v = pv ? align(pv, n) : cut(rsiOf(closes, p.period || 14));
       return { lines: [{ v: v, tone: p.tone || "gold" }], lo: 0, hi: 100, levels: p.levels || [30, 70] };
     }
     if (p.type === "macd") {
@@ -139,6 +151,7 @@
         m = f.map(function (x, i) { return i < (p.slow || 26) - 1 ? null : x - sl[i]; });
         s = ema(m, p.period || 9);
         hst = m.map(function (x, i) { return x == null || s[i] == null ? null : x - s[i]; });
+        m = cut(m); s = cut(s); hst = cut(hst);
       }
       var show = p.show || ["hist", "lines"], all = [].concat(m, s, hst).filter(function (x) { return x != null; });
       var mx = Math.max.apply(null, all.map(Math.abs).concat([1e-9]));
@@ -164,7 +177,11 @@
     var data = c.ohlc || (c.path ? genPath(c) : []);
     var w = opt.w || 330, h = opt.h || Math.round((c.height || 150) * w / 330), sc = w / 330;
     // a question's chart on a phone gets the height the tighter answer options free (about +45px), full-width charts only
-    if (questionChart && !opt.h && w === 330 && window.matchMedia && matchMedia("(max-width: 860px)").matches) h = Math.round(h + Math.min(48, h * 0.3));
+    // a question's chart (Calls, checks, Chapter Challenges) is the thing to read: at least 150 tall, never a flat strip
+    if (questionChart && !opt.h && w === 330) {
+      h = Math.max(h, 150);
+      if (window.matchMedia && matchMedia("(max-width: 860px)").matches) h = Math.round(Math.min(h + Math.min(48, h * 0.3), Math.max(h, 190)));
+    }
     var panels = c.panels || [], hasVol = !!(c.volume && c.volume.length);
     var axis = c.axis !== false && !opt.noAxis;
     var ticks = c.ticks != null ? c.ticks : (axis ? 4 : 2);
@@ -176,7 +193,7 @@
     if (c.future) fut = Math.max(fut, c.future);
     var plotW = w - axisW - 8;
     var step = plotW / (n + fut + 0.5);
-    var cw = Math.max(3, step * 0.62);
+    var cw = Math.max(questionChart ? 4 : 3, step * (questionChart ? 0.7 : 0.62));   // question charts: slightly fuller candles
     var lo = c.lo != null ? c.lo : Math.min.apply(null, data.map(function (d) { return d[2]; }));
     var hi = c.hi != null ? c.hi : Math.max.apply(null, data.map(function (d) { return d[1]; }));
     (c.hlines || []).forEach(function (l) { lo = Math.min(lo, l.price); hi = Math.max(hi, l.price); });
@@ -325,7 +342,7 @@
       s += vs; H = vtop + vh + 4;
     }
     panels.forEach(function (p) {
-      var ps = panelSeries(p, data), ph = Math.round((p.height || 58) * sc), ptop = H + (p.label ? 18 : 8), pbot = ptop + ph;
+      var ps = panelSeries(p, data), ph = Math.round((p.height || 58) * sc * (questionChart ? 1.6 : 1)), ptop = H + (p.label ? 18 : 8), pbot = ptop + ph;
       var plo = ps.lo, phi = ps.hi; if (!(phi > plo)) { phi = plo + 1; }
       function PY(v) { return pbot - (v - plo) / (phi - plo) * ph; }
       var g = '<line x1="8" x2="' + R + '" y1="' + r1(H + 2) + '" y2="' + r1(H + 2) + '" class="ac-v__grid"/>' + (p.label ? T(8, H + 14, p.label, { fs: 10, w: 800, cls: "ac-v__t--muted" }) : "");

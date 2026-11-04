@@ -82,7 +82,7 @@
       ctl = AC.cards.mcq({ type: "challenge", title: q.q }, {
         eyebrow: "", tone: "gold", head: meta + '<h2 class="ac-c__title">' + AC.rich(q.q) + "</h2>",
         options: q.options.map(function (o) { return { text: o }; }), answer: q.answer, why: q.why, work: q.work, gym: !!q.idea, slot: "challenge", idea: q.idea, dim: true,
-        visual: q.visual && AC.visual ? AC.visual(q.visual) : "", keepVisual: AC.cards.keepVisual(q.visual), visualMain: true,
+        visual: q.visual && AC.visual ? AC.visual(q.visual, { question: true }) : "", keepVisual: AC.cards.keepVisual(q.visual), visualMain: true,
         nextLabel: qi + 1 < n ? AC.t("challenge.q.next") : AC.t("challenge.q.results"),
       }, {
         mode: "challenge",
