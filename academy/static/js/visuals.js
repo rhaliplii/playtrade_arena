@@ -683,7 +683,7 @@
         return '<div class="ac-v__tile ac-v__coltile ' + tone(c.tone || "white") + '"><b class="ac-v__ink ac-v__coltitle">' + esc(c.title) + "</b>" + svg +
           (c.result ? '<b class="ac-v__colres ac-v__ink">' + AC.rich(c.result) + "</b>" : "") + "</div>";
       }
-      return '<div class="ac-v__tile ' + tone(c.tone || "white") + '"><b class="ac-v__ink ac-v__coltitle">' + esc(c.title) + "</b>" + c.rows.map(function (r) {
+      return '<div class="ac-v__tile ' + tone(c.tone || "white") + (c.tint ? " is-tinted" : "") + '"><b class="ac-v__ink ac-v__coltitle">' + esc(c.title) + "</b>" + c.rows.map(function (r) {
         return '<div class="ac-v__row ac-v__row--sm"><span>' + esc(r.label) + '</span><b class="ac-num ' + (r.tone ? tone(r.tone) + " ac-v__ink" : "") + '">' + esc(r.value) + "</b></div>";
       }).join("") + (c.result ? '<b class="ac-v__colres ac-v__ink">' + AC.rich(c.result) + "</b>" : "") + "</div>";
     }).join("") + "</div>";

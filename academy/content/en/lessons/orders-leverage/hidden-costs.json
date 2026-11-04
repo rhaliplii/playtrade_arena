@@ -152,7 +152,9 @@
         "label": "Spread per share",
         "value": "$0.06"
        }
-      ]
+      ],
+      "tone": "sky",
+      "tint": true
      },
      {
       "title": "BROKER B",
@@ -165,7 +167,9 @@
         "label": "Spread per share",
         "value": "$0.01"
        }
-      ]
+      ],
+      "tone": "pro",
+      "tint": true
      }
     ]
    },
