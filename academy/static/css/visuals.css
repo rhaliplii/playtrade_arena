@@ -800,3 +800,20 @@ button.ac-v__trw.is-open { box-shadow: inset 3px 0 0 var(--ac-primary-ink); back
 .ac-v__cmid span { font: 700 11px/1.3 var(--ac-font); color: var(--ac-text-muted); }
 .ac-v__cmid b { font: 800 16px var(--ac-font); color: var(--ac-text); }
 .ac-v__axis--strong { fill: var(--ac-text-soft) !important; }
+.ac-v__stroke { stroke: var(--tone); }
+
+/* bars, layout rows: label · horizontal bar + value · tap shows the working as a chip */
+.ac-v__box--brows { gap: 8px; }
+.ac-v__brow2 { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-items: center; gap: 10px; width: 100%; padding: 4px 0; border: 0; background: none; color: var(--ac-text); text-align: left; font: inherit; }
+button.ac-v__brow2 { cursor: pointer; }
+.ac-v__brlab { font: 800 13px var(--ac-font); }
+.ac-v__brtrack { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }
+.ac-v__brbar { display: block; height: 22px; min-width: 4px; max-width: 62%; border-radius: 6px; background: color-mix(in srgb, var(--tone) 75%, transparent); }
+.ac-v__brow2[aria-expanded="true"] .ac-v__brbar { background: var(--tone); box-shadow: 0 0 0 2px var(--ac-gold); }
+.ac-v__brval { font: 800 13px var(--ac-font); white-space: nowrap; }
+.ac-v__brsub { display: none; padding: 3px 10px; border-radius: 999px; background: var(--ac-gold); color: var(--ac-ink) !important; font: 800 12px var(--ac-font); white-space: nowrap; }
+.ac-v__brow2[aria-expanded="true"] .ac-v__brsub { display: inline-block; }
+/* equation: one row, the terms share the width */
+.ac-v__eq { flex-wrap: nowrap; gap: 6px; }
+.ac-v__eq .ac-v__term { flex: 1 1 0; min-width: 0; padding: 10px 6px; }
+.ac-v__eq .ac-v__term b { font-size: clamp(16px, 5vw, 22px); }

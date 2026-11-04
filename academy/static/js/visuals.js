@@ -436,6 +436,25 @@
         '<b class="ac-v__result ' + tone(it.tone || "white") + ' ac-v__ink">' + AC.rich(it.result) + "</b>" + (it.sub ? '<span class="ac-v__sub">' + AC.rich(it.sub) + "</span>" : "") + "</div>";
     }).join("") + "</div>";
   };
+  /** stacks: money as stacked bars, a dashed arrow (with a mark) from one stack to the next (design P1-Ch02 L3 Call:
+      "You: $1,000" → ? → "Trade: $10,000"). items: [{label, n (bars), tone}], mark: text over the arrow. */
+  R.stacks = function (v) {
+    var W = 360, H = 130, base = 108, bw = 54, bh = 8, gap = 1, cols = v.items.length, x0 = 50, x1 = W - 50 - bw;
+    var xs = v.items.map(function (_, i) { return cols === 1 ? (W - bw) / 2 : x0 + (x1 - x0) * i / (cols - 1); });
+    var s = "";
+    v.items.forEach(function (it, i) {
+      var x = xs[i];
+      for (var k = 0; k < it.n; k++) s += '<rect x="' + r1(x) + '" y="' + r1(base - (k + 1) * (bh + gap)) + '" width="' + bw + '" height="' + bh + '" rx="4" class="' + tone(it.tone || "gold") + ' ac-v__fill" fill-opacity="' + (k % 2 ? 0.6 : 0.5) + '"/>';
+      s += T(x + bw / 2, 124, it.label, { fs: 12, w: 800, anchor: "middle" });
+      if (i < cols - 1) {
+        var a = x + bw + 16, b = xs[i + 1] - 16, y = 80;
+        s += '<path d="M' + r1(a) + " " + y + " H" + r1(b) + '" class="' + tone(it.tone || "gold") + ' ac-v__stroke" stroke-width="2" stroke-dasharray="4 4" fill="none"/>' +
+          '<path d="M' + r1(b - 4) + " " + (y - 6) + " l8 6 -8 6" + '" class="' + tone(it.tone || "gold") + ' ac-v__stroke" stroke-width="2" fill="none"/>' +
+          (v.mark ? T((a + b) / 2, y - 14, v.mark, { tone: it.tone || "gold", fs: 26, w: 800, anchor: "middle" }) : "");
+      }
+    });
+    return '<div class="ac-v__box ac-v__box--svg"><svg class="ac-v__svg" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(v.label || "") + '">' + s + "</svg></div>";
+  };
   /** crowd: buyers against sellers at one price, counted as people (Ch1 "Ten buyers, one seller"). sides: [{label, n,
       tone, tag (e.g. "you")}]; price: the last trade, shown between them. */
   R.crowd = function (v) {
@@ -684,6 +703,16 @@
   R.bars = function (v) {
     var bars = v.bars, n = bars.length, tap = bars.some(function (b) { return b.sub; });
     var max = v.max || Math.max.apply(null, bars.map(function (b) { return Math.abs(b.value); })) || 1;
+    // layout "rows" (design P1-Ch02 L3 "wipe-out rule"): a horizontal bar a row, its value beside it, tap for the working
+    if (v.layout === "rows") {
+      return '<div class="ac-v__box ac-v__box--brows"' + (tap ? ' data-interactive="bars"' : "") + ">" + (v.caption ? '<span class="ac-v__title">' + esc(v.caption) + "</span>" : "") +
+        bars.map(function (b) {
+          var tag = tap && b.sub ? "button" : "div", pct = Math.max(1.5, Math.abs(b.value) / max * 100);
+          return "<" + tag + (tag === "button" ? ' type="button" aria-expanded="false" data-bar' : "") + ' class="ac-v__brow2 ' + tone(b.tone || "primary") + '"><b class="ac-v__brlab">' + esc(b.label) + "</b>" +
+            '<span class="ac-v__brtrack"><span class="ac-v__brbar" style="width:' + r1(pct) + '%"></span><span class="ac-v__brval ac-num">' + esc(b.display != null ? b.display : num(b.value)) + "</span>" +
+            (b.sub ? '<span class="ac-v__bsub ac-v__brsub">' + esc(b.sub) + "</span>" : "") + "</span></" + tag + ">";
+        }).join("") + "</div>";
+    }
     var bands = (v.bands || []).map(function (b) {
       return '<span class="ac-v__band ' + tone(b.tone) + '" style="grid-column:' + (b.from + 1) + " / " + (b.to + 2) + '"><span class="ac-v__ink">' + esc(b.label) + "</span></span>";
     }).join("");
@@ -1471,6 +1500,13 @@
       }
       input.addEventListener("input", function () { out.innerHTML = sliderOut(model, p, +input.value, lab); track(); emit(); });
       track();
+      // params.goal "lo": the one end that matters (the leverage wipe-out): drag all the way left to go on
+      if (p.goal === "lo") {
+        var hit = false;
+        input.addEventListener("input", function () { if (+input.value <= min) { hit = true; emit(); } });
+        parts.push({ total: 1, slider: true, goal: p.goalLabel || "", done: function () { return hit ? 1 : 0; }, value: function () { return +input.value; }, openAll: function () { hit = true; } });
+        return;
+      }
       parts.push({ total: 2, slider: true, done: function () { return (ends.lo ? 1 : 0) + (ends.hi ? 1 : 0); }, value: function () { return +input.value; },
         openAll: function () { ends.lo = ends.hi = true; } });
     });

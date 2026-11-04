@@ -643,6 +643,8 @@
     }
     ctl.cta = function () {
       if (done() >= total()) return { label: AC.t("common.continue") };
+      var goal = api.parts.filter(function (p) { return p.slider && p.goal; })[0];
+      if (goal && !steps.length) return { label: goal.goal, disabled: true };
       if (api.hasSlider() && !steps.length) return { label: AC.t("cards.walk.ends", { n: api.done(), total: 2 }), disabled: true };
       if (api.parts.some(function (p) { return p.drawline; }) && api.total() === 1 && !steps.length) return { label: AC.t("cards.walk.drag"), disabled: true };
       return { label: AC.t("cards.walk.tapped", { n: done(), total: total() }), disabled: true };

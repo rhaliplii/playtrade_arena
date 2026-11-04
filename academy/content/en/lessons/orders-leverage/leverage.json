@@ -14,22 +14,19 @@
    "title": "What’s the catch?",
    "situation": "A broker offers: “Deposit $1,000 and trade as if you had $10,000.” If the price rises 10%, you’d make $1,000 instead of $100. What’s the catch?",
    "visual": {
-    "kind": "flow",
+    "kind": "stacks",
+    "mark": "?",
+    "label": "Your $1,000 becomes a $10,000 trade. How?",
     "items": [
      {
-      "top": "You",
-      "value": "$1,000",
+      "label": "You: $1,000",
+      "n": 1,
       "tone": "gold"
      },
      {
-      "value": "?",
+      "label": "Trade: $10,000",
+      "n": 10,
       "tone": "gold"
-     },
-     {
-      "top": "Trade",
-      "value": "$10,000",
-      "tone": "gold",
-      "active": true
      }
     ]
    },
@@ -88,11 +85,11 @@
    "added": "Slider interaction on the p.14 numbers · Visual: Leverage slider drawn at −10%, with +1% and −5% marks (book p.14 numbers)",
    "tag": "drag",
    "title": "Move the price",
-   "text": "You have $1,000 at 10×, a $10,000 position. Drag the price. A 1% move is $100, which is 10% of your money. A 10% move is $1,000, which is all of it.",
+   "text": "You have $1,000 at 10×, a $10,000 position. A 1% move is $100, which is 10% of your money. Drag the price down to −10% and watch your $1,000.",
    "visual": {
     "kind": "slider",
     "model": "leverage",
-    "value": -10,
+    "value": 0,
     "label": "$1,000 AT 10× · A $10,000 POSITION",
     "params": {
      "margin": 1000,
@@ -121,7 +118,9 @@
      "pnlLabel": "POSITION P&L",
      "equityLabel": "YOUR $1,000 NOW",
      "wipeout": "WIPED OUT",
-     "foot": "Price moves −10% → you lose 100%."
+     "foot": "Price moves −10% → you lose 100%.",
+     "goal": "lo",
+     "goalLabel": "Drag the price to −10%"
     }
    }
   },
@@ -164,7 +163,8 @@
       "tone": "down",
       "sub": "100% ÷ 100 = 1%"
      }
-    ]
+    ],
+    "layout": "rows"
    }
   },
   {
