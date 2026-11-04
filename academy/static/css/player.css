@@ -399,7 +399,6 @@
 .ac-c.is-revealed.ac-ch-q .ac-c__title { font-size: 24px; }
 .ac-pl--challenge .ac-pl__foot.has-sheet { padding-top: 0; }
 .ac-pl--challenge .ac-sheet .ac-sheet__rico { height: 52px; }
-.ac-pl--challenge .ac-pl__foot.has-sheet .ac-pl__bar { display: none; }
 .ac-res { display: flex; flex-direction: column; gap: 14px; }
 .ac-res__main { display: flex; flex-direction: column; gap: 14px; }
 .ac-res__hero { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; padding: 20px 16px 0 20px; border-radius: 20px; background: var(--ac-hero); color: var(--ac-hero-text); overflow: hidden; }

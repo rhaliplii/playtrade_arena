@@ -99,12 +99,8 @@
         if (r === "next") { qi += 1; return qi < n ? question() : submit(); }
         if (ctl.sheet && !ctl.sheetPlaced) {
           ctl.sheetPlaced = true;
-          // the next step sits inside the sheet (canvas: "Not quite … [Next question]")
-          var b = AC.h('<button type="button" class="ac-btn ac-btn--primary ac-btn--lg ac-sheet__cta">' + esc(ctl.cta().label) + "</button>");
-          b.addEventListener("click", function () { onCta(); });
-          ctl.sheet.appendChild(b);
+          // the next step is the fixed button at the bottom, where Check was (as in lessons and the Gym)
           F.setRico(null, null); F.placeSheet(ctl.sheet); F.setProgress(qi, true);
-          F.el.classList.add("is-sheetcta");
           F.setAside(missed() ? AC.t("challenge.aside.missed", { n: missed() }) : AC.t("challenge.aside.rule"));
           F.showAnswer();
         }
