@@ -130,7 +130,8 @@
        "asLine": true,
        "priceLabel": "Price",
        "volLabel": "Volume",
-       "volTone": "up"
+       "volTone": "up",
+       "lineTone": "sky"
       }
      },
      {
@@ -250,7 +251,8 @@
        "asLine": true,
        "priceLabel": "Price",
        "volLabel": "Volume",
-       "volTone": "up"
+       "volTone": "up",
+       "lineTone": "pro"
       }
      }
     ]
@@ -608,7 +610,8 @@
        "volMax": 4.9,
        "volTone": "up",
        "priceLabel": "Price",
-       "volLabel": "Volume"
+       "volLabel": "Volume",
+       "lineTone": "sky"
       },
       "foot": "Each push higher brings **more** shares traded. Plenty of buyers back the move."
      },
@@ -841,7 +844,8 @@
        "volMax": 4.9,
        "volTone": "up",
        "priceLabel": "Price",
-       "volLabel": "Volume"
+       "volLabel": "Volume",
+       "lineTone": "pro"
       },
       "foot": "Price still edges up, but fewer shares trade each day. Buyers are tiring: **watch for a stall**."
      }
