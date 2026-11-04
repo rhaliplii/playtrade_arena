@@ -64,7 +64,8 @@
       "sessions": "#/$defs/sessions",
       "crowd": "#/$defs/crowd",
       "stacks": "#/$defs/stacks",
-      "zoom": "#/$defs/zoom"
+      "zoom": "#/$defs/zoom",
+      "trendrows": "#/$defs/trendrows"
     }
   },
   "$defs": {
@@ -4176,6 +4177,78 @@
               },
               "chart": {
                 "$ref": "#/$defs/chart"
+              }
+            }
+          }
+        }
+      }
+    },
+    "trendrows": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "description": "Situations as rows: a mini price-and-average chart, what you see, and the verdict with an arrow.",
+      "properties": {
+        "kind": {
+          "const": "trendrows"
+        },
+        "label": {
+          "type": "string"
+        },
+        "legend": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "priceTone": {
+          "type": "string"
+        },
+        "avgTone": {
+          "type": "string"
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value",
+              "price"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "tone": {
+                "type": "string"
+              },
+              "dir": {
+                "enum": [
+                  "up",
+                  "down",
+                  "flat"
+                ]
+              },
+              "price": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "avg": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
               }
             }
           }

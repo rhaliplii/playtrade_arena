@@ -483,6 +483,19 @@
   };
   /** crowd: buyers against sellers at one price, counted as people (Ch1 "Ten buyers, one seller"). sides: [{label, n,
       tone, tag (e.g. "you")}]; price: the last trade, shown between them. */
+  /** trendrows: one row per situation: a mini chart (price line + its moving average on one scale), what you see, and
+      the verdict with an arrow (up / down / flat). rows: [{label, value, tone, dir, price: [...], avg: [...]}] */
+  R.trendrows = function (v) {
+    var W = 96, H = 46;
+    return '<div class="ac-v__box ac-v__trows">' + (v.legend ? '<div class="ac-v__hdr"><span class="ac-v__legend">' + legendHtml(v.legend) + "</span></div>" : "") + v.rows.map(function (r) {
+      var all = r.price.concat(r.avg || []), o = { x0: 3, x1: W - 3, top: 5, bot: H - 5, lo: Math.min.apply(null, all), hi: Math.max.apply(null, all) };
+      var svg = '<svg class="ac-v__tchart" viewBox="0 0 ' + W + " " + H + '" aria-hidden="true">' +
+        (r.avg ? '<path d="' + linePath(r.avg, o).d + '" class="' + tone(v.avgTone || "gold") + ' ac-v__ovl"/>' : "") +
+        '<path d="' + linePath(r.price, o).d + '" class="' + tone(v.priceTone || "blue") + ' ac-v__ovl ac-v__tprice"/></svg>';
+      return '<div class="ac-v__trow">' + svg + '<span class="ac-v__tlabel2">' + AC.rich(r.label) + "</span>" +
+        '<b class="ac-v__tverdict ' + tone(r.tone || "white") + ' ac-v__ink">' + (r.dir ? '<span class="ac-v__tarrow">' + svgIcon(r.dir === "up" ? ARROW_UP : r.dir === "down" ? ARROW_DOWN : TREND.flat, 16) + "</span>" : "") + esc(r.value) + "</b></div>";
+    }).join("") + "</div>";
+  };
   R.crowd = function (v) {
     var PERSON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0z"/></svg>';
     var side = function (s) {
