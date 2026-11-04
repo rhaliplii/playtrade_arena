@@ -436,6 +436,20 @@
         '<b class="ac-v__result ' + tone(it.tone || "white") + ' ac-v__ink">' + AC.rich(it.result) + "</b>" + (it.sub ? '<span class="ac-v__sub">' + AC.rich(it.sub) + "</span>" : "") + "</div>";
     }).join("") + "</div>";
   };
+  /** zoom: a timeframe switcher that works (Ch3 "Zoom out first"): tabs on top, one chart at a time, a line per
+      timeframe that builds the story. items: [{tab, title, aside, line, chart (candles spec)}]; start: the first tab shown. */
+  R.zoom = function (v) {
+    var st = v.start || 0;
+    var tabs = v.items.map(function (it, i) {
+      return '<button type="button" role="tab" class="ac-v__ztab' + (i === st ? " is-on is-seen" : "") + '" aria-selected="' + (i === st) + '" data-ztab="' + i + '">' + esc(it.tab) + '<span class="ac-v__ztick" aria-hidden="true">✓</span></button>';
+    }).join("");
+    var panes = v.items.map(function (it, i) {
+      return '<div class="ac-v__zpane" data-zpane="' + i + '"' + (i === st ? "" : " hidden") + ">" +
+        '<div class="ac-v__dhead"><b>' + esc(it.title) + "</b><span>" + esc(it.aside || "") + "</span></div>" +
+        candles(it.chart, {}) + (it.line ? '<p class="ac-v__zline">' + AC.rich(it.line) + "</p>" : "") + "</div>";
+    }).join("");
+    return '<div class="ac-v__zoom" data-interactive="zoom"><div class="ac-v__ztabs" role="tablist" aria-label="' + esc(v.label || "Timeframe") + '">' + tabs + '</div><div class="ac-v__box ac-v__zbox">' + panes + "</div></div>";
+  };
   /** stacks: money as stacked bars, a dashed arrow (with a mark) from one stack to the next (design P1-Ch02 L3 Call:
       "You: $1,000" → ? → "Trade: $10,000"). items: [{label, n (bars), tone}], mark: text over the arrow. */
   R.stacks = function (v) {
@@ -1434,7 +1448,7 @@
     if (!spec) return false;
     if (spec.kind === "tiles" || spec.kind === "slider") return true;
     if (spec.kind === "bars") return (spec.bars || []).some(function (b) { return b.sub; });
-    if (spec.kind === "drawline") return true;
+    if (spec.kind === "drawline" || spec.kind === "zoom") return true;
     if (spec.kind === "table") return (spec.rows || []).some(function (r) { return r.note; });
     if (spec.kind === "barchart" && (spec.groups || []).some(function (g) { return g.note; })) return true;
     if (spec.kind === "checklist") return !!explore;
@@ -1500,6 +1514,19 @@
       }
       btns.forEach(function (b, i) { b.addEventListener("click", function () { reveal(b, i); }); });
       parts.push({ total: btns.length, done: function () { return Object.keys(seen).length; }, openAll: function () { btns.forEach(function (b, i) { reveal(b, i, true); }); } });
+    });
+    AC.$$('[data-interactive="zoom"]', root).forEach(function (w) {
+      var tabs = AC.$$("[data-ztab]", w), panes = AC.$$("[data-zpane]", w), seen = {};
+      tabs.forEach(function (t, i) { if (t.classList.contains("is-seen")) seen[i] = true; });
+      tabs.forEach(function (t, i) {
+        t.addEventListener("click", function () {
+          tabs.forEach(function (x, k) { x.classList.toggle("is-on", k === i); x.setAttribute("aria-selected", String(k === i)); });
+          panes.forEach(function (p, k) { p.hidden = k !== i; });
+          t.classList.add("is-seen"); seen[i] = true; emit();
+        });
+      });
+      parts.push({ total: tabs.length, done: function () { return Object.keys(seen).length; },
+        openAll: function () { tabs.forEach(function (t, i) { t.classList.add("is-seen"); seen[i] = true; }); } });
     });
     AC.$$('[data-interactive="slider"]', root).forEach(function (w) {
       var input = AC.$(".ac-v__range", w), out = AC.$(".ac-v__sl-out", w);

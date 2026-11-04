@@ -63,7 +63,8 @@
       "depth": "#/$defs/depth",
       "sessions": "#/$defs/sessions",
       "crowd": "#/$defs/crowd",
-      "stacks": "#/$defs/stacks"
+      "stacks": "#/$defs/stacks",
+      "zoom": "#/$defs/zoom"
     }
   },
   "$defs": {
@@ -4088,6 +4089,57 @@
               },
               "tone": {
                 "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        }
+      }
+    },
+    "zoom": {
+      "type": "object",
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "Working timeframe tabs: one candle chart per tab, a line each; every tab must be seen.",
+      "properties": {
+        "kind": {
+          "const": "zoom"
+        },
+        "label": {
+          "type": "string"
+        },
+        "start": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": [
+              "tab",
+              "title",
+              "chart"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "tab": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "aside": {
+                "type": "string"
+              },
+              "line": {
+                "type": "string"
+              },
+              "chart": {
+                "$ref": "#/$defs/chart"
               }
             }
           }

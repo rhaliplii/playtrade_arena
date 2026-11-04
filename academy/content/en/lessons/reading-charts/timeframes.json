@@ -140,24 +140,16 @@
    "type": "walkthrough",
    "tag": "tap",
    "title": "Zoom out first",
-   "text": "",
+   "text": "Tap each timeframe, from the closest view out to the biggest. The same stock tells three different stories.",
    "visual": {
-    "kind": "stack",
+    "kind": "zoom",
+    "start": 0,
+    "label": "Timeframe",
     "items": [
      {
-      "kind": "tabs",
-      "items": [
-       "1m",
-       "1H",
-       "1D",
-       "1W"
-      ],
-      "on": 3
-     },
-     {
-      "kind": "candles",
-      "title": "Weekly · the trend",
-      "aside": "up",
+      "tab": "1H",
+      "title": "Hourly · today",
+      "aside": "bounce",
       "chart": {
        "axis": false,
        "lastTag": false,
@@ -165,46 +157,43 @@
        "path": [
         [
          0,
-         40
+         52.4
         ],
         [
-         4,
-         45
+         3,
+         52.0
         ],
         [
          6,
-         43.5
+         52.9
         ],
         [
-         11,
-         50
+         9,
+         52.6
         ],
         [
          14,
-         48
+         53.4
         ],
         [
-         19,
-         55
-        ],
-        [
-         21,
-         54
+         17,
+         53.1
         ],
         [
          23,
-         58
+         54
         ]
        ],
-       "seed": 3,
-       "height": 100,
+       "seed": 9,
+       "height": 160,
        "noise": 1.6,
-       "label": "Weekly candles rising from $40 to $58",
+       "label": "Hourly candles bouncing from $52 to $54",
        "wick": 1.6
-      }
+      },
+      "line": "Looks like a rally…"
      },
      {
-      "kind": "candles",
+      "tab": "1D",
       "title": "Daily · the pullback",
       "aside": "down",
       "chart": {
@@ -246,16 +235,17 @@
         ]
        ],
        "seed": 5,
-       "height": 100,
+       "height": 160,
        "noise": 1.6,
        "label": "Daily candles pulling back from $58 to $52",
        "wick": 1.6
-      }
+      },
+      "line": "…but it’s a bounce inside a pullback."
      },
      {
-      "kind": "candles",
-      "title": "Hourly · today",
-      "aside": "bounce",
+      "tab": "1W",
+      "title": "Weekly · the trend",
+      "aside": "up",
       "chart": {
        "axis": false,
        "lastTag": false,
@@ -263,39 +253,44 @@
        "path": [
         [
          0,
-         52.4
+         40
         ],
         [
-         3,
-         52.0
+         4,
+         45
         ],
         [
          6,
-         52.9
+         43.5
         ],
         [
-         9,
-         52.6
+         11,
+         50
         ],
         [
          14,
-         53.4
+         48
         ],
         [
-         17,
-         53.1
+         19,
+         55
+        ],
+        [
+         21,
+         54
         ],
         [
          23,
-         54
+         58
         ]
        ],
-       "seed": 9,
-       "height": 100,
+       "seed": 3,
+       "height": 160,
        "noise": 1.6,
-       "label": "Hourly candles bouncing from $52 to $54",
+       "label": "Weekly candles rising from $40 to $58",
        "wick": 1.6
-      }
+      },
+      "line": "And the pullback sits inside an uptrend. **Zoom out first.**"
      }
     ]
    }
