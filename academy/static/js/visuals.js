@@ -1101,7 +1101,8 @@
       var s = "";
       // one candle: label only its own four prices (a dollar grid labels prices it never touched); several: a nice grid
       var tv = v.items.length === 1 ? o.filter(function (q, i, a) { return a.indexOf(q) === i; }) : niceTicks(lo, hi, 5).values;
-      if (ax) tv.forEach(function (q) { s += '<line x1="44" x2="' + (W - 6) + '" y1="' + r1(Y(q)) + '" y2="' + r1(Y(q)) + '" class="ac-v__grid"/>' + T(38, Y(q) + 3.5, money(q, v.fmt), { fs: 10, w: 700, anchor: "end", cls: "ac-v__axis" }); });
+      // one candle: its prices are what the question is about, so they read at body-text size, not as faint axis ticks
+      if (ax) tv.forEach(function (q) { s += '<line x1="44" x2="' + (W - 6) + '" y1="' + r1(Y(q)) + '" y2="' + r1(Y(q)) + '" class="ac-v__grid"/>' + T(38, Y(q) + 5, money(q, v.fmt), { fs: v.items.length === 1 ? 16 : 10, w: v.items.length === 1 ? 800 : 700, anchor: "end", cls: v.items.length === 1 ? "ac-v__axis ac-v__axis--strong" : "ac-v__axis" }); });
       var y1 = Y(Math.max(o[0], o[3])), y2 = Y(Math.min(o[0], o[3]));
       s += '<g class="' + tone(t) + ' ac-v__cdl"><line x1="' + cx + '" x2="' + cx + '" y1="' + r1(Y(o[1])) + '" y2="' + r1(Y(o[2])) + '" class="ac-v__wick ac-v__wick--big"/><rect x="' + (cx - bw / 2) + '" y="' + r1(y1) + '" width="' + bw + '" height="' + r1(Math.max(2, y2 - y1)) + '" rx="3" class="ac-v__fill"/></g>';
       if (!ax && it.labels !== false) {

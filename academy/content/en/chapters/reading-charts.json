@@ -38,7 +38,7 @@
   "questions": [
    {
     "lesson": 1,
-    "q": "This red candle opened at $50. Read it: where did it close?",
+    "q": "This red candle opened at $50. Where did it close?",
     "visual": {
      "kind": "candle",
      "title": "Daily · one candle",
@@ -482,7 +482,7 @@
   "retry": [
    {
     "lesson": 1,
-    "q": "This green candle opened at $30. Read it: where did it close?",
+    "q": "This green candle opened at $30. Where did it close?",
     "visual": {
      "kind": "candle",
      "title": "Daily · one candle",
