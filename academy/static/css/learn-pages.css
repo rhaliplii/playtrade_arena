@@ -1573,3 +1573,6 @@ html.ac-reduce-motion .ac-home--guest .ac-ghsticky, html.ac-reduce-motion .ac-do
   .ac-home--guest .ac-ghsticky { background: var(--ac-page); padding-top: 4px; }
   .ac-home--guest .ac-ghsticky::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 20px; background: linear-gradient(180deg, transparent, var(--ac-page)); pointer-events: none; }
 }
+
+/* All paths › In progress, empty: the link to start sits on its own line */
+.ac-empty--paths a { display: table; margin-top: 4px; }

@@ -34,7 +34,7 @@ def routes(ctx):
     <div class="ac-section-head"><h2 id="pro-title" class="ac-h2">{esc(t("paths.pro"))}</h2></div>
     <div class="ac-pgrid">{"".join(pro_card(t, base, p) for p in pros)}</div>
   </section>
-  <p class="ac-empty" data-paths-empty hidden>{esc(t("paths.empty"))} <a href="{href(base, first_r)}">{esc(t("paths.emptyCta"))}</a></p>
+  <p class="ac-empty ac-empty--paths" data-paths-empty hidden>{esc(t("paths.empty"))} <a href="{href(base, first_r)}">{esc(t("paths.emptyCta"))}</a></p>
   </div>
   <section class="ac-card ac-proband" aria-labelledby="band-title" data-pro-hide>
     <span class="ac-iconbox ac-iconbox--pro ac-iconbox--lg">{icon("star", 22, 2)}</span>
