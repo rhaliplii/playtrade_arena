@@ -359,7 +359,7 @@ def theme_color():
     return m.group(1) if m else "black"
 
 
-OG_IMAGE = f"{ORIGIN}/academy/static/img/rico/hero.webp"   # default share image: Rico's hero pose
+OG_IMAGE = f"{ORIGIN}/academy/static/img/og/academy.jpg"   # default share image (1200×630): logo + ACADEMY, tagline, Rico
 
 
 def json_script(v):
@@ -401,6 +401,9 @@ def page(t, *, route, title, description, body, active="home", index=True, css=(
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{esc(canonical or url)}">
   <meta property="og:image" content="{OG_IMAGE}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Profit.com Academy: 5-minute trading lessons with Rico">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="{theme_color()}">
   <link rel="icon" type="image/svg+xml" href="{root}assets/ft-logo-mark.svg">{ld}
