@@ -231,7 +231,7 @@ const initTopnav = () => {
       groups: [
         { title: "Learn", items: [
           { label: "How it works", icon: "ln-question.svg", href: "academy/how-it-works/index.html" },
-          { label: "Paths", icon: "ln-paths.svg", href: "academy/paths/index.html" },
+          { label: "Learning paths", icon: "ln-paths.svg", href: "academy/paths/index.html" },
           { label: "Top Learners", icon: "ln-trophy.svg", href: "academy/leaderboard/index.html" },
           { label: "Glossary", icon: "ln-glossary.svg", href: "academy/glossary/index.html" },
           { label: "Free guide", icon: "ln-guide.svg", href: "academy/guide/index.html" },
