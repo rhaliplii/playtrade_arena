@@ -637,6 +637,7 @@
     } else a.hidden = true;
     // free learners on a lesson that isn't open yet: "Unlock it now with Pro, or keep going free" instead of "Not now"
     showEl($("[data-sheet-up]", d), !!o.upsell);
+    if (o.upsell) setText($("[data-sheet-pro]", d), t(o.upsellKey || "pm.sheet.upPro"));   // a Challenge still needs its lessons: Pro unlocks the lessons
     showEl($("[data-sheet-close]", d), !o.upsell);
     if (!d.dataset.wired) {
       d.dataset.wired = "1";
@@ -769,7 +770,7 @@
         showEl(cgo, false);
         var chint = state === "soon" ? t("pm.l.hint.soon") : c.unlocked ? t("pm.l.hint.challengeLessons") : t("pm.l.hint.chapterCh", { n: prev ? prev.n : c.n });
         setText($("[data-tip]", ch), chint);
-        ch._hint = { eb: t("pm.sheet.ebCh", { n: c.n }), title: t("pm.ch.challenge"), text: chint, cta: state === "soon" ? null : cta };
+        ch._hint = { eb: t("pm.sheet.ebCh", { n: c.n }), title: t("pm.ch.challenge"), text: chint, cta: state === "soon" ? null : cta, upsell: state !== "soon" && !isGuest() && !pro, upsellKey: "pm.sheet.upProAll" };
         $("[data-hint]", ch).setAttribute("aria-label", t("pm.ch.challenge") + ". " + chint);
       }
     }

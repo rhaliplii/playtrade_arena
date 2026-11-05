@@ -745,7 +745,6 @@
 .ac-pmsheet__close { min-height: 44px; border: 0; background: none; color: var(--ac-text-muted); font: 600 14px var(--ac-font); cursor: pointer; }
 .ac-pmsheet__close:hover { color: var(--ac-text); }
 /* free learners: the Pro upsell line in place of "Not now"; a ✕ for desktop (phones close by swipe / backdrop) */
-.ac-pmsheet { position: relative; }
 .ac-pmsheet__up { margin: 2px 0 0; text-align: center; font: 600 14px/1.5 var(--ac-font); color: var(--ac-text-muted); }
 .ac-pmsheet__up a { color: var(--ac-pro-ink, var(--ac-gold)) !important; font-weight: 700; text-decoration: none; }
 .ac-pmsheet__up a:hover { text-decoration: underline; }
