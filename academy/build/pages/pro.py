@@ -37,11 +37,11 @@ def routes(ctx):
                   else t("pro.row.paths.noteAll", n=n_live))
     rows = [
         ("pro.row.ltt", t("pro.row.ltt.note", n=len(ctx.path["chapters"])), True),
-        ("pro.row.anyOrder", t("pro.row.anyOrder.note"), False),   # Pro may open any lesson (the locked-lesson sheet's upsell)
         ("pro.row.gym", t("pro.row.gym.note"), True),
         ("pro.row.glossary", t("pro.row.glossary.note"), True),
         ("pro.row.board", t("pro.row.board.note"), True),
         ("pro.row.cert", t("pro.row.cert.note"), True),
+        ("pro.row.anyOrder", t("pro.row.anyOrder.note"), False),   # Pro may open any lesson (the locked-lesson sheet's upsell)
         ("pro.row.paths", paths_note, False),
         ("pro.row.proCert", t("pro.row.proCert.note"), False),
     ]
