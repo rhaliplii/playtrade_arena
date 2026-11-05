@@ -77,7 +77,7 @@ def routes(ctx):
 
   <section class="ac-pro-table-wrap" aria-label="{esc(t("pro.table.aria"))}">
     <table class="ac-pro-table">
-      <thead><tr><th scope="col">{esc(t("pro.table.what"))}</th><th scope="col">{esc(t("pro.table.free"))}</th><th scope="col" class="ac-pro-table__pro">{esc(t("pro.table.pro"))}</th></tr></thead>
+      <thead><tr><th scope="col">{esc(t("pro.table.what"))}</th><th scope="col">{esc(t("pro.table.free"))}</th><th scope="col" class="ac-pro-table__pro"><span class="ac-pro-table__pill">{esc(t("pro.table.pro"))}</span></th></tr></thead>
       <tbody>{table}</tbody>
     </table>
   </section>
