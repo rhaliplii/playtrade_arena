@@ -88,7 +88,8 @@
 .ac-how-skill.is-on .ac-how-skill__icon, .ac-how-skill.is-on .ac-how-skill__state { background: var(--ac-primary-soft); color: var(--ac-primary-ink); }
 .ac-how-finish { margin-top: auto; display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: var(--ac-r-tile); background: var(--ac-surface-raised); font: 500 14px/20px var(--ac-font); color: var(--ac-text-muted); }
 .ac-how-finish b { color: var(--ac-text); }
-.ac-how-verify { align-self: flex-start; display: inline-flex; gap: 6px; margin-top: 12px; }
+.ac-how-verify { align-self: flex-start; display: inline-block; margin-top: 12px; }   /* inline, so the hover underline runs under the › too */
+.ac-how-verify > span::before { content: "\a0"; }
 .ac-how-col .ac-ref-rows { margin-bottom: 16px; }
 
 .ac-how-steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }

@@ -661,7 +661,8 @@
 .ac-pmcard__foot { display: flex; align-items: center; gap: 8px; min-height: 32px; padding-top: 12px; border-top: 1px solid var(--ac-line); font: 600 13.5px var(--ac-font); color: var(--ac-link) !important; text-decoration: none !important; }
 .ac-pmcard__foot:hover { text-decoration: underline !important; text-underline-offset: 3px; }
 .ac-pmcard__foot svg { flex: none; }
-.ac-pmcard__foot--chev { justify-content: flex-start; gap: 6px; }   /* the › right after its text */
+.ac-pmcard__foot--chev { display: block; line-height: 20px; }   /* text and › flow as one line, so the hover underline runs under both */
+.ac-pmcard__foot--chev > span::before { content: "\a0"; }
 .ac-pmcard--save { background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-mint-wash) 18%, transparent), transparent 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--pm-mint-a); }
 .ac-pmcard--pro { gap: 14px; padding: 20px; background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-pro) 28%, transparent), transparent 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ac-pro) 45%, transparent); }
 :root[data-theme="light"] .ac-pmcard--pro { background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-pro) 12%, transparent), transparent 60%), var(--ac-surface); }
