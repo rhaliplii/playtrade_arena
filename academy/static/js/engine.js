@@ -350,10 +350,13 @@
       var first = chs[0] && chs[0].lessons && chs[0].lessons[0] ? chs[0].lessons[0].id : null;
       if (guest) return { reason: "guest", chapter: chapterId, lesson: first };
       if (!ch.available) return { reason: "soon", chapter: chapterId };
+      // Pro: every lesson of the free path opens in any order (the certificate still needs every Chapter Challenge)
+      var pro = !!(AC.auth && AC.auth.isPro && AC.auth.isPro());
       function passed(c) { var r = rec.chapters[c] || {}; return !!(r.testedOut || (r.challenge && r.challenge.passed)); }
       function done(id) { return !!(rec.lessons[id] && rec.lessons[id].done); }
       if (what !== "challenge" && done(what)) return null;   // a finished lesson can always be replayed
-      if (ci > 0 && !passed(chs[ci - 1].id)) {
+      if (pro && what !== "challenge") return null;
+      if (ci > 0 && !pro && !passed(chs[ci - 1].id)) {
         var prev = chs[ci - 1], todo = (prev.lessons || []).filter(function (l) { return !done(l.id); })[0];
         return { reason: "chapter", chapter: prev.id, lesson: todo ? todo.id : null };
       }

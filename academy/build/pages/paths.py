@@ -204,5 +204,5 @@ def pro_body(ctx, p, base):
       {practice}
     </aside>
   </div>
-  {pm_sheet(t)}
+  {pm_sheet(t, base)}
 </div>'''

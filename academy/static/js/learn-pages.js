@@ -62,7 +62,7 @@
       return out;
     });
     chapters.forEach(function (c, i) {
-      c.unlocked = c.available && (i === 0 || chapters[i - 1].passed);
+      c.unlocked = c.available && (i === 0 || chapters[i - 1].passed || AC.auth.isPro());   // Pro may play ahead
       c.complete = c.passed && (c.testedOut || c.done === c.count);
       c.next = c.lessons.filter(function (l) { return !l.done; })[0] || null;
       c.paid = chapterXpOf(c);
@@ -576,6 +576,14 @@
   /** The learner's place: the chapter they are in (or, when every ready chapter is done, the next one). */
   function placeOf(m) { return m.current || m.chapters.filter(function (c) { return !c.passed; })[0] || null; }
 
+  /** A lesson's place in the whole path (chapter order, then lesson order), and the place of the last finished one. */
+  function posOf(m, c, n) { return m.chapters.indexOf(c) * 100 + n; }
+  function lastDoneAt(m) {
+    var at = -1;
+    m.chapters.forEach(function (c) { c.lessons.forEach(function (l, j) { if (l.done && !c.testedOut) at = Math.max(at, posOf(m, c, j + 1)); }); });
+    return at;
+  }
+
   /** What "go on" means right now: the next lesson / Challenge, as a sheet CTA. */
   function nextCta(m) {
     var a = m.action, link = actionLink(m);
@@ -627,9 +635,12 @@
       setLink(a, o.cta.href || "#", !!o.cta.locked);
       a.onclick = function (e) { if (d.open && d.close) d.close(); if (o.cta.onClick) { e.preventDefault(); o.cta.onClick(); } };
     } else a.hidden = true;
+    // free learners on a lesson that isn't open yet: "Unlock it now with Pro, or keep going free" instead of "Not now"
+    showEl($("[data-sheet-up]", d), !!o.upsell);
+    showEl($("[data-sheet-close]", d), !o.upsell);
     if (!d.dataset.wired) {
       d.dataset.wired = "1";
-      $("[data-sheet-close]", d).addEventListener("click", function () { d.close ? d.close() : d.removeAttribute("open"); });
+      $$("[data-sheet-close], [data-sheet-x], [data-sheet-free]", d).forEach(function (b) { b.addEventListener("click", function () { d.close ? d.close() : d.removeAttribute("open"); }); });
       d.addEventListener("click", function (e) { if (e.target === d && d.close) d.close(); });
     }
     if (d.showModal) { if (!d.open) d.showModal(); } else d.setAttribute("open", "");
@@ -692,11 +703,14 @@
       if (state === "now" && m.action.kind === "challenge") return t("pm.l.hint.challenge", { n: c.n });
       return t("pm.l.hint.chapter", { n: prev ? prev.n : c.n });
     }
+    var pro = AC.auth.isPro(), lastDone = lastDoneAt(m);
     var rows = $$("[data-pml]", sec), filled = 0, counting = true;
     rows.forEach(function (li) {
       var n = +li.getAttribute("data-n"), l = c.lessons[n - 1];
       if (!l) return;
-      var st = open2 && l.done ? "done" : l === nowL ? "now" : open2 && (c.passed || c.testedOut) ? "open" : "later";
+      var st = open2 && l.done ? "done" : l === nowL ? "now" : open2 && (c.passed || c.testedOut || pro) ? "open" : "later";
+      var tag = $("[data-tag]", li);
+      if (tag) tag.hidden = !(pro && !l.done && st !== "now" && posOf(m, c, n) < lastDone);   // played past it: Pro learners may skip ahead
       if (counting && st === "done") filled++; else counting = false;
       li.className = "ac-pml is-" + st;
       var dot = $("[data-dot]", li), xp = $("[data-xp]", li), go = $("[data-go]", li), meta2 = $("[data-meta]", li), mgo = $("[data-mgo]", li);
@@ -718,7 +732,7 @@
       if (st === "later") {
         var h = hint(l);
         setText($("[data-tip]", li), h);
-        li._hint = { eb: t("pm.sheet.eb", { c: c.n, n: n, xp: XP.lesson }), title: l.title, text: h, cta: state === "soon" ? null : cta };
+        li._hint = { eb: t("pm.sheet.eb", { c: c.n, n: n, xp: XP.lesson }), title: l.title, text: h, cta: state === "soon" ? null : cta, upsell: state !== "soon" && !isGuest() && !pro };
         $("[data-hint]", li).setAttribute("aria-label", l.title + ". " + h);
       }
     });

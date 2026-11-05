@@ -29,6 +29,7 @@ ICONS = {
     "chev": '<path d="m9 6 6 6-6 6"/>',
     "chev-l": '<path d="m15 6-6 6 6 6"/>',
     "arrow": '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    "close": '<path d="M6 6l12 12M18 6 6 18"/>',
     "check": '<path d="m5 12 5 5 9-10"/>',
     "shield": '<path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
     "diamond": '<path d="M12 2 22 12 12 22 2 12z"/>',
@@ -283,7 +284,7 @@ def pm_lesson(t, base, L, c, l, now=False):
             f'<span class="ac-pml__dot" data-dot>{l["n"]}</span>'
             f'<div class="ac-pml__text">'
             f'<span class="ac-pml__eb">{esc(t("pm.l.ebNext", n=l["n"]))}</span>'
-            f'<b class="ac-pml__title">{esc(l["title"])}</b>'
+            f'<b class="ac-pml__title">{esc(l["title"])}<span class="ac-pml__tag" data-tag hidden>{esc(t("pm.l.skipped"))}</span></b>'
             f'<span class="ac-pml__sub">{desc}</span>'
             f'<span class="ac-pml__meta" data-meta>{esc(t("pm.l.meta", min=mins, xp=LESSON_XP))}</span>{mgo}</div>'
             f'<span class="ac-pml__end"><span class="ac-pml__xp" data-xp>{esc(t("pm.l.upTo", xp=LESSON_XP))}</span>{go}</span>'
@@ -416,13 +417,16 @@ def pm_upnext(t, base, pro):
             f'<a class="ac-pmcard__foot ac-pmcard__foot--chev" href="{href(base, "paths")}">{esc(t("pm.upnext.all"))}<span aria-hidden="true">›</span></a></section>')
 
 
-def pm_sheet(t):
+def pm_sheet(t, base):
     """Bottom sheet (phones) / small dialog (desktop): a lesson that isn't open yet, or a Pro chapter."""
     return (f'<dialog class="ac-pmsheet" data-pm-sheet aria-labelledby="pm-sheet-t"><span class="ac-pmsheet__grip" aria-hidden="true"></span>'
             f'<span class="ac-pmsheet__eb" data-sheet-eb></span><span class="ac-pmsheet__sub" data-sheet-sub hidden></span><h2 class="ac-pmsheet__title" id="pm-sheet-t" tabindex="-1" autofocus data-sheet-title></h2>'
             f'<p class="ac-pmsheet__text" data-sheet-text></p>'
             f'<a class="ac-btn ac-btn--primary ac-btn--block ac-pmbtn ac-pmbtn--lg" href="#" data-sheet-cta><span data-sheet-cta-label></span>{icon("arrow", 16, 2.4)}</a>'
-            f'<button type="button" class="ac-pmsheet__close" data-sheet-close>{esc(t("pm.sheet.close"))}</button></dialog>')
+            f'<p class="ac-pmsheet__up" data-sheet-up hidden><a href="{href(base, "pro")}" data-sheet-pro>{esc(t("pm.sheet.upPro"))}</a>{esc(t("pm.sheet.upOr"))}'
+            f'<button type="button" data-sheet-free>{esc(t("pm.sheet.upFree"))}</button></p>'
+            f'<button type="button" class="ac-pmsheet__close" data-sheet-close>{esc(t("pm.sheet.close"))}</button>'
+            f'<button type="button" class="ac-pmsheet__x" data-sheet-x aria-label="{esc(t("pm.sheet.close"))}">{icon("close", 16, 2.4)}</button></dialog>')
 
 
 def pm_mstats(t):
@@ -488,7 +492,7 @@ def merged_body(ctx, L, base, open_id=None):
     <aside class="ac-pm-side" aria-label="{esc(t("path.aside"))}">{aside}</aside>
   </div>
   <button type="button" class="ac-pm-back" data-pm-back hidden>{icon("arrow-up", 16, 2.4, "ac-pm-back__up")}{icon("arrow-down", 16, 2.4, "ac-pm-back__down")}<span data-pm-back-label></span></button>
-  {pm_sheet(t)}
+  {pm_sheet(t, base)}
 </div>'''
 
 

@@ -744,6 +744,16 @@
 .ac-pmsheet__text { margin: 0; font: 500 14px/1.5 var(--ac-font); color: var(--ac-text-soft); }
 .ac-pmsheet__close { min-height: 44px; border: 0; background: none; color: var(--ac-text-muted); font: 600 14px var(--ac-font); cursor: pointer; }
 .ac-pmsheet__close:hover { color: var(--ac-text); }
+/* free learners: the Pro upsell line in place of "Not now"; a ✕ for desktop (phones close by swipe / backdrop) */
+.ac-pmsheet { position: relative; }
+.ac-pmsheet__up { margin: 2px 0 0; text-align: center; font: 600 14px/1.5 var(--ac-font); color: var(--ac-text-muted); }
+.ac-pmsheet__up a { color: var(--ac-pro-ink, var(--ac-gold)) !important; font-weight: 700; text-decoration: none; }
+.ac-pmsheet__up a:hover { text-decoration: underline; }
+.ac-pmsheet__up button { padding: 0; border: 0; background: none; color: var(--ac-text-soft); font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ac-line-strong); }
+.ac-pmsheet__up button:hover { color: var(--ac-text); }
+.ac-pmsheet__x { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 50%; background: none; color: var(--ac-text-muted); cursor: pointer; }
+.ac-pmsheet__x:hover { background: var(--ac-surface-hover); color: var(--ac-text); }
+.ac-pml__tag { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: var(--ac-r-pill); vertical-align: 2px; background: color-mix(in srgb, var(--ac-gold) 16%, transparent); color: var(--ac-gold-ink, var(--ac-gold)); font: 700 11px/1.4 var(--ac-font); letter-spacing: .02em; }
 
 /* ---- "Back to Lesson N" pill (phones) */
 .ac-pm-back { position: fixed; z-index: 45; left: 50%; bottom: calc(84px + env(safe-area-inset-bottom)); transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--ac-white); color: var(--pm-ink) !important; box-shadow: 0 10px 30px rgba(0, 0, 0, .45), inset 0 0 0 1px var(--ac-line); font: 600 14px var(--ac-font); white-space: nowrap; text-decoration: none !important; border: 0; cursor: pointer; animation: pm-pop .2s ease-out; }
@@ -875,6 +885,7 @@
   .ac-pm--pro .ac-pml__sub, .ac-pm--pro .ac-pml:not(.ac-pml--ch) .ac-pml__xp { display: none; }
 
   /* sheet: a bottom sheet on phones */
+  .ac-pmsheet__x { display: none; }
   .ac-pmsheet { width: 100%; max-width: 100%; margin: auto 0 0; padding: 10px 20px calc(24px + env(safe-area-inset-bottom)); border-radius: 28px 28px 0 0; }
   .ac-pmsheet[open] { animation: pm-up .22s ease-out; }
   .ac-pmsheet__grip { display: block; align-self: center; width: 40px; height: 5px; margin-bottom: 4px; border-radius: 3px; background: var(--ac-line-strong); }
