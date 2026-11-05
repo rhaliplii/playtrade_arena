@@ -224,6 +224,8 @@
   "pro.table.no": "Not included",
   "pro.row.ltt": "Trading Foundations",
   "pro.row.ltt.note": "{n} chapters, from your first candle to your own plan",
+  "pro.row.anyOrder": "Any lesson, any order",
+  "pro.row.anyOrder.note": "Skip ahead in Trading Foundations. The certificate still needs every Chapter Challenge.",
   "pro.row.gym": "Rico's Gym",
   "pro.row.gym.note": "Missed questions come back until they stick",
   "pro.row.glossary": "Glossary",
