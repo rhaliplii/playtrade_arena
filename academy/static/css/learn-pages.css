@@ -661,7 +661,7 @@
 .ac-pmcard__foot { display: flex; align-items: center; gap: 8px; min-height: 32px; padding-top: 12px; border-top: 1px solid var(--ac-line); font: 600 13.5px var(--ac-font); color: var(--ac-link) !important; text-decoration: none !important; }
 .ac-pmcard__foot:hover { text-decoration: underline !important; text-underline-offset: 3px; }
 .ac-pmcard__foot svg { flex: none; }
-.ac-pmcard__foot--chev { justify-content: space-between; }
+.ac-pmcard__foot--chev { justify-content: flex-start; gap: 6px; }   /* the › right after its text */
 .ac-pmcard--save { background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-mint-wash) 18%, transparent), transparent 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px var(--pm-mint-a); }
 .ac-pmcard--pro { gap: 14px; padding: 20px; background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-pro) 28%, transparent), transparent 60%), var(--ac-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ac-pro) 45%, transparent); }
 :root[data-theme="light"] .ac-pmcard--pro { background: radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--ac-pro) 12%, transparent), transparent 60%), var(--ac-surface); }
@@ -672,13 +672,13 @@
 .ac-pmchecks--pro svg { color: var(--ac-pro-ink); }
 
 .ac-pmrank__who { display: flex; align-items: center; gap: 12px; }
-.ac-pmrank__look { display: grid; place-items: end center; flex: none; width: 44px; height: 44px; border-radius: 50%; overflow: hidden; background: linear-gradient(160deg, var(--rk, var(--ac-rank-rookie)), color-mix(in srgb, var(--rk, var(--ac-rank-rookie)) 55%, black)); }
-.ac-pmrank__look img { height: 52px; width: auto; margin-bottom: -6px; }
+.ac-pmrank__look { display: flex; align-items: flex-end; justify-content: center; flex: none; width: 56px; height: 56px; border-radius: 14px; overflow: hidden; background: linear-gradient(160deg, var(--rk, var(--ac-rank-rookie)), color-mix(in srgb, var(--rk, var(--ac-rank-rookie)) 62%, black)); }   /* as the home rank card */
+.ac-pmrank__look img { height: 52px; width: auto; }
 .ac-pmrank__txt { display: flex; flex-direction: column; min-width: 0; }
 .ac-pmrank__txt b { font: 800 15px/1.3 var(--ac-font); }
 .ac-pmrank__txt span { font: 600 12px/1.4 var(--ac-font); color: var(--ac-text-muted); font-variant-numeric: tabular-nums; }
 .ac-pmrank__bar { height: 6px; border-radius: 3px; background: var(--ac-line); overflow: hidden; }
-.ac-pmrank__bar span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--ac-primary-ink); transition: width .6s ease; }
+.ac-pmrank__bar span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--rk, var(--ac-rank-rookie)); transition: width .6s ease; }
 .ac-pmrank__day { display: flex; flex-wrap: wrap; gap: 4px 16px; font: 700 13px var(--ac-font); color: var(--ac-text-soft); font-variant-numeric: tabular-nums; }
 .ac-pmrank__streak { display: inline-flex; align-items: center; gap: 5px; color: var(--ac-warning); }
 .ac-pmrank__streak svg { fill: currentColor; }
