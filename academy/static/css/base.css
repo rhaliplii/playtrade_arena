@@ -4,6 +4,8 @@
 .ac-body *, .ac-body *::before, .ac-body *::after { box-sizing: border-box; }
 .ac-main a:not(.pf-footer a), .ac-dialog a, .ac-pop a { color: var(--ac-link); text-decoration: none; }
 .ac-main a:not(.pf-footer a):hover, .ac-pop a:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* …but never on tabs, pills and chips that happen to be links (My progress tabs, key terms, glossary chips): text links only */
+.ac-body :is(.ac-filter, .ac-pmterm, .ac-ref-chip, .ac-chip, .ac-search-tab, .ac-tabbar__item, .ac-btn):is(:hover, :focus-visible) { text-decoration: none !important; }
 .ac-body :focus-visible { outline: 2px solid var(--ac-focus); outline-offset: 2px; }
 .ac-body :focus:not(:focus-visible) { outline: none; }
 .ac-body img { max-width: 100%; }
