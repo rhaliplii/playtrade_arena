@@ -387,7 +387,13 @@ def pm_terms(t, base, c, shown):
     guide = t("pm.terms.guide", pages=c["pages"]) if c.get("pages") else t("pm.terms.guideNoPages")
     return (f'<section class="ac-pmcard" data-pm-terms="{esc(c["id"])}" aria-labelledby="pm-kt-{esc(c["id"])}"{"" if shown else " hidden"}>'
             f'<h2 class="ac-pmcard__eb" id="pm-kt-{esc(c["id"])}">{esc(t("pm.terms.title"))}</h2><ul class="ac-pmterms">{terms}</ul>'
-            f'<a class="ac-pmcard__foot" href="{href(base, "guide")}">{icon("bookmark", 16, 2)}{esc(guide)}</a></section>')
+            f'<a class="ac-pmcard__foot" href="{href(base, "guide")}">{icon("bookmark", 16, 2)}<span>{guide_html(guide)}</span></a></section>')
+
+
+def guide_html(s):
+    """"Prefer to read? Free guide · p. 12–17": the part after the question never splits, so a narrow card breaks after the "?"."""
+    head, sep, tail = s.partition("? ")
+    return f'{esc(head + sep)}<span class="ac-nowrap">{esc(tail)}</span>' if sep else esc(s)
 
 
 def pm_rank(t, base):
