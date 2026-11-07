@@ -516,11 +516,12 @@
   .ac-pl--zoom .ac-call__box .ac-c__title { font-size: 22px; }
   .ac-ch-q .ac-c__title, .ac-c.is-revealed.ac-ch-q .ac-c__title { font-size: 30px; }
   .ac-pl--challenge .ac-c__text { font-size: 17px; }
-  .ac-pl--challenge .ac-pl__grid:has(.ac-c.is-revealed) { max-width: 600px; }
-  /* the answer sheet stacks under the question (one 600px column), never as a squeezed side column */
-  .ac-pl--challenge .ac-pl__grid.has-side:has(.ac-c.is-revealed) { display: flex; flex-direction: column; align-items: stretch; gap: 16px; margin: 0 auto; }
-  .ac-pl--challenge .ac-pl__grid.has-side:has(.ac-c.is-revealed) > * { width: 100%; }
-  .ac-pl--challenge .ac-pl__grid:has(.ac-c.is-revealed) .ac-pl__side { display: none; }
+  .ac-pl--challenge .ac-pl__grid:not(.has-side):has(.ac-c.is-revealed) { max-width: 600px; }
+  /* a question with a chart: the lesson layout (question + answers left, chart right, the answer sheet under the chart),
+     at the lessons' size (460 + 470 at 1.28×) */
+  .ac-pl--challenge .ac-pl__grid.has-side, .ac-pl--challenge .ac-pl__grid.has-side:has(.ac-c.is-revealed) { grid-template-columns: minmax(0, 590px) auto; gap: 56px; max-width: 1250px; }
+  .ac-pl--challenge .ac-pl__side { width: 470px; zoom: var(--pl-z, 1.28); }   /* the chart column renders exactly as in lessons */
+  .ac-pl--challenge .ac-pl__side .ac-c__visual--q { max-width: none; }
   .ac-pl--challenge .ac-sheet { align-items: center; gap: 16px; padding: 18px 20px; }
   .ac-pl--challenge .ac-sheet .ac-sheet__rico { height: 80px; }
   .ac-sheet:has(.ac-sheet__cta) { flex-wrap: nowrap; }

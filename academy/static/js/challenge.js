@@ -26,7 +26,7 @@
     if (st) AC.progress.sandbox();
     var chapterUrl = AC.url("learn-to-trade/" + CH.id);
     var results = [], qi = 0, ctl = null;
-    var F = AC.cards.frame({ close: chapterUrl, closeLabel: AC.t("challenge.close"), heading: AC.t("challenge.heading", { n: CH.n }), aside: AC.t("challenge.aside.intro"), segments: n, sheetMain: true, sheetDock: true,
+    var F = AC.cards.frame({ close: chapterUrl, closeLabel: AC.t("challenge.close"), heading: AC.t("challenge.heading", { n: CH.n }), aside: AC.t("challenge.aside.intro"), segments: n, sheetMain: true, sheetDock: true, fit: true,
       keys: function () { return ctl; } });
     F.el.classList.add("ac-pl--challenge");
     host.innerHTML = "";
@@ -82,7 +82,7 @@
       ctl = AC.cards.mcq({ type: "challenge", title: q.q }, {
         eyebrow: "", tone: "gold", head: meta + '<h2 class="ac-c__title">' + AC.rich(q.q) + "</h2>",
         options: q.options.map(function (o) { return { text: o }; }), answer: q.answer, why: q.why, work: q.work, gym: !!q.idea, slot: "challenge", idea: q.idea, dim: true,
-        visual: q.visual && AC.visual ? AC.visual(q.visual, { question: true }) : "", keepVisual: AC.cards.keepVisual(q.visual), visualMain: true,
+        visual: q.visual && AC.visual ? AC.visual(q.visual, { question: true }) : "", keepVisual: AC.cards.keepVisual(q.visual),
         nextLabel: qi + 1 < n ? AC.t("challenge.q.next") : AC.t("challenge.q.results"),
       }, {
         mode: "challenge",
@@ -100,7 +100,7 @@
         if (ctl.sheet && !ctl.sheetPlaced) {
           ctl.sheetPlaced = true;
           // the next step is the fixed button at the bottom, where Check was (as in lessons and the Gym)
-          F.setRico(null, null); F.placeSheet(ctl.sheet); F.setProgress(qi, true);
+          F.placeSheet(ctl.sheet); F.setProgress(qi, true);
           F.setAside(missed() ? AC.t("challenge.aside.missed", { n: missed() }) : AC.t("challenge.aside.rule"));
           F.showAnswer();
         }

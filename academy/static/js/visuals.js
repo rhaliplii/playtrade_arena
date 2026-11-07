@@ -301,11 +301,16 @@
     if (swings.length) {
       var srt = swings.slice().sort(function (a, b) { return a.i - b.i; });
       if (c.zigzag) s += '<polyline points="' + srt.map(function (q) { return r1(X(q.i)) + "," + r1(Y(q.price)); }).join(" ") + '" class="' + tone(typeof c.zigzag === "string" ? c.zigzag : "blue") + ' ac-v__zz ac-v__drawq" pathLength="1"/>';
+      // a word label ("lower low") near an edge hugs it instead of running off the chart
+      var swingLabel = function (txt, x, y, t) {
+        var hw = txt.length * 3.1, a = x + hw > w - 2 ? "end" : x - hw < 2 ? "start" : "middle";
+        return T(a === "end" ? w - 2 : a === "start" ? 2 : x, y, txt, { tone: t, fs: 10, w: 800, anchor: a });
+      };
       swings.forEach(function (q, k) {
         var j = srt.indexOf(q), pv = srt[j - 1], nx = srt[j + 1];
         var above = q.pos ? q.pos === "above" : ((!pv || q.price >= pv.price) && (!nx || q.price >= nx.price));
         var x = X(q.i), y = Y(q.price), t = q.tone || "gold";
-        var g = '<circle cx="' + r1(x) + '" cy="' + r1(y) + '" r="3.5" class="' + tone(t) + ' ac-v__dot"/>' + (q.label ? T(x, above ? y - 8 : y + 16, q.label, { tone: t, fs: 10, w: 800, anchor: "middle" }) : "");
+        var g = '<circle cx="' + r1(x) + '" cy="' + r1(y) + '" r="3.5" class="' + tone(t) + ' ac-v__dot"/>' + (q.label ? swingLabel(q.label, x, above ? y - 8 : y + 16, t) : "");
         s += add(ex === "swings" ? "s" + k : null, g);
       });
     }

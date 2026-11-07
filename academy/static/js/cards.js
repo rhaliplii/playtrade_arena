@@ -641,6 +641,7 @@
       if (f && done() >= total() && f.hidden) { f.hidden = false; if (!AC.reducedMotion()) f.classList.add("ac-in"); }
       changed(ctx);
     }
+    if (!total()) update();   // nothing to tap (a pre-labelled chart): the foot shows at once
     ctl.cta = function () {
       if (done() >= total()) return { label: AC.t("common.continue") };
       var goal = api.parts.filter(function (p) { return p.slider && p.goal; })[0];
@@ -779,7 +780,7 @@
       if (sideEl) { if (desk && !sides.length) f.side.insertBefore(sideEl, f.side.firstChild); else sideEl.remove(); }
       if (bubbleEl) { if ((desk && sideEl) || (sheetEl && !desk)) bubbleEl.remove(); else if (bubbleEl.parentNode !== f.dock) f.dock.insertBefore(bubbleEl, f.dock.firstChild); }
       if (sheetEl) {
-        if (desk) (o.sheetMain ? f.main : f.side).appendChild(sheetEl);
+        if (desk) (o.sheetMain && !sides.length ? f.main : f.side).appendChild(sheetEl);   // a chart on the right: the sheet goes under it, as in lessons
         else (o.sheetDock ? f.dock : f.main).appendChild(sheetEl);
       }
       f.foot.classList.toggle("has-sheet", !!(sheetEl && sheetEl.parentNode === f.dock));
@@ -863,7 +864,7 @@
     });
     /* Fit to screen (desktop, zoomed layouts): the design is drawn at 1.28× for a 1440×900 frame. On smaller windows
        (a 14" laptop leaves ~800px) the card scales down to fit the stage, never below 0.8×, never above 1.28×. */
-    if (o.zoom) {
+    if (o.zoom || o.fit) {   // fit: the Challenge, whose chart column is drawn at the lessons' 1.28×
       var fitting = false;
       var fit = function () {
         if (fitting || !mq.matches) { el.style.removeProperty("--pl-z"); return; }

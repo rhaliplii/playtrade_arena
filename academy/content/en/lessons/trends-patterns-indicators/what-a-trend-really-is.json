@@ -219,9 +219,8 @@
   },
   {
    "type": "walkthrough",
-   "tag": "tap the swings",
    "title": "When the pattern breaks",
-   "text": "Label each swing. The uptrend holds while the lows keep rising.",
+   "text": "In an uptrend, each dip stops higher than the last. Watch the lows: when one breaks below the last, the trend is in trouble.",
    "visual": {
     "kind": "candles",
     "title": "Daily",
@@ -267,7 +266,7 @@
       ]
      ],
      "seed": 6,
-     "height": 170,
+     "height": 200,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -282,56 +281,54 @@
       {
        "i": 6,
        "price": 47,
-       "label": "H",
        "tone": "up"
       },
       {
        "i": 10,
        "price": 45,
-       "label": "HL",
+       "label": "higher low",
        "tone": "up"
       },
       {
        "i": 16,
        "price": 50,
-       "label": "HH",
        "tone": "up"
       },
       {
        "i": 20,
        "price": 48,
-       "label": "HL",
+       "label": "higher low",
        "tone": "up"
       },
       {
        "i": 26,
        "price": 53,
-       "label": "HH",
        "tone": "up"
       },
       {
        "i": 30,
        "price": 49,
-       "label": "HL",
+       "label": "higher low",
        "tone": "up"
       },
       {
        "i": 34,
        "price": 52,
-       "label": "LH",
+       "label": "lower high",
        "tone": "down"
       },
       {
        "i": 38,
        "price": 47.5,
-       "label": "LL",
+       "label": "lower low",
        "tone": "down"
       }
      ],
      "label": "Higher highs and higher lows, then a lower high at $52 and a lower low under $49",
      "n": 39,
      "noise": 0.6,
-     "wick": 0.8
+     "wick": 0.8,
+     "explore": "none"
     }
    },
    "foot": "First a {down}lower high{/down} at $52, then a {down}lower low{/down} under $49. The uptrend is broken. That’s a warning, not a promise of a fall.",
