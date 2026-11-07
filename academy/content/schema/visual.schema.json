@@ -2422,6 +2422,10 @@
               },
               "note": {
                 "type": "string"
+              },
+              "work": {
+                "type": "string",
+                "description": "the working, shown under \"See details\""
               }
             }
           },
@@ -2436,6 +2440,12 @@
         },
         "digits": {
           "type": "integer"
+        },
+        "explore": {
+          "enum": [
+            "none"
+          ],
+          "description": "walk-through: no ▶ Play, the chart shows at once"
         }
       },
       "description": "Grouped columns (negatives hang below zero). A group with a `note` is tapped to show it."

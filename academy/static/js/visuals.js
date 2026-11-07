@@ -979,8 +979,16 @@
         (g.note ? '<span class="ac-v__bcn">' + AC.rich(g.note) + '</span><span class="ac-v__bplus" aria-hidden="true">+</span>' : "") + "</" + tag + ">";
     }).join("");
     return '<div class="ac-v__box ac-v__box--barchart"' + (tap ? ' data-interactive="bcg"' : "") + ">" + hdr({ title: v.title, aside: v.aside, asideTone: v.asideTone, legend: legend }) +
-      '<div class="ac-v__bc" style="--n:' + groups.length + '">' + cols + "</div>" + foot(v.foot) + "</div>";
+      '<div class="ac-v__bc" style="--n:' + groups.length + '">' + cols + "</div>" + detailsHtml(groups) + foot(v.foot) + "</div>";
   };
+  /** "See details" under a bar chart: each group's working (g.work), folded until asked for; never gates the card. */
+  function detailsHtml(groups) {
+    var rows = groups.filter(function (g) { return g.work; });
+    if (!rows.length) return "";
+    return '<details class="ac-v__more"><summary>' + esc(AC.t("cards.v.details")) + '</summary><ul>' + rows.map(function (g) {
+      return "<li><b>" + esc(g.label || "") + '</b><span class="ac-num">' + AC.rich(g.work) + "</span></li>";
+    }).join("") + "</ul></details>";
+  }
 
   /** hbars: horizontal bars (gain needed to recover, savings vs inflation); value2 adds a second bar per row (fall | gain back). */
   R.hbars = function (v) {
@@ -1309,7 +1317,7 @@
 
   /** walk-through helpers: which visuals are revealed by ▶ Play, which have their own taps */
   var PLAY = ["flow", "counter", "series", "hbars", "split", "trades", "rr", "donut", "gauge", "barchart", "cycle", "candle"];
-  function playable(spec) { if (!spec) return false; if (spec.kind === "barchart") return !(spec.groups || []).some(function (g) { return g.note; }); return PLAY.indexOf(spec.kind) >= 0; }
+  function playable(spec) { if (!spec || spec.explore === "none") return false; if (spec.kind === "barchart") return !(spec.groups || []).some(function (g) { return g.note; }); return PLAY.indexOf(spec.kind) >= 0; }
   function tappable(x) { return !!x && (AC.visual.interactive(x, false) || x.kind === "checklist"); }
 
   /** drawline behaviour: drag (pointer) or arrow keys on a handle; reports fit to the target */

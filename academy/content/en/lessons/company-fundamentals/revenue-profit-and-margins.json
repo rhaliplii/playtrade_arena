@@ -105,9 +105,8 @@
   {
    "type": "walkthrough",
    "added": "Tap notes written for the Academy (the working for each year’s margin)",
-   "tag": "tap a year",
    "title": "Sales up, margin down",
-   "text": "Acme’s sales grew every year. Look at what it kept.",
+   "text": "Acme’s sales grew every year. Look at what it kept: margin = profit ÷ revenue.",
    "visual": {
     "kind": "barchart",
     "title": "Acme · 3 years",
@@ -135,7 +134,7 @@
        "$100M",
        "$20M"
       ],
-      "note": "$20M ÷ $100M = 20%."
+      "work": "$20M ÷ $100M = **20%**"
      },
      {
       "label": "Year 2",
@@ -149,7 +148,7 @@
        "$120M",
        "$18M"
       ],
-      "note": "$18M ÷ $120M = 15%."
+      "work": "$18M ÷ $120M = **15%**"
      },
      {
       "label": "Year 3",
@@ -163,9 +162,10 @@
        "$150M",
        "$15M"
       ],
-      "note": "$15M ÷ $150M = 10%."
+      "work": "$15M ÷ $150M = **10%**"
      }
-    ]
+    ],
+    "explore": "none"
    },
    "foot": "Sales +50%, profit −25%. Each sale earns less, maybe from price cuts or rising costs. That’s a warning sign.",
    "footTone": "red"
