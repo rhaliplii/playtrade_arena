@@ -16,12 +16,14 @@
      {
       "label": "Heads",
       "value": "+$100",
-      "tone": "up"
+      "tone": "up",
+      "img": "coin-heads"
      },
      {
       "label": "Tails",
       "value": "−$100",
-      "tone": "down"
+      "tone": "down",
+      "img": "coin-tails"
      }
     ]
    },
@@ -92,48 +94,48 @@
        50
       ],
       [
-       1,
+       2,
        49.4
       ],
       [
-       2,
+       4,
        50.6
       ],
       [
-       4,
+       8,
        49
       ],
       [
-       6,
+       12,
        47
       ],
       [
-       8,
+       16,
        45.5
       ],
       [
-       10,
+       20,
        44
       ],
       [
-       12,
+       24,
        42.5
       ],
       [
-       14,
+       28,
        41
       ],
       [
-       16,
+       32,
        39.5
       ],
       [
-       17,
+       34,
        38
       ]
      ],
      "seed": 64,
-     "noise": 0.4,
+     "noise": 0.5,
      "height": 140,
      "axis": false,
      "lastTag": false,
@@ -154,21 +156,22 @@
      ],
      "marks": [
       {
-       "i": 6,
+       "i": 12,
        "price": 47,
        "label": "stop moved",
        "tone": "gold",
        "pos": "below"
       },
       {
-       "i": 17,
+       "i": 34,
        "price": 38,
        "label": "$38",
        "tone": "down",
        "pos": "below"
       }
      ],
-     "label": "Bought at $50; price breaks the $47 stop and falls to $38"
+     "label": "Bought at $50; price breaks the $47 stop and falls to $38",
+     "wick": 0.8
     }
    },
    "blocks": [

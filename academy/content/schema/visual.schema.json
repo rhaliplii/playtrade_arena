@@ -1249,6 +1249,28 @@
         "open": {
           "type": "integer",
           "description": "rows layout: the bar shown selected at first"
+        },
+        "links": {
+          "type": "array",
+          "description": "a line from each bar's top to the next bar's, labelled with the step",
+          "items": {
+            "type": "object",
+            "required": [
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "tone": {
+                "$ref": "#/$defs/tone"
+              }
+            }
+          }
+        },
+        "label": {
+          "type": "string"
         }
       }
     },
@@ -1588,6 +1610,12 @@
             "column",
             "row"
           ]
+        },
+        "explore": {
+          "enum": [
+            "none"
+          ],
+          "description": "walk-through: no ▶ Play, the stack shows at once"
         }
       }
     },
@@ -3161,6 +3189,15 @@
         },
         "labelsWidth": {
           "type": "number"
+        },
+        "lo": {
+          "type": "number"
+        },
+        "hi": {
+          "type": "number"
+        },
+        "lineNames": {
+          "type": "boolean"
         }
       },
       "description": "Trade plan: reward box (entry → target, green) over risk box (stop → entry, red), with +$ / −$ labels. compact for two tiles side by side."
@@ -3460,6 +3497,10 @@
               },
               "tint": {
                 "type": "boolean"
+              },
+              "img": {
+                "type": "string",
+                "description": "a picture in static/img/art/<img>.webp beside the label"
               }
             }
           },

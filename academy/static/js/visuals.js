@@ -759,6 +759,28 @@
   R.bars = function (v) {
     var bars = v.bars, n = bars.length, tap = bars.some(function (b) { return b.sub; });
     var max = v.max || Math.max.apply(null, bars.map(function (b) { return Math.abs(b.value); })) || 1;
+    // links (P1-Ch05 L1 "half the account"): a line from each bar's top to the next one's, the step written on it (−50%, +?%)
+    if (v.links) {
+      var W = 330, H = 200, base = 156, top = 40, bw = 44, cwid = W / n, s2 = "";
+      var bx = function (i) { return cwid * i + cwid / 2; }, by = function (b) { return base - Math.abs(b.value) / max * (base - top); };
+      bars.forEach(function (b, i) {
+        var x = bx(i), y = by(b);
+        s2 += b.dashed ? '<rect x="' + r1(x - bw / 2) + '" y="' + r1(y) + '" width="' + bw + '" height="' + r1(base - y) + '" rx="6" class="ac-v__bghost"/>'
+          : '<rect x="' + r1(x - bw / 2) + '" y="' + r1(y) + '" width="' + bw + '" height="' + r1(base - y) + '" rx="6" class="' + tone(b.tone || "primary") + ' ac-v__fill ac-v__bfill"/>';
+        s2 += T(x, y - 9, b.display != null ? b.display : num(b.value), { fs: 12, w: 800, anchor: "middle" }) + T(x, base + 22, b.label, { fs: 11.5, w: 700, anchor: "middle", cls: "ac-v__t--muted" });
+      });
+      v.links.forEach(function (l, i) {
+        var a = bars[i], b = bars[i + 1]; if (!b) return;
+        var x1 = bx(i) + bw / 2 + 4, y1 = by(a), x2 = bx(i + 1) - bw / 2 - 4, y2 = by(b), mx = (x1 + x2) / 2, my = (y1 + y2) / 2, mid = "acbl" + (++uid);
+        var tw = l.label.length * 7 + 18;
+        s2 += '<defs><marker id="' + mid + '" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" class="' + tone(l.tone) + ' ac-v__fill"/></marker></defs>' +
+          '<line x1="' + r1(x1) + '" y1="' + r1(y1) + '" x2="' + r1(x2) + '" y2="' + r1(y2) + '" class="' + tone(l.tone) + ' ac-v__blink" marker-end="url(#' + mid + ')"/>' +
+          '<rect x="' + r1(mx - tw / 2) + '" y="' + r1(my - 11) + '" width="' + r1(tw) + '" height="22" rx="11" class="' + tone(l.tone) + ' ac-v__tag"/>' + T(mx, my + 4.5, l.label, { tone: l.tone, fs: 12, w: 800, anchor: "middle" });
+      });
+      s2 += '<line x1="8" x2="' + (W - 8) + '" y1="' + base + '" y2="' + base + '" class="ac-v__base"/>';
+      return '<div class="ac-v__box ac-v__box--chart">' + hdr({ title: v.caption }, "ac-v__hdr--chart") +
+        '<svg class="ac-v__svg" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(v.label || "") + '">' + s2 + "</svg>" + foot(v.foot) + "</div>";
+    }
     // layout "rows" (design P1-Ch02 L3 "wipe-out rule"): a horizontal bar a row, its value beside it, tap for the working
     if (v.layout === "rows") {
       return '<div class="ac-v__box ac-v__box--brows"' + (tap ? ' data-interactive="bars"' : "") + ">" + (v.caption ? '<span class="ac-v__title">' + esc(v.caption) + "</span>" : "") +
@@ -836,7 +858,7 @@
     if (o.explore && (v.items || []).some(tappable)) return '<div class="' + cls + '">' + v.items.map(function (x) { return render(x, { explore: x.kind === "checklist" }); }).join("") + "</div>";
     var inner = v.items.map(function (x) { return render(x, { tile: v.layout === "row" }); }).join("");
     // ▶ Play sits under the stack (a row stack keeps its items in a row of their own, never the button as a column)
-    if (o.explore) return '<div class="ac-v__stack ac-v__playwrap is-idle" data-explore="play">' + (v.layout === "row" ? '<div class="' + cls + '">' + inner + "</div>" : inner) + '<div class="ac-v__reveals">' + playBtn() + "</div></div>";
+    if (o.explore && v.explore !== "none") return '<div class="ac-v__stack ac-v__playwrap is-idle" data-explore="play">' + (v.layout === "row" ? '<div class="' + cls + '">' + inner + "</div>" : inner) + '<div class="ac-v__reveals">' + playBtn() + "</div></div>";
     return '<div class="' + cls + '">' + inner + "</div>";
   };
 
@@ -1061,7 +1083,7 @@
   /** cycle: a smooth wave with labelled points (the market's emotion cycle, the economic cycle). */
   var CURVES = {
     wave: [[0, 0.06], [0.25, 0.5], [0.5, 0.94], [0.75, 0.5], [1, 0.06]],
-    sentiment: [[0, 0.02], [0.14, 0.3], [0.27, 0.68], [0.4, 0.98], [0.5, 0.86], [0.6, 0.6], [0.7, 0.34], [0.8, 0.12], [0.88, 0.04], [1, 0.07]],
+    sentiment: [[0, 0.02], [0.14, 0.32], [0.27, 0.7], [0.4, 0.98], [0.5, 0.86], [0.6, 0.62], [0.7, 0.4], [0.79, 0.25], [0.86, 0.2], [1, 0.21]],   // a flat tail at the bottom leaves room for the box under it (design)
   };
   function curveSamples(ctrl) {
     var out = [];
@@ -1115,6 +1137,7 @@
     var cp = !!v.compact, W = cp ? 160 : 330, H = v.height || (cp ? 104 : 130), lv = v.levels || [];
     var ps = [v.entry, v.stop, v.target].concat(lv.map(function (l) { return l.price; })), lo = Math.min.apply(null, ps), hi = Math.max.apply(null, ps), sp = (hi - lo) || 1;
     lo -= sp * 0.12; hi += sp * 0.12;
+    if (v.lo != null) lo = v.lo; if (v.hi != null) hi = v.hi;   // tiles side by side share one scale: the same $2 risk is the same height
     var top = 8, bot = H - 8, bx0 = cp ? 18 : (v.labelsWidth || 118), bx1 = W - (cp ? 52 : 70);
     function Y(q) { return bot - (q - lo) / (hi - lo) * (bot - top); }
     var lab = v.labels || {}, dg = v.fmt;
@@ -1126,6 +1149,7 @@
     [["target", yt, "up"], ["entry", ye, "blue"], ["stop", ys, "down"]].forEach(function (k) {
       s += '<line x1="' + bx0 + '" x2="' + bx1 + '" y1="' + r1(k[1]) + '" y2="' + r1(k[1]) + '" class="' + tone(k[2]) + ' ac-v__rrline"/>';
       if (!cp) s += T(bx0 - 8, k[1] + 4, L(k[0], v[k[0]]), { tone: k[2], fs: 11, w: 800, anchor: "end" });
+      else if (v.lineNames) s += T(bx0 + 5, k[0] === "stop" ? k[1] - 4 : k[1] + 11, AC.t("cards.v.rrName." + k[0]), { fs: 8.5, w: 700, cls: "ac-v__t--muted" });
     });
     var rw = v.reward != null ? v.reward : "+" + money(Math.abs(v.target - v.entry), dg), rk = v.risk != null ? v.risk : "−" + money(Math.abs(v.entry - v.stop), dg);
     s += T(bx1 + 6, (yt + ye) / 2 + 4, rw, { tone: "up", fs: cp ? 11 : 12, w: 800 }) + T(bx1 + 6, (ye + ys) / 2 + 4, rk, { tone: "down", fs: cp ? 11 : 12, w: 800 });
@@ -1181,6 +1205,8 @@
     var cols = v.cols || Math.min(v.items.length, 2);
     var tiles = v.items.map(function (it, i) {
       var t = it.tone || "white";
+      // img (P1-Ch06 L4 coin flip): a picture beside the label and value
+      if (it.img) return '<div class="ac-v__stat ac-v__stat--img ' + tone(t) + '"><img src="' + AC.base + "static/img/art/" + esc(it.img) + '.webp" alt="" width="68" height="68"><span>' + (it.label ? '<span class="ac-v__stl">' + esc(it.label) + "</span>" : "") + '<b class="ac-v__stv ac-num ac-v__ink">' + esc(it.value || "") + "</b></span></div>";
       return (v.arrow && i ? '<span class="ac-v__sarrow" aria-hidden="true">→</span>' : "") + '<div class="ac-v__stat ' + tone(t) + (it.tint ? " is-tint" : "") + '">' + (it.label ? '<span class="ac-v__stl">' + (it.dot ? '<i aria-hidden="true"></i>' : "") + esc(it.label) + "</span>" : "") +
         (it.value ? '<b class="ac-v__stv ac-num' + (it.tone ? " ac-v__ink" : "") + '">' + esc(it.value) + "</b>" : "") + (it.sub ? '<span class="ac-v__sts">' + AC.rich(it.sub) + "</span>" : "") + (it.text ? '<span class="ac-v__stt">' + AC.rich(it.text) + "</span>" : "") + "</div>";
     }).join("");

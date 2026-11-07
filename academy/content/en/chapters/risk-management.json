@@ -391,7 +391,38 @@
     "why": "The gain works on the smaller $30,000. Winning back $10,000 on $30,000 takes about a third.",
     "work": "$40,000 − $30,000 = $10,000. $10,000 ÷ $30,000 ≈ 33%.",
     "idea": "half-loss-double-gain",
-    "added": "New situation written for the Academy"
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "barchart",
+     "title": "Your account",
+     "label": "Account before $40,000, now $30,000",
+     "groups": [
+      {
+       "label": "Before",
+       "values": [
+        40000
+       ],
+       "displays": [
+        "$40,000"
+       ],
+       "tones": [
+        "blue"
+       ]
+      },
+      {
+       "label": "Now",
+       "values": [
+        30000
+       ],
+       "displays": [
+        "$30,000"
+       ],
+       "tones": [
+        "down"
+       ]
+      }
+     ]
+    }
    },
    {
     "lesson": 2,
@@ -432,7 +463,184 @@
     "answer": 1,
     "why": "Support fails only if price breaks the bottom of the zone. A stop above the zone gets hit by a normal dip; one far away makes the size tiny.",
     "idea": "stop-below-the-low",
-    "added": "New situation written for the Academy"
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "candles",
+     "title": "Daily",
+     "chart": {
+      "ohlc": [
+       [
+        51.8,
+        51.99,
+        51.33,
+        51.5
+       ],
+       [
+        51.5,
+        51.63,
+        50.73,
+        51.0
+       ],
+       [
+        51.0,
+        51.1,
+        50.4,
+        50.6
+       ],
+       [
+        50.6,
+        51.18,
+        50.48,
+        50.9
+       ],
+       [
+        50.9,
+        51.11,
+        49.98,
+        50.2
+       ],
+       [
+        50.2,
+        50.31,
+        49.42,
+        49.6
+       ],
+       [
+        49.6,
+        50.14,
+        49.41,
+        49.9
+       ],
+       [
+        49.9,
+        50.15,
+        48.97,
+        49.1
+       ],
+       [
+        49.1,
+        49.25,
+        48.28,
+        48.4
+       ],
+       [
+        48.4,
+        48.9,
+        48.12,
+        48.7
+       ],
+       [
+        48.7,
+        48.92,
+        47.65,
+        47.9
+       ],
+       [
+        47.9,
+        48.08,
+        46.95,
+        47.2
+       ],
+       [
+        47.2,
+        47.32,
+        46.44,
+        46.6
+       ],
+       [
+        46.6,
+        47.13,
+        46.35,
+        46.9
+       ],
+       [
+        46.9,
+        47.08,
+        45.98,
+        46.1
+       ],
+       [
+        46.1,
+        46.25,
+        45.26,
+        45.4
+       ],
+       [
+        45.4,
+        45.56,
+        44.2,
+        45.0
+       ],
+       [
+        45.0,
+        45.74,
+        44.72,
+        45.6
+       ],
+       [
+        45.6,
+        45.88,
+        45.09,
+        45.2
+       ],
+       [
+        45.2,
+        45.38,
+        44.2,
+        44.8
+       ],
+       [
+        44.8,
+        45.6,
+        44.62,
+        45.5
+       ],
+       [
+        45.5,
+        46.48,
+        45.38,
+        46.2
+       ],
+       [
+        46.2,
+        46.92,
+        46.08,
+        46.7
+       ],
+       [
+        46.7,
+        47.22,
+        46.42,
+        47.0
+       ]
+      ],
+      "height": 150,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "lo": 42.6,
+      "hi": 52.4,
+      "label": "Price falls into support at $44 to $45, bounces twice and turns up to $47",
+      "hlines": [
+       {
+        "price": 47,
+        "tone": "blue",
+        "label": "Buy $47",
+        "style": "text"
+       },
+       {
+        "price": 45,
+        "tone": "gold"
+       },
+       {
+        "price": 44,
+        "tone": "gold",
+        "label": "support $44–45",
+        "style": "below"
+       }
+      ]
+     }
+    }
    },
    {
     "lesson": 5,
@@ -446,7 +654,80 @@
     "why": "You risk $4 a share, so 2:1 needs $8 of reward above the $100 entry.",
     "work": "$108 − $100 = $8. $100 − $96 = $4. $8 ÷ $4 = 2:1.",
     "idea": "reward-to-risk-ratio",
-    "added": "New situation written for the Academy"
+    "added": "New situation written for the Academy",
+    "visual": {
+     "kind": "candles",
+     "title": "Your trade plan",
+     "chart": {
+      "path": [
+       [
+        0,
+        97.8
+       ],
+       [
+        1,
+        98.6
+       ],
+       [
+        2,
+        98.2
+       ],
+       [
+        3,
+        99.2
+       ],
+       [
+        4,
+        98.8
+       ],
+       [
+        5,
+        100
+       ]
+      ],
+      "noise": 0.5,
+      "wick": 0.8,
+      "seed": 55,
+      "future": 6,
+      "height": 170,
+      "axis": false,
+      "lastTag": false,
+      "ticks": 0,
+      "hlines": [
+       {
+        "price": 108,
+        "tone": "muted",
+        "label": "$108",
+        "style": "text"
+       },
+       {
+        "price": 104,
+        "tone": "muted",
+        "label": "$104",
+        "style": "text"
+       },
+       {
+        "price": 102,
+        "tone": "muted",
+        "label": "$102",
+        "style": "text"
+       },
+       {
+        "price": 100,
+        "tone": "blue",
+        "label": "Entry $100",
+        "style": "text"
+       },
+       {
+        "price": 96,
+        "tone": "down",
+        "label": "Stop $96",
+        "style": "text"
+       }
+      ],
+      "label": "Entry $100, stop $96, possible targets $102, $104 and $108"
+     }
+    }
    },
    {
     "lesson": 6,

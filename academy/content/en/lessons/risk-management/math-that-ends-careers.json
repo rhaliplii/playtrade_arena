@@ -13,28 +13,38 @@
    "title": "Half the account, gone",
    "situation": "You start with $10,000 and lose 50%. What gain do you need just to get back to $10,000?",
    "visual": {
-    "kind": "series",
-    "title": "Account",
-    "aside": "$10,000 → $5,000 → ?",
-    "ends": false,
-    "height": 90,
-    "label": "Account falls from $10,000 to $5,000; how far must it climb to get back?",
-    "hlines": [
+    "kind": "bars",
+    "caption": "Your account",
+    "label": "Start at $10,000; lose 50% to $5,000; what gain gets you back to $10,000?",
+    "bars": [
      {
+      "label": "Start",
       "value": 10000,
+      "display": "$10,000",
       "tone": "muted"
+     },
+     {
+      "label": "After the loss",
+      "value": 5000,
+      "display": "$5,000",
+      "tone": "down"
+     },
+     {
+      "label": "Back to start",
+      "value": 10000,
+      "display": "$10,000",
+      "tone": "gold",
+      "dashed": true
      }
     ],
-    "series": [
+    "links": [
      {
-      "values": [
-       10000,
-       5000,
-       10000
-      ],
-      "tone": "down",
-      "dots": true,
-      "end": false
+      "label": "−50%",
+      "tone": "down"
+     },
+     {
+      "label": "+?%",
+      "tone": "gold"
      }
     ]
    },

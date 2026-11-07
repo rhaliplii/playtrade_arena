@@ -106,65 +106,85 @@
    "text": "Say you lose $100 twice, then double your size each time to win it back.",
    "visual": {
     "kind": "stack",
+    "explore": "none",
     "items": [
      {
-      "kind": "series",
-      "title": "No rule",
-      "aside": "4 trades",
-      "height": 100,
-      "lo": -850,
-      "hi": 50,
-      "label": "Without a rule: −$100, −$100, −$200, −$400, ending at −$800",
-      "series": [
+      "kind": "bars",
+      "caption": "No rule · lost $800",
+      "max": 400,
+      "bars": [
        {
-        "values": [
-         0,
-         -100,
-         -200,
-         -400,
-         -800
-        ],
-        "tone": "down",
-        "area": true,
-        "end": "−$800"
+        "label": "1× size",
+        "value": 100,
+        "display": "−$100",
+        "tone": "down"
+       },
+       {
+        "label": "1× size",
+        "value": 100,
+        "display": "−$100",
+        "tone": "down"
+       },
+       {
+        "label": "2× size",
+        "value": 200,
+        "display": "−$200",
+        "tone": "down"
+       },
+       {
+        "label": "4× size",
+        "value": 400,
+        "display": "−$400",
+        "tone": "down"
        }
       ],
-      "points": [
+      "bands": [
        {
-        "i": 3,
-        "label": "2× size",
-        "tone": "gold"
+        "from": 2,
+        "to": 3,
+        "label": "doubling to win it back",
+        "tone": "down"
        }
       ]
      },
      {
-      "kind": "series",
-      "title": "Rule: stop after 2 losses",
-      "aside": "2 trades",
-      "height": 100,
-      "lo": -850,
-      "hi": 50,
-      "label": "With the rule: two $100 losses, then no more trades, ending at −$200",
-      "series": [
+      "kind": "bars",
+      "caption": "Rule: stop after 2 losses · lost $200",
+      "max": 400,
+      "bars": [
        {
-        "values": [
-         0,
-         -100,
-         -200,
-         -200,
-         -200
-        ],
-        "tone": "blue",
-        "area": true,
-        "end": false
+        "label": "1× size",
+        "value": 100,
+        "display": "−$100",
+        "tone": "down"
+       },
+       {
+        "label": "1× size",
+        "value": 100,
+        "display": "−$100",
+        "tone": "down"
+       },
+       {
+        "label": "no trade",
+        "value": 0,
+        "display": "$0",
+        "tone": "muted",
+        "dashed": true
+       },
+       {
+        "label": "no trade",
+        "value": 0,
+        "display": "$0",
+        "tone": "muted",
+        "dashed": true
        }
       ],
-      "points": [
+      "bands": [
        {
-        "i": 2,
-        "label": "stops here",
-        "tone": "gold",
-        "pos": "below"
+        "from": 2,
+        "to": 3,
+        "label": "done for the day",
+        "tone": "up"
        }
       ]
      }

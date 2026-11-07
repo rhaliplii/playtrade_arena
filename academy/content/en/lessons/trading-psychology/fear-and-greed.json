@@ -175,15 +175,15 @@
         "tone": "gold"
        },
        {
-        "t": 0.76,
+        "t": 0.74,
         "label": "Panic",
         "tone": "down"
        },
        {
-        "t": 0.85,
+        "t": 0.81,
         "label": "Capitulation",
         "tone": "down",
-        "pos": "left"
+        "pos": "below"
        },
        {
         "t": 0.93,
@@ -201,11 +201,11 @@
         "from": 0.4
        },
        {
-        "t": 0.86,
-        "y": 0.1,
+        "t": 0.9,
+        "y": 0.06,
         "text": "Max opportunity:\nyou feel hopeless",
         "tone": "up",
-        "from": 0.88
+        "from": 0.96
        }
       ]
      }
@@ -315,7 +315,8 @@
        }
       ]
      }
-    ]
+    ],
+    "explore": "none"
    },
    "blocks": [
     {

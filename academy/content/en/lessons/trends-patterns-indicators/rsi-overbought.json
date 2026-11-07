@@ -174,7 +174,6 @@
   },
   {
    "type": "walkthrough",
-   "tag": "tap Play",
    "title": "Strong trends stay overbought",
    "text": "Watch RSI cross 70, then stay there while price keeps climbing.",
    "visual": {
@@ -206,7 +205,7 @@
       ]
      ],
      "seed": 33,
-     "height": 90,
+     "height": 150,
      "axis": false,
      "lastTag": false,
      "ticks": 0,
@@ -266,7 +265,8 @@
        ]
       }
      ],
-     "label": "RSI crosses 70, then stays there while price rises another 24%"
+     "label": "RSI crosses 70, then stays there while price rises another 24%",
+     "explore": "none"
     }
    },
    "foot": "Selling the first time RSI hit 70 meant missing the next 24%. Here, [[overbought|overbought]] was a sign of strength.",

@@ -14,27 +14,60 @@
    "situation": "You win 4 trades out of 10. Setup A risks $2 to make $2. Setup B risks $2 to make $6. Which one pays over time?",
    "visual": {
     "kind": "stack",
-    "layout": "row",
     "items": [
      {
-      "kind": "rr",
-      "compact": true,
-      "title": "Setup A",
-      "aside": "1:1",
-      "entry": 50,
-      "stop": 48,
-      "target": 52,
-      "label": "Setup A: risk $2 to make $2"
+      "kind": "units",
+      "heading": "Your last 10 trades",
+      "aside": "4 wins · 6 losses",
+      "total": 10,
+      "cols": 10,
+      "tones": [
+       "up",
+       "up",
+       "up",
+       "up",
+       "down",
+       "down",
+       "down",
+       "down",
+       "down",
+       "down"
+      ],
+      "label": "10 trades: 4 wins, 6 losses"
      },
      {
-      "kind": "rr",
-      "compact": true,
-      "title": "Setup B",
-      "aside": "3:1",
-      "entry": 50,
-      "stop": 48,
-      "target": 56,
-      "label": "Setup B: risk $2 to make $6"
+      "kind": "stack",
+      "layout": "row",
+      "items": [
+       {
+        "kind": "rr",
+        "compact": true,
+        "title": "Setup A",
+        "aside": "1:1",
+        "entry": 50,
+        "stop": 48,
+        "target": 52,
+        "label": "Setup A: risk $2 to make $2",
+        "lo": 47.6,
+        "hi": 56.4,
+        "lineNames": true,
+        "height": 190
+       },
+       {
+        "kind": "rr",
+        "compact": true,
+        "title": "Setup B",
+        "aside": "3:1",
+        "entry": 50,
+        "stop": 48,
+        "target": 56,
+        "label": "Setup B: risk $2 to make $6",
+        "lo": 47.6,
+        "hi": 56.4,
+        "lineNames": true,
+        "height": 190
+       }
+      ]
      }
     ]
    },
@@ -58,8 +91,8 @@
   },
   {
    "type": "learn",
-   "title": "Reward-to-risk",
-   "text": "Compare what you could make with what you could lose. Pros aim for **2:1 or more**: at least $2 of reward for every $1 of risk.",
+   "title": "Reward-to-risk ratio",
+   "text": "Compare what you could make with what you could lose. Pros aim for a minimum **2:1** [[reward-to-risk|reward-to-risk ratio]]: at least $2 of reward for every $1 of risk.",
    "visual": {
     "kind": "rr",
     "title": "Trade plan",
@@ -153,29 +186,244 @@
    "tag": "Rico’s rule",
    "title": "The target has to be real",
    "text": "A 5:1 plan means nothing if the target sits **past resistance** that price keeps failing at. Put the target just before the next ceiling. If 2:1 doesn’t fit, **skip the trade**.",
-   "visual": {
-    "kind": "rows",
-    "rows": [
-     {
-      "label": "Stop",
-      "value": "$48"
+   "rico": true,
+   "blocks": [
+    {
+     "visual": {
+      "kind": "candles",
+      "title": "Daily",
+      "chart": {
+       "ohlc": [
+        [
+         48.7,
+         49.19,
+         48.49,
+         49.0
+        ],
+        [
+         49.0,
+         49.82,
+         48.76,
+         49.6
+        ],
+        [
+         49.6,
+         50.51,
+         49.36,
+         50.3
+        ],
+        [
+         50.3,
+         51.1,
+         50.13,
+         51.0
+        ],
+        [
+         51.0,
+         52.04,
+         50.8,
+         51.8
+        ],
+        [
+         51.8,
+         52.84,
+         51.68,
+         52.6
+        ],
+        [
+         52.6,
+         53.47,
+         52.46,
+         53.3
+        ],
+        [
+         53.3,
+         54.0,
+         53.11,
+         53.8
+        ],
+        [
+         53.8,
+         53.9,
+         53.07,
+         53.2
+        ],
+        [
+         53.2,
+         53.34,
+         52.16,
+         52.4
+        ],
+        [
+         52.4,
+         52.61,
+         51.58,
+         51.7
+        ],
+        [
+         51.7,
+         51.92,
+         51.08,
+         51.2
+        ],
+        [
+         51.2,
+         51.79,
+         51.08,
+         51.6
+        ],
+        [
+         51.6,
+         52.4,
+         51.37,
+         52.3
+        ],
+        [
+         52.3,
+         53.13,
+         52.17,
+         53.0
+        ],
+        [
+         53.0,
+         53.85,
+         52.77,
+         53.6
+        ],
+        [
+         53.6,
+         54.0,
+         53.36,
+         53.9
+        ],
+        [
+         53.9,
+         54.0,
+         53.1,
+         53.3
+        ],
+        [
+         53.3,
+         53.43,
+         52.36,
+         52.6
+        ],
+        [
+         52.6,
+         52.8,
+         51.66,
+         51.9
+        ],
+        [
+         51.9,
+         52.13,
+         51.16,
+         51.3
+        ],
+        [
+         51.3,
+         51.45,
+         50.68,
+         50.8
+        ],
+        [
+         50.8,
+         50.92,
+         50.29,
+         50.4
+        ],
+        [
+         50.4,
+         50.75,
+         50.21,
+         50.6
+        ],
+        [
+         50.6,
+         50.7,
+         50.0,
+         50.2
+        ],
+        [
+         50.2,
+         50.35,
+         49.85,
+         50.0
+        ]
+       ],
+       "axis": false,
+       "lastTag": false,
+       "ticks": 0,
+       "height": 210,
+       "lo": 47.3,
+       "hi": 60.8,
+       "label": "Price fails twice at $54 resistance. Entry $50, stop $48. A 5:1 target at $60 sits past that ceiling",
+       "hlines": [
+        {
+         "price": 60,
+         "tone": "muted",
+         "label": "5:1 target $60 · past the ceiling"
+        },
+        {
+         "price": 54,
+         "tone": "down",
+         "label": "resistance $54 · fails here twice"
+        },
+        {
+         "price": 50,
+         "tone": "blue",
+         "label": "entry $50",
+         "style": "below"
+        },
+        {
+         "price": 48,
+         "tone": "down",
+         "label": "stop $48",
+         "style": "below"
+        }
+       ],
+       "marks": [
+        {
+         "i": 7,
+         "price": 54,
+         "tone": "down"
+        },
+        {
+         "i": 16,
+         "price": 54,
+         "tone": "down"
+        }
+       ]
+      }
      },
-     {
-      "label": "Entry",
-      "value": "$50"
+     "side": true
+    },
+    {
+     "visual": {
+      "kind": "rows",
+      "rows": [
+       {
+        "label": "Stop",
+        "value": "$48"
+       },
+       {
+        "label": "Entry",
+        "value": "$50"
+       },
+       {
+        "label": "Resistance",
+        "value": "$54"
+       },
+       {
+        "label": "Target",
+        "value": "$53.80 · 1.9:1 · skip",
+        "tone": "gold"
+       }
+      ]
      },
-     {
-      "label": "Resistance",
-      "value": "$54"
-     },
-     {
-      "label": "Target",
-      "value": "$53.80 · 1.9:1 · skip",
-      "tone": "gold"
-     }
-    ]
-   },
-   "rico": true
+     "side": true
+    }
+   ]
   },
   {
    "type": "exercise",

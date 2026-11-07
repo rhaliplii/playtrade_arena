@@ -12,12 +12,37 @@
    "situation": "You’ve made 40 trades in two months and written nothing down. You feel you’re doing OK. What can’t you tell without a record?",
    "visual": {
     "kind": "series",
-    "title": "40 trades · no notes",
-    "aside": "why?",
-    "ends": false,
-    "height": 100,
-    "label": "An account line that wanders up and down and ends a little lower",
+    "title": "40 trades",
+    "height": 150,
+    "label": "What you remember climbs to +$380 because memory keeps the big wins; the real account ends at −$140",
+    "hlines": [
+     {
+      "value": 0,
+      "tone": "muted"
+     }
+    ],
     "series": [
+     {
+      "values": [
+       0,
+       60,
+       60,
+       140,
+       140,
+       210,
+       210,
+       210,
+       260,
+       260,
+       260,
+       260,
+       330,
+       330,
+       380
+      ],
+      "tone": "gold",
+      "end": "+$380"
+     },
      {
       "values": [
        0,
@@ -36,8 +61,19 @@
        -90,
        -140
       ],
-      "tone": "muted",
-      "area": true
+      "tone": "down",
+      "area": true,
+      "end": "−$140"
+     }
+    ],
+    "legend": [
+     {
+      "label": "What you remember",
+      "tone": "gold"
+     },
+     {
+      "label": "Real",
+      "tone": "down"
      }
     ]
    },
@@ -243,7 +279,8 @@
        }
       ]
      }
-    ]
+    ],
+    "explore": "none"
    },
    "blocks": [
     {

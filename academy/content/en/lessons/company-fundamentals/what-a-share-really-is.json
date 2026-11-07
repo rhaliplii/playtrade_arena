@@ -9,7 +9,7 @@
   {
    "type": "call",
    "added": "Feedback for options the board doesn’t show written for the Academy",
-   "title": "What did you buy?",
+   "title": "What do you own?",
    "situation": "Northwind Bakery is split into 100 equal shares. You buy 5 of them. What do you own?",
    "visual": {
     "kind": "units",
@@ -73,7 +73,6 @@
   {
    "type": "walkthrough",
    "added": "Price path between $40 and $50 drawn for the Academy (board shows only the start, end and +25%)",
-   "tag": "tap",
    "title": "Price is not worth",
    "text": "Acme’s business didn’t change this month. Same shops, same sales. Its share price still rose 25%.",
    "visual": {
@@ -99,33 +98,50 @@
       "kind": "series",
       "title": "Acme share price",
       "aside": "1 month",
-      "height": 90,
+      "height": 120,
       "label": "Acme’s share price climbs from $40 to $50 in a month, up 25%",
       "series": [
        {
         "values": [
-         40,
-         40.8,
-         39.6,
-         41.8,
-         42.6,
-         42.2,
-         43.6,
-         44.4,
-         44.1,
-         45.4,
-         47.2,
-         46.3,
-         48.4,
-         49.1,
-         50
+         40.0,
+         39.86,
+         40.75,
+         40.77,
+         41.52,
+         41.89,
+         41.22,
+         41.46,
+         43.27,
+         42.57,
+         42.86,
+         44.56,
+         43.95,
+         44.94,
+         44.62,
+         45.25,
+         44.7,
+         45.91,
+         46.66,
+         46.38,
+         47.1,
+         47.31,
+         46.55,
+         48.13,
+         48.16,
+         47.98,
+         47.82,
+         49.66,
+         49.28,
+         50.06,
+         50.0
         ],
         "tone": "up",
         "end": "+25%"
        }
       ]
      }
-    ]
+    ],
+    "explore": "none"
    },
    "foot": "Price moves when buyers are keener than sellers: news, mood, hype. The business can stay exactly the same.",
    "footTone": "sky"
@@ -143,12 +159,18 @@
      {
       "label": "Acme",
       "value": "$20",
-      "sub": "a share"
+      "sub": "a share",
+      "tone": "blue",
+      "tint": true,
+      "dot": true
      },
      {
       "label": "Beta",
       "value": "$200",
-      "sub": "a share"
+      "sub": "a share",
+      "tone": "amber",
+      "tint": true,
+      "dot": true
      }
     ]
    },
